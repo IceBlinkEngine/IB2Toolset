@@ -1,0 +1,1 @@
+from with in VS, go to Team Explorer, go to home then settings, then git settings, then Edit Ignore File and remove the lines with [Bb]in and [Dd]ebug
