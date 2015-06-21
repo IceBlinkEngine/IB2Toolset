@@ -21,6 +21,7 @@
     "Marissa"
   ],
   "moduleLogicTreesList": [],
+  "moduleIBScriptsList": [],
   "moduleAreasObjects": [],
   "moduleGlobalInts": [],
   "moduleGlobalStrings": [],

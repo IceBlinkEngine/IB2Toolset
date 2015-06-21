@@ -54,6 +54,7 @@ namespace IB2Toolset
         public int _selectedLbxAreaIndex;
         public int _selectedLbxConvoIndex;
         public int _selectedLbxLogicTreeIndex;
+        public int _selectedLbxIBScriptIndex;
         public int _selectedLbxContainerIndex;
         public int _selectedLbxEncounterIndex;
         public string lastSelectedCreatureNodeName = "";
@@ -73,6 +74,7 @@ namespace IB2Toolset
         public AreaForm frmAreas;
         public ConversationsForm frmConversations;
         public LogicTreeForm frmLogicTree;
+        public IBScriptForm frmIBScript;
         //public EncountersForm frmEncounters;
         public ContainersForm frmContainers;
         public LogForm frmLog;
@@ -93,6 +95,7 @@ namespace IB2Toolset
             frmAreas = new AreaForm(this);
             frmConversations = new ConversationsForm(this);
             frmLogicTree = new LogicTreeForm(this);
+            frmIBScript = new IBScriptForm(this);
             //frmEncounters = new EncountersForm(this);
             frmContainers = new ContainersForm(this);
             frmLog = new LogForm(this);
@@ -169,6 +172,8 @@ namespace IB2Toolset
                 return frmConversations;
             else if (persistString == typeof(LogicTreeForm).ToString())
                 return frmLogicTree;
+            else if (persistString == typeof(IBScriptForm).ToString())
+                return frmIBScript;
             //else if (persistString == typeof(EncountersForm).ToString())
             //    return frmEncounters;
             else if (persistString == typeof(ContainersForm).ToString())
@@ -189,6 +194,7 @@ namespace IB2Toolset
                         (content.DockHandler.TabText == "Encounters") ||
                         (content.DockHandler.TabText == "TriggerEvents") ||
                         (content.DockHandler.TabText == "LogicTrees") ||
+                        (content.DockHandler.TabText == "IBScripts") ||
                         (content.DockHandler.TabText == "LogForm") ||
                         (content.DockHandler.TabText == "Blueprints") ||
                         (content.DockHandler.TabText == "Properties") ||
@@ -221,6 +227,7 @@ namespace IB2Toolset
             frmAreas.refreshListBoxAreas();
             frmConversations.refreshListBoxConvos();
             frmLogicTree.refreshListBoxLogicTrees();
+            frmIBScript.refreshListBoxIBScripts();
         }
         private void openCreatures(string filename)
         {
@@ -874,6 +881,10 @@ namespace IB2Toolset
         private void logicTreesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmLogicTree.Show(dockPanel1);
+        }
+        private void iBScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIBScript.Show(dockPanel1);
         }
         private void conversationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1695,5 +1706,12 @@ namespace IB2Toolset
             MergerEditor mergerEdit = new MergerEditor(mod, this);
             mergerEdit.ShowDialog();
         }
+
+        private void tsBtnIBScriptEditor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

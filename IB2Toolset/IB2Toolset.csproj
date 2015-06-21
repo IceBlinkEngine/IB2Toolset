@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IB2Toolset</RootNamespace>
     <AssemblyName>IBBToolset</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -59,6 +59,10 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET, Version=3.4.0.0, Culture=neutral, PublicKeyToken=d42c48f11a620156, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -124,11 +128,23 @@
     <Compile Include="LocalInt.cs" />
     <Compile Include="LocalListItem.cs" />
     <Compile Include="LocalString.cs" />
+    <Compile Include="IBScriptEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IBScriptEditor.designer.cs">
+      <DependentUpon>IBScriptEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogicTreeEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LogicTreeEditor.designer.cs">
       <DependentUpon>LogicTreeEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IBScriptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IBScriptForm.Designer.cs">
+      <DependentUpon>IBScriptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogicTreeForm.cs">
       <SubType>Form</SubType>
@@ -302,8 +318,14 @@
     <EmbeddedResource Include="ConvoEditor.resx">
       <DependentUpon>ConvoEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IBScriptEditor.resx">
+      <DependentUpon>IBScriptEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogicTreeEditor.resx">
       <DependentUpon>LogicTreeEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IBScriptForm.resx">
+      <DependentUpon>IBScriptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogicTreeForm.resx">
       <DependentUpon>LogicTreeForm.cs</DependentUpon>

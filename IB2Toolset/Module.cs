@@ -48,6 +48,7 @@ namespace IB2Toolset
         public List<string> moduleAreasList = new List<string>();
         public List<string> moduleConvosList = new List<string>();
         public List<string> moduleLogicTreesList = new List<string>();
+        public List<string> moduleIBScriptsList = new List<string>();
         public List<Area> moduleAreasObjects = new List<Area>();
         public List<GlobalInt> moduleGlobalInts = new List<GlobalInt>();
         public List<GlobalString> moduleGlobalStrings = new List<GlobalString>();
