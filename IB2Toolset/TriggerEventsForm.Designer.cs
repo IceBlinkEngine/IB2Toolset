@@ -144,8 +144,8 @@
             // 
             // txtTrigTag
             // 
-            this.txtTrigTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTrigTag.Location = new System.Drawing.Point(71, 41);
             this.txtTrigTag.Name = "txtTrigTag";
             this.txtTrigTag.Size = new System.Drawing.Size(174, 20);
@@ -194,8 +194,8 @@
             // 
             // gbE1transition
             // 
-            this.gbE1transition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbE1transition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbE1transition.Controls.Add(this.numE1y);
             this.gbE1transition.Controls.Add(this.label9);
             this.gbE1transition.Controls.Add(this.numE1x);
@@ -245,8 +245,8 @@
             // 
             // gbE1parms
             // 
-            this.gbE1parms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbE1parms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbE1parms.Controls.Add(this.txtE1parm4);
             this.gbE1parms.Controls.Add(this.txtE1parm3);
             this.gbE1parms.Controls.Add(this.txtE1parm2);
@@ -264,8 +264,8 @@
             // 
             // txtE1parm4
             // 
-            this.txtE1parm4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE1parm4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE1parm4.Location = new System.Drawing.Point(18, 103);
             this.txtE1parm4.Name = "txtE1parm4";
             this.txtE1parm4.Size = new System.Drawing.Size(98, 20);
@@ -275,8 +275,8 @@
             // 
             // txtE1parm3
             // 
-            this.txtE1parm3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE1parm3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE1parm3.Location = new System.Drawing.Point(18, 75);
             this.txtE1parm3.Name = "txtE1parm3";
             this.txtE1parm3.Size = new System.Drawing.Size(98, 20);
@@ -286,8 +286,8 @@
             // 
             // txtE1parm2
             // 
-            this.txtE1parm2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE1parm2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE1parm2.Location = new System.Drawing.Point(18, 47);
             this.txtE1parm2.Name = "txtE1parm2";
             this.txtE1parm2.Size = new System.Drawing.Size(98, 20);
@@ -297,8 +297,8 @@
             // 
             // txtE1parm1
             // 
-            this.txtE1parm1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE1parm1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE1parm1.Location = new System.Drawing.Point(18, 19);
             this.txtE1parm1.Name = "txtE1parm1";
             this.txtE1parm1.Size = new System.Drawing.Size(98, 20);
@@ -375,6 +375,7 @@
             "encounter",
             "logictree",
             "script",
+            "ibscript",
             "transition"});
             this.cmbE1type.Location = new System.Drawing.Point(9, 88);
             this.cmbE1type.Name = "cmbE1type";
@@ -442,8 +443,8 @@
             // 
             // gbE2transition
             // 
-            this.gbE2transition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbE2transition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbE2transition.Controls.Add(this.numE2y);
             this.gbE2transition.Controls.Add(this.label10);
             this.gbE2transition.Controls.Add(this.numE2x);
@@ -493,8 +494,8 @@
             // 
             // gbE2parms
             // 
-            this.gbE2parms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbE2parms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbE2parms.Controls.Add(this.txtE2parm4);
             this.gbE2parms.Controls.Add(this.txtE2parm3);
             this.gbE2parms.Controls.Add(this.txtE2parm2);
@@ -512,8 +513,8 @@
             // 
             // txtE2parm4
             // 
-            this.txtE2parm4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE2parm4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE2parm4.Location = new System.Drawing.Point(18, 103);
             this.txtE2parm4.Name = "txtE2parm4";
             this.txtE2parm4.Size = new System.Drawing.Size(98, 20);
@@ -523,8 +524,8 @@
             // 
             // txtE2parm3
             // 
-            this.txtE2parm3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE2parm3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE2parm3.Location = new System.Drawing.Point(18, 75);
             this.txtE2parm3.Name = "txtE2parm3";
             this.txtE2parm3.Size = new System.Drawing.Size(98, 20);
@@ -534,8 +535,8 @@
             // 
             // txtE2parm2
             // 
-            this.txtE2parm2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE2parm2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE2parm2.Location = new System.Drawing.Point(18, 47);
             this.txtE2parm2.Name = "txtE2parm2";
             this.txtE2parm2.Size = new System.Drawing.Size(98, 20);
@@ -545,8 +546,8 @@
             // 
             // txtE2parm1
             // 
-            this.txtE2parm1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE2parm1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE2parm1.Location = new System.Drawing.Point(18, 19);
             this.txtE2parm1.Name = "txtE2parm1";
             this.txtE2parm1.Size = new System.Drawing.Size(98, 20);
@@ -622,6 +623,7 @@
             "encounter",
             "logictree",
             "script",
+            "ibscript",
             "transition"});
             this.cmbE2type.Location = new System.Drawing.Point(9, 88);
             this.cmbE2type.Name = "cmbE2type";
@@ -671,9 +673,9 @@
             // 
             // pnlTrig
             // 
-            this.pnlTrig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTrig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTrig.AutoScroll = true;
             this.pnlTrig.Controls.Add(this.rtxtScript);
             this.pnlTrig.Controls.Add(this.gbE3);
@@ -687,9 +689,9 @@
             // 
             // rtxtScript
             // 
-            this.rtxtScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtxtScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtxtScript.BackColor = System.Drawing.Color.White;
             this.rtxtScript.Location = new System.Drawing.Point(3, 725);
             this.rtxtScript.Name = "rtxtScript";
@@ -719,8 +721,8 @@
             // 
             // gbE3transition
             // 
-            this.gbE3transition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbE3transition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbE3transition.Controls.Add(this.numE3y);
             this.gbE3transition.Controls.Add(this.label18);
             this.gbE3transition.Controls.Add(this.numE3x);
@@ -770,8 +772,8 @@
             // 
             // gbE3parms
             // 
-            this.gbE3parms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbE3parms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbE3parms.Controls.Add(this.txtE3parm4);
             this.gbE3parms.Controls.Add(this.txtE3parm3);
             this.gbE3parms.Controls.Add(this.txtE3parm2);
@@ -789,8 +791,8 @@
             // 
             // txtE3parm4
             // 
-            this.txtE3parm4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE3parm4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE3parm4.Location = new System.Drawing.Point(18, 103);
             this.txtE3parm4.Name = "txtE3parm4";
             this.txtE3parm4.Size = new System.Drawing.Size(98, 20);
@@ -800,8 +802,8 @@
             // 
             // txtE3parm3
             // 
-            this.txtE3parm3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE3parm3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE3parm3.Location = new System.Drawing.Point(18, 75);
             this.txtE3parm3.Name = "txtE3parm3";
             this.txtE3parm3.Size = new System.Drawing.Size(98, 20);
@@ -811,8 +813,8 @@
             // 
             // txtE3parm2
             // 
-            this.txtE3parm2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE3parm2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE3parm2.Location = new System.Drawing.Point(18, 47);
             this.txtE3parm2.Name = "txtE3parm2";
             this.txtE3parm2.Size = new System.Drawing.Size(98, 20);
@@ -822,8 +824,8 @@
             // 
             // txtE3parm1
             // 
-            this.txtE3parm1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtE3parm1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtE3parm1.Location = new System.Drawing.Point(18, 19);
             this.txtE3parm1.Name = "txtE3parm1";
             this.txtE3parm1.Size = new System.Drawing.Size(98, 20);
@@ -899,6 +901,7 @@
             "encounter",
             "logictree",
             "script",
+            "ibscript",
             "transition"});
             this.cmbE3type.Location = new System.Drawing.Point(9, 88);
             this.cmbE3type.Name = "cmbE3type";

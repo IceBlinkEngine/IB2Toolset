@@ -17,8 +17,8 @@ namespace IB2Toolset
         public Module mod;
         public ParentForm prntForm;
         public string filename = ""; //example: coolscript.ibs
-        public string kwMain1 = "break continue else end endif for gosub goto if label msg next return subroutine %Mod[] %ModArea[] %ModEncounter[] %AreaProp[] %Player[] %Roster[] %PartyInventory[] #numModArea #numModEncounters #numAreaProps #numPlayers #numRosters #numPartyInventory";
-        public string kwMain2 = "Mod currentArea currentEncounter ModArea ModEncounter AreaProp Player Roster PartyInventory";
+        public string kwMain1 = "break continue else end endif for gosub goto if label msg next return subroutine %Mod[] %ModArea[] %ModEncounter[] %AreaProp[] %Player[] %Roster[] %PartyInventoryItem[] #numModAreas #numModEncounters #numAreaProps #numPlayers #numPlayersInRoster #numPartyInventoryItems";
+        public string kwMain2 = "Mod currentArea currentEncounter ModArea ModEncounter AreaProp Player Roster PartyInventoryItem";
         public string okwMod = "WorldTime PlayerLocationX PlayerLocationY partyGold showPartyToken partyTokenFilename selectedPartyLeader indexOfPCtoLastUseItem OnHeartBeatLogicTree OnHeartBeatParms";
         public string okwPlayer = "combatLocX combatLocY charStatus baseStr baseDex baseInt baseCha hp sp XP";
         public string okwProp = "LocationX LocationY isShown isActive ConversationWhenOnPartySquare EncounterWhenOnPartySquare isMover isChaser MoverType";

@@ -22,6 +22,7 @@ namespace IB2Toolset
         public List<string> logictreesList = new List<string>();
         public List<string> encountersList = new List<string>();
         public List<string> scriptsList = new List<string>();
+        public List<string> ibscriptsList = new List<string>();
         public List<string> areasList = new List<string>();
 
 
@@ -413,6 +414,9 @@ namespace IB2Toolset
             logictreesList.Clear();
             logictreesList = new List<string>(prntForm.mod.moduleLogicTreesList);
 
+            ibscriptsList.Clear();
+            ibscriptsList = new List<string>(prntForm.mod.moduleIBScriptsList);
+
             encountersList.Clear();
             foreach (Encounter c in prntForm.encountersList)
             {
@@ -511,6 +515,16 @@ namespace IB2Toolset
                 gbE1parms.Enabled = true;
                 gbE1transition.Enabled = false;
             }
+            else if ((string)cmbE1type.SelectedItem == "ibscript")
+            {
+                cmbE1tag.BeginUpdate();
+                cmbE1tag.DataSource = null;
+                cmbE1tag.DataSource = ibscriptsList;
+                cmbE1tag.EndUpdate();
+
+                gbE1parms.Enabled = true;
+                gbE1transition.Enabled = false;
+            }
             else if ((string)cmbE1type.SelectedItem == "encounter")
             {
                 cmbE1tag.BeginUpdate();
@@ -591,6 +605,16 @@ namespace IB2Toolset
                 gbE2parms.Enabled = true;
                 gbE2transition.Enabled = false;
             }
+            else if ((string)cmbE2type.SelectedItem == "ibscript")
+            {
+                cmbE2tag.BeginUpdate();
+                cmbE2tag.DataSource = null;
+                cmbE2tag.DataSource = ibscriptsList;
+                cmbE2tag.EndUpdate();
+
+                gbE2parms.Enabled = true;
+                gbE2transition.Enabled = false;
+            }
             else if ((string)cmbE2type.SelectedItem == "encounter")
             {
                 cmbE2tag.BeginUpdate();
@@ -666,6 +690,16 @@ namespace IB2Toolset
                 cmbE3tag.BeginUpdate();
                 cmbE3tag.DataSource = null;
                 cmbE3tag.DataSource = logictreesList;
+                cmbE3tag.EndUpdate();
+
+                gbE3parms.Enabled = true;
+                gbE3transition.Enabled = false;
+            }
+            else if ((string)cmbE3type.SelectedItem == "ibscript")
+            {
+                cmbE3tag.BeginUpdate();
+                cmbE3tag.DataSource = null;
+                cmbE3tag.DataSource = ibscriptsList;
                 cmbE3tag.EndUpdate();
 
                 gbE3parms.Enabled = true;
