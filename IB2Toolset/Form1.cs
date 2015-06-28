@@ -75,7 +75,7 @@ namespace IB2Toolset
         public ConversationsForm frmConversations;
         public LogicTreeForm frmLogicTree;
         public IBScriptForm frmIBScript;
-        //public EncountersForm frmEncounters;
+        public EncountersForm frmEncounters;
         public ContainersForm frmContainers;
         public LogForm frmLog;
         public bool m_bSaveLayout = true;
@@ -96,7 +96,7 @@ namespace IB2Toolset
             frmConversations = new ConversationsForm(this);
             frmLogicTree = new LogicTreeForm(this);
             frmIBScript = new IBScriptForm(this);
-            //frmEncounters = new EncountersForm(this);
+            frmEncounters = new EncountersForm(this);
             frmContainers = new ContainersForm(this);
             frmLog = new LogForm(this);
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
@@ -174,8 +174,8 @@ namespace IB2Toolset
                 return frmLogicTree;
             else if (persistString == typeof(IBScriptForm).ToString())
                 return frmIBScript;
-            //else if (persistString == typeof(EncountersForm).ToString())
-            //    return frmEncounters;
+            else if (persistString == typeof(EncountersForm).ToString())
+                return frmEncounters;
             else if (persistString == typeof(ContainersForm).ToString())
                 return frmContainers;
             else //(persistString == typeof(LogForm).ToString())
@@ -892,7 +892,7 @@ namespace IB2Toolset
         }
         private void encountersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //frmEncounters.Show(dockPanel1);
+            frmEncounters.Show(dockPanel1);
         }
         private void containersToolStripMenuItem_Click(object sender, EventArgs e)
         {

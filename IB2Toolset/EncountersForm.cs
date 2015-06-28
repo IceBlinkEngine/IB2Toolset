@@ -6,10 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-//using IceBlinkCore;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace IBBToolset
+namespace IB2Toolset
 {
     public partial class EncountersForm : DockContent
     {
@@ -27,7 +26,7 @@ namespace IBBToolset
         {
             lbxEncounters.BeginUpdate();
             lbxEncounters.DataSource = null;
-            lbxEncounters.DataSource = prntForm.encountersList.encounters;
+            lbxEncounters.DataSource = prntForm.encountersList;
             lbxEncounters.DisplayMember = "EncounterName";
             lbxEncounters.EndUpdate();
         }
@@ -35,7 +34,7 @@ namespace IBBToolset
         {
             try
             {
-                prntForm.encountersList.encounters[prntForm._selectedLbxEncounterIndex].encounterName = txtEncounterName.Text;
+                prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterName = txtEncounterName.Text;
                 refreshListBoxEncounters();
             }
             catch { }
@@ -44,8 +43,9 @@ namespace IBBToolset
         {
             Encounter newEncounter = new Encounter();
             newEncounter.encounterName = "new encounter";
+            newEncounter.SetAllToGrass();
             //newEncounter.passRefs(prntForm.game, prntForm);
-            prntForm.encountersList.encounters.Add(newEncounter);
+            prntForm.encountersList.Add(newEncounter);
             refreshListBoxEncounters();
             // should I create a new file at this point?
         }
@@ -57,7 +57,7 @@ namespace IBBToolset
                 {
                     // The Remove button was clicked.
                     int selectedIndex = lbxEncounters.SelectedIndex;
-                    prntForm.encountersList.encounters.RemoveAt(selectedIndex);
+                    prntForm.encountersList.RemoveAt(selectedIndex);
                 }
                 catch { }
                 prntForm._selectedLbxEncounterIndex = 0;
@@ -99,7 +99,7 @@ namespace IBBToolset
             if (lbxEncounters.SelectedIndex >= 0)
             {
                 prntForm._selectedLbxEncounterIndex = lbxEncounters.SelectedIndex;
-                txtEncounterName.Text = prntForm.encountersList.encounters[prntForm._selectedLbxEncounterIndex].EncounterName;
+                txtEncounterName.Text = prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterName;
                 lbxEncounters.SelectedIndex = prntForm._selectedLbxEncounterIndex;
             }
         }
@@ -113,7 +113,7 @@ namespace IBBToolset
                 {
                     try
                     {
-                        prntForm.encountersList.encounters[prntForm._selectedLbxEncounterIndex].EncounterName = newName.RenameText;
+                        prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterName = newName.RenameText;
                         refreshListBoxEncounters();
                     }
                     catch { }
@@ -138,7 +138,7 @@ namespace IBBToolset
         }
         private void btnSort_Click(object sender, EventArgs e)
         {
-            prntForm.encountersList.encounters = prntForm.encountersList.encounters.OrderBy(o => o.EncounterName).ToList();
+            prntForm.encountersList = prntForm.encountersList.OrderBy(o => o.encounterName).ToList();
             refreshListBoxEncounters();
         }
         private void btnDuplicate_Click(object sender, EventArgs e)
@@ -148,10 +148,10 @@ namespace IBBToolset
                 try
                 {
                     Encounter newEncounter = new Encounter();
-                    newEncounter = prntForm.encountersList.encounters[prntForm._selectedLbxEncounterIndex].DeepCopy();
-                    newEncounter.EncounterName = prntForm.encountersList.encounters[prntForm._selectedLbxEncounterIndex].EncounterName + "-Copy";
-                    newEncounter.passRefs(prntForm.game, prntForm);
-                    prntForm.encountersList.encounters.Add(newEncounter);
+                    newEncounter = prntForm.encountersList[prntForm._selectedLbxEncounterIndex].DeepCopy();
+                    newEncounter.encounterName = prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterName + "-Copy";
+                    //newEncounter.passRefs(prntForm.game, prntForm);
+                    prntForm.encountersList.Add(newEncounter);
                     refreshListBoxEncounters();
                 }
                 catch { }
@@ -161,9 +161,9 @@ namespace IBBToolset
        
         private void EditEncounter()
         {
-            Encounter enc = prntForm.encountersList.encounters[prntForm._selectedLbxEncounterIndex];
-            EncounterEditor newChild = new EncounterEditor(prntForm.mod, enc, prntForm.game, prntForm); //add new child
-            newChild.Text = prntForm.encountersList.encounters[prntForm._selectedLbxEncounterIndex].EncounterName;
+            Encounter enc = prntForm.encountersList[prntForm._selectedLbxEncounterIndex];
+            EncounterEditor newChild = new EncounterEditor(prntForm.mod, prntForm); //add new child
+            newChild.Text = prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterName;
             newChild.Show(prntForm.dockPanel1); //as new form created so that corresponding tab and child form is active
             refreshListBoxEncounters();
         }

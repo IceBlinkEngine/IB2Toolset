@@ -1,4 +1,4 @@
-﻿namespace IBBToolset
+﻿namespace IB2Toolset
 {
     partial class EncountersForm
     {

@@ -8,28 +8,26 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace IB2Toolset
 {
-    public partial class EncounterBuilder : Form
+    public partial class EncounterBuilder : DockContent
     {
         public ParentForm prntForm;
         public Module mod;
 
-        //public List<Encounter> prntForm.encountersList = new List<Encounter>();
-        //public List<Creature> prntForm.creaturesList = new List<Creature>();
-        //public List<Item> prntForm.itemsList = new List<Item>(); 
         private List<TileBitmapNamePair> tileList = new List<TileBitmapNamePair>();
         private Graphics device;
         private Bitmap surface;
         private Bitmap mapBitmap;
-        private Bitmap grass;
-        private Bitmap mud;
-        private Bitmap black;
-        private Bitmap tree;
-        private Bitmap rock;
-        private Bitmap floor;
-        private Bitmap wall;
+        //private Bitmap grass;
+        //private Bitmap mud;
+        //private Bitmap black;
+        //private Bitmap tree;
+        //private Bitmap rock;
+        //private Bitmap floor;
+        //private Bitmap wall;
         private Bitmap selectedBitmap;
         public Bitmap g_walkPass;
         public Bitmap g_walkBlock;
@@ -42,7 +40,6 @@ namespace IB2Toolset
         private int gridX = 0;
         private int gridY = 0;
         public string saveFilenameNoExt = "";
-        //public string prntForm._mainDirectory;
         public string returnMapFilenameNoExt;
         public int _selectedLbxEncounterIndex = 0;
         public int _selectedLbxCreatureIndex = 0;
@@ -62,20 +59,12 @@ namespace IB2Toolset
             mod = m;
             prntForm = p;
             createTileImageButtons();
-            //prntForm._mainDirectory = Directory.GetCurrentDirectory();
             surface = new Bitmap(mSizeW, mSizeH);
             panelView.BackgroundImage = surface;            
             device = Graphics.FromImage(surface);
             g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png");
             g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_block.png");
             g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\los_block.png");
-            //grass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\t_grass.png");
-            //mud = new Bitmap(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\t_mud.png");
-            black = new Bitmap(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\black_tile.png");
-            //tree = new Bitmap(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\tree.png");
-            //floor = new Bitmap(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\t_stone_floor.png");
-            //wall = new Bitmap(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\t_stone_wall.png");
-            //rock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\rock.png");
             if (prntForm.encountersList.Count < 1)
             {
                 Encounter newEnc = new Encounter();
@@ -398,42 +387,7 @@ namespace IB2Toolset
                 }
             }
             refreshMap();
-        }
-        private void rbtnGrass_CheckedChanged(object sender, EventArgs e)
-        {
-            tileSelected = true;
-            currentTile = 'g';
-        }
-        private void rbtnMud_CheckedChanged(object sender, EventArgs e)
-        {
-            tileSelected = true;
-            currentTile = 'm';
-        }
-        private void rbtnBlack_CheckedChanged(object sender, EventArgs e)
-        {
-            tileSelected = true;
-            currentTile = 'b';
-        }
-        private void rbtnTree_CheckedChanged(object sender, EventArgs e)
-        {
-            tileSelected = true;
-            currentTile = 't';
-        }
-        private void rbtnFloor_CheckedChanged(object sender, EventArgs e)
-        {
-            tileSelected = true;
-            currentTile = 's';
-        }
-        private void rbtnWall_CheckedChanged(object sender, EventArgs e)
-        {
-            tileSelected = true;
-            currentTile = 'w';
-        }
-        private void rbtnRock_CheckedChanged(object sender, EventArgs e)
-        {
-            tileSelected = true;
-            currentTile = 'r';
-        }
+        }        
         private void btnSave_Click(object sender, EventArgs e)
         {
             saveEncountersFile();

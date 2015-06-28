@@ -123,6 +123,12 @@
     </Compile>
     <Compile Include="Coordinate.cs" />
     <Compile Include="DataCheck.cs" />
+    <Compile Include="EncountersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EncountersForm.Designer.cs">
+      <DependentUpon>EncountersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalListItem.cs" />
     <Compile Include="GlobalString.cs" />
     <Compile Include="LocalInt.cs" />
@@ -174,6 +180,12 @@
       <DependentUpon>VariablesEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="WayPoint.cs" />
+    <Compile Include="EncounterEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EncounterEditor.designer.cs">
+      <DependentUpon>EncounterEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="WorldMapEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +330,9 @@
     <EmbeddedResource Include="ConvoEditor.resx">
       <DependentUpon>ConvoEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EncountersForm.resx">
+      <DependentUpon>EncountersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IBScriptEditor.resx">
       <DependentUpon>IBScriptEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -338,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VariablesEditor.resx">
       <DependentUpon>VariablesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EncounterEditor.resx">
+      <DependentUpon>EncounterEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorldMapEditor.resx">
       <DependentUpon>WorldMapEditor.cs</DependentUpon>

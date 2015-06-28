@@ -6,951 +6,180 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-//using IceBlinkCore;
 using System.IO;
+using Newtonsoft.Json;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
-namespace IBBToolset
+namespace IB2Toolset
 {
     public partial class EncounterEditor : DockContent
-    {        
+    {
         public ParentForm prntForm;
-        public const int mapSize = 16;
-        public const int tileSize = 64;
-        public Module ee_mod = new Module();
-        //public Game ee_game;
-        public Creature ee_selectedCreature = new Creature();
-        public Prop ee_selectedProp = new Prop();
-        public Encounter ee_encounter = new Encounter();
-        public Bitmap drawArea;
-        public Bitmap gameMapBitmap;
-        public Bitmap selectedBitmap;
-        public int selectedBitmapSize = 1;
-        public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match EncounterCreatureList index
-        public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match EncounterPropList index
-        //public List<Bitmap> crtRefBitmapList = new List<Bitmap>(); //index will match ee_encounter.encounters index
-        public List<Bitmap> PCBitmapList = new List<Bitmap>();
-        public int mousex, mousey;
-        public Graphics gfx;
-        public int gridx, gridy;
-        public Font fontArial;
-        public string ee_filename = "";
-        public string ee_directory = "";
-        public Area area;
-        public bool selected = false;
-        public bool propSelected = false;
-        public bool PCselected = false;
-        public Point lastSelectedCreatureIcon;
-        public string lastSelectedObjectTag;
-        public string lastSelectedObjectResRef;
-        public bool showGrid = true;
+        public Module mod;
+
+        private List<TileBitmapNamePair> tileList = new List<TileBitmapNamePair>();
+        private Graphics device;
+        private Bitmap surface;
+        private Bitmap selectedBitmap;
         public Bitmap g_walkPass;
         public Bitmap g_walkBlock;
         public Bitmap g_LoSBlock;
+        private int sqr = 25;
+        private int mSizeW = 800;
+        private int mSizeH = 800;
+        private Point currentPoint = new Point(0, 0);
+        private Point lastPoint = new Point(0, 0);
+        private int gridX = 0;
+        private int gridY = 0;
+        public string saveFilenameNoExt = "";
+        public string returnMapFilenameNoExt;
+        public int _selectedLbxEncounterIndex = 0;
+        public int _selectedLbxCreatureIndex = 0;
+        public string currentTileFilename = "t_grass";
+        public bool tileSelected = true;
+        public bool PcSelected = false;
+        public bool CrtSelected = false;
+        Font drawFont = new Font("Arial", 6);
+        Font drawFontNum = new Font("Arial", 24);
+        SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+        Pen blackPen = new Pen(Color.Black, 1);
+        public Point currentSquareClicked = new Point(0, 0);
+        public Point lastSquareClicked = new Point(0, 0);
+        public selectionStruct selectedTile;
+        public Point lastSelectedCreaturePropIcon;
+        public string lastSelectedObjectTag;
+        public string lastSelectedObjectResRef;
+        public Creature le_selectedCreature = new Creature();
+        public Prop le_selectedProp = new Prop();
+        public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
+        public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
+        public Encounter thisEnc = new Encounter();
 
-        public EncounterEditor(Module mod, Encounter encounter, ParentForm p)
+        public EncounterEditor(Module m, ParentForm p)
         {
             InitializeComponent();
-            ee_mod = mod;
-            ee_encounter = encounter;            
-            //ee_game = g;
+            mod = m;
             prntForm = p;
-            //ee_encounter.passRefs(g, p);
-        }
-        private void EncounterEditor_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            gfx.Dispose();
-            drawArea.Dispose();
-            //gfxSelected.Dispose();
-            //selectedBitmap.Dispose();
-            //this.Close();
-        }
-        private void EncounterEditor_Load(object sender, EventArgs e)
-        {
-            //prntForm = (ParentForm)this.ParentForm;
+            thisEnc = prntForm.encountersList[prntForm._selectedLbxEncounterIndex];
+            createTileImageButtons();
+            surface = new Bitmap(mSizeW, mSizeH);
+            panelView.BackgroundImage = surface;            
+            device = Graphics.FromImage(surface);
             try
             {
-                g_walkPass = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\walkPass.png");
-                g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\walkBlock.png");
-                g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\LoSBlock.png");
+                g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png");
+                g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_block.png");
+                g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\los_block.png");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
-                ee_game.errorLog("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
             }
-            area = new Area();
-            area.MapSizeInSquares.Width = 16;
-            area.MapSizeInSquares.Height = 16;
-            //set up level drawing surface
-            drawArea = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
-            pictureBox1.Image = drawArea;
-            gfx = Graphics.FromImage(drawArea);
-
-            selectedBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\blank.png");
-
-            createNewArea(area.MapSizeInSquares.Width, area.MapSizeInSquares.Height);
-
-            for (int i = 1; i <= 6; i++)
-            {
-                Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc" + i.ToString() + ".png");
-                PCBitmapList.Add(newBitmap);
-            }
-
-            cmbItems.DataSource = null;
-            cmbItems.DataSource = prntForm.itemsList.itemsList;
-            cmbItems.DisplayMember = "ItemName";
+            refreshCmbItems();
             refreshLbxItems();
+            refreshGoldDrop();
+        }
+        
+        private void EncounterEditor_Load(object sender, EventArgs e)
+        {
+            //LoadEncounters();
+            radioButton1.Checked = true;
+            checkBox1.Checked = true;
+            checkBox2.Checked = true;
+            //createTileImageButtons(); 
 
-            loadFileSelectedToEdit();
+            //thisEnc = prntForm.encountersList[_selectedLbxEncounterIndex];
+            //thisEnc.MapSizeX = 7;
+            //thisEnc.MapSizeY = 7;
 
-            //refreshPanel();
-        }
-        private void loadEncounterTriggerPassRefs()
-        {
-            foreach (Trigger t in area.AreaTriggerList.triggersList)
-            {
-                t.passRefs(ee_game, prntForm, area);
-            }
-        }
-        private void convertObjectsToRefs()
-        {
-            //need to find resref of crt and get the tag
-            foreach (Creature crt in ee_encounter.EncounterCreatureList.creatures)
-            {
-                Creature test = ee_encounter.EncounterCreatureList.getCreatureByResRef(crt.ResRef);
-                if (test != null)
-                {
-                    CreatureRefs newCrtRef = new CreatureRefs();
-                    newCrtRef.CreatureName = crt.Name;
-                    newCrtRef.CreatureTag = crt.Tag;
-                    newCrtRef.CreatureResRef = crt.ResRef;
-                    newCrtRef.CreatureSize = crt.Size;
-                    newCrtRef.CreatureStartLocation = new Point(crt.CombatLocation.X, crt.CombatLocation.Y);
-                    newCrtRef.MouseOverText = crt.MouseOverText;
-                    ee_encounter.EncounterCreatureRefsList.Add(newCrtRef);
-                }
-                else
-                {
-                    MessageBox.Show("Didn't find ResRef: " + crt.ResRef + " ...Failed to automatically convert object to a reference");
-                }
-            }
-            ee_encounter.EncounterCreatureList.creatures.Clear();
-        }
-        private void loadEncounterObjectBitmapLists()
-        {
-            convertObjectsToRefs();
-            foreach (CreatureRefs crtRef in ee_encounter.EncounterCreatureRefsList)
-            {
-                // get Creature by Tag and then get Icon filename, add Bitmap to list
-                Creature newCrt = prntForm.creaturesList.getCreatureByResRef(crtRef.CreatureResRef);
-                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\graphics\\sprites\\tokens\\module\\" + newCrt.CharSprite.SpriteSheetFilename))
-                {
-                    Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\graphics\\sprites\\tokens\\module\\" + newCrt.CharSprite.SpriteSheetFilename);
-                    crtBitmapList.Add(newBitmap);
-                }
-                else if (File.Exists(prntForm._mainDirectory + "\\data\\graphics\\sprites\\tokens\\" + newCrt.CharSprite.SpriteSheetFilename))
-                {
-                    Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\sprites\\tokens\\" + newCrt.CharSprite.SpriteSheetFilename);
-                    crtBitmapList.Add(newBitmap);
-                }
-                else
-                {
-                    MessageBox.Show("Failed to find creature sprite (" + newCrt.CharSprite.SpriteSheetFilename + ") in data or module folders");
-                }
-            }
-            foreach (PropRefs prpRef in ee_encounter.EncounterPropRefsList)
-            {
-                // get Creature by Tag and then get Icon filename, add Bitmap to list
-                Prop newPrp = prntForm.propsList.getPropByResRef(prpRef.PropResRef);
-                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\graphics\\sprites\\props\\" + newPrp.PropSprite.SpriteSheetFilename))
-                {
-                    Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\graphics\\sprites\\props\\" + newPrp.PropSprite.SpriteSheetFilename);
-                    propBitmapList.Add(newBitmap);
-                }
-                else if (File.Exists(prntForm._mainDirectory + "\\data\\graphics\\sprites\\props\\" + newPrp.PropSprite.SpriteSheetFilename))
-                {
-                    Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\sprites\\props\\" + newPrp.PropSprite.SpriteSheetFilename);
-                    propBitmapList.Add(newBitmap);
-                }
-                else
-                {
-                    MessageBox.Show("Failed to find prop sprite (" + newPrp.PropSprite.SpriteSheetFilename + ") in data or module folders");
-                }
-            }
-        }
-        private void createNewArea(int width, int height)
-        {
-            area = null;
-            area = new Area();
-            area.MapSizeInSquares.Width = width;
-            area.MapSizeInSquares.Height = height;
-            area.MapSizeInPixels.Width = width * tileSize;
-            area.MapSizeInPixels.Height = height * tileSize;
-            for (int index = 0; index < (width * height); index++)
-            {
-                Tile newTile = new Tile();
-                //newTile.tilenum = 0;
-                newTile.collidable = false;
-                area.TileMapList.Add(newTile);
-            }
-        }
-        private void loadFileSelectedToEdit()
-        {
-            // try and load the file selected if it exists
-            string g_filename = prntForm.encountersList.encounters[prntForm._selectedLbxEncounterIndex].EncounterLevelFilename;
-            string g_directory = prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\areas";
-            string filenameNoExtension = Path.GetFileNameWithoutExtension(g_filename);
-            if (File.Exists(g_directory + "\\" + g_filename + ".level"))
-            {
-                openLevel(g_directory, g_filename, filenameNoExtension);
-                if (area == null)
-                {
-                    createNewArea(area.MapSizeInSquares.Width, area.MapSizeInSquares.Height);
-                }
-            }
-            else
-            {
-                createNewArea(area.MapSizeInSquares.Width, area.MapSizeInSquares.Height);
-            }
-        }
-        private void openLevel(string g_dir, string g_fil, string g_filNoEx)
-        {
-            this.Cursor = Cursors.WaitCursor;
+            //createNewArea(thisEnc.MapSizeX, thisEnc.MapSizeY);
 
-            try
-            {
-                area = area.loadAreaFile(g_dir + "\\" + g_fil + ".level");
-                if (area == null)
-                {
-                    MessageBox.Show("returned a null area");
-                    return;
-                }
-                loadEncounterObjectBitmapLists();
-                loadEncounterTriggerPassRefs();
-                //MessageBox.Show("open file success");
-                // load Map next
-                //ee_encounter.encounterPngMapName = filenameNoExtension + ".png";
-                gameMapBitmap = new Bitmap(g_dir + "\\" + ee_encounter.EncounterMapFilename);
-                drawArea = new Bitmap(g_dir + "\\" + ee_encounter.EncounterMapFilename);
-                pictureBox1.Width = gameMapBitmap.Size.Width;
-                pictureBox1.Height = gameMapBitmap.Size.Height;
-                pictureBox1.Image = (Image)drawArea;
-                gfx = Graphics.FromImage(drawArea);
-                if (drawArea == null)
-                {
-                    MessageBox.Show("returned a null Map bitmap");
-                }
-                refreshMap();
-                //redrawTilemap();
-            }
-            catch (Exception es)
-            {
-                MessageBox.Show(es.Message);
-                MessageBox.Show("failed to open file");
-            }          
+            //set up level drawing surface
+            panelView.Width = thisEnc.MapSizeX * sqr;
+            panelView.Height = thisEnc.MapSizeY * sqr;           
+            surface = new Bitmap(panelView.Size.Width, panelView.Size.Height);
+            //UpdatePB();
+            device = Graphics.FromImage(surface);
+            panelView.BackgroundImage = (Image)surface;
 
-            this.Cursor = Cursors.Arrow;
+            rbtnInfo.Checked = true;
+            rbtnZoom1x.Checked = true;
         }
-        /*private void btnLoadMap_Click(object sender, EventArgs e)
-        {
-            openFileDialog2.InitialDirectory = Environment.CurrentDirectory;
-            //Empty the FileName text box of the dialog
-            openFileDialog2.FileName = String.Empty;
-            openFileDialog2.Filter = "jpg files (*.jpg)|*.jpg|All files (*.*)|*.*";
-            openFileDialog2.FilterIndex = 1;
 
-            DialogResult result = openFileDialog2.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
-            {
-                string filename = Path.GetFullPath(openFileDialog2.FileName);
-                string filenameOnly = openFileDialog2.SafeFileName;
-                ee_encounter.EncounterMapName = filenameOnly;
-                gameMapBitmap = new Bitmap(filename);
-                drawArea = new Bitmap(filename);
-                pictureBox1.Width = gameMapBitmap.Size.Width;
-                pictureBox1.Height = gameMapBitmap.Size.Height;
-                pictureBox1.Image = (Image)drawArea;
-                gfx = Graphics.FromImage(drawArea);
-                if (drawArea == null)
-                {
-                    MessageBox.Show("returned a null bitmap");
-                }
-                createNewArea(gameMapBitmap.Size.Width / tileSize, gameMapBitmap.Size.Height / tileSize);
-            }
-        }*/
-        private void btnLoadEncounter_Click(object sender, EventArgs e)
+        #region Encounter Stuff
+        public void refreshCmbItems()
         {
-            //display the open file dialog
-            openFileDialog1.DefaultExt = ".level";
-            openFileDialog1.Filter = "Tilemap Files|*.level";
-            openFileDialog1.Multiselect = false;
-            openFileDialog1.Title = "Load Level File";
-            openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\areas";
-            DialogResult result = openFileDialog1.ShowDialog();
-            if (result != DialogResult.OK) return;
-            //ee_directory = Path.GetDirectoryName(openFileDialog1.FileName);
-            ee_directory = prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\areas";
-            string filenameNoExtension = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
-            ee_filename = openFileDialog1.SafeFileName;            
-            this.Cursor = Cursors.WaitCursor;            
-
-            try
-            {
-                area = area.loadAreaFile(ee_directory + "\\" + filenameNoExtension + ".level");
-                if (area == null)
-                {
-                    MessageBox.Show("returned a null area");
-                }                
-                // load Map
-                ee_encounter.EncounterMapFilename = area.MapFileName;
-                ee_encounter.EncounterLevelFilename = area.AreaFileName;
-                gameMapBitmap = new Bitmap(ee_directory + "\\" + area.MapFileName);
-                drawArea = new Bitmap(ee_directory + "\\" + area.MapFileName);
-                pictureBox1.Width = gameMapBitmap.Size.Width;
-                pictureBox1.Height = gameMapBitmap.Size.Height;
-                pictureBox1.Image = (Image)drawArea;
-                gfx = Graphics.FromImage(drawArea);
-                if (drawArea == null)
-                {
-                    MessageBox.Show("returned a null Map bitmap");
-                }
-                //MessageBox.Show("open file success");
-                refreshMap();
-                //redrawTilemap();
-            }
-            catch (Exception es)
-            {
-                MessageBox.Show(es.Message);
-                MessageBox.Show("failed to open Level file");
-            }
-
-            this.Cursor = Cursors.Arrow;
-        }
-        /*private void btnSaveEncounter_Click(object sender, EventArgs e)
-        {
-            //display the open file dialog
-            saveFileDialog1.DefaultExt = ".level";
-            saveFileDialog1.Filter = "Tilemap Files|*.level";
-            saveFileDialog1.Title = "Save Level File";
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.OverwritePrompt = true;
-            saveFileDialog1.InitialDirectory = Environment.CurrentDirectory;
-            DialogResult result = saveFileDialog1.ShowDialog();
-            if (result != DialogResult.OK) return;
-            if (saveFileDialog1.FileName.Length == 0) return;
-            ee_filename = Path.GetFileNameWithoutExtension(saveFileDialog1.FileName);
-            ee_directory = Path.GetDirectoryName(saveFileDialog1.FileName);
-            area.AreaFileName = ee_filename;
-            area.MapFileName = Path.GetFileNameWithoutExtension(saveFileDialog1.FileName) + ".jpg";
-            area.saveAreaFile(ee_directory + "\\" + ee_filename + ".level");
-        }*/
-        private void btnPlacePC_Click(object sender, EventArgs e)
-        {
-            selected = false;
-            PCselected = true;
-        }
-        private void btnDeleteAllPCStartPoints_Click(object sender, EventArgs e)
-        {
-            ee_encounter.EncounterPcStartLocations.Clear();
-            PCBitmapList.Clear();
-            refreshPcIcon();
-            refreshMap();
-        }
-        /*private void refreshPanel()
-        {
-            //retreatX.Value = ee_encounter.encounterPcRetreatLocation.X;
-            //retreatY.Value = ee_encounter.encounterPcRetreatLocation.Y;
-        }*/
-        private void refreshMap()
-        {
-            try
-            {
-                if (gameMapBitmap != null)
-                {
-                    gfx.DrawImage((Image)gameMapBitmap, 0, 0);
-                }
-                int cnt = 0;
-                foreach (CreatureRefs crtRef in ee_encounter.EncounterCreatureRefsList)
-                {
-                    int cspx = crtRef.CreatureStartLocation.X;
-                    int cspy = crtRef.CreatureStartLocation.Y;
-                    spriteCreatureDraw(cspx, cspy, cnt, crtRef.CreatureSize);
-                    cnt++;
-                }
-                cnt = 0;
-                foreach (PropRefs prpRef in ee_encounter.EncounterPropRefsList)
-                {
-                    int cspx = prpRef.PropStartLocation.X;
-                    int cspy = prpRef.PropStartLocation.Y;
-                    spritePropDraw(cspx, cspy, cnt);
-                    cnt++;
-                }
-                /*cnt = 0;
-                foreach (Creature crt in ee_encounter.EncounterCreatureList.creatures)
-                {
-                    int cspx = crt.CombatLocation.X;
-                    int cspy = crt.CombatLocation.Y;
-                    spriteCreatureDraw(cspx, cspy, cnt);
-                    cnt++;
-                }*/
-                cnt = 0;
-                foreach (Point PCpoint in ee_encounter.EncounterPcStartLocations)
-                {
-                    spritePcCombatDraw(PCpoint.X, PCpoint.Y, cnt);
-                    cnt++;
-                }
-                if (area != null)
-                {
-                    drawTileSettings();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("failed on refresh map: " + ex.ToString());
-                ee_game.errorLog("failed on refresh map: " + ex.ToString());
-            }
+            cmbItems.BeginUpdate();
+            cmbItems.DataSource = null;
+            cmbItems.DataSource = prntForm.itemsList;
+            cmbItems.DisplayMember = "name";
+            cmbItems.EndUpdate();
         }
         private void refreshLbxItems()
         {
             lbxItems.BeginUpdate();
             lbxItems.DataSource = null;
-            lbxItems.DataSource = ee_encounter.EncounterInventoryTagList;
+            lbxItems.DataSource = prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterInventoryRefsList;
+            lbxItems.DisplayMember = "name";
             lbxItems.EndUpdate();
         }
-        private void spriteCreatureDraw(int cspx, int cspy, int spriteListIndex, int size)
+        public void refreshGoldDrop()
         {
-            //source image
-            Rectangle source = new Rectangle(0, 0, tileSize * size, tileSize * size);
-            //target location
-            Rectangle target = new Rectangle(cspx * tileSize, cspy * tileSize, tileSize * size, tileSize * size);
-            //draw sprite
-            gfx.DrawImage((Image)crtBitmapList[spriteListIndex], target, source, GraphicsUnit.Pixel);
+            numGold.Value = (int)prntForm.encountersList[prntForm._selectedLbxEncounterIndex].goldDrop;
         }
-        private void spritePropDraw(int cspx, int cspy, int spriteListIndex)
+        private void numGold_ValueChanged(object sender, EventArgs e)
         {
-            //source image
-            Rectangle source = new Rectangle(0, 0, ee_selectedProp.PropSprite.SpriteSize.Width, ee_selectedProp.PropSprite.SpriteSize.Height);
-            //target location
-            Rectangle target = new Rectangle(cspx * tileSize, cspy * tileSize, ee_selectedProp.PropSprite.SpriteSize.Width, ee_selectedProp.PropSprite.SpriteSize.Height);
-            //draw sprite
-            gfx.DrawImage((Image)propBitmapList[spriteListIndex], target, source, GraphicsUnit.Pixel);
-        }
-        /*private void spriteCombatDraw(int cspx, int cspy, int spriteListIndex)
-        {
-            //source image
-            Rectangle source = new Rectangle(0, 0, tileSize, tileSize);
-            //target location
-            Rectangle target = new Rectangle(cspx * tileSize, cspy * tileSize, tileSize, tileSize);
-            //draw sprite
-            gfx.DrawImage((Image)crtBitmapList[spriteListIndex], target, source, GraphicsUnit.Pixel);
-        }*/
-        private void spritePcCombatDraw(int cspx, int cspy, int spriteListIndex)
-        {
-            //source image
-            Rectangle source = new Rectangle(0, 0, tileSize, tileSize);
-            //target location
-            Rectangle target = new Rectangle(cspx * tileSize, cspy * tileSize, tileSize, tileSize);
-            //draw sprite
-            gfx.DrawImage((Image)PCBitmapList[spriteListIndex], target, source, GraphicsUnit.Pixel);
-        }
-        private void drawTileSettings()
-        {
-            //for (int index = 0; index < area.MapSizeInSquares.Width * mapSize; index++)
-            for (int x = 0; x < area.MapSizeInSquares.Width; x++)
-            {
-                for (int y = 0; y < area.MapSizeInSquares.Height; y++)
-                {
-                    if (showGrid) //if show grid is turned on, draw grid squares
-                    {
-                        if (area.TileMapList[y * this.area.MapSizeInSquares.Width + x].LoSBlocked)
-                        {
-                            Rectangle src = new Rectangle(0, 0, tileSize, tileSize);
-                            int dx = x * tileSize;
-                            int dy = y * tileSize;
-                            Rectangle target = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
-                            gfx.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
-                        }
-                        if (area.TileMapList[y * this.area.MapSizeInSquares.Width + x].collidable)
-                        {
-                            Rectangle src = new Rectangle(0, 0, tileSize, tileSize);
-                            int dx = x * tileSize;
-                            int dy = y * tileSize;
-                            Rectangle target = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
-                            gfx.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
-                        }
-                        else
-                        {
-                            Rectangle src = new Rectangle(0, 0, tileSize, tileSize);
-                            int dx = x * tileSize;
-                            int dy = y * tileSize;
-                            Rectangle target = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
-                            gfx.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
-                        }
-                    }
-                }
-            }
-            /*foreach (Trigger t in ee_encounter.EncounterTriggerList.triggersList)
-            {
-                foreach (Point p in t.TriggerSquaresList)
-                {
-                    int dx = p.X * tileSize;
-                    int dy = p.Y * tileSize;
-                    Pen pen = new Pen(t.TriggerColor, 2);
-                    Rectangle rect = new Rectangle(dx + 3, dy + 3, tileSize - 6, tileSize - 6);
-                    gfx.DrawRectangle(pen, rect);
-                }
-            }*/
-            foreach (Trigger t in area.AreaTriggerList.triggersList)
-            {
-                foreach (Point p in t.TriggerSquaresList)
-                {
-                    int dx = p.X * tileSize;
-                    int dy = p.Y * tileSize;
-                    Pen pen = new Pen(t.TriggerColor, 2);
-                    Rectangle rect = new Rectangle(dx + 3, dy + 3, tileSize - 6, tileSize - 6);
-                    gfx.DrawRectangle(pen, rect);
-                }
-            }
-            //save changes
-            pictureBox1.Image = drawArea;
-        }
-        private void drawSelectionBox(int gridx, int gridy)
-        {
-            //hideSelectionBox();
-            refreshMap();
-            //remember current tile
-            //selectedTile.oldIndex = selectedTile.index;
 
-            //draw selection box around tile
-            int dx = gridx * tileSize;
-            int dy = gridy * tileSize;
-            Pen pen = new Pen(Color.DarkMagenta, 2);
-            Rectangle rect = new Rectangle(dx + 1, dy + 1, tileSize - 2, tileSize - 2);
-            gfx.DrawRectangle(pen, rect);
-
-            //save changes
-            pictureBox1.Image = drawArea;
-        }
-        protected override System.Drawing.Point ScrollToControl(Control activeControl)
-        {
-            return DisplayRectangle.Location;
-        }
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {            
-            gridx = e.X / tileSize;
-            gridy = e.Y / tileSize;
-            mousex = e.X;
-            mousey = e.Y;
-            lblMouseInfo.Text = "CURSOR " + e.X.ToString() + "," + e.Y.ToString() + " - GRID " + gridx.ToString() + "," + gridy.ToString();
-            if ((selected) || (PCselected) || (propSelected))
-            {
-                refreshMap();
-                try
-                {
-                    if (selectedBitmap != null)
-                    {
-                        //source image size
-                        Rectangle frame = new Rectangle(0, 0, tileSize * selectedBitmapSize, tileSize * selectedBitmapSize);
-                        //target location
-                        Rectangle target = new Rectangle(gridx * tileSize, gridy * tileSize, tileSize * selectedBitmapSize, tileSize * selectedBitmapSize);
-                        //draw sprite
-                        gfx.DrawImage((Image)selectedBitmap, target, frame, GraphicsUnit.Pixel);
-                    }
-                }
-                catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
-                //save changes
-                pictureBox1.Image = drawArea;
-            }
-        }
-        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        }        
+        public void saveEncountersFile()
         {
             try
             {
-                refreshMap();
-                pictureBox1.Image = drawArea;
+                string json = JsonConvert.SerializeObject(prntForm.encountersList, Formatting.Indented);
+                using (StreamWriter sw = new StreamWriter(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\data\\encounters.json"))
+                {
+                    sw.Write(json.ToString());
+                }
+                MessageBox.Show("Saved File");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("failed on mouse leave map: " + ex.ToString());
+                MessageBox.Show("Failed to Save File: " + ex.ToString());
             }
         }
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        public List<Encounter> loadEncountersFile()
         {
-            switch (e.Button)
+            List<Encounter> toReturn = null;
+
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(prntForm._mainDirectory + "\\data\\encounters.json"))
             {
-                #region Left Button
-                case MouseButtons.Left:
-                    #region Creature Selected
-                    if ((selected) && (ee_selectedCreature != null))
-                    {
-                        string selectedCrt = prntForm.selectedEncounterCreatureTag;
-                        prntForm.logText(selectedCrt);
-                        prntForm.logText(Environment.NewLine);
-
-                        gridx = e.X / tileSize;
-                        gridy = e.Y / tileSize;
-
-                        prntForm.logText("gridx = " + gridx.ToString() + "gridy = " + gridy.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        // verify that there is no creature, blocked, or PC already on this location
-                        // add to a List<> a new item with the x,y coordinates
-                        if (ee_selectedCreature.SpriteFilename == "blank.spt")
-                        {
-                            return;
-                        }
-                        //check to see if a creature already exists on this square
-                        foreach (CreatureRefs cr in ee_encounter.EncounterCreatureRefsList)
-                        {
-                            if (cr.CreatureStartLocation == new Point(gridx, gridy))
-                            {
-                                MessageBox.Show("Can only place one creature per square...aborting placement");
-                                return;
-                            }
-                        }
-                        CreatureRefs newCrtRef = new CreatureRefs();
-                        newCrtRef.CreatureName = ee_selectedCreature.Name;
-                        newCrtRef.CreatureTag = ee_selectedCreature.Tag + "_" + prntForm.mod.NextIdNumber;
-                        newCrtRef.CreatureResRef = ee_selectedCreature.ResRef;
-                        newCrtRef.CreatureSize = ee_selectedCreature.Size;
-                        newCrtRef.MouseOverText = ee_selectedCreature.MouseOverText;
-                        newCrtRef.CreatureStartLocation = new Point(gridx, gridy);
-                        ee_encounter.EncounterCreatureRefsList.Add(newCrtRef);
-                        //Creature newCrt = new Creature();
-                        //newCrt = ee_selectedCreature.DeepCopy();
-                        //newCrt.Tag = ee_selectedCreature.Tag + "_" + prntForm.mod.NextIdNumber;
-                        //newCrt.CombatLocation = new Point(gridx, gridy);
-                        //ee_encounter.EncounterCreatureList.creatures.Add(newCrt);
-                        //area.AreaCreatureList.creatures.Add(newCrt);                      
-                        // show the item on the map
-                        if (ee_mod.ModuleName != "NewModule")
-                        {
-                            Creature crt = ee_selectedCreature.DeepCopy();
-                            crt.LoadSpriteStuff(prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName);
-                            Bitmap newBitmap = (Bitmap)crt.CharSprite.Image.Clone();
-                            //Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\graphics\\sprites\\tokens\\module\\" + ee_selectedCreature.CharSprite.SpriteSheetFilename);
-                            crtBitmapList.Add(newBitmap);
-                        }
-                        else
-                        {
-                            Creature crt = ee_selectedCreature.DeepCopy();
-                            crt.LoadSpriteStuff(prntForm._mainDirectory + "\\data\\NewModule");
-                            Bitmap newBitmap = (Bitmap)crt.CharSprite.Image.Clone(); 
-                            //Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\NewModule\\graphics\\sprites\\tokens\\" + ee_selectedCreature.CharSprite.SpriteSheetFilename);
-                            crtBitmapList.Add(newBitmap);
-                        }
-                    }
-                    #endregion
-                    #region Prop Selected
-                    else if ((propSelected) && (ee_selectedProp != null))
-                    {
-                        string selectedProp = prntForm.selectedEncounterPropTag;
-                        prntForm.logText(selectedProp);
-                        prntForm.logText(Environment.NewLine);
-
-                        gridx = e.X / tileSize;
-                        gridy = e.Y / tileSize;
-
-                        prntForm.logText("gridx = " + gridx.ToString() + "gridy = " + gridy.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        // verify that there is no creature, blocked, or PC already on this location
-                        // add to a List<> a new item with the x,y coordinates
-                        if (ee_selectedProp.PropSpriteFilename == "blank.spt")
-                        {
-                            return;
-                        }
-                        PropRefs newPropRef = new PropRefs();
-                        newPropRef.PropName = ee_selectedProp.PropName;
-                        newPropRef.PropTag = ee_selectedProp.PropTag + "_" + prntForm.mod.NextIdNumber;
-                        newPropRef.PropResRef = ee_selectedProp.PropResRef;
-                        newPropRef.PropContainerChk = ee_selectedProp.PropContainerChk;
-                        newPropRef.PropContainerTag = ee_selectedProp.PropContainerTag;
-                        newPropRef.PropTrappedChk = ee_selectedProp.PropTrapped;
-                        newPropRef.PropLockedChk = ee_selectedProp.PropLocked;
-                        newPropRef.PropKeyTag = ee_selectedProp.PropKeyTag;
-                        newPropRef.MouseOverText = ee_selectedProp.MouseOverText;
-                        newPropRef.PropStartLocation = new Point(gridx, gridy);
-                        ee_encounter.EncounterPropRefsList.Add(newPropRef);                        
-                        //Prop newProp = new Prop();
-                        //newProp = ee_selectedProp.DeepCopy();
-                        //newProp.PropTag = ee_selectedProp.PropTag + "_" + prntForm.mod.NextIdNumber;
-                        //newProp.Location = new Point(gridx, gridy);
-                        //ee_encounter.EncounterPropList.propsList.Add(newProp);
-                        // show the item on the map
-                        if (ee_mod.ModuleName != "NewModule")
-                        {
-                            Prop prp = ee_selectedProp.DeepCopy();
-                            prp.LoadPropSpriteStuffForTS(prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName);
-                            Bitmap newBitmap = (Bitmap)prp.PropSprite.Image.Clone();
-                            //Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + ee_mod.ModuleFolderName + "\\graphics\\sprites\\props\\" + ee_selectedProp.PropSprite.SpriteSheetFilename);
-                            propBitmapList.Add(newBitmap);
-                        }
-                        else
-                        {
-                            Prop prp = ee_selectedProp.DeepCopy();
-                            prp.LoadPropSpriteStuffForTS(prntForm._mainDirectory + "\\data\\NewModule");
-                            Bitmap newBitmap = (Bitmap)prp.PropSprite.Image.Clone();
-                            //Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\NewModule\\graphics\\sprites\\props\\" + ee_selectedProp.PropSprite.SpriteSheetFilename);
-                            propBitmapList.Add(newBitmap);
-                        }
-                    }
-                    #endregion
-                    #region PC Selected
-                    else if (PCselected)
-                    {
-                        // place PC location, check if valid location and not used yet
-                        gridx = e.X / tileSize;
-                        gridy = e.Y / tileSize;
-
-                        prntForm.logText("gridx = " + gridx.ToString() + "gridy = " + gridy.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        // verify that there is no creature, blocked, or PC already on this location
-                        // add to a List<> a new item with the x,y coordinates                        
-                        Point newPoint = new Point(gridx, gridy);
-                        ee_encounter.EncounterPcStartLocations.Add(newPoint);
-                        Bitmap newBitmap;
-                        if (ee_encounter.EncounterPcStartLocations.Count >= 6)
-                            newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc6.png");
-                        else if (ee_encounter.EncounterPcStartLocations.Count >= 5)
-                            newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc5.png");
-                        else if (ee_encounter.EncounterPcStartLocations.Count >= 4)
-                            newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc4.png");
-                        else if (ee_encounter.EncounterPcStartLocations.Count >= 3)
-                            newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc3.png");
-                        else if (ee_encounter.EncounterPcStartLocations.Count >= 2)
-                            newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc2.png");
-                        else
-                            newBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc1.png");
-                        PCBitmapList.Add(newBitmap);
-                        refreshPcIcon();
-                    }
-                    #endregion
-                    #region None Selected
-                    else // not placing, just getting info and possibly deleteing icon
-                    {
-                        gridx = e.X / tileSize;
-                        gridy = e.Y / tileSize;
-                        Point newPoint = new Point(gridx, gridy);
-                        //draw selection box
-                        drawSelectionBox(gridx, gridy);
-                        txtSelectedIconInfo.Text = "";
-                        // if click on item (and not placing a new item), should be able to
-                        // get info about the item and remove if wanted
-
-                        // iterate through all icons to see if one is at the selected location
-                        foreach (Creature crt in ee_encounter.EncounterCreatureList.creatures)
-                        {
-                            if (crt.CombatLocation == newPoint)
-                            {
-                                // if so then give details about that icon (name, tag, etc.)
-                                txtSelectedIconInfo.Text = "name: " + crt.Name + Environment.NewLine + "tag: " + crt.Tag;
-                                lastSelectedObjectTag = crt.Tag;
-                                //lastSelectedObjectResRef = crt.ResRef;
-                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = crt;
-                            }
-                        }
-                        foreach (CreatureRefs crt in ee_encounter.EncounterCreatureRefsList)
-                        {
-                            if (crt.CreatureStartLocation == newPoint)
-                            {
-                                // if so then give details about that icon (name, tag, etc.)
-                                txtSelectedIconInfo.Text = "name: " + crt.CreatureName + Environment.NewLine
-                                                            + "tag: " + crt.CreatureTag + Environment.NewLine
-                                                            + "resref: " + crt.CreatureResRef;
-                                //lastSelectedObjectResRef = crt.CreatureResRef;
-                                lastSelectedObjectTag = crt.CreatureTag;
-                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = crt;
-                            }
-                        }
-                        foreach (PropRefs prp in ee_encounter.EncounterPropRefsList)
-                        {
-                            if (prp.PropStartLocation == newPoint)
-                            {
-                                // if so then give details about that icon (name, tag, etc.)
-                                txtSelectedIconInfo.Text = "name: " + prp.PropName + Environment.NewLine
-                                                            + "tag: " + prp.PropTag + Environment.NewLine
-                                                            + "resref: " + prp.PropResRef;
-                                //lastSelectedObjectResRef = prp.PropResRef;
-                                lastSelectedObjectTag = prp.PropTag;
-                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prp;
-                            }
-                        }
-                        foreach (Point pc in ee_encounter.EncounterPcStartLocations)
-                        {
-                            if (pc == newPoint)
-                            {
-                                txtSelectedIconInfo.Text = "selected a PC marker";
-                            }
-                        }                        
-                    }
-                    #endregion
-                    break;
-                #endregion
-                #region Right Button
-                case MouseButtons.Right:
-                    // exit by right click or ESC
-                    prntForm.logText("entered esc");
-                    prntForm.logText(Environment.NewLine);
-                    prntForm.selectedEncounterCreatureTag = "";
-                    prntForm.selectedEncounterPropTag = "";
-                    selected = false;
-                    PCselected = false;
-                    propSelected = false;
-                    refreshMap();            
-                    pictureBox1.Image = drawArea;
-                    break;
-                #endregion
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (List<Encounter>)serializer.Deserialize(file, typeof(List<Encounter>));
             }
+            return toReturn;
         }
-        private void EncounterEditor_KeyDown(object sender, KeyEventArgs e)
+        public List<Item> loadItemsFile()
         {
-            if (e.KeyCode == Keys.Escape)
-            {
-                // exit by right click or ESC
-                prntForm.logText("entered escape");
-                prntForm.logText(Environment.NewLine);
-                prntForm.selectedEncounterCreatureTag = "";
-                prntForm.selectedEncounterPropTag = "";
-                selected = false;
-                PCselected = false;
-                refreshMap();
-                pictureBox1.Image = drawArea;
-            }
-        }
-        private void pictureBox1_MouseEnter(object sender, EventArgs e)
-        {
-            pictureBox1.Focus();
-            try
-            {
-                if (prntForm.selectedEncounterCreatureTag != "")
-                {
-                    selected = true;
-                }
-                if (prntForm.selectedEncounterPropTag != "")
-                {
-                    propSelected = true;
-                }
-                if (selected)
-                {
-                    string selectedCrt = prntForm.selectedEncounterCreatureTag;
-                    ee_selectedCreature = prntForm.creaturesList.getCreatureByTag(selectedCrt);
-                    if (ee_selectedCreature != null)
-                    {
-                        selectedBitmap = ee_selectedCreature.CharSprite.Image;
-                        selectedBitmapSize = ee_selectedCreature.Size;
-                    }
-                }
-                //else if (prntForm.PropSelected)
-                else if (propSelected)
-                {
-                    string selectedProp = prntForm.selectedLevelMapPropTag;
-                    ee_selectedProp = prntForm.propsList.getPropByTag(selectedProp);
-                    if (ee_selectedProp != null)
-                    {
-                        selectedBitmap = ee_selectedProp.PropSprite.Image;
-                        selectedBitmapSize = ee_selectedProp.PropSprite.SpriteSize.Width / tileSize;
-                    }
-                }
-                else if (PCselected)
-                {
-                    // determine how many PCs have been placed
-                    refreshPcIcon();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("failed on mouse enter map: " + ex.ToString()); 
-            }
-        }
-        private void refreshPcIcon()
-        {
-            try
-            {
-                if (ee_encounter.EncounterPcStartLocations.Count == 5)
-                    selectedBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc6.png");
-                else if (ee_encounter.EncounterPcStartLocations.Count == 4)
-                    selectedBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc5.png");
-                else if (ee_encounter.EncounterPcStartLocations.Count == 3)
-                    selectedBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc4.png");
-                else if (ee_encounter.EncounterPcStartLocations.Count == 2)
-                    selectedBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc3.png");
-                else if (ee_encounter.EncounterPcStartLocations.Count == 1)
-                    selectedBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc2.png");
-                else
-                    selectedBitmap = new Bitmap(prntForm._mainDirectory + "\\data\\graphics\\PCLoc1.png");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("failed on refresh PC Icons: " + ex.ToString());
-            }
+            List<Item> toReturn = null;
 
-        }
-        private void btnRemoveSelectedCreature_Click(object sender, EventArgs e)
-        {
-            // iterate through creature ref list and see if tag matches
-            int cnt = 0;
-            foreach (CreatureRefs crt in ee_encounter.EncounterCreatureRefsList)
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(prntForm._mainDirectory + "\\data\\items.json"))
             {
-                //if (crt.CreatureResRef == lastSelectedObjectResRef)
-                if (crt.CreatureTag == lastSelectedObjectTag)
-                {
-                    // remove at index of matched location
-                    ee_encounter.EncounterCreatureRefsList.RemoveAt(cnt);
-                    crtBitmapList.RemoveAt(cnt);
-                    refreshMap();
-                    return;
-                }
-                cnt++;
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (List<Item>)serializer.Deserialize(file, typeof(List<Item>));
             }
-            // iterate through creature list and see if tag matches
-            /*cnt = 0;
-            foreach (Creature crt in ee_encounter.EncounterCreatureList.creatures)
-            {
-                if (crt.Tag == lastSelectedObjectTag)
-                {
-                    // remove at index of matched tag
-                    ee_encounter.EncounterCreatureList.creatures.RemoveAt(cnt);
-                    crtBitmapList.RemoveAt(cnt);
-                    refreshMap();
-                    return;
-                }
-                cnt++;
-            }*/
-            cnt = 0;
-            foreach (PropRefs prp in ee_encounter.EncounterPropRefsList)
-            {
-                //if (prp.PropResRef == lastSelectedObjectResRef)
-                if (prp.PropTag == lastSelectedObjectTag)
-                {
-                    // remove at index of matched tag
-                    ee_encounter.EncounterPropRefsList.RemoveAt(cnt);
-                    propBitmapList.RemoveAt(cnt);
-                    refreshMap();
-                    return;
-                }
-                cnt++;
-            }
-            /*cnt = 0;
-            foreach (Prop prp in ee_encounter.EncounterPropList.propsList)
-            {
-                if (prp.PropResRef == lastSelectedObjectResRef)
-                {
-                    // remove at index of matched tag
-                    ee_encounter.EncounterPropList.propsList.RemoveAt(cnt);
-                    propBitmapList.RemoveAt(cnt);
-                    refreshMap();
-                    return;
-                }
-                cnt++;
-            }*/
+            return toReturn;
         }
         private void btnAddItems_Click(object sender, EventArgs e)
         {
             try
             {
-                string newTag;
-                newTag = prntForm.itemsList.itemsList[cmbItems.SelectedIndex].ItemTag;
-                ee_encounter.EncounterInventoryTagList.Add(newTag);
+                Item it = prntForm.itemsList[cmbItems.SelectedIndex];
+                ItemRefs newIR = prntForm.createItemRefsFromItem(it);
+                prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterInventoryRefsList.Add(newIR);
                 refreshLbxItems();
             }
             catch { }
@@ -962,37 +191,1370 @@ namespace IBBToolset
                 try
                 {
                     if (lbxItems.SelectedIndex >= 0)
-                        ee_encounter.EncounterInventoryTagList.RemoveAt(lbxItems.SelectedIndex);
+                        prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterInventoryRefsList.RemoveAt(lbxItems.SelectedIndex);
                 }
                 catch { }
                 refreshLbxItems();
             }
         }
+        private void btnPlacePCs_Click(object sender, EventArgs e)
+        {
+            tileSelected = false;
+            PcSelected = true;
+            CrtSelected = false;
+        }
+        private void btnDeletePCs_Click(object sender, EventArgs e)
+        {
+            prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterPcStartLocations.Clear();
+            refreshMap(true);
+        }
+        private void btnDeleteCreatures_Click(object sender, EventArgs e)
+        {
+            prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterCreatureRefsList.Clear();
+            refreshMap(true);
+        }
+        #endregion
+
+        private void resetPanelAndDeviceSize()
+        {
+            panelView.Width = thisEnc.MapSizeX * sqr;
+            panelView.Height = thisEnc.MapSizeY * sqr;
+            surface = new Bitmap(thisEnc.MapSizeX * sqr, thisEnc.MapSizeY * sqr);
+            device = Graphics.FromImage(surface);
+        }
+        private void createTileImageButtons()
+        {
+            try
+            {
+                this.flPanelTab1.Controls.Clear();
+                tileList.Clear();
+                foreach (string f in Directory.GetFiles(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\", "*.png"))
+                {
+                    string filename = Path.GetFullPath(f);
+                    using (Bitmap bit = new Bitmap(filename))
+                    {
+                        //bit = ResizeBitmap(bit, 50, 50);
+                        Button btnNew = new Button();
+                        btnNew.BackgroundImage = (Image)bit.Clone();
+                        btnNew.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+                        btnNew.FlatAppearance.BorderSize = 2;
+                        btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+                        btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
+                        btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                        btnNew.Size = new System.Drawing.Size(50 + 2, 50 + 2);
+                        btnNew.BackgroundImageLayout = ImageLayout.Zoom;
+                        btnNew.Text = Path.GetFileNameWithoutExtension(f);
+                        btnNew.UseVisualStyleBackColor = true;
+                        btnNew.Click += new System.EventHandler(this.btnSelectedTerrain_Click);
+                        this.flPanelTab1.Controls.Add(btnNew);
+
+                        //fill tileList as well
+                        TileBitmapNamePair t = new TileBitmapNamePair((Bitmap)bit.Clone(), Path.GetFileNameWithoutExtension(f));
+                        tileList.Add(t);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error: " + ex.ToString());
+            }
+        }
+        private TileBitmapNamePair getTileByName(string name)
+        {
+            foreach (TileBitmapNamePair t in tileList)
+            {
+                if (t.filename == name)
+                {
+                    return t;
+                }
+            }
+            return null;
+        }
+        private void btnSelectedTerrain_Click(object sender, EventArgs e)
+        {
+            Button selectBtn = (Button)sender;
+            currentTileFilename = selectBtn.Text;
+            selectedBitmap = (Bitmap)selectBtn.BackgroundImage.Clone();
+            panel1.BackgroundImage = selectedBitmap;
+        }
+        private void refreshMap(bool refreshAll)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (thisEnc == null) { return; }
+            if (refreshAll)
+            {
+                device.Clear(Color.Gainsboro);
+            }
+            try
+            {
+                //draw map
+                for (int y = 0; y < thisEnc.MapSizeY; y++)                
+                {
+                    for (int x = 0; x < thisEnc.MapSizeX; x++)
+                    {
+                        if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                        {
+                            TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                            Bitmap lyr1 = null;
+                            Bitmap lyr2 = null;
+                            Rectangle src1 = new Rectangle(0, 0, 50, 50);
+                            Rectangle src2 = new Rectangle(0, 0, 50, 50);
+                            //check to see if 100x100 tile image size
+                            if (getTileByName(tile.Layer1Filename) != null)
+                            {
+                                lyr1 = getTileByName(tile.Layer1Filename).bitmap;
+                                src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                            }
+                            if (getTileByName(tile.Layer2Filename) != null)
+                            {
+                                lyr2 = getTileByName(tile.Layer2Filename).bitmap;
+                                src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
+                            }
+                            
+                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                            //draw layer 1 first
+                            if (checkBox1.Checked)
+                            {
+                                if (lyr1 != null)
+                                {
+                                    device.DrawImage(lyr1, target, src1, GraphicsUnit.Pixel);                                    
+                                }
+                            }
+                            //draw layer 2
+                            if (checkBox2.Checked)
+                            {
+                                if (lyr2 != null)
+                                {
+                                    device.DrawImage(lyr2, target, src2, GraphicsUnit.Pixel);                                    
+                                }
+                            }
+                            //draw square walkmesh and LoS stuff
+                            Rectangle src = new Rectangle(0, 0, 50, 50);
+                            if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                            {
+                                if (tile.LoSBlocked)
+                                {
+                                    device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                                    device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                                }
+                                if (tile.Walkable)
+                                {
+                                    device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
+                                }
+                                else
+                                {
+                                    target = new Rectangle(x * sqr + 1, y * sqr + 1, sqr - 1, sqr - 1);
+                                    device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                    device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                    device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                            target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                            if (chkGrid.Checked)
+                            {
+                                //device.DrawRectangle(blackPen, target);
+                            }
+                        }
+                    }
+                }
+
+                //draw creatures
+                foreach (CreatureRefs crtRef in prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterCreatureRefsList)
+                {
+                    int cspx = crtRef.creatureStartLocationX * sqr;
+                    int cspy = crtRef.creatureStartLocationY * sqr;
+                    //TODO change font size based on zoom level
+                    device.DrawString(crtRef.creatureTag, drawFont, drawBrush, new Point(cspx, cspy + 25));
+                }
+                //draw PCs
+                int cnt = 0;
+                foreach (Coordinate PCpoint in prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterPcStartLocations)
+                {
+                    int cspx = PCpoint.X * sqr;
+                    int cspy = PCpoint.Y * sqr;
+                    //TODO change font size based on zoom level
+                    device.DrawString((cnt + 1).ToString(), drawFontNum, drawBrush, new Point(cspx, cspy + 5));
+                    cnt++;
+                }
+
+                /*TODOint cnt = 0;
+                foreach (Prop prpRef in thisEnc.Props)
+                {
+                    int cspx = prpRef.LocationX;
+                    int cspy = prpRef.LocationY;
+                    if ((refreshAll) || (currentSquareClicked == new Point(cspx, cspy)) || (lastSquareClicked == new Point(cspx, cspy)))
+                    {                        
+                        spritePropDraw(cspx, cspy, cnt);
+                    }
+                    cnt++;
+                }*/
+                /*TODOforeach (Trigger t in thisEnc.Triggers)
+                {
+                    foreach (Coordinate p in t.TriggerSquaresList)
+                    {
+                        if ((refreshAll) || (currentSquareClicked == new Point(p.X, p.Y)) || (lastSquareClicked == new Point(p.X, p.Y)))
+                        {
+                            int dx = p.X * sqr;
+                            int dy = p.Y * sqr;
+                            Pen pen = new Pen(Color.Orange, 2);
+                            if ((t.Event1Type == "encounter") || (t.Event2Type == "encounter") || (t.Event3Type == "encounter"))
+                            {
+                                pen = new Pen(Color.Red, 2);
+                            }
+                            else if (t.Event1Type == "conversation")
+                            {
+                                pen = new Pen(Color.Yellow, 2);
+                            }
+                            else if (t.Event1Type == "script")
+                            {
+                                pen = new Pen(Color.Blue, 2);
+                            }
+                            else if (t.Event1Type == "transition")
+                            {
+                                pen = new Pen(Color.Lime, 2);
+                            }
+                            Rectangle rect = new Rectangle(dx + 3, dy + 3, sqr - 6, sqr - 6);
+                            device.DrawRectangle(pen, rect);
+                        }
+                    }
+                }*/
+                UpdatePB();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed on refresh map: " + ex.ToString());                
+            }            
+        }
+        private void spritePropDraw(int cspx, int cspy, int spriteListIndex)
+        {
+            //source image
+            Bitmap prpBitmap = propBitmapList[spriteListIndex];
+            //Rectangle source = new Rectangle(0, 0, le_selectedProp.propBitmap.Width, le_selectedProp.propBitmap.Height);
+            Rectangle source = new Rectangle(0, 0, prpBitmap.Width, prpBitmap.Height);
+            //target location
+            Rectangle target = new Rectangle(cspx * sqr, cspy * sqr, sqr, sqr);
+            //draw sprite
+            device.DrawImage((Image)prpBitmap, target, source, GraphicsUnit.Pixel);
+        }
+        /*private void drawTileSettings()
+        {
+            //for (int index = 0; index < area.MapSizeInSquares.Width * area.MapSizeInSquares.Height; index++)
+            /*for (int x = 0; x < area.MapSizeX; x++)
+            {
+                for (int y = 0; y < area.MapSizeY; y++)
+                {
+                    if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                    {
+                        if (area.Tiles[y * this.area.MapSizeX + x].LoSBlocked)
+                        {
+                            Rectangle src = new Rectangle(0, 0, sqr, sqr);
+                            int dx = x * sqr;
+                            int dy = y * sqr;
+                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                            device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                        }
+                        if (area.Tiles[y * this.area.MapSizeX + x].Walkable)
+                        {
+                            Rectangle src = new Rectangle(0, 0, sqr, sqr);
+                            int dx = x * sqr;
+                            int dy = y * sqr;
+                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                            device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
+                        }
+                        else
+                        {
+                            Rectangle src = new Rectangle(0, 0, sqr, sqr);
+                            int dx = x * sqr;
+                            int dy = y * sqr;
+                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                            device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                        }
+                    }
+                }
+            }*/
+            /*foreach (Trigger t in area.Triggers)
+            {
+                foreach (Coordinate p in t.TriggerSquaresList)
+                {
+                    int dx = p.X * sqr;
+                    int dy = p.Y * sqr;
+                    Pen pen = new Pen(Color.Orange, 2);
+                    if ((t.Event1Type == "encounter") || (t.Event2Type == "encounter") || (t.Event3Type == "encounter"))
+                    {
+                        pen = new Pen(Color.Red, 2);
+                    }
+                    else if (t.Event1Type == "conversation")
+                    {
+                        pen = new Pen(Color.Yellow, 2);
+                    }
+                    else if (t.Event1Type == "script")
+                    {
+                        pen = new Pen(Color.Blue, 2);
+                    }
+                    else if (t.Event1Type == "transition")
+                    {
+                        pen = new Pen(Color.Lime, 2);
+                    }
+                    Rectangle rect = new Rectangle(dx + 3, dy + 3, sqr - 6, sqr - 6);
+                    device.DrawRectangle(pen, rect);
+                }
+            }*/
+            //panelView.BackgroundImage = surface;
+        //}*/
+        public void drawSelectionBox(int gridx, int gridy)
+        {
+            //draw selection box around tile
+            int dx = gridx * sqr;
+            int dy = gridy * sqr;
+            Pen pen = new Pen(Color.DarkMagenta, 2);
+            Rectangle rect = new Rectangle(dx + 1, dy + 1, sqr - 2, sqr - 2);
+            device.DrawRectangle(pen, rect);
+
+            //save changes
+            UpdatePB();
+        }
+        public void UpdatePB()
+        {
+            this.Cursor = Cursors.Default;
+            panelView.BackgroundImage = surface;
+            panelView.Invalidate();
+        }        
+        
+        private void panelView_MouseMove(object sender, MouseEventArgs e)
+        {            
+            gridX = e.X / sqr;
+            gridY = e.Y / sqr;
+            lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
+            if (currentPoint != new Point(gridX, gridY))
+            {
+                if ((rbtnPaintTile.Checked) && (e.Button == MouseButtons.Left))
+                {
+                    clickDrawArea(e);
+                }
+            }
+            if (prntForm.PropSelected)
+            {
+                refreshMap(true);
+                try
+                {
+                    if (selectedBitmap != null)
+                    {
+                        //source image size
+                        Rectangle frame = new Rectangle(0, 0, selectedBitmap.Width, selectedBitmap.Height);
+                        //target location
+                        Rectangle target = new Rectangle(gridX * sqr, gridY * sqr, sqr, sqr);
+                        //draw sprite
+                        device.DrawImage((Image)selectedBitmap, target, frame, GraphicsUnit.Pixel);
+                    }
+                }
+                catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
+                //save changes
+                UpdatePB();
+            }
+        }
+        private void panelView_MouseDown(object sender, MouseEventArgs e)
+        {
+            /*
+            int col = e.X / sqr;
+            int row = e.Y / sqr;
+
+            if (tileSelected)
+            {
+                //prntForm.encountersList[_selectedLbxEncounterIndex].encounterMapLayout[row, col] = currentTile;
+                if (radioButton1.Checked)
+                {
+                    prntForm.encountersList[_selectedLbxEncounterIndex].encounterTiles[row * 7 + col].Layer1Filename = currentTileFilename;
+                }
+                else if (radioButton2.Checked)
+                {
+                    prntForm.encountersList[_selectedLbxEncounterIndex].encounterTiles[row * 7 + col].Layer2Filename = currentTileFilename;
+                }
+            }
+            else if (rbtnWalkable.Checked)
+            {
+                if (prntForm.encountersList[_selectedLbxEncounterIndex].encounterTiles[row * 7 + col].Walkable == true)
+                {
+                    prntForm.encountersList[_selectedLbxEncounterIndex].encounterTiles[row * 7 + col].Walkable = false;
+                }
+                else
+                {
+                    prntForm.encountersList[_selectedLbxEncounterIndex].encounterTiles[row * 7 + col].Walkable = true;
+                }
+                refreshMap();
+            }
+            else if (rbtnLoS.Checked)
+            {
+                if (prntForm.encountersList[_selectedLbxEncounterIndex].encounterTiles[row * 7 + col].LoSBlocked == true)
+                {
+                    prntForm.encountersList[_selectedLbxEncounterIndex].encounterTiles[row * 7 + col].LoSBlocked = false;
+                }
+                else
+                {
+                    prntForm.encountersList[_selectedLbxEncounterIndex].encounterTiles[row * 7 + col].LoSBlocked = true;
+                }
+                refreshMap();
+            }
+            refreshMap();  
+            */
+        }
+        private void panelView_MouseLeave(object sender, EventArgs e)
+        {
+            try
+            {
+                //refreshMap();
+                //UpdatePB();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed on mouse leave map: " + ex.ToString());
+            }
+        }
+        private void panelView_MouseEnter(object sender, EventArgs e)
+        {
+            panelView.Select();
+            try
+            {
+                if (prntForm.selectedLevelMapCreatureTag != "")
+                {
+                    prntForm.CreatureSelected = true;
+                }
+                if (prntForm.selectedLevelMapPropTag != "")
+                {
+                    prntForm.PropSelected = true;
+                }
+                if (prntForm.CreatureSelected)
+                {
+                    string selectedCrt = prntForm.selectedEncounterCreatureTag;
+                    le_selectedCreature = prntForm.getCreatureByTag(selectedCrt);
+                    if (le_selectedCreature != null)
+                    {
+                        selectedBitmap = le_selectedCreature.creatureIconBitmap;
+                        //selectedBitmapSize = le_selectedCreature.Size;
+                    }
+                }
+                else if (prntForm.PropSelected)
+                {
+                    string selectedProp = prntForm.selectedLevelMapPropTag;
+                    le_selectedProp = prntForm.getPropByTag(selectedProp);
+                    if (le_selectedProp != null)
+                    {
+                        selectedBitmap = le_selectedProp.propBitmap;
+                        //selectedBitmapSize = le_selectedProp.propBitmap.Width / (tileSize * 2);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed on mouse enter map: " + ex.ToString());
+            }
+        }
+        private void panelView_MouseClick(object sender, MouseEventArgs e)
+        {
+            clickDrawArea(e);
+        }
+        private void clickDrawArea(MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                #region Left Button
+                case MouseButtons.Left:
+                    refreshLeftPanelInfo();
+                    prntForm.currentSelectedTrigger = null; 
+                    gridX = e.X / sqr;
+                    gridY = e.Y / sqr;
+                    lastSquareClicked.X = currentSquareClicked.X;
+                    lastSquareClicked.Y = currentSquareClicked.Y;
+                    currentSquareClicked.X = gridX;
+                    currentSquareClicked.Y = gridY;
+
+                    #region PC Selected
+                    if (PcSelected)
+                    {
+                        if (prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterPcStartLocations.Count < 6)
+                        {
+                            prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterPcStartLocations.Add(new Coordinate(gridX, gridY));
+                        }
+                        refreshMap(true);
+                    }
+                    #endregion
+                    #region Creature Selected
+                    else if (CrtSelected)
+                    {
+                        CreatureRefs crtRef = new CreatureRefs();
+                        string _nodeTag = prntForm.frmBlueprints.tvCreatures.SelectedNode.Name;
+                        crtRef.creatureResRef = prntForm.creaturesList[prntForm.frmBlueprints.GetCreatureIndex(_nodeTag)].cr_resref;
+                        crtRef.creatureTag = prntForm.creaturesList[prntForm.frmBlueprints.GetCreatureIndex(_nodeTag)].cr_tag + "_" + prntForm.mod.nextIdNumber;
+                        crtRef.creatureStartLocationX = gridX;
+                        crtRef.creatureStartLocationY = gridY;
+                        prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterCreatureRefsList.Add(crtRef);
+                        refreshMap(true);
+                    }
+                    #endregion
+                    #region Tile Selected
+                    else if (rbtnPaintTile.Checked)
+                    {
+                        //gridX = e.X / sqr;
+                        //gridY = e.Y / sqr;
+                        selectedTile.index = gridY * thisEnc.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        if (radioButton1.Checked)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Layer1Filename = currentTileFilename;
+                            //if shift key is down, draw all between here and lastclickedsquare
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Filename = currentTileFilename;
+                                        currentSquareClicked = new Point(x, y);
+                                        refreshMap(false);
+                                    }
+                                }
+
+
+                                /*if (cSqr.X == lSqr.X)
+                                {
+                                    if (cSqr.Y > lSqr.Y)
+                                    {
+                                        for (int i = lSqr.Y; i <= cSqr.Y; i++)
+                                        {
+                                            area.Tiles[i * area.MapSizeX + cSqr.X].Layer1Filename = currentTileFilename;
+                                            currentSquareClicked = new Point(cSqr.X, i);
+                                            refreshMap(false);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int i = cSqr.Y; i <= lSqr.Y; i++)
+                                        {
+                                            area.Tiles[i * area.MapSizeX + cSqr.X].Layer1Filename = currentTileFilename;
+                                            currentSquareClicked = new Point(cSqr.X, i);
+                                            refreshMap(false);
+                                        }
+                                    }                                     
+                                }
+                                else if (cSqr.Y == lSqr.Y)
+                                {
+                                    if (cSqr.X > lSqr.X)
+                                    {
+                                        for (int i = lSqr.X; i <= cSqr.X; i++)
+                                        {
+                                            area.Tiles[cSqr.Y * area.MapSizeX + i].Layer1Filename = currentTileFilename;
+                                            currentSquareClicked = new Point(i, cSqr.Y);
+                                            refreshMap(false);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int i = cSqr.X; i <= lSqr.X; i++)
+                                        {
+                                            area.Tiles[cSqr.Y * area.MapSizeX + i].Layer1Filename = currentTileFilename;
+                                            currentSquareClicked = new Point(i, cSqr.Y);
+                                            refreshMap(false);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    int startX = lSqr.X;
+                                    int startY = lSqr.Y;
+                                    int endX = cSqr.X;
+                                    int endY = cSqr.Y;
+                                    if (lSqr.X >= cSqr.X)
+                                    {
+                                        startX = cSqr.X;
+                                        endX = lSqr.X;
+                                    }
+                                    if (lSqr.Y >= cSqr.Y)
+                                    {
+                                        startY = cSqr.Y;
+                                        endY = lSqr.Y;
+                                    }
+                                    for (int x = startX; x <= endX; x++)
+                                    {
+                                        for (int y = startY; y <= endY; y++)
+                                        {
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Filename = currentTileFilename;
+                                            currentSquareClicked = new Point(x, y);
+                                            refreshMap(false);
+                                        }
+                                    }
+                                    
+                                    prntForm.logText("Shift key down for line painting but last click must be a straight line to this click");
+                                    prntForm.logText(Environment.NewLine);
+                                }*/
+                            }
+                        }
+                        else if (radioButton2.Checked)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Layer2Filename = currentTileFilename;
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Filename = currentTileFilename;
+                                        currentSquareClicked = new Point(x, y);
+                                        refreshMap(false);
+                                    }
+                                }
+                            }
+                        }
+                        refreshMap(false);
+                    }
+                    #endregion
+                    #region Prop Selected
+                    else if (prntForm.PropSelected)
+                    {
+                        /*TODO still need to add props to encounters
+                        string selectedProp = prntForm.selectedLevelMapPropTag;
+                        prntForm.logText(selectedProp);
+                        prntForm.logText(Environment.NewLine);
+
+                        //gridX = e.X / sqr;
+                        //gridY = e.Y / sqr;
+
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        // verify that there is no creature, blocked, or PC already on this location
+                        // add to a List<> a new item with the x,y coordinates
+                        if (le_selectedProp.ImageFileName == "blank")
+                        {
+                            return;
+                        }
+                        Prop newProp = new Prop();
+                        newProp = le_selectedProp.DeepCopy();
+                        newProp.PropTag = le_selectedProp.PropTag + "_" + prntForm.mod.nextIdNumber;
+                        newProp.LocationX = gridX;
+                        newProp.LocationY = gridY;
+                        thisEnc.Props.Add(newProp);
+                        // show the item on the map
+                        if (mod.moduleName != "NewModule")
+                        {
+                            Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\" + le_selectedProp.ImageFileName + ".png");
+                            propBitmapList.Add(newBitmap);
+                        }
+                        else
+                        {
+                            //do nothing if default module
+                        }
+                        refreshMap(false);
+                        */
+                    }
+                    #endregion
+                    #region Paint New Trigger Selected
+                    else if (rbtnPaintTrigger.Checked)
+                    {
+                        /*TODO stil need to add triggers to encounters
+                        string selectedTrigger = prntForm.selectedLevelMapTriggerTag;
+                        prntForm.logText(selectedTrigger);
+                        prntForm.logText(Environment.NewLine);
+
+                        //gridX = e.X / sqr;
+                        //gridY = e.Y / sqr;
+
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        Point newPoint = new Point(gridX, gridY);
+                        //add the selected square to the squareList if doesn't already exist
+                        try
+                        {
+                            //check: if click square already exists, then erase from list                            
+                            Trigger newTrigger = thisEnc.getTriggerByTag(selectedTrigger);
+                            bool exists = false;
+                            foreach (Coordinate p in newTrigger.TriggerSquaresList)
+                            {
+                                if ((p.X == newPoint.X) && (p.Y == newPoint.Y))
+                                {
+                                    //already exists, erase
+                                    newTrigger.TriggerSquaresList.Remove(p);
+                                    exists = true;
+                                    break;
+                                }
+                            }
+                            if (!exists) //doesn't exist so is a new point, add to list
+                            {
+                                Coordinate newCoor = new Coordinate();
+                                newCoor.X = newPoint.X;
+                                newCoor.Y = newPoint.Y;
+                                newTrigger.TriggerSquaresList.Add(newCoor);
+                            }
+                        }
+                        catch
+                        {
+                            MessageBox.Show("The tag of the selected Trigger was not found in the area's trigger list");
+                        }
+                        //update the map to show colored squares    
+                        refreshMap(false);
+                        */
+                    }
+                    #endregion
+                    #region Edit Trigger Selected
+                    else if (rbtnEditTrigger.Checked)
+                    {
+                        /*TODO add triggers to encounters
+                        if (prntForm.selectedLevelMapTriggerTag != null)
+                        {
+                            string selectedTrigger = prntForm.selectedLevelMapTriggerTag;
+                            prntForm.logText(selectedTrigger);
+                            prntForm.logText(Environment.NewLine);
+
+                            //gridX = e.X / sqr;
+                            //gridY = e.Y / sqr;
+
+                            prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                            prntForm.logText(Environment.NewLine);
+                            Point newPoint = new Point(gridX, gridY);
+                            try
+                            {
+                                //check: if click square already exists, then erase from list  
+                                Trigger newTrigger = thisEnc.getTriggerByTag(selectedTrigger);
+                                if (newTrigger == null)
+                                {
+                                    MessageBox.Show("error: make sure to select a trigger to edit first (click info button then click on trigger)");
+                                }
+                                bool exists = false;
+                                foreach (Coordinate p in newTrigger.TriggerSquaresList)
+                                {
+                                    if ((p.X == newPoint.X) && (p.Y == newPoint.Y))
+                                    {
+                                        //already exists, erase
+                                        newTrigger.TriggerSquaresList.Remove(p);
+                                        exists = true;
+                                        break;
+                                    }
+                                }
+                                if (!exists) //doesn't exist so is a new point, add to list
+                                {
+                                    Coordinate newCoor = new Coordinate();
+                                    newCoor.X = newPoint.X;
+                                    newCoor.Y = newPoint.Y;
+                                    newTrigger.TriggerSquaresList.Add(newCoor);
+                                    //newTrigger.TriggerSquaresList.Add(newPoint);
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("The tag of the selected Trigger was not found in the area's trigger list");
+                            }
+                            //update the map to show colored squares    
+                            refreshMap(false);
+                        }
+                        */
+                    }
+                    #endregion
+                    #region Walkmesh Toggle Selected
+                    else if (rbtnWalkable.Checked)
+                    {
+                        //gridX = e.X / sqr;
+                        //gridY = e.Y / sqr;
+                        selectedTile.index = gridY * thisEnc.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        if (thisEnc.encounterTiles[selectedTile.index].Walkable == true)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Walkable = false;
+                        }
+                        else
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Walkable = true;
+                        }
+                        refreshMap(false);
+                    }
+                    #endregion
+                    #region LoS mesh Toggle Selected
+                    else if (rbtnLoS.Checked)
+                    {
+                        //gridX = e.X / sqr;
+                        //gridY = e.Y / sqr;
+                        selectedTile.index = gridY * thisEnc.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        if (thisEnc.encounterTiles[selectedTile.index].LoSBlocked == true)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].LoSBlocked = false;
+                        }
+                        else
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].LoSBlocked = true;
+                        }
+                        refreshMap(false);
+                    }
+                    #endregion
+                    #region None Selected
+                    else // not placing, just getting info and possibly deleteing icon
+                    {
+                        contextMenuStrip1.Items.Clear();
+                        //when left click, get location
+                        //gridX = e.X / sqr;
+                        //gridY = e.Y / sqr;
+                        Point newPoint = new Point(gridX, gridY);
+                        EventHandler handler = new EventHandler(HandleContextMenuClick);
+                        //loop through all the objects
+                        //if has that location, add the tag to the list                    
+                        //draw selection box
+                        refreshMap(false);
+                        drawSelectionBox(gridX, gridY);
+                        txtSelectedIconInfo.Text = "";
+
+                        /*TODOforeach (Prop prp in thisEnc.Props)
+                        {
+                            if ((prp.LocationX == newPoint.X) && (prp.LocationY == newPoint.Y))
+                            {
+                                // if so then give details about that icon (name, tag, etc.)
+                                txtSelectedIconInfo.Text = "name: " + prp.ImageFileName + Environment.NewLine
+                                                            + "tag: " + prp.PropTag + Environment.NewLine;
+                                lastSelectedObjectTag = prp.PropTag;
+                                //prntForm.selectedLevelMapPropTag = prp.PropTag;
+                                panelView.ContextMenuStrip.Items.Add(prp.PropTag, null, handler); //string, image, handler
+                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prp;
+                            }
+                        }*/
+                        /*TODOforeach (Trigger t in thisEnc.Triggers)
+                        {
+                            foreach (Coordinate p in t.TriggerSquaresList)
+                            {
+                                if ((p.X == newPoint.X) && (p.Y == newPoint.Y))
+                                {
+                                    txtSelectedIconInfo.Text = "Trigger Tag: " + Environment.NewLine + t.TriggerTag;
+                                    lastSelectedObjectTag = t.TriggerTag;
+                                    prntForm.currentSelectedTrigger = t;
+                                    prntForm.frmTriggerEvents.refreshTriggers();
+                                    panelView.ContextMenuStrip.Items.Add(t.TriggerTag, null, handler); //string, image, handler
+                                    //prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                                }
+                            }
+                        }*/
+                        //if the list is less than 2, do nothing
+                        if (panelView.ContextMenuStrip.Items.Count > 1)
+                        {
+                            contextMenuStrip1.Show(panelView, e.Location);
+                        }
+                        prntForm.frmTriggerEvents.refreshTriggers();
+                    }
+                    #endregion
+                    break;
+                #endregion
+                #region Right Button
+                case MouseButtons.Right:
+                    // exit by right click or ESC
+                    prntForm.logText("entered right-click");
+                    prntForm.logText(Environment.NewLine);
+                    prntForm.selectedLevelMapCreatureTag = "";
+                    prntForm.selectedLevelMapPropTag = "";
+                    prntForm.CreatureSelected = false;
+                    prntForm.PropSelected = false;
+                    prntForm.currentSelectedTrigger = null;
+                    refreshMap(true);
+                    UpdatePB();
+                    rbtnInfo.Checked = true;
+                    break;
+                #endregion
+            }
+        }
+        private void btnRefreshMap_Click(object sender, EventArgs e)
+        {
+            refreshMap(true);
+        }
+        
+        private void btnFillWithSelected_Click(object sender, EventArgs e)
+        {
+            for (int x = 0; x < thisEnc.MapSizeX; x++)
+            {
+                for (int y = 0; y < thisEnc.MapSizeY; y++)
+                {
+                    selectedTile.index = y * thisEnc.MapSizeX + x;
+                    if (radioButton1.Checked)
+                    {
+                        thisEnc.encounterTiles[selectedTile.index].Layer1Filename = currentTileFilename;
+                    }
+                    else if (radioButton2.Checked)
+                    {
+                        thisEnc.encounterTiles[selectedTile.index].Layer2Filename = currentTileFilename;
+                    }                    
+                }
+            }
+            refreshMap(true);
+        }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshMap(true);
+        }
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshMap(true);
+        }
+        
+
+        #region Methods
+        private void loadAreaObjectBitmapLists()
+        {
+            /*TODO add props to encounters
+            foreach (Prop prp in thisEnc.Props)
+            {
+                // get Prop by Tag and then get Icon filename, add Bitmap to list
+                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + prp.ImageFileName + ".png"))
+                {
+                    Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + prp.ImageFileName + ".png");
+                    propBitmapList.Add(newBitmap);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to find prop image (" + prp.ImageFileName + ") in graphics folder");
+                }
+            }
+            */
+        }
+        /*private void openLevel(string g_dir, string g_fil, string g_filNoEx)
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            try
+            {
+                area = area.loadAreaFile(g_dir + "\\" + g_fil + ".lvl");
+                if (area == null)
+                {
+                    MessageBox.Show("returned a null area");
+                }
+                loadAreaObjectBitmapLists();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed to open file: " + ex.ToString());
+            }
+            
+            refreshLeftPanelInfo();
+            panelView.Width = area.MapSizeX * sqr;
+            panelView.Height = area.MapSizeY * sqr;
+            panelView.BackgroundImage = (Image)surface;
+            device = Graphics.FromImage(surface);
+            if (surface == null)
+            {
+                MessageBox.Show("returned a null Map bitmap");
+                return;
+            }
+            refreshMap(true);
+            this.Cursor = Cursors.Arrow;
+        }*/
+        private void createNewArea(int width, int height)
+        {
+            //create tilemap
+            thisEnc = null;
+            thisEnc = new Encounter();
+            thisEnc.MapSizeX = width;
+            thisEnc.MapSizeY = height;
+            for (int index = 0; index < (width * height); index++)
+            {
+                TileEnc newTile = new TileEnc();
+                newTile.Walkable = true;
+                newTile.LoSBlocked = false;
+                thisEnc.encounterTiles.Add(newTile);
+            }
+            refreshLeftPanelInfo();
+            panelView.Width = thisEnc.MapSizeX * sqr;
+            panelView.Height = thisEnc.MapSizeY * sqr;
+            panelView.BackgroundImage = (Image)surface;
+            device = Graphics.FromImage(surface);
+            if (surface == null)
+            {
+                MessageBox.Show("returned a null Map bitmap");
+                return;
+            }
+            refreshMap(true);
+        }
+        private void resetAreaTileValues(int width, int height)
+        {
+            thisEnc.MapSizeX = width;
+            thisEnc.MapSizeY = height;
+            thisEnc.encounterTiles.Clear();
+            for (int index = 0; index < (width * height); index++)
+            {
+                TileEnc newTile = new TileEnc();
+                newTile.Walkable = true;
+                newTile.LoSBlocked = false;
+                thisEnc.encounterTiles.Add(newTile);
+            }
+        }
+        public void refreshLeftPanelInfo()
+        {
+            lblMapSizeX.Text = thisEnc.MapSizeX.ToString();
+            lblMapSizeY.Text = thisEnc.MapSizeY.ToString();
+            selectedTile.x = gridX;
+            selectedTile.y = gridY;
+            selectedTile.index = gridY * thisEnc.MapSizeX + gridX;
+            drawSelectionBox(gridX, gridY);
+        }
+        private void mapSizeChangeStuff()
+        {
+            lblMapSizeX.Text = thisEnc.MapSizeX.ToString();
+            lblMapSizeY.Text = thisEnc.MapSizeY.ToString();
+            resetPanelAndDeviceSize();
+        }
+        #endregion
+
+        #region Event Handlers        
+        private void EncounterEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //MessageBox.Show("closing editor and removing from openAreaList");
+            //prntForm.openAreasList.Remove(area);
+        }
+        private void EncounterEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            device.Dispose();
+            surface.Dispose();
+            //gfxSelected.Dispose();
+            //selectedBitmap.Dispose();
+            //this.Close();
+        }
+        private void rbtnInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnInfo.Checked)
+            {
+                prntForm.logText("info on selecting map objects");
+                prntForm.logText(Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                //refreshMap(true);
+                //UpdatePB();
+            }
+        }
+        private void rbtnWalkable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnWalkable.Checked)
+            {
+                prntForm.logText("editing walkmesh");
+                prntForm.logText(Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                //refreshMap(true);
+                //UpdatePB();
+            }
+        }
+        private void rbtnLoS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnLoS.Checked)
+            {
+                prntForm.logText("editing line-of-sight mesh");
+                prntForm.logText(Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                //refreshMap(true);
+                //UpdatePB();
+            }
+        }
+        private void btnRemoveSelectedObject_Click(object sender, EventArgs e)
+        {
+            int cnt = 0;
+            /*TODOforeach (Prop prp in thisEnc.Props)
+            {
+                if (prp.PropTag == lastSelectedObjectTag)
+                {
+                    // remove at index of matched tag
+                    area.Props.RemoveAt(cnt);
+                    propBitmapList.RemoveAt(cnt);
+                    refreshMap(true);
+                    return;
+                }
+                cnt++;
+            }*/
+            /*TODOforeach (Trigger t in area.Triggers)
+            {
+                if (t.TriggerTag == lastSelectedObjectTag)
+                {
+                    // remove at index of matched tag
+                    area.Triggers.Remove(t);
+                    refreshMap(true);
+                    return;
+                }
+            }*/
+        }
+        private void rbtnPaintTrigger_CheckedChanged(object sender, EventArgs e)
+        {
+            /*TODOif (rbtnPaintTrigger.Checked)
+            {
+                //create a new trigger object
+                Trigger newTrigger = new Trigger();
+                //increment the tag to something unique
+                newTrigger.TriggerTag = "newTrigger_" + prntForm.mod.nextIdNumber;
+                prntForm.selectedLevelMapTriggerTag = newTrigger.TriggerTag;
+                thisEnc.Triggers.Add(newTrigger);
+                //set propertygrid to the new object
+                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = newTrigger;
+                prntForm.logText("painting a new trigger");
+                prntForm.logText(Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                //refreshMap(true);
+                //UpdatePB();
+            }*/
+        }
+        private void rbtnEditTrigger_CheckedChanged(object sender, EventArgs e)
+        {
+            /*TODOif (rbtnEditTrigger.Checked)
+            {
+                prntForm.logText("edit trigger: ");
+                prntForm.logText(Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                prntForm.selectedLevelMapTriggerTag = lastSelectedObjectTag;
+                //refreshMap(true);
+                //UpdatePB();
+            }*/
+        }
         private void chkGrid_CheckedChanged(object sender, EventArgs e)
         {
-            showGrid = chkGrid.Checked;
-            refreshMap();
+            refreshMap(true);
         }
-
+        public void HandleContextMenuClick(object sender, EventArgs e)
+        {
+            //else, handler returns the selected tag
+            ToolStripMenuItem menuItm = (ToolStripMenuItem)sender;
+            /*TODOforeach (Prop prp in area.Props)
+            {
+                if (prp.PropTag == menuItm.Text)
+                {
+                    // if so then give details about that icon (name, tag, etc.)
+                    txtSelectedIconInfo.Text = "name: " + prp.PropName + Environment.NewLine + "tag: " + prp.PropTag;
+                    lastSelectedObjectTag = prp.PropTag;
+                    //prntForm.selectedLevelMapPropTag = prp.PropTag;
+                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prp;
+                    return;
+                }
+            }*/
+            /*TODOforeach (Trigger t in area.Triggers)
+            {
+                if (t.TriggerTag == menuItm.Text)
+                {
+                    txtSelectedIconInfo.Text = "Trigger Tag: " + Environment.NewLine + t.TriggerTag;
+                    lastSelectedObjectTag = t.TriggerTag;
+                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                    return;
+                }
+            }*/
+        }
+        private void btnPlusLeftX_Click(object sender, EventArgs e)
+        {
+            //y * area.MapSizeX + x
+            int oldX = thisEnc.MapSizeX;
+            for (int i = thisEnc.encounterTiles.Count - oldX; i >= 0; i -= oldX)
+            {
+                TileEnc newTile = new TileEnc();
+                thisEnc.encounterTiles.Insert(i, newTile);
+            }
+            /*TODOforeach (Prop prpRef in thisEnc.Props)
+            {
+                prpRef.LocationX++;
+            }
+            foreach (Trigger t in thisEnc.Triggers)
+            {
+                foreach (Coordinate p in t.TriggerSquaresList)
+                {
+                    p.X++;
+                }
+            }*/
+            thisEnc.MapSizeX++;
+            mapSizeChangeStuff();
+        }
+        private void btnMinusLeftX_Click(object sender, EventArgs e)
+        {
+            //y * area.MapSizeX + x
+            int oldX = thisEnc.MapSizeX;
+            for (int i = thisEnc.encounterTiles.Count - oldX; i >= 0; i -= oldX)
+            {
+                thisEnc.encounterTiles.RemoveAt(i);
+            }
+            /*foreach (Prop prpRef in thisEnc.Props)
+            {
+                prpRef.LocationX--;
+            }
+            foreach (Trigger t in thisEnc.Triggers)
+            {
+                foreach (Coordinate p in t.TriggerSquaresList)
+                {
+                    p.X--;
+                }
+            }*/
+            thisEnc.MapSizeX--;
+            mapSizeChangeStuff();
+        }
+        private void btnPlusRightX_Click(object sender, EventArgs e)
+        {
+            //y * area.MapSizeX + x
+            int oldX = thisEnc.MapSizeX;
+            for (int i = thisEnc.encounterTiles.Count - 1; i >= 0; i -= oldX)
+            {
+                TileEnc newTile = new TileEnc();
+                thisEnc.encounterTiles.Insert(i + 1, newTile);
+            }
+            thisEnc.MapSizeX++;
+            mapSizeChangeStuff();
+        }
+        private void btnMinusRightX_Click(object sender, EventArgs e)
+        {
+            //y * area.MapSizeX + x
+            int oldX = thisEnc.MapSizeX;
+            for (int i = thisEnc.encounterTiles.Count - 1; i >= 0; i -= oldX)
+            {
+                thisEnc.encounterTiles.RemoveAt(i);
+            }
+            thisEnc.MapSizeX--;
+            mapSizeChangeStuff();
+        }
+        private void btnPlusTopY_Click(object sender, EventArgs e)
+        {
+            //y * area.MapSizeX + x
+            for (int i = 0; i < thisEnc.MapSizeX; i++)
+            {
+                TileEnc newTile = new TileEnc();
+                thisEnc.encounterTiles.Insert(0, newTile);
+            }
+            /*TODOforeach (Prop prpRef in thisEnc.Props)
+            {
+                prpRef.LocationY++;
+            }
+            foreach (Trigger t in thisEnc.Triggers)
+            {
+                foreach (Coordinate p in t.TriggerSquaresList)
+                {
+                    p.Y++;
+                }
+            }*/
+            thisEnc.MapSizeY++;
+            mapSizeChangeStuff();
+        }
+        private void btnMinusTopY_Click(object sender, EventArgs e)
+        {
+            //y * area.MapSizeX + x
+            for (int i = 0; i < thisEnc.MapSizeX; i++)
+            {
+                thisEnc.encounterTiles.RemoveAt(0);
+            }
+            /*TODOforeach (Prop prpRef in thisEnc.Props)
+            {
+                prpRef.LocationY--;
+            }
+            foreach (Trigger t in thisEnc.Triggers)
+            {
+                foreach (Coordinate p in t.TriggerSquaresList)
+                {
+                    p.Y--;
+                }
+            }*/
+            thisEnc.MapSizeY--;
+            mapSizeChangeStuff();
+        }
+        private void btnPlusBottumY_Click(object sender, EventArgs e)
+        {
+            //y * area.MapSizeX + x
+            for (int i = 0; i < thisEnc.MapSizeX; i++)
+            {
+                TileEnc newTile = new TileEnc();
+                thisEnc.encounterTiles.Add(newTile);
+            }
+            thisEnc.MapSizeY++;
+            mapSizeChangeStuff();
+        }
+        private void btnMinusBottumY_Click(object sender, EventArgs e)
+        {
+            //y * area.MapSizeX + x
+            for (int i = 0; i < thisEnc.MapSizeX; i++)
+            {
+                thisEnc.encounterTiles.RemoveAt(thisEnc.encounterTiles.Count - 1);
+            }
+            thisEnc.MapSizeY--;
+            mapSizeChangeStuff();
+        }
         private void btnProperties_Click(object sender, EventArgs e)
         {
-            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = ee_encounter;
+            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = thisEnc;
         }
-
-        private void pictureBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void panelView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
                 // exit by right click or ESC
-                prntForm.logText("entered escape");
+                prntForm.logText("pressed escape");
                 prntForm.logText(Environment.NewLine);
-                prntForm.selectedEncounterCreatureTag = "";
-                prntForm.selectedEncounterPropTag = "";
-                selected = false;
-                PCselected = false;
-                refreshMap();
-                pictureBox1.Image = drawArea;
+                //prntForm.selectedEncounterCreatureTag = "";
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                refreshMap(true);
+                UpdatePB();
+                rbtnInfo.Checked = true;
             }
         }
-    }
+        #endregion
+
+        private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 50;
+            resetPanelAndDeviceSize();
+            refreshMap(true);
+        }
+
+        private void rbtnZoom2x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 25;
+            resetPanelAndDeviceSize();
+            refreshMap(true);
+        }
+
+        private void rbtnZoom5x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 10;
+            resetPanelAndDeviceSize();
+            refreshMap(true);
+        }
+    }    
 }

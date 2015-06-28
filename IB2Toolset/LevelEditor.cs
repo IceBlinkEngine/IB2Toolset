@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-//using IceBlinkCore;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace IB2Toolset

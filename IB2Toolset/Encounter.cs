@@ -12,44 +12,6 @@ using Newtonsoft.Json;
 
 namespace IB2Toolset
 {
-    /*public class Encounters
-    {
-        //[XmlArrayItem("Encounters")]
-        public List<Encounter> encounters = new List<Encounter>();
-        
-        public Encounters()
-        {
-        }
-        public void saveEncountersFile(string filename)
-        {
-            string json = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-            using (StreamWriter sw = new StreamWriter(filename))
-            {
-                sw.Write(json.ToString());
-            }
-        }
-        public Encounters loadEncountersFile(string filename)
-        {
-            Encounters toReturn = null;
-
-            // deserialize JSON directly from a file
-            using (StreamReader file = File.OpenText(filename))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                toReturn = (Encounters)serializer.Deserialize(file, typeof(Encounters));
-            }
-            return toReturn;
-        }
-        public Encounter getEncounter(string name)
-        {
-            foreach (Encounter encounter in encounters)
-            {
-                if (encounter.encounterName == name) return encounter;
-            }
-            return null;
-        }
-    }*/
-
     public class Encounter
     {
         private string encName = "newEncounter";
@@ -57,11 +19,11 @@ namespace IB2Toolset
         private string mapImage = "none";
         private bool useMapImage = false;
         private bool useDayNightCycle = false;
+        public int MapSizeX = 7;
+        public int MapSizeY = 7;
         public List<TileEnc> encounterTiles = new List<TileEnc>();
-        //m=mud, b=black, g=grass, t=tree, r=rock, w=stone wall, s=stone floor
         public List<CreatureRefs> encounterCreatureRefsList = new List<CreatureRefs>();
         public List<string> encounterCreatureList = new List<string>();
-        //public List<string> encounterInventoryTagList = new List<string>();
         public List<ItemRefs> encounterInventoryRefsList = new List<ItemRefs>();
         public List<Coordinate> encounterPcStartLocations = new List<Coordinate>();
         public int goldDrop = 0;
@@ -161,11 +123,63 @@ namespace IB2Toolset
         public Encounter()
         {
         }
+        public Encounter DeepCopy()
+        {
+            Encounter copy = new Encounter();
+            copy = (Encounter)this.MemberwiseClone();
+            
+            copy.encounterTiles = new List<TileEnc>();
+            foreach (TileEnc s in this.encounterTiles)
+            {
+                TileEnc newTileEnc = new TileEnc();
+                newTileEnc.Layer1Filename = s.Layer1Filename;
+                newTileEnc.Layer2Filename = s.Layer2Filename;
+                newTileEnc.LoSBlocked = s.LoSBlocked;
+                newTileEnc.Walkable = s.Walkable;
+                copy.encounterTiles.Add(newTileEnc);
+            }
+
+            copy.encounterCreatureRefsList = new List<CreatureRefs>();
+            foreach (CreatureRefs s in this.encounterCreatureRefsList)
+            {
+                CreatureRefs newCrtRef = new CreatureRefs();
+                newCrtRef.creatureResRef = s.creatureResRef;
+                newCrtRef.creatureTag = s.creatureTag;
+                newCrtRef.creatureStartLocationX = s.creatureStartLocationX;
+                newCrtRef.creatureStartLocationY = s.creatureStartLocationY;
+                copy.encounterCreatureRefsList.Add(newCrtRef);
+            }
+
+            copy.encounterCreatureList = new List<string>();
+            foreach (string s in this.encounterCreatureList)
+            {
+                copy.encounterCreatureList.Add(s);
+            }
+
+            copy.encounterInventoryRefsList = new List<ItemRefs>();
+            foreach (ItemRefs s in this.encounterInventoryRefsList)
+            {
+                ItemRefs newItRef = new ItemRefs();
+                newItRef = s.DeepCopy();
+                copy.encounterInventoryRefsList.Add(newItRef);
+            }
+
+            copy.encounterPcStartLocations = new List<Coordinate>();
+            foreach (Coordinate s in this.encounterPcStartLocations)
+            {
+                Coordinate newCoor = new Coordinate();
+                newCoor.X = s.X;
+                newCoor.Y = s.Y;
+                copy.encounterPcStartLocations.Add(newCoor);
+            }
+
+            return copy;
+        }
         public void SetAllToGrass()
         {
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < this.MapSizeX; x++)
             {
-                for (int y = 0; y < 7; y++)
+                for (int y = 0; y < this.MapSizeY; y++)
                 {
                     TileEnc t = new TileEnc();
                     encounterTiles.Add(t);                                        
