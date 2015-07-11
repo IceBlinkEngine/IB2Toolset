@@ -12,43 +12,6 @@ using Newtonsoft.Json;
 
 namespace IB2Toolset
 {
-    /*public class Races
-    {
-        public List<Race> racesList = new List<Race>();
-
-        public Races()
-        {
-        }
-        public void saveRacesFile(string filename)
-        {
-            string json = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-            using (StreamWriter sw = new StreamWriter(filename))
-            {
-                sw.Write(json.ToString());
-            }
-        }
-        public Races loadRacesFile(string filename)
-        {
-            Races toReturn = null;
-
-            // deserialize JSON directly from a file
-            using (StreamReader file = File.OpenText(filename))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                toReturn = (Races)serializer.Deserialize(file, typeof(Races));
-            }
-            return toReturn;
-        }
-        public Race getRaceByTag(string tag)
-        {
-            foreach (Race ts in racesList)
-            {
-                if (ts.tag == tag) return ts;
-            }
-            return null;
-        }
-    }*/
-
     public class Race
     {        
         #region Fields        
