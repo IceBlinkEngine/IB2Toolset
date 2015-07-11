@@ -15,8 +15,7 @@ namespace IB2Toolset
 	    public int combatLocX = 0;
         public int combatLocY = 0;
         public int moveDistance = 5;
-        private int _baseMoveDistance = 5;
-	    private string _name = "newPlayer";	
+        private string _name = "newPlayer";	
 	    private string _tag = "newTag";	
 	    private string _raceTag = "human";
         [JsonIgnore]
@@ -137,12 +136,6 @@ namespace IB2Toolset
         {
             get { return _classLevel; }
             set { _classLevel = value; }
-        }
-        [CategoryAttribute("00 - Main"), DescriptionAttribute("Base movement distance in combat round.")]
-        public int baseMoveDistance
-        {
-            get { return _baseMoveDistance; }
-            set { _baseMoveDistance = value; }
         }
         [CategoryAttribute("00 - Main"), DescriptionAttribute("Used to determine gender.")]
         public bool isMale

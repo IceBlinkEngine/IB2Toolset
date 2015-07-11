@@ -67,6 +67,8 @@ namespace IB2Toolset
         private int _damageTypeResistanceValueFire = 0;
         private int _damageTypeResistanceValueMagic = 0;
         private int _damageTypeResistanceValuePoison = 0;
+        private int moveDistanceLightArmor = 6;
+        private int moveDistanceMediumHeavyArmor = 4;
         private List<string> _classesAllowed = new List<string>();
         private SortableBindingList<TraitAllowed> _traitsAllowed = new SortableBindingList<TraitAllowed>();
         //private SortableBindingList<TraitAllowed> traitsAllowed = new SortableBindingList<TraitAllowed>();
@@ -120,6 +122,30 @@ namespace IB2Toolset
             set
             {
                 _description = value;
+            }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("How far this race can move in one turn of combat with no armor or light armor (measured in squares)")]
+        public int MoveDistanceLightArmor
+        {
+            get
+            {
+                return moveDistanceLightArmor;
+            }
+            set
+            {
+                moveDistanceLightArmor = value;
+            }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("How far this race can move in one turn of combat with medium or heavy armor (measured in squares)")]
+        public int MoveDistanceMediumHeavyArmor
+        {
+            get
+            {
+                return moveDistanceMediumHeavyArmor;
+            }
+            set
+            {
+                moveDistanceMediumHeavyArmor = value;
             }
         }
         [CategoryAttribute("02 - Attribute Modifiers"), DescriptionAttribute("modifier to the PC's base attribute")]

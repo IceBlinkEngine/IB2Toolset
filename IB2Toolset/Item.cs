@@ -102,7 +102,7 @@ namespace IB2Toolset
         public Bitmap itemIconBitmap;
         //private UsableInSituation useableInSituation = UsableInSituation.Always;
         //private category p_category = category.Armor; //catergory type (armor, weapon, ammo, etc.)
-        //private ArmorWeight p_armorWeightType = ArmorWeight.Light;            
+        private string _armorWeightType = "Light"; //Light, Medium, Heavy           
         //private ScriptSelectEditorReturnObject onScoringHit = new ScriptSelectEditorReturnObject();
         //private ScriptSelectEditorReturnObject onUseItem = new ScriptSelectEditorReturnObject();
         //private ScriptSelectEditorReturnObject onWhileEquipped = new ScriptSelectEditorReturnObject();
@@ -142,6 +142,7 @@ namespace IB2Toolset
         private int _savingThrowModifierReflex = 0;
         private int _savingThrowModifierFortitude = 0;
         private int _savingThrowModifierWill = 0;
+        private int movementPointModifier = 0;
         private int _spRegenPerRoundInCombat = 0;
         private int _roundsPerSpRegenOutsideCombat = 0;
         private int _hpRegenPerRoundInCombat = 0;
@@ -202,6 +203,19 @@ namespace IB2Toolset
                 _resref = value;
                 this.NotifyPropertyChanged("resref");
             }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Armor Weight Type (used when the item is an armor)")]
+        public string ArmorWeightType
+        {
+            get
+            {
+                return _armorWeightType;
+            }
+            set
+            {
+                _armorWeightType = value;
+            }
+
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("grouping purposes in toolset")]
         public string ItemCategoryName
@@ -590,6 +604,12 @@ namespace IB2Toolset
         {
             get { return _savingThrowModifierFortitude; }
             set { _savingThrowModifierFortitude = value; }
+        }
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Modifier to movement")]
+        public int MovementPointModifier
+        {
+            get { return movementPointModifier; }
+            set { movementPointModifier = value; }
         }
         [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The number of SP to regenerate per round of combat (regen happens at start of new combat round)")]
         public int spRegenPerRoundInCombat
