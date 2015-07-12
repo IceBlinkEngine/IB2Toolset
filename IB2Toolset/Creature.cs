@@ -12,53 +12,6 @@ using Newtonsoft.Json;
 
 namespace IB2Toolset
 {
-    /*public class Creatures
-    {
-        public List<Creature> creatures = new List<Creature>();
-        
-        public Creatures()
-        {
-        }
-        public void saveCreaturesFile(string filename)
-        {
-            string json = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-            using (StreamWriter sw = new StreamWriter(filename))
-            {
-                sw.Write(json.ToString());
-            }
-            
-        }
-        public Creatures loadCreaturesFile(string filename)
-        {
-            Creatures toReturn = null;
-
-            // deserialize JSON directly from a file
-            using (StreamReader file = File.OpenText(filename))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                toReturn = (Creatures)serializer.Deserialize(file, typeof(Creatures));
-            }
-            return toReturn;
-            
-        }
-        public Creature getCreature(string name)
-        {
-            foreach (Creature cr in creatures)
-            {
-                if (cr.cr_name == name) return cr;
-            }
-            return null;
-        }
-        public Creature getCreatureByTag(string tag)
-        {
-            foreach (Creature crtag in creatures)
-            {
-                if (crtag.cr_tag == tag) return crtag;
-            }
-            return null;
-        }        
-    }*/
-
     public class Creature
     {
         public enum crCategory
@@ -83,6 +36,7 @@ namespace IB2Toolset
         public bool combatFacingLeft = true;
         public int combatLocX = 0;
         public int combatLocY = 0;
+        private int _moveDistance = 5;
         private string _name = "newCreature";
         private string _tag = "newTag";
         private string _resref = "newResRef";
@@ -181,6 +135,12 @@ namespace IB2Toolset
             {
                 _parentNodeName = value;
             }
+        }
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Move distance for creature per round")]
+        public int moveDistance
+        {
+            get { return _moveDistance; }
+            set { _moveDistance = value; }
         }
         [CategoryAttribute("00 - Main"), DescriptionAttribute("Level of creature")]
         public int cr_level
