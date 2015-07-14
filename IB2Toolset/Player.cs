@@ -10,6 +10,7 @@ namespace IB2Toolset
     public class Player
     {
         public string tokenFilename = "blank";
+        public string portraitFilename = "blank";
 	    public bool combatFacingLeft = true;
         private bool _nonRemoveablePc = false;
 	    public int combatLocX = 0;
