@@ -36,6 +36,12 @@ namespace IB2Toolset
         private string onStartCombatTurnParms = "";
         private string onEndCombatLogicTree = "none";
         private string onEndCombatParms = "";
+        private string onStartCombatRoundIBScript = "none";
+        private string onStartCombatRoundIBScriptParms = "";
+        private string onStartCombatTurnIBScript = "none";
+        private string onStartCombatTurnIBScriptParms = "";
+        private string onEndCombatIBScript = "none";
+        private string onEndCombatIBScriptParms = "";
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of Encounter, must be unique")]
         public string encounterName
@@ -118,6 +124,46 @@ namespace IB2Toolset
         {
             get { return onEndCombatParms; }
             set { onEndCombatParms = value; }
+        }
+
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the start of each combat round")]
+        public string OnStartCombatRoundIBScript
+        {
+            get { return onStartCombatRoundIBScript; }
+            set { onStartCombatRoundIBScript = value; }
+        }
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        public string OnStartCombatRoundIBScriptParms
+        {
+            get { return onStartCombatRoundIBScriptParms; }
+            set { onStartCombatRoundIBScriptParms = value; }
+        }
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the start of each PC and Enemy turn in combat")]
+        public string OnStartCombatTurnIBScript
+        {
+            get { return onStartCombatTurnIBScript; }
+            set { onStartCombatTurnIBScript = value; }
+        }
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        public string OnStartCombatTurnIBScriptParms
+        {
+            get { return onStartCombatTurnIBScriptParms; }
+            set { onStartCombatTurnIBScriptParms = value; }
+        }
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the end of combat")]
+        public string OnEndCombatIBScript
+        {
+            get { return onEndCombatIBScript; }
+            set { onEndCombatIBScript = value; }
+        }
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        public string OnEndCombatIBScriptParms
+        {
+            get { return onEndCombatIBScriptParms; }
+            set { onEndCombatIBScriptParms = value; }
         }
 
         public Encounter()

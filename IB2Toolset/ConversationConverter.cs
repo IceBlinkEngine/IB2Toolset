@@ -60,6 +60,24 @@ namespace IB2Toolset
         }
     }
 
+    public class IBScriptConverter : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            //true means show a combobox
+            return true;
+        }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            //true will limit to list. false will show the list, but allow free-form entry
+            return true;
+        }
+        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(DropdownStringLists.ibScriptStringList);
+        }
+    }
+
     public class MusicConverter : StringConverter
     {
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
@@ -256,6 +274,7 @@ namespace IB2Toolset
     public class DropdownStringLists
     {
         public static List<string> logicTreeStringList;
+        public static List<string> ibScriptStringList;
         public static List<string> spriteStringList;
         public static List<string> soundStringList;
         public static List<string> musicStringList;

@@ -437,6 +437,7 @@ namespace IB2Toolset
             loadSpriteDropdownList();
             loadSoundDropdownList();
             loadLogicTreeDropdownList();
+            loadIBScriptDropdownList();
             loadMusicDropdownList();
             loadConversationDropdownList();
             loadEncounterDropdownList();
@@ -477,6 +478,18 @@ namespace IB2Toolset
             {
                 string filename = Path.GetFileNameWithoutExtension(f);
                 DropdownStringLists.logicTreeStringList.Add(filename);
+            }
+        }
+        public void loadIBScriptDropdownList()
+        {
+            DropdownStringLists.ibScriptStringList = new List<string>();
+            DropdownStringLists.ibScriptStringList.Add("none");
+            string jobDir = "";
+            jobDir = this._mainDirectory + "\\modules\\" + mod.moduleName + "\\ibscript";
+            foreach (string f in Directory.GetFiles(jobDir, "*.*", SearchOption.AllDirectories))
+            {
+                string filename = Path.GetFileNameWithoutExtension(f);
+                DropdownStringLists.ibScriptStringList.Add(filename);
             }
         }
         public void loadConversationDropdownList()
