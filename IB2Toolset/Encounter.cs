@@ -36,6 +36,8 @@ namespace IB2Toolset
         private string onStartCombatTurnParms = "";
         private string onEndCombatLogicTree = "none";
         private string onEndCombatParms = "";
+        private string onSetupCombatIBScript = "none";
+        private string onSetupCombatIBScriptParms = "";
         private string onStartCombatRoundIBScript = "none";
         private string onStartCombatRoundIBScriptParms = "";
         private string onStartCombatTurnIBScript = "none";
@@ -124,6 +126,20 @@ namespace IB2Toolset
         {
             get { return onEndCombatParms; }
             set { onEndCombatParms = value; }
+        }
+
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run once at setup of combat, before first combat round")]
+        public string OnSetupCombatIBScript
+        {
+            get { return onSetupCombatIBScript; }
+            set { onSetupCombatIBScript = value; }
+        }
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        public string OnSetupCombatIBScriptParms
+        {
+            get { return onSetupCombatIBScriptParms; }
+            set { onSetupCombatIBScriptParms = value; }
         }
 
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]

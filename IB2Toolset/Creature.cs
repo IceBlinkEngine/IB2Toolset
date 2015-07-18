@@ -77,7 +77,9 @@ namespace IB2Toolset
         private string _onScoringHit = "none";
         private string _onScoringHitParms = "none";
         private string _onDeathLogicTree = "none";
-        private string _onDeathParms = ""; 
+        private string _onDeathParms = "";
+        private string _onDeathIBScript = "none";
+        private string _onDeathIBScriptParms = ""; 
         //private ScriptSelectEditorReturnObject onScoringHit = new ScriptSelectEditorReturnObject();  
         private List<string> _knownSpellsTags = new List<string>();
 	    public List<Effect> cr_effectsList = new List<Effect>();
@@ -263,6 +265,18 @@ namespace IB2Toolset
         {
             get { return _onDeathParms; }
             set { _onDeathParms = value; }
+        }
+        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("IBScript that fires when the creature dies")]
+        public string onDeathIBScript
+        {
+            get { return _onDeathIBScript; }
+            set { _onDeathIBScript = value; }
+        }
+        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("optional input parameters for the IBScript...comma separated parameters")]
+        public string onDeathIBScriptParms
+        {
+            get { return _onDeathIBScriptParms; }
+            set { _onDeathIBScriptParms = value; }
         }
         [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("damage adder")]
         public int damageAdder
