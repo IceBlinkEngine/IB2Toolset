@@ -22,7 +22,9 @@ namespace IB2Toolset
         private int _strMod = 0;
         private int _dexMod = 0;
         private int _intMod = 0;
-        private int _chaMod = 0;        
+        private int _chaMod = 0;
+        private int _conMod = 0;
+        private int _wisMod = 0; 
         private int _damageTypeResistanceValueAcid = 0;
         private int _damageTypeResistanceValueNormal = 0;
         private int _damageTypeResistanceValueCold = 0;
@@ -157,6 +159,30 @@ namespace IB2Toolset
             set
             {
                 _chaMod = value;
+            }
+        }
+        [CategoryAttribute("02 - Attribute Modifiers"), DescriptionAttribute("modifier to the PC's base attribute")]
+        public int conMod
+        {
+            get
+            {
+                return _conMod;
+            }
+            set
+            {
+                _conMod = value;
+            }
+        }
+        [CategoryAttribute("02 - Attribute Modifiers"), DescriptionAttribute("modifier to the PC's base attribute")]
+        public int wisMod
+        {
+            get
+            {
+                return _wisMod;
+            }
+            set
+            {
+                _wisMod = value;
             }
         }
         [CategoryAttribute("00 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]

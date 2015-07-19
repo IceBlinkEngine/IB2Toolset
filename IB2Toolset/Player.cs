@@ -42,10 +42,14 @@ namespace IB2Toolset
 	    public int dexterity = 10;	
 	    public int intelligence = 10;	
 	    public int charisma = 10;
+        public int constitution = 10;
+        public int wisdom = 10;
 	    private int _baseStr = 10;
 	    private int _baseDex = 10;
 	    private int _baseInt = 10;
 	    private int _baseCha = 10;
+        private int _baseWis = 10;
+        private int _baseCon = 10;
 	    private int _ACBase = 10;
 	    public int AC = 10;
 	    public int classBonus = 0;
@@ -185,6 +189,18 @@ namespace IB2Toolset
         {
             get { return _baseCha; }
             set { _baseCha = value; }
+        }
+        [CategoryAttribute("01 - Attributes"), DescriptionAttribute("base constitution attribute")]
+        public int baseCon
+        {
+            get { return _baseCon; }
+            set { _baseCon = value; }
+        }
+        [CategoryAttribute("01 - Attributes"), DescriptionAttribute("base wisdom attribute")]
+        public int baseWis
+        {
+            get { return _baseWis; }
+            set { _baseWis = value; }
         }
         [CategoryAttribute("00 - Main"), DescriptionAttribute("base armor class")]
         public int ACBase

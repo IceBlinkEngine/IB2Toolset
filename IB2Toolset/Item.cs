@@ -15,55 +15,6 @@ using Newtonsoft.Json;
 
 namespace IB2Toolset
 {
-
-    /*public class Items
-    {
-        //[XmlArrayItem("ItemsList")]
-        public List<Item> itemsList = new List<Item>();
-
-        public Items()
-        {
-        }
-        public void saveItemsFile(string filename)
-        {
-            string json = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-            using (StreamWriter sw = new StreamWriter(filename))
-            {
-                sw.Write(json.ToString());
-            }
-            
-        }
-        public Items loadItemsFile(string filename)
-        {
-            Items toReturn = null;
-
-            // deserialize JSON directly from a file
-            using (StreamReader file = File.OpenText(filename))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                toReturn = (Items)serializer.Deserialize(file, typeof(Items));
-            }
-            return toReturn;
-            
-        }
-        public Item getItem(string name)
-        {
-            foreach (Item it in itemsList)
-            {
-                if (it.name == name) return it;
-            }
-            return null;
-        }
-        public Item getItemByTag(string tag)
-        {
-            foreach (Item it in itemsList)
-            {
-                if (it.tag == tag) return it;
-            }
-            return null;
-        }
-    }*/
-
     public class Item : INotifyPropertyChanged
     {
         public enum Category
@@ -139,6 +90,8 @@ namespace IB2Toolset
         private int _attributeBonusModifierDex = 0;
         private int _attributeBonusModifierInt = 0;
         private int _attributeBonusModifierCha = 0;
+        private int _attributeBonusModifierCon = 0;
+        private int _attributeBonusModifierWis = 0;
         private int _savingThrowModifierReflex = 0;
         private int _savingThrowModifierFortitude = 0;
         private int _savingThrowModifierWill = 0;
@@ -586,6 +539,18 @@ namespace IB2Toolset
         {
             get { return _attributeBonusModifierCha; }
             set { _attributeBonusModifierCha = value; }
+        }
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
+        public int attributeBonusModifierCon
+        {
+            get { return _attributeBonusModifierCon; }
+            set { _attributeBonusModifierCon = value; }
+        }
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
+        public int attributeBonusModifierWis
+        {
+            get { return _attributeBonusModifierWis; }
+            set { _attributeBonusModifierWis = value; }
         }
         [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Reflex Saving Throw")]
         public int savingThrowModifierReflex
