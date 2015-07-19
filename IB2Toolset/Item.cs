@@ -17,7 +17,7 @@ namespace IB2Toolset
 {
     public class Item : INotifyPropertyChanged
     {
-        public enum Category
+        /*public enum Category
         {
             Armor = 0,
             Ranged = 1,
@@ -28,8 +28,8 @@ namespace IB2Toolset
             Boots = 6,
             Head = 7,
             Neck = 8
-        }
-        public enum projectileImage
+        }*/
+        /*public enum projectileImage
         {
             Arrow = 0,
             Bolt = 1,
@@ -38,13 +38,13 @@ namespace IB2Toolset
             Dagger = 4,
             Fireball = 5,
             Heal = 6
-        }
-        public enum ArmorWeight
+        }*/
+        /*public enum ArmorWeight
         {
             Light = 0,
             Medium = 1,
             Heavy = 2
-        }
+        }*/
                 
         public event PropertyChangedEventHandler PropertyChanged;
 

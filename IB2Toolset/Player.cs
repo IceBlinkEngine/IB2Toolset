@@ -12,6 +12,7 @@ namespace IB2Toolset
         public string tokenFilename = "blank";
         public string portraitFilename = "blank";
 	    public bool combatFacingLeft = true;
+        public int combatFacing = 4; //numpad directions (7,8,9,4,6,1,2,3)
         private bool _nonRemoveablePc = false;
 	    public int combatLocX = 0;
         public int combatLocY = 0;
