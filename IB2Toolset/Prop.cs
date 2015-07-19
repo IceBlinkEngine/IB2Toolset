@@ -78,7 +78,7 @@ namespace IB2Toolset
         private bool _isMover = false;
         private int _ChanceToMove2Squares = 0;
 	    private int _ChanceToMove0Squares = 0;
-        private string _MoverType = "post"; //post, random, patrol
+        private string _MoverType = "post"; //post, random, patrol, daily, weekly, monthly, yearly
         private bool _isChaser = false;
 	    private int _ChaserDetectRangeRadius = 2;
 	    private int _ChaserGiveUpChasingRangeRadius = 3;

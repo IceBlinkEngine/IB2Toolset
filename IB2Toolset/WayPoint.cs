@@ -14,6 +14,8 @@ namespace IB2Toolset
         private List<BarkString> _BarkStringsAtWayPoint = new List<BarkString>();
         private List<BarkString> _BarkStringsOnTheWayToNextWayPoint = new List<BarkString>();
 	    //private int _StartWaitDurationTime = 0; //in seconds, this is set to the world time once at waypoint
+        string _areaName;
+        string _departureTime;
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("X coordinate of waypoint")]
         public int X
@@ -33,6 +35,21 @@ namespace IB2Toolset
             get { return _WaitDuration; }
             set { _WaitDuration = value; }
         }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("name of the area that the waypoint exists on. First waypoint with different area name then the one before it initiates an area transition of the prop.")]
+        public string areaName
+        {
+            get { return _areaName; }
+            set { _areaName = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("time in the relevant interval (daily, weekly, monthly or yearly) at which the prop leaves this waypoint and travels to the next waypoint. This is a string value that requires a strict format: [day, from 0 to 336, assuming 7 days a week with 4 weeks a month and 12 months a year: 0 is used for the daily cycle, while weekly, monthly and yearly cycles use day up to the max level for that cycle, i.e. 1-7 for weekly, 1-28 for monthly and 1 to 336 for yearly]:[hour, from 0 to 23]:[minute, from 0 to 59]. Examples: 0:16:31 means 16 hours and 31 minutes in a daily cycle; 5:3:8 means fifth day in weekly/monthly/yearly cycle, three o'clock in the morning and eight minutes.")]
+        public string departureTime
+        {
+            get { return _departureTime; }
+            set { _departureTime = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Floaty message bark strings to play at waypoint.")]
         public List<BarkString> BarkStringsAtWayPoint
         {

@@ -141,7 +141,7 @@ namespace IB2Toolset
             DropdownStringLists.itemTypeStringList = new List<string> { "Head", "Neck", "Armor", "Ranged", "Melee", "General", "Ring", "Shield", "Feet", "Ammo" };
             DropdownStringLists.useableWhenStringList = new List<string> { "InCombat", "OutOfCombat", "Always", "Passive" };
             DropdownStringLists.weaponTypeStringList = new List<string> { "Ranged", "Melee" };
-            DropdownStringLists.moverTypeStringList = new List<string> { "post", "random", "patrol" };
+            DropdownStringLists.moverTypeStringList = new List<string> { "post", "random", "patrol", "daily", "weekly", "monthly", "yearly"};
 
 
             this.WindowState = FormWindowState.Maximized;

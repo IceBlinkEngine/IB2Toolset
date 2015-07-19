@@ -285,7 +285,7 @@ namespace IB2Toolset
         public static List<string> itemTypeStringList; //catergory type (Armor, Ranged, Melee, General, Ring, Shield)
         public static List<string> conversationTypeStringList; //all conversations in module's conversation list
         public static List<string> encounterTypeStringList; //all encounters in module's encounter list
-        public static List<string> moverTypeStringList; //none, random, patrol
+        public static List<string> moverTypeStringList; //none, random, patrol, daily, weekly, monthly, yearly
         public static List<string> playerClassTagsTypeStringList; //all tags in module's Player Classes list
         public static List<string> raceTagsTypeStringList; //all tags in module's races list
     }
