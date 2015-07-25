@@ -22,6 +22,7 @@ namespace IB2Toolset
         private List<TileBitmapNamePair> tileList = new List<TileBitmapNamePair>();
         private Graphics device;
         private Bitmap surface;
+        private Bitmap mapBitmap;
         private Bitmap selectedBitmap;
         public Bitmap g_walkPass;
         public Bitmap g_walkBlock;
@@ -287,49 +288,61 @@ namespace IB2Toolset
             }
             try
             {
-                //draw map
-                for (int y = 0; y < thisEnc.MapSizeY; y++)                
+                //draw map from single image
+                if ((thisEnc.UseMapImage) && (thisEnc.MapImage != "none"))
                 {
-                    for (int x = 0; x < thisEnc.MapSizeX; x++)
+                    //draw single image type map
+                    if (mapBitmap == null)
+                    {                        
+                        if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + thisEnc.MapImage + ".jpg"))
+                        {
+                            mapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + thisEnc.MapImage + ".jpg");
+                        }
+                        else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + thisEnc.MapImage))
+                        {
+                            mapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + thisEnc.MapImage);
+                        }
+                        else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + thisEnc.MapImage + ".png"))
+                        {
+                            mapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + thisEnc.MapImage + ".png");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Couldn't find map image " + thisEnc.MapImage + " in graphics folder, setting UseMapImage to false.");
+                            thisEnc.UseMapImage = false;
+                            return;
+                        }
+                    }
+                    Rectangle src = new Rectangle(0, 0, mapBitmap.Width, mapBitmap.Height);
+                    Rectangle dst = new Rectangle(0, 0, thisEnc.MapSizeX * sqr, thisEnc.MapSizeY * sqr);
+                    device.DrawImage(mapBitmap, dst, src, GraphicsUnit.Pixel);
+                    //Draw Grid stuff
+                    for (int x = 0; x < thisEnc.MapSizeY; x++)
                     {
-                        if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                        for (int y = 0; y < thisEnc.MapSizeX; y++)
                         {
                             TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
-                            Bitmap lyr1 = null;
-                            Bitmap lyr2 = null;
-                            Rectangle src1 = new Rectangle(0, 0, 50, 50);
-                            Rectangle src2 = new Rectangle(0, 0, 50, 50);
-                            //check to see if 100x100 tile image size
-                            if (getTileByName(tile.Layer1Filename) != null)
-                            {
-                                lyr1 = getTileByName(tile.Layer1Filename).bitmap;
-                                src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
-                            }
-                            if (getTileByName(tile.Layer2Filename) != null)
-                            {
-                                lyr2 = getTileByName(tile.Layer2Filename).bitmap;
-                                src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
-                            }
-                            
+                            //src = new Rectangle(0, 0, sqr, sqr);
+                            //int dx = x * sqr;
+                            //int dy = y * sqr;
                             Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                            //draw layer 1 first
-                            if (checkBox1.Checked)
-                            {
-                                if (lyr1 != null)
-                                {
-                                    device.DrawImage(lyr1, target, src1, GraphicsUnit.Pixel);                                    
-                                }
-                            }
-                            //draw layer 2
-                            if (checkBox2.Checked)
-                            {
-                                if (lyr2 != null)
-                                {
-                                    device.DrawImage(lyr2, target, src2, GraphicsUnit.Pixel);                                    
-                                }
-                            }
                             //draw square walkmesh and LoS stuff
-                            Rectangle src = new Rectangle(0, 0, 50, 50);
+                            /*if (tile.LoSBlocked)
+                            {
+                                device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                            }
+                            if (tile.Walkable)
+                            {
+                                device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
+                            }
+                            else
+                            {
+                                device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                            }
+                            device.DrawRectangle(blackPen, target);*/
+
+                            //draw square walkmesh and LoS stuff
+                            src = new Rectangle(0, 0, 50, 50);
                             if (chkGrid.Checked) //if show grid is turned on, draw grid squares
                             {
                                 if (tile.LoSBlocked)
@@ -349,10 +362,78 @@ namespace IB2Toolset
                                     device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
                                 }
                             }
-                            target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                            if (chkGrid.Checked)
+                        }
+                    }
+                }
+                else
+                {
+                    //draw tile map
+                    for (int y = 0; y < thisEnc.MapSizeY; y++)
+                    {
+                        for (int x = 0; x < thisEnc.MapSizeX; x++)
+                        {
+                            if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
                             {
-                                //device.DrawRectangle(blackPen, target);
+                                TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                                Bitmap lyr1 = null;
+                                Bitmap lyr2 = null;
+                                Rectangle src1 = new Rectangle(0, 0, 50, 50);
+                                Rectangle src2 = new Rectangle(0, 0, 50, 50);
+                                //check to see if 100x100 tile image size
+                                if (getTileByName(tile.Layer1Filename) != null)
+                                {
+                                    lyr1 = getTileByName(tile.Layer1Filename).bitmap;
+                                    src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                }
+                                if (getTileByName(tile.Layer2Filename) != null)
+                                {
+                                    lyr2 = getTileByName(tile.Layer2Filename).bitmap;
+                                    src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
+                                }
+
+                                Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                                //draw layer 1 first
+                                if (checkBox1.Checked)
+                                {
+                                    if (lyr1 != null)
+                                    {
+                                        device.DrawImage(lyr1, target, src1, GraphicsUnit.Pixel);
+                                    }
+                                }
+                                //draw layer 2
+                                if (checkBox2.Checked)
+                                {
+                                    if (lyr2 != null)
+                                    {
+                                        device.DrawImage(lyr2, target, src2, GraphicsUnit.Pixel);
+                                    }
+                                }
+                                //draw square walkmesh and LoS stuff
+                                Rectangle src = new Rectangle(0, 0, 50, 50);
+                                if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                                {
+                                    if (tile.LoSBlocked)
+                                    {
+                                        device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                                        device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                                    }
+                                    if (tile.Walkable)
+                                    {
+                                        device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
+                                    }
+                                    else
+                                    {
+                                        target = new Rectangle(x * sqr + 1, y * sqr + 1, sqr - 1, sqr - 1);
+                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                    }
+                                }
+                                target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                                if (chkGrid.Checked)
+                                {
+                                    //device.DrawRectangle(blackPen, target);
+                                }
                             }
                         }
                     }
@@ -678,7 +759,7 @@ namespace IB2Toolset
                     }
                     #endregion
                     #region Creature Selected
-                    else if (CrtSelected)
+                    else if (prntForm.CreatureSelected)
                     {
                         CreatureRefs crtRef = new CreatureRefs();
                         string _nodeTag = prntForm.frmBlueprints.tvCreatures.SelectedNode.Name;

@@ -37,6 +37,7 @@ namespace IB2Toolset
         public int combatLocX = 0;
         public int combatLocY = 0;
         private int _moveDistance = 5;
+        private int _initiativeBonus = 0;
         private string _name = "newCreature";
         private string _tag = "newTag";
         private string _resref = "newResRef";
@@ -143,6 +144,12 @@ namespace IB2Toolset
         {
             get { return _moveDistance; }
             set { _moveDistance = value; }
+        }
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Adder to initiative roll. Equivalent to the dexterity bonus that PCs use...so for a PC with a DEX of 16, the bonus would be (16 - 10) / 2 = 3")]
+        public int initiativeBonus
+        {
+            get { return _initiativeBonus; }
+            set { _initiativeBonus = value; }
         }
         [CategoryAttribute("00 - Main"), DescriptionAttribute("Level of creature")]
         public int cr_level
