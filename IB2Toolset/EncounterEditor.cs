@@ -322,25 +322,7 @@ namespace IB2Toolset
                         for (int y = 0; y < thisEnc.MapSizeX; y++)
                         {
                             TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
-                            //src = new Rectangle(0, 0, sqr, sqr);
-                            //int dx = x * sqr;
-                            //int dy = y * sqr;
                             Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                            //draw square walkmesh and LoS stuff
-                            /*if (tile.LoSBlocked)
-                            {
-                                device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
-                            }
-                            if (tile.Walkable)
-                            {
-                                device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
-                            }
-                            else
-                            {
-                                device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
-                            }
-                            device.DrawRectangle(blackPen, target);*/
-
                             //draw square walkmesh and LoS stuff
                             src = new Rectangle(0, 0, 50, 50);
                             if (chkGrid.Checked) //if show grid is turned on, draw grid squares
@@ -444,8 +426,18 @@ namespace IB2Toolset
                 {
                     int cspx = crtRef.creatureStartLocationX * sqr;
                     int cspy = crtRef.creatureStartLocationY * sqr;
-                    //TODO change font size based on zoom level
-                    device.DrawString(crtRef.creatureTag, drawFont, drawBrush, new Point(cspx, cspy + 25));
+                    Creature crt = prntForm.getCreatureByResRef(crtRef.creatureResRef);
+                    Rectangle src = new Rectangle(0, 0, crt.creatureIconBitmap.Width, crt.creatureIconBitmap.Width);
+                    Rectangle dst = new Rectangle(cspx, cspy, sqr, sqr);
+                    if (crt.creatureIconBitmap.Width > 100)
+                    {                    
+                        dst = new Rectangle(cspx, cspy, sqr * 2, sqr * 2);
+                    }
+                    device.DrawImage(crt.creatureIconBitmap, dst, src, GraphicsUnit.Pixel);
+                    if (sqr == 50) { drawFont = new Font("Arial", 6); }
+                    else if (sqr == 25) { drawFont = new Font("Arial", 3); }
+                    else if (sqr == 10) { drawFont = new Font("Arial", 2); }
+                    device.DrawString(crtRef.creatureTag, drawFont, drawBrush, new Point(cspx, cspy + (sqr/2)));
                 }
                 //draw PCs
                 int cnt = 0;
@@ -453,7 +445,9 @@ namespace IB2Toolset
                 {
                     int cspx = PCpoint.X * sqr;
                     int cspy = PCpoint.Y * sqr;
-                    //TODO change font size based on zoom level
+                    if (sqr == 50) { drawFontNum = new Font("Arial", 24); }
+                    else if (sqr == 25) { drawFontNum = new Font("Arial", 12); }
+                    else if (sqr == 10) { drawFontNum = new Font("Arial", 5); }
                     device.DrawString((cnt + 1).ToString(), drawFontNum, drawBrush, new Point(cspx, cspy + 5));
                     cnt++;
                 }
