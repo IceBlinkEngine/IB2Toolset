@@ -54,7 +54,7 @@ namespace IB2Toolset
         public string lastSelectedObjectResRef;
         public Creature le_selectedCreature = new Creature();
         public Prop le_selectedProp = new Prop();
-        public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
+        //public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
         public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
         public Encounter thisEnc = new Encounter();
 
@@ -122,13 +122,13 @@ namespace IB2Toolset
         {
             lbxItems.BeginUpdate();
             lbxItems.DataSource = null;
-            lbxItems.DataSource = prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterInventoryRefsList;
+            lbxItems.DataSource = thisEnc.encounterInventoryRefsList;
             lbxItems.DisplayMember = "name";
             lbxItems.EndUpdate();
         }
         public void refreshGoldDrop()
         {
-            numGold.Value = (int)prntForm.encountersList[prntForm._selectedLbxEncounterIndex].goldDrop;
+            numGold.Value = (int)thisEnc.goldDrop;
         }
         private void numGold_ValueChanged(object sender, EventArgs e)
         {
@@ -180,7 +180,7 @@ namespace IB2Toolset
             {
                 Item it = prntForm.itemsList[cmbItems.SelectedIndex];
                 ItemRefs newIR = prntForm.createItemRefsFromItem(it);
-                prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterInventoryRefsList.Add(newIR);
+                thisEnc.encounterInventoryRefsList.Add(newIR);
                 refreshLbxItems();
             }
             catch { }
@@ -192,7 +192,7 @@ namespace IB2Toolset
                 try
                 {
                     if (lbxItems.SelectedIndex >= 0)
-                        prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterInventoryRefsList.RemoveAt(lbxItems.SelectedIndex);
+                        thisEnc.encounterInventoryRefsList.RemoveAt(lbxItems.SelectedIndex);
                 }
                 catch { }
                 refreshLbxItems();
@@ -206,12 +206,12 @@ namespace IB2Toolset
         }
         private void btnDeletePCs_Click(object sender, EventArgs e)
         {
-            prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterPcStartLocations.Clear();
+            thisEnc.encounterPcStartLocations.Clear();
             refreshMap(true);
         }
         private void btnDeleteCreatures_Click(object sender, EventArgs e)
         {
-            prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterCreatureRefsList.Clear();
+            thisEnc.encounterCreatureRefsList.Clear();
             refreshMap(true);
         }
         #endregion
@@ -422,7 +422,7 @@ namespace IB2Toolset
                 }
 
                 //draw creatures
-                foreach (CreatureRefs crtRef in prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterCreatureRefsList)
+                foreach (CreatureRefs crtRef in thisEnc.encounterCreatureRefsList)
                 {
                     int cspx = crtRef.creatureStartLocationX * sqr;
                     int cspy = crtRef.creatureStartLocationY * sqr;
@@ -441,7 +441,7 @@ namespace IB2Toolset
                 }
                 //draw PCs
                 int cnt = 0;
-                foreach (Coordinate PCpoint in prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterPcStartLocations)
+                foreach (Coordinate PCpoint in thisEnc.encounterPcStartLocations)
                 {
                     int cspx = PCpoint.X * sqr;
                     int cspy = PCpoint.Y * sqr;
@@ -745,9 +745,9 @@ namespace IB2Toolset
                     #region PC Selected
                     if (PcSelected)
                     {
-                        if (prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterPcStartLocations.Count < 6)
+                        if (thisEnc.encounterPcStartLocations.Count < 6)
                         {
-                            prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterPcStartLocations.Add(new Coordinate(gridX, gridY));
+                            thisEnc.encounterPcStartLocations.Add(new Coordinate(gridX, gridY));
                         }
                         refreshMap(true);
                     }
@@ -761,7 +761,7 @@ namespace IB2Toolset
                         crtRef.creatureTag = prntForm.creaturesList[prntForm.frmBlueprints.GetCreatureIndex(_nodeTag)].cr_tag + "_" + prntForm.mod.nextIdNumber;
                         crtRef.creatureStartLocationX = gridX;
                         crtRef.creatureStartLocationY = gridY;
-                        prntForm.encountersList[prntForm._selectedLbxEncounterIndex].encounterCreatureRefsList.Add(crtRef);
+                        thisEnc.encounterCreatureRefsList.Add(crtRef);
                         refreshMap(true);
                     }
                     #endregion
@@ -1109,6 +1109,20 @@ namespace IB2Toolset
                         drawSelectionBox(gridX, gridY);
                         txtSelectedIconInfo.Text = "";
 
+                        foreach (CreatureRefs crt in thisEnc.encounterCreatureRefsList)
+                        {
+                            if ((crt.creatureStartLocationX == newPoint.X) && (crt.creatureStartLocationY == newPoint.Y))
+                            {
+                                Creature c = prntForm.getCreatureByResRef(crt.creatureResRef);
+                                // if so then give details about that icon (name, tag, etc.)
+                                txtSelectedIconInfo.Text = "name: " + c.cr_name + Environment.NewLine
+                                                            + "tag: " + crt.creatureTag + Environment.NewLine
+                                                            + "resref: " + crt.creatureResRef;
+                                //lastSelectedObjectResRef = crt.CreatureResRef;
+                                lastSelectedObjectTag = crt.creatureTag;
+                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = crt;
+                            }
+                        }
                         /*TODOforeach (Prop prp in thisEnc.Props)
                         {
                             if ((prp.LocationX == newPoint.X) && (prp.LocationY == newPoint.Y))
@@ -1365,6 +1379,18 @@ namespace IB2Toolset
         private void btnRemoveSelectedObject_Click(object sender, EventArgs e)
         {
             int cnt = 0;
+            foreach (CreatureRefs crt in thisEnc.encounterCreatureRefsList)
+            {
+                if (crt.creatureTag == lastSelectedObjectTag)
+                {
+                    // remove at index of matched location
+                    thisEnc.encounterCreatureRefsList.RemoveAt(cnt);
+                    //crtBitmapList.RemoveAt(cnt);
+                    refreshMap(true);
+                    return;
+                }
+                cnt++;
+            }
             /*TODOforeach (Prop prp in thisEnc.Props)
             {
                 if (prp.PropTag == lastSelectedObjectTag)
