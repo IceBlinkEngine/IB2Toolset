@@ -41,6 +41,8 @@ namespace IB2Toolset
         public List<Convo> openConvosList = new List<Convo>();
         public List<LogicTree> openLogicTreesList = new List<LogicTree>();
         public List<string> scriptList = new List<string>();
+        public List<Condition> copiedConditionalsList = new List<Condition>();
+        public List<Action> copiedActionsList = new List<Action>();
         public string selectedEncounterCreatureTag = "";
         public string selectedEncounterPropTag = "";
         public string selectedEncounterTriggerTag = "";

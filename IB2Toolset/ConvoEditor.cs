@@ -1343,6 +1343,44 @@ namespace IB2Toolset
                 setupConditionsDataGridView();
             }
         }
+        private void btnCondCopySelected_Click(object sender, EventArgs e)
+        {
+            prntForm.copiedConditionalsList.Clear();
+            int node = Convert.ToInt32(treeView1.SelectedNode.Name);
+            if (dgvCondition.Rows.Count > 0)
+            {
+                try
+                {
+                    int rnod = Convert.ToInt32(treeView1.SelectedNode.Name);
+                    List<int> list = getAllIndexOfSelectedConditions();
+                    //prntForm.logText("selected index = " + rcond.ToString() + Environment.NewLine);
+                    foreach (int index in list)
+                    {
+                        if (index >= 0)
+                        {
+                            prntForm.copiedConditionalsList.Add(f_convo.GetContentNodeById(rnod).conditions[index]);
+                        }
+                    }
+                    setupConditionsDataGridView();
+                }
+                catch { }
+            }
+        }
+        private void btnCondPaste_Click(object sender, EventArgs e)
+        {
+            int node = Convert.ToInt32(treeView1.SelectedNode.Name);
+            foreach (Condition c in prntForm.copiedConditionalsList)
+            {
+                f_convo.GetContentNodeById(node).conditions.Add(c.DeepCopy());
+            }
+            RefreshGrid(f_convo.GetContentNodeById(node).conditions);
+            setupConditionsDataGridView();
+        }
+        private void btnCondVariables_Click(object sender, EventArgs e)
+        {
+            VariablesEditor varEditor = new VariablesEditor(ce_mod, prntForm);
+            varEditor.ShowDialog();
+        }
         private int getIndexOfSelectedCondition()
         {
             foreach (DataGridViewRow row in dgvCondition.Rows)
@@ -1353,6 +1391,18 @@ namespace IB2Toolset
                 }
             }
             return -1;
+        }
+        private List<int> getAllIndexOfSelectedConditions()
+        {
+            List<int> list = new List<int>();
+            foreach (DataGridViewRow row in dgvCondition.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[0].Value) == true)
+                {
+                    list.Add(row.Index);
+                }
+            }
+            return list;
         }
         #endregion
 
@@ -1486,6 +1536,43 @@ namespace IB2Toolset
                 setupActionsDataGridView();
             }
         }
+        private void btnActCopySelected_Click(object sender, EventArgs e)
+        {
+            prntForm.copiedActionsList.Clear();
+            int node = Convert.ToInt32(treeView1.SelectedNode.Name);
+            if (dgvAction.Rows.Count > 0)
+            {
+                try
+                {
+                    int rnod = Convert.ToInt32(treeView1.SelectedNode.Name);
+                    List<int> list = getAllIndexOfSelectedActions();
+                    foreach (int index in list)
+                    {
+                        if (index >= 0)
+                        {
+                            prntForm.copiedActionsList.Add(f_convo.GetContentNodeById(rnod).actions[index]);
+                        }
+                    }
+                    setupActionsDataGridView();
+                }
+                catch { }
+            }
+        }
+        private void btnActPaste_Click(object sender, EventArgs e)
+        {
+            int node = Convert.ToInt32(treeView1.SelectedNode.Name);
+            foreach (IB2Toolset.Action c in prntForm.copiedActionsList)
+            {
+                f_convo.GetContentNodeById(node).actions.Add(c.DeepCopy());
+            }
+            RefreshGrid(f_convo.GetContentNodeById(node).actions);
+            setupActionsDataGridView();
+        }
+        private void btnActVariables_Click(object sender, EventArgs e)
+        {
+            VariablesEditor varEditor = new VariablesEditor(ce_mod, prntForm);
+            varEditor.ShowDialog();
+        }
         private int getIndexOfSelectedAction()
         {
             foreach (DataGridViewRow row in dgvAction.Rows)
@@ -1497,19 +1584,18 @@ namespace IB2Toolset
             }
             return -1;
         }
+        private List<int> getAllIndexOfSelectedActions()
+        {
+            List<int> list = new List<int>();
+            foreach (DataGridViewRow row in dgvAction.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[0].Value) == true)
+                {
+                    list.Add(row.Index);
+                }
+            }
+            return list;
+        }
         #endregion                       
-
-        private void btnCondVariables_Click(object sender, EventArgs e)
-        {
-            VariablesEditor varEditor = new VariablesEditor(ce_mod, prntForm);
-            varEditor.ShowDialog();
-        }
-        private void btnActVariables_Click(object sender, EventArgs e)
-        {
-            VariablesEditor varEditor = new VariablesEditor(ce_mod, prntForm);
-            varEditor.ShowDialog();
-        }
-
-        
     }
 }
