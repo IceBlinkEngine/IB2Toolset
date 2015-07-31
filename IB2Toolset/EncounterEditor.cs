@@ -359,8 +359,10 @@ namespace IB2Toolset
                                 TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
                                 Bitmap lyr1 = null;
                                 Bitmap lyr2 = null;
+                                Bitmap lyr3 = null;
                                 Rectangle src1 = new Rectangle(0, 0, 50, 50);
                                 Rectangle src2 = new Rectangle(0, 0, 50, 50);
+                                Rectangle src3 = new Rectangle(0, 0, 50, 50);
                                 //check to see if 100x100 tile image size
                                 if (getTileByName(tile.Layer1Filename) != null)
                                 {
@@ -371,6 +373,11 @@ namespace IB2Toolset
                                 {
                                     lyr2 = getTileByName(tile.Layer2Filename).bitmap;
                                     src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
+                                }
+                                if (getTileByName(tile.Layer3Filename) != null)
+                                {
+                                    lyr3 = getTileByName(tile.Layer3Filename).bitmap;
+                                    src3 = new Rectangle(0, 0, lyr3.Width, lyr3.Height);
                                 }
 
                                 Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
@@ -388,6 +395,14 @@ namespace IB2Toolset
                                     if (lyr2 != null)
                                     {
                                         device.DrawImage(lyr2, target, src2, GraphicsUnit.Pixel);
+                                    }
+                                }
+                                //draw layer 3
+                                if (checkBox3.Checked)
+                                {
+                                    if (lyr3 != null)
+                                    {
+                                        device.DrawImage(lyr3, target, src3, GraphicsUnit.Pixel);
                                     }
                                 }
                                 //draw square walkmesh and LoS stuff
@@ -805,79 +820,6 @@ namespace IB2Toolset
                                         refreshMap(false);
                                     }
                                 }
-
-
-                                /*if (cSqr.X == lSqr.X)
-                                {
-                                    if (cSqr.Y > lSqr.Y)
-                                    {
-                                        for (int i = lSqr.Y; i <= cSqr.Y; i++)
-                                        {
-                                            area.Tiles[i * area.MapSizeX + cSqr.X].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(cSqr.X, i);
-                                            refreshMap(false);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        for (int i = cSqr.Y; i <= lSqr.Y; i++)
-                                        {
-                                            area.Tiles[i * area.MapSizeX + cSqr.X].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(cSqr.X, i);
-                                            refreshMap(false);
-                                        }
-                                    }                                     
-                                }
-                                else if (cSqr.Y == lSqr.Y)
-                                {
-                                    if (cSqr.X > lSqr.X)
-                                    {
-                                        for (int i = lSqr.X; i <= cSqr.X; i++)
-                                        {
-                                            area.Tiles[cSqr.Y * area.MapSizeX + i].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(i, cSqr.Y);
-                                            refreshMap(false);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        for (int i = cSqr.X; i <= lSqr.X; i++)
-                                        {
-                                            area.Tiles[cSqr.Y * area.MapSizeX + i].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(i, cSqr.Y);
-                                            refreshMap(false);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    int startX = lSqr.X;
-                                    int startY = lSqr.Y;
-                                    int endX = cSqr.X;
-                                    int endY = cSqr.Y;
-                                    if (lSqr.X >= cSqr.X)
-                                    {
-                                        startX = cSqr.X;
-                                        endX = lSqr.X;
-                                    }
-                                    if (lSqr.Y >= cSqr.Y)
-                                    {
-                                        startY = cSqr.Y;
-                                        endY = lSqr.Y;
-                                    }
-                                    for (int x = startX; x <= endX; x++)
-                                    {
-                                        for (int y = startY; y <= endY; y++)
-                                        {
-                                            area.Tiles[y * area.MapSizeX + x].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(x, y);
-                                            refreshMap(false);
-                                        }
-                                    }
-                                    
-                                    prntForm.logText("Shift key down for line painting but last click must be a straight line to this click");
-                                    prntForm.logText(Environment.NewLine);
-                                }*/
                             }
                         }
                         else if (radioButton2.Checked)
@@ -906,6 +848,38 @@ namespace IB2Toolset
                                     for (int y = startY; y <= endY; y++)
                                     {
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Filename = currentTileFilename;
+                                        currentSquareClicked = new Point(x, y);
+                                        refreshMap(false);
+                                    }
+                                }
+                            }
+                        }
+                        else if (radioButton3.Checked)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Layer3Filename = currentTileFilename;
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Filename = currentTileFilename;
                                         currentSquareClicked = new Point(x, y);
                                         refreshMap(false);
                                     }
@@ -1197,7 +1171,11 @@ namespace IB2Toolset
                     else if (radioButton2.Checked)
                     {
                         thisEnc.encounterTiles[selectedTile.index].Layer2Filename = currentTileFilename;
-                    }                    
+                    }
+                    else if (radioButton3.Checked)
+                    {
+                        thisEnc.encounterTiles[selectedTile.index].Layer3Filename = currentTileFilename;
+                    }
                 }
             }
             refreshMap(true);
@@ -1210,7 +1188,10 @@ namespace IB2Toolset
         {
             refreshMap(true);
         }
-        
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshMap(true);
+        }
 
         #region Methods
         private void loadAreaObjectBitmapLists()

@@ -213,8 +213,14 @@ namespace IB2Toolset
                             Tile tile = area.Tiles[y * area.MapSizeX + x];
                             Bitmap lyr1 = null;
                             Bitmap lyr2 = null;
+                            Bitmap lyr3 = null;
+                            Bitmap lyr4 = null;
+                            Bitmap lyr5 = null;
                             Rectangle src1 = new Rectangle(0, 0, 50, 50);
                             Rectangle src2 = new Rectangle(0, 0, 50, 50);
+                            Rectangle src3 = new Rectangle(0, 0, 50, 50);
+                            Rectangle src4 = new Rectangle(0, 0, 50, 50);
+                            Rectangle src5 = new Rectangle(0, 0, 50, 50);
                             if (getTileByName(tile.Layer1Filename) != null)
                             {
                                 lyr1 = getTileByName(tile.Layer1Filename).bitmap;
@@ -224,6 +230,21 @@ namespace IB2Toolset
                             {
                                 lyr2 = getTileByName(tile.Layer2Filename).bitmap;
                                 src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
+                            }
+                            if (getTileByName(tile.Layer3Filename) != null)
+                            {
+                                lyr3 = getTileByName(tile.Layer3Filename).bitmap;
+                                src3 = new Rectangle(0, 0, lyr3.Width, lyr3.Height);
+                            }
+                            if (getTileByName(tile.Layer4Filename) != null)
+                            {
+                                lyr4 = getTileByName(tile.Layer4Filename).bitmap;
+                                src4 = new Rectangle(0, 0, lyr4.Width, lyr4.Height);
+                            }
+                            if (getTileByName(tile.Layer5Filename) != null)
+                            {
+                                lyr5 = getTileByName(tile.Layer5Filename).bitmap;
+                                src5 = new Rectangle(0, 0, lyr5.Width, lyr5.Height);
                             }
                             
                             Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
@@ -241,6 +262,30 @@ namespace IB2Toolset
                                 if (lyr2 != null)
                                 {
                                     device.DrawImage(lyr2, target, src2, GraphicsUnit.Pixel);                                    
+                                }
+                            }
+                            //draw layer 3
+                            if (checkBox3.Checked)
+                            {
+                                if (lyr3 != null)
+                                {
+                                    device.DrawImage(lyr3, target, src3, GraphicsUnit.Pixel);
+                                }
+                            }
+                            //draw layer 4
+                            if (checkBox4.Checked)
+                            {
+                                if (lyr4 != null)
+                                {
+                                    device.DrawImage(lyr4, target, src4, GraphicsUnit.Pixel);
+                                }
+                            }
+                            //draw layer 5
+                            if (checkBox5.Checked)
+                            {
+                                if (lyr5 != null)
+                                {
+                                    device.DrawImage(lyr5, target, src5, GraphicsUnit.Pixel);
                                 }
                             }
                             //draw square walkmesh and LoS stuff
@@ -574,6 +619,7 @@ namespace IB2Toolset
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
+                        #region Layer 1
                         if (radioButton1.Checked)
                         {
                             area.Tiles[selectedTile.index].Layer1Filename = currentTileFilename;
@@ -606,81 +652,10 @@ namespace IB2Toolset
                                         refreshMap(false);
                                     }
                                 }
-
-
-                                /*if (cSqr.X == lSqr.X)
-                                {
-                                    if (cSqr.Y > lSqr.Y)
-                                    {
-                                        for (int i = lSqr.Y; i <= cSqr.Y; i++)
-                                        {
-                                            area.Tiles[i * area.MapSizeX + cSqr.X].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(cSqr.X, i);
-                                            refreshMap(false);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        for (int i = cSqr.Y; i <= lSqr.Y; i++)
-                                        {
-                                            area.Tiles[i * area.MapSizeX + cSqr.X].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(cSqr.X, i);
-                                            refreshMap(false);
-                                        }
-                                    }                                     
-                                }
-                                else if (cSqr.Y == lSqr.Y)
-                                {
-                                    if (cSqr.X > lSqr.X)
-                                    {
-                                        for (int i = lSqr.X; i <= cSqr.X; i++)
-                                        {
-                                            area.Tiles[cSqr.Y * area.MapSizeX + i].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(i, cSqr.Y);
-                                            refreshMap(false);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        for (int i = cSqr.X; i <= lSqr.X; i++)
-                                        {
-                                            area.Tiles[cSqr.Y * area.MapSizeX + i].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(i, cSqr.Y);
-                                            refreshMap(false);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    int startX = lSqr.X;
-                                    int startY = lSqr.Y;
-                                    int endX = cSqr.X;
-                                    int endY = cSqr.Y;
-                                    if (lSqr.X >= cSqr.X)
-                                    {
-                                        startX = cSqr.X;
-                                        endX = lSqr.X;
-                                    }
-                                    if (lSqr.Y >= cSqr.Y)
-                                    {
-                                        startY = cSqr.Y;
-                                        endY = lSqr.Y;
-                                    }
-                                    for (int x = startX; x <= endX; x++)
-                                    {
-                                        for (int y = startY; y <= endY; y++)
-                                        {
-                                            area.Tiles[y * area.MapSizeX + x].Layer1Filename = currentTileFilename;
-                                            currentSquareClicked = new Point(x, y);
-                                            refreshMap(false);
-                                        }
-                                    }
-                                    
-                                    prntForm.logText("Shift key down for line painting but last click must be a straight line to this click");
-                                    prntForm.logText(Environment.NewLine);
-                                }*/
                             }
                         }
+                        #endregion
+                        #region Layer 2
                         else if (radioButton2.Checked)
                         {
                             area.Tiles[selectedTile.index].Layer2Filename = currentTileFilename;
@@ -713,6 +688,109 @@ namespace IB2Toolset
                                 }
                             }
                         }
+                        #endregion
+                        #region Layer 3
+                        else if (radioButton3.Checked)
+                        {
+                            area.Tiles[selectedTile.index].Layer3Filename = currentTileFilename;
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        area.Tiles[y * area.MapSizeX + x].Layer3Filename = currentTileFilename;
+                                        currentSquareClicked = new Point(x, y);
+                                        refreshMap(false);
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+                        #region Layer 4
+                        else if (radioButton4.Checked)
+                        {
+                            area.Tiles[selectedTile.index].Layer4Filename = currentTileFilename;
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        area.Tiles[y * area.MapSizeX + x].Layer4Filename = currentTileFilename;
+                                        currentSquareClicked = new Point(x, y);
+                                        refreshMap(false);
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+                        #region Layer 5
+                        else if (radioButton5.Checked)
+                        {
+                            area.Tiles[selectedTile.index].Layer5Filename = currentTileFilename;
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        area.Tiles[y * area.MapSizeX + x].Layer5Filename = currentTileFilename;
+                                        currentSquareClicked = new Point(x, y);
+                                        refreshMap(false);
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
                         refreshMap(false);
                     }
                     #endregion
@@ -978,7 +1056,19 @@ namespace IB2Toolset
                     else if (radioButton2.Checked)
                     {
                         area.Tiles[selectedTile.index].Layer2Filename = currentTileFilename;
-                    }                    
+                    }
+                    else if (radioButton3.Checked)
+                    {
+                        area.Tiles[selectedTile.index].Layer3Filename = currentTileFilename;
+                    }
+                    else if (radioButton4.Checked)
+                    {
+                        area.Tiles[selectedTile.index].Layer4Filename = currentTileFilename;
+                    }
+                    else if (radioButton5.Checked)
+                    {
+                        area.Tiles[selectedTile.index].Layer5Filename = currentTileFilename;
+                    }
                 }
             }
             refreshMap(true);
@@ -991,7 +1081,18 @@ namespace IB2Toolset
         {
             refreshMap(true);
         }
-        
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshMap(true);
+        }
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshMap(true);
+        }
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshMap(true);
+        }        
 
         #region Methods
         private void loadAreaObjectBitmapLists()
@@ -1487,5 +1588,7 @@ namespace IB2Toolset
             resetPanelAndDeviceSize();
             refreshMap(true);
         }
+
+        
     }    
 }

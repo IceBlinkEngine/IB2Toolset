@@ -35,9 +35,15 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -91,7 +97,7 @@
             // 
             // btnFillWithSelected
             // 
-            this.btnFillWithSelected.Location = new System.Drawing.Point(16, 145);
+            this.btnFillWithSelected.Location = new System.Drawing.Point(16, 238);
             this.btnFillWithSelected.Name = "btnFillWithSelected";
             this.btnFillWithSelected.Size = new System.Drawing.Size(86, 39);
             this.btnFillWithSelected.TabIndex = 17;
@@ -101,13 +107,13 @@
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.AutoScroll = true;
             this.panel3.Controls.Add(this.flPanelTab1);
             this.panel3.Location = new System.Drawing.Point(1028, 12);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(140, 598);
+            this.panel3.Size = new System.Drawing.Size(140, 713);
             this.panel3.TabIndex = 68;
             // 
             // flPanelTab1
@@ -121,7 +127,7 @@
             // 
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.panel1);
-            this.groupBox6.Location = new System.Drawing.Point(16, 190);
+            this.groupBox6.Location = new System.Drawing.Point(16, 283);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(86, 81);
             this.groupBox6.TabIndex = 69;
@@ -139,19 +145,55 @@
             // groupBox7
             // 
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.radioButton5);
+            this.groupBox7.Controls.Add(this.radioButton4);
+            this.groupBox7.Controls.Add(this.radioButton3);
             this.groupBox7.Controls.Add(this.radioButton1);
             this.groupBox7.Controls.Add(this.radioButton2);
             this.groupBox7.Location = new System.Drawing.Point(17, 15);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(86, 60);
+            this.groupBox7.Size = new System.Drawing.Size(86, 109);
             this.groupBox7.TabIndex = 70;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Edit Layer";
             // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(11, 83);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(60, 17);
+            this.radioButton5.TabIndex = 8;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "Layer 5";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(11, 66);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(60, 17);
+            this.radioButton4.TabIndex = 7;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Layer 4";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(11, 49);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(60, 17);
+            this.radioButton3.TabIndex = 6;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Layer 3";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(10, 15);
+            this.radioButton1.Location = new System.Drawing.Point(11, 15);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(60, 17);
             this.radioButton1.TabIndex = 4;
@@ -162,7 +204,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(10, 32);
+            this.radioButton2.Location = new System.Drawing.Point(11, 32);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(60, 17);
             this.radioButton2.TabIndex = 5;
@@ -173,19 +215,55 @@
             // groupBox8
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox8.Controls.Add(this.checkBox5);
+            this.groupBox8.Controls.Add(this.checkBox4);
+            this.groupBox8.Controls.Add(this.checkBox3);
             this.groupBox8.Controls.Add(this.checkBox1);
             this.groupBox8.Controls.Add(this.checkBox2);
-            this.groupBox8.Location = new System.Drawing.Point(17, 81);
+            this.groupBox8.Location = new System.Drawing.Point(17, 125);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(86, 58);
+            this.groupBox8.Size = new System.Drawing.Size(86, 107);
             this.groupBox8.TabIndex = 71;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Show";
             // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(10, 84);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(61, 17);
+            this.checkBox5.TabIndex = 6;
+            this.checkBox5.Text = "Layer 5";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(10, 67);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(61, 17);
+            this.checkBox4.TabIndex = 5;
+            this.checkBox4.Text = "Layer 4";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(10, 50);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(61, 17);
+            this.checkBox3.TabIndex = 4;
+            this.checkBox3.Text = "Layer 3";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(14, 16);
+            this.checkBox1.Location = new System.Drawing.Point(10, 16);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(61, 17);
             this.checkBox1.TabIndex = 2;
@@ -196,7 +274,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(14, 33);
+            this.checkBox2.Location = new System.Drawing.Point(10, 33);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(61, 17);
             this.checkBox2.TabIndex = 3;
@@ -213,7 +291,7 @@
             this.groupBox9.Controls.Add(this.btnFillWithSelected);
             this.groupBox9.Location = new System.Drawing.Point(136, 5);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(118, 339);
+            this.groupBox9.Size = new System.Drawing.Size(118, 426);
             this.groupBox9.TabIndex = 72;
             this.groupBox9.TabStop = false;
             // 
@@ -222,7 +300,7 @@
             this.groupBox3.Controls.Add(this.rbtnZoom5x);
             this.groupBox3.Controls.Add(this.rbtnZoom2x);
             this.groupBox3.Controls.Add(this.rbtnZoom1x);
-            this.groupBox3.Location = new System.Drawing.Point(14, 277);
+            this.groupBox3.Location = new System.Drawing.Point(14, 370);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(90, 52);
             this.groupBox3.TabIndex = 72;
@@ -313,7 +391,7 @@
             // btnProperties
             // 
             this.btnProperties.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProperties.Location = new System.Drawing.Point(142, 517);
+            this.btnProperties.Location = new System.Drawing.Point(142, 604);
             this.btnProperties.Name = "btnProperties";
             this.btnProperties.Size = new System.Drawing.Size(106, 48);
             this.btnProperties.TabIndex = 76;
@@ -451,7 +529,7 @@
             this.gbMapSize.Controls.Add(this.btnMinusLeftX);
             this.gbMapSize.Controls.Add(this.label2);
             this.gbMapSize.Controls.Add(this.label1);
-            this.gbMapSize.Location = new System.Drawing.Point(136, 350);
+            this.gbMapSize.Location = new System.Drawing.Point(136, 437);
             this.gbMapSize.Name = "gbMapSize";
             this.gbMapSize.Size = new System.Drawing.Size(118, 131);
             this.gbMapSize.TabIndex = 79;
@@ -580,16 +658,16 @@
             // 
             // panelNoScrollOnFocus1
             // 
-            this.panelNoScrollOnFocus1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelNoScrollOnFocus1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelNoScrollOnFocus1.AutoScroll = true;
             this.panelNoScrollOnFocus1.BackColor = System.Drawing.Color.Black;
             this.panelNoScrollOnFocus1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelNoScrollOnFocus1.Controls.Add(this.panelView);
             this.panelNoScrollOnFocus1.Location = new System.Drawing.Point(260, 12);
             this.panelNoScrollOnFocus1.Name = "panelNoScrollOnFocus1";
-            this.panelNoScrollOnFocus1.Size = new System.Drawing.Size(765, 598);
+            this.panelNoScrollOnFocus1.Size = new System.Drawing.Size(765, 713);
             this.panelNoScrollOnFocus1.TabIndex = 77;
             // 
             // panelView
@@ -611,7 +689,7 @@
             // btnRefreshMap
             // 
             this.btnRefreshMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshMap.Location = new System.Drawing.Point(142, 485);
+            this.btnRefreshMap.Location = new System.Drawing.Point(142, 572);
             this.btnRefreshMap.Name = "btnRefreshMap";
             this.btnRefreshMap.Size = new System.Drawing.Size(106, 30);
             this.btnRefreshMap.TabIndex = 80;
@@ -622,7 +700,7 @@
             // btnMiniMap
             // 
             this.btnMiniMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMiniMap.Location = new System.Drawing.Point(142, 567);
+            this.btnMiniMap.Location = new System.Drawing.Point(142, 654);
             this.btnMiniMap.Name = "btnMiniMap";
             this.btnMiniMap.Size = new System.Drawing.Size(106, 48);
             this.btnMiniMap.TabIndex = 81;
@@ -634,7 +712,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 622);
+            this.ClientSize = new System.Drawing.Size(1172, 737);
             this.Controls.Add(this.btnMiniMap);
             this.Controls.Add(this.btnRefreshMap);
             this.Controls.Add(this.gbMapSize);
@@ -719,6 +797,12 @@
         private System.Windows.Forms.RadioButton rbtnZoom5x;
         private System.Windows.Forms.RadioButton rbtnZoom2x;
         private System.Windows.Forms.RadioButton rbtnZoom1x;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }
 

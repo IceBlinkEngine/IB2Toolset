@@ -196,6 +196,7 @@ namespace IB2Toolset
                 TileEnc newTileEnc = new TileEnc();
                 newTileEnc.Layer1Filename = s.Layer1Filename;
                 newTileEnc.Layer2Filename = s.Layer2Filename;
+                newTileEnc.Layer3Filename = s.Layer3Filename;
                 newTileEnc.LoSBlocked = s.LoSBlocked;
                 newTileEnc.Walkable = s.Walkable;
                 copy.encounterTiles.Add(newTileEnc);
@@ -254,6 +255,7 @@ namespace IB2Toolset
     {
 	    public string Layer1Filename = "t_grass";
 	    public string Layer2Filename = "t_blank";
+        public string Layer3Filename = "t_blank";
 	    public bool Walkable = true;
 	    public bool LoSBlocked = false;
     
