@@ -91,6 +91,8 @@ namespace IB2Toolset
         public int combatAnimationSpeed = 100;
         private string onHeartBeatLogicTree = "none";
         private string onHeartBeatParms = "";
+        private string onHeartBeatIBScript = "none";
+        private string onHeartBeatIBScriptParms = "";
         #endregion
 
         #region Properties
@@ -243,6 +245,20 @@ namespace IB2Toolset
         {
             get { return onHeartBeatParms; }
             set { onHeartBeatParms = value; }
+        }
+
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the end of each move on any area map (not combat)")]
+        public string OnHeartBeatIBScript
+        {
+            get { return onHeartBeatIBScript; }
+            set { onHeartBeatIBScript = value; }
+        }
+        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        public string OnHeartBeatIBScriptParms
+        {
+            get { return onHeartBeatIBScriptParms; }
+            set { onHeartBeatIBScriptParms = value; }
         }
 
         #endregion

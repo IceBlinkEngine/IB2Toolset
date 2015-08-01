@@ -12,44 +12,7 @@ using Newtonsoft.Json;
 
 namespace IB2Toolset
 {
-    /*public class Props
-    {
-        //[XmlArrayItem("PropsList")]
-        public List<Prop> propsList = new List<Prop>();
-
-        public Props()
-        {
-        }
-        public void savePropsFile(string filename)
-        {
-            string json = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-            using (StreamWriter sw = new StreamWriter(filename))
-            {
-                sw.Write(json.ToString());
-            }
-        }
-        public Props loadPropsFile(string filename)
-        {
-            Props toReturn = null;
-
-            // deserialize JSON directly from a file
-            using (StreamReader file = File.OpenText(filename))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                toReturn = (Props)serializer.Deserialize(file, typeof(Props));
-            }
-            return toReturn;
-        }
-        public Prop getPropByTag(string tag)
-        {
-            foreach (Prop it in propsList)
-            {
-                if (it.propTag == tag) return it;
-            }
-            return null;
-        }
-    }*/
-
+    
     public class Prop
     {
         #region Fields
@@ -86,6 +49,8 @@ namespace IB2Toolset
 	    private int _RandomMoverRadius = 5;
         private string onHeartBeatLogicTree = "none";
         private string onHeartBeatParms = "";
+        private string onHeartBeatIBScript = "none";
+        private string onHeartBeatIBScriptParms = "";
         #endregion
 
         #region Properties
@@ -279,6 +244,19 @@ namespace IB2Toolset
         {
             get { return onHeartBeatParms; }
             set { onHeartBeatParms = value; }
+        }
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
+        [CategoryAttribute("03 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run for this Prop at the end of each move on this area map (not combat)")]
+        public string OnHeartBeatIBScript
+        {
+            get { return onHeartBeatIBScript; }
+            set { onHeartBeatIBScript = value; }
+        }
+        [CategoryAttribute("03 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        public string OnHeartBeatIBScriptParms
+        {
+            get { return onHeartBeatIBScriptParms; }
+            set { onHeartBeatIBScriptParms = value; }
         }
         #endregion
 

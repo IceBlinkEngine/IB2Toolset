@@ -36,6 +36,8 @@ namespace IB2Toolset
         private int nextIdNumber = 100;
         private string onHeartBeatLogicTree = "none";
         private string onHeartBeatParms = "";
+        private string onHeartBeatIBScript = "none";
+        private string onHeartBeatIBScriptParms = "";
         private List<LocalInt> areaLocalInts = new List<LocalInt>();
         private List<LocalString> areaLocalStrings = new List<LocalString>();
         
@@ -175,6 +177,19 @@ namespace IB2Toolset
         {
             get { return onHeartBeatParms; }
             set { onHeartBeatParms = value; }
+        }
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
+        [CategoryAttribute("03 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the end of each move on this area map (not combat)")]
+        public string OnHeartBeatIBScript
+        {
+            get { return onHeartBeatIBScript; }
+            set { onHeartBeatIBScript = value; }
+        }
+        [CategoryAttribute("03 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        public string OnHeartBeatIBScriptParms
+        {
+            get { return onHeartBeatIBScriptParms; }
+            set { onHeartBeatIBScriptParms = value; }
         }
         [CategoryAttribute("04 - Locals"), DescriptionAttribute("These Local Variables will be saved in the save games")]
         public List<LocalInt> AreaLocalInts

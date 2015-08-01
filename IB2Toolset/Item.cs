@@ -17,35 +17,7 @@ namespace IB2Toolset
 {
     public class Item : INotifyPropertyChanged
     {
-        /*public enum Category
-        {
-            Armor = 0,
-            Ranged = 1,
-            Melee = 2,
-            General = 3,
-            Ring = 4,
-            Shield = 5,
-            Boots = 6,
-            Head = 7,
-            Neck = 8
-        }*/
-        /*public enum projectileImage
-        {
-            Arrow = 0,
-            Bolt = 1,
-            Stone = 2,
-            Dart = 3,
-            Dagger = 4,
-            Fireball = 5,
-            Heal = 6
-        }*/
-        /*public enum ArmorWeight
-        {
-            Light = 0,
-            Medium = 1,
-            Heavy = 2
-        }*/
-                
+                        
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region Fields
@@ -106,6 +78,9 @@ namespace IB2Toolset
         private string _onUseItemLogicTree = "none";
         private string _onUseItemLogicTreeParms = "";
         private bool _destroyItemAfterOnUseItemLogicTree = false;
+        private string _onUseItemIBScript = "none";
+        private string _onUseItemIBScriptParms = "";
+        private bool _destroyItemAfterOnUseItemIBScript = false;
         private string _onWhileEquipped = "none";
         private int _damageTypeResistanceValueAcid = 0;
         private int _damageTypeResistanceValueCold = 0;
@@ -637,6 +612,26 @@ namespace IB2Toolset
         {
             get { return _destroyItemAfterOnUseItemLogicTree; }
             set { _destroyItemAfterOnUseItemLogicTree = value; }
+        }
+
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
+        [CategoryAttribute("04 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run upon using an item (onUseItem must be set to 'none' for this to work properly)")]
+        public string onUseItemIBScript
+        {
+            get { return _onUseItemIBScript; }
+            set { _onUseItemIBScript = value; }
+        }
+        [CategoryAttribute("04 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        public string onUseItemIBScriptParms
+        {
+            get { return _onUseItemIBScriptParms; }
+            set { _onUseItemIBScriptParms = value; }
+        }
+        [CategoryAttribute("04 - IBScript Hooks"), DescriptionAttribute("If set to true, the item will be destroyed (or decremented by one if stacked) after the IBScript is completed.")]
+        public bool destroyItemAfterOnUseItemIBScript
+        {
+            get { return _destroyItemAfterOnUseItemIBScript; }
+            set { _destroyItemAfterOnUseItemIBScript = value; }
         }
         /*[CategoryAttribute("03 - Scripts"), DescriptionAttribute("fires when the item is used")]
         [Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
