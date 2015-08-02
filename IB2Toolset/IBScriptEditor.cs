@@ -17,11 +17,16 @@ namespace IB2Toolset
         public Module mod;
         public ParentForm prntForm;
         public string filename = ""; //example: coolscript.ibs
-        public string kwMain1 = "break continue else end endif for gosub goto if label msg next return subroutine %Mod[] %ModArea[] %ModEncounter[] %AreaProp[] %Player[] %Roster[] %PartyInventoryItem[] #numModAreas #numModEncounters #numAreaProps #numPlayers #numPlayersInRoster #numPartyInventoryItems";
-        public string kwMain2 = "Mod currentArea currentEncounter ModArea ModEncounter AreaProp Player Roster PartyInventoryItem";
-        public string okwMod = "WorldTime PlayerLocationX PlayerLocationY partyGold showPartyToken partyTokenFilename selectedPartyLeader indexOfPCtoLastUseItem OnHeartBeatLogicTree OnHeartBeatParms";
-        public string okwPlayer = "combatLocX combatLocY charStatus baseStr baseDex baseInt baseCha hp sp XP";
-        public string okwProp = "LocationX LocationY isShown isActive ConversationWhenOnPartySquare EncounterWhenOnPartySquare isMover isChaser MoverType";
+        public string keywordMain1 = "break continue else end endif for gosub goto if label msg debug next return subroutine %Mod[] %ModArea[] " +
+                                            "%ModEncounter[] %AreaProp[] %Player[] %Roster[] %PartyInventoryItem[] #numModAreas #numModEncounters " +
+                                            "#numAreaProps #numPlayers #numPlayersInRoster #numPartyInventoryItems";
+        public string keywordMain2 = "Mod currentArea currentEncounter ModArea ModEncounter AreaProp Player Roster PartyInventoryItem";
+        public string objKeywordMod = "WorldTime PlayerLocationX PlayerLocationY partyGold showPartyToken partyTokenFilename selectedPartyLeader " +
+                                            "indexOfPCtoLastUseItem OnHeartBeatLogicTree OnHeartBeatParms";
+        public string objKeywordPlayer = "combatLocX combatLocY charStatus baseStr baseDex baseInt baseCha hp sp XP";
+        public string objKeywordProp = "LocationX LocationY isShown isActive ConversationWhenOnPartySquare EncounterWhenOnPartySquare isMover isChaser " +
+                                            "MoverType";
+        public List<string> basicCommands = new List<string>() { "break", "continue", "else", "end", "endif", "for", "gosub", "goto", "if", "label", "msg", "debug", "next", "return", "subroutine" };
 
 
         public IBScriptEditor(Module m, ParentForm p)
@@ -56,8 +61,8 @@ namespace IB2Toolset
             scintilla1.Lexer = Lexer.Cpp;
 
             // Set the keywords
-            scintilla1.SetKeywords(0, kwMain1);
-            scintilla1.SetKeywords(1, kwMain2);
+            scintilla1.SetKeywords(0, keywordMain1);
+            scintilla1.SetKeywords(1, keywordMain2);
 
             scintilla1.Margins[0].Width = 35;
 
@@ -155,15 +160,15 @@ namespace IB2Toolset
                     string keyword = scintilla1.GetTextRange(currentPos - 10, 10);
                     if (keyword.Contains("Player["))
                     {
-                        scintilla1.AutoCShow(lenEntered, okwPlayer);
+                        scintilla1.AutoCShow(lenEntered, objKeywordPlayer);
                     }
                     else if (keyword.Contains("AreaProp["))
                     {
-                        scintilla1.AutoCShow(lenEntered, okwProp);
+                        scintilla1.AutoCShow(lenEntered, objKeywordProp);
                     }
                     else if (keyword.Contains("Mod["))
                     {
-                        scintilla1.AutoCShow(lenEntered, okwMod);
+                        scintilla1.AutoCShow(lenEntered, objKeywordMod);
                     }
 
                     t.Stop();
@@ -184,7 +189,7 @@ namespace IB2Toolset
 
                 if (lenEntered > 0)
                 {
-                    scintilla1.AutoCShow(lenEntered, kwMain1);
+                    scintilla1.AutoCShow(lenEntered, keywordMain1);
                 }
             }
         }
@@ -198,6 +203,34 @@ namespace IB2Toolset
             {
                 scintilla1.ViewWhitespace = WhitespaceMode.VisibleAlways;
             }
+        }
+
+        private void cmbFunctions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            refreshLbxFunctions();            
+        }
+        private void refreshLbxFunctions()
+        {
+            /*~ga~gc~og~os
+            BasicCommands
+            ModuleProperties
+            PlayerProperties
+            PropProperties*/
+
+
+            lbxFunctions.BeginUpdate();
+            lbxFunctions.DataSource = null;
+            if (cmbFunctions.SelectedIndex == 0)
+            {
+                lbxFunctions.DataSource = prntForm.scriptList;
+                //lbxFunctions.DisplayMember = "name";
+            }
+            else if (cmbFunctions.SelectedIndex == 1)
+            {
+                lbxFunctions.DataSource = basicCommands;
+                //lbxFunctions.DisplayMember = "name";
+            }
+            lbxFunctions.EndUpdate();
         }
     }
 }

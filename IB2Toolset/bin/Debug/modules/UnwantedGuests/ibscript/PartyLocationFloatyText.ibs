@@ -1,8 +1,8 @@
 ~ogGetPropLocation(thisProp,,ThisPropLocX,ThisPropLocY)
 //get prop's X location
-@propx = ~gaGetGlobalInt(ThisPropLocX)
+~gaGetGlobalInt(ThisPropLocX,@propx)
 //get prop's Y location
-@propy = ~gaGetGlobalInt(ThisPropLocY)
+~gaGetGlobalInt(ThisPropLocY,@propy)
 //check if 1 square away
 @i = ~gcCheckPartyDistance(thisProp,1)
 if (@i = 1)

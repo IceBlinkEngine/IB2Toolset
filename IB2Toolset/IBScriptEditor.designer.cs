@@ -115,10 +115,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFunctions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFunctions.FormattingEnabled = true;
+            this.cmbFunctions.Items.AddRange(new object[] {
+            "~ga|~gc|~og|~os",
+            "BasicCommands",
+            "ModuleProperties",
+            "PlayerProperties",
+            "PropProperties"});
             this.cmbFunctions.Location = new System.Drawing.Point(3, 3);
             this.cmbFunctions.Name = "cmbFunctions";
             this.cmbFunctions.Size = new System.Drawing.Size(224, 21);
             this.cmbFunctions.TabIndex = 1;
+            this.cmbFunctions.SelectedIndexChanged += new System.EventHandler(this.cmbFunctions_SelectedIndexChanged);
             // 
             // lbxFunctions
             // 
