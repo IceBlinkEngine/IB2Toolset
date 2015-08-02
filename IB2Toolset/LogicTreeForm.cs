@@ -12,7 +12,7 @@ using System.IO;
 
 namespace IB2Toolset
 {
-    public partial class LogicTreeForm : DockContent
+    /*public partial class LogicTreeForm : DockContent
     {
         public ParentForm prntForm;
 
@@ -274,5 +274,5 @@ namespace IB2Toolset
             newChild.ce_filename = prntForm.mod.moduleLogicTreesList[prntForm._selectedLbxLogicTreeIndex] + ".json";
             newChild.saveConvoFile();
         }        
-    }
+    }*/
 }

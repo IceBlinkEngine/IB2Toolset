@@ -1,6 +1,6 @@
 ﻿namespace IB2Toolset
 {
-    partial class LogicTreeForm
+    /*partial class LogicTreeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -183,4 +183,5 @@
         private System.Windows.Forms.Button btnDuplicate;
         private System.Windows.Forms.Button btnLoadAll;
     }
+    */
 }

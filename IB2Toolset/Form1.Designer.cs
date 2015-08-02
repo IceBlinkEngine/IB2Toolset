@@ -78,7 +78,7 @@
             this.triggerEventsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.areasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conversationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logicTreesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iBScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.encountersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.containersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,7 +107,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.iBScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -369,7 +368,6 @@
             this.triggerEventsToolStripMenuItem,
             this.areasToolStripMenuItem,
             this.conversationsToolStripMenuItem,
-            this.logicTreesToolStripMenuItem,
             this.iBScriptsToolStripMenuItem,
             this.encountersToolStripMenuItem,
             this.containersToolStripMenuItem,
@@ -427,12 +425,12 @@
             this.conversationsToolStripMenuItem.Text = "Conversations";
             this.conversationsToolStripMenuItem.Click += new System.EventHandler(this.conversationsToolStripMenuItem_Click);
             // 
-            // logicTreesToolStripMenuItem
+            // iBScriptsToolStripMenuItem
             // 
-            this.logicTreesToolStripMenuItem.Name = "logicTreesToolStripMenuItem";
-            this.logicTreesToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.logicTreesToolStripMenuItem.Text = "LogicTrees";
-            this.logicTreesToolStripMenuItem.Click += new System.EventHandler(this.logicTreesToolStripMenuItem_Click);
+            this.iBScriptsToolStripMenuItem.Name = "iBScriptsToolStripMenuItem";
+            this.iBScriptsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.iBScriptsToolStripMenuItem.Text = "IBScripts";
+            this.iBScriptsToolStripMenuItem.Click += new System.EventHandler(this.iBScriptsToolStripMenuItem_Click);
             // 
             // encountersToolStripMenuItem
             // 
@@ -674,13 +672,6 @@
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // iBScriptsToolStripMenuItem
-            // 
-            this.iBScriptsToolStripMenuItem.Name = "iBScriptsToolStripMenuItem";
-            this.iBScriptsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.iBScriptsToolStripMenuItem.Text = "IBScripts";
-            this.iBScriptsToolStripMenuItem.Click += new System.EventHandler(this.iBScriptsToolStripMenuItem_Click);
-            // 
             // ParentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -762,7 +753,6 @@
         private System.Windows.Forms.ToolStripMenuItem effectEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem encounterEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem triggerEventsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logicTreesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyTagsToResrefsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsBtnResetDropDowns;

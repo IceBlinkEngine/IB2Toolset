@@ -1,6 +1,6 @@
 ﻿namespace IB2Toolset
 {
-    partial class LogicTreeEditor
+    /*partial class LogicTreeEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -1174,5 +1174,6 @@
         private System.Windows.Forms.ToolStripMenuItem relocateCopiedNodeToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkShowTextOnly;
     }
+    */
 }
 

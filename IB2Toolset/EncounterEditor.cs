@@ -89,6 +89,7 @@ namespace IB2Toolset
             radioButton1.Checked = true;
             checkBox1.Checked = true;
             checkBox2.Checked = true;
+            checkBox3.Checked = true;
             //createTileImageButtons(); 
 
             //thisEnc = prntForm.encountersList[_selectedLbxEncounterIndex];

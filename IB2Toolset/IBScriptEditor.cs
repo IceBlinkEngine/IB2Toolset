@@ -105,11 +105,7 @@ namespace IB2Toolset
             scintilla1.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
             #endregion
 
-            //read in script file and create line numbered list
-            //lines = File.ReadAllLines("script.txt");
-            //List<string> converttolist = lines.ToList();
-            //converttolist.Insert(0, "//line 0");
-            //lines = converttolist.ToArray();
+            cmbFunctions.SelectedIndex = 0;
         }
         
         public void LoadScript()
@@ -204,7 +200,40 @@ namespace IB2Toolset
                 scintilla1.ViewWhitespace = WhitespaceMode.VisibleAlways;
             }
         }
-
+        private void loadScriptText(string scriptFilename)
+        {
+            //load script into rtxt for browsing
+            string jobDir = "";
+            if (prntForm.mod.moduleName != "NewModule")
+            {
+                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\scripts\\" + scriptFilename))
+                {
+                    jobDir = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\scripts";
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule\\scripts\\" + scriptFilename))
+                {
+                    jobDir = prntForm._mainDirectory + "\\default\\NewModule\\scripts";
+                }
+                else
+                {
+                    prntForm.logText("couldn't find the script file." + Environment.NewLine);
+                    //prntForm.game.errorLog("couldn't find the script file.");
+                }
+            }
+            else
+            {
+                //jobDir = prntForm._mainDirectory + "\\data\\scripts";
+            }
+            try
+            {
+                rtxtScript.LoadFile(jobDir + "\\" + scriptFilename, RichTextBoxStreamType.PlainText);
+            }
+            catch (Exception ex)
+            {
+                prntForm.logText("Failed to preview script of " + scriptFilename + Environment.NewLine);
+                //prntForm.game.errorLog("failed to preview script of selected row: " + ex.ToString());
+            }
+        }
         private void cmbFunctions_SelectedIndexChanged(object sender, EventArgs e)
         {
             refreshLbxFunctions();            
@@ -231,6 +260,36 @@ namespace IB2Toolset
                 //lbxFunctions.DisplayMember = "name";
             }
             lbxFunctions.EndUpdate();
+        }
+        private void lbxFunctions_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string text = lbxFunctions.SelectedItem.ToString();
+            if (cmbFunctions.SelectedIndex == 0) //a ga_ or gc_ etc.
+            {
+                //remove the .cs
+                text = text.Substring(0, text.Length - 3);
+                //add "~" at the beginning and "()" to the end
+                text = "~" + text + "()";
+            }
+            scintilla1.InsertText(scintilla1.CurrentPosition, text);
+        }
+
+        private void lbxFunctions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbFunctions.SelectedIndex == 0) //a ga_ or gc_ etc.
+            {
+                loadScriptText(lbxFunctions.SelectedItem.ToString());
+            }
+        }
+
+        private void tsUndo_Click(object sender, EventArgs e)
+        {
+            scintilla1.Undo();            
+        }
+
+        private void tsRedo_Click(object sender, EventArgs e)
+        {
+            scintilla1.Redo();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace IB2Toolset
         public List<string> propsParentNodeList = new List<string>();
         public List<Area> openAreasList = new List<Area>();
         public List<Convo> openConvosList = new List<Convo>();
-        public List<LogicTree> openLogicTreesList = new List<LogicTree>();
+        //public List<LogicTree> openLogicTreesList = new List<LogicTree>();
         public List<string> scriptList = new List<string>();
         public List<Condition> copiedConditionalsList = new List<Condition>();
         public List<Action> copiedActionsList = new List<Action>();
@@ -75,7 +75,7 @@ namespace IB2Toolset
         public Blueprints frmBlueprints;
         public AreaForm frmAreas;
         public ConversationsForm frmConversations;
-        public LogicTreeForm frmLogicTree;
+        //public LogicTreeForm frmLogicTree;
         public IBScriptForm frmIBScript;
         public EncountersForm frmEncounters;
         public ContainersForm frmContainers;
@@ -96,7 +96,7 @@ namespace IB2Toolset
             frmBlueprints = new Blueprints(this);
             frmAreas = new AreaForm(this);
             frmConversations = new ConversationsForm(this);
-            frmLogicTree = new LogicTreeForm(this);
+            //REMOVEfrmLogicTree = new LogicTreeForm(this);
             frmIBScript = new IBScriptForm(this);
             frmEncounters = new EncountersForm(this);
             frmContainers = new ContainersForm(this);
@@ -172,8 +172,8 @@ namespace IB2Toolset
                 return frmTriggerEvents;
             else if (persistString == typeof(ConversationsForm).ToString())
                 return frmConversations;
-            else if (persistString == typeof(LogicTreeForm).ToString())
-                return frmLogicTree;
+            //REMOVEelse if (persistString == typeof(LogicTreeForm).ToString())
+            //REMOVE    return frmLogicTree;
             else if (persistString == typeof(IBScriptForm).ToString())
                 return frmIBScript;
             else if (persistString == typeof(EncountersForm).ToString())
@@ -195,7 +195,6 @@ namespace IB2Toolset
                         (content.DockHandler.TabText == "Containers") ||
                         (content.DockHandler.TabText == "Encounters") ||
                         (content.DockHandler.TabText == "TriggerEvents") ||
-                        (content.DockHandler.TabText == "LogicTrees") ||
                         (content.DockHandler.TabText == "IBScripts") ||
                         (content.DockHandler.TabText == "LogForm") ||
                         (content.DockHandler.TabText == "Blueprints") ||
@@ -226,9 +225,9 @@ namespace IB2Toolset
             }
             frmAreas.lbxAreas.DataSource = null;
             frmAreas.lbxAreas.DataSource = mod.moduleAreasList;
-            frmAreas.refreshListBoxAreas();
+            frmAreas.refreshListBoxAreas();            
             frmConversations.refreshListBoxConvos();
-            frmLogicTree.refreshListBoxLogicTrees();
+            //REMOVEfrmLogicTree.refreshListBoxLogicTrees();
             frmIBScript.refreshListBoxIBScripts();
         }
         private void openCreatures(string filename)
@@ -324,12 +323,13 @@ namespace IB2Toolset
             if (File.Exists(filename))
             {
                 encountersList.Clear();
-                encountersList = loadEncountersFile(filename);
+                encountersList = loadEncountersFile(filename);                
             }
             else
             {
                 MessageBox.Show("Couldn't find encounters.json file. Will create a new one upon saving module.");
             }
+            frmEncounters.refreshListBoxEncounters();
         }
         private void openJournal(string filename)
         {
@@ -730,7 +730,7 @@ namespace IB2Toolset
                     }
                 }
                 // save logic trees that are open
-                foreach (LogicTree logtre in openLogicTreesList)
+                /*//REMOVEforeach (LogicTree logtre in openLogicTreesList)
                 {
                     try
                     {
@@ -740,7 +740,7 @@ namespace IB2Toolset
                     {
                         MessageBox.Show("Error: Could not save Logic Tree file to disk. Original error: " + ex.Message);
                     }
-                }
+                }*/
                 // save areas that are open
                 foreach (Area a in openAreasList)
                 {
@@ -893,10 +893,10 @@ namespace IB2Toolset
         {
             frmAreas.Show(dockPanel1);
         }
-        private void logicTreesToolStripMenuItem_Click(object sender, EventArgs e)
+        /*//REMOVEprivate void logicTreesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmLogicTree.Show(dockPanel1);
-        }
+        }*/
         private void iBScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmIBScript.Show(dockPanel1);

@@ -16,7 +16,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace IB2Toolset
 {
-    public partial class LogicTreeEditor : DockContent
+    /*public partial class LogicTreeEditor : DockContent
     { 
         public LogicTree lt;
         public Module mod;
@@ -1337,4 +1337,5 @@ namespace IB2Toolset
             refreshTreeView();
         }
     }
+    */
 }

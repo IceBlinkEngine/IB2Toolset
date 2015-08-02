@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace IB2Toolset
 {
-    [Serializable]
+    /*[Serializable]
     public class LogicTree
     {
         private string filename = "";
@@ -77,4 +77,5 @@ namespace IB2Toolset
             SubNodes.Remove(contentNode);
         }
     }        
+    */
 }

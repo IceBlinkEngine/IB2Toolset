@@ -32,12 +32,14 @@
             this.scintilla1 = new ScintillaNET.Scintilla();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.splitContainerScript = new System.Windows.Forms.SplitContainer();
-            this.txtInfo = new System.Windows.Forms.TextBox();
+            this.rtxtScript = new System.Windows.Forms.RichTextBox();
             this.cmbFunctions = new System.Windows.Forms.ComboBox();
             this.lbxFunctions = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsSaveScript = new System.Windows.Forms.ToolStripButton();
             this.tsShowWhiteSpace = new System.Windows.Forms.ToolStripButton();
+            this.tsUndo = new System.Windows.Forms.ToolStripButton();
+            this.tsRedo = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -95,19 +97,22 @@
             // 
             // splitContainerScript.Panel2
             // 
-            this.splitContainerScript.Panel2.Controls.Add(this.txtInfo);
+            this.splitContainerScript.Panel2.Controls.Add(this.rtxtScript);
             this.splitContainerScript.Size = new System.Drawing.Size(738, 527);
             this.splitContainerScript.SplitterDistance = 408;
             this.splitContainerScript.TabIndex = 0;
             // 
-            // txtInfo
+            // rtxtScript
             // 
-            this.txtInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInfo.Location = new System.Drawing.Point(0, 0);
-            this.txtInfo.Multiline = true;
-            this.txtInfo.Name = "txtInfo";
-            this.txtInfo.Size = new System.Drawing.Size(738, 115);
-            this.txtInfo.TabIndex = 0;
+            this.rtxtScript.BackColor = System.Drawing.Color.White;
+            this.rtxtScript.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtScript.Location = new System.Drawing.Point(0, 0);
+            this.rtxtScript.Name = "rtxtScript";
+            this.rtxtScript.ReadOnly = true;
+            this.rtxtScript.Size = new System.Drawing.Size(738, 115);
+            this.rtxtScript.TabIndex = 20;
+            this.rtxtScript.Text = "";
+            this.rtxtScript.WordWrap = false;
             // 
             // cmbFunctions
             // 
@@ -137,12 +142,16 @@
             this.lbxFunctions.Name = "lbxFunctions";
             this.lbxFunctions.Size = new System.Drawing.Size(224, 498);
             this.lbxFunctions.TabIndex = 0;
+            this.lbxFunctions.SelectedIndexChanged += new System.EventHandler(this.lbxFunctions_SelectedIndexChanged);
+            this.lbxFunctions.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbxFunctions_MouseDoubleClick);
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsSaveScript,
-            this.tsShowWhiteSpace});
+            this.tsShowWhiteSpace,
+            this.tsUndo,
+            this.tsRedo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(972, 25);
@@ -171,6 +180,28 @@
             this.tsShowWhiteSpace.Text = "ShowWhiteSpace";
             this.tsShowWhiteSpace.Click += new System.EventHandler(this.tsShowWhiteSpace_Click);
             // 
+            // tsUndo
+            // 
+            this.tsUndo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tsUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsUndo.Image = ((System.Drawing.Image)(resources.GetObject("tsUndo.Image")));
+            this.tsUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsUndo.Name = "tsUndo";
+            this.tsUndo.Size = new System.Drawing.Size(40, 22);
+            this.tsUndo.Text = "Undo";
+            this.tsUndo.Click += new System.EventHandler(this.tsUndo_Click);
+            // 
+            // tsRedo
+            // 
+            this.tsRedo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tsRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsRedo.Image = ((System.Drawing.Image)(resources.GetObject("tsRedo.Image")));
+            this.tsRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsRedo.Name = "tsRedo";
+            this.tsRedo.Size = new System.Drawing.Size(38, 22);
+            this.tsRedo.Text = "Redo";
+            this.tsRedo.Click += new System.EventHandler(this.tsRedo_Click);
+            // 
             // IBScriptEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,7 +221,6 @@
             this.splitContainerMain.ResumeLayout(false);
             this.splitContainerScript.Panel1.ResumeLayout(false);
             this.splitContainerScript.Panel2.ResumeLayout(false);
-            this.splitContainerScript.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerScript)).EndInit();
             this.splitContainerScript.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
@@ -205,12 +235,14 @@
         private ScintillaNET.Scintilla scintilla1;
         private System.Windows.Forms.SplitContainer splitContainerMain;
         private System.Windows.Forms.SplitContainer splitContainerScript;
-        private System.Windows.Forms.TextBox txtInfo;
         private System.Windows.Forms.ComboBox cmbFunctions;
         private System.Windows.Forms.ListBox lbxFunctions;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsSaveScript;
         private System.Windows.Forms.ToolStripButton tsShowWhiteSpace;
+        public System.Windows.Forms.RichTextBox rtxtScript;
+        private System.Windows.Forms.ToolStripButton tsUndo;
+        private System.Windows.Forms.ToolStripButton tsRedo;
     }
 }
 

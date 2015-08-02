@@ -86,6 +86,9 @@ namespace IB2Toolset
             radioButton1.Checked = true;
             checkBox1.Checked = true;
             checkBox2.Checked = true;
+            checkBox3.Checked = true;
+            checkBox4.Checked = true;
+            checkBox5.Checked = true;
             //createTileImageButtons(); 
             
             area = new Area();

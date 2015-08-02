@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace IB2Toolset
 {
-    [Serializable]
+    /*[Serializable]
     public class LogicTreeNode
     {        
         public int idNum = -1;
@@ -151,4 +151,5 @@ namespace IB2Toolset
             return newNode;
         }
     }
+    */
 }

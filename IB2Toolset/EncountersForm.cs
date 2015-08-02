@@ -27,7 +27,7 @@ namespace IB2Toolset
             lbxEncounters.BeginUpdate();
             lbxEncounters.DataSource = null;
             lbxEncounters.DataSource = prntForm.encountersList;
-            lbxEncounters.DisplayMember = "EncounterName";
+            lbxEncounters.DisplayMember = "encounterName";
             lbxEncounters.EndUpdate();
         }
         private void txtEncounterName_TextChanged_1(object sender, EventArgs e)
