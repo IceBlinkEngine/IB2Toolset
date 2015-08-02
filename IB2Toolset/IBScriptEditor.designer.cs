@@ -106,6 +106,7 @@
             // 
             this.rtxtScript.BackColor = System.Drawing.Color.White;
             this.rtxtScript.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtScript.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxtScript.Location = new System.Drawing.Point(0, 0);
             this.rtxtScript.Name = "rtxtScript";
             this.rtxtScript.ReadOnly = true;

@@ -234,6 +234,40 @@ namespace IB2Toolset
                 //prntForm.game.errorLog("failed to preview script of selected row: " + ex.ToString());
             }
         }
+        private void loadExamplesText(string exampleFilename)
+        {
+            //load script into rtxt for browsing
+            string jobDir = "";
+            if (prntForm.mod.moduleName != "NewModule")
+            {
+                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ibscriptexamples\\" + exampleFilename))
+                {
+                    jobDir = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ibscriptexamples";
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule\\ibscriptexamples\\" + exampleFilename))
+                {
+                    jobDir = prntForm._mainDirectory + "\\default\\NewModule\\ibscriptexamples";
+                }
+                else
+                {
+                    prntForm.logText("couldn't find the example file." + Environment.NewLine);
+                    //prntForm.game.errorLog("couldn't find the script file.");
+                }
+            }
+            else
+            {
+                //jobDir = prntForm._mainDirectory + "\\data\\scripts";
+            }
+            try
+            {
+                rtxtScript.LoadFile(jobDir + "\\" + exampleFilename, RichTextBoxStreamType.PlainText);
+            }
+            catch (Exception ex)
+            {
+                prntForm.logText("Failed to preview example of " + exampleFilename + Environment.NewLine);
+                //prntForm.game.errorLog("failed to preview script of selected row: " + ex.ToString());
+            }
+        }
         private void cmbFunctions_SelectedIndexChanged(object sender, EventArgs e)
         {
             refreshLbxFunctions();            
@@ -276,9 +310,17 @@ namespace IB2Toolset
 
         private void lbxFunctions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lbxFunctions.SelectedItem == null)
+            {
+                return;
+            }
             if (cmbFunctions.SelectedIndex == 0) //a ga_ or gc_ etc.
             {
                 loadScriptText(lbxFunctions.SelectedItem.ToString());
+            }
+            else if (cmbFunctions.SelectedIndex == 1) 
+            {
+                loadExamplesText(lbxFunctions.SelectedItem.ToString() + ".txt");
             }
         }
 
