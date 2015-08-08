@@ -256,6 +256,10 @@ namespace IB2Toolset
             newChild.Show(prntForm.dockPanel1);  //as new form created so that corresponding tab and child form is active
             refreshListBoxIBScripts();
             newChild.filename = prntForm.mod.moduleIBScriptsList[prntForm._selectedLbxIBScriptIndex] + ".ibs";
+            if (!File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ibscript\\" + newChild.filename))
+            {
+                newChild.SaveScript();
+            }
             try
             {
                 newChild.LoadScript();
