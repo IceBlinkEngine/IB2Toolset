@@ -40,6 +40,7 @@ namespace IB2Toolset
         private string onHeartBeatIBScriptParms = "";
         private List<LocalInt> areaLocalInts = new List<LocalInt>();
         private List<LocalString> areaLocalStrings = new List<LocalString>();
+        private string _inGameAreaName = "newArea";
         
         #endregion
 
@@ -61,6 +62,12 @@ namespace IB2Toolset
         {
             get { return useMiniMapFogOfWar; }
             set { useMiniMapFogOfWar = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string inGameAreaName
+        {
+            get { return _inGameAreaName; }
+            set { _inGameAreaName = value; }
         }
         [CategoryAttribute("01 - Main")]
         public bool areaDark
