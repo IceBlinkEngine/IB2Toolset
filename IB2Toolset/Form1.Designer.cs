@@ -685,7 +685,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ParentForm";
-            this.Text = "IceBlinkRPG Toolset";
+            this.Text = "IceBlink 2 Toolset";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ParentForm_FormClosing);
             this.Load += new System.EventHandler(this.ParentForm_Load);
             this.toolStrip1.ResumeLayout(false);
