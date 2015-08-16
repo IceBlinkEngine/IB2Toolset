@@ -51,6 +51,7 @@ namespace IB2Toolset
         private string onHeartBeatParms = "";
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
+        private bool _unavoidableConversation = false;
         #endregion
 
         #region Properties
@@ -207,6 +208,12 @@ namespace IB2Toolset
         {
             get { return _isChaser; }
             set { _isChaser = value; }
+        }
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("True = conversation on this prop cannot be avoided; False = conversation on this prop is not displayed when avoidconversations toggle is pressed.")]
+        public bool unavoidableConversation
+        {
+            get { return _unavoidableConversation; }
+            set { _unavoidableConversation = value; }
         }
         [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("If the party is within this range radius (in squares) and the Prop is a chaser (isChaser = true), the Prop will start chasing the party.")]
         public int ChaserDetectRangeRadius

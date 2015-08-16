@@ -72,5 +72,7 @@
   "partyGold": 0,
   "partyTokenFilename": "prp_party",
   "OnHeartBeatLogicTree": "none",
-  "OnHeartBeatParms": ""
+  "OnHeartBeatParms": "",
+  "OnHeartBeatIBScript": "none",
+  "OnHeartBeatIBScriptParms": ""
 }

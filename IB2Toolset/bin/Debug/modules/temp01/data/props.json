@@ -24,12 +24,15 @@
     "ChanceToMove2Squares": 0,
     "ChanceToMove0Squares": 0,
     "isChaser": false,
+    "unavoidableConversation": false,
     "ChaserDetectRangeRadius": 2,
     "ChaserGiveUpChasingRangeRadius": 3,
     "ChaserChaseDuration": 24,
     "RandomMoverRadius": 5,
     "OnHeartBeatLogicTree": "none",
-    "OnHeartBeatParms": ""
+    "OnHeartBeatParms": "",
+    "OnHeartBeatIBScript": "none",
+    "OnHeartBeatIBScriptParms": ""
   },
   {
     "LocationX": 0,
@@ -56,12 +59,15 @@
     "ChanceToMove2Squares": 0,
     "ChanceToMove0Squares": 0,
     "isChaser": false,
+    "unavoidableConversation": false,
     "ChaserDetectRangeRadius": 2,
     "ChaserGiveUpChasingRangeRadius": 3,
     "ChaserChaseDuration": 24,
     "RandomMoverRadius": 5,
     "OnHeartBeatLogicTree": "none",
-    "OnHeartBeatParms": ""
+    "OnHeartBeatParms": "",
+    "OnHeartBeatIBScript": "none",
+    "OnHeartBeatIBScriptParms": ""
   },
   {
     "LocationX": 0,
@@ -88,12 +94,15 @@
     "ChanceToMove2Squares": 0,
     "ChanceToMove0Squares": 0,
     "isChaser": false,
+    "unavoidableConversation": false,
     "ChaserDetectRangeRadius": 2,
     "ChaserGiveUpChasingRangeRadius": 3,
     "ChaserChaseDuration": 24,
     "RandomMoverRadius": 5,
     "OnHeartBeatLogicTree": "none",
-    "OnHeartBeatParms": ""
+    "OnHeartBeatParms": "",
+    "OnHeartBeatIBScript": "none",
+    "OnHeartBeatIBScriptParms": ""
   },
   {
     "LocationX": 0,
@@ -120,11 +129,14 @@
     "ChanceToMove2Squares": 0,
     "ChanceToMove0Squares": 0,
     "isChaser": false,
+    "unavoidableConversation": false,
     "ChaserDetectRangeRadius": 2,
     "ChaserGiveUpChasingRangeRadius": 3,
     "ChaserChaseDuration": 24,
     "RandomMoverRadius": 5,
     "OnHeartBeatLogicTree": "none",
-    "OnHeartBeatParms": ""
+    "OnHeartBeatParms": "",
+    "OnHeartBeatIBScript": "none",
+    "OnHeartBeatIBScriptParms": ""
   }
 ]

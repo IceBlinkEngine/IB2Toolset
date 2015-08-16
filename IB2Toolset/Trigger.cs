@@ -63,6 +63,9 @@ namespace IB2Toolset
         private string event3Parm2 = "none";
         private string event3Parm3 = "none";
         private string event3Parm4 = "none";
+
+        private bool ConversationCannotBeAvoided = true;
+
         #endregion
 
         #region Properties
@@ -74,6 +77,12 @@ namespace IB2Toolset
         }
         [CategoryAttribute("0 - Main"), DescriptionAttribute("Used to Enable or Disable the trigger")]
         public bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
+        }
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("Used to allow ground trigger bound conversations to be affected by avoid conversations toggle; by default ground trigger bound conversations are not avoidable")]
+        public bool conversationCannotBeAvoided
         {
             get { return enabled; }
             set { enabled = value; }
