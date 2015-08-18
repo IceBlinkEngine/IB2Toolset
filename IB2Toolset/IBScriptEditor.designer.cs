@@ -126,7 +126,12 @@
             "BasicCommands",
             "ModuleProperties",
             "PlayerProperties",
-            "PropProperties"});
+            "PropProperties",
+            "CreatureInCurrentEncounterProperties",
+            "CreatureResRefProperties",
+            "AreaProperties",
+            "EncounterProperties"
+            });
             this.cmbFunctions.Location = new System.Drawing.Point(3, 3);
             this.cmbFunctions.Name = "cmbFunctions";
             this.cmbFunctions.Size = new System.Drawing.Size(224, 21);

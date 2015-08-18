@@ -17,16 +17,34 @@ namespace IB2Toolset
         public Module mod;
         public ParentForm prntForm;
         public string filename = ""; //example: coolscript.ibs
-        public string keywordMain1 = "break continue else end endif for gosub goto if label msg debug next return subroutine %Mod[] %ModArea[] " +
-                                            "%ModEncounter[] %AreaProp[] %Player[] %Roster[] %PartyInventoryItem[] #numModAreas #numModEncounters " +
+       
+        //this is used to define keywords for the initial dropdown on starting to type in anew line
+        public string keywordMain1 = "break continue else end endif for gosub goto if label msg debug next return subroutine %Mod %Area " +
+                                            "%Encounter %Prop %Player %CreatureResRef %CreatureInCurrentEncounter #numModAreas #numModEncounters " +
                                             "#numAreaProps #numPlayers #numPlayersInRoster #numPartyInventoryItems";
-        public string keywordMain2 = "Mod currentArea currentEncounter ModArea ModEncounter AreaProp Player Roster PartyInventoryItem";
-        public string objKeywordMod = "WorldTime PlayerLocationX PlayerLocationY partyGold showPartyToken partyTokenFilename selectedPartyLeader " +
-                                            "indexOfPCtoLastUseItem OnHeartBeatLogicTree OnHeartBeatParms";
-        public string objKeywordPlayer = "combatLocX combatLocY charStatus baseStr baseDex baseInt baseCha hp sp XP";
-        public string objKeywordProp = "LocationX LocationY isShown isActive ConversationWhenOnPartySquare EncounterWhenOnPartySquare isMover isChaser " +
-                                            "MoverType";
+        
+        //this is used to color the contained keywords red(?) 
+        public string keywordMain2 = "Mod Area Encounter Prop Player CreatureResRef CreatureInCurrentEncounter";
+        
+        //DISABLED (using lists below for this, too); the keywords in this block are used for the drop down popping up after a "."
+        //public string objKeywordMod = "WorldTime PlayerLocationX PlayerLocationY partyGold showPartyToken partyTokenFilename selectedPartyLeader " +
+                                            //"indexOfPCtoLastUseItem OnHeartBeatLogicTree OnHeartBeatParms";
+        //public string objKeywordPlayer = "combatLocX combatLocY charStatus baseStr baseDex baseInt baseCha hp sp XP";
+        //public string objKeywordProp = "LocationX LocationY isShown isActive ConversationWhenOnPartySquare EncounterWhenOnPartySquare isMover isChaser " +
+                                            //"MoverType";
+        
+        
+        //these are used for available selection in the right hand side big drop down box choosing commands and properties by category
         public List<string> basicCommands = new List<string>() { "break", "continue", "else", "end", "endif", "for", "gosub", "goto", "if", "label", "msg", "debug", "next", "return", "subroutine" };
+        public List<string> moduleProperties = new List<string>() { "WorldTime", "TimePerRound", "PlayerLocationX", "PlayerLocationY", "PlayerLastLocationX", "PlayerLastLocationY", "partyGold", "showPartyToken", "partyTokenFilename", "selectedPartyLeader", "indexOfPCtoLastUseItem", "combatAnimationSpeed", "OnHeartBeatIBScript", "OnHeartBeatIBScriptParms", "debugMode", "allowSave", "PlayerFacingLeft", "SizeOfModuleItemsList", "SizeOfModuleEncountersLists", "SizeOfModuleContainersList", "SizeOfModuleShopsList", "SizeOfModuleCreaturesList", "SizeOfModuleJournal", "SizeOfModulePlayerClassLists", "SizeOfModuleRacesList", "SizeOfModuleSpellsList", "SizeOfModuleTraitsList", "SizeOfModuleEffectsList", "SizeOfModuleAreasList", "SizeOfModuleConvosList", "SizeOfModuleAreasObjects", "SizeOfModuleGlobalInts", "SizeOfModuleGlobalStrings", "SizeOfModuleConvoSavedValuesList", "SizeOfPlayerList", "SizeOfPartyRosterList", "SizeOfPartyInventoryRefsList", "SizeOfPartyJournalQuests", "SizeOfPartyJournalCompleted"};
+        public List<string> playerProperties = new List<string>() { "hp", "sp", "combatLocX", "combatLocY", "moveDistance", "moveOrder", "classLevel", "baseFortitude", "baseWill", "baseReflex", "fortitude", "will", "reflex", "strength", "dexterity", "intelligence", "charisma", "wisdom", "constitution", "baseStr", "baseDex", "baseInt", "baseCha", "baseWis", "baseCon", "ACBase", "AC", "baseAttBonus", "hpMax", "spMax", "XP", "XPNeeded", "hpRegenTimePassedCounter", "spRegenTimePassedCounter", "damageTypeResistanceTotalAcid", "damageTypeResistanceTotalCold", "damageTypeResistanceTotalNormal", "damageTypeResistanceTotalElectricity", "damageTypeResistanceTotalFire", "damageTypeResistanceTotalMagic", "damageTypeResistanceTotalPoison", "SizeOfKnownSpellsTags", "SizeOfKnownSpellsList", "SizeOfKnownTraitsTags", "SizeOfKnownTraitsList", "SizeOfEffectsList", "combatFacingLeft", "steathModeOn", "mainPc", "nonRemoveablePc", "isMale", "tokenFilename", "name", "tag", "raceTag", "classTag", "HeadRefsTag", "HeadRefsName", "HeadRefsResRef", "HeadRefsCanNotBeUnequipped", "HeadRefsQuantity", "NeckRefsTag", "NeckRefsName", "NeckRefsResRef", "NeckRefsCanNotBeUnequipped", "NeckRefsQuantity", "BodyRefsTag", "BodyRefsName", "BodyRefsResRef", "BodyRefsCanNotBeUnequipped", "BodyRefsQuantity", "MainHandRefsTag", "MainHandRefsName", "MainHandRefsResRef", "MainHandRefsCanNotBeUnequipped", "MainHandRefsQuantity", "OffHandRefsTag", "OffHandRefsName", "OffHandRefsResRef", "OffHandRefsCanNotBeUnequipped", "OffHandRefsQuantity", "RingRefsTag", "RingRefsName", "RingRefsResRef", "RingRefsCanNotBeUnequipped", "RingRefsQuantity", "Ring2RefsTag", "Ring2RefsName", "Ring2RefsResRef", "Ring2RefsCanNotBeUnequipped", "Ring2RefsQuantity", "FeetRefsTag", "FeetRefsName", "FeetRefsResRef", "FeetRefsCanNotBeUnequipped", "FeetRefsQuantity", "AmmoRefsTag", "AmmoRefsName", "AmmoRefsResRef", "AmmoRefsCanNotBeUnequipped", "AmmoRefsQuantity" };
+        public List<string> propProperties = new List<string>() { "PropTag", "LocationX", "LocationY", "PropFacingLeft", "HasCollision", "isShown", "isActive", "DeletePropWhenThisEncounterIsWon", "PostLocationX", "PostLocationY", "WayPointListCurrentIndex", "isMover", "ChanceToMove2Squares", "ChanceToMove0Squares", "isChaser", "isCurrentlyChasing", "ChaserDetectRangeRadius", "ChaserGiveUpChasingRangeRadius", "ChaserChaseDuration", "ChaserStartChasingTime", "RandomMoverRadius", "ReturningToPost", "ImageFileName", "MouseOverText", "PropCategoryName", "ConversationWhenOnPartySquare", "EncounterWhenOnPartySquare", "MoverType", "SizeOfPropLocalInts", "SizeOfPropLocalStrings", "SizeOfWayPointList", "OnHeartBeatIBScript", "OnHeartBeatIBScriptParms", "unavoidableConversation" };
+        public List<string> creatureInCurrentEncounterProperties = new List<string>() { "cr_tokenFilename", "combatFacingLeft", "combatLocX", "combatLocY", "moveDistance", "cr_name", "cr_tag", "cr_resref", "cr_desc", "cr_level", "hpMax", "sp", "hp", "cr_XP", "AC", "cr_status", "cr_att", "cr_attRange", "cr_damageNumDice", "cr_damageDie", "cr_damageAdder", "cr_category", "cr_projSpriteFilename", "cr_spriteEndingFilename", "cr_attackSound", "cr_numberOfAttacks", "cr_ai", "fortitude", "will", "reflex", "damageTypeResistanceValueAcid", "damageTypeResistanceValueNormal", "damageTypeResistanceValueCold", "damageTypeResistanceValueElectricity", "damageTypeResistanceValueFire", "damageTypeResistanceValueMagic", "damageTypeResistanceValuePoison", "cr_typeOfDamage", "onScoringHit", "onScoringHitParms", "onDeathIBScript", "onDeathIBScriptParms", "SizeOfKnownSpellsTags", "SizeOfCr_effectsList", "SizeOfCreatureLocalInts", "SizeOfCreatureLocalStrings" };
+        public List<string> creatureResRefProperties = new List<string>() { "LocationX", "LocationY", "isShown", "isActive", "ConversationWhenOnPartySquare", "EncounterWhenOnPartySquare", "isMover", "isChaser", "MoverType" };
+        public List<string> areaProperties = new List<string>() { "LocationX", "LocationY", "isShown", "isActive", "ConversationWhenOnPartySquare", "EncounterWhenOnPartySquare", "isMover", "isChaser", "MoverType" };
+        public List<string> encounterProperties = new List<string>() { "LocationX", "LocationY", "isShown", "isActive", "ConversationWhenOnPartySquare", "EncounterWhenOnPartySquare", "isMover", "isChaser", "MoverType" };
+        
+
 
 
         public IBScriptEditor(Module m, ParentForm p)
@@ -137,6 +155,8 @@ namespace IB2Toolset
                 MessageBox.Show("Error: Could not save IBScript file " + filename + " to disk. Error: " + ex.Message);
             }
         }
+        
+        //this calls the drop selection selction when a "." is typed in the script editor window
         private void scintilla1_CharAdded(object sender, CharAddedEventArgs e)
         {
             if (e.Char == '.')
@@ -152,20 +172,107 @@ namespace IB2Toolset
                 t.Interval = 10;
                 t.Tag = scintilla1;
                 t.Tick += new EventHandler((obj, ev) =>
-                {
-                    string keyword = scintilla1.GetTextRange(currentPos - 10, 10);
-                    if (keyword.Contains("Player["))
+                { 
+                    string keyword = scintilla1.GetTextRange(currentPos - 40, 40);
+                    string[] words = keyword.Split('%'); 
+                    keyword = words[words.Length-1];
+                    
+                    //IMPORTANT: If one kjeyword is fully contaiend in another one, check the longer keyword first
+
+                    if (keyword.Contains("CreatureResRef"))
                     {
-                        scintilla1.AutoCShow(lenEntered, objKeywordPlayer);
+                        //we add the full path here, including the name(s) of the list(s) that can be referenced in the for-loop header with SizeOfListName
+                        List<string> extentedPropProperties = new List<string>();
+                        extentedPropProperties = creatureResRefProperties.ConvertAll(d => ("Mod.ModuleEncountersList[@i].Encounter.EncounterCreatureRefsList{@j}." + d));
+                        string selection = "";
+                        foreach (string s in extentedPropProperties)
+                        {
+                            selection = selection + s + " ";
+                        }
+
+                        scintilla1.AutoCShow(lenEntered, selection);
                     }
-                    else if (keyword.Contains("AreaProp["))
+                    else if (keyword.Contains("CreatureInCurrentEncounter"))
                     {
-                        scintilla1.AutoCShow(lenEntered, objKeywordProp);
+                        //we add the full path here, including the name(s) of the list(s) that can be referenced in the for-loop header with SizeOfListName
+                        List<string> extentedPropProperties = new List<string>();
+                        extentedPropProperties = creatureInCurrentEncounterProperties.ConvertAll(d => ("CurrentEncounter.EncounterCreatureList[@i]." + d));
+                        string selection = "";
+                        foreach (string s in extentedPropProperties)
+                        {
+                            selection = selection + s + " ";
+                        }
+
+                        scintilla1.AutoCShow(lenEntered, selection);
                     }
-                    else if (keyword.Contains("Mod["))
+
+                    else if (keyword.Contains("Encounter"))
                     {
-                        scintilla1.AutoCShow(lenEntered, objKeywordMod);
+                        //we add the full path here, including the name(s) of the list(s) that can be referenced in the for-loop header with SizeOfListName
+                        List<string> extentedPropProperties = new List<string>();
+                        extentedPropProperties = encounterProperties.ConvertAll(d => ("Mod.ModuleEncountersList[@i]." + d));
+                        string selection = "";
+                        foreach (string s in extentedPropProperties)
+                        {
+                            selection = selection + s + " ";
+                        }
+
+                        scintilla1.AutoCShow(lenEntered, selection);
                     }
+                    
+                    else if (keyword.Contains("Mod"))
+                    {
+                        //we add the full path here, including the name(s) of the list(s) that can be referenced in the for-loop header with SizeOfListName
+                        //List<string> extentedPropProperties = new List<string>();
+                        //extentedPropProperties = moduleProperties.ConvertAll(d => ("" + d));
+                        string selection = "";
+                        foreach (string s in moduleProperties)
+                        {
+                            selection = selection + s + " ";
+                        }
+                        
+                        scintilla1.AutoCShow(lenEntered, selection);
+                    }
+                    else if (keyword.Contains("Player"))
+                    {
+                        //we add the full path here, including the name(s) of the list(s) that can be referenced in the for-loop header with SizeOfListName
+                        List<string> extentedPropProperties = new List<string>();
+                        extentedPropProperties = playerProperties.ConvertAll(d => ("Mod.PlayerList[@i]." + d));
+                        string selection = "";
+                        foreach (string s in extentedPropProperties)
+                        {
+                            selection = selection + s + " ";
+                        }
+
+                        scintilla1.AutoCShow(lenEntered, selection);
+                    }
+                    else if (keyword.Contains("Prop"))
+                    {
+                        //we add the full path here, including the name(s) of the list(s) that can be referenced in the for-loop header with SizeOfListName
+                        List<string> extentedPropProperties = new List<string>();
+                        extentedPropProperties = propProperties.ConvertAll(d => ("Mod.ModuleAreasObjects[@i].Area.Props{@j}." + d));
+                        string selection ="";
+                        foreach (string s in extentedPropProperties)
+                        {
+                            selection = selection + s + " ";
+                        }
+
+                        scintilla1.AutoCShow(lenEntered, selection);
+                    }
+                    else if (keyword.Contains("Area"))
+                    {
+                        //we add the full path here, including the name(s) of the list(s) that can be referenced in the for-loop header with SizeOfListName
+                        List<string> extentedPropProperties = new List<string>();
+                        extentedPropProperties = areaProperties.ConvertAll(d => ("Mod.ModuleAreasObjects[@i]." + d));
+                        string selection = "";
+                        foreach (string s in extentedPropProperties)
+                        {
+                            selection = selection + s + " ";
+                        }
+
+                        scintilla1.AutoCShow(lenEntered, selection);
+                    }
+                
 
                     t.Stop();
                     t.Enabled = false;
@@ -272,13 +379,20 @@ namespace IB2Toolset
         {
             refreshLbxFunctions();            
         }
+        
+        //this fills the left hand side drop down list with the properties (for each category)
         private void refreshLbxFunctions()
         {
             /*~ga~gc~og~os
             BasicCommands
             ModuleProperties
             PlayerProperties
-            PropProperties*/
+            PropProperties
+            CreatureInCurrentEncounter
+            CreatureResRef
+            Area
+            Encounter
+             */
 
 
             lbxFunctions.BeginUpdate();
@@ -293,8 +407,60 @@ namespace IB2Toolset
                 lbxFunctions.DataSource = basicCommands;
                 //lbxFunctions.DisplayMember = "name";
             }
+
+            //module
+            else if (cmbFunctions.SelectedIndex == 2)
+            {
+                lbxFunctions.DataSource = moduleProperties;
+                //lbxFunctions.DisplayMember = "name";
+            }
+            
+            //player
+            else if (cmbFunctions.SelectedIndex == 3)
+            {
+                lbxFunctions.DataSource = playerProperties;
+                //lbxFunctions.DisplayMember = "name";
+            }
+
+            //prop
+            else if (cmbFunctions.SelectedIndex == 4)
+            {
+                lbxFunctions.DataSource = propProperties;
+                //lbxFunctions.DisplayMember = "name";
+            }
+
+            //CreatureInCurrentEncounter
+            else if (cmbFunctions.SelectedIndex == 5)
+            {
+                lbxFunctions.DataSource = creatureInCurrentEncounterProperties;
+                //lbxFunctions.DisplayMember = "name";
+            }
+
+            //CreatureResRef
+            else if (cmbFunctions.SelectedIndex == 6)
+            {
+                lbxFunctions.DataSource = creatureResRefProperties;
+                //lbxFunctions.DisplayMember = "name";
+            }
+
+            //Area
+            else if (cmbFunctions.SelectedIndex == 7)
+            {
+                lbxFunctions.DataSource = areaProperties;
+                //lbxFunctions.DisplayMember = "name";
+            }
+            
+            //Encounter
+            else if (cmbFunctions.SelectedIndex == 8)
+            {
+                lbxFunctions.DataSource = encounterProperties;
+                //lbxFunctions.DisplayMember = "name";
+            }
+
             lbxFunctions.EndUpdate();
         }
+        
+        //this defines what's copied into the script text on double click in the drop down list
         private void lbxFunctions_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string text = lbxFunctions.SelectedItem.ToString();
@@ -305,9 +471,60 @@ namespace IB2Toolset
                 //add "~" at the beginning and "()" to the end
                 text = "~" + text + "()";
             }
+
+            //basic commands
+            else if (cmbFunctions.SelectedIndex == 1)
+            {
+                //todo: mayhaps insert a typical loop when clcik on "for"
+            }
+            
+            //module
+            else if (cmbFunctions.SelectedIndex == 2)
+            {
+                text = "%Mod." + text;
+            }
+            
+            //player
+            else if (cmbFunctions.SelectedIndex == 3)
+            {
+                text = "%Player.Mod.PlayerList[@i]." + text;
+            }
+
+            //prop
+            else if (cmbFunctions.SelectedIndex == 4)
+            {    
+                text = "%Prop.Mod.ModuleAreasObjects[@i].Area.Props{@j}." + text;
+            }
+
+            //CreatureInCurrentEncounter
+            else if (cmbFunctions.SelectedIndex == 5)
+            {
+                text = "%CreatureInCurrentEncounter.CurrentEncounter.EncounterCreatureList[@i]." + text;
+            }
+
+            //CreatureResRef
+            else if (cmbFunctions.SelectedIndex == 6)
+            {
+                text = "%CreatureResRef.Mod.ModuleEncountersList[@i].Encounter.EncounterCreatureRefsList{@j}." + text;
+            }
+            
+            //Area
+            else if (cmbFunctions.SelectedIndex == 7)
+            {
+                text = "%Area.Mod.ModuleAreasObjects[@i]." + text;
+            }
+
+            //Encounter
+            else if (cmbFunctions.SelectedIndex == 8)
+            {
+                text = "%Encounter.Mod.ModuleEncountersList[@i]." + text;
+            }
+            
+            
             scintilla1.InsertText(scintilla1.CurrentPosition, text);
         }
 
+        //this is for filling the info text box at tooslet bottom
         private void lbxFunctions_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbxFunctions.SelectedItem == null)
@@ -318,7 +535,7 @@ namespace IB2Toolset
             {
                 loadScriptText(lbxFunctions.SelectedItem.ToString());
             }
-            else if (cmbFunctions.SelectedIndex == 1) 
+            else if (cmbFunctions.SelectedIndex > 0)
             {
                 loadExamplesText(lbxFunctions.SelectedItem.ToString() + ".txt");
             }
