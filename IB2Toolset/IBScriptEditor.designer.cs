@@ -125,12 +125,13 @@
             "~ga|~gc|~og|~os",
             "BasicCommands",
             "ModuleProperties",
-            "PlayerProperties",
-            "PropProperties",
-            "CreatureInCurrentEncounterProperties",
-            "CreatureResRefProperties",
-            "AreaProperties",
-            "EncounterProperties"
+            "PlayerProperties (right click each property for for-loop example)",
+            "PropProperties (right click each property for for-loop example)",
+            "CreatureInCurrentEncounterProperties (right click each property for for-loop example)",
+            "CreatureResRefProperties (right click each property for for-loop example)",
+            "AreaProperties (right click each property for for-loop example)",
+            "EncounterProperties (right click each property for for-loop example)",
+            "CurrentEncounterProperties"
             });
             this.cmbFunctions.Location = new System.Drawing.Point(3, 3);
             this.cmbFunctions.Name = "cmbFunctions";
@@ -150,6 +151,7 @@
             this.lbxFunctions.TabIndex = 0;
             this.lbxFunctions.SelectedIndexChanged += new System.EventHandler(this.lbxFunctions_SelectedIndexChanged);
             this.lbxFunctions.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbxFunctions_MouseDoubleClick);
+            this.lbxFunctions.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbxFunctions_RightClick);
             // 
             // toolStrip1
             // 
