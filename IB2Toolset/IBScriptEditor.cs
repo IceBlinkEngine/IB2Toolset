@@ -35,7 +35,7 @@ namespace IB2Toolset
         
         
         //these are used for available selection in the right hand side big drop down box choosing commands and properties by category
-        public List<string> basicCommands = new List<string>() { "break", "continue", "else", "end", "endif", "for", "gosub", "goto", "if", "label", "msg", "debug", "next", "return", "subroutine" };
+        public List<string> basicCommands = new List<string>() { "for", "break", "continue", "next", "if", "else", "endif", "gosub", "subroutine", "return", "goto", "label", "msg", "debug", "end" };
         public List<string> moduleProperties = new List<string>() { "WorldTime", "TimePerRound", "PlayerLocationX", "PlayerLocationY", "PlayerLastLocationX", "PlayerLastLocationY", "partyGold", "showPartyToken", "partyTokenFilename", "selectedPartyLeader", "indexOfPCtoLastUseItem", "combatAnimationSpeed", "OnHeartBeatIBScript", "OnHeartBeatIBScriptParms", "debugMode", "allowSave", "PlayerFacingLeft", "SizeOfModuleItemsList", "SizeOfModuleEncountersLists", "SizeOfModuleContainersList", "SizeOfModuleShopsList", "SizeOfModuleCreaturesList", "SizeOfModuleJournal", "SizeOfModulePlayerClassLists", "SizeOfModuleRacesList", "SizeOfModuleSpellsList", "SizeOfModuleTraitsList", "SizeOfModuleEffectsList", "SizeOfModuleAreasList", "SizeOfModuleConvosList", "SizeOfModuleAreasObjects", "SizeOfModuleGlobalInts", "SizeOfModuleGlobalStrings", "SizeOfModuleConvoSavedValuesList", "SizeOfPlayerList", "SizeOfPartyRosterList", "SizeOfPartyInventoryRefsList", "SizeOfPartyJournalQuests", "SizeOfPartyJournalCompleted"};
         public List<string> playerProperties = new List<string>() { "hp", "sp", "combatLocX", "combatLocY", "moveDistance", "moveOrder", "classLevel", "baseFortitude", "baseWill", "baseReflex", "fortitude", "will", "reflex", "strength", "dexterity", "intelligence", "charisma", "wisdom", "constitution", "baseStr", "baseDex", "baseInt", "baseCha", "baseWis", "baseCon", "ACBase", "AC", "baseAttBonus", "hpMax", "spMax", "XP", "XPNeeded", "hpRegenTimePassedCounter", "spRegenTimePassedCounter", "damageTypeResistanceTotalAcid", "damageTypeResistanceTotalCold", "damageTypeResistanceTotalNormal", "damageTypeResistanceTotalElectricity", "damageTypeResistanceTotalFire", "damageTypeResistanceTotalMagic", "damageTypeResistanceTotalPoison", "SizeOfKnownSpellsTags", "SizeOfKnownSpellsList", "SizeOfKnownTraitsTags", "SizeOfKnownTraitsList", "SizeOfEffectsList", "combatFacingLeft", "steathModeOn", "mainPc", "nonRemoveablePc", "isMale", "tokenFilename", "name", "tag", "raceTag", "classTag", "HeadRefsTag", "HeadRefsName", "HeadRefsResRef", "HeadRefsCanNotBeUnequipped", "HeadRefsQuantity", "NeckRefsTag", "NeckRefsName", "NeckRefsResRef", "NeckRefsCanNotBeUnequipped", "NeckRefsQuantity", "BodyRefsTag", "BodyRefsName", "BodyRefsResRef", "BodyRefsCanNotBeUnequipped", "BodyRefsQuantity", "MainHandRefsTag", "MainHandRefsName", "MainHandRefsResRef", "MainHandRefsCanNotBeUnequipped", "MainHandRefsQuantity", "OffHandRefsTag", "OffHandRefsName", "OffHandRefsResRef", "OffHandRefsCanNotBeUnequipped", "OffHandRefsQuantity", "RingRefsTag", "RingRefsName", "RingRefsResRef", "RingRefsCanNotBeUnequipped", "RingRefsQuantity", "Ring2RefsTag", "Ring2RefsName", "Ring2RefsResRef", "Ring2RefsCanNotBeUnequipped", "Ring2RefsQuantity", "FeetRefsTag", "FeetRefsName", "FeetRefsResRef", "FeetRefsCanNotBeUnequipped", "FeetRefsQuantity", "AmmoRefsTag", "AmmoRefsName", "AmmoRefsResRef", "AmmoRefsCanNotBeUnequipped", "AmmoRefsQuantity" };
         public List<string> propProperties = new List<string>() { "PropTag", "LocationX", "LocationY", "PropFacingLeft", "HasCollision", "isShown", "isActive", "DeletePropWhenThisEncounterIsWon", "PostLocationX", "PostLocationY", "WayPointListCurrentIndex", "isMover", "ChanceToMove2Squares", "ChanceToMove0Squares", "isChaser", "isCurrentlyChasing", "ChaserDetectRangeRadius", "ChaserGiveUpChasingRangeRadius", "ChaserChaseDuration", "ChaserStartChasingTime", "RandomMoverRadius", "ReturningToPost", "ImageFileName", "MouseOverText", "PropCategoryName", "ConversationWhenOnPartySquare", "EncounterWhenOnPartySquare", "MoverType", "SizeOfPropLocalInts", "SizeOfPropLocalStrings", "SizeOfWayPointList", "OnHeartBeatIBScript", "OnHeartBeatIBScriptParms", "unavoidableConversation" };
@@ -486,43 +486,54 @@ namespace IB2Toolset
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
+
+                //right clcik also selects the clicked line and uses its content
+                lbxFunctions.SelectedIndex = lbxFunctions.IndexFromPoint(e.X, e.Y);
+                
                 string text = lbxFunctions.SelectedItem.ToString();
+                int wantedPosition = scintilla1.CurrentPosition;
 
                 
                 //player
                 if (cmbFunctions.SelectedIndex == 3)
                 {
-                    text = "for (@i = 0; @i < %Mod.SizeOFPlayerList; @i++)" + "\n" + "%Player[@i]." + text + "\n" + "next";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfPlayerList; @i++)" + "\n" + "   %Player[@i]." + text + "\n" + "next" + "\n";
+                    wantedPosition += text.Length;
+                    
                 }
-
                 //prop
                 else if (cmbFunctions.SelectedIndex == 4)
                 {
-                    text = "for (@i = 0; @i < %Mod.SizeOfModuleAreasObjects; @i++)" + "\n" + "for (@j = 0; @j < %Area[@i].SizeOfProps; @j++)" + "\n" + "%Prop{@j}.Area[@i]." + text + "\n" + "next" + "\n" + "next";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleAreasObjects; @i++)" + "\n" + "   for (@j = 0; @j < %Area[@i].SizeOfProps; @j++)" + "\n" + "      %Prop{@j}.Area[@i]." + text + "\n" + "   next" + "\n" + "next" + "\n";
+                    wantedPosition += text.Length;
                 }
 
                 //CreatureInCurrentEncounter
                 else if (cmbFunctions.SelectedIndex == 5)
                 {
-                    text = "for (@i = 0; @i <  %CurrentEncounter.SizeOfEncounterCreatureList; @i++)" + "\n" + "%CreatureInCurrentEncounter[@i]." + text + "\n" + "next";
+                    text = "\n" + "for (@i = 0; @i <  %CurrentEncounter.SizeOfEncounterCreatureList; @i++)" + "\n" + "   %CreatureInCurrentEncounter[@i]." + text + "\n" + "next" + "\n";
+                    wantedPosition += text.Length;
                 }
 
                 //CreatureResRef
                 else if (cmbFunctions.SelectedIndex == 6)
                 {
-                     text = "for (@i = 0; @i < %Mod.SizeOfModuleEncountersList; @i++)" + "\n" + "for (@j = 0; @j < %Encounter[@i].SizeOfEncounterCreatureRefsList; @j++)" + "\n" + "%CreatureResRef{@j}.Encounter[@i]." + text + "\n" + "next" + "\n" + "next";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleEncountersList; @i++)" + "\n" + "   for (@j = 0; @j < %Encounter[@i].SizeOfEncounterCreatureRefsList; @j++)" + "\n" + "      %CreatureResRef{@j}.Encounter[@i]." + text + "\n" + "   next" + "\n" + "next" + "\n";
+                    wantedPosition += text.Length;
                 }
                     
                 //Area
                 else if (cmbFunctions.SelectedIndex == 7)
                 {
-                    text = "for (@i = 0; @i < %Mod.SizeOfModuleAreasObjects; @i++)" + "\n" + "%Area[@i]." + text + "\n" + "next";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleAreasObjects; @i++)" + "\n" + "   %Area[@i]." + text + "\n" + "next" + "\n";
+                    wantedPosition += text.Length;
                 }
 
                 //Encounter
                 else if (cmbFunctions.SelectedIndex == 8)
                 {
-                    text = "for (@i = 0; @i < %Mod.SizeOFModuleEncountersList; @i++)" + "\n" + "%Encounter[@i]." + text + "\n" + "next";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleEncountersList; @i++)" + "\n" + "   %Encounter[@i]." + text + "\n" + "next" + "\n";
+                    wantedPosition += text.Length;
                 }
                 //CurrentEncounter
                 else if (cmbFunctions.SelectedIndex == 9)
@@ -535,81 +546,120 @@ namespace IB2Toolset
                 }
 
                 scintilla1.InsertText(scintilla1.CurrentPosition, text);
-                         
-                text = "from right click: " + text + "\n Second line"; 
+                scintilla1.GotoPosition(wantedPosition);
+                scintilla1.Focus();
             }
-
         }
-
 
         //this defines what's copied into the script text on double click in the drop down list
         private void lbxFunctions_MouseDoubleClick(object sender, MouseEventArgs e)
         {
 
                 string text = lbxFunctions.SelectedItem.ToString();
+                int wantedPosition = scintilla1.CurrentPosition;
+
                 if (cmbFunctions.SelectedIndex == 0) //a ga_ or gc_ etc.
                 {
                     //remove the .cs
                     text = text.Substring(0, text.Length - 3);
                     //add "~" at the beginning and "()" to the end
                     text = "~" + text + "()";
+                    wantedPosition += text.Length;
                 }
 
                 //basic commands
                 else if (cmbFunctions.SelectedIndex == 1)
                 {
-                    //todo: mayhaps insert a typical loop when clcik on "for"
+                    if (text == "for")
+                    {
+                        text = "\n" + "for (@i = 0; @i < XXX; @i++)" + "\n" + "\n" + "next" + "\n";
+                        wantedPosition += text.Length;
+                    }
+                    else if (text == "if")
+                    {
+                        text = "\n" + "if (XXX)" + "\n" + "\n" + "endif" + "\n";
+                        wantedPosition += text.Length;
+                    }
+                    else if (text == "msg")
+                    {
+                        text = "\n" + "msg (\"XXX\")" + "\n";
+                        wantedPosition += text.Length;
+                    }
+                    else if (text == "goto")
+                    {
+                        text = "\n" + "goto XXX" + "\n" + "\n" + "label XXX" + "\n";
+                        wantedPosition += text.Length;
+                    }
+                    else if (text == "gosub")
+                    {
+                        text = "\n" + "gosub XXX" + "\n" + "\n" + "subroutine XXX" + "\n" + "\n" + "return" + "\n";
+                        wantedPosition += text.Length;
+                    }
+                    else if (text == "debug")
+                    {
+                        text = "\n" + "debug (\"XXX\")" + "\n";
+                        wantedPosition += text.Length;
+                    }
                 }
 
                 //module
                 else if (cmbFunctions.SelectedIndex == 2)
                 {
                     text = "%Mod." + text;
+                    wantedPosition += text.Length;
                 }
 
                 //player
                 else if (cmbFunctions.SelectedIndex == 3)
                 {
                     text = "%Player[@i]." + text;
+                    wantedPosition += text.Length;
                 }
 
                 //prop
                 else if (cmbFunctions.SelectedIndex == 4)
                 {
                     text = "%Prop{@j}.Area[@i]." + text;
+                    wantedPosition += text.Length;
                 }
 
                 //CreatureInCurrentEncounter
                 else if (cmbFunctions.SelectedIndex == 5)
                 {
                     text = "%CreatureInCurrentEncounter[@i]." + text;
+                    wantedPosition += text.Length;
                 }
 
                 //CreatureResRef
                 else if (cmbFunctions.SelectedIndex == 6)
                 {
                     text = "%CreatureResRef{@j}.Encounter[@i]." + text;
+                    wantedPosition += text.Length;
                 }
 
                 //Area
                 else if (cmbFunctions.SelectedIndex == 7)
                 {
                     text = "%Area[@i]." + text;
+                    wantedPosition += text.Length;
                 }
 
                 //Encounter
                 else if (cmbFunctions.SelectedIndex == 8)
                 {
                     text = "%Encounter[@i]." + text;
+                    wantedPosition += text.Length;
                 }
                 //CurrentEncounter
                 else if (cmbFunctions.SelectedIndex == 9)
                 {
                     text = "%CurrentEncounter." + text;
+                    wantedPosition += text.Length;
                 }
 
                 scintilla1.InsertText(scintilla1.CurrentPosition, text);
-
+                scintilla1.GotoPosition(wantedPosition);
+                scintilla1.Focus();
         }
 
         //this is for filling the info text box at tooslet bottom
