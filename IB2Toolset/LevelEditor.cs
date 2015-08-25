@@ -32,6 +32,8 @@ namespace IB2Toolset
         public Bitmap selectedBitmap;
         //public int selectedBitmapSize = 1;
         public int mousex, mousey;
+        private Point currentPoint = new Point(0, 0);
+        private Point lastPoint = new Point(0, 0);
         public Graphics gfx;
         public int gridx, gridy;
         public Font fontArial;
@@ -568,7 +570,7 @@ namespace IB2Toolset
                         }
                     }
                     #endregion
-                    #region Walkmesh Toggle Selected
+                    #region Walkmesh Toggle Selected (Make Non-Walkable)
                     else if (rbtnWalkable.Checked)
                     {
                         gridx = e.X / tileSize;
@@ -576,18 +578,11 @@ namespace IB2Toolset
                         selectedTile.index = gridy * area.MapSizeX + gridx;
                         prntForm.logText("gridx = " + gridx.ToString() + "gridy = " + gridy.ToString());
                         prntForm.logText(Environment.NewLine);
-                        if (area.Tiles[selectedTile.index].Walkable == true)
-                        {
-                            area.Tiles[selectedTile.index].Walkable = false;
-                        }
-                        else
-                        {
-                            area.Tiles[selectedTile.index].Walkable = true;
-                        }
+                        area.Tiles[selectedTile.index].Walkable = false;
                         refreshMap();
                     }
                     #endregion
-                    #region LoS mesh Toggle Selected
+                    #region LoS mesh Toggle Selected (Make LoS Blocked)
                     else if (rbtnLoS.Checked)
                     {
                         gridx = e.X / tileSize;
@@ -595,14 +590,7 @@ namespace IB2Toolset
                         selectedTile.index = gridy * area.MapSizeX + gridx;
                         prntForm.logText("gridx = " + gridx.ToString() + "gridy = " + gridy.ToString());
                         prntForm.logText(Environment.NewLine);
-                        if (area.Tiles[selectedTile.index].LoSBlocked == true)
-                        {
-                            area.Tiles[selectedTile.index].LoSBlocked = false;
-                        }
-                        else
-                        {
-                            area.Tiles[selectedTile.index].LoSBlocked = true;
-                        }
+                        area.Tiles[selectedTile.index].LoSBlocked = true;
                         refreshMap();
                     }
                     #endregion
@@ -661,18 +649,45 @@ namespace IB2Toolset
                 #endregion
                 #region Right Button
                 case MouseButtons.Right:
-                    // exit by right click or ESC
-                    prntForm.logText("entered right-click");
-                    prntForm.logText(Environment.NewLine);
-                    //prntForm.selectedEncounterCreatureTag = "";
-                    prntForm.selectedLevelMapCreatureTag = "";
-                    prntForm.selectedLevelMapPropTag = "";
-                    prntForm.CreatureSelected = false;
-                    prntForm.PropSelected = false;
-                    prntForm.currentSelectedTrigger = null;
-                    refreshMap();
-                    pictureBox1.Image = drawArea;
-                    rbtnInfo.Checked = true;
+                    #region Walkmesh Toggle Selected (Make Walkable)
+                    if (rbtnWalkable.Checked)
+                    {
+                        gridx = e.X / tileSize;
+                        gridy = e.Y / tileSize;
+                        selectedTile.index = gridy * area.MapSizeX + gridx;
+                        prntForm.logText("gridx = " + gridx.ToString() + "gridy = " + gridy.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        area.Tiles[selectedTile.index].Walkable = true;
+                        refreshMap();
+                    }
+                    #endregion
+                    #region LoS mesh Toggle Selected (Make LoS Visible)
+                    else if (rbtnLoS.Checked)
+                    {
+                        gridx = e.X / tileSize;
+                        gridy = e.Y / tileSize;
+                        selectedTile.index = gridy * area.MapSizeX + gridx;
+                        prntForm.logText("gridx = " + gridx.ToString() + "gridy = " + gridy.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        area.Tiles[selectedTile.index].LoSBlocked = false;
+                        refreshMap();
+                    }
+                    #endregion
+                    else
+                    {
+                        // exit by right click or ESC
+                        prntForm.logText("entered right-click");
+                        prntForm.logText(Environment.NewLine);
+                        //prntForm.selectedEncounterCreatureTag = "";
+                        prntForm.selectedLevelMapCreatureTag = "";
+                        prntForm.selectedLevelMapPropTag = "";
+                        prntForm.CreatureSelected = false;
+                        prntForm.PropSelected = false;
+                        prntForm.currentSelectedTrigger = null;
+                        refreshMap();
+                        pictureBox1.Image = drawArea;
+                        rbtnInfo.Checked = true;
+                    }
                     break;
                 #endregion
             }
@@ -797,10 +812,19 @@ namespace IB2Toolset
         {
             clickDrawArea(e);
         }
+        public bool mouseInMapArea(int gridX, int gridY)
+        {
+            if (gridX < 0) { return false; }
+            if (gridY < 0) { return false; }
+            if (gridX > area.MapSizeX - 1) { return false; }
+            if (gridY > area.MapSizeY - 1) { return false; }
+            return true;
+        }
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {            
             gridx = e.X / tileSize;
             gridy = e.Y / tileSize;
+            if (!mouseInMapArea(gridx, gridy)) { return; }
             mousex = e.X;
             mousey = e.Y;
             lblMouseInfo.Text = "CURSOR " + e.X.ToString() + "," + e.Y.ToString() + Environment.NewLine + "GRID " + gridx.ToString() + "," + gridy.ToString();
@@ -822,6 +846,22 @@ namespace IB2Toolset
                 catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
                 //save changes
                 pictureBox1.Image = drawArea;
+            }
+            else if (currentPoint != new Point(gridx, gridy))
+            {
+                //if painting tiles or walkable or Line-of-sight squares, allow multiple square painting if left mouse button down and move
+                if (prntForm.CreatureSelected)
+                {
+                    return; //don't allow painting multiple creatures by mouse down and move
+                }
+                if ((e.Button == MouseButtons.Left) || (e.Button == MouseButtons.Right))
+                {
+                    //if painting walkable or Line-of-sight squares, allow multiple square painting if LEFT mouse button down and move
+                    if ((rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                    {
+                        clickDrawArea(e);
+                    }
+                }
             }
         }
         private void pictureBox1_MouseLeave(object sender, EventArgs e)

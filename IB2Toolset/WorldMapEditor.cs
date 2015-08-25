@@ -471,14 +471,8 @@ namespace IB2Toolset
         {            
             gridX = e.X / sqr;
             gridY = e.Y / sqr;
+            if (!mouseInMapArea(gridX, gridY)) { return; }
             lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
-            if (currentPoint != new Point(gridX, gridY))
-            {
-                if ((rbtnPaintTile.Checked) && (e.Button == MouseButtons.Left))
-                {
-                    clickDrawArea(e);
-                }
-            }
             if (prntForm.PropSelected)
             {
                 refreshMap(true);
@@ -498,6 +492,37 @@ namespace IB2Toolset
                 //save changes
                 UpdatePB();
             }
+            else if (currentPoint != new Point(gridX, gridY))
+            {
+                //if painting tiles or walkable or Line-of-sight squares, allow multiple square painting if left mouse button down and move
+                if (prntForm.CreatureSelected)
+                {
+                    return; //don't allow painting multiple creatures by mouse down and move
+                }
+                if (e.Button == MouseButtons.Left)
+                {
+                    //if painting tiles or walkable or Line-of-sight squares, allow multiple square painting if LEFT mouse button down and move
+                    if ((rbtnPaintTile.Checked) || (rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                    {
+                        clickDrawArea(e);
+                    }
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    //if painting walkable or Line-of-sight squares, allow multiple square painting if RIGHT mouse button down and move
+                    if ((rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                    {
+                        clickDrawArea(e);
+                    }
+                }
+            }
+            /*else if (currentPoint != new Point(gridX, gridY))
+            {
+                if ((rbtnPaintTile.Checked) && (e.Button == MouseButtons.Left))
+                {
+                    clickDrawArea(e);
+                }
+            }*/            
         }
         private void panelView_MouseDown(object sender, MouseEventArgs e)
         {
@@ -599,21 +624,29 @@ namespace IB2Toolset
         {
             clickDrawArea(e);
         }
+        public bool mouseInMapArea(int gridX, int gridY)
+        {
+            if (gridX < 0) { return false; }
+            if (gridY < 0) { return false; }
+            if (gridX > area.MapSizeX - 1) { return false; }
+            if (gridY > area.MapSizeY - 1) { return false; }
+            return true;
+        }
         private void clickDrawArea(MouseEventArgs e)
         {
+            gridX = e.X / sqr;
+            gridY = e.Y / sqr;
+            lastSquareClicked.X = currentSquareClicked.X;
+            lastSquareClicked.Y = currentSquareClicked.Y;
+            currentSquareClicked.X = gridX;
+            currentSquareClicked.Y = gridY;
+
             switch (e.Button)
             {
                 #region Left Button
                 case MouseButtons.Left:
                     refreshLeftPanelInfo();
-                    prntForm.currentSelectedTrigger = null; 
-                    gridX = e.X / sqr;
-                    gridY = e.Y / sqr;
-                    lastSquareClicked.X = currentSquareClicked.X;
-                    lastSquareClicked.Y = currentSquareClicked.Y;
-                    currentSquareClicked.X = gridX;
-                    currentSquareClicked.Y = gridY;
-
+                    prntForm.currentSelectedTrigger = null;
                     #region Tile Selected
                     if (rbtnPaintTile.Checked)
                     {
@@ -931,41 +964,23 @@ namespace IB2Toolset
                         }
                     }
                     #endregion
-                    #region Walkmesh Toggle Selected
+                    #region Walkmesh Toggle Selected (Make Non-Walkable)
                     else if (rbtnWalkable.Checked)
                     {
-                        //gridX = e.X / sqr;
-                        //gridY = e.Y / sqr;
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        if (area.Tiles[selectedTile.index].Walkable == true)
-                        {
-                            area.Tiles[selectedTile.index].Walkable = false;
-                        }
-                        else
-                        {
-                            area.Tiles[selectedTile.index].Walkable = true;
-                        }
+                        area.Tiles[selectedTile.index].Walkable = false;
                         refreshMap(false);
                     }
                     #endregion
-                    #region LoS mesh Toggle Selected
+                    #region LoS mesh Toggle Selected (Make LoS Blocked)
                     else if (rbtnLoS.Checked)
                     {
-                        //gridX = e.X / sqr;
-                        //gridY = e.Y / sqr;
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        if (area.Tiles[selectedTile.index].LoSBlocked == true)
-                        {
-                            area.Tiles[selectedTile.index].LoSBlocked = false;
-                        }
-                        else
-                        {
-                            area.Tiles[selectedTile.index].LoSBlocked = true;
-                        }
+                        area.Tiles[selectedTile.index].LoSBlocked = true;
                         refreshMap(false);
                     }
                     #endregion
@@ -1025,17 +1040,40 @@ namespace IB2Toolset
                 #endregion
                 #region Right Button
                 case MouseButtons.Right:
-                    // exit by right click or ESC
-                    prntForm.logText("entered right-click");
-                    prntForm.logText(Environment.NewLine);
-                    prntForm.selectedLevelMapCreatureTag = "";
-                    prntForm.selectedLevelMapPropTag = "";
-                    prntForm.CreatureSelected = false;
-                    prntForm.PropSelected = false;
-                    prntForm.currentSelectedTrigger = null;
-                    refreshMap(true);
-                    UpdatePB();
-                    rbtnInfo.Checked = true;
+                    #region Walkmesh Toggle Selected (Make Walkable)
+                    if (rbtnWalkable.Checked)
+                    {
+                        selectedTile.index = gridY * area.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        area.Tiles[selectedTile.index].Walkable = true;
+                        refreshMap(false);
+                    }
+                    #endregion
+                    #region LoS mesh Toggle Selected (Make LoS Visible)
+                    else if (rbtnLoS.Checked)
+                    {
+                        selectedTile.index = gridY * area.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        area.Tiles[selectedTile.index].LoSBlocked = false;
+                        refreshMap(false);
+                    }
+                    #endregion
+                    else
+                    {
+                        // exit by right click or ESC
+                        prntForm.logText("entered right-click");
+                        prntForm.logText(Environment.NewLine);
+                        prntForm.selectedLevelMapCreatureTag = "";
+                        prntForm.selectedLevelMapPropTag = "";
+                        prntForm.CreatureSelected = false;
+                        prntForm.PropSelected = false;
+                        prntForm.currentSelectedTrigger = null;
+                        refreshMap(true);
+                        UpdatePB();
+                        rbtnInfo.Checked = true;
+                    }
                     break;
                 #endregion
             }
