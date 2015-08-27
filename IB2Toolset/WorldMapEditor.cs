@@ -185,17 +185,7 @@ namespace IB2Toolset
                 }
             }
             return null;
-        }
-        private void btnSelectedTerrain_Click(object sender, EventArgs e)
-        {
-            Button selectBtn = (Button)sender;
-            //tileSelected = true;
-            //PcSelected = false;
-            //CrtSelected = false;
-            currentTileFilename = selectBtn.Text;
-            selectedBitmap = (Bitmap)selectBtn.BackgroundImage.Clone();
-            panel1.BackgroundImage = selectedBitmap;
-        }
+        }        
         private void refreshMap(bool refreshAll)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -475,6 +465,7 @@ namespace IB2Toolset
             lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
             if (prntForm.PropSelected)
             {
+                /* TODO re-implement continuous drawing of props once converted to use Direct2D
                 refreshMap(true);
                 try
                 {
@@ -491,6 +482,7 @@ namespace IB2Toolset
                 catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
                 //save changes
                 UpdatePB();
+                */
             }
             else if (currentPoint != new Point(gridX, gridY))
             {
@@ -1288,6 +1280,18 @@ namespace IB2Toolset
             //selectedBitmap.Dispose();
             //this.Close();
         }
+        private void btnSelectedTerrain_Click(object sender, EventArgs e)
+        {
+            Button selectBtn = (Button)sender;
+            currentTileFilename = selectBtn.Text;
+            selectedBitmap = (Bitmap)selectBtn.BackgroundImage.Clone();
+            panel1.BackgroundImage = selectedBitmap;
+            rbtnPaintTile.Checked = true;
+            prntForm.selectedLevelMapCreatureTag = "";
+            prntForm.selectedLevelMapPropTag = "";
+            prntForm.CreatureSelected = false;
+            prntForm.PropSelected = false;
+        }
         private void rbtnInfo_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnInfo.Checked)
@@ -1300,6 +1304,17 @@ namespace IB2Toolset
                 prntForm.PropSelected = false;
                 //refreshMap(true);
                 //UpdatePB();
+            }
+        }
+        private void rbtnPaintTile_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnPaintTile.Checked)
+            {
+                prntForm.logText("painting tiles" + Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
             }
         }
         private void rbtnWalkable_CheckedChanged(object sender, EventArgs e)
@@ -1578,6 +1593,32 @@ namespace IB2Toolset
                 UpdatePB();
                 rbtnInfo.Checked = true;
             }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                int cnt = 0;
+                foreach (Prop prp in area.Props)
+                {
+                    if (prp.PropTag == lastSelectedObjectTag)
+                    {
+                        // remove at index of matched tag
+                        area.Props.RemoveAt(cnt);
+                        propBitmapList.RemoveAt(cnt);
+                        refreshMap(true);
+                        return;
+                    }
+                    cnt++;
+                }
+                foreach (Trigger t in area.Triggers)
+                {
+                    if (t.TriggerTag == lastSelectedObjectTag)
+                    {
+                        // remove at index of matched tag
+                        area.Triggers.Remove(t);
+                        refreshMap(true);
+                        return;
+                    }
+                }
+            }
         }
         #endregion
 
@@ -1629,6 +1670,8 @@ namespace IB2Toolset
             resetPanelAndDeviceSize();
             refreshMap(true);
         }
+
+        
 
         
     }    

@@ -463,6 +463,7 @@
             this.rbtnPaintTile.Text = "Paint\r\nTiles";
             this.rbtnPaintTile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnPaintTile.UseVisualStyleBackColor = true;
+            this.rbtnPaintTile.CheckedChanged += new System.EventHandler(this.rbtnPaintTile_CheckedChanged);
             // 
             // rbtnEditTrigger
             // 

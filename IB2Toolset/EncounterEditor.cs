@@ -175,7 +175,6 @@ namespace IB2Toolset
             }
             return toReturn;
         }
-        
         #endregion
 
         private void resetPanelAndDeviceSize()
@@ -1666,6 +1665,44 @@ namespace IB2Toolset
                 refreshMap(true);
                 UpdatePB();
                 rbtnInfo.Checked = true;
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                int cnt = 0;
+                foreach (CreatureRefs crt in thisEnc.encounterCreatureRefsList)
+                {
+                    if (crt.creatureTag == lastSelectedObjectTag)
+                    {
+                        // remove at index of matched location
+                        thisEnc.encounterCreatureRefsList.RemoveAt(cnt);
+                        //crtBitmapList.RemoveAt(cnt);
+                        refreshMap(true);
+                        return;
+                    }
+                    cnt++;
+                }
+                /*TODOforeach (Prop prp in thisEnc.Props)
+                {
+                    if (prp.PropTag == lastSelectedObjectTag)
+                    {
+                        // remove at index of matched tag
+                        area.Props.RemoveAt(cnt);
+                        propBitmapList.RemoveAt(cnt);
+                        refreshMap(true);
+                        return;
+                    }
+                    cnt++;
+                }*/
+                /*TODOforeach (Trigger t in area.Triggers)
+                {
+                    if (t.TriggerTag == lastSelectedObjectTag)
+                    {
+                        // remove at index of matched tag
+                        area.Triggers.Remove(t);
+                        refreshMap(true);
+                        return;
+                    }
+                }*/
             }
         }
         #endregion
