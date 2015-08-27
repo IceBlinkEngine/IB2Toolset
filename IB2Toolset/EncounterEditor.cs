@@ -1727,5 +1727,44 @@ namespace IB2Toolset
             resetPanelAndDeviceSize();
             refreshMap(true);
         }
+
+        private void btnLoadMap_Click(object sender, EventArgs e)
+        {
+            if (mod.moduleName != "NewModule")
+            {
+                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics";
+            }
+            else
+            {
+                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\default\\NewModule\\graphics";
+            }
+            //Empty the FileName text box of the dialog
+            openFileDialog1.FileName = String.Empty;
+            openFileDialog1.Filter = "Map (*.jpg)|*.jpg";
+            openFileDialog1.FilterIndex = 1;
+
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                using (Bitmap testSize = new Bitmap(Path.GetFullPath(openFileDialog1.FileName)))
+                {
+                    thisEnc.MapSizeX = testSize.Width / sqr;
+                    thisEnc.MapSizeY = testSize.Height / sqr;
+                }
+                string filename = Path.GetFullPath(openFileDialog1.FileName);
+                thisEnc.MapImage = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                thisEnc.UseMapImage = true;                
+                resetAreaTileValues(thisEnc.MapSizeX, thisEnc.MapSizeY);
+                mapSizeChangeStuff();
+                chkUseMapImage.Checked = true;
+                refreshMap(true);
+            }
+        }
+
+        private void chkUseMapImage_CheckedChanged(object sender, EventArgs e)
+        {
+            thisEnc.UseMapImage = chkUseMapImage.Checked;
+            refreshMap(true);
+        }
     }    
 }

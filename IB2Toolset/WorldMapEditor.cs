@@ -113,7 +113,8 @@ namespace IB2Toolset
                 createNewArea(area.MapSizeX, area.MapSizeY);
                 area.Filename = g_filename;
             }
-
+            lblMapSizeX.Text = area.MapSizeX.ToString();
+            lblMapSizeY.Text = area.MapSizeY.ToString();
             //set up level drawing surface
             panelView.Width = area.MapSizeX * sqr;
             panelView.Height = area.MapSizeY * sqr;           
