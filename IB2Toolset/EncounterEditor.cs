@@ -175,46 +175,7 @@ namespace IB2Toolset
             }
             return toReturn;
         }
-        private void btnAddItems_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Item it = prntForm.itemsList[cmbItems.SelectedIndex];
-                ItemRefs newIR = prntForm.createItemRefsFromItem(it);
-                thisEnc.encounterInventoryRefsList.Add(newIR);
-                refreshLbxItems();
-            }
-            catch { }
-        }
-        private void btnRemoveItems_Click(object sender, EventArgs e)
-        {
-            if (lbxItems.Items.Count > 0)
-            {
-                try
-                {
-                    if (lbxItems.SelectedIndex >= 0)
-                        thisEnc.encounterInventoryRefsList.RemoveAt(lbxItems.SelectedIndex);
-                }
-                catch { }
-                refreshLbxItems();
-            }
-        }
-        private void btnPlacePCs_Click(object sender, EventArgs e)
-        {
-            tileSelected = false;
-            PcSelected = true;
-            CrtSelected = false;
-        }
-        private void btnDeletePCs_Click(object sender, EventArgs e)
-        {
-            thisEnc.encounterPcStartLocations.Clear();
-            refreshMap(true);
-        }
-        private void btnDeleteCreatures_Click(object sender, EventArgs e)
-        {
-            thisEnc.encounterCreatureRefsList.Clear();
-            refreshMap(true);
-        }
+        
         #endregion
 
         private void resetPanelAndDeviceSize()
@@ -272,13 +233,7 @@ namespace IB2Toolset
             }
             return null;
         }
-        private void btnSelectedTerrain_Click(object sender, EventArgs e)
-        {
-            Button selectBtn = (Button)sender;
-            currentTileFilename = selectBtn.Text;
-            selectedBitmap = (Bitmap)selectBtn.BackgroundImage.Clone();
-            panel1.BackgroundImage = selectedBitmap;
-        }
+        
         private void refreshMap(bool refreshAll)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -726,10 +681,16 @@ namespace IB2Toolset
                 if (prntForm.selectedLevelMapCreatureTag != "")
                 {
                     prntForm.CreatureSelected = true;
+                    tileSelected = false;
+                    PcSelected = false;
+                    CrtSelected = true;
                 }
                 if (prntForm.selectedLevelMapPropTag != "")
                 {
                     prntForm.PropSelected = true;
+                    tileSelected = false;
+                    PcSelected = false;
+                    CrtSelected = false;
                 }
                 if (prntForm.CreatureSelected)
                 {
@@ -1329,9 +1290,75 @@ namespace IB2Toolset
             lblMapSizeY.Text = thisEnc.MapSizeY.ToString();
             resetPanelAndDeviceSize();
         }
+        public void ResetAllToFalse()
+        {
+            prntForm.selectedLevelMapCreatureTag = "";
+            prntForm.selectedLevelMapPropTag = "";
+            prntForm.CreatureSelected = false;
+            prntForm.PropSelected = false;
+            tileSelected = false;
+            PcSelected = false;
+            CrtSelected = false;
+        }
         #endregion
 
-        #region Event Handlers        
+        #region Event Handlers  
+        private void btnAddItems_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Item it = prntForm.itemsList[cmbItems.SelectedIndex];
+                ItemRefs newIR = prntForm.createItemRefsFromItem(it);
+                thisEnc.encounterInventoryRefsList.Add(newIR);
+                refreshLbxItems();
+            }
+            catch { }
+        }
+        private void btnRemoveItems_Click(object sender, EventArgs e)
+        {
+            if (lbxItems.Items.Count > 0)
+            {
+                try
+                {
+                    if (lbxItems.SelectedIndex >= 0)
+                        thisEnc.encounterInventoryRefsList.RemoveAt(lbxItems.SelectedIndex);
+                }
+                catch { }
+                refreshLbxItems();
+            }
+        }
+        private void btnPlacePCs_Click(object sender, EventArgs e)
+        {
+            rbtnInfo.Checked = true;
+            ResetAllToFalse();
+            PcSelected = true;
+        }
+        private void btnDeletePCs_Click(object sender, EventArgs e)
+        {
+            thisEnc.encounterPcStartLocations.Clear();
+            refreshMap(true);
+        }
+        private void btnDeleteCreatures_Click(object sender, EventArgs e)
+        {
+            thisEnc.encounterCreatureRefsList.Clear();
+            refreshMap(true);
+        }
+        private void flPanelTab1_MouseClick(object sender, MouseEventArgs e)
+        {
+            rbtnPaintTile.Checked = true;            
+            ResetAllToFalse();
+            tileSelected = true;
+        }
+        private void btnSelectedTerrain_Click(object sender, EventArgs e)
+        {
+            Button selectBtn = (Button)sender;
+            currentTileFilename = selectBtn.Text;
+            selectedBitmap = (Bitmap)selectBtn.BackgroundImage.Clone();
+            panel1.BackgroundImage = selectedBitmap;
+            rbtnPaintTile.Checked = true;
+            ResetAllToFalse();
+            tileSelected = true;
+        }
         private void EncounterEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             //MessageBox.Show("closing editor and removing from openAreaList");
@@ -1351,12 +1378,17 @@ namespace IB2Toolset
             {
                 prntForm.logText("info on selecting map objects");
                 prntForm.logText(Environment.NewLine);
-                prntForm.selectedLevelMapCreatureTag = "";
-                prntForm.selectedLevelMapPropTag = "";
-                prntForm.CreatureSelected = false;
-                prntForm.PropSelected = false;
-                //refreshMap(true);
-                //UpdatePB();
+                ResetAllToFalse();
+            }
+        }
+        private void rbtnPaintTile_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnPaintTile.Checked)
+            {
+                prntForm.logText("painting tiles" + Environment.NewLine);
+                ResetAllToFalse();
+                rbtnPaintTile.Checked = true;
+                tileSelected = true;
             }
         }
         private void rbtnWalkable_CheckedChanged(object sender, EventArgs e)
@@ -1365,13 +1397,7 @@ namespace IB2Toolset
             {
                 prntForm.logText("editing walkmesh");
                 prntForm.logText(Environment.NewLine);
-                prntForm.selectedLevelMapCreatureTag = "";
-                prntForm.selectedLevelMapPropTag = "";
-                prntForm.selectedLevelMapTriggerTag = "";
-                prntForm.CreatureSelected = false;
-                prntForm.PropSelected = false;
-                //refreshMap(true);
-                //UpdatePB();
+                ResetAllToFalse();
             }
         }
         private void rbtnLoS_CheckedChanged(object sender, EventArgs e)
@@ -1380,13 +1406,7 @@ namespace IB2Toolset
             {
                 prntForm.logText("editing line-of-sight mesh");
                 prntForm.logText(Environment.NewLine);
-                prntForm.selectedLevelMapCreatureTag = "";
-                prntForm.selectedLevelMapPropTag = "";
-                prntForm.selectedLevelMapTriggerTag = "";
-                prntForm.CreatureSelected = false;
-                prntForm.PropSelected = false;
-                //refreshMap(true);
-                //UpdatePB();
+                ResetAllToFalse();
             }
         }
         private void btnRemoveSelectedObject_Click(object sender, EventArgs e)
