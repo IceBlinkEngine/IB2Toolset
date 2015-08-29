@@ -95,6 +95,10 @@ namespace IB2Toolset
         private string onHeartBeatParms = "";
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
+        public bool _useRealTimeTimer = false;
+        public int _realTimeTimerLengthInMilliSeconds = 1500;
+
+
         #endregion
 
         #region Properties
@@ -128,6 +132,14 @@ namespace IB2Toolset
             get { return _mustUsePreMadePC; }
             set { _mustUsePreMadePC = value; }
         }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates the realTime timer. It will make a new turn on main map happen after a number of realtime milliseconds defined in realTimeTimerLengthInMilliSecond. Its main purpose is to have moving NPC and creatures who even move when the party just stands idly. It does not affect combat which never has a real time component")]
+        public bool useRealTimeTimer
+        {
+            get { return _useRealTimeTimer; }
+            set { _useRealTimeTimer = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The total number of player made characters allowed in the party (default is 1, max PCs in a party is 6)")]
         public int numberOfPlayerMadePcsAllowed
         {
@@ -191,6 +203,13 @@ namespace IB2Toolset
                 return _nextIdNumber;
             }
             set { _nextIdNumber = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The duration in real time milliseconds after which a new turn on main map takes place. Default is 1500, which 1.5 seconds.")]
+        public int realTimeTimerLengthInMilliSeconds
+        {
+            get {return _realTimeTimerLengthInMilliSeconds;}
+            set { _realTimeTimerLengthInMilliSeconds = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Current value for World Time in generic units")]
