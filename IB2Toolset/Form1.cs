@@ -1727,6 +1727,12 @@ namespace IB2Toolset
 
         }
 
+        private void rulesEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RulesEditor rulesEdit = new RulesEditor(mod, this);
+            rulesEdit.ShowDialog();
+        }
+
         
     }
 }

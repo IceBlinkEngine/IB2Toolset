@@ -88,7 +88,6 @@
             this.copyItemTagsToResrefsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wizardsEditorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mergerEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.encounterEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.journalEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playerClassEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,6 +106,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.rulesEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -490,7 +490,7 @@
             // 
             this.wizardsEditorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mergerEditorToolStripMenuItem,
-            this.encounterEditorToolStripMenuItem,
+            this.rulesEditorToolStripMenuItem,
             this.journalEditorToolStripMenuItem,
             this.shopToolStripMenuItem,
             this.playerClassEditorToolStripMenuItem,
@@ -509,13 +509,6 @@
             this.mergerEditorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.mergerEditorToolStripMenuItem.Text = "Merger Editor";
             this.mergerEditorToolStripMenuItem.Click += new System.EventHandler(this.mergerEditorToolStripMenuItem_Click);
-            // 
-            // encounterEditorToolStripMenuItem
-            // 
-            this.encounterEditorToolStripMenuItem.Name = "encounterEditorToolStripMenuItem";
-            this.encounterEditorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.encounterEditorToolStripMenuItem.Text = "Encounter Editor";
-            this.encounterEditorToolStripMenuItem.Click += new System.EventHandler(this.encounterEditorToolStripMenuItem_Click);
             // 
             // journalEditorToolStripMenuItem
             // 
@@ -672,6 +665,13 @@
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // rulesEditorToolStripMenuItem
+            // 
+            this.rulesEditorToolStripMenuItem.Name = "rulesEditorToolStripMenuItem";
+            this.rulesEditorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.rulesEditorToolStripMenuItem.Text = "Rules Editor";
+            this.rulesEditorToolStripMenuItem.Click += new System.EventHandler(this.rulesEditorToolStripMenuItem_Click);
+            // 
             // ParentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -751,7 +751,6 @@
         private System.Windows.Forms.ToolStripMenuItem journalEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem effectEditorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem encounterEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem triggerEventsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyTagsToResrefsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -761,6 +760,7 @@
         private System.Windows.Forms.ToolStripButton tsBtnDataCheck;
         private System.Windows.Forms.ToolStripMenuItem mergerEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iBScriptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rulesEditorToolStripMenuItem;
     }
 }
 
