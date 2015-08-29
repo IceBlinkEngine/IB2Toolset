@@ -33,11 +33,15 @@
             this.rbtnOneSquare = new System.Windows.Forms.RadioButton();
             this.rtxtInfo = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.gbArmorClassDisplay = new System.Windows.Forms.GroupBox();
+            this.rbtnDescendingAC = new System.Windows.Forms.RadioButton();
+            this.rbtnAscendingAC = new System.Windows.Forms.RadioButton();
             this.gbMoveDiagonalCost.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.gbArmorClassDisplay.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbMoveDiagonalCost
@@ -96,6 +100,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.gbArmorClassDisplay);
             this.splitContainer1.Panel1.Controls.Add(this.gbMoveDiagonalCost);
             this.splitContainer1.Panel1.MouseHover += new System.EventHandler(this.splitContainer1_Panel1_MouseHover);
             // 
@@ -105,6 +110,44 @@
             this.splitContainer1.Size = new System.Drawing.Size(825, 514);
             this.splitContainer1.SplitterDistance = 551;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // gbArmorClassDisplay
+            // 
+            this.gbArmorClassDisplay.Controls.Add(this.rbtnDescendingAC);
+            this.gbArmorClassDisplay.Controls.Add(this.rbtnAscendingAC);
+            this.gbArmorClassDisplay.Location = new System.Drawing.Point(147, 12);
+            this.gbArmorClassDisplay.Name = "gbArmorClassDisplay";
+            this.gbArmorClassDisplay.Size = new System.Drawing.Size(129, 64);
+            this.gbArmorClassDisplay.TabIndex = 1;
+            this.gbArmorClassDisplay.TabStop = false;
+            this.gbArmorClassDisplay.Text = "Armor Class Shown";
+            this.gbArmorClassDisplay.MouseHover += new System.EventHandler(this.gbArmorClassDisplay_MouseHover);
+            // 
+            // rbtnDescendingAC
+            // 
+            this.rbtnDescendingAC.AutoSize = true;
+            this.rbtnDescendingAC.Location = new System.Drawing.Point(11, 38);
+            this.rbtnDescendingAC.Name = "rbtnDescendingAC";
+            this.rbtnDescendingAC.Size = new System.Drawing.Size(82, 17);
+            this.rbtnDescendingAC.TabIndex = 1;
+            this.rbtnDescendingAC.TabStop = true;
+            this.rbtnDescendingAC.Text = "Descending";
+            this.rbtnDescendingAC.UseVisualStyleBackColor = true;
+            this.rbtnDescendingAC.CheckedChanged += new System.EventHandler(this.rbtnDescendingAC_CheckedChanged);
+            this.rbtnDescendingAC.MouseHover += new System.EventHandler(this.rbtnDescendingAC_MouseHover);
+            // 
+            // rbtnAscendingAC
+            // 
+            this.rbtnAscendingAC.AutoSize = true;
+            this.rbtnAscendingAC.Location = new System.Drawing.Point(11, 18);
+            this.rbtnAscendingAC.Name = "rbtnAscendingAC";
+            this.rbtnAscendingAC.Size = new System.Drawing.Size(75, 17);
+            this.rbtnAscendingAC.TabIndex = 0;
+            this.rbtnAscendingAC.TabStop = true;
+            this.rbtnAscendingAC.Text = "Ascending";
+            this.rbtnAscendingAC.UseVisualStyleBackColor = true;
+            this.rbtnAscendingAC.CheckedChanged += new System.EventHandler(this.rbtnAscendingAC_CheckedChanged);
+            this.rbtnAscendingAC.MouseHover += new System.EventHandler(this.rbtnAscendingAC_MouseHover);
             // 
             // RulesEditor
             // 
@@ -120,6 +163,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.gbArmorClassDisplay.ResumeLayout(false);
+            this.gbArmorClassDisplay.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -131,5 +176,8 @@
         private System.Windows.Forms.RadioButton rbtnOneSquare;
         private System.Windows.Forms.RichTextBox rtxtInfo;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.GroupBox gbArmorClassDisplay;
+        private System.Windows.Forms.RadioButton rbtnDescendingAC;
+        private System.Windows.Forms.RadioButton rbtnAscendingAC;
     }
 }

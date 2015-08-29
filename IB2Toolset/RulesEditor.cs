@@ -15,6 +15,7 @@ namespace IB2Toolset
         private ParentForm prntForm;
 
         public string moveDiagCostInfo = "This defines the amount of movement points that are consumed for diagonal moves in combat";
+        public string ArmorClassDisplayInfo = "Defines the way Armor Class is displayed. Ascending goes from 10 -> 30+ (think 3e) and Descending goes from 10 -> -10- (think 1e)";
 
 
         public RulesEditor(Module m, ParentForm pf)
@@ -27,6 +28,7 @@ namespace IB2Toolset
 
         public void resetForm()
         {
+            //Diagonal Move Cost
             if (mod.diagonalMoveCost == 1.0f)
             {
                 rbtnOneSquare.Checked = true;
@@ -34,6 +36,15 @@ namespace IB2Toolset
             else
             {
                 rbtnOnePointFiveSquares.Checked = true;
+            }
+            //Armor Class Diplay
+            if (mod.ArmorClassAscending)
+            {
+                rbtnAscendingAC.Checked = true;
+            }
+            else
+            {
+                rbtnDescendingAC.Checked = true;
             }
         }
 
@@ -57,6 +68,28 @@ namespace IB2Toolset
         private void rbtnOnePointFiveSquares_CheckedChanged(object sender, EventArgs e)
         {
             mod.diagonalMoveCost = 1.5f;
+        }
+        #endregion
+        #region Armor Class Display
+        private void gbArmorClassDisplay_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = ArmorClassDisplayInfo;
+        }
+        private void rbtnAscendingAC_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = ArmorClassDisplayInfo;
+        }
+        private void rbtnDescendingAC_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = ArmorClassDisplayInfo;
+        }
+        private void rbtnAscendingAC_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.ArmorClassAscending = true;
+        }
+        private void rbtnDescendingAC_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.ArmorClassAscending = false;
         }
         #endregion
 

@@ -35,6 +35,7 @@ namespace IB2Toolset
         public int TimePerRound = 6;
         public bool debugMode = true;
         public float diagonalMoveCost = 1.5f;
+        public bool ArmorClassAscending = true;
         public List<Item> moduleItemsList = new List<Item>();
         public List<Encounter> moduleEncountersList = new List<Encounter>();
         public List<Container> moduleContainersList = new List<Container>();
