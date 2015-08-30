@@ -33,6 +33,11 @@
             this.rbtnOneSquare = new System.Windows.Forms.RadioButton();
             this.rtxtInfo = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.gbToHitBonusFromBehind = new System.Windows.Forms.GroupBox();
+            this.rbtnPlusOneToHitFromBehind = new System.Windows.Forms.RadioButton();
+            this.rbtnPlusTwoToHitFromBehind = new System.Windows.Forms.RadioButton();
+            this.rbtnPlusThreeToHitFromBehind = new System.Windows.Forms.RadioButton();
+            this.rbtnPlusFourToHitFromBehind = new System.Windows.Forms.RadioButton();
             this.gbArmorClassDisplay = new System.Windows.Forms.GroupBox();
             this.rbtnDescendingAC = new System.Windows.Forms.RadioButton();
             this.rbtnAscendingAC = new System.Windows.Forms.RadioButton();
@@ -41,6 +46,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.gbToHitBonusFromBehind.SuspendLayout();
             this.gbArmorClassDisplay.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,6 +106,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.gbToHitBonusFromBehind);
             this.splitContainer1.Panel1.Controls.Add(this.gbArmorClassDisplay);
             this.splitContainer1.Panel1.Controls.Add(this.gbMoveDiagonalCost);
             this.splitContainer1.Panel1.MouseHover += new System.EventHandler(this.splitContainer1_Panel1_MouseHover);
@@ -110,6 +117,72 @@
             this.splitContainer1.Size = new System.Drawing.Size(825, 514);
             this.splitContainer1.SplitterDistance = 551;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // gbToHitBonusFromBehind
+            // 
+            this.gbToHitBonusFromBehind.Controls.Add(this.rbtnPlusOneToHitFromBehind);
+            this.gbToHitBonusFromBehind.Controls.Add(this.rbtnPlusTwoToHitFromBehind);
+            this.gbToHitBonusFromBehind.Controls.Add(this.rbtnPlusThreeToHitFromBehind);
+            this.gbToHitBonusFromBehind.Controls.Add(this.rbtnPlusFourToHitFromBehind);
+            this.gbToHitBonusFromBehind.Location = new System.Drawing.Point(282, 12);
+            this.gbToHitBonusFromBehind.Name = "gbToHitBonusFromBehind";
+            this.gbToHitBonusFromBehind.Size = new System.Drawing.Size(158, 118);
+            this.gbToHitBonusFromBehind.TabIndex = 2;
+            this.gbToHitBonusFromBehind.TabStop = false;
+            this.gbToHitBonusFromBehind.Text = "To Hit Bonus From Behind";
+            this.gbToHitBonusFromBehind.MouseHover += new System.EventHandler(this.gbToHitBonusFromBehind_MouseHover);
+            // 
+            // rbtnPlusOneToHitFromBehind
+            // 
+            this.rbtnPlusOneToHitFromBehind.AutoSize = true;
+            this.rbtnPlusOneToHitFromBehind.Location = new System.Drawing.Point(11, 19);
+            this.rbtnPlusOneToHitFromBehind.Name = "rbtnPlusOneToHitFromBehind";
+            this.rbtnPlusOneToHitFromBehind.Size = new System.Drawing.Size(121, 17);
+            this.rbtnPlusOneToHitFromBehind.TabIndex = 0;
+            this.rbtnPlusOneToHitFromBehind.TabStop = true;
+            this.rbtnPlusOneToHitFromBehind.Text = "+1 to hit from behind";
+            this.rbtnPlusOneToHitFromBehind.UseVisualStyleBackColor = true;
+            this.rbtnPlusOneToHitFromBehind.CheckedChanged += new System.EventHandler(this.rbtnPlusOneToHitFromBehind_CheckedChanged);
+            this.rbtnPlusOneToHitFromBehind.MouseHover += new System.EventHandler(this.rbtnPlusOneToHitFromBehind_MouseHover);
+            // 
+            // rbtnPlusTwoToHitFromBehind
+            // 
+            this.rbtnPlusTwoToHitFromBehind.AutoSize = true;
+            this.rbtnPlusTwoToHitFromBehind.Location = new System.Drawing.Point(11, 42);
+            this.rbtnPlusTwoToHitFromBehind.Name = "rbtnPlusTwoToHitFromBehind";
+            this.rbtnPlusTwoToHitFromBehind.Size = new System.Drawing.Size(121, 17);
+            this.rbtnPlusTwoToHitFromBehind.TabIndex = 1;
+            this.rbtnPlusTwoToHitFromBehind.TabStop = true;
+            this.rbtnPlusTwoToHitFromBehind.Text = "+2 to hit from behind";
+            this.rbtnPlusTwoToHitFromBehind.UseVisualStyleBackColor = true;
+            this.rbtnPlusTwoToHitFromBehind.CheckedChanged += new System.EventHandler(this.rbtnPlusTwoToHitFromBehind_CheckedChanged);
+            this.rbtnPlusTwoToHitFromBehind.MouseHover += new System.EventHandler(this.rbtnPlusTwoToHitFromBehind_MouseHover);
+            // 
+            // rbtnPlusThreeToHitFromBehind
+            // 
+            this.rbtnPlusThreeToHitFromBehind.AutoSize = true;
+            this.rbtnPlusThreeToHitFromBehind.Location = new System.Drawing.Point(11, 65);
+            this.rbtnPlusThreeToHitFromBehind.Name = "rbtnPlusThreeToHitFromBehind";
+            this.rbtnPlusThreeToHitFromBehind.Size = new System.Drawing.Size(121, 17);
+            this.rbtnPlusThreeToHitFromBehind.TabIndex = 2;
+            this.rbtnPlusThreeToHitFromBehind.TabStop = true;
+            this.rbtnPlusThreeToHitFromBehind.Text = "+3 to hit from behind";
+            this.rbtnPlusThreeToHitFromBehind.UseVisualStyleBackColor = true;
+            this.rbtnPlusThreeToHitFromBehind.CheckedChanged += new System.EventHandler(this.rbtnPlusThreeToHitFromBehind_CheckedChanged);
+            this.rbtnPlusThreeToHitFromBehind.MouseHover += new System.EventHandler(this.rbtnPlusThreeToHitFromBehind_MouseHover);
+            // 
+            // rbtnPlusFourToHitFromBehind
+            // 
+            this.rbtnPlusFourToHitFromBehind.AutoSize = true;
+            this.rbtnPlusFourToHitFromBehind.Location = new System.Drawing.Point(11, 88);
+            this.rbtnPlusFourToHitFromBehind.Name = "rbtnPlusFourToHitFromBehind";
+            this.rbtnPlusFourToHitFromBehind.Size = new System.Drawing.Size(121, 17);
+            this.rbtnPlusFourToHitFromBehind.TabIndex = 3;
+            this.rbtnPlusFourToHitFromBehind.TabStop = true;
+            this.rbtnPlusFourToHitFromBehind.Text = "+4 to hit from behind";
+            this.rbtnPlusFourToHitFromBehind.UseVisualStyleBackColor = true;
+            this.rbtnPlusFourToHitFromBehind.CheckedChanged += new System.EventHandler(this.rbtnPlusFourToHitFromBehind_CheckedChanged);
+            this.rbtnPlusFourToHitFromBehind.MouseHover += new System.EventHandler(this.rbtnPlusFourToHitFromBehind_MouseHover);
             // 
             // gbArmorClassDisplay
             // 
@@ -163,6 +236,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.gbToHitBonusFromBehind.ResumeLayout(false);
+            this.gbToHitBonusFromBehind.PerformLayout();
             this.gbArmorClassDisplay.ResumeLayout(false);
             this.gbArmorClassDisplay.PerformLayout();
             this.ResumeLayout(false);
@@ -173,11 +248,16 @@
 
         private System.Windows.Forms.GroupBox gbMoveDiagonalCost;
         private System.Windows.Forms.RadioButton rbtnOnePointFiveSquares;
-        private System.Windows.Forms.RadioButton rbtnOneSquare;
+        private System.Windows.Forms.RadioButton  rbtnOneSquare;
         private System.Windows.Forms.RichTextBox rtxtInfo;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox gbArmorClassDisplay;
         private System.Windows.Forms.RadioButton rbtnDescendingAC;
         private System.Windows.Forms.RadioButton rbtnAscendingAC;
+        private System.Windows.Forms.GroupBox gbToHitBonusFromBehind;
+        private System.Windows.Forms.RadioButton rbtnPlusOneToHitFromBehind;
+        private System.Windows.Forms.RadioButton rbtnPlusTwoToHitFromBehind;
+        private System.Windows.Forms.RadioButton rbtnPlusThreeToHitFromBehind;
+        private System.Windows.Forms.RadioButton rbtnPlusFourToHitFromBehind;
     }
 }

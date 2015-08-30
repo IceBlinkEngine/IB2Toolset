@@ -59,6 +59,8 @@
   "combatAnimationSpeed": 100,
   "_useRealTimeTimer": false,
   "_realTimeTimerLengthInMilliSeconds": 1500,
+  "attackFromBehindToHitModifier": 2,
+  "attackFromBehindDamageModifier": 0,
   "moduleName": "temp01",
   "moduleLabelName": "NewModule",
   "moduleVersion": 1,

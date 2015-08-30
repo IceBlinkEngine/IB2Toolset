@@ -16,6 +16,7 @@ namespace IB2Toolset
 
         public string moveDiagCostInfo = "This defines the amount of movement points that are consumed for diagonal moves in combat";
         public string ArmorClassDisplayInfo = "Defines the way Armor Class is displayed. Ascending goes from 10 -> 30+ (think 3e) and Descending goes from 10 -> -10- (think 1e)";
+        public string toHitBonusFromBehindInfo = "To hit bonus when attacking from behind";
 
 
         public RulesEditor(Module m, ParentForm pf)
@@ -45,6 +46,23 @@ namespace IB2Toolset
             else
             {
                 rbtnDescendingAC.Checked = true;
+            }
+            //to hit bonus from behind
+            if (mod.attackFromBehindToHitModifier == 1)
+            {
+                rbtnPlusOneToHitFromBehind.Checked = true;
+            }
+            else if (mod.attackFromBehindToHitModifier == 2)
+            {
+                rbtnPlusTwoToHitFromBehind.Checked = true;
+            }
+            else if (mod.attackFromBehindToHitModifier == 3)
+            {
+                rbtnPlusThreeToHitFromBehind.Checked = true;
+            }
+            else if (mod.attackFromBehindToHitModifier == 4)
+            {
+                rbtnPlusFourToHitFromBehind.Checked = true;
             }
         }
 
@@ -92,6 +110,47 @@ namespace IB2Toolset
             mod.ArmorClassAscending = false;
         }
         #endregion
+        #region To hit bonus from behind
+        private void gbToHitBonusFromBehind_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = toHitBonusFromBehindInfo;
+        }
+        private void rbtnPlusOneToHitFromBehind_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = toHitBonusFromBehindInfo;
+        }
+        private void rbtnPlusTwoToHitFromBehind_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = toHitBonusFromBehindInfo;
+        }
+        private void rbtnPlusThreeToHitFromBehind_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = toHitBonusFromBehindInfo;
+        }
+        private void rbtnPlusFourToHitFromBehind_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = toHitBonusFromBehindInfo;
+        }
+
+        private void rbtnPlusOneToHitFromBehind_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.attackFromBehindToHitModifier = 1;
+        }
+        private void rbtnPlusTwoToHitFromBehind_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.attackFromBehindToHitModifier = 2;
+        }
+        private void rbtnPlusThreeToHitFromBehind_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.attackFromBehindToHitModifier = 3;
+        }
+        private void rbtnPlusFourToHitFromBehind_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.attackFromBehindToHitModifier = 4;
+        }
+        
+        #endregion
+
 
         private void splitContainer1_Panel1_MouseHover(object sender, EventArgs e)
         {
