@@ -96,6 +96,7 @@ namespace IB2Toolset
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
         public bool _useRealTimeTimer = false;
+        public bool _useSmoothMovement = false;
         public int _realTimeTimerLengthInMilliSeconds = 1500;
         public int attackFromBehindToHitModifier = 2;
         public int attackFromBehindDamageModifier = 0;
@@ -140,6 +141,13 @@ namespace IB2Toolset
         {
             get { return _useRealTimeTimer; }
             set { _useRealTimeTimer = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using smooth movements of props (gliding).")]
+        public bool useSmoothMovement
+        {
+            get { return _useSmoothMovement; }
+            set { _useSmoothMovement = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The total number of player made characters allowed in the party (default is 1, max PCs in a party is 6)")]
