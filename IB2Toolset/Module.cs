@@ -95,9 +95,9 @@ namespace IB2Toolset
         private string onHeartBeatParms = "";
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
-        public bool _useRealTimeTimer = false;
-        public bool _useSmoothMovement = false;
-        public int _realTimeTimerLengthInMilliSeconds = 1500;
+        private bool _useRealTimeTimer = false;
+        private bool _useSmoothMovement = false;
+        private int _realTimeTimerLengthInMilliSeconds = 1500;
         public int attackFromBehindToHitModifier = 2;
         public int attackFromBehindDamageModifier = 0;
 
