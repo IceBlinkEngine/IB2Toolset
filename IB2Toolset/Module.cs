@@ -95,8 +95,10 @@ namespace IB2Toolset
         private string onHeartBeatParms = "";
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
+        //suggesting here to have realTime off as default, but smoothMove on by default
+        //this stays true to 100% turn based, but adds some nice visual indication for the direction a prop comes from/moves to
         private bool _useRealTimeTimer = false;
-        private bool _useSmoothMovement = false;
+        private bool _useSmoothMovement = true;
         private int _realTimeTimerLengthInMilliSeconds = 1500;
         public int attackFromBehindToHitModifier = 2;
         public int attackFromBehindDamageModifier = 0;
