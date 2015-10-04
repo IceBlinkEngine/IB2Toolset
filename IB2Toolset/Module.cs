@@ -102,6 +102,7 @@ namespace IB2Toolset
         private int _realTimeTimerLengthInMilliSeconds = 1500;
         public int attackFromBehindToHitModifier = 2;
         public int attackFromBehindDamageModifier = 0;
+        private bool _useOrbitronFont = false;
 
 
         #endregion
@@ -150,6 +151,13 @@ namespace IB2Toolset
         {
             get { return _useSmoothMovement; }
             set { _useSmoothMovement = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using the scifi Orbitron font (light).")]
+        public bool useOrbitronFont
+        {
+            get { return _useOrbitronFont; }
+            set { _useOrbitronFont = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The total number of player made characters allowed in the party (default is 1, max PCs in a party is 6)")]
