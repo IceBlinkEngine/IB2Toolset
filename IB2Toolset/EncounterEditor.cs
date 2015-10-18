@@ -68,15 +68,43 @@ namespace IB2Toolset
             surface = new Bitmap(mSizeW, mSizeH);
             panelView.BackgroundImage = surface;            
             device = Graphics.FromImage(surface);
-            try
+            if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png"))
             {
                 g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png");
+            }
+            else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_pass.png"))
+            {
+                g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_pass.png");
+            }
+            if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_block.png"))
+            {
                 g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_block.png");
+            }
+            else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_block.png"))
+            {
+                g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_block.png");
+            }
+            if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\los_block.png"))
+            {
                 g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\los_block.png");
             }
-            catch (Exception ex)
+            else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\los_block.png"))
             {
-                MessageBox.Show("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
+                g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\los_block.png");
+            }
+            if ((g_walkBlock == null) || (g_walkPass == null) || (g_LoSBlock == null))
+            {
+                try
+                {
+                    g_walkPass = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\walk_pass.png");
+                    g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\walk_block.png");
+                    g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\los_block.png");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("failed to load walk_pass, los_block, and walk_block bitmaps: " + ex.ToString());
+                    //le_game.errorLog("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
+                }
             }
             refreshCmbItems();
             refreshLbxItems();
@@ -279,7 +307,7 @@ namespace IB2Toolset
                             TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
                             Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
                             //draw square walkmesh and LoS stuff
-                            src = new Rectangle(0, 0, 50, 50);
+                            src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
                             if (chkGrid.Checked) //if show grid is turned on, draw grid squares
                             {
                                 if (tile.LoSBlocked)
@@ -361,7 +389,7 @@ namespace IB2Toolset
                                     }
                                 }
                                 //draw square walkmesh and LoS stuff
-                                Rectangle src = new Rectangle(0, 0, 50, 50);
+                                Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
                                 if (chkGrid.Checked) //if show grid is turned on, draw grid squares
                                 {
                                     if (tile.LoSBlocked)

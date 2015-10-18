@@ -282,7 +282,7 @@ namespace IB2Toolset
                     {
                         if (area.Tiles[y * this.area.MapSizeX + x].LoSBlocked)
                         {
-                            Rectangle src = new Rectangle(0, 0, tileSize, tileSize);
+                            Rectangle src = new Rectangle(0, 0, g_LoSBlock.Width, g_LoSBlock.Height);
                             int dx = x * tileSize;
                             int dy = y * tileSize;
                             Rectangle target = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
@@ -290,7 +290,7 @@ namespace IB2Toolset
                         }
                         if (area.Tiles[y * this.area.MapSizeX + x].Walkable)
                         {
-                            Rectangle src = new Rectangle(0, 0, tileSize, tileSize);
+                            Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
                             int dx = x * tileSize;
                             int dy = y * tileSize;
                             Rectangle target = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
@@ -298,7 +298,7 @@ namespace IB2Toolset
                         }
                         else
                         {
-                            Rectangle src = new Rectangle(0, 0, tileSize, tileSize);
+                            Rectangle src = new Rectangle(0, 0, g_walkBlock.Width, g_walkBlock.Height);
                             int dx = x * tileSize;
                             int dy = y * tileSize;
                             Rectangle target = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
@@ -758,16 +758,43 @@ namespace IB2Toolset
         private void LevelEditor_Load(object sender, EventArgs e)
         {
             //prntForm = (ParentForm)this.ParentForm;
-            try
+            if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png"))
             {
                 g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png");
+            }
+            else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_pass.png"))
+            {
+                g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_pass.png");
+            }
+            if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_block.png"))
+            {
                 g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_block.png");
+            }
+            else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_block.png"))
+            {
+                g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_block.png");
+            }
+            if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\los_block.png"))
+            {
                 g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\los_block.png");
             }
-            catch (Exception ex)
+            else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\los_block.png"))
             {
-                MessageBox.Show("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
-                //le_game.errorLog("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
+                g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\los_block.png");
+            }
+            if ((g_walkBlock == null) || (g_walkPass == null) || (g_LoSBlock == null))
+            {
+                try
+                {
+                    g_walkPass = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\walk_pass.png");
+                    g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\walk_block.png");
+                    g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\los_block.png");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("failed to load walk_pass, los_block, and walk_block bitmaps: " + ex.ToString());
+                    //le_game.errorLog("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
+                }
             }
             area = new Area();
             area.MapSizeX = 16;
