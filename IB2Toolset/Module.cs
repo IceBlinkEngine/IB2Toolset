@@ -35,6 +35,7 @@ namespace IB2Toolset
         public int TimePerRound = 6;
         public bool debugMode = true;
         public float diagonalMoveCost = 1.5f;
+        public bool useLuck = false;
         public bool ArmorClassAscending = true;
         public List<Item> moduleItemsList = new List<Item>();
         public List<Encounter> moduleEncountersList = new List<Encounter>();
@@ -90,7 +91,7 @@ namespace IB2Toolset
 	    public bool showTutorialCombat = true;
 	    public bool showAutosaveMessage = true;
 	    public bool allowAutosave = true;
-        public int combatAnimationSpeed = 100;
+        public int combatAnimationSpeed = 25;
         private string onHeartBeatLogicTree = "none";
         private string onHeartBeatParms = "";
         private string onHeartBeatIBScript = "none";

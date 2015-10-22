@@ -3,6 +3,7 @@
   "TimePerRound": 6,
   "debugMode": true,
   "diagonalMoveCost": 1.5,
+  "useLuck": false,
   "ArmorClassAscending": true,
   "moduleItemsList": [],
   "moduleEncountersList": [],

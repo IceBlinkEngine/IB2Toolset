@@ -17,6 +17,8 @@ namespace IB2Toolset
         public string moveDiagCostInfo = "This defines the amount of movement points that are consumed for diagonal moves in combat";
         public string ArmorClassDisplayInfo = "Defines the way Armor Class is displayed. Ascending goes from 10 -> 30+ (think 3e) and Descending goes from 10 -> -10- (think 1e)";
         public string toHitBonusFromBehindInfo = "To hit bonus when attacking from behind";
+        public string useLuckInfo = "Luck is an additional attribute that's heigh wehn the attribute scores of a char are low; can e.g. be checked by authors for special event or dialgoue situations";
+
 
 
         public RulesEditor(Module m, ParentForm pf)
@@ -63,6 +65,16 @@ namespace IB2Toolset
             else if (mod.attackFromBehindToHitModifier == 4)
             {
                 rbtnPlusFourToHitFromBehind.Checked = true;
+            }
+
+            //use Luck attribute
+            if (mod.useLuck)
+            {
+                rbtnUseLuck.Checked = true;
+            }
+            else
+            {
+                rbtnDoNotUseLuck.Checked = true;
             }
         }
 
@@ -149,6 +161,33 @@ namespace IB2Toolset
             mod.attackFromBehindToHitModifier = 4;
         }
         
+        #endregion
+        #region use Luck
+        private void gbUseLuck_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = useLuckInfo;
+        }
+        private void rbtnUseLuck_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = useLuckInfo;
+        }
+        private void rbtnUseLuckHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = useLuckInfo;
+        }
+        private void rbtnDoNotUseLuck_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = useLuckInfo;
+        }
+        private void rbtnUseLuck_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.useLuck = true;
+        }
+        private void rbtnDoNotUseLuck_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.useLuck = false;
+        }
+
         #endregion
 
 

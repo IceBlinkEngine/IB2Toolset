@@ -33,6 +33,10 @@
             this.rbtnOneSquare = new System.Windows.Forms.RadioButton();
             this.rtxtInfo = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.gbUseLuck = new System.Windows.Forms.GroupBox();
+            this.rbtnUseLuck = new System.Windows.Forms.RadioButton();
+            this.rbtnDoNotUseLuck = new System.Windows.Forms.RadioButton();
+
             this.gbToHitBonusFromBehind = new System.Windows.Forms.GroupBox();
             this.rbtnPlusOneToHitFromBehind = new System.Windows.Forms.RadioButton();
             this.rbtnPlusTwoToHitFromBehind = new System.Windows.Forms.RadioButton();
@@ -48,6 +52,7 @@
             this.splitContainer1.SuspendLayout();
             this.gbToHitBonusFromBehind.SuspendLayout();
             this.gbArmorClassDisplay.SuspendLayout();
+            this.gbUseLuck.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbMoveDiagonalCost
@@ -109,6 +114,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.gbToHitBonusFromBehind);
             this.splitContainer1.Panel1.Controls.Add(this.gbArmorClassDisplay);
             this.splitContainer1.Panel1.Controls.Add(this.gbMoveDiagonalCost);
+            this.splitContainer1.Panel1.Controls.Add(this.gbUseLuck);
             this.splitContainer1.Panel1.MouseHover += new System.EventHandler(this.splitContainer1_Panel1_MouseHover);
             // 
             // splitContainer1.Panel2
@@ -221,6 +227,47 @@
             this.rbtnAscendingAC.UseVisualStyleBackColor = true;
             this.rbtnAscendingAC.CheckedChanged += new System.EventHandler(this.rbtnAscendingAC_CheckedChanged);
             this.rbtnAscendingAC.MouseHover += new System.EventHandler(this.rbtnAscendingAC_MouseHover);
+
+            // gbUseLuck
+            // 
+            this.gbUseLuck.Controls.Add(this.rbtnUseLuck);
+            this.gbUseLuck.Controls.Add(this.rbtnDoNotUseLuck);
+            this.gbUseLuck.Location = new System.Drawing.Point(12, 86);
+            this.gbUseLuck.Name = "gbUseLuck";
+            this.gbUseLuck.Size = new System.Drawing.Size(129, 64);
+            this.gbUseLuck.TabIndex = 1;
+            this.gbUseLuck.TabStop = false;
+            this.gbUseLuck.Text = "Luck";
+            this.gbUseLuck.MouseHover += new System.EventHandler(this.gbUseLuck_MouseHover);
+            //
+
+            // rbtnUseLuck
+            // 
+            this.rbtnUseLuck.AutoSize = true;
+            this.rbtnUseLuck.Location = new System.Drawing.Point(11, 38);
+            this.rbtnUseLuck.Name = "rbtnUseLuck";
+            this.rbtnUseLuck.Size = new System.Drawing.Size(82, 17);
+            this.rbtnUseLuck.TabIndex = 1;
+            this.rbtnUseLuck.TabStop = true;
+            this.rbtnUseLuck.Text = "Use Luck";
+            this.rbtnUseLuck.UseVisualStyleBackColor = true;
+            this.rbtnUseLuck.CheckedChanged += new System.EventHandler(this.rbtnUseLuck_CheckedChanged);
+            this.rbtnUseLuck.MouseHover += new System.EventHandler(this.rbtnUseLuck_MouseHover);
+            // 
+            // rbtnDoNotUseLuck
+            // 
+            this.rbtnDoNotUseLuck.AutoSize = true;
+            this.rbtnDoNotUseLuck.Location = new System.Drawing.Point(11, 18);
+            this.rbtnDoNotUseLuck.Name = "rbtnDoNotUseLuck";
+            this.rbtnDoNotUseLuck.Size = new System.Drawing.Size(75, 17);
+            this.rbtnDoNotUseLuck.TabIndex = 0;
+            this.rbtnDoNotUseLuck.TabStop = true;
+            this.rbtnDoNotUseLuck.Text = "Do not use Luck";
+            this.rbtnDoNotUseLuck.UseVisualStyleBackColor = true;
+            this.rbtnDoNotUseLuck.CheckedChanged += new System.EventHandler(this.rbtnDoNotUseLuck_CheckedChanged);
+            this.rbtnDoNotUseLuck.MouseHover += new System.EventHandler(this.rbtnDoNotUseLuck_MouseHover);
+
+            
             // 
             // RulesEditor
             // 
@@ -240,6 +287,8 @@
             this.gbToHitBonusFromBehind.PerformLayout();
             this.gbArmorClassDisplay.ResumeLayout(false);
             this.gbArmorClassDisplay.PerformLayout();
+            this.gbUseLuck.ResumeLayout(false);
+            this.gbUseLuck.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -259,5 +308,10 @@
         private System.Windows.Forms.RadioButton rbtnPlusTwoToHitFromBehind;
         private System.Windows.Forms.RadioButton rbtnPlusThreeToHitFromBehind;
         private System.Windows.Forms.RadioButton rbtnPlusFourToHitFromBehind;
+        private System.Windows.Forms.GroupBox gbUseLuck;
+        private System.Windows.Forms.RadioButton rbtnUseLuck;
+        private System.Windows.Forms.RadioButton rbtnDoNotUseLuck;
+
+
     }
 }
