@@ -7,7 +7,7 @@ namespace IB2Toolset
 {
     public class Tile
     {
-        public string Layer1Filename = "t_grass";
+        public string Layer1Filename = "t_blank";
         public string Layer2Filename = "t_blank";
         public string Layer3Filename = "t_blank";
         public string Layer4Filename = "t_blank";

@@ -79,10 +79,18 @@
             this.btnMinusLeftX = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.panelNoScrollOnFocus1 = new IB2Toolset.PanelNoScrollOnFocus();
-            this.panelView = new System.Windows.Forms.Panel();
             this.btnRefreshMap = new System.Windows.Forms.Button();
-            this.btnMiniMap = new System.Windows.Forms.Button();
+            this.btnLoadMap = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numBGLocY = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numBGLocX = new System.Windows.Forms.NumericUpDown();
+            this.panelView = new System.Windows.Forms.Panel();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnRemoveMap = new System.Windows.Forms.Button();
+            this.panelNoScrollOnFocus1 = new IB2Toolset.PanelNoScrollOnFocus();
             this.panel3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -92,6 +100,10 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbMapSize.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numBGLocY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBGLocX)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.panelNoScrollOnFocus1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -401,7 +413,7 @@
             // 
             // lblMouseInfo
             // 
-            this.lblMouseInfo.Location = new System.Drawing.Point(9, 571);
+            this.lblMouseInfo.Location = new System.Drawing.Point(134, 659);
             this.lblMouseInfo.Name = "lblMouseInfo";
             this.lblMouseInfo.Size = new System.Drawing.Size(121, 30);
             this.lblMouseInfo.TabIndex = 73;
@@ -411,7 +423,7 @@
             // 
             this.groupBox1.Controls.Add(this.btnRemoveSelectedObject);
             this.groupBox1.Controls.Add(this.txtSelectedIconInfo);
-            this.groupBox1.Location = new System.Drawing.Point(12, 419);
+            this.groupBox1.Location = new System.Drawing.Point(12, 562);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(118, 142);
             this.groupBox1.TabIndex = 74;
@@ -445,7 +457,7 @@
             this.groupBox2.Controls.Add(this.rbtnEditTrigger);
             this.groupBox2.Controls.Add(this.rbtnWalkable);
             this.groupBox2.Controls.Add(this.rbtnPaintTrigger);
-            this.groupBox2.Location = new System.Drawing.Point(12, 5);
+            this.groupBox2.Location = new System.Drawing.Point(12, 148);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(118, 364);
             this.groupBox2.TabIndex = 75;
@@ -506,7 +518,7 @@
             this.chkGrid.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chkGrid.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
             this.chkGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkGrid.Location = new System.Drawing.Point(21, 379);
+            this.chkGrid.Location = new System.Drawing.Point(21, 522);
             this.chkGrid.Margin = new System.Windows.Forms.Padding(0);
             this.chkGrid.Name = "chkGrid";
             this.chkGrid.Size = new System.Drawing.Size(103, 28);
@@ -657,19 +669,74 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "X";
             // 
-            // panelNoScrollOnFocus1
+            // btnRefreshMap
             // 
-            this.panelNoScrollOnFocus1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelNoScrollOnFocus1.AutoScroll = true;
-            this.panelNoScrollOnFocus1.BackColor = System.Drawing.Color.Black;
-            this.panelNoScrollOnFocus1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelNoScrollOnFocus1.Controls.Add(this.panelView);
-            this.panelNoScrollOnFocus1.Location = new System.Drawing.Point(260, 12);
-            this.panelNoScrollOnFocus1.Name = "panelNoScrollOnFocus1";
-            this.panelNoScrollOnFocus1.Size = new System.Drawing.Size(765, 713);
-            this.panelNoScrollOnFocus1.TabIndex = 77;
+            this.btnRefreshMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshMap.Location = new System.Drawing.Point(142, 572);
+            this.btnRefreshMap.Name = "btnRefreshMap";
+            this.btnRefreshMap.Size = new System.Drawing.Size(106, 30);
+            this.btnRefreshMap.TabIndex = 80;
+            this.btnRefreshMap.Text = "Refresh Map";
+            this.btnRefreshMap.UseVisualStyleBackColor = true;
+            this.btnRefreshMap.Click += new System.EventHandler(this.btnRefreshMap_Click);
+            // 
+            // btnLoadMap
+            // 
+            this.btnLoadMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoadMap.Location = new System.Drawing.Point(11, 16);
+            this.btnLoadMap.Name = "btnLoadMap";
+            this.btnLoadMap.Size = new System.Drawing.Size(101, 30);
+            this.btnLoadMap.TabIndex = 82;
+            this.btnLoadMap.Text = "Load";
+            this.btnLoadMap.UseVisualStyleBackColor = true;
+            this.btnLoadMap.Click += new System.EventHandler(this.btnLoadMap_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.numBGLocY);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.numBGLocX);
+            this.groupBox4.Location = new System.Drawing.Point(11, 79);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(101, 58);
+            this.groupBox4.TabIndex = 83;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Image Location";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(64, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Y:";
+            // 
+            // numBGLocY
+            // 
+            this.numBGLocY.Location = new System.Drawing.Point(56, 30);
+            this.numBGLocY.Name = "numBGLocY";
+            this.numBGLocY.Size = new System.Drawing.Size(35, 20);
+            this.numBGLocY.TabIndex = 2;
+            this.numBGLocY.ValueChanged += new System.EventHandler(this.numBGLocY_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "X:";
+            // 
+            // numBGLocX
+            // 
+            this.numBGLocX.Location = new System.Drawing.Point(8, 30);
+            this.numBGLocX.Name = "numBGLocX";
+            this.numBGLocX.Size = new System.Drawing.Size(35, 20);
+            this.numBGLocX.TabIndex = 0;
+            this.numBGLocX.ValueChanged += new System.EventHandler(this.numBGLocX_ValueChanged);
             // 
             // panelView
             // 
@@ -687,38 +754,57 @@
             this.panelView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseMove);
             this.panelView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panelView_PreviewKeyDown);
             // 
-            // btnRefreshMap
+            // openFileDialog1
             // 
-            this.btnRefreshMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshMap.Location = new System.Drawing.Point(142, 572);
-            this.btnRefreshMap.Name = "btnRefreshMap";
-            this.btnRefreshMap.Size = new System.Drawing.Size(106, 30);
-            this.btnRefreshMap.TabIndex = 80;
-            this.btnRefreshMap.Text = "Refresh Map";
-            this.btnRefreshMap.UseVisualStyleBackColor = true;
-            this.btnRefreshMap.Click += new System.EventHandler(this.btnRefreshMap_Click);
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // btnMiniMap
+            // groupBox5
             // 
-            this.btnMiniMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMiniMap.Location = new System.Drawing.Point(142, 654);
-            this.btnMiniMap.Name = "btnMiniMap";
-            this.btnMiniMap.Size = new System.Drawing.Size(106, 48);
-            this.btnMiniMap.TabIndex = 81;
-            this.btnMiniMap.Text = "Create MiniMap";
-            this.btnMiniMap.UseVisualStyleBackColor = true;
-            this.btnMiniMap.Click += new System.EventHandler(this.btnMiniMap_Click);
+            this.groupBox5.Controls.Add(this.btnRemoveMap);
+            this.groupBox5.Controls.Add(this.btnLoadMap);
+            this.groupBox5.Controls.Add(this.groupBox4);
+            this.groupBox5.Location = new System.Drawing.Point(12, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(118, 142);
+            this.groupBox5.TabIndex = 85;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Background Image";
+            // 
+            // btnRemoveMap
+            // 
+            this.btnRemoveMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveMap.Location = new System.Drawing.Point(11, 49);
+            this.btnRemoveMap.Name = "btnRemoveMap";
+            this.btnRemoveMap.Size = new System.Drawing.Size(101, 30);
+            this.btnRemoveMap.TabIndex = 84;
+            this.btnRemoveMap.Text = "Remove";
+            this.btnRemoveMap.UseVisualStyleBackColor = true;
+            this.btnRemoveMap.Click += new System.EventHandler(this.btnRemoveMap_Click);
+            // 
+            // panelNoScrollOnFocus1
+            // 
+            this.panelNoScrollOnFocus1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelNoScrollOnFocus1.AutoScroll = true;
+            this.panelNoScrollOnFocus1.BackColor = System.Drawing.Color.Black;
+            this.panelNoScrollOnFocus1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelNoScrollOnFocus1.Controls.Add(this.panelView);
+            this.panelNoScrollOnFocus1.Location = new System.Drawing.Point(260, 12);
+            this.panelNoScrollOnFocus1.Name = "panelNoScrollOnFocus1";
+            this.panelNoScrollOnFocus1.Size = new System.Drawing.Size(765, 713);
+            this.panelNoScrollOnFocus1.TabIndex = 77;
             // 
             // WorldMapEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 737);
-            this.Controls.Add(this.btnMiniMap);
+            this.Controls.Add(this.panelNoScrollOnFocus1);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btnRefreshMap);
             this.Controls.Add(this.gbMapSize);
             this.Controls.Add(this.chkGrid);
-            this.Controls.Add(this.panelNoScrollOnFocus1);
             this.Controls.Add(this.btnProperties);
             this.Controls.Add(this.lblMouseInfo);
             this.Controls.Add(this.groupBox1);
@@ -743,6 +829,11 @@
             this.groupBox2.ResumeLayout(false);
             this.gbMapSize.ResumeLayout(false);
             this.gbMapSize.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numBGLocY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBGLocX)).EndInit();
+            this.groupBox5.ResumeLayout(false);
             this.panelNoScrollOnFocus1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -793,7 +884,6 @@
         private System.Windows.Forms.Button btnMinusRightX;
         private System.Windows.Forms.Button btnMinusLeftX;
         private System.Windows.Forms.Button btnRefreshMap;
-        private System.Windows.Forms.Button btnMiniMap;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton rbtnZoom5x;
         private System.Windows.Forms.RadioButton rbtnZoom2x;
@@ -804,6 +894,15 @@
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button btnLoadMap;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numBGLocY;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numBGLocX;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnRemoveMap;
     }
 }
 

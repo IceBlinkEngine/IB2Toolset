@@ -15,10 +15,12 @@ namespace IB2Toolset
     {        
         #region Fields
         private string filename = "newArea";
-        private string imageFileName = "newArea.jpg";
+        private string imageFileName = "none";
+        public int backgroundImageStartLocX = 0;
+        public int backgroundImageStartLocY = 0;
         private int mapSizeX = 16;
         private int mapSizeY = 16;
-        private bool isWorldMap = false;
+        //private bool isWorldMap = false;
         private bool useMiniMapFogOfWar = false;
         private bool _areaDark = false;
         private bool useDayNightCycle = false;
@@ -51,12 +53,12 @@ namespace IB2Toolset
             get { return filename; }
             set { filename = value; }
         }
-        [CategoryAttribute("01 - Main"), ReadOnly(true)]
+        /*[CategoryAttribute("01 - Main"), ReadOnly(true)]
         public bool IsWorldMap
         {
             get { return isWorldMap; }
             set { isWorldMap = value; }
-        }
+        }*/
         [CategoryAttribute("01 - Main")]
         public bool UseMiniMapFogOfWar
         {

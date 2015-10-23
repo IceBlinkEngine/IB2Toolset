@@ -258,15 +258,15 @@ namespace IB2Toolset
 
         private void EditArea()
         {
-            if (prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex].StartsWith("wm_"))
-            {
+            //if (prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex].StartsWith("wm_"))
+            //{
                 WorldMapEditor newChild = new WorldMapEditor(prntForm.mod, prntForm); //add new child
                 newChild.Text = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
                 newChild.Show(prntForm.dockPanel1); //as new form created so that corresponding tab and child form is active
                 refreshListBoxAreas();
                 newChild.g_directory = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
                 newChild.g_filename = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
-            }
+            /*}
             else
             {
                 LevelEditor newChild = new LevelEditor(prntForm.mod, prntForm); //add new child
@@ -275,7 +275,7 @@ namespace IB2Toolset
                 refreshListBoxAreas();
                 newChild.g_directory = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
                 newChild.g_filename = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
-            }
+            }*/
         }
 
         private void btnLoadAllArea_Click(object sender, EventArgs e)

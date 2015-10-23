@@ -22,6 +22,7 @@ namespace IB2Toolset
         private List<TileBitmapNamePair> tileList = new List<TileBitmapNamePair>();
         private Graphics device;
         private Bitmap surface;
+        public Bitmap gameMapBitmap;
         private Bitmap selectedBitmap;
         public Bitmap g_walkPass;
         public Bitmap g_walkBlock;
@@ -156,9 +157,10 @@ namespace IB2Toolset
             rbtnInfo.Checked = true;
             rbtnZoom1x.Checked = true;
             //refreshMap(true);
-
+            numBGLocX.Value = area.backgroundImageStartLocX;
+            numBGLocY.Value = area.backgroundImageStartLocY;
             //Set this map to be a WORLD MAP
-            area.IsWorldMap = true;
+            //area.IsWorldMap = true;
         }
         private void resetPanelAndDeviceSize()
         {
@@ -225,6 +227,13 @@ namespace IB2Toolset
             }
             try
             {
+                //draw background image first if using one
+                if ((!area.ImageFileName.Equals("none")) && (gameMapBitmap != null))
+                {
+                    Rectangle srcBG = new Rectangle(0, 0, gameMapBitmap.Width, gameMapBitmap.Height);
+                    Rectangle dstBG = new Rectangle(area.backgroundImageStartLocX * sqr, area.backgroundImageStartLocY * sqr, sqr * (gameMapBitmap.Width / 50), sqr * (gameMapBitmap.Height / 50));
+                    device.DrawImage(gameMapBitmap, dstBG, srcBG, GraphicsUnit.Pixel); 
+                }
                 //draw map
                 for (int y = 0; y < area.MapSizeY; y++)                
                 {
@@ -238,11 +247,11 @@ namespace IB2Toolset
                             Bitmap lyr3 = null;
                             Bitmap lyr4 = null;
                             Bitmap lyr5 = null;
-                            Rectangle src1 = new Rectangle(0, 0, 50, 50);
-                            Rectangle src2 = new Rectangle(0, 0, 50, 50);
-                            Rectangle src3 = new Rectangle(0, 0, 50, 50);
-                            Rectangle src4 = new Rectangle(0, 0, 50, 50);
-                            Rectangle src5 = new Rectangle(0, 0, 50, 50);
+                            Rectangle src1 = new Rectangle(0, 0, 100, 100);
+                            Rectangle src2 = new Rectangle(0, 0, 100, 100);
+                            Rectangle src3 = new Rectangle(0, 0, 100, 100);
+                            Rectangle src4 = new Rectangle(0, 0, 100, 100);
+                            Rectangle src5 = new Rectangle(0, 0, 100, 100);
                             if (getTileByName(tile.Layer1Filename) != null)
                             {
                                 lyr1 = getTileByName(tile.Layer1Filename).bitmap;
@@ -1190,6 +1199,33 @@ namespace IB2Toolset
             {
                 MessageBox.Show("failed to open file: " + ex.ToString());
             }
+            // load JPG Map first
+            try
+            {
+                if (!area.ImageFileName.Equals("none"))
+                {
+                    if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".jpg"))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".jpg");
+                    }
+                    else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName);
+                    }
+                    else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".png"))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".png");
+                    }
+                    else
+                    {
+                        gameMapBitmap = null;
+                    }
+                }
+            }
+            catch
+            {
+                gameMapBitmap = null;
+            }
             
             refreshLeftPanelInfo();
             panelView.Width = area.MapSizeX * sqr;
@@ -1248,6 +1284,7 @@ namespace IB2Toolset
                 newTile.Visible = false;
                 area.Tiles.Add(newTile);
             }
+            gameMapBitmap = null;
             refreshLeftPanelInfo();
             panelView.Width = area.MapSizeX * sqr;
             panelView.Height = area.MapSizeY * sqr;
@@ -1282,6 +1319,8 @@ namespace IB2Toolset
         {
             lblMapSizeX.Text = area.MapSizeX.ToString();
             lblMapSizeY.Text = area.MapSizeY.ToString();
+            numBGLocX.Value = area.backgroundImageStartLocX;
+            numBGLocY.Value = area.backgroundImageStartLocY;
             selectedTile.x = gridX;
             selectedTile.y = gridY;
             selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1295,7 +1334,54 @@ namespace IB2Toolset
         }
         #endregion
 
-        #region Event Handlers        
+        #region Event Handlers    
+        private void btnLoadMap_Click(object sender, EventArgs e)
+        {
+            if (mod.moduleName != "NewModule")
+            {
+                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics";
+            }
+            else
+            {
+                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\default\\NewModule";
+            }
+            openFileDialog1.FileName = String.Empty;
+            openFileDialog1.Filter = "Map (*.jpg)|*.jpg";
+            openFileDialog1.FilterIndex = 1;
+
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                Bitmap testSize = new Bitmap(Path.GetFullPath(openFileDialog1.FileName));
+                if ((testSize.Width > 800) || (testSize.Height > 800))
+                {
+                    MessageBox.Show("Map images must be less than 800x800 pixels");
+                    return;
+                }
+                string filename = Path.GetFullPath(openFileDialog1.FileName);
+                area.ImageFileName = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                gameMapBitmap = new Bitmap(filename);
+
+                if (gameMapBitmap == null)
+                {
+                    MessageBox.Show("returned a null bitmap");
+                }
+                refreshMap(true);
+            }
+        }
+        private void btnRemoveMap_Click(object sender, EventArgs e)
+        {
+            area.ImageFileName = "none";
+            refreshMap(true);
+        }
+        private void numBGLocX_ValueChanged(object sender, EventArgs e)
+        {
+            area.backgroundImageStartLocX = (int)numBGLocX.Value;
+        }
+        private void numBGLocY_ValueChanged(object sender, EventArgs e)
+        {
+            area.backgroundImageStartLocY = (int)numBGLocY.Value;
+        }
         private void WorldMapEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             //MessageBox.Show("closing editor and removing from openAreaList");
@@ -1469,6 +1555,24 @@ namespace IB2Toolset
                     return;
                 }
             }
+        }
+        private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 50;
+            resetPanelAndDeviceSize();
+            refreshMap(true);
+        }
+        private void rbtnZoom2x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 25;
+            resetPanelAndDeviceSize();
+            refreshMap(true);
+        }
+        private void rbtnZoom5x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 10;
+            resetPanelAndDeviceSize();
+            refreshMap(true);
         }
         private void btnPlusLeftX_Click(object sender, EventArgs e)
         {
@@ -1651,12 +1755,12 @@ namespace IB2Toolset
         }
         #endregion
 
-        private void btnMiniMap_Click(object sender, EventArgs e)
+        /*private void btnMiniMap_Click(object sender, EventArgs e)
         {
             Bitmap mini = ResizeBitmap(surface, surface.Width / 5, surface.Height / 5);
             mini.Save(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\" + area.Filename + ".png", ImageFormat.Png);
-        }
-        private ImageCodecInfo GetEncoder(ImageFormat format)
+        }*/
+        /*private ImageCodecInfo GetEncoder(ImageFormat format)
         {
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
             foreach (ImageCodecInfo codec in codecs)
@@ -1667,8 +1771,8 @@ namespace IB2Toolset
                 }
             }
             return null;
-        }
-        private static Bitmap ResizeBitmap(Bitmap sourceBMP, int width, int height)
+        }*/
+        /*private static Bitmap ResizeBitmap(Bitmap sourceBMP, int width, int height)
         {
             Bitmap result = new Bitmap(width, height);
             using (Graphics g = Graphics.FromImage(result))
@@ -1677,31 +1781,6 @@ namespace IB2Toolset
                 g.DrawImage(sourceBMP, 0, 0, width, height);
             }
             return result;
-        }
-
-        private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
-        {
-            sqr = 50;
-            resetPanelAndDeviceSize();
-            refreshMap(true);
-        }
-
-        private void rbtnZoom2x_CheckedChanged(object sender, EventArgs e)
-        {
-            sqr = 25;
-            resetPanelAndDeviceSize();
-            refreshMap(true);
-        }
-
-        private void rbtnZoom5x_CheckedChanged(object sender, EventArgs e)
-        {
-            sqr = 10;
-            resetPanelAndDeviceSize();
-            refreshMap(true);
-        }
-
-        
-
-        
+        }*/
     }    
 }
