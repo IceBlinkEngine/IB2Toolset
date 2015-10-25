@@ -4,6 +4,7 @@
   "debugMode": true,
   "diagonalMoveCost": 1.5,
   "useLuck": false,
+  "use3d6": false,
   "ArmorClassAscending": true,
   "moduleItemsList": [],
   "moduleEncountersList": [],

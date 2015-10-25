@@ -36,6 +36,9 @@
             this.gbUseLuck = new System.Windows.Forms.GroupBox();
             this.rbtnUseLuck = new System.Windows.Forms.RadioButton();
             this.rbtnDoNotUseLuck = new System.Windows.Forms.RadioButton();
+            this.gbRollingSystem = new System.Windows.Forms.GroupBox();
+            this.rbtnUse3d6 = new System.Windows.Forms.RadioButton();
+            this.rbtnUse6Plusd12 = new System.Windows.Forms.RadioButton();
 
             this.gbToHitBonusFromBehind = new System.Windows.Forms.GroupBox();
             this.rbtnPlusOneToHitFromBehind = new System.Windows.Forms.RadioButton();
@@ -53,6 +56,7 @@
             this.gbToHitBonusFromBehind.SuspendLayout();
             this.gbArmorClassDisplay.SuspendLayout();
             this.gbUseLuck.SuspendLayout();
+            this.gbRollingSystem.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbMoveDiagonalCost
@@ -115,6 +119,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.gbArmorClassDisplay);
             this.splitContainer1.Panel1.Controls.Add(this.gbMoveDiagonalCost);
             this.splitContainer1.Panel1.Controls.Add(this.gbUseLuck);
+            this.splitContainer1.Panel1.Controls.Add(this.gbRollingSystem);
             this.splitContainer1.Panel1.MouseHover += new System.EventHandler(this.splitContainer1_Panel1_MouseHover);
             // 
             // splitContainer1.Panel2
@@ -267,7 +272,44 @@
             this.rbtnDoNotUseLuck.CheckedChanged += new System.EventHandler(this.rbtnDoNotUseLuck_CheckedChanged);
             this.rbtnDoNotUseLuck.MouseHover += new System.EventHandler(this.rbtnDoNotUseLuck_MouseHover);
 
-            
+            // gbRollingSystem
+            // 
+            this.gbRollingSystem.Controls.Add(this.rbtnUse3d6);
+            this.gbRollingSystem.Controls.Add(this.rbtnUse6Plusd12);
+            this.gbRollingSystem.Location = new System.Drawing.Point(147, 86);
+            this.gbRollingSystem.Name = "gbRollingSystem";
+            this.gbRollingSystem.Size = new System.Drawing.Size(129, 64);
+            this.gbRollingSystem.TabIndex = 1;
+            this.gbRollingSystem.TabStop = false;
+            this.gbRollingSystem.Text = "Attribute System";
+            this.gbRollingSystem.MouseHover += new System.EventHandler(this.gbRollingSystem_MouseHover);
+            //
+
+            // rbtnUse3d6
+            // 
+            this.rbtnUse3d6.AutoSize = true;
+            this.rbtnUse3d6.Location = new System.Drawing.Point(11, 38);
+            this.rbtnUse3d6.Name = "rbtnUseLuck";
+            this.rbtnUse3d6.Size = new System.Drawing.Size(82, 17);
+            this.rbtnUse3d6.TabIndex = 1;
+            this.rbtnUse3d6.TabStop = true;
+            this.rbtnUse3d6.Text = "Use 3d6";
+            this.rbtnUse3d6.UseVisualStyleBackColor = true;
+            this.rbtnUse3d6.CheckedChanged += new System.EventHandler(this.rbtnUse3d6_CheckedChanged);
+            this.rbtnUse3d6.MouseHover += new System.EventHandler(this.rbtnUse3d6_MouseHover);
+
+            // rbtnUse6Plusd12
+            this.rbtnUse6Plusd12.AutoSize = true;
+            this.rbtnUse6Plusd12.Location = new System.Drawing.Point(11, 18);
+            this.rbtnUse6Plusd12.Name = "rbtnUse6Plusd12";
+            this.rbtnUse6Plusd12.Size = new System.Drawing.Size(75, 17);
+            this.rbtnUse6Plusd12.TabIndex = 0;
+            this.rbtnUse6Plusd12.TabStop = true;
+            this.rbtnUse6Plusd12.Text = "Use 6 + d12";
+            this.rbtnUse6Plusd12.UseVisualStyleBackColor = true;
+            this.rbtnUse6Plusd12.CheckedChanged += new System.EventHandler(this.rbtnUse6Plusd12_CheckedChanged);
+            this.rbtnUse6Plusd12.MouseHover += new System.EventHandler(this.rbtnUse6Plusd12_MouseHover);
+
             // 
             // RulesEditor
             // 
@@ -289,15 +331,16 @@
             this.gbArmorClassDisplay.PerformLayout();
             this.gbUseLuck.ResumeLayout(false);
             this.gbUseLuck.PerformLayout();
+            this.gbRollingSystem.ResumeLayout(false);
+            this.gbRollingSystem.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion
 
         private System.Windows.Forms.GroupBox gbMoveDiagonalCost;
         private System.Windows.Forms.RadioButton rbtnOnePointFiveSquares;
-        private System.Windows.Forms.RadioButton  rbtnOneSquare;
+        private System.Windows.Forms.RadioButton rbtnOneSquare;
         private System.Windows.Forms.RichTextBox rtxtInfo;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox gbArmorClassDisplay;
@@ -311,7 +354,8 @@
         private System.Windows.Forms.GroupBox gbUseLuck;
         private System.Windows.Forms.RadioButton rbtnUseLuck;
         private System.Windows.Forms.RadioButton rbtnDoNotUseLuck;
-
-
+        private System.Windows.Forms.GroupBox gbRollingSystem;
+        private System.Windows.Forms.RadioButton rbtnUse3d6;
+        private System.Windows.Forms.RadioButton rbtnUse6Plusd12;
     }
 }
