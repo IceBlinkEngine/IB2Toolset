@@ -134,7 +134,7 @@
             // 
             this.flPanelTab1.Location = new System.Drawing.Point(3, 3);
             this.flPanelTab1.Name = "flPanelTab1";
-            this.flPanelTab1.Size = new System.Drawing.Size(118, 5000);
+            this.flPanelTab1.Size = new System.Drawing.Size(118, 25000);
             this.flPanelTab1.TabIndex = 0;
             this.flPanelTab1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flPanelTab1_MouseClick);
             // 
