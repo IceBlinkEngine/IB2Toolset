@@ -25,17 +25,18 @@ namespace IB2Toolset
         private int maxPartySize = 6;
         private string _moduleDescription = "";
         private string _moduleCredits = "<big><b>Lanterna - The Exile</b></big><BR><BR>"
-						+ "-Story, coding and some art by <b>slowdive_fan</b><BR><BR>"
-						+ "-Portrait art by Bree Arts<BR><BR>"
-						+ "<i>(an IceBlink Engine conversion to Android)</i><BR><BR>"						
-						+ "visit the forums for more info:<BR>"
-						+ "www.iceblinkengine.com/forums";
+                        + "-Story, coding and some art by <b>slowdive_fan</b><BR><BR>"
+                        + "-Portrait art by Bree Arts<BR><BR>"
+                        + "<i>(an IceBlink Engine conversion to Android)</i><BR><BR>"
+                        + "visit the forums for more info:<BR>"
+                        + "www.iceblinkengine.com/forums";
         private int _nextIdNumber = 100;
         private int worldTime = 0;
         public int TimePerRound = 6;
         public bool debugMode = true;
         public float diagonalMoveCost = 1.5f;
         public bool useLuck = false;
+        public bool use3d6 = false;
         public bool ArmorClassAscending = true;
         public List<Item> moduleItemsList = new List<Item>();
         public List<Encounter> moduleEncountersList = new List<Encounter>();
@@ -68,29 +69,29 @@ namespace IB2Toolset
         private int _partyGold = 0;
         public bool showPartyToken = false;
         private string _partyTokenFilename = "prp_party";
-	    public List<Player> playerList = new List<Player>();
-		//public List<Item> partyInventoryList = new List<Item>();
-	    //public List<string> partyInventoryTagList = new List<string>();
+        public List<Player> playerList = new List<Player>();
+        //public List<Item> partyInventoryList = new List<Item>();
+        //public List<string> partyInventoryTagList = new List<string>();
         public List<ItemRefs> partyInventoryRefsList = new List<ItemRefs>();
-	    public List<JournalQuest> partyJournalQuests = new List<JournalQuest>();
-	    public List<JournalQuest> partyJournalCompleted = new List<JournalQuest>();
-	    public string partyJournalNotes = "";
-	    public int selectedPartyLeader = 0;
-		public bool returnCheck = false;
-		public bool addPCScriptFired = false;
-		public bool uncheckConvo = false;
-		public bool removeCreature = false;
-		public bool deleteItemUsedScript = false;
-		public int indexOfPCtoLastUseItem = 0;
-	    public bool com_showGrid = false;
-	    public bool playMusic = false;
-	    public bool playButtonSounds = false;
-	    public bool playButtonHaptic = false;
-	    public bool showTutorialParty = true;
-	    public bool showTutorialInventory = true;
-	    public bool showTutorialCombat = true;
-	    public bool showAutosaveMessage = true;
-	    public bool allowAutosave = true;
+        public List<JournalQuest> partyJournalQuests = new List<JournalQuest>();
+        public List<JournalQuest> partyJournalCompleted = new List<JournalQuest>();
+        public string partyJournalNotes = "";
+        public int selectedPartyLeader = 0;
+        public bool returnCheck = false;
+        public bool addPCScriptFired = false;
+        public bool uncheckConvo = false;
+        public bool removeCreature = false;
+        public bool deleteItemUsedScript = false;
+        public int indexOfPCtoLastUseItem = 0;
+        public bool com_showGrid = false;
+        public bool playMusic = false;
+        public bool playButtonSounds = false;
+        public bool playButtonHaptic = false;
+        public bool showTutorialParty = true;
+        public bool showTutorialInventory = true;
+        public bool showTutorialCombat = true;
+        public bool showAutosaveMessage = true;
+        public bool allowAutosave = true;
         public int combatAnimationSpeed = 25;
         private string onHeartBeatLogicTree = "none";
         private string onHeartBeatParms = "";
@@ -165,39 +166,41 @@ namespace IB2Toolset
         public int numberOfPlayerMadePcsAllowed
         {
             get { return _numberOfPlayerMadePcsAllowed; }
-            set {
-                    if (value > 6)
-                    {
-                        _numberOfPlayerMadePcsAllowed = 6;
-                    }
-                    else if (value < 1)
-                    {
-                        _numberOfPlayerMadePcsAllowed = 1;
-                    }
-                    else
-                    {
-                        _numberOfPlayerMadePcsAllowed = value;
-                    }
+            set
+            {
+                if (value > 6)
+                {
+                    _numberOfPlayerMadePcsAllowed = 6;
                 }
+                else if (value < 1)
+                {
+                    _numberOfPlayerMadePcsAllowed = 1;
+                }
+                else
+                {
+                    _numberOfPlayerMadePcsAllowed = value;
+                }
+            }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The maximum total number of players that can be in the party (only values of 1-6 accepted)")]
         public int MaxPartySize
         {
             get { return maxPartySize; }
-            set {
-                    if (value > 6)
-                    {
-                        maxPartySize = 6;
-                    }
-                    else if (value < 1)
-                    {
-                        maxPartySize = 1;
-                    }
-                    else
-                    {
-                        maxPartySize = value;
-                    }
+            set
+            {
+                if (value > 6)
+                {
+                    maxPartySize = 6;
                 }
+                else if (value < 1)
+                {
+                    maxPartySize = 1;
+                }
+                else
+                {
+                    maxPartySize = value;
+                }
+            }
         }
         [Editor(typeof(MultilineStringEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Description of the Module")]
@@ -229,7 +232,7 @@ namespace IB2Toolset
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The duration in real time milliseconds after which a new turn on main map takes place. Default is 1500, which 1.5 seconds.")]
         public int realTimeTimerLengthInMilliSeconds
         {
-            get {return _realTimeTimerLengthInMilliSeconds;}
+            get { return _realTimeTimerLengthInMilliSeconds; }
             set { _realTimeTimerLengthInMilliSeconds = value; }
         }
 
@@ -246,7 +249,7 @@ namespace IB2Toolset
             get { return _startingArea; }
             set { _startingArea = value; }
         }
-        
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Starting X location in starting area")]
         public int startingPlayerPositionX
         {
@@ -348,6 +351,6 @@ namespace IB2Toolset
                     MessageBox.Show("failed to open all files: " + ex.ToString() + ex.Message);
                 }
             }
-        }     
+        }
     }
 }

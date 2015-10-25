@@ -18,8 +18,7 @@ namespace IB2Toolset
         public string ArmorClassDisplayInfo = "Defines the way Armor Class is displayed. Ascending goes from 10 -> 30+ (think 3e) and Descending goes from 10 -> -10- (think 1e)";
         public string toHitBonusFromBehindInfo = "To hit bonus when attacking from behind";
         public string useLuckInfo = "Luck is an additional attribute that's heigh wehn the attribute scores of a char are low; can e.g. be checked by authors for special event or dialgoue situations";
-
-
+        public string rollingSystemInfo = "The 3d6 system generates results between 3 and 18, by three times adding numbers from 1 to 6; the 6+d12 method generates results from 7 to 18 by adding 6 to a range of numbers from 1 - 12.";
 
         public RulesEditor(Module m, ParentForm pf)
         {
@@ -75,6 +74,16 @@ namespace IB2Toolset
             else
             {
                 rbtnDoNotUseLuck.Checked = true;
+            }
+
+            // decide for attribute rolling system
+            if (mod.use3d6)
+            {
+                rbtnUse3d6.Checked = true;
+            }
+            else
+            {
+                rbtnUse6Plusd12.Checked = true;
             }
         }
 
@@ -160,7 +169,7 @@ namespace IB2Toolset
         {
             mod.attackFromBehindToHitModifier = 4;
         }
-        
+
         #endregion
         #region use Luck
         private void gbUseLuck_MouseHover(object sender, EventArgs e)
@@ -168,10 +177,6 @@ namespace IB2Toolset
             rtxtInfo.Text = useLuckInfo;
         }
         private void rbtnUseLuck_MouseHover(object sender, EventArgs e)
-        {
-            rtxtInfo.Text = useLuckInfo;
-        }
-        private void rbtnUseLuckHover(object sender, EventArgs e)
         {
             rtxtInfo.Text = useLuckInfo;
         }
@@ -190,6 +195,28 @@ namespace IB2Toolset
 
         #endregion
 
+        #region Decide for attribute rolling system
+        private void gbRollingSystem_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = rollingSystemInfo;
+        }
+        private void rbtnUse3d6_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = rollingSystemInfo;
+        }
+        private void rbtnUse6Plusd12_MouseHover(object sender, EventArgs e)
+        {
+            rtxtInfo.Text = rollingSystemInfo;
+        }
+        private void rbtnUse3d6_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.use3d6 = true;
+        }
+        private void rbtnUse6Plusd12_CheckedChanged(object sender, EventArgs e)
+        {
+            mod.use3d6 = false;
+        }
+        #endregion
 
         private void splitContainer1_Panel1_MouseHover(object sender, EventArgs e)
         {
