@@ -105,6 +105,7 @@ namespace IB2Toolset
         public int attackFromBehindToHitModifier = 2;
         public int attackFromBehindDamageModifier = 0;
         private bool _useOrbitronFont = false;
+        private bool _useUIBackground = false;
 
 
         #endregion
@@ -160,6 +161,13 @@ namespace IB2Toolset
         {
             get { return _useOrbitronFont; }
             set { _useOrbitronFont = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using UI background graphics.")]
+        public bool useUIBackground
+        {
+            get { return _useUIBackground; }
+            set { _useUIBackground = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The total number of player made characters allowed in the party (default is 1, max PCs in a party is 6)")]
