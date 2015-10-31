@@ -14,13 +14,13 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace IB2Toolset
 {
-    public struct selectionStruct
+    /*public struct selectionStruct
     {
         public int index;
         public int oldIndex;
         public int x, y;
-    }
-
+    }*/
+    
     public partial class LevelEditor : DockContent
     {
         public ParentForm prntForm;
@@ -422,7 +422,7 @@ namespace IB2Toolset
                             crtBitmapList.Add(newBitmap);
                         }
                     }*/
-                    #endregion
+/*                  #endregion
                     #region Prop Selected
                     if (prntForm.PropSelected)
                     {
@@ -455,7 +455,7 @@ namespace IB2Toolset
                         newProp.Location = new Point(gridx, gridy);
                         area.AreaPropList.propsList.Add(newProp);*/
                         // show the item on the map
-                        if (le_mod.moduleName != "NewModule")
+/*                        if (le_mod.moduleName != "NewModule")
                         {
                             //Prop prp = le_selectedProp.DeepCopy();
                             //prp.LoadPropSpriteStuffForTS(prntForm._mainDirectory + "\\modules\\" + le_mod.ModuleFolderName);
@@ -925,7 +925,7 @@ namespace IB2Toolset
                         selectedBitmap = le_selectedCreature.CharSprite.Image;
                         selectedBitmapSize = le_selectedCreature.Size;
                     }*/
-                }
+/*                }
                 else if (prntForm.PropSelected)
                 {
                     string selectedProp = prntForm.selectedLevelMapPropTag;
@@ -1126,4 +1126,5 @@ namespace IB2Toolset
             }
         }        
     }
+    */
 }

@@ -175,6 +175,8 @@
       <DependentUpon>RulesEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Schedules.cs" />
+    <Compile Include="TileBitmapNamePair.cs" />
+    <Compile Include="TileEnc.cs" />
     <Compile Include="VariablesEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,12 +199,6 @@
     <Compile Include="Creature.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="Encounter.cs" />
-    <Compile Include="EncounterBuilder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EncounterBuilder.designer.cs">
-      <DependentUpon>EncounterBuilder.cs</DependentUpon>
-    </Compile>
     <Compile Include="GlobalInt.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Journal.cs" />
@@ -245,12 +241,6 @@
     </Compile>
     <Compile Include="JournalEditor.Designer.cs">
       <DependentUpon>JournalEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LevelEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LevelEditor.designer.cs">
-      <DependentUpon>LevelEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="LogForm.cs">
       <SubType>Form</SubType>
@@ -365,9 +355,6 @@
     <EmbeddedResource Include="WorldMapEditor.resx">
       <DependentUpon>WorldMapEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EncounterBuilder.resx">
-      <DependentUpon>EncounterBuilder.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RenameDialog.resx">
       <DependentUpon>RenameDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -382,9 +369,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="JournalEditor.resx">
       <DependentUpon>JournalEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LevelEditor.resx">
-      <DependentUpon>LevelEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogForm.resx">
       <DependentUpon>LogForm.cs</DependentUpon>

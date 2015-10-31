@@ -12,6 +12,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace IB2Toolset
 {
+    /*
     public partial class EncounterBuilder : DockContent
     {
         public ParentForm prntForm;
@@ -299,7 +300,7 @@ namespace IB2Toolset
                 currentPoint = new Point(gridX, gridY);
                 renderSelected(gridX, gridY);
             }*/
-        }
+        /*}
         private void panelView_MouseDown(object sender, MouseEventArgs e)
         {            
             int col = e.X / sqr;
@@ -502,7 +503,7 @@ namespace IB2Toolset
                 }
                 catch { }
             }*/
-        }
+        /*}
         private void lbxEncounters_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (lbxEncounters.SelectedIndex >= 0)
@@ -667,8 +668,8 @@ namespace IB2Toolset
 
         
     }
-
-    public class TileBitmapNamePair
+    */
+    /*public class TileBitmapNamePair
     {
         public Bitmap bitmap = null;
         public string filename = "";
@@ -681,5 +682,5 @@ namespace IB2Toolset
             bitmap = bm;
             filename = fname;
         }
-    }
+    }*/
 }

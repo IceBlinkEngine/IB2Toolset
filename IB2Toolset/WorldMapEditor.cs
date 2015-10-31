@@ -14,6 +14,13 @@ using System.Drawing.Imaging;
 
 namespace IB2Toolset
 {
+    public struct selectionStruct
+    {
+        public int index;
+        public int oldIndex;
+        public int x, y;
+    }
+
     public partial class WorldMapEditor : DockContent
     {
         public ParentForm prntForm;
@@ -255,26 +262,47 @@ namespace IB2Toolset
                             if (getTileByName(tile.Layer1Filename) != null)
                             {
                                 lyr1 = getTileByName(tile.Layer1Filename).bitmap;
+                                //lyr1 = (Bitmap)getTileByName(tile.Layer1Filename).bitmap.Clone();
+                                //flip about y-axis layer
+                                //lyr1 = Flip(lyr1, tile.Layer1Flip);
+                                //rotate layer
+                                //lyr1 = Rotate(lyr1, tile.Layer1Rotate);
                                 src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
                             }
                             if (getTileByName(tile.Layer2Filename) != null)
                             {
                                 lyr2 = getTileByName(tile.Layer2Filename).bitmap;
+                                //flip about y-axis layer
+                                //lyr2 = Flip(lyr2, tile.Layer2Flip);
+                                //rotate layer
+                                //lyr2 = Rotate(lyr2, tile.Layer2Rotate);
                                 src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
                             }
                             if (getTileByName(tile.Layer3Filename) != null)
                             {
                                 lyr3 = getTileByName(tile.Layer3Filename).bitmap;
+                                //flip about y-axis layer
+                                //lyr3 = Flip(lyr3, tile.Layer3Flip);
+                                //rotate layer
+                                //lyr3 = Rotate(lyr3, tile.Layer3Rotate);
                                 src3 = new Rectangle(0, 0, lyr3.Width, lyr3.Height);
                             }
                             if (getTileByName(tile.Layer4Filename) != null)
                             {
                                 lyr4 = getTileByName(tile.Layer4Filename).bitmap;
+                                //flip about y-axis layer
+                                //lyr4 = Flip(lyr4, tile.Layer4Flip);
+                                //rotate layer
+                                //lyr4 = Rotate(lyr4, tile.Layer4Rotate);
                                 src4 = new Rectangle(0, 0, lyr4.Width, lyr4.Height);
                             }
                             if (getTileByName(tile.Layer5Filename) != null)
                             {
                                 lyr5 = getTileByName(tile.Layer5Filename).bitmap;
+                                //flip about y-axis layer
+                                //lyr5 = Flip(lyr5, tile.Layer5Flip);
+                                //rotate layer
+                                //lyr5 = Rotate(lyr5, tile.Layer5Rotate);
                                 src5 = new Rectangle(0, 0, lyr5.Width, lyr5.Height);
                             }
                             
@@ -503,7 +531,7 @@ namespace IB2Toolset
             lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
             if (prntForm.PropSelected)
             {
-                /* TODO re-implement continuous drawing of props once converted to use Direct2D
+                // TODO re-implement continuous drawing of props once converted to use Direct2D
                 refreshMap(true);
                 try
                 {
@@ -520,7 +548,7 @@ namespace IB2Toolset
                 catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
                 //save changes
                 UpdatePB();
-                */
+                
             }
             else if (currentPoint != new Point(gridX, gridY))
             {
@@ -1331,6 +1359,35 @@ namespace IB2Toolset
             lblMapSizeX.Text = area.MapSizeX.ToString();
             lblMapSizeY.Text = area.MapSizeY.ToString();
             resetPanelAndDeviceSize();
+        }
+        public Bitmap Flip(Bitmap src, bool doFlip)
+        {
+            if (doFlip)
+            {
+                src.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            }            
+            return src;
+        }
+        public Bitmap Rotate(Bitmap src, int angle)
+        {
+            //0=0, 1=90, 2=180, 3=270
+            if (angle == 1)
+            {
+                src.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            }
+            else if (angle == 1)
+            {
+                src.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            }
+            else if (angle == 3)
+            {
+                src.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            }
+            else // angle == 0
+            {
+                //no rotate, just return original Bitmap
+            }
+            return src;
         }
         #endregion
 

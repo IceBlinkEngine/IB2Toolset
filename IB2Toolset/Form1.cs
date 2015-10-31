@@ -921,11 +921,6 @@ namespace IB2Toolset
         {
            frmIceBlinkProperties.propertyGrid1.SelectedObject = mod;
         }
-        private void encounterEditorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EncounterBuilder encounterEdit = new EncounterBuilder(mod, this);
-            encounterEdit.ShowDialog();
-        }
         private void journalEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             JournalEditor journalEdit = new JournalEditor(mod, this);
