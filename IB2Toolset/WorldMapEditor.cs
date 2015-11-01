@@ -228,6 +228,11 @@ namespace IB2Toolset
         {
             this.Cursor = Cursors.WaitCursor;
             if (area == null) { return; }
+            //if area is small, always do a full redraw (refreshAll == true)
+            if ((area.MapSizeX < 20) && (area.MapSizeY < 20))
+            {
+                refreshAll = true;
+            }
             if (refreshAll)
             {
                 device.Clear(Color.Gainsboro);
