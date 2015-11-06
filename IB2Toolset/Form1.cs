@@ -438,7 +438,7 @@ namespace IB2Toolset
             fillScriptList();
             loadSpriteDropdownList();
             loadSoundDropdownList();
-            loadLogicTreeDropdownList();
+            //loadLogicTreeDropdownList();
             loadIBScriptDropdownList();
             loadMusicDropdownList();
             loadConversationDropdownList();
