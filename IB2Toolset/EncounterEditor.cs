@@ -272,9 +272,10 @@ namespace IB2Toolset
             try
             {
                 //draw map from single image
+                
                 if ((thisEnc.UseMapImage) && (thisEnc.MapImage != "none"))
                 {
-                    //draw single image type map
+                    #region Draw Single Image Map
                     if (mapBitmap == null)
                     {                        
                         if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + thisEnc.MapImage + ".jpg"))
@@ -329,11 +330,137 @@ namespace IB2Toolset
                             }
                         }
                     }
+                    #endregion
                 }
-                else
+                else //draw tile map instead
                 {
+                    #region Draw Layer1
+                    if (checkBox1.Checked)
+                    {
+                        for (int y = 0; y < thisEnc.MapSizeY; y++)
+                        {
+                            for (int x = 0; x < thisEnc.MapSizeX; x++)
+                            {
+                                if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                                {
+                                    TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                                    Bitmap lyr1 = null;
+                                    if (getTileByName(tile.Layer1Filename) != null)
+                                    {
+                                        lyr1 = getTileByName(tile.Layer1Filename).bitmap;
+                                    }
+                                    Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                                    if (lyr1 != null)
+                                    {
+                                        float scalerX = lyr1.Width / 100;
+                                        float scalerY = lyr1.Height / 100;
+                                        Rectangle src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                        Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                        device.DrawImage(lyr1, dst, src1, GraphicsUnit.Pixel);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                    #region Draw Layer2
+                    if (checkBox2.Checked)
+                    {
+                        for (int y = 0; y < thisEnc.MapSizeY; y++)
+                        {
+                            for (int x = 0; x < thisEnc.MapSizeX; x++)
+                            {
+                                if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                                {
+                                    TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                                    Bitmap lyr1 = null;
+                                    if (getTileByName(tile.Layer2Filename) != null)
+                                    {
+                                        lyr1 = getTileByName(tile.Layer2Filename).bitmap;
+                                    }
+                                    Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                                    if (lyr1 != null)
+                                    {
+                                        float scalerX = lyr1.Width / 100;
+                                        float scalerY = lyr1.Height / 100;
+                                        Rectangle src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                        Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                        device.DrawImage(lyr1, dst, src1, GraphicsUnit.Pixel);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                    #region Draw Layer3
+                    if (checkBox3.Checked)
+                    {
+                        for (int y = 0; y < thisEnc.MapSizeY; y++)
+                        {
+                            for (int x = 0; x < thisEnc.MapSizeX; x++)
+                            {
+                                if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                                {
+                                    TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                                    Bitmap lyr1 = null;
+                                    if (getTileByName(tile.Layer3Filename) != null)
+                                    {
+                                        lyr1 = getTileByName(tile.Layer3Filename).bitmap;
+                                    }
+                                    Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                                    if (lyr1 != null)
+                                    {
+                                        float scalerX = lyr1.Width / 100;
+                                        float scalerY = lyr1.Height / 100;
+                                        Rectangle src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                        Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                        device.DrawImage(lyr1, dst, src1, GraphicsUnit.Pixel);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                    #region Draw Grid
                     //draw tile map
-                    for (int y = 0; y < thisEnc.MapSizeY; y++)
+                    if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                    {
+                        for (int y = 0; y < thisEnc.MapSizeY; y++)
+                        {
+                            for (int x = 0; x < thisEnc.MapSizeX; x++)
+                            {
+                                if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                                {
+                                    TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                                    Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                                    //draw square walkmesh and LoS stuff
+                                    Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
+
+                                    if (tile.LoSBlocked)
+                                    {
+                                        device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                                        device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                                    }
+                                    if (tile.Walkable)
+                                    {
+                                        device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
+                                    }
+                                    else
+                                    {
+                                        target = new Rectangle(x * sqr + 1, y * sqr + 1, sqr - 1, sqr - 1);
+                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                    #region Old system for reference (to be deleted after new system is fully tested)
+                    //draw tile map
+                    /*for (int y = 0; y < thisEnc.MapSizeY; y++)
                     {
                         for (int x = 0; x < thisEnc.MapSizeX; x++)
                         {
@@ -416,7 +543,8 @@ namespace IB2Toolset
                                 }
                             }
                         }
-                    }
+                    }*/
+                    #endregion
                 }
 
                 //draw creatures

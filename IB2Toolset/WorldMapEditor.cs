@@ -437,7 +437,7 @@ namespace IB2Toolset
                     }
                 }
                 #endregion
-                #region Draw Layer 1
+                #region Old stuff for reference (to be deleted later once fully tested)
                 /*for (int y = 0; y < area.MapSizeY; y++)
                 {
                     for (int x = 0; x < area.MapSizeX; x++)
