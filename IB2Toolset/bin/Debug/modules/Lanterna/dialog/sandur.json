@@ -475,7 +475,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_sandur.png",
+  "NpcPortraitBitmap": "ptr_sandur.png",
   "DefaultNpcName": "Sandur",
   "NextIdNum": 200
 }

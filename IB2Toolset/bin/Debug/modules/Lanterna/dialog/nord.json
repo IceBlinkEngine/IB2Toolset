@@ -927,7 +927,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_nord.png",
+  "NpcPortraitBitmap": "ptr_nord.png",
   "DefaultNpcName": "Nord",
   "NextIdNum": 200
 }

@@ -1,8 +1,11 @@
 {
   "tokenFilename": "tkn_galdor",
+  "portraitFilename": "ptr_galdor",
   "combatFacingLeft": true,
+  "combatFacing": 4,
   "combatLocX": 0,
   "combatLocY": 0,
+  "moveDistance": 5,
   "knownSpellsTags": [
     "mageBolt",
     "web",
@@ -26,6 +29,8 @@
   "dexterity": 10,
   "intelligence": 10,
   "charisma": 10,
+  "constitution": 10,
+  "wisdom": 10,
   "AC": 10,
   "classBonus": 0,
   "baseAttBonus": 1,
@@ -53,14 +58,14 @@
   },
   "BodyRefs": {
     "resref": "studdedLeather",
-    "tag": "studdedLeather_10339",
+    "tag": "studdedLeather_10996",
     "name": "Studded Leather Armor",
     "canNotBeUnequipped": false,
     "quantity": 1
   },
   "MainHandRefs": {
     "resref": "lbow1",
-    "tag": "lbow1_10349",
+    "tag": "lbow1_11006",
     "name": "Long Bow",
     "canNotBeUnequipped": false,
     "quantity": 1
@@ -93,6 +98,13 @@
     "canNotBeUnequipped": false,
     "quantity": 1
   },
+  "AmmoRefs": {
+    "resref": "none",
+    "tag": "none",
+    "name": "none",
+    "canNotBeUnequipped": false,
+    "quantity": 1
+  },
   "damageTypeResistanceTotalAcid": 0,
   "damageTypeResistanceTotalCold": 0,
   "damageTypeResistanceTotalNormal": 0,
@@ -114,6 +126,8 @@
   "baseDex": 18,
   "baseInt": 14,
   "baseCha": 10,
+  "baseCon": 12,
+  "baseWis": 10,
   "ACBase": 10,
   "XP": 0
 }

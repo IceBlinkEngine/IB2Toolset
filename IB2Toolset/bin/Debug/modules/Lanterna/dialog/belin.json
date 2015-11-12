@@ -58,7 +58,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_belin.png",
+  "NpcPortraitBitmap": "ptr_belin.png",
   "DefaultNpcName": "Belin",
   "NextIdNum": 0
 }

@@ -1,8 +1,11 @@
 {
   "tokenFilename": "tkn_veloria",
+  "portraitFilename": "ptr_veloria",
   "combatFacingLeft": true,
+  "combatFacing": 4,
   "combatLocX": 0,
   "combatLocY": 0,
+  "moveDistance": 5,
   "knownSpellsTags": [
     "mageBolt",
     "sleep",
@@ -26,6 +29,8 @@
   "dexterity": 10,
   "intelligence": 10,
   "charisma": 10,
+  "constitution": 10,
+  "wisdom": 10,
   "AC": 10,
   "classBonus": 0,
   "baseAttBonus": 1,
@@ -60,7 +65,7 @@
   },
   "MainHandRefs": {
     "resref": "sling",
-    "tag": "sling_10540",
+    "tag": "sling_11116",
     "name": "Sling",
     "canNotBeUnequipped": false,
     "quantity": 1
@@ -93,6 +98,13 @@
     "canNotBeUnequipped": false,
     "quantity": 1
   },
+  "AmmoRefs": {
+    "resref": "none",
+    "tag": "none",
+    "name": "none",
+    "canNotBeUnequipped": false,
+    "quantity": 1
+  },
   "damageTypeResistanceTotalAcid": 0,
   "damageTypeResistanceTotalCold": 0,
   "damageTypeResistanceTotalNormal": 0,
@@ -112,8 +124,10 @@
   "baseReflex": 1,
   "baseStr": 10,
   "baseDex": 18,
-  "baseInt": 14,
+  "baseInt": 16,
   "baseCha": 12,
+  "baseCon": 10,
+  "baseWis": 12,
   "ACBase": 10,
   "XP": 0
 }

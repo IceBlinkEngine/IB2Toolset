@@ -130,7 +130,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_earawen.png",
+  "NpcPortraitBitmap": "ptr_earawen.png",
   "DefaultNpcName": "Earawen",
   "NextIdNum": 0
 }

@@ -1588,7 +1588,7 @@
   "AreaSounds": "none",
   "AreaSoundsDelay": 0,
   "AreaSoundsDelayRandomAdder": 0,
-  "NextIdNumber": 120,
+  "NextIdNumber": 158,
   "OnHeartBeatLogicTree": "none",
   "OnHeartBeatParms": "",
   "OnHeartBeatIBScript": "none",

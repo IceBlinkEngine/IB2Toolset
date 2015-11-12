@@ -130,7 +130,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_adela.png",
+  "NpcPortraitBitmap": "ptr_adela.png",
   "DefaultNpcName": "Adela",
   "NextIdNum": 0
 }

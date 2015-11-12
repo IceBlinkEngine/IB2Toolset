@@ -173,7 +173,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_andy.png",
+  "NpcPortraitBitmap": "ptr_andy.png",
   "DefaultNpcName": "Andy",
   "NextIdNum": 10
 }

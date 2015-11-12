@@ -859,7 +859,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_dalin.png",
+  "NpcPortraitBitmap": "ptr_dalin.png",
   "DefaultNpcName": "Dalin",
   "NextIdNum": 0
 }

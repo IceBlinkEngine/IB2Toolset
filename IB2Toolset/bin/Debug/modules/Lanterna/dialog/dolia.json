@@ -130,7 +130,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_dolia.png",
+  "NpcPortraitBitmap": "ptr_dolia.png",
   "DefaultNpcName": "Dolia",
   "NextIdNum": 0
 }

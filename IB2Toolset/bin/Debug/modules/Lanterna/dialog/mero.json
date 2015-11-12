@@ -213,7 +213,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_mero.png",
+  "NpcPortraitBitmap": "ptr_mero.png",
   "DefaultNpcName": "Mero",
   "NextIdNum": 0
 }

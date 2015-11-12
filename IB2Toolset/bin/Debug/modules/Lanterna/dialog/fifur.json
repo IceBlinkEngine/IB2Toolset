@@ -188,7 +188,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_fifur.png",
+  "NpcPortraitBitmap": "ptr_fifur.png",
   "DefaultNpcName": "Fifur",
   "NextIdNum": 0
 }

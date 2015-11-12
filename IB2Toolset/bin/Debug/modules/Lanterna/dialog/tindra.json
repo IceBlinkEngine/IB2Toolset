@@ -611,7 +611,7 @@
   "Narration": false,
   "PartyChat": true,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_tindra.png",
+  "NpcPortraitBitmap": "ptr_tindra.png",
   "DefaultNpcName": "Tindra",
   "NextIdNum": 300
 }

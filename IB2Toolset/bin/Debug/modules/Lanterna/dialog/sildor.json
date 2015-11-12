@@ -843,7 +843,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_sildor.png",
+  "NpcPortraitBitmap": "ptr_sildor.png",
   "DefaultNpcName": "Sildor",
   "NextIdNum": 0
 }

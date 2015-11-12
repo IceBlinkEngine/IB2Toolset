@@ -1,8 +1,11 @@
 {
   "tokenFilename": "tkn_dalin",
+  "portraitFilename": "blank",
   "combatFacingLeft": true,
+  "combatFacing": 4,
   "combatLocX": 0,
   "combatLocY": 0,
+  "moveDistance": 5,
   "knownSpellsTags": [],
   "knownSpellsList": [],
   "knownTraitsTags": [
@@ -19,6 +22,8 @@
   "dexterity": 10,
   "intelligence": 10,
   "charisma": 10,
+  "constitution": 10,
+  "wisdom": 10,
   "AC": 10,
   "classBonus": 0,
   "baseAttBonus": 1,
@@ -46,21 +51,21 @@
   },
   "BodyRefs": {
     "resref": "chainmail",
-    "tag": "chainmail_9907",
+    "tag": "chainmail_10924",
     "name": "Chainmail Armor",
     "canNotBeUnequipped": false,
     "quantity": 1
   },
   "MainHandRefs": {
     "resref": "lsword01",
-    "tag": "lsword01_9920",
+    "tag": "lsword01_10937",
     "name": "Long Sword",
     "canNotBeUnequipped": false,
     "quantity": 1
   },
   "OffHandRefs": {
     "resref": "largeshield",
-    "tag": "largeshield_9929",
+    "tag": "largeshield_10946",
     "name": "Large Shield",
     "canNotBeUnequipped": false,
     "quantity": 1
@@ -86,6 +91,13 @@
     "canNotBeUnequipped": false,
     "quantity": 1
   },
+  "AmmoRefs": {
+    "resref": "none",
+    "tag": "none",
+    "name": "none",
+    "canNotBeUnequipped": false,
+    "quantity": 1
+  },
   "damageTypeResistanceTotalAcid": 0,
   "damageTypeResistanceTotalCold": 0,
   "damageTypeResistanceTotalNormal": 0,
@@ -105,8 +117,10 @@
   "baseReflex": 2,
   "baseStr": 17,
   "baseDex": 15,
-  "baseInt": 16,
+  "baseInt": 13,
   "baseCha": 14,
+  "baseCon": 14,
+  "baseWis": 15,
   "ACBase": 10,
   "XP": 1600
 }

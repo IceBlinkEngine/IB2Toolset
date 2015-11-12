@@ -144,7 +144,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "prp_captive.png",
+  "NpcPortraitBitmap": "ptr_slave.png",
   "DefaultNpcName": "Slave",
   "NextIdNum": 0
 }

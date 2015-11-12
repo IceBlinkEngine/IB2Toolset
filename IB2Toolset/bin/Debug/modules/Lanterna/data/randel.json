@@ -1,8 +1,11 @@
 {
   "tokenFilename": "tkn_randel",
+  "portraitFilename": "ptr_randel",
   "combatFacingLeft": true,
+  "combatFacing": 4,
   "combatLocX": 0,
   "combatLocY": 0,
+  "moveDistance": 5,
   "knownSpellsTags": [],
   "knownSpellsList": [],
   "knownTraitsTags": [
@@ -18,6 +21,8 @@
   "dexterity": 10,
   "intelligence": 10,
   "charisma": 10,
+  "constitution": 10,
+  "wisdom": 10,
   "AC": 10,
   "classBonus": 0,
   "baseAttBonus": 1,
@@ -45,14 +50,14 @@
   },
   "BodyRefs": {
     "resref": "larmor1",
-    "tag": "larmor1_10400",
+    "tag": "larmor1_11030",
     "name": "Leather Armor",
     "canNotBeUnequipped": false,
     "quantity": 1
   },
   "MainHandRefs": {
     "resref": "lsword01",
-    "tag": "lsword01_10412",
+    "tag": "lsword01_11042",
     "name": "Long Sword",
     "canNotBeUnequipped": false,
     "quantity": 1
@@ -85,6 +90,13 @@
     "canNotBeUnequipped": false,
     "quantity": 1
   },
+  "AmmoRefs": {
+    "resref": "none",
+    "tag": "none",
+    "name": "none",
+    "canNotBeUnequipped": false,
+    "quantity": 1
+  },
   "damageTypeResistanceTotalAcid": 0,
   "damageTypeResistanceTotalCold": 0,
   "damageTypeResistanceTotalNormal": 0,
@@ -106,6 +118,8 @@
   "baseDex": 14,
   "baseInt": 12,
   "baseCha": 11,
+  "baseCon": 14,
+  "baseWis": 10,
   "ACBase": 10,
   "XP": 150
 }
