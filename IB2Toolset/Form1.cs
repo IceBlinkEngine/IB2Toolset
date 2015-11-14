@@ -1728,6 +1728,99 @@ namespace IB2Toolset
             rulesEdit.ShowDialog();
         }
 
-        
+        private void tilesUsedInModuleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Area areaObj = new Area();
+            List<string> tilenames = new List<string>();
+            //iterate over each area and add tile names to tilenames if not already contained
+            foreach (string ar in mod.moduleAreasList)
+            {
+                // try and load the file selected if it exists
+                string g_directory = this._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+                if (File.Exists(g_directory + "\\" + ar + ".lvl"))
+                {
+                    try
+                    {
+                        areaObj = areaObj.loadAreaFile(g_directory + "\\" + ar + ".lvl");
+                        foreach (Tile t in areaObj.Tiles)
+                        {
+                            if (!tilenames.Contains(t.Layer1Filename)) { tilenames.Add(t.Layer1Filename); }
+                            if (!tilenames.Contains(t.Layer2Filename)) { tilenames.Add(t.Layer2Filename); }
+                            if (!tilenames.Contains(t.Layer3Filename)) { tilenames.Add(t.Layer3Filename); }
+                            if (!tilenames.Contains(t.Layer4Filename)) { tilenames.Add(t.Layer4Filename); }
+                            if (!tilenames.Contains(t.Layer5Filename)) { tilenames.Add(t.Layer5Filename); }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("failed to open file: " + ex.ToString());
+                    }                    
+                }                
+            }
+            
+            //iterate over each encounter and add tile names to List<string> if not already contained
+            foreach (Encounter enc in encountersList)
+            {
+                foreach (TileEnc t in enc.encounterTiles)
+                {
+                    if (!tilenames.Contains(t.Layer1Filename)) { tilenames.Add(t.Layer1Filename); }
+                    if (!tilenames.Contains(t.Layer2Filename)) { tilenames.Add(t.Layer2Filename); }
+                    if (!tilenames.Contains(t.Layer3Filename)) { tilenames.Add(t.Layer3Filename); }
+                }
+            }
+            //write out list to a file 'tiles_used.txt', one tile per line
+            if (Directory.Exists(this._mainDirectory + "\\modules\\" + mod.moduleName + "\\tiles\\tiles_used"))
+            {
+                try
+                {
+                    //delete folder and all contents first then create a clean folder to fill
+                    Directory.Delete(this._mainDirectory + "\\modules\\" + mod.moduleName + "\\tiles\\tiles_used", true);
+                    createDirectory(this._mainDirectory + "\\modules\\" + mod.moduleName + "\\tiles\\tiles_used");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to delete 'tiles_used' folder and then create a new version: " + ex.ToString());
+                }
+            }  
+            else
+            {
+                try
+                {
+                    createDirectory(this._mainDirectory + "\\modules\\" + mod.moduleName + "\\tiles\\tiles_used");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to create the folder 'tiles_used': " + ex.ToString());
+                }
+            }
+            try
+            {
+                tilenames.Sort();
+                File.WriteAllLines(this._mainDirectory + "\\modules\\" + mod.moduleName + "\\tiles\\tiles_used\\00_tiles_used_list.txt", tilenames);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to create a text file with list of tiles used: " + ex.ToString());
+            }
+            //create a folder 'tiles_used' and copy the tiles into it
+            foreach (string s in tilenames)
+            {
+                try
+                {
+                    File.Copy(
+                        this._mainDirectory + "\\modules\\" + mod.moduleName + "\\tiles\\" + s + ".png",
+                        this._mainDirectory + "\\modules\\" + mod.moduleName + "\\tiles\\tiles_used\\" + s + ".png",
+                        true);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to copy file: s  " + ex.ToString());
+                }
+            }
+
+            MessageBox.Show("A list of tiles and the tile files have been copied to a folder called 'tiles_used' in your " +
+                            "module's 'tiles' folder. If the 'tiles_used' folder existed before, it was deleted first and then updated " + 
+                            "to the currently used tiles in your module.");
+        }
     }
 }
