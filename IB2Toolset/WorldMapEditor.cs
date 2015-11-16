@@ -247,113 +247,168 @@ namespace IB2Toolset
                     device.DrawImage(gameMapBitmap, dstBG, srcBG, GraphicsUnit.Pixel); 
                 }
                 //draw map
-                for (int y = 0; y < area.MapSizeY; y++)                
+                #region Draw Layer 1
+                if (checkBox1.Checked)
+                {
+                    for (int y = 0; y < area.MapSizeY; y++)
+                    {
+                        for (int x = 0; x < area.MapSizeX; x++)
+                        {
+                            if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                            {
+                                Tile tile = area.Tiles[y * area.MapSizeX + x];
+                                Bitmap lyr1 = null;
+                                //Rectangle src1 = new Rectangle(0, 0, 100, 100);
+                                if (getTileByName(tile.Layer1Filename) != null)
+                                {
+                                    lyr1 = getTileByName(tile.Layer1Filename).bitmap;
+                                    //lyr1 = (Bitmap)getTileByName(tile.Layer1Filename).bitmap.Clone();
+                                    //flip about y-axis layer
+                                    //lyr1 = Flip(lyr1, tile.Layer1Flip);
+                                    //rotate layer
+                                    //lyr1 = Rotate(lyr1, tile.Layer1Rotate);
+                                    //src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                }
+                                //Rectangle src = new Rectangle(0, 0, 100, 100);
+                                //Rectangle dst = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                                //draw layer 1 first
+                                if (lyr1 != null)
+                                {
+                                    float scalerX = lyr1.Width / 100;
+                                    float scalerY = lyr1.Height / 100;
+                                    Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                    Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+                #region Draw Layer 2
+                if (checkBox2.Checked)
+                {
+                    for (int y = 0; y < area.MapSizeY; y++)
+                    {
+                        for (int x = 0; x < area.MapSizeX; x++)
+                        {
+                            if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                            {
+                                Tile tile = area.Tiles[y * area.MapSizeX + x];
+                                Bitmap lyr1 = null;
+                                if (getTileByName(tile.Layer2Filename) != null)
+                                {
+                                    lyr1 = getTileByName(tile.Layer2Filename).bitmap;
+                                }
+                                if (lyr1 != null)
+                                {
+                                    float scalerX = lyr1.Width / 100;
+                                    float scalerY = lyr1.Height / 100;
+                                    Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                    Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+                #region Draw Layer 3
+                if (checkBox3.Checked)
+                {
+                    for (int y = 0; y < area.MapSizeY; y++)
+                    {
+                        for (int x = 0; x < area.MapSizeX; x++)
+                        {
+                            if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                            {
+                                Tile tile = area.Tiles[y * area.MapSizeX + x];
+                                Bitmap lyr1 = null;
+                                if (getTileByName(tile.Layer3Filename) != null)
+                                {
+                                    lyr1 = getTileByName(tile.Layer3Filename).bitmap;
+                                }
+                                if (lyr1 != null)
+                                {
+                                    float scalerX = lyr1.Width / 100;
+                                    float scalerY = lyr1.Height / 100;
+                                    Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                    Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+                #region Draw Layer 4
+                if (checkBox4.Checked)
+                {
+                    for (int y = 0; y < area.MapSizeY; y++)
+                    {
+                        for (int x = 0; x < area.MapSizeX; x++)
+                        {
+                            if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                            {
+                                Tile tile = area.Tiles[y * area.MapSizeX + x];
+                                Bitmap lyr1 = null;
+                                if (getTileByName(tile.Layer4Filename) != null)
+                                {
+                                    lyr1 = getTileByName(tile.Layer4Filename).bitmap;
+                                }
+                                if (lyr1 != null)
+                                {
+                                    float scalerX = lyr1.Width / 100;
+                                    float scalerY = lyr1.Height / 100;
+                                    Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                    Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+                #region Draw Layer 5
+                if (checkBox5.Checked)
+                {
+                    for (int y = 0; y < area.MapSizeY; y++)
+                    {
+                        for (int x = 0; x < area.MapSizeX; x++)
+                        {
+                            if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                            {
+                                Tile tile = area.Tiles[y * area.MapSizeX + x];
+                                Bitmap lyr1 = null;
+                                if (getTileByName(tile.Layer5Filename) != null)
+                                {
+                                    lyr1 = getTileByName(tile.Layer5Filename).bitmap;
+                                }
+                                if (lyr1 != null)
+                                {
+                                    float scalerX = lyr1.Width / 100;
+                                    float scalerY = lyr1.Height / 100;
+                                    Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                    Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+
+                #region Draw Grid
+                for (int y = 0; y < area.MapSizeY; y++)
                 {
                     for (int x = 0; x < area.MapSizeX; x++)
                     {
                         if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
                         {
-                            Tile tile = area.Tiles[y * area.MapSizeX + x];
-                            Bitmap lyr1 = null;
-                            Bitmap lyr2 = null;
-                            Bitmap lyr3 = null;
-                            Bitmap lyr4 = null;
-                            Bitmap lyr5 = null;
-                            Rectangle src1 = new Rectangle(0, 0, 100, 100);
-                            Rectangle src2 = new Rectangle(0, 0, 100, 100);
-                            Rectangle src3 = new Rectangle(0, 0, 100, 100);
-                            Rectangle src4 = new Rectangle(0, 0, 100, 100);
-                            Rectangle src5 = new Rectangle(0, 0, 100, 100);
-                            if (getTileByName(tile.Layer1Filename) != null)
-                            {
-                                lyr1 = getTileByName(tile.Layer1Filename).bitmap;
-                                //lyr1 = (Bitmap)getTileByName(tile.Layer1Filename).bitmap.Clone();
-                                //flip about y-axis layer
-                                //lyr1 = Flip(lyr1, tile.Layer1Flip);
-                                //rotate layer
-                                //lyr1 = Rotate(lyr1, tile.Layer1Rotate);
-                                src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
-                            }
-                            if (getTileByName(tile.Layer2Filename) != null)
-                            {
-                                lyr2 = getTileByName(tile.Layer2Filename).bitmap;
-                                //flip about y-axis layer
-                                //lyr2 = Flip(lyr2, tile.Layer2Flip);
-                                //rotate layer
-                                //lyr2 = Rotate(lyr2, tile.Layer2Rotate);
-                                src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
-                            }
-                            if (getTileByName(tile.Layer3Filename) != null)
-                            {
-                                lyr3 = getTileByName(tile.Layer3Filename).bitmap;
-                                //flip about y-axis layer
-                                //lyr3 = Flip(lyr3, tile.Layer3Flip);
-                                //rotate layer
-                                //lyr3 = Rotate(lyr3, tile.Layer3Rotate);
-                                src3 = new Rectangle(0, 0, lyr3.Width, lyr3.Height);
-                            }
-                            if (getTileByName(tile.Layer4Filename) != null)
-                            {
-                                lyr4 = getTileByName(tile.Layer4Filename).bitmap;
-                                //flip about y-axis layer
-                                //lyr4 = Flip(lyr4, tile.Layer4Flip);
-                                //rotate layer
-                                //lyr4 = Rotate(lyr4, tile.Layer4Rotate);
-                                src4 = new Rectangle(0, 0, lyr4.Width, lyr4.Height);
-                            }
-                            if (getTileByName(tile.Layer5Filename) != null)
-                            {
-                                lyr5 = getTileByName(tile.Layer5Filename).bitmap;
-                                //flip about y-axis layer
-                                //lyr5 = Flip(lyr5, tile.Layer5Flip);
-                                //rotate layer
-                                //lyr5 = Rotate(lyr5, tile.Layer5Rotate);
-                                src5 = new Rectangle(0, 0, lyr5.Width, lyr5.Height);
-                            }
-                            
-                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                            //draw layer 1 first
-                            if (checkBox1.Checked)
-                            {
-                                if (lyr1 != null)
-                                {
-                                    device.DrawImage(lyr1, target, src1, GraphicsUnit.Pixel);                                    
-                                }
-                            }
-                            //draw layer 2
-                            if (checkBox2.Checked)
-                            {
-                                if (lyr2 != null)
-                                {
-                                    device.DrawImage(lyr2, target, src2, GraphicsUnit.Pixel);                                    
-                                }
-                            }
-                            //draw layer 3
-                            if (checkBox3.Checked)
-                            {
-                                if (lyr3 != null)
-                                {
-                                    device.DrawImage(lyr3, target, src3, GraphicsUnit.Pixel);
-                                }
-                            }
-                            //draw layer 4
-                            if (checkBox4.Checked)
-                            {
-                                if (lyr4 != null)
-                                {
-                                    device.DrawImage(lyr4, target, src4, GraphicsUnit.Pixel);
-                                }
-                            }
-                            //draw layer 5
-                            if (checkBox5.Checked)
-                            {
-                                if (lyr5 != null)
-                                {
-                                    device.DrawImage(lyr5, target, src5, GraphicsUnit.Pixel);
-                                }
-                            }
+                            Tile tile = area.Tiles[y * area.MapSizeX + x];                            
                             //draw square walkmesh and LoS stuff
                             Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
+                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
                             if (chkGrid.Checked) //if show grid is turned on, draw grid squares
                             {
                                 if (tile.LoSBlocked)
@@ -381,6 +436,165 @@ namespace IB2Toolset
                         }
                     }
                 }
+                #endregion
+                #region Old stuff for reference (to be deleted later once fully tested)
+                /*for (int y = 0; y < area.MapSizeY; y++)
+                {
+                    for (int x = 0; x < area.MapSizeX; x++)
+                    {
+                        if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                        {
+                            Tile tile = area.Tiles[y * area.MapSizeX + x];
+                            Bitmap lyr1 = null;
+                            Bitmap lyr2 = null;
+                            Bitmap lyr3 = null;
+                            Bitmap lyr4 = null;
+                            Bitmap lyr5 = null;
+                            Rectangle src1 = new Rectangle(0, 0, 100, 100);
+                            Rectangle src2 = new Rectangle(0, 0, 100, 100);
+                            Rectangle src3 = new Rectangle(0, 0, 100, 100);
+                            Rectangle src4 = new Rectangle(0, 0, 100, 100);
+                            Rectangle src5 = new Rectangle(0, 0, 100, 100);
+                            if (getTileByName(tile.Layer1Filename) != null)
+                            {
+                                lyr1 = getTileByName(tile.Layer1Filename).bitmap;
+                                //lyr1 = (Bitmap)getTileByName(tile.Layer1Filename).bitmap.Clone();
+                                //flip about y-axis layer
+                                //lyr1 = Flip(lyr1, tile.Layer1Flip);
+                                //rotate layer
+                                //lyr1 = Rotate(lyr1, tile.Layer1Rotate);
+                                //src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                            }
+                            if (getTileByName(tile.Layer2Filename) != null)
+                            {
+                                lyr2 = getTileByName(tile.Layer2Filename).bitmap;
+                                //flip about y-axis layer
+                                //lyr2 = Flip(lyr2, tile.Layer2Flip);
+                                //rotate layer
+                                //lyr2 = Rotate(lyr2, tile.Layer2Rotate);
+                                //src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
+                            }
+                            if (getTileByName(tile.Layer3Filename) != null)
+                            {
+                                lyr3 = getTileByName(tile.Layer3Filename).bitmap;
+                                //flip about y-axis layer
+                                //lyr3 = Flip(lyr3, tile.Layer3Flip);
+                                //rotate layer
+                                //lyr3 = Rotate(lyr3, tile.Layer3Rotate);
+                                //src3 = new Rectangle(0, 0, lyr3.Width, lyr3.Height);
+                            }
+                            if (getTileByName(tile.Layer4Filename) != null)
+                            {
+                                lyr4 = getTileByName(tile.Layer4Filename).bitmap;
+                                //flip about y-axis layer
+                                //lyr4 = Flip(lyr4, tile.Layer4Flip);
+                                //rotate layer
+                                //lyr4 = Rotate(lyr4, tile.Layer4Rotate);
+                                //src4 = new Rectangle(0, 0, lyr4.Width, lyr4.Height);
+                            }
+                            if (getTileByName(tile.Layer5Filename) != null)
+                            {
+                                lyr5 = getTileByName(tile.Layer5Filename).bitmap;
+                                //flip about y-axis layer
+                                //lyr5 = Flip(lyr5, tile.Layer5Flip);
+                                //rotate layer
+                                //lyr5 = Rotate(lyr5, tile.Layer5Rotate);
+                                //src5 = new Rectangle(0, 0, lyr5.Width, lyr5.Height);
+                            }
+
+                            Rectangle src = new Rectangle(0, 0, 100, 100);
+                            Rectangle dst = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                            //draw layer 1 first
+                            if (checkBox1.Checked)
+                            {
+                                if (lyr1 != null)
+                                {
+                                    float scalerX = lyr1.Width / 100;
+                                    float scalerY = lyr1.Height / 100;
+                                    src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                    dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                            //draw layer 2
+                            if (checkBox2.Checked)
+                            {
+                                if (lyr2 != null)
+                                {
+                                    float scalerX = lyr2.Width / 100;
+                                    float scalerY = lyr2.Height / 100;
+                                    src = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
+                                    dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr2, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                            //draw layer 3
+                            if (checkBox3.Checked)
+                            {
+                                if (lyr3 != null)
+                                {
+                                    float scalerX = lyr3.Width / 100;
+                                    float scalerY = lyr3.Height / 100;
+                                    src = new Rectangle(0, 0, lyr3.Width, lyr3.Height);
+                                    dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr3, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                            //draw layer 4
+                            if (checkBox4.Checked)
+                            {
+                                if (lyr4 != null)
+                                {
+                                    float scalerX = lyr4.Width / 100;
+                                    float scalerY = lyr4.Height / 100;
+                                    src = new Rectangle(0, 0, lyr4.Width, lyr4.Height);
+                                    dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr4, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                            //draw layer 5
+                            if (checkBox5.Checked)
+                            {
+                                if (lyr5 != null)
+                                {
+                                    float scalerX = lyr5.Width / 100;
+                                    float scalerY = lyr5.Height / 100;
+                                    src = new Rectangle(0, 0, lyr5.Width, lyr5.Height);
+                                    dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr5, dst, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                            //draw square walkmesh and LoS stuff
+                            src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
+                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                            if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                            {
+                                if (tile.LoSBlocked)
+                                {
+                                    device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                                    device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
+                                }
+                                if (tile.Walkable)
+                                {
+                                    device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
+                                }
+                                else
+                                {
+                                    target = new Rectangle(x * sqr + 1, y * sqr + 1, sqr - 1, sqr - 1);
+                                    device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                    device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                    device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
+                                }
+                            }
+                            target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                            if (chkGrid.Checked)
+                            {
+                                //device.DrawRectangle(blackPen, target);
+                            }
+                        }
+                    }
+                }*/
+                #endregion
 
                 int cnt = 0;
                 foreach (Prop prpRef in area.Props)
@@ -423,7 +637,6 @@ namespace IB2Toolset
                         }
                     }
                 }
-                //drawTileSettings();
                 UpdatePB();
             }
             catch (Exception ex)
