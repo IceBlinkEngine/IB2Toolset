@@ -43,7 +43,10 @@ namespace IB2Toolset
         private List<LocalInt> areaLocalInts = new List<LocalInt>();
         private List<LocalString> areaLocalStrings = new List<LocalString>();
         private string _inGameAreaName = "newArea";
-        
+        private bool _useMiniProps = false;
+        private bool _useSuperTinyProps = false;
+
+
         #endregion
 
         #region Properties
@@ -70,6 +73,18 @@ namespace IB2Toolset
         {
             get { return _inGameAreaName; }
             set { _inGameAreaName = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public bool useMiniProps
+        {
+            get { return _useMiniProps; }
+            set { _useMiniProps = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public bool useSuperTinyProps
+        {
+            get { return _useSuperTinyProps; }
+            set { _useSuperTinyProps = value; }
         }
         [CategoryAttribute("01 - Main")]
         public bool areaDark
