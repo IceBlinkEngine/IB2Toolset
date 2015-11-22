@@ -45,6 +45,9 @@ namespace IB2Toolset
         private string _inGameAreaName = "newArea";
         private bool _useMiniProps = false;
         private bool _useSuperTinyProps = false;
+        private bool _useFullScreenEffectLayer1 = false;
+        private bool _useFullScreenEffectLayer2 = false;
+        private bool _useFullScreenEffectLayer3 = false;
 
 
         #endregion
@@ -86,6 +89,29 @@ namespace IB2Toolset
             get { return _useSuperTinyProps; }
             set { _useSuperTinyProps = value; }
         }
+        [CategoryAttribute("01 - Main")]
+        public bool useFullScreenEffectLayer1
+        {
+            get { return _useFullScreenEffectLayer1; }
+            set { _useFullScreenEffectLayer1 = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public bool useFullScreenEffectLayer2
+        {
+            get { return _useFullScreenEffectLayer2; }
+            set { _useFullScreenEffectLayer2 = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public bool useFullScreenEffectLayer3
+        {
+            get { return _useFullScreenEffectLayer3; }
+            set { _useFullScreenEffectLayer3 = value; }
+        }
+
+
+        /*public bool useFullScreenEffectLayer1 = false;
+        public bool useFullScreenEffectLayer2 = false;
+        public bool useFullScreenEffectLayer3 = false;*/
         [CategoryAttribute("01 - Main")]
         public bool areaDark
         {
