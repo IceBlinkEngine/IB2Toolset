@@ -19,7 +19,6 @@ namespace IB2Toolset
     {
         public string _mainDirectory;
         public Module mod = new Module();
-        //public Game game;
         public List<JournalQuest> journal = new List<JournalQuest>();
         public List<Creature> creaturesList = new List<Creature>();
         public List<Container> containersList = new List<Container>();
@@ -27,10 +26,8 @@ namespace IB2Toolset
         public List<Encounter> encountersList = new List<Encounter>();
         public List<Item> itemsList = new List<Item>();
         public List<Prop> propsList = new List<Prop>();
-        //public Triggers triggersList = new Triggers();
         public List<PlayerClass> playerClassesList = new List<PlayerClass>();
         public List<Race> racesList = new List<Race>();
-        //public Skills skillsList = new Skills();
         public List<Spell> spellsList = new List<Spell>();
         public List<Trait> traitsList = new List<Trait>();
         public List<Effect> effectsList = new List<Effect>();
@@ -39,7 +36,6 @@ namespace IB2Toolset
         public List<string> propsParentNodeList = new List<string>();
         public List<Area> openAreasList = new List<Area>();
         public List<Convo> openConvosList = new List<Convo>();
-        //public List<LogicTree> openLogicTreesList = new List<LogicTree>();
         public List<string> scriptList = new List<string>();
         public List<Condition> copiedConditionalsList = new List<Condition>();
         public List<Action> copiedActionsList = new List<Action>();
@@ -65,9 +61,8 @@ namespace IB2Toolset
         public Trigger currentSelectedTrigger = null;
         public Bitmap iconBitmap;
         public string lastModuleFullPath;
-        public string versionMessage = "IceBlink RPG Toolset for creating adventure modules for the Android IceBlink RPG app.\r\n\r\n IceBlink RPG Toolset ver 1.08";
-        //Bitmap portraitBitmap;
-
+        public string versionMessage = "IceBlink 2 RPG Toolset for creating adventure modules for the PC and Android.\r\n\r\n IceBlink 2 RPG Toolset ver 1.00";
+        
         private DeserializeDockContent m_deserializeDockContent;
         public IceBlinkProperties frmIceBlinkProperties;
         public IconSprite frmIconSprite;
@@ -75,7 +70,6 @@ namespace IB2Toolset
         public Blueprints frmBlueprints;
         public AreaForm frmAreas;
         public ConversationsForm frmConversations;
-        //public LogicTreeForm frmLogicTree;
         public IBScriptForm frmIBScript;
         public EncountersForm frmEncounters;
         public ContainersForm frmContainers;

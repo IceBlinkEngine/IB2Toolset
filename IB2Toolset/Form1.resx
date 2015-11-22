@@ -255,6 +255,11 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>238, 17</value>
   </metadata>
+  <data name="tilesUsedInModuleToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>This will create a folder called 'tiles_used' (or overwrite it if it already exists)
+ in your module's 'tiles' folder and copy all the tiles currently being used in 
+your module. It will also create a text file with the list of tiles used.</value>
+  </data>
   <data name="newToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

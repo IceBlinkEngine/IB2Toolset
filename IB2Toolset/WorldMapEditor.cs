@@ -2029,33 +2029,5 @@ namespace IB2Toolset
             }
         }
         #endregion
-
-        /*private void btnMiniMap_Click(object sender, EventArgs e)
-        {
-            Bitmap mini = ResizeBitmap(surface, surface.Width / 5, surface.Height / 5);
-            mini.Save(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\" + area.Filename + ".png", ImageFormat.Png);
-        }*/
-        /*private ImageCodecInfo GetEncoder(ImageFormat format)
-        {
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-            foreach (ImageCodecInfo codec in codecs)
-            {
-                if (codec.FormatID == format.Guid)
-                {
-                    return codec;
-                }
-            }
-            return null;
-        }*/
-        /*private static Bitmap ResizeBitmap(Bitmap sourceBMP, int width, int height)
-        {
-            Bitmap result = new Bitmap(width, height);
-            using (Graphics g = Graphics.FromImage(result))
-            {
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.DrawImage(sourceBMP, 0, 0, width, height);
-            }
-            return result;
-        }*/
     }    
 }
