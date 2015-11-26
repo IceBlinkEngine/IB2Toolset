@@ -86,6 +86,7 @@
     <Compile Include="AreaForm.Designer.cs">
       <DependentUpon>AreaForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AreaOfEffectShape.cs" />
     <Compile Include="BarkString.cs" />
     <Compile Include="Blueprints.cs">
       <SubType>Form</SubType>

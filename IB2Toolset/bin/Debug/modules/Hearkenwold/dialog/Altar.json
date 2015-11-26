@@ -93,6 +93,7 @@
   "ConvoFileName": "Altar",
   "Narration": false,
   "PartyChat": true,
+  "SpeakToMainPcOnly": false,
   "NpcPortraitBitmap": "ptr_chapel.png",
   "DefaultNpcName": "",
   "NextIdNum": 4

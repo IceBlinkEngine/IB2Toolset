@@ -82,6 +82,7 @@
   "ConvoFileName": "Bed",
   "Narration": false,
   "PartyChat": false,
+  "SpeakToMainPcOnly": false,
   "NpcPortraitBitmap": "ptr_p_cot.png",
   "DefaultNpcName": "",
   "NextIdNum": 3

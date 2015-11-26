@@ -8,6 +8,7 @@ using System.IO;
 using System.Drawing;
 using System.ComponentModel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 //using IceBlink;
 
 namespace IB2Toolset
@@ -59,12 +60,6 @@ namespace IB2Toolset
 
     public class Spell
     {        
-        public enum AoEShape
-        {
-            Square = 0,
-            Cone = 1,
-            Line = 2
-        }
         public enum EffectType
         {
             Damage = 0, //usually persistent and negative for effect target
@@ -89,6 +84,7 @@ namespace IB2Toolset
         //private TargetType spellTargetType = TargetType.Enemy;
         private string _spellEffectType = "Damage";
         //private EffectType spellEffectType = EffectType.Damage;
+        private AreaOfEffectShape _aoeShape = AreaOfEffectShape.Circle;
         private int _aoeRadius = 0;
         private int _range = 0;
         //private ScriptSelectEditorReturnObject spellScript = new ScriptSelectEditorReturnObject();
@@ -255,6 +251,19 @@ namespace IB2Toolset
             set
             {
                 _spellEffectType = value;
+            }
+        }
+        [CategoryAttribute("02 - Target"), DescriptionAttribute("the shape of the AoE")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AreaOfEffectShape aoeShape
+        {
+            get
+            {
+                return _aoeShape;
+            }
+            set
+            {
+                _aoeShape = value;
             }
         }
         [CategoryAttribute("02 - Target"), DescriptionAttribute("the radius of the AoE")]
