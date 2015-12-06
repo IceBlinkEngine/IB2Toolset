@@ -106,6 +106,8 @@ namespace IB2Toolset
         public int attackFromBehindDamageModifier = 0;
         private bool _useOrbitronFont = false;
         private bool _useUIBackground = false;
+        private string _fontName = "Metamorphous";
+        private string _fontFilename = "Metamorphous-Regular.ttf";
 
 
         #endregion
@@ -168,6 +170,18 @@ namespace IB2Toolset
         {
             get { return _useUIBackground; }
             set { _useUIBackground = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The file name of the font including extension (ex. Metamorphous-Regular.ttf)")]
+        public string fontFilename
+        {
+            get { return _fontFilename; }
+            set { _fontFilename = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The font name. Often is different from the file name. To find out your font's name: find the font file in your modules 'fonts' folder (assuming you already placed the font there), right click on it and select 'preview', the font name is under 'Font name:' (ex. Metamorphous)")]
+        public string fontName
+        {
+            get { return _fontName; }
+            set { _fontName = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The total number of player made characters allowed in the party (default is 1, max PCs in a party is 6)")]
