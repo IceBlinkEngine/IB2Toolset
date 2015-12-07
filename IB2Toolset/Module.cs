@@ -108,8 +108,10 @@ namespace IB2Toolset
         private bool _useUIBackground = false;
         private string _fontName = "Metamorphous";
         private string _fontFilename = "Metamorphous-Regular.ttf";
-
-
+        private string _spellLabelSingular = "Spell";
+        private string _spellLabelPlural = "Spells";
+        private string _goldLabelSingular = "Gold";
+        private string _goldLabelPlural = "Gold";
         #endregion
 
         #region Properties
@@ -182,6 +184,30 @@ namespace IB2Toolset
         {
             get { return _fontName; }
             set { _fontName = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Spell singular form (ex. Spell, Power, etc.)")]
+        public string spellLabelSingular
+        {
+            get { return _spellLabelSingular; }
+            set { _spellLabelSingular = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Spell plural form (ex. Spells, Powers, etc.)")]
+        public string spellLabelPlural
+        {
+            get { return _spellLabelPlural; }
+            set { _spellLabelPlural = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Gold singular form (ex. Gold, Credit, etc.)")]
+        public string goldLabelSingular
+        {
+            get { return _goldLabelSingular; }
+            set { _goldLabelSingular = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Gold plural form (ex. Gold, Credits, etc.)")]
+        public string goldLabelPlural
+        {
+            get { return _goldLabelPlural; }
+            set { _goldLabelPlural = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The total number of player made characters allowed in the party (default is 1, max PCs in a party is 6)")]
