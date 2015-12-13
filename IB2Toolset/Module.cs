@@ -108,6 +108,8 @@ namespace IB2Toolset
         private bool _useUIBackground = false;
         private string _fontName = "Metamorphous";
         private string _fontFilename = "Metamorphous-Regular.ttf";
+        public float _fontD2DScaleMultiplier = 1.0f;
+        public int _logNumberOfLines = 20;
         private string _spellLabelSingular = "Spell";
         private string _spellLabelPlural = "Spells";
         private string _goldLabelSingular = "Gold";
@@ -184,6 +186,18 @@ namespace IB2Toolset
         {
             get { return _fontName; }
             set { _fontName = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("A multiplier used to adjust the font size so that your custom font will fit well with the UI...keep trying different values until everything works well. This is a float value type so you can use a decimal value. (ex: 1.015 or 0.97 or 0.8 etc.)")]
+        public float fontD2DScaleMultiplier
+        {
+            get { return _fontD2DScaleMultiplier; }
+            set { _fontD2DScaleMultiplier = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This sets the number of lines of text that will be shown in the main map and combat log box. Best way to determine the appropriate vaule is to first pick the font size multipler (see fontD2DScaleMultiplier) and then run the game and click on some of the toggle buttons until you fill the log box and then count the number of lines that are displayed. Use that number for this property.")]
+        public int logNumberOfLines
+        {
+            get { return _logNumberOfLines; }
+            set { _logNumberOfLines = value; }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Spell singular form (ex. Spell, Power, etc.)")]
         public string spellLabelSingular
