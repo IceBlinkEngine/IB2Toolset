@@ -108,8 +108,8 @@ namespace IB2Toolset
         private bool _useUIBackground = false;
         private string _fontName = "Metamorphous";
         private string _fontFilename = "Metamorphous-Regular.ttf";
-        public float _fontD2DScaleMultiplier = 1.0f;
-        public int _logNumberOfLines = 20;
+        private float _fontD2DScaleMultiplier = 1.0f;
+        private int _logNumberOfLines = 20;
         private string _spellLabelSingular = "Spell";
         private string _spellLabelPlural = "Spells";
         private string _goldLabelSingular = "Gold";
