@@ -72,6 +72,8 @@
   "useUIBackground": false,
   "fontFilename": "Metamorphous-Regular.ttf",
   "fontName": "Metamorphous",
+  "fontD2DScaleMultiplier": 1.0,
+  "logNumberOfLines": 20,
   "spellLabelSingular": "Spell",
   "spellLabelPlural": "Spells",
   "goldLabelSingular": "Gold",
