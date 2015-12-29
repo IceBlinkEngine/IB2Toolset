@@ -49,6 +49,12 @@ namespace IB2Toolset
         private bool _useFullScreenEffectLayer2 = false;
         private bool _useFullScreenEffectLayer3 = false;
 
+        private string _areaWeatherScript = "";
+        private string _effectChannelScript1 = "deactivateChannel1";
+        private string _effectChannelScript2 = "deactivateChannel2";
+        private string _effectChannelScript3 = "deactivateChannel3";
+        private string _effectChannelScript4 = "deactivateChannel4";
+
 
         #endregion
 
@@ -76,6 +82,36 @@ namespace IB2Toolset
         {
             get { return _inGameAreaName; }
             set { _inGameAreaName = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string areaWeatherScript
+        {
+            get { return _areaWeatherScript; }
+            set { _areaWeatherScript = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string effectChannelScript1
+        {
+            get { return _effectChannelScript1; }
+            set { _effectChannelScript1 = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string effectChannelScript2
+        {
+            get { return _effectChannelScript2; }
+            set { _effectChannelScript2 = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string effectChannelScript3
+        {
+            get { return _effectChannelScript3; }
+            set { _effectChannelScript3 = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string effectChannelScript4
+        {
+            get { return _effectChannelScript4; }
+            set { _effectChannelScript4 = value; }
         }
         [CategoryAttribute("01 - Main")]
         public bool useMiniProps
