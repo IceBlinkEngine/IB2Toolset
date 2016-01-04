@@ -424,7 +424,7 @@ namespace IB2Toolset
                 openTraits(directory + "\\data\\traits.json");
                 openEffects(directory + "\\data\\effects.json");
                 refreshDropDownLists();
-                this.Text = "IceBlinkRPG Toolset - " + mod.moduleLabelName;
+                this.Text = "IceBlink 2 Toolset - " + mod.moduleLabelName;
             }
         }
         public void refreshDropDownLists()

@@ -89,6 +89,7 @@ namespace IB2Toolset
         private int _range = 0;
         //private ScriptSelectEditorReturnObject spellScript = new ScriptSelectEditorReturnObject();
         private string _spellScript = "none";
+        private string _spellEffectTag = "none";
         #endregion
 
         #region Properties
@@ -297,12 +298,18 @@ namespace IB2Toolset
             get { return spellScript; }
             set { spellScript = value; }
         }*/
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("the script to use for this Spell")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("the script to use for this Spell (leave as 'none' to use spellEffectTag instead)")]
         //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string spellScript
         {
             get { return _spellScript; }
             set { _spellScript = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("the effect to use for this Spell")]
+        public string spellEffectTag
+        {
+            get { return _spellEffectTag; }
+            set { _spellEffectTag = value; }
         }
         #endregion
 
