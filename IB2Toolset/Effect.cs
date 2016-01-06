@@ -35,61 +35,61 @@ namespace IB2Toolset
         private bool _instantaneous = false; //this determines if the effect is either an instantaneous and permanent effect (damage, heal, etc.) or a duration effect which can be permanent (poison) or temporary (AC bonus, held)
 
         //DAMAGE (hp)
-        public bool _doDamage = false;
-        public string _damType = ""; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison
+        private bool _doDamage = false;
+        private string _damType = "Normal"; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison
         //(for reference) Attack: AdB+C for every D levels after level E up to F levels total
-        public int _damNumOfDice = 0; //(A)how many dice to roll
-        public int _damDie = 0; //(B)type of die to roll such as 4 sided or 10 sided, etc.
-        public int _damAdder = 0; //(C)integer adder to total damage such as the "1" in 2d4+1
-        public int _damAttacksEveryNLevels = 0; //(D)
-        public int _damAttacksAfterLevelN = 0; //(E)
-        public int _damAttacksUpToNLevelsTotal = 0; //(F)
+        private int _damNumOfDice = 0; //(A)how many dice to roll
+        private int _damDie = 0; //(B)type of die to roll such as 4 sided or 10 sided, etc.
+        private int _damAdder = 0; //(C)integer adder to total damage such as the "1" in 2d4+1
+        private int _damAttacksEveryNLevels = 0; //(D)
+        private int _damAttacksAfterLevelN = 0; //(E)
+        private int _damAttacksUpToNLevelsTotal = 0; //(F)
         //(for reference) NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total
-        public int _damNumberOfAttacks = 0; //(A)
-        public int _damNumberOfAttacksForEveryNLevels = 0; //(B)
-        public int _damNumberOfAttacksAfterLevelN = 0; //(C)
-        public int _damNumberOfAttacksUpToNAttacksTotal = 0; //(D)
+        private int _damNumberOfAttacks = 0; //(A)
+        private int _damNumberOfAttacksForEveryNLevels = 0; //(B)
+        private int _damNumberOfAttacksAfterLevelN = 0; //(C)
+        private int _damNumberOfAttacksUpToNAttacksTotal = 0; //(D)
 
         //HEAL (hp)
-        public bool _doHeal = false;
-        public string _healType = ""; //Organic (living things), NonOrganic (robots, constructs)
+        private bool _doHeal = false;
+        private string _healType = "Organic"; //Organic (living things), NonOrganic (robots, constructs)
         //(for reference) HealActions: AdB+C for every D levels after level E up to F levels total
-        public int _healNumOfDice = 0; //(A)how many dice to roll
-        public int _healDie = 0; //(B)type of die to roll such as 4 sided or 10 sided, etc.
-        public int _healAdder = 0; //(C)integer adder to total damage such as the "1" in 2d4+1
-        public int _healActionsEveryNLevels = 0; //(D)
-        public int _healActionsAfterLevelN = 0; //(E)
-        public int _healActionsUpToNLevelsTotal = 0; //(F)
+        private int _healNumOfDice = 0; //(A)how many dice to roll
+        private int _healDie = 0; //(B)type of die to roll such as 4 sided or 10 sided, etc.
+        private int _healAdder = 0; //(C)integer adder to total damage such as the "1" in 2d4+1
+        private int _healActionsEveryNLevels = 0; //(D)
+        private int _healActionsAfterLevelN = 0; //(E)
+        private int _healActionsUpToNLevelsTotal = 0; //(F)
 
         //BUFF and DEBUFF
-        public bool _doBuff = false;
-        public bool _doDeBuff = false;
-        public string _addStatusType = ""; //Alive, Dead, Held, Immobile, Invisible, Silenced, Poisoned, etc.
-        public int _modifyFortitude = 0;
-        public int _modifyWill = 0;
-        public int _modifyReflex = 0;
+        private bool _doBuff = false;
+        private bool _doDeBuff = false;
+        private string _addStatusType = "none"; //none, Held, Immobile, Invisible, Silenced, etc.
+        private int _modifyFortitude = 0;
+        private int _modifyWill = 0;
+        private int _modifyReflex = 0;
         //For PC only
-        public int _modifyStr = 0;
-        public int _modifyDex = 0;
-        public int _modifyInt = 0;
-        public int _modifyCha = 0;
-        public int _modifyCon = 0;
-        public int _modifyWis = 0;
-        public int _modifyLuk = 0;
+        private int _modifyStr = 0;
+        private int _modifyDex = 0;
+        private int _modifyInt = 0;
+        private int _modifyCha = 0;
+        private int _modifyCon = 0;
+        private int _modifyWis = 0;
+        private int _modifyLuk = 0;
         //end PC only
-        public int _modifyMoveDistance = 0;
-        public int _modifyHpMax = 0;
-        public int _modifySpMax = 0;
-        public int _modifySp = 0;
-        public int _modifyDamageTypeResistanceAcid = 0;
-        public int _modifyDamageTypeResistanceCold = 0;
-        public int _modifyDamageTypeResistanceNormal = 0;
-        public int _modifyDamageTypeResistanceElectricity = 0;
-        public int _modifyDamageTypeResistanceFire = 0;
-        public int _modifyDamageTypeResistanceMagic = 0;
-        public int _modifyDamageTypeResistancePoison = 0;
-        public int _modifyNumberOfMeleeAttacks = 0;
-        public int _modifyNumberOfRangedAttacks = 0;
+        private int _modifyMoveDistance = 0;
+        private int _modifyHpMax = 0;
+        private int _modifySpMax = 0;
+        private int _modifySp = 0;
+        private int _modifyDamageTypeResistanceAcid = 0;
+        private int _modifyDamageTypeResistanceCold = 0;
+        private int _modifyDamageTypeResistanceNormal = 0;
+        private int _modifyDamageTypeResistanceElectricity = 0;
+        private int _modifyDamageTypeResistanceFire = 0;
+        private int _modifyDamageTypeResistanceMagic = 0;
+        private int _modifyDamageTypeResistancePoison = 0;
+        private int _modifyNumberOfMeleeAttacks = 0;
+        private int _modifyNumberOfRangedAttacks = 0;
         #endregion
 
         #region Properties
@@ -401,7 +401,7 @@ namespace IB2Toolset
             get { return _doDeBuff; }
             set { _doDeBuff = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("Alive, Dead, Held, Immobile, Invisible, Silenced, Poisoned")]
+        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("none, Held, Immobile, Invisible, Silenced")]
         public string addStatusType
         {
             get { return _addStatusType; }
