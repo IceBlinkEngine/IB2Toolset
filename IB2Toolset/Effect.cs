@@ -18,6 +18,7 @@ namespace IB2Toolset
         private string _name = "newEffect";
         private string _tag = "newEffectTag";
         private string _tagOfSender = "senderTag";
+        private int _classLevelOfSender = 0;
         private string _description = "";
         private string _spriteFilename = "held";
         private int _durationInUnits = 0;
@@ -28,12 +29,11 @@ namespace IB2Toolset
         private bool _isStackableEffect = false;
         private bool _isStackableDuration = false;
         private bool _usedForUpdateStats = false;
-        private string _effectScript = "none";
+        private string _effectScript = "efGeneric";
 
         private string _saveCheckType = "none"; //none, reflex, will, fortitude
         private int _saveCheckDC = 10;
-        private bool _instantaneous = false; //this determines if the effect is either an instantaneous and permanent effect (damage, heal, etc.) or a duration effect which can be permanent (poison) or temporary (AC bonus, held)
-
+        
         //DAMAGE (hp)
         private bool _doDamage = false;
         private string _damType = "Normal"; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison
@@ -129,6 +129,18 @@ namespace IB2Toolset
                 _tagOfSender = value;
             }
         }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Level of Effect sender, the one (Creature, Player, Item, etc.) who created the effect"), ReadOnly(true)]
+        public int classLevelOfSender
+        {
+            get
+            {
+                return _classLevelOfSender;
+            }
+            set
+            {
+                _classLevelOfSender = value;
+            }
+        }
         [Editor(typeof(MultilineStringEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Detailed description of effect with some stats")]
         public string description
@@ -155,7 +167,7 @@ namespace IB2Toolset
                 _spriteFilename = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("How long the Effect lasts in units of time")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("How long the Effect lasts in units of time. For instantaneous effects like fireball or mage bolt, set this to = 0")]
         public int durationInUnits
         {
             get
@@ -167,7 +179,7 @@ namespace IB2Toolset
                 _durationInUnits = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("How long the Effect has been going on so far in units of time")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("(no longer used)How long the Effect has been going on so far in units of time"), ReadOnly(true)]
         public int currentDurationInUnits
         {
             get
@@ -179,7 +191,7 @@ namespace IB2Toolset
                 _currentDurationInUnits = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("At what time did the Effect begin, in units of time")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("(no longer used)At what time did the Effect begin, in units of time"), ReadOnly(true)]
         public int startingTimeInUnits
         {
             get
@@ -262,12 +274,6 @@ namespace IB2Toolset
         {
             get { return _saveCheckDC; }
             set { _saveCheckDC = value; }
-        }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("this determines if the effect is either an instantaneous and permanent effect (damage, heal, etc.) or a duration effect which can be permanent (poison) or temporary (AC bonus, held)")]
-        public bool instantaneous
-        {
-            get { return _instantaneous; }
-            set { _instantaneous = value; }
         }
         [CategoryAttribute("02 - Damage"), DescriptionAttribute("set to true if this Effect uses a Damage type Effect")]
         public bool doDamage
