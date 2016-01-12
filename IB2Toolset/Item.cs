@@ -82,6 +82,11 @@ namespace IB2Toolset
         private string _onUseItemIBScriptParms = "";
         private bool _destroyItemAfterOnUseItemIBScript = false;
         private string _onWhileEquipped = "none";
+        private string _onScoringHitCastSpellTag = "none";
+        private string _onUseItemCastSpellTag = "none";
+        private bool _destroyItemAfterOnUseItemCastSpell = false;
+        private int _levelOfItemForCastSpell = 1;
+        private bool _usePlayerClassLevelForOnUseItemCastSpell = false;
         private int _damageTypeResistanceValueAcid = 0;
         private int _damageTypeResistanceValueCold = 0;
         private int _damageTypeResistanceValueNormal = 0;
@@ -658,6 +663,38 @@ namespace IB2Toolset
         {
             get { return _onWhileEquipped; }
             set { _onWhileEquipped = value; }
+        }
+        [Browsable(true), TypeConverter(typeof(SpellTagTypeConverter))]
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("Cast this spell upon the target after making a successful attack (melee/ranged) hit on the target")]
+        public string onScoringHitCastSpellTag
+        {
+            get { return _onScoringHitCastSpellTag; }
+            set { _onScoringHitCastSpellTag = value; }
+        }
+        [Browsable(true), TypeConverter(typeof(SpellTagTypeConverter))]
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("Cast this spell upon using the item")]
+        public string onUseItemCastSpellTag
+        {
+            get { return _onUseItemCastSpellTag; }
+            set { _onUseItemCastSpellTag = value; }
+        }
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("If set to true, the item will be destroyed (or decremented by one if stacked) after the Spell is completed.")]
+        public bool destroyItemAfterOnUseItemCastSpell
+        {
+            get { return _destroyItemAfterOnUseItemCastSpell; }
+            set { _destroyItemAfterOnUseItemCastSpell = value; }
+        }
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("Effective level of item used in Effect calculations that are based on level adjustments.")]
+        public int levelOfItemForCastSpell
+        {
+            get { return _levelOfItemForCastSpell; }
+            set { _levelOfItemForCastSpell = value; }
+        }
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("If set to true, the item will use the Player's class level instead of the item's effective level used in Effect calculations that are based on level adjustments.")]
+        public bool usePlayerClassLevelForOnUseItemCastSpell
+        {
+            get { return _usePlayerClassLevelForOnUseItemCastSpell; }
+            set { _usePlayerClassLevelForOnUseItemCastSpell = value; }
         }
         #endregion
 

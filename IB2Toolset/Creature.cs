@@ -77,6 +77,7 @@ namespace IB2Toolset
         //private DamageType typeOfDamage = DamageType.Slashing;
         private string _onScoringHit = "none";
         private string _onScoringHitParms = "none";
+        private string _onScoringHitCastSpellTag = "none";
         private string _onDeathLogicTree = "none";
         private string _onDeathParms = "";
         private string _onDeathIBScript = "none";
@@ -284,6 +285,13 @@ namespace IB2Toolset
         {
             get { return _onDeathIBScriptParms; }
             set { _onDeathIBScriptParms = value; }
+        }
+        [Browsable(true), TypeConverter(typeof(SpellTagTypeConverter))]
+        [CategoryAttribute("04 - Spell/Effect System"), DescriptionAttribute("Cast this spell (special ability) upon the target after making a successful attack (melee/ranged) hit on the target")]
+        public string onScoringHitCastSpellTag
+        {
+            get { return _onScoringHitCastSpellTag; }
+            set { _onScoringHitCastSpellTag = value; }
         }
         [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("damage adder")]
         public int damageAdder

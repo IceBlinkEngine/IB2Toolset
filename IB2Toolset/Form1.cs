@@ -439,6 +439,7 @@ namespace IB2Toolset
             loadEncounterDropdownList();
             loadPlayerClassesTagsList();
             loadRacesTagsList();
+            loadSpellTagsList();
         }
         public void loadSpriteDropdownList()
         {
@@ -532,6 +533,14 @@ namespace IB2Toolset
             foreach (Race rc in this.racesList)
             {
                 DropdownStringLists.raceTagsTypeStringList.Add(rc.tag);
+            }
+        }
+        public void loadSpellTagsList()
+        {
+            DropdownStringLists.spellTagsTypeStringList = new List<string>();
+            foreach (Spell sp in this.spellsList)
+            {
+                DropdownStringLists.spellTagsTypeStringList.Add(sp.tag);
             }
         }
         private void fillScriptList()

@@ -270,6 +270,23 @@ namespace IB2Toolset
             return new StandardValuesCollection(DropdownStringLists.raceTagsTypeStringList);
         }
     }
+    public class SpellTagTypeConverter : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            //true means show a combobox
+            return true;
+        }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            //true will limit to list. false will show the list, but allow free-form entry
+            return true;
+        }
+        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(DropdownStringLists.spellTagsTypeStringList);
+        }
+    }
 
     public class DropdownStringLists
     {
@@ -288,5 +305,6 @@ namespace IB2Toolset
         public static List<string> moverTypeStringList; //none, random, patrol, daily, weekly, monthly, yearly
         public static List<string> playerClassTagsTypeStringList; //all tags in module's Player Classes list
         public static List<string> raceTagsTypeStringList; //all tags in module's races list
+        public static List<string> spellTagsTypeStringList; //all tags in module's races list
     }
 }
