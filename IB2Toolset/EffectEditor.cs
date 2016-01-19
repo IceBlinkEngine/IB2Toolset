@@ -42,6 +42,7 @@ namespace IB2Toolset
                 selectedLbxIndex = lbxEffects.SelectedIndex;
                 lbxEffects.SelectedIndex = selectedLbxIndex;
                 propertyGrid1.SelectedObject = prntForm.effectsList[selectedLbxIndex];
+                refreshGroupBoxes();
             }
         }
         private void propertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -85,6 +86,146 @@ namespace IB2Toolset
         {
             prntForm.effectsList = prntForm.effectsList.OrderBy(o => o.name).ToList();
             refreshListBox();
+        }
+
+        public void refreshGroupBoxes()
+        {
+            if (prntForm.effectsList != null)
+            {
+                Effect ef = prntForm.effectsList[lbxEffects.SelectedIndex];
+                numDamActionA.Value = ef.damNumOfDice;
+                numDamActionB.Value = ef.damDie;
+                numDamActionC.Value = ef.damAdder;
+                numDamActionD.Value = ef.damAttacksEveryNLevels;
+                numDamActionE.Value = ef.damAttacksAfterLevelN;
+                numDamActionF.Value = ef.damAttacksUpToNLevelsTotal;
+                numDamNumActionsA.Value = ef.damNumberOfAttacks;
+                numDamNumActionsB.Value = ef.damNumberOfAttacksForEveryNLevels;
+                numDamNumActionsC.Value = ef.damNumberOfAttacksAfterLevelN;
+                numDamNumActionsD.Value = ef.damNumberOfAttacksUpToNAttacksTotal;
+                numHealActionA.Value = ef.healNumOfDice;
+                numHealActionA.Value = ef.healDie;
+                numHealActionA.Value = ef.healAdder;
+                numHealActionA.Value = ef.healActionsEveryNLevels;
+                numHealActionA.Value = ef.healActionsAfterLevelN;
+                numHealActionA.Value = ef.healActionsUpToNLevelsTotal;
+            }
+        }
+
+        //Damage Action
+        private void numDamActionA_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damNumOfDice = (int)numDamActionA.Value;
+            }
+        }
+        private void numDamActionB_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damDie = (int)numDamActionB.Value;
+            }
+        }
+        private void numDamActionC_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damAdder = (int)numDamActionC.Value;
+            }
+        }
+        private void numDamActionD_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damAttacksEveryNLevels = (int)numDamActionD.Value;
+            }
+        }
+        private void numDamActionE_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damAttacksAfterLevelN = (int)numDamActionE.Value;
+            }
+        }
+        private void numDamActionF_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damAttacksUpToNLevelsTotal = (int)numDamActionF.Value;
+            }
+        }
+        //Damage Number of Actions
+        private void numDamNumActionsA_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damNumberOfAttacks = (int)numDamNumActionsA.Value;
+            }
+        }
+        private void numDamNumActionsB_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damNumberOfAttacksForEveryNLevels = (int)numDamNumActionsB.Value;
+            }
+        }
+        private void numDamNumActionsC_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damNumberOfAttacksAfterLevelN = (int)numDamNumActionsC.Value;
+            }
+        }
+        private void numDamNumActionsD_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].damNumberOfAttacksUpToNAttacksTotal = (int)numDamNumActionsD.Value;
+            }
+        }
+        //Heal Action
+        private void numHealActionA_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].healNumOfDice = (int)numHealActionA.Value;
+            }
+        }
+        private void numHealActionB_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].healDie = (int)numHealActionB.Value;
+            }
+        }
+        private void numHealActionC_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].healAdder = (int)numHealActionC.Value;
+            }
+        }
+        private void numHealActionD_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].healActionsEveryNLevels = (int)numHealActionD.Value;
+            }
+        }
+        private void numHealActionE_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].healActionsAfterLevelN = (int)numHealActionE.Value;
+            }
+        }
+        private void numHealActionF_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].healActionsUpToNLevelsTotal = (int)numHealActionF.Value;
+            }
         }
     }
 }
