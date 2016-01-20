@@ -12,6 +12,7 @@ using System.Drawing.Design;
 //using System.Design;
 using System.ComponentModel.Design;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace IB2Toolset
 {
@@ -53,6 +54,7 @@ namespace IB2Toolset
         private int _attackBonus = 0; //attack bonus
         private int _attackRange = 1; //attack range
         private int _AreaOfEffect = 0; //AoE
+        private AreaOfEffectShape _aoeShape = AreaOfEffectShape.Circle;
         private int _damageNumDice = 1; //number of dice to roll for damage
         private int _damageDie = 2; //type of dice to roll for damage
         private int _damageAdder = 0; //the adder like 2d4+1 where "1" is the adder
@@ -369,7 +371,7 @@ namespace IB2Toolset
                 _attackRange = value;
             }
         }
-        [CategoryAttribute("99 - Not Implemented Yet"), DescriptionAttribute("Item's Area of Effect radius measured in squares (0 = 1 square, 1 = 9 squares, etc.)")]
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("Item's Area of Effect radius measured in squares for Spell/Effect properties of item if this item uses the Spell/Effect system (0 = 1 square, 1 = 9 squares, etc.)")]
         public int AreaOfEffect
         {
             get
@@ -379,6 +381,19 @@ namespace IB2Toolset
             set
             {
                 _AreaOfEffect = value;
+            }
+        }
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("the shape of the AoE for the Effect/Spell system if used for this item.")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AreaOfEffectShape aoeShape
+        {
+            get
+            {
+                return _aoeShape;
+            }
+            set
+            {
+                _aoeShape = value;
             }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("number of dice to roll for damage")]
