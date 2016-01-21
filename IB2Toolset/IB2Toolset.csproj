@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Coordinate.cs" />
     <Compile Include="DataCheck.cs" />
+    <Compile Include="EffectTagForDropDownList.cs" />
     <Compile Include="EncountersForm.cs">
       <SubType>Form</SubType>
     </Compile>

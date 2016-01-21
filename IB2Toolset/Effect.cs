@@ -287,61 +287,61 @@ namespace IB2Toolset
             get { return _damType; }
             set { _damType = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(A)how many dice to roll [Attack: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(A)how many dice to roll [Attack: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int damNumOfDice
         {
             get { return _damNumOfDice; }
             set { _damNumOfDice = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(B)number of sides on the die such as 4 sided or 10 sided, etc. [Attack: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(B)number of sides on the die such as 4 sided or 10 sided, etc. [Attack: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int damDie
         {
             get { return _damDie; }
             set { _damDie = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(C)integer adder to total damage such as the '1' in 2d4+1 [Attack: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(C)integer adder to total damage such as the '1' in 2d4+1 [Attack: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int damAdder
         {
             get { return _damAdder; }
             set { _damAdder = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(D) [Attack: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(D) [Attack: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int damAttacksEveryNLevels
         {
             get { return _damAttacksEveryNLevels; }
             set { _damAttacksEveryNLevels = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(E) [Attack: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(E) [Attack: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int damAttacksAfterLevelN
         {
             get { return _damAttacksAfterLevelN; }
             set { _damAttacksAfterLevelN = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(F) [Attack: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(F) [Attack: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int damAttacksUpToNLevelsTotal
         {
             get { return _damAttacksUpToNLevelsTotal; }
             set { _damAttacksUpToNLevelsTotal = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(A) [NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(A) [NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total]"), ReadOnly(true), Browsable(false)]
         public int damNumberOfAttacks
         {
             get { return _damNumberOfAttacks; }
             set { _damNumberOfAttacks = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(B) [NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(B) [NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total]"), ReadOnly(true), Browsable(false)]
         public int damNumberOfAttacksForEveryNLevels
         {
             get { return _damNumberOfAttacksForEveryNLevels; }
             set { _damNumberOfAttacksForEveryNLevels = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(C) [NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(C) [NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total]"), ReadOnly(true), Browsable(false)]
         public int damNumberOfAttacksAfterLevelN
         {
             get { return _damNumberOfAttacksAfterLevelN; }
             set { _damNumberOfAttacksAfterLevelN = value; }
         }
-        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(D) [NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total]")]
+        [CategoryAttribute("02 - Damage"), DescriptionAttribute("(D) [NumOfAttacks: A of these attacks for every B levels after level C up to D attacks total]"), ReadOnly(true), Browsable(false)]
         public int damNumberOfAttacksUpToNAttacksTotal
         {
             get { return _damNumberOfAttacksUpToNAttacksTotal; }
@@ -359,37 +359,37 @@ namespace IB2Toolset
             get { return _healType; }
             set { _healType = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(A) [HealActions: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(A) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healNumOfDice
         {
             get { return _healNumOfDice; }
             set { _healNumOfDice = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(B) [HealActions: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(B) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healDie
         {
             get { return _healDie; }
             set { _healDie = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(C) [HealActions: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(C) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healAdder
         {
             get { return _healAdder; }
             set { _healAdder = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(D) [HealActions: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(D) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healActionsEveryNLevels
         {
             get { return _healActionsEveryNLevels; }
             set { _healActionsEveryNLevels = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(E) [HealActions: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(E) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healActionsAfterLevelN
         {
             get { return _healActionsAfterLevelN; }
             set { _healActionsAfterLevelN = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(F) [HealActions: AdB+C for every D levels after level E up to F levels total]")]
+        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(F) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healActionsUpToNLevelsTotal
         {
             get { return _healActionsUpToNLevelsTotal; }
