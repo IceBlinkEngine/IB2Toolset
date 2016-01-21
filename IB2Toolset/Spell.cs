@@ -90,6 +90,7 @@ namespace IB2Toolset
         //private ScriptSelectEditorReturnObject spellScript = new ScriptSelectEditorReturnObject();
         private string _spellScript = "none";
         private string _spellEffectTag = "none";
+        private List<EffectTagForDropDownList> _removeEffectTagList = new List<EffectTagForDropDownList>();
         #endregion
 
         #region Properties
@@ -305,11 +306,19 @@ namespace IB2Toolset
             get { return _spellScript; }
             set { _spellScript = value; }
         }
+        [Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
         [CategoryAttribute("01 - Main"), DescriptionAttribute("the effect to use for this Spell")]
         public string spellEffectTag
         {
             get { return _spellEffectTag; }
             set { _spellEffectTag = value; }
+        }
+        //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("List of EffectTags that will be removed from the target when this spell is used (used for dispell magic, free action, neutralize poison, etc.)")]
+        public List<EffectTagForDropDownList> removeEffectTagList
+        {
+            get { return _removeEffectTagList; }
+            set { _removeEffectTagList = value; }
         }
         #endregion
 
@@ -327,6 +336,11 @@ namespace IB2Toolset
         public Spell DeepCopy()
         {
             Spell other = (Spell)this.MemberwiseClone();
+            other.removeEffectTagList = new List<EffectTagForDropDownList>();
+            foreach (EffectTagForDropDownList s in this.removeEffectTagList)
+            {
+                other.removeEffectTagList.Add(s);
+            }
             return other;
         }
     }
