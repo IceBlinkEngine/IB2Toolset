@@ -1270,11 +1270,11 @@
         "allow": true
       },
       {
-						  "name": "Mage Bolt",
-						  "tag": "mageBolt",
-						  "atWhatLevelIsAvailable": 1,
-						  "automaticallyLearned": false,
-						  "allow": true
+        "name": "Mage Bolt",
+        "tag": "mageBolt",
+        "atWhatLevelIsAvailable": 1,
+        "automaticallyLearned": false,
+        "allow": true
       },
       {
         "name": "Mage Armor",
@@ -1312,11 +1312,11 @@
         "allow": true
       },
       {
-								"name": "Lightning",
-								"tag": "lightning",
-								"atWhatLevelIsAvailable": 1,
-								"automaticallyLearned": false,
-								"allow": true
+        "name": "Lightning",
+        "tag": "lightning",
+        "atWhatLevelIsAvailable": 1,
+        "automaticallyLearned": false,
+        "allow": true
       },
       {
         "name": "Fireball",
