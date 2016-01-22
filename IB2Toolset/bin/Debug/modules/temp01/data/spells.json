@@ -15,7 +15,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 3,
-    "spellScript": "spMageBolt"
+    "spellScript": "spMageBolt",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Mage Armor",
@@ -33,7 +35,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 0,
-    "spellScript": "spMageArmor"
+    "spellScript": "spMageArmor",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Sleep",
@@ -51,7 +55,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 1,
     "range": 3,
-    "spellScript": "spSleep"
+    "spellScript": "spSleep",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Web",
@@ -69,7 +75,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 1,
     "range": 4,
-    "spellScript": "spWeb"
+    "spellScript": "spWeb",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Minor Regeneration",
@@ -87,7 +95,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 3,
-    "spellScript": "spMinorRegen"
+    "spellScript": "spMinorRegen",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Ice Storm",
@@ -105,7 +115,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 1,
     "range": 3,
-    "spellScript": "spIceStorm"
+    "spellScript": "spIceStorm",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Fireball",
@@ -123,7 +135,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 1,
     "range": 3,
-    "spellScript": "spFireball"
+    "spellScript": "spFireball",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Minor Healing",
@@ -141,7 +155,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 3,
-    "spellScript": "spHeal"
+    "spellScript": "spHeal",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Bless",
@@ -159,7 +175,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 3,
-    "spellScript": "spBless"
+    "spellScript": "spBless",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Magic Stone",
@@ -177,7 +195,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 3,
-    "spellScript": "spMagicStone"
+    "spellScript": "spMagicStone",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Moderate Healing",
@@ -195,7 +215,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 3,
-    "spellScript": "spHeal"
+    "spellScript": "spHeal",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Blast of Light",
@@ -213,7 +235,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 1,
     "range": 3,
-    "spellScript": "spBlastOfLight"
+    "spellScript": "spBlastOfLight",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Hold",
@@ -231,7 +255,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 3,
-    "spellScript": "spHold"
+    "spellScript": "spHold",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Mass Minor Healing",
@@ -249,6 +275,8 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 3,
-    "spellScript": "spMassHeal"
+    "spellScript": "spMassHeal",
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   }
 ]
