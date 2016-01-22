@@ -16,7 +16,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spMageBolt",
-    "spellEffectTag": "none"
+    "spellEffectTag": "magebolt",
+    "removeEffectTagList": []
   },
   {
     "name": "Flame Fingers",
@@ -35,7 +36,8 @@
     "aoeRadius": 2,
     "range": 1,
     "spellScript": "none",
-    "spellEffectTag": "flamefingers"
+    "spellEffectTag": "flamefingers",
+    "removeEffectTagList": []
   },
   {
     "name": "Mage Armor",
@@ -54,7 +56,8 @@
     "aoeRadius": 0,
     "range": 0,
     "spellScript": "spMageArmor",
-    "spellEffectTag": "none"
+    "spellEffectTag": "mageArmor",
+    "removeEffectTagList": []
   },
   {
     "name": "Sleep",
@@ -73,7 +76,8 @@
     "aoeRadius": 1,
     "range": 3,
     "spellScript": "spSleep",
-    "spellEffectTag": "none"
+    "spellEffectTag": "sleep",
+    "removeEffectTagList": []
   },
   {
     "name": "Web",
@@ -89,10 +93,11 @@
     "spellTargetType": "PointLocation",
     "spellEffectType": "DeBuff",
     "aoeShape": "Circle",
-    "aoeRadius": 1,
+    "aoeRadius": 2,
     "range": 4,
     "spellScript": "spWeb",
-    "spellEffectTag": "none"
+    "spellEffectTag": "web",
+    "removeEffectTagList": []
   },
   {
     "name": "Minor Regeneration",
@@ -111,7 +116,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spMinorRegen",
-    "spellEffectTag": "none"
+    "spellEffectTag": "minorRegen",
+    "removeEffectTagList": []
   },
   {
     "name": "Ice Storm",
@@ -130,7 +136,8 @@
     "aoeRadius": 1,
     "range": 3,
     "spellScript": "spIceStorm",
-    "spellEffectTag": "none"
+    "spellEffectTag": "icestorm",
+    "removeEffectTagList": []
   },
   {
     "name": "Lightning",
@@ -149,7 +156,8 @@
     "aoeRadius": 5,
     "range": 3,
     "spellScript": "spLightning",
-    "spellEffectTag": "none"
+    "spellEffectTag": "lightning",
+    "removeEffectTagList": []
   },
   {
     "name": "Fireball",
@@ -165,10 +173,11 @@
     "spellTargetType": "PointLocation",
     "spellEffectType": "Damage",
     "aoeShape": "Circle",
-    "aoeRadius": 1,
+    "aoeRadius": 2,
     "range": 3,
     "spellScript": "spFireball",
-    "spellEffectTag": "none"
+    "spellEffectTag": "fireball",
+    "removeEffectTagList": []
   },
   {
     "name": "Minor Healing",
@@ -187,13 +196,14 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spHeal",
-    "spellEffectTag": "none"
+    "spellEffectTag": "minorhealing",
+    "removeEffectTagList": []
   },
   {
     "name": "Bless",
     "tag": "bless",
     "spellImage": "sp_bless",
-    "description": "All allies receive a +1 to their BAB for 5 rounds per level of the caster.",
+    "description": "All allies in the area of effect receive a +1 to their BAB for 5 rounds per level of the caster.",
     "useableInSituation": "Always",
     "spriteFilename": "fx_heal",
     "spriteEndingFilename": "fx_heal1x1end",
@@ -203,10 +213,11 @@
     "spellTargetType": "Friend",
     "spellEffectType": "Buff",
     "aoeShape": "Circle",
-    "aoeRadius": 0,
+    "aoeRadius": 3,
     "range": 3,
     "spellScript": "spBless",
-    "spellEffectTag": "none"
+    "spellEffectTag": "bless",
+    "removeEffectTagList": []
   },
   {
     "name": "Magic Stone",
@@ -225,7 +236,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spMagicStone",
-    "spellEffectTag": "none"
+    "spellEffectTag": "magicstone",
+    "removeEffectTagList": []
   },
   {
     "name": "Moderate Healing",
@@ -244,7 +256,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spHeal",
-    "spellEffectTag": "none"
+    "spellEffectTag": "moderatehealing",
+    "removeEffectTagList": []
   },
   {
     "name": "Blast of Light",
@@ -263,7 +276,8 @@
     "aoeRadius": 1,
     "range": 3,
     "spellScript": "spBlastOfLight",
-    "spellEffectTag": "none"
+    "spellEffectTag": "blastoflight",
+    "removeEffectTagList": []
   },
   {
     "name": "Hold",
@@ -282,13 +296,14 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spHold",
-    "spellEffectTag": "none"
+    "spellEffectTag": "hold",
+    "removeEffectTagList": []
   },
   {
     "name": "Mass Minor Healing",
     "tag": "massMinorHealing",
     "spellImage": "sp_massheal",
-    "description": "Heals all party members for 8 HP each.",
+    "description": "Heals all party members in the area of effect for 8 HP each.",
     "useableInSituation": "Always",
     "spriteFilename": "fx_heal",
     "spriteEndingFilename": "fx_heal1x1end",
@@ -298,10 +313,11 @@
     "spellTargetType": "Friend",
     "spellEffectType": "Heal",
     "aoeShape": "Circle",
-    "aoeRadius": 0,
+    "aoeRadius": 3,
     "range": 3,
     "spellScript": "spMassHeal",
-    "spellEffectTag": "none"
+    "spellEffectTag": "minorhealing",
+    "removeEffectTagList": []
   },
   {
     "name": "Spider Bite Poison Minor",
@@ -320,6 +336,117 @@
     "aoeRadius": 0,
     "range": 1,
     "spellScript": "none",
-    "spellEffectTag": "spiderPoisonMinor"
+    "spellEffectTag": "spiderPoisonMinor",
+    "removeEffectTagList": []
+  },
+  {
+    "name": "Remove Poison",
+    "tag": "removePoison",
+    "spellImage": "sp_magebolt",
+    "description": "",
+    "useableInSituation": "Always",
+    "spriteFilename": "fx_heal",
+    "spriteEndingFilename": "fx_heal1x1end",
+    "spellStartSound": "buffer",
+    "spellEndSound": "buffer",
+    "costSP": 0,
+    "spellTargetType": "Friend",
+    "spellEffectType": "Damage",
+    "aoeShape": "Circle",
+    "aoeRadius": 0,
+    "range": 1,
+    "spellScript": "none",
+    "spellEffectTag": "removeEffect",
+    "removeEffectTagList": [
+      {
+        "tag": "poisonedLight"
+      },
+      {
+        "tag": "poisonedMedium"
+      },
+      {
+        "tag": "spiderPoisonMinor"
+      }
+    ]
+  },
+  {
+    "name": "Poison Light",
+    "tag": "poisonlight",
+    "spellImage": "sp_flamefingers",
+    "description": "poison of 1d2",
+    "useableInSituation": "InCombat",
+    "spriteFilename": "fx_acidball",
+    "spriteEndingFilename": "fx_acid1x1end",
+    "spellStartSound": "punch",
+    "spellEndSound": "none",
+    "costSP": 0,
+    "spellTargetType": "Enemy",
+    "spellEffectType": "Damage",
+    "aoeShape": "Circle",
+    "aoeRadius": 0,
+    "range": 1,
+    "spellScript": "none",
+    "spellEffectTag": "poisonedLight",
+    "removeEffectTagList": []
+  },
+  {
+    "name": "Poison Medium",
+    "tag": "poisonmedium",
+    "spellImage": "sp_flamefingers",
+    "description": "poison of 1d4",
+    "useableInSituation": "InCombat",
+    "spriteFilename": "fx_acidball",
+    "spriteEndingFilename": "fx_acid1x1end",
+    "spellStartSound": "punch",
+    "spellEndSound": "none",
+    "costSP": 0,
+    "spellTargetType": "Enemy",
+    "spellEffectType": "Damage",
+    "aoeShape": "Circle",
+    "aoeRadius": 0,
+    "range": 1,
+    "spellScript": "none",
+    "spellEffectTag": "poisonedMedium",
+    "removeEffectTagList": []
+  },
+  {
+    "name": "Resist Cold",
+    "tag": "resistcold",
+    "spellImage": "sp_magebolt",
+    "description": "Target gain 50% resistance to cold for 40 rounds",
+    "useableInSituation": "InCombat",
+    "spriteFilename": "fx_heal1x1end",
+    "spriteEndingFilename": "fx_heal",
+    "spellStartSound": "buffer",
+    "spellEndSound": "buffer",
+    "costSP": 0,
+    "spellTargetType": "Friend",
+    "spellEffectType": "Buff",
+    "aoeShape": "Circle",
+    "aoeRadius": 0,
+    "range": 3,
+    "spellScript": "none",
+    "spellEffectTag": "resistCold",
+    "removeEffectTagList": []
+  },
+  {
+    "name": "Resist Fire",
+    "tag": "resistfire",
+    "spellImage": "sp_magebolt",
+    "description": "Target gain 50% resistance to fire for 40 rounds",
+    "useableInSituation": "InCombat",
+    "spriteFilename": "fx_heal1x1end",
+    "spriteEndingFilename": "fx_heal",
+    "spellStartSound": "buffer",
+    "spellEndSound": "buffer",
+    "costSP": 0,
+    "spellTargetType": "Friend",
+    "spellEffectType": "Buff",
+    "aoeShape": "Circle",
+    "aoeRadius": 0,
+    "range": 3,
+    "spellScript": "none",
+    "spellEffectTag": "resistFire",
+    "removeEffectTagList": []
   }
 ]
