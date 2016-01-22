@@ -16,7 +16,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spMageBolt",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Mage Armor",
@@ -35,7 +36,8 @@
     "aoeRadius": 0,
     "range": 0,
     "spellScript": "spMageArmor",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Sleep",
@@ -54,7 +56,8 @@
     "aoeRadius": 1,
     "range": 3,
     "spellScript": "spSleep",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Web",
@@ -73,7 +76,8 @@
     "aoeRadius": 1,
     "range": 4,
     "spellScript": "spWeb",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Minor Regeneration",
@@ -92,7 +96,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spMinorRegen",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Ice Storm",
@@ -111,7 +116,8 @@
     "aoeRadius": 1,
     "range": 3,
     "spellScript": "spIceStorm",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Fireball",
@@ -130,7 +136,8 @@
     "aoeRadius": 1,
     "range": 3,
     "spellScript": "spFireball",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Minor Healing",
@@ -149,7 +156,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spHeal",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Bless",
@@ -168,7 +176,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spBless",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Magic Stone",
@@ -187,7 +196,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spMagicStone",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Moderate Healing",
@@ -206,7 +216,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spHeal",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Blast of Light",
@@ -225,7 +236,8 @@
     "aoeRadius": 1,
     "range": 3,
     "spellScript": "spBlastOfLight",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Hold",
@@ -244,7 +256,8 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spHold",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   },
   {
     "name": "Mass Minor Healing",
@@ -263,6 +276,7 @@
     "aoeRadius": 0,
     "range": 3,
     "spellScript": "spMassHeal",
-    "spellEffectTag": "none"
+    "spellEffectTag": "none",
+    "removeEffectTagList": []
   }
 ]

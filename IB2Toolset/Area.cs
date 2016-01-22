@@ -52,6 +52,10 @@ namespace IB2Toolset
         private string _effectChannelScript3 = "deactivateChannel3";
         private string _effectChannelScript4 = "deactivateChannel4";
 
+        private string _easternNeighbourArea = "";
+        private string _westernNeighbourArea = "";
+        private string _northernNeighbourArea = "";
+        private string _southernNeighbourArea = "";
 
         #endregion
 
@@ -86,6 +90,31 @@ namespace IB2Toolset
             get { return _areaWeatherScript; }
             set { _areaWeatherScript = value; }
         }
+        [CategoryAttribute("01 - Main")]
+        public string easternNeighbourArea
+        {
+            get { return _easternNeighbourArea; }
+            set { _easternNeighbourArea = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string westernNeighbourArea
+        {
+            get { return _westernNeighbourArea; }
+            set { _westernNeighbourArea = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string northernNeighbourArea
+        {
+            get { return _northernNeighbourArea; }
+            set { _northernNeighbourArea = value; }
+        }
+        [CategoryAttribute("01 - Main")]
+        public string southernNeighbourArea
+        {
+            get { return _southernNeighbourArea; }
+            set { _southernNeighbourArea = value; }
+        }
+
         [CategoryAttribute("01 - Main")]
         public string effectChannelScript1
         {
