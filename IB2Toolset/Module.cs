@@ -114,6 +114,8 @@ namespace IB2Toolset
         private string _spellLabelPlural = "Spells";
         private string _goldLabelSingular = "Gold";
         private string _goldLabelPlural = "Gold";
+        private int _borderAreaSize = 0;
+
         #endregion
 
         #region Properties
@@ -296,6 +298,13 @@ namespace IB2Toolset
         {
             get { return _realTimeTimerLengthInMilliSeconds; }
             set { _realTimeTimerLengthInMilliSeconds = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("If you use an area border, like marble stone in Haarkenwold, set here how many squares broad that border is for the purpose of automatic transitions to neighbouring maps.")]
+        public int borderAreaSize
+        {
+            get { return _borderAreaSize; }
+            set { _borderAreaSize = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Current value for World Time in generic units")]
