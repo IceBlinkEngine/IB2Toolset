@@ -64,7 +64,7 @@ namespace IB2Toolset
         //BUFF and DEBUFF
         private bool _doBuff = false;
         private bool _doDeBuff = false;
-        private string _addStatusType = "none"; //none, Held, Immobile, Invisible, Silenced, etc.
+        private string _statusType = "none"; //none, Held, Immobile, Invisible, Silenced, etc.
         private int _modifyFortitude = 0;
         private int _modifyWill = 0;
         private int _modifyReflex = 0;
@@ -408,10 +408,10 @@ namespace IB2Toolset
             set { _doDeBuff = value; }
         }
         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("none, Held, Immobile, Invisible, Silenced")]
-        public string addStatusType
+        public string statusType
         {
-            get { return _addStatusType; }
-            set { _addStatusType = value; }
+            get { return _statusType; }
+            set { _statusType = value; }
         }
         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyFortitude

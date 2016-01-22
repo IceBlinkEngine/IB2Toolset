@@ -104,11 +104,11 @@ namespace IB2Toolset
                 numDamNumActionsC.Value = ef.damNumberOfAttacksAfterLevelN;
                 numDamNumActionsD.Value = ef.damNumberOfAttacksUpToNAttacksTotal;
                 numHealActionA.Value = ef.healNumOfDice;
-                numHealActionA.Value = ef.healDie;
-                numHealActionA.Value = ef.healAdder;
-                numHealActionA.Value = ef.healActionsEveryNLevels;
-                numHealActionA.Value = ef.healActionsAfterLevelN;
-                numHealActionA.Value = ef.healActionsUpToNLevelsTotal;
+                numHealActionB.Value = ef.healDie;
+                numHealActionC.Value = ef.healAdder;
+                numHealActionD.Value = ef.healActionsEveryNLevels;
+                numHealActionE.Value = ef.healActionsAfterLevelN;
+                numHealActionF.Value = ef.healActionsUpToNLevelsTotal;
             }
         }
 
