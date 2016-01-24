@@ -51,6 +51,7 @@ namespace IB2Toolset
         private bool _twoHanded = false; //requires the use of two hands
         private bool _canNotBeUnequipped = false; //set to true for cursed items or summon creature items
         private bool _isStackable = false;
+        private bool _automaticallyHitsTarget = false; //does not require a successful to hit roll, always hits target (ex. mage bolt wand)
         private int _attackBonus = 0; //attack bonus
         private int _attackRange = 1; //attack range
         private int _AreaOfEffect = 0; //AoE
@@ -345,6 +346,18 @@ namespace IB2Toolset
             set
             {
                 _isStackable = value;
+            }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Does not require a successful 'to hit' roll, always hits target (ex. mage bolt wand).")]
+        public bool automaticallyHitsTarget
+        {
+            get
+            {
+                return _automaticallyHitsTarget;
+            }
+            set
+            {
+                _automaticallyHitsTarget = value;
             }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Item Attack Bonus...Can be used to account for enchantments as well.")]
