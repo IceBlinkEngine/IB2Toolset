@@ -84,6 +84,7 @@
   "moduleCredits": "<big><b>NewModule</b></big><BR>\r\n<BR>\r\n-coding and art by <b>slowdive_fan</b><BR>\r\n<BR>\r\n-visit the forums for more info:<BR>\r\nwww.iceblinkengine.com/forums",
   "nextIdNumber": 389,
   "realTimeTimerLengthInMilliSeconds": 1500,
+  "borderAreaSize": 0,
   "WorldTime": 0,
   "startingArea": "homeds",
   "startingPlayerPositionX": 4,

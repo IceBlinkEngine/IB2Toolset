@@ -13,9 +13,11 @@
     "spellTargetType": "Friend",
     "spellEffectType": "Buff",
     "aoeShape": "Circle",
-    "aoeRadius": 0,
+    "aoeRadius": 3,
     "range": 5,
-    "spellScript": "spBless"
+    "spellScript": "none",
+    "spellEffectTag": "bless",
+    "removeEffectTagList": []
   },
   {
     "name": "Hypnotize",
@@ -33,7 +35,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 5,
-    "spellScript": "spHold"
+    "spellScript": "none",
+    "spellEffectTag": "hold",
+    "removeEffectTagList": []
   },
   {
     "name": "Mass Minor Healing",
@@ -49,9 +53,11 @@
     "spellTargetType": "Friend",
     "spellEffectType": "Heal",
     "aoeShape": "Circle",
-    "aoeRadius": 0,
+    "aoeRadius": 3,
     "range": 5,
-    "spellScript": "spMassHeal"
+    "spellScript": "none",
+    "spellEffectTag": "minorhealing",
+    "removeEffectTagList": []
   },
   {
     "name": "Minor Healing",
@@ -69,7 +75,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 5,
-    "spellScript": "spHeal"
+    "spellScript": "none",
+    "spellEffectTag": "minorhealing",
+    "removeEffectTagList": []
   },
   {
     "name": "Minor Regeneration",
@@ -87,7 +95,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 5,
-    "spellScript": "spMinorRegen"
+    "spellScript": "none",
+    "spellEffectTag": "minorRegen",
+    "removeEffectTagList": []
   },
   {
     "name": "Moderate Healing",
@@ -105,7 +115,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 0,
     "range": 5,
-    "spellScript": "spHeal"
+    "spellScript": "none",
+    "spellEffectTag": "moderatehealing",
+    "removeEffectTagList": []
   },
   {
     "name": "Blast Grenade",
@@ -123,7 +135,9 @@
     "aoeShape": "Circle",
     "aoeRadius": 1,
     "range": 5,
-    "spellScript": "spBlastOfLight"
+    "spellScript": "none",
+    "spellEffectTag": "blastoflight",
+    "removeEffectTagList": []
   },
   {
     "name": "Sleep Grenade",
@@ -141,6 +155,38 @@
     "aoeShape": "Circle",
     "aoeRadius": 1,
     "range": 5,
-    "spellScript": "spSleep"
+    "spellScript": "none",
+    "spellEffectTag": "sleep",
+    "removeEffectTagList": []
+  },
+  {
+    "name": "Remove Poison",
+    "tag": "removePoison",
+    "spellImage": "sp_magebolt",
+    "description": "",
+    "useableInSituation": "Always",
+    "spriteFilename": "fx_heal",
+    "spriteEndingFilename": "fx_heal1x1end",
+    "spellStartSound": "buffer",
+    "spellEndSound": "buffer",
+    "costSP": 0,
+    "spellTargetType": "Friend",
+    "spellEffectType": "Damage",
+    "aoeShape": "Circle",
+    "aoeRadius": 0,
+    "range": 1,
+    "spellScript": "none",
+    "spellEffectTag": "removeEffect",
+    "removeEffectTagList": [
+      {
+        "tag": "poisonedLight"
+      },
+      {
+        "tag": "poisonedMedium"
+      },
+      {
+        "tag": "spiderPoisonMinor"
+      }
+    ]
   }
 ]
