@@ -70,63 +70,63 @@
     "itemsAllowed": [
       {
         "resref": "larmor1",
-        "tag": "larmor1_704",
+        "tag": "larmor1_825",
         "name": "Military Skeinsuit",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "potion01",
-        "tag": "potion01_705",
+        "tag": "potion01_826",
         "name": "Stimdose",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "potion02",
-        "tag": "potion02_706",
+        "tag": "potion02_827",
         "name": "Survival Rations",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol3",
-        "tag": "pistol3_707",
+        "tag": "pistol3_828",
         "name": "Gyrojet Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol1",
-        "tag": "pistol1_708",
+        "tag": "pistol1_829",
         "name": "Laser Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol2",
-        "tag": "pistol2_709",
+        "tag": "pistol2_830",
         "name": "Needler Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "knife01",
-        "tag": "knife01_710",
+        "tag": "knife01_831",
         "name": "Vibroknife",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "powerpack",
-        "tag": "powerpack_711",
+        "tag": "powerpack_832",
         "name": "Power Pack",
         "canNotBeUnequipped": false,
         "quantity": 20
       },
       {
         "resref": "needlepack",
-        "tag": "needlepack_712",
+        "tag": "needlepack_833",
         "name": "Needles",
         "canNotBeUnequipped": false,
         "quantity": 20
@@ -257,98 +257,98 @@
     "itemsAllowed": [
       {
         "resref": "larmor1",
-        "tag": "larmor1_642",
+        "tag": "larmor1_802",
         "name": "Military Skeinsuit",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "potion01",
-        "tag": "potion01_643",
+        "tag": "potion01_803",
         "name": "Stimdose",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "potion02",
-        "tag": "potion02_644",
+        "tag": "potion02_804",
         "name": "Survival Rations",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "esword01",
-        "tag": "esword01_645",
+        "tag": "esword01_805",
         "name": "Electric Sword",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol3",
-        "tag": "pistol3_646",
+        "tag": "pistol3_806",
         "name": "Gyrojet Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "rifle3",
-        "tag": "rifle3_647",
+        "tag": "rifle3_807",
         "name": "Gyrojet Rifle",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol1",
-        "tag": "pistol1_648",
+        "tag": "pistol1_808",
         "name": "Laser Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "rifle1",
-        "tag": "rifle1_649",
+        "tag": "rifle1_809",
         "name": "Laser Rifle",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol2",
-        "tag": "pistol2_650",
+        "tag": "pistol2_810",
         "name": "Needler Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "rifle2",
-        "tag": "rifle2_651",
+        "tag": "rifle2_811",
         "name": "Needler Rifle",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "sword01",
-        "tag": "sword01_652",
+        "tag": "sword01_812",
         "name": "Sword",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "knife01",
-        "tag": "knife01_653",
+        "tag": "knife01_813",
         "name": "Vibroknife",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "powerpack",
-        "tag": "powerpack_654",
+        "tag": "powerpack_814",
         "name": "Power Pack",
         "canNotBeUnequipped": false,
         "quantity": 20
       },
       {
         "resref": "needlepack",
-        "tag": "needlepack_655",
+        "tag": "needlepack_815",
         "name": "Needles",
         "canNotBeUnequipped": false,
         "quantity": 20
@@ -492,63 +492,63 @@
     "itemsAllowed": [
       {
         "resref": "larmor1",
-        "tag": "larmor1_656",
+        "tag": "larmor1_834",
         "name": "Military Skeinsuit",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "potion01",
-        "tag": "potion01_657",
+        "tag": "potion01_835",
         "name": "Stimdose",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "potion02",
-        "tag": "potion02_658",
+        "tag": "potion02_836",
         "name": "Survival Rations",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol3",
-        "tag": "pistol3_659",
+        "tag": "pistol3_837",
         "name": "Gyrojet Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol1",
-        "tag": "pistol1_660",
+        "tag": "pistol1_838",
         "name": "Laser Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "pistol2",
-        "tag": "pistol2_661",
+        "tag": "pistol2_839",
         "name": "Needler Pistol",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "knife01",
-        "tag": "knife01_662",
+        "tag": "knife01_840",
         "name": "Vibroknife",
         "canNotBeUnequipped": false,
         "quantity": 1
       },
       {
         "resref": "powerpack",
-        "tag": "powerpack_663",
+        "tag": "powerpack_841",
         "name": "Power Pack",
         "canNotBeUnequipped": false,
         "quantity": 20
       },
       {
         "resref": "needlepack",
-        "tag": "needlepack_664",
+        "tag": "needlepack_842",
         "name": "Needles",
         "canNotBeUnequipped": false,
         "quantity": 20
