@@ -57,6 +57,8 @@ namespace IB2Toolset
         private string _northernNeighbourArea = "";
         private string _southernNeighbourArea = "";
 
+        public string sourceBitmapName = "";
+
         #endregion
 
         #region Properties
