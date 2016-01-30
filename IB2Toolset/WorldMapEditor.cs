@@ -273,8 +273,10 @@ namespace IB2Toolset
                     {
                         for (int x = 0; x < area.MapSizeX; x++)
                         {
-                            if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
-                            {
+                            //if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                            if ((refreshAll))
+                            
+                                {
                                 Tile tile = area.Tiles[y * area.MapSizeX + x];
                                 Bitmap lyr0 = null;
                             try
@@ -833,8 +835,11 @@ namespace IB2Toolset
             if (prntForm.PropSelected)
             {
                 // TODO re-implement continuous drawing of props once converted to use Direct2D
-                refreshMap(true);
-                try
+                //yn1: deactivate constant refreshing for performance reasons
+                //refreshMap(true);
+
+                //yn1: deactivate painting props without clicking for now
+                /*try
                 {
                     if (selectedBitmap != null)
                     {
@@ -848,7 +853,13 @@ namespace IB2Toolset
                 }
                 catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
                 //save changes
-                UpdatePB();
+                */
+
+                //yn1: only paint props on mouse click 
+                if (e.Button == MouseButtons.Left)
+                {
+                    UpdatePB();
+                }
                 
             }
             else if (currentPoint != new Point(gridX, gridY))
