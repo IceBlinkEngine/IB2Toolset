@@ -57,6 +57,10 @@ namespace IB2Toolset
         private string _northernNeighbourArea = "";
         private string _southernNeighbourArea = "";
 
+        public string sourceBitmapName = "";
+        //public Bitmap minimap;
+        //public List<System.Drawing.Bitmap> minimapImages = new List<System.Drawing.Bitmap>();
+
         #endregion
 
         #region Properties

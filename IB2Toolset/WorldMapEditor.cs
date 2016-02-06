@@ -65,6 +65,16 @@ namespace IB2Toolset
         public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
         public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
 
+        public Bitmap sourceBitmap;
+        //public string sourceBitmapName = "";
+        string[] args = new string[2];
+        string xCells = "";
+        string yCells = "";
+
+        bool calledFromLoadButton = false;
+        public List<System.Drawing.Bitmap> minimapImages = new List<System.Drawing.Bitmap>();
+        public List<string> minimapImageNames = new List<string>();
+
 
         public WorldMapEditor(Module m, ParentForm p)
         {
@@ -205,8 +215,14 @@ namespace IB2Toolset
                         //fill tileList as well
                         TileBitmapNamePair t = new TileBitmapNamePair((Bitmap)bit.Clone(), Path.GetFileNameWithoutExtension(f));
                         tileList.Add(t);
+
+                        //add the layer0 tiles on top
+
+                        //TileBitmapNamePair u = new TileBitmapNamePair((Bitmap)bit.Clone(), Path.GetFileNameWithoutExtension(f));
+                        //tileList.Add(u);
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -240,13 +256,93 @@ namespace IB2Toolset
             try
             {
                 //draw background image first if using one
+                //could be deleted later actually
                 if ((!area.ImageFileName.Equals("none")) && (gameMapBitmap != null))
                 {
                     Rectangle srcBG = new Rectangle(0, 0, gameMapBitmap.Width, gameMapBitmap.Height);
                     Rectangle dstBG = new Rectangle(area.backgroundImageStartLocX * sqr, area.backgroundImageStartLocY * sqr, sqr * (gameMapBitmap.Width / 50), sqr * (gameMapBitmap.Height / 50));
-                    device.DrawImage(gameMapBitmap, dstBG, srcBG, GraphicsUnit.Pixel); 
+                    device.DrawImage(gameMapBitmap, dstBG, srcBG, GraphicsUnit.Pixel);
+                     
                 }
-                //draw map
+                //new code for drawing layer 0, aka puzzle pieces of hand drawn map
+                    #region Draw Layer 0
+                    if (area.sourceBitmapName != "")
+                    {
+                    int tileCounter = 0;
+                    for (int y = 0; y < area.MapSizeY; y++)
+                    {
+                        for (int x = 0; x < area.MapSizeX; x++)
+                        {
+                            //if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
+                            if ((refreshAll))
+                            
+                                {
+                                Tile tile = area.Tiles[y * area.MapSizeX + x];
+                                Bitmap lyr0 = null;
+                            try
+                            {
+                                tile.Layer0Filename = area.sourceBitmapName + tileCounter.ToString();
+                            }
+                            catch { }
+                            if ((tile.Layer0Filename != null) && (tile.Layer0Filename != "") && tile.Layer0Filename != "t_blank")
+                            {
+                                string bitMapPath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + tile.Layer0Filename + ".png";
+                                tileCounter++;
+                                //Rectangle src1 = new Rectangle(0, 0, 100, 100);
+
+                                //if (tile.Layer0Filename != null)
+                                //{
+
+                                //lyr0 = new Bitmap(Path.GetFullPath(tile.Layer0Filename + ".png"));
+                                //g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png");
+                                //lyr0 = getTileByName(tile.Layer0Filename).bitmap;
+                                try
+                                {
+                                    lyr0 = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + tile.Layer0Filename + ".png");
+                                    //int block = 3;
+                                }
+                                catch
+                                {
+
+                                }
+                                //lyr1 = (Bitmap)getTileByName(tile.Layer1Filename).bitmap.Clone();
+                                //flip about y-axis layer
+                                //lyr1 = Flip(lyr1, tile.Layer1Flip);
+                                //rotate layer
+                                //lyr1 = Rotate(lyr1, tile.Layer1Rotate);
+                                //src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
+                                //}
+                                //Rectangle src = new Rectangle(0, 0, 100, 100);
+                                //Rectangle dst = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                                //draw layer 1 first
+                                if (lyr0 != null)
+                                {
+                                    //float scalerX = lyr0.Width / 100;
+                                    //float scalerY = lyr0.Height / 100;
+                                    float scalerX = 1;
+                                    float scalerY = 1;
+                                    Rectangle src = new Rectangle(0, 0, lyr0.Width, lyr0.Height);
+                                    Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr0, dst, src, GraphicsUnit.Pixel);
+                                    minimapImages.Add(lyr0);
+                                    minimapImageNames.Add(tile.Layer0Filename);
+                                    //area.minimapImages.Add(lyr0);
+
+                                        //surface.
+                                        //device.
+
+                                        //sourceBitmap.Clone(new Rectangle(column * 50, row * 50, 50, 50), sourceBitmap.PixelFormat).Save(cellpath, ImageFormat.Png);
+
+
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    #endregion
+                }
                 #region Draw Layer 1
                 if (checkBox1.Checked)
                 {
@@ -279,6 +375,8 @@ namespace IB2Toolset
                                     Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
                                     Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
                                     device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                    minimapImages.Add(lyr1);
+                                    minimapImageNames.Add(tile.Layer1Filename);
                                 }
                             }
                         }
@@ -307,6 +405,8 @@ namespace IB2Toolset
                                     Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
                                     Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
                                     device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                    minimapImages.Add(lyr1);
+                                    minimapImageNames.Add(tile.Layer2Filename);
                                 }
                             }
                         }
@@ -335,6 +435,8 @@ namespace IB2Toolset
                                     Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
                                     Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
                                     device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                    minimapImages.Add(lyr1);
+                                    minimapImageNames.Add(tile.Layer3Filename);
                                 }
                             }
                         }
@@ -363,6 +465,8 @@ namespace IB2Toolset
                                     Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
                                     Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
                                     device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                    minimapImages.Add(lyr1);
+                                    minimapImageNames.Add(tile.Layer4Filename);
                                 }
                             }
                         }
@@ -383,6 +487,7 @@ namespace IB2Toolset
                                 if (getTileByName(tile.Layer5Filename) != null)
                                 {
                                     lyr1 = getTileByName(tile.Layer5Filename).bitmap;
+                                    
                                 }
                                 if (lyr1 != null)
                                 {
@@ -391,6 +496,8 @@ namespace IB2Toolset
                                     Rectangle src = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
                                     Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
                                     device.DrawImage(lyr1, dst, src, GraphicsUnit.Pixel);
+                                    minimapImages.Add(lyr1);
+                                    minimapImageNames.Add(tile.Layer5Filename);
                                 }
                             }
                         }
@@ -642,8 +749,71 @@ namespace IB2Toolset
             catch (Exception ex)
             {
                 MessageBox.Show("failed on refresh map: " + ex.ToString());                
-            }            
+            }
+
+            CreateMinimap();
         }
+
+        private void CreateMinimap()
+        {
+           try
+            {
+                int minimapSquareSizeInPixels = 400 / area.MapSizeX;
+                int width = minimapSquareSizeInPixels * area.MapSizeX;
+                int height = minimapSquareSizeInPixels * area.MapSizeY;
+                Bitmap minimap = new System.Drawing.Bitmap(width, height);
+
+                //get a graphics object from the image so we can draw on it
+                using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(minimap))
+                {
+                    //set background color
+                    g.Clear(System.Drawing.Color.Black);
+
+                    int counter = 0;
+                    int numberOfUsedLayers = 6;
+                    //catch maps that do not have a layer 0
+                    if (minimapImages.Count < (area.MapSizeX * area.MapSizeY * 6))
+                    {
+                        numberOfUsedLayers = 5;
+                    }
+
+                    //z is for the layers here
+                    for (int z = 0; z < numberOfUsedLayers; z++)
+                    {
+                        for (int y = 0; y < area.MapSizeY; y++)
+                        {
+                            for (int x = 0; x < area.MapSizeX; x++)
+                            {
+                                float scalerX = minimapImages[counter].Size.Width / 100;
+                                float scalerY = minimapImages[counter].Size.Height / 100;
+                                //the 50x50 tiles of layer zero are zoomed up to 100x100
+                                if (z == 0)
+                                {
+                                    scalerX = 1;
+                                    scalerY = 1;
+                                }
+                                int brX = (int)(minimapSquareSizeInPixels * scalerX);
+                                int brY = (int)(minimapSquareSizeInPixels * scalerY);
+                                g.DrawImage(minimapImages[counter], new System.Drawing.Rectangle(x * minimapSquareSizeInPixels, y * minimapSquareSizeInPixels, brX, brY));
+                                counter++;
+                            }
+                        }
+                    }
+
+                    string dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics";
+                    string path = dir + Path.DirectorySeparatorChar + area.Filename + "Minimap.png";
+                    minimap.Save(path, ImageFormat.Png);
+                    minimap.Dispose();
+                }
+            }
+            catch
+            {
+                
+            }    
+                minimapImageNames.Clear();
+                minimapImages.Clear();
+        }
+        
         private void spritePropDraw(int cspx, int cspy, int spriteListIndex)
         {
             //source image
@@ -748,24 +918,33 @@ namespace IB2Toolset
             if (!mouseInMapArea(gridX, gridY)) { return; }
             lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
             if (prntForm.PropSelected)
-            {
-                // TODO re-implement continuous drawing of props once converted to use Direct2D
-                refreshMap(true);
-                try
-                {
-                    if (selectedBitmap != null)
+            {  
+                    // TODO re-implement continuous drawing of props once converted to use Direct2D
+                    //yn1: deactivate constant refreshing for performance reasons
+                    //refreshMap(true);
+
+                    //yn1: deactivate painting props without clicking for now
+                    /*try
                     {
-                        //source image size
-                        Rectangle frame = new Rectangle(0, 0, selectedBitmap.Width, selectedBitmap.Height);
-                        //target location
-                        Rectangle target = new Rectangle(gridX * sqr, gridY * sqr, sqr, sqr);
-                        //draw sprite
-                        device.DrawImage((Image)selectedBitmap, target, frame, GraphicsUnit.Pixel);
+                        if (selectedBitmap != null)
+                        {
+                            //source image size
+                            Rectangle frame = new Rectangle(0, 0, selectedBitmap.Width, selectedBitmap.Height);
+                            //target location
+                            Rectangle target = new Rectangle(gridX * sqr, gridY * sqr, sqr, sqr);
+                            //draw sprite
+                            device.DrawImage((Image)selectedBitmap, target, frame, GraphicsUnit.Pixel);
+                        }
                     }
+                    catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
+                    //save changes
+                    */
+
+                    //yn1: only paint props on mouse click 
+                    if (e.Button == MouseButtons.Left)
+                {
+                    UpdatePB();
                 }
-                catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
-                //save changes
-                UpdatePB();
                 
             }
             else if (currentPoint != new Point(gridX, gridY))
@@ -1610,7 +1789,90 @@ namespace IB2Toolset
         #endregion
 
         #region Event Handlers    
+
         private void btnLoadMap_Click(object sender, EventArgs e)
+        {
+            if (mod.moduleName != "NewModule")
+            {
+                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics";
+            }
+            else
+            {
+                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\default\\NewModule";
+            }
+            openFileDialog1.FileName = String.Empty;
+            //allow .png maps, too (their transparency allows to show bottom layer full screen effects, like the sea)
+            openFileDialog1.Filter = "Map (*.jpg)|*.jpg|Map (*.png)|*.png";
+            openFileDialog1.FilterIndex = 1;
+
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                //more of an arbitrary limit, could likely go higher
+                Bitmap testSize = new Bitmap(Path.GetFullPath(openFileDialog1.FileName));
+                if ((testSize.Width > 5000) || (testSize.Height > 5000))
+                {
+                    MessageBox.Show("Map images must be no more than 5000x5000 pixels, i.e. 100x100 squares");
+                    return;
+                }
+                
+               
+                string filename = Path.GetFullPath(openFileDialog1.FileName);
+                //area.ImageFileName = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                //gameMapBitmap = new Bitmap(filename);
+                //openLevel and refreshMap methods for drawing layer0 need area.ImageFileName != "none" to fire
+                //let us "none" and null here for starters to circumvent the regular load and draw of a background map en block
+                //we can later remove the whole old strucutre
+                area.ImageFileName = "none";
+                gameMapBitmap = null;
+
+                //this is our source bitmap, ready for the cutting
+                //also name of the bitmap later to be used for directory of its tiles as well as prefix in every of its tiles names (swamp0, swamp1, swamp2, etc.)
+                area.sourceBitmapName = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                sourceBitmap = new Bitmap(filename);
+
+            int columns = sourceBitmap.Width / 50;
+            int rows = sourceBitmap.Height / 50;
+            int cells = columns * rows;
+
+            string dir  = "";
+            try
+            {
+                dir = Path.GetDirectoryName(filename) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(filename);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+                   
+            }
+            catch
+            {
+                
+            }
+            string cellfile;
+            string cellpath;
+            try
+            {
+                for (int row = 0; row < rows; row++)
+                {
+                    for (int column = 0; column < columns; column++)
+                    {
+                        cellfile = area.sourceBitmapName + (row * columns + column).ToString();
+                        cellpath = dir + Path.DirectorySeparatorChar + cellfile + ".png";
+                        sourceBitmap.Clone(new Rectangle(column * 50, row * 50, 50, 50), sourceBitmap.PixelFormat).Save(cellpath, ImageFormat.Png);
+                     }
+                }
+            }
+            catch
+            {
+               
+            }
+                refreshMap(true);
+            }
+        }
+
+        //old code for btnLoadMap_Click (for reference and eventually restoring)
+        /*private void btnLoadMap_Click(object sender, EventArgs e)
         {
             if (mod.moduleName != "NewModule")
             {
@@ -1643,7 +1905,8 @@ namespace IB2Toolset
                 }
                 refreshMap(true);
             }
-        }
+        }*/
+
         private void btnRemoveMap_Click(object sender, EventArgs e)
         {
             area.ImageFileName = "none";
