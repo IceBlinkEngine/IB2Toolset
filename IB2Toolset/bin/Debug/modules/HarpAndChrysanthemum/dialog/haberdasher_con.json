@@ -314,7 +314,7 @@
                                                             },
                                                             {
                                                               "idNum": 19,
-                                                              "orderNum": 1,
+                                                              "orderNum": 0,
                                                               "pcNode": true,
                                                               "linkTo": 0,
                                                               "ShowOnlyOnce": false,
@@ -335,7 +335,7 @@
                                                                   "NodePortraitBitmap": "",
                                                                   "NodeNpcName": "",
                                                                   "NodeSound": "none",
-                                                                  "conversationText": "There you are, sir!  The hat has been altered to your friend's specifications.|***ga_fade_from_black-->Float::4    |",
+                                                                  "conversationText": "",
                                                                   "IsExpanded": true,
                                                                   "subNodes": [],
                                                                   "actions": [],
@@ -382,7 +382,7 @@
                                                             },
                                                             {
                                                               "idNum": 21,
-                                                              "orderNum": 2,
+                                                              "orderNum": 0,
                                                               "pcNode": true,
                                                               "linkTo": 0,
                                                               "ShowOnlyOnce": false,
@@ -403,7 +403,7 @@
                                                                   "NodePortraitBitmap": "",
                                                                   "NodeNpcName": "",
                                                                   "NodeSound": "none",
-                                                                  "conversationText": "There you are, sir!  The hat has been altered to your friend's specifications.|***ga_fade_from_black-->Float::4    |",
+                                                                  "conversationText": "",
                                                                   "IsExpanded": true,
                                                                   "subNodes": [],
                                                                   "actions": [],
@@ -450,7 +450,7 @@
                                                             },
                                                             {
                                                               "idNum": 23,
-                                                              "orderNum": 3,
+                                                              "orderNum": 0,
                                                               "pcNode": true,
                                                               "linkTo": 0,
                                                               "ShowOnlyOnce": false,
@@ -471,7 +471,7 @@
                                                                   "NodePortraitBitmap": "",
                                                                   "NodeNpcName": "",
                                                                   "NodeSound": "none",
-                                                                  "conversationText": "There you are, sir!  The hat has been altered to your friend's specifications.|***ga_fade_from_black-->Float::4    |",
+                                                                  "conversationText": "",
                                                                   "IsExpanded": true,
                                                                   "subNodes": [],
                                                                   "actions": [],
@@ -518,7 +518,7 @@
                                                             },
                                                             {
                                                               "idNum": 25,
-                                                              "orderNum": 4,
+                                                              "orderNum": 0,
                                                               "pcNode": true,
                                                               "linkTo": 0,
                                                               "ShowOnlyOnce": false,
@@ -547,7 +547,7 @@
                                                   "actions": [],
                                                   "conditions": [
                                                     {
-                                                      "c_script": "gc_journal_entry(nonIBscript)",
+                                                      "c_script": "gcCheckJournalEntryByTag.cs",
                                                       "c_btnAndOr": null,
                                                       "c_and": false,
                                                       "c_not": false,
@@ -561,7 +561,7 @@
                                                 },
                                                 {
                                                   "idNum": 26,
-                                                  "orderNum": 1,
+                                                  "orderNum": 0,
                                                   "pcNode": false,
                                                   "linkTo": 0,
                                                   "ShowOnlyOnce": false,
@@ -595,7 +595,7 @@
                                                           "NodePortraitBitmap": "",
                                                           "NodeNpcName": "",
                                                           "NodeSound": "none",
-                                                          "conversationText": "What do you think, <FirstName>?  Do you think I should invest in an alteration to my hat?",
+                                                          "conversationText": "",
                                                           "IsExpanded": true,
                                                           "subNodes": [],
                                                           "actions": [],
@@ -611,7 +611,7 @@
                                                   "actions": [],
                                                   "conditions": [
                                                     {
-                                                      "c_script": "gc_journal_entry(nonIBscript)",
+                                                      "c_script": "gcCheckJournalEntryByTag.cs",
                                                       "c_btnAndOr": null,
                                                       "c_and": false,
                                                       "c_not": false,
@@ -682,7 +682,7 @@
               "c_parameter_4": null
             },
             {
-              "c_script": "gc_journal_entry(nonIBscript)",
+              "c_script": "gcCheckJournalEntryByTag.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -696,7 +696,7 @@
         },
         {
           "idNum": 29,
-          "orderNum": 1,
+          "orderNum": 0,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -724,7 +724,7 @@
         },
         {
           "idNum": 30,
-          "orderNum": 2,
+          "orderNum": 0,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -738,7 +738,7 @@
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_journal_entry(nonIBscript)",
+              "c_script": "gcCheckJournalEntryByTag.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -752,7 +752,7 @@
         },
         {
           "idNum": 31,
-          "orderNum": 3,
+          "orderNum": 0,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -786,7 +786,7 @@
                   "NodePortraitBitmap": "",
                   "NodeNpcName": "",
                   "NodeSound": "none",
-                  "conversationText": "What do you think, <FirstName>?  Do you think I should invest in an alteration to my hat?",
+                  "conversationText": "",
                   "IsExpanded": true,
                   "subNodes": [],
                   "actions": [],
@@ -812,7 +812,7 @@
               "c_parameter_4": null
             },
             {
-              "c_script": "gc_journal_entry(nonIBscript)",
+              "c_script": "gcCheckJournalEntryByTag.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -830,7 +830,7 @@
       "isLink": false
     }
   ],
-  "ConvoFileName": "haberdasher_con",
+  "ConvoFileName": "haberdasher_con.json",
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,

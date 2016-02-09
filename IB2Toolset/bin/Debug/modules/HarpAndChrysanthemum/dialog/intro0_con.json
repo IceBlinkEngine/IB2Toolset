@@ -14,20 +14,20 @@
       "IsExpanded": true,
       "subNodes": [
         {
-          "idNum": 1,
+          "idNum": 7,
           "orderNum": 0,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
           "NodeIsActive": true,
-          "NodePortraitBitmap": "",
+          "NodePortraitBitmap": "nar_intro01.png",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "|***ga_fade_to_black-->Float::0    Float::6    Int::0    ***ga_global_int-->String::starting_int    String::1    |",
+          "conversationText": "A Fair Day to you, Theophilus.  What word do you bring from Corm Orp?",
           "IsExpanded": true,
           "subNodes": [
             {
-              "idNum": 2,
+              "idNum": 8,
               "orderNum": 0,
               "pcNode": true,
               "linkTo": 0,
@@ -36,24 +36,24 @@
               "NodePortraitBitmap": "",
               "NodeNpcName": "",
               "NodeSound": "none",
-              "conversationText": "",
+              "conversationText": "Continue",
               "IsExpanded": true,
               "subNodes": [
                 {
-                  "idNum": 3,
+                  "idNum": 9,
                   "orderNum": 0,
                   "pcNode": false,
                   "linkTo": 0,
                   "ShowOnlyOnce": false,
                   "NodeIsActive": true,
-                  "NodePortraitBitmap": "",
+                  "NodePortraitBitmap": "nar_intro06.png",
                   "NodeNpcName": "",
                   "NodeSound": "none",
-                  "conversationText": "|***ga_fade_to_black-->Float::4    Float::5    Int::0    |",
+                  "conversationText": "A Fair Day to you as well, Disciple.  <i>Our</i> word is spreading.  But <i>the</i> Word, the Word of our god, has not yet been spoken.",
                   "IsExpanded": true,
                   "subNodes": [
                     {
-                      "idNum": 4,
+                      "idNum": 10,
                       "orderNum": 0,
                       "pcNode": true,
                       "linkTo": 0,
@@ -62,24 +62,24 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "Continue",
                       "IsExpanded": true,
                       "subNodes": [
                         {
-                          "idNum": 5,
+                          "idNum": 11,
                           "orderNum": 0,
                           "pcNode": false,
                           "linkTo": 0,
                           "ShowOnlyOnce": false,
                           "NodeIsActive": true,
-                          "NodePortraitBitmap": "",
+                          "NodePortraitBitmap": "nar_intro05.png",
                           "NodeNpcName": "",
                           "NodeSound": "none",
-                          "conversationText": "|***ga_fade_from_black-->Float::15    |",
+                          "conversationText": "How can this be, Theophilus?",
                           "IsExpanded": true,
                           "subNodes": [
                             {
-                              "idNum": 6,
+                              "idNum": 12,
                               "orderNum": 0,
                               "pcNode": true,
                               "linkTo": 0,
@@ -88,24 +88,24 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "Continue",
                               "IsExpanded": true,
                               "subNodes": [
                                 {
-                                  "idNum": 7,
+                                  "idNum": 13,
                                   "orderNum": 0,
                                   "pcNode": false,
                                   "linkTo": 0,
                                   "ShowOnlyOnce": false,
                                   "NodeIsActive": true,
-                                  "NodePortraitBitmap": "",
+                                  "NodePortraitBitmap": "nar_intro02.png",
                                   "NodeNpcName": "",
                                   "NodeSound": "none",
-                                  "conversationText": "A Fair Day to you, Theophilus.  What word do you bring from Corm Orp?",
+                                  "conversationText": "Only the unbeliever says, \"How can I know the Word is true and yet not have it?\"  Have <i>faith</i>, Disciple, and the Word shall be found.",
                                   "IsExpanded": true,
                                   "subNodes": [
                                     {
-                                      "idNum": 8,
+                                      "idNum": 14,
                                       "orderNum": 0,
                                       "pcNode": true,
                                       "linkTo": 0,
@@ -114,24 +114,24 @@
                                       "NodePortraitBitmap": "",
                                       "NodeNpcName": "",
                                       "NodeSound": "none",
-                                      "conversationText": "",
+                                      "conversationText": "Continue",
                                       "IsExpanded": true,
                                       "subNodes": [
                                         {
-                                          "idNum": 9,
+                                          "idNum": 15,
                                           "orderNum": 0,
                                           "pcNode": false,
                                           "linkTo": 0,
                                           "ShowOnlyOnce": false,
                                           "NodeIsActive": true,
-                                          "NodePortraitBitmap": "",
+                                          "NodePortraitBitmap": "nar_intro05.png",
                                           "NodeNpcName": "",
                                           "NodeSound": "none",
-                                          "conversationText": "A Fair Day to you as well, Disciple.  <i>Our</i> word is spreading.  But <i>the</i> Word, the Word of our god, has not yet been spoken.|***ga_move-->String::amnestus_wp1    Int::0    String::amnestus    |",
+                                          "conversationText": "Then I will believe!  Were my faith not strong already, the miracle that has changed this place would convince me.  Observe how thoroughly we have purged it of foulness.",
                                           "IsExpanded": true,
                                           "subNodes": [
                                             {
-                                              "idNum": 10,
+                                              "idNum": 16,
                                               "orderNum": 0,
                                               "pcNode": true,
                                               "linkTo": 0,
@@ -140,24 +140,24 @@
                                               "NodePortraitBitmap": "",
                                               "NodeNpcName": "",
                                               "NodeSound": "none",
-                                              "conversationText": "",
+                                              "conversationText": "Continue",
                                               "IsExpanded": true,
                                               "subNodes": [
                                                 {
-                                                  "idNum": 11,
+                                                  "idNum": 17,
                                                   "orderNum": 0,
                                                   "pcNode": false,
                                                   "linkTo": 0,
                                                   "ShowOnlyOnce": false,
                                                   "NodeIsActive": true,
-                                                  "NodePortraitBitmap": "",
+                                                  "NodePortraitBitmap": "nar_intro03.png",
                                                   "NodeNpcName": "",
                                                   "NodeSound": "none",
-                                                  "conversationText": "How can this be, Theophilus?",
+                                                  "conversationText": "I see and am glad.  But our work is not yet done.  These bodies must be burned tonight--",
                                                   "IsExpanded": true,
                                                   "subNodes": [
                                                     {
-                                                      "idNum": 12,
+                                                      "idNum": 18,
                                                       "orderNum": 0,
                                                       "pcNode": true,
                                                       "linkTo": 0,
@@ -166,24 +166,24 @@
                                                       "NodePortraitBitmap": "",
                                                       "NodeNpcName": "",
                                                       "NodeSound": "none",
-                                                      "conversationText": "",
+                                                      "conversationText": "Continue",
                                                       "IsExpanded": true,
                                                       "subNodes": [
                                                         {
-                                                          "idNum": 13,
+                                                          "idNum": 19,
                                                           "orderNum": 0,
                                                           "pcNode": false,
                                                           "linkTo": 0,
                                                           "ShowOnlyOnce": false,
                                                           "NodeIsActive": true,
-                                                          "NodePortraitBitmap": "",
+                                                          "NodePortraitBitmap": "nar_intro02.png",
                                                           "NodeNpcName": "",
                                                           "NodeSound": "none",
-                                                          "conversationText": "Only the unbeliever says, \"How can I know the Word is true and yet not have it?\"  Have <i>faith</i>, Disciple, and the Word shall be found.",
+                                                          "conversationText": "Prepare the pyre.  Walk in Love.",
                                                           "IsExpanded": true,
                                                           "subNodes": [
                                                             {
-                                                              "idNum": 14,
+                                                              "idNum": 20,
                                                               "orderNum": 0,
                                                               "pcNode": true,
                                                               "linkTo": 0,
@@ -192,24 +192,24 @@
                                                               "NodePortraitBitmap": "",
                                                               "NodeNpcName": "",
                                                               "NodeSound": "none",
-                                                              "conversationText": "",
+                                                              "conversationText": "Continue",
                                                               "IsExpanded": true,
                                                               "subNodes": [
                                                                 {
-                                                                  "idNum": 15,
+                                                                  "idNum": 21,
                                                                   "orderNum": 0,
                                                                   "pcNode": false,
                                                                   "linkTo": 0,
                                                                   "ShowOnlyOnce": false,
                                                                   "NodeIsActive": true,
-                                                                  "NodePortraitBitmap": "",
+                                                                  "NodePortraitBitmap": "nar_intro05.png",
                                                                   "NodeNpcName": "",
                                                                   "NodeSound": "none",
-                                                                  "conversationText": "Then I will believe!  Were my faith not strong already, the miracle that has changed this place would convince me.  Observe how thoroughly we have purged it of foulness.",
+                                                                  "conversationText": "I will do as you ask.  Walk in Love, Theophilus.",
                                                                   "IsExpanded": true,
                                                                   "subNodes": [
                                                                     {
-                                                                      "idNum": 16,
+                                                                      "idNum": 22,
                                                                       "orderNum": 0,
                                                                       "pcNode": true,
                                                                       "linkTo": 0,
@@ -218,192 +218,9 @@
                                                                       "NodePortraitBitmap": "",
                                                                       "NodeNpcName": "",
                                                                       "NodeSound": "none",
-                                                                      "conversationText": "",
+                                                                      "conversationText": "[END DIALOG]",
                                                                       "IsExpanded": true,
-                                                                      "subNodes": [
-                                                                        {
-                                                                          "idNum": 17,
-                                                                          "orderNum": 0,
-                                                                          "pcNode": false,
-                                                                          "linkTo": 0,
-                                                                          "ShowOnlyOnce": false,
-                                                                          "NodeIsActive": true,
-                                                                          "NodePortraitBitmap": "",
-                                                                          "NodeNpcName": "",
-                                                                          "NodeSound": "none",
-                                                                          "conversationText": "I see and am glad.  But our work is not yet done.  These bodies must be burned tonight--|***ga_music_stop-->|",
-                                                                          "IsExpanded": true,
-                                                                          "subNodes": [
-                                                                            {
-                                                                              "idNum": 18,
-                                                                              "orderNum": 0,
-                                                                              "pcNode": true,
-                                                                              "linkTo": 0,
-                                                                              "ShowOnlyOnce": false,
-                                                                              "NodeIsActive": true,
-                                                                              "NodePortraitBitmap": "",
-                                                                              "NodeNpcName": "",
-                                                                              "NodeSound": "none",
-                                                                              "conversationText": "",
-                                                                              "IsExpanded": true,
-                                                                              "subNodes": [
-                                                                                {
-                                                                                  "idNum": 19,
-                                                                                  "orderNum": 0,
-                                                                                  "pcNode": false,
-                                                                                  "linkTo": 0,
-                                                                                  "ShowOnlyOnce": false,
-                                                                                  "NodeIsActive": true,
-                                                                                  "NodePortraitBitmap": "",
-                                                                                  "NodeNpcName": "",
-                                                                                  "NodeSound": "none",
-                                                                                  "conversationText": "Prepare the pyre.  Walk in Love.",
-                                                                                  "IsExpanded": true,
-                                                                                  "subNodes": [
-                                                                                    {
-                                                                                      "idNum": 20,
-                                                                                      "orderNum": 0,
-                                                                                      "pcNode": true,
-                                                                                      "linkTo": 0,
-                                                                                      "ShowOnlyOnce": false,
-                                                                                      "NodeIsActive": true,
-                                                                                      "NodePortraitBitmap": "",
-                                                                                      "NodeNpcName": "",
-                                                                                      "NodeSound": "none",
-                                                                                      "conversationText": "",
-                                                                                      "IsExpanded": true,
-                                                                                      "subNodes": [
-                                                                                        {
-                                                                                          "idNum": 21,
-                                                                                          "orderNum": 0,
-                                                                                          "pcNode": false,
-                                                                                          "linkTo": 0,
-                                                                                          "ShowOnlyOnce": false,
-                                                                                          "NodeIsActive": true,
-                                                                                          "NodePortraitBitmap": "",
-                                                                                          "NodeNpcName": "",
-                                                                                          "NodeSound": "none",
-                                                                                          "conversationText": "I will do as you ask.  Walk in Love, Theophilus.|***ga_move-->String::amnestus_wp2    Int::0    String::amnestus    ***ga_move-->String::acolyte_wp1    Int::0    String::acolyte    |",
-                                                                                          "IsExpanded": true,
-                                                                                          "subNodes": [
-                                                                                            {
-                                                                                              "idNum": 22,
-                                                                                              "orderNum": 0,
-                                                                                              "pcNode": true,
-                                                                                              "linkTo": 0,
-                                                                                              "ShowOnlyOnce": false,
-                                                                                              "NodeIsActive": true,
-                                                                                              "NodePortraitBitmap": "",
-                                                                                              "NodeNpcName": "",
-                                                                                              "NodeSound": "none",
-                                                                                              "conversationText": "",
-                                                                                              "IsExpanded": true,
-                                                                                              "subNodes": [
-                                                                                                {
-                                                                                                  "idNum": 23,
-                                                                                                  "orderNum": 0,
-                                                                                                  "pcNode": false,
-                                                                                                  "linkTo": 0,
-                                                                                                  "ShowOnlyOnce": false,
-                                                                                                  "NodeIsActive": true,
-                                                                                                  "NodePortraitBitmap": "",
-                                                                                                  "NodeNpcName": "",
-                                                                                                  "NodeSound": "none",
-                                                                                                  "conversationText": "|***ga_fade_to_black-->Float::5    Float::0    Int::0    |",
-                                                                                                  "IsExpanded": true,
-                                                                                                  "subNodes": [
-                                                                                                    {
-                                                                                                      "idNum": 24,
-                                                                                                      "orderNum": 0,
-                                                                                                      "pcNode": true,
-                                                                                                      "linkTo": 0,
-                                                                                                      "ShowOnlyOnce": false,
-                                                                                                      "NodeIsActive": true,
-                                                                                                      "NodePortraitBitmap": "",
-                                                                                                      "NodeNpcName": "",
-                                                                                                      "NodeSound": "none",
-                                                                                                      "conversationText": "|***ga_jump_players-->String::start_wp    Int::1    Int::0    |",
-                                                                                                      "IsExpanded": true,
-                                                                                                      "subNodes": [],
-                                                                                                      "actions": [
-                                                                                                        {
-                                                                                                          "a_script": "ga_jump_players(nonIBscript)",
-                                                                                                          "a_parameter_1": "start_wp",
-                                                                                                          "a_parameter_2": "1",
-                                                                                                          "a_parameter_3": "0",
-                                                                                                          "a_parameter_4": null
-                                                                                                        }
-                                                                                                      ],
-                                                                                                      "conditions": [],
-                                                                                                      "isLink": false
-                                                                                                    }
-                                                                                                  ],
-                                                                                                  "actions": [
-                                                                                                    {
-                                                                                                      "a_script": "ga_fade_to_black(nonIBscript)",
-                                                                                                      "a_parameter_1": "5",
-                                                                                                      "a_parameter_2": "0",
-                                                                                                      "a_parameter_3": "0",
-                                                                                                      "a_parameter_4": null
-                                                                                                    }
-                                                                                                  ],
-                                                                                                  "conditions": [],
-                                                                                                  "isLink": false
-                                                                                                }
-                                                                                              ],
-                                                                                              "actions": [],
-                                                                                              "conditions": [],
-                                                                                              "isLink": false
-                                                                                            }
-                                                                                          ],
-                                                                                          "actions": [
-                                                                                            {
-                                                                                              "a_script": "ga_move(nonIBscript)",
-                                                                                              "a_parameter_1": "amnestus_wp2",
-                                                                                              "a_parameter_2": "0",
-                                                                                              "a_parameter_3": "amnestus",
-                                                                                              "a_parameter_4": null
-                                                                                            },
-                                                                                            {
-                                                                                              "a_script": "ga_move(nonIBscript)",
-                                                                                              "a_parameter_1": "acolyte_wp1",
-                                                                                              "a_parameter_2": "0",
-                                                                                              "a_parameter_3": "acolyte",
-                                                                                              "a_parameter_4": null
-                                                                                            }
-                                                                                          ],
-                                                                                          "conditions": [],
-                                                                                          "isLink": false
-                                                                                        }
-                                                                                      ],
-                                                                                      "actions": [],
-                                                                                      "conditions": [],
-                                                                                      "isLink": false
-                                                                                    }
-                                                                                  ],
-                                                                                  "actions": [],
-                                                                                  "conditions": [],
-                                                                                  "isLink": false
-                                                                                }
-                                                                              ],
-                                                                              "actions": [],
-                                                                              "conditions": [],
-                                                                              "isLink": false
-                                                                            }
-                                                                          ],
-                                                                          "actions": [
-                                                                            {
-                                                                              "a_script": "ga_music_stop(nonIBscript)",
-                                                                              "a_parameter_1": null,
-                                                                              "a_parameter_2": null,
-                                                                              "a_parameter_3": null,
-                                                                              "a_parameter_4": null
-                                                                            }
-                                                                          ],
-                                                                          "conditions": [],
-                                                                          "isLink": false
-                                                                        }
-                                                                      ],
+                                                                      "subNodes": [],
                                                                       "actions": [],
                                                                       "conditions": [],
                                                                       "isLink": false
@@ -439,15 +256,7 @@
                                               "isLink": false
                                             }
                                           ],
-                                          "actions": [
-                                            {
-                                              "a_script": "ga_move(nonIBscript)",
-                                              "a_parameter_1": "amnestus_wp1",
-                                              "a_parameter_2": "0",
-                                              "a_parameter_3": "amnestus",
-                                              "a_parameter_4": null
-                                            }
-                                          ],
+                                          "actions": [],
                                           "conditions": [],
                                           "isLink": false
                                         }
@@ -467,15 +276,7 @@
                               "isLink": false
                             }
                           ],
-                          "actions": [
-                            {
-                              "a_script": "ga_fade_from_black(nonIBscript)",
-                              "a_parameter_1": "15",
-                              "a_parameter_2": null,
-                              "a_parameter_3": null,
-                              "a_parameter_4": null
-                            }
-                          ],
+                          "actions": [],
                           "conditions": [],
                           "isLink": false
                         }
@@ -485,15 +286,7 @@
                       "isLink": false
                     }
                   ],
-                  "actions": [
-                    {
-                      "a_script": "ga_fade_to_black(nonIBscript)",
-                      "a_parameter_1": "4",
-                      "a_parameter_2": "5",
-                      "a_parameter_3": "0",
-                      "a_parameter_4": null
-                    }
-                  ],
+                  "actions": [],
                   "conditions": [],
                   "isLink": false
                 }
@@ -503,22 +296,7 @@
               "isLink": false
             }
           ],
-          "actions": [
-            {
-              "a_script": "ga_fade_to_black(nonIBscript)",
-              "a_parameter_1": "0",
-              "a_parameter_2": "6",
-              "a_parameter_3": "0",
-              "a_parameter_4": null
-            },
-            {
-              "a_script": "gaSetGlobalInt.cs",
-              "a_parameter_1": "starting_int",
-              "a_parameter_2": "1",
-              "a_parameter_3": null,
-              "a_parameter_4": null
-            }
-          ],
+          "actions": [],
           "conditions": [],
           "isLink": false
         }
@@ -529,10 +307,10 @@
     }
   ],
   "ConvoFileName": "intro0_con",
-  "Narration": false,
+  "Narration": true,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "",
+  "NpcPortraitBitmap": "nar_intro04.png",
   "DefaultNpcName": "",
   "NextIdNum": 25
 }
