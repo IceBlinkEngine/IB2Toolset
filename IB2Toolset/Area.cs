@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace IB2Toolset
 {
     public class Area
-    {        
+    {
         #region Fields
         private string filename = "newArea";
         private string imageFileName = "none";
@@ -45,7 +45,7 @@ namespace IB2Toolset
         private string _inGameAreaName = "newArea";
         private bool _useMiniProps = false;
         private bool _useSuperTinyProps = false;
-      
+
         private string _areaWeatherScript = "";
         private string _effectChannelScript1 = "deactivateChannel1";
         private string _effectChannelScript2 = "deactivateChannel2";
@@ -58,8 +58,11 @@ namespace IB2Toolset
         private string _southernNeighbourArea = "";
 
         public string sourceBitmapName = "";
-        //public Bitmap minimap;
-        //public List<System.Drawing.Bitmap> minimapImages = new List<System.Drawing.Bitmap>();
+        public bool isJPGMap = false;
+        public bool isPNGMap = false;
+
+        private bool _drawWithLessVisibleSeamsButMorePixelated = false;
+        private bool _use100pixSquares = false;
 
         #endregion
 
@@ -154,6 +157,20 @@ namespace IB2Toolset
         {
             get { return _useSuperTinyProps; }
             set { _useSuperTinyProps = value; }
+        }
+
+        [CategoryAttribute("01 - Main")]
+        public bool drawWithLessVisibleSeamsButMorePixelated
+        {
+            get { return _drawWithLessVisibleSeamsButMorePixelated; }
+            set { _drawWithLessVisibleSeamsButMorePixelated = value; }
+        }
+
+        [CategoryAttribute("01 - Main")]
+        public bool use100pixSquares
+        {
+            get { return _use100pixSquares; }
+            set { _use100pixSquares = value; }
         }
 
         [CategoryAttribute("01 - Main")]
@@ -298,7 +315,7 @@ namespace IB2Toolset
             set { areaLocalStrings = value; }
         }
         #endregion
-        
+
         public Area()
         {
         }
@@ -331,5 +348,5 @@ namespace IB2Toolset
             }
             return null;
         }
-    }    
+    }
 }
