@@ -135,6 +135,19 @@ namespace IB2Toolset
             }
             return null;
         }
+        public ContentNode GetContentNodeLinkedToGivenNode(int linkedToIdNum)
+        {
+            ContentNode tempNode = null;
+            foreach (ContentNode subNode in subNodes)
+            {
+                tempNode = subNode.SearchContentNodeById(linkedToIdNum);
+                if (tempNode != null)
+                {
+                    return tempNode;
+                }
+            }
+            return null;
+        }
         public string GetTextById(int idNum)
         {
             ContentNode tempNode = GetContentNodeById(idNum);

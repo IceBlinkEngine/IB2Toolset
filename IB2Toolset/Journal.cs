@@ -177,7 +177,7 @@ namespace IB2Toolset
             get { return entryText; }
             set { entryText = value; }
         }
-        [CategoryAttribute("JournalEntry"), DescriptionAttribute("Tag of the entry (Must be unique)")]
+        [CategoryAttribute("JournalEntry"), DescriptionAttribute("Tag of the entry (Must be unique within this Journal Category...for example, can use '10' in all Journal Categories, but only once in each Category.)")]
         public string Tag
         {
             get { return tag; }

@@ -84,6 +84,23 @@ namespace IB2Toolset
             }
             return null;
         }
+        public ContentNode GetContentNodeLinkedToGivenNode(int linkedToIdNum)
+        {
+            ContentNode tempNode = null;
+            if (linkTo == linkedToIdNum)
+            {
+                return this;
+            }
+            foreach (ContentNode subNode in subNodes)
+            {
+                tempNode = subNode.GetContentNodeLinkedToGivenNode(linkedToIdNum);
+                if (tempNode != null)
+                {
+                    return tempNode;
+                }
+            }
+            return null;
+        }
         public ContentNode DuplicateContentNode(int nextIdNum)
         {
             ContentNode newNode = new ContentNode();

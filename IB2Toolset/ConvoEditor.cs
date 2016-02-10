@@ -590,21 +590,90 @@ namespace IB2Toolset
             try
             {
                 //check to ignore if selected node is root
-                if (Convert.ToInt32(treeView1.SelectedNode.Name) != 0)
+                if (Convert.ToInt32(treeView1.SelectedNode.Name) == 0)
                 {
-                    PushToUndoStack();
+                    return;
+                }
+                                
+                PushToUndoStack();
 
-                    //find corresponding contentNode (same IdNum) and delete it and subNodes
-                    int rnod = Convert.ToInt32(treeView1.SelectedNode.Name);
-                    int prnod = Convert.ToInt32(treeView1.SelectedNode.Parent.Name);
-                    //prntForm.logText("rnod = " + rnod.ToString());
-                    //prntForm.logText("prnod = " + prnod.ToString());
-                    f_convo.GetContentNodeById(prnod).RemoveNodeFromSubNode(f_convo.GetContentNodeById(rnod));
-                    //treeView1.SelectedNode.Remove();
-                    refreshTreeView();
+                //do a check for linked nodes pointing to this node or subnodes
+
+                //delete any linked nodes first before deleting this node
+
+                //find corresponding contentNode (same IdNum) and delete it and subNodes
+                int rnod = Convert.ToInt32(treeView1.SelectedNode.Name);
+                int prnod = Convert.ToInt32(treeView1.SelectedNode.Parent.Name);
+                ContentNode node = f_convo.GetContentNodeById(rnod);
+                removeAllLinksToNodeAndSubnodes(node);
+                //prntForm.logText("rnod = " + rnod.ToString());
+                //prntForm.logText("prnod = " + prnod.ToString());
+                f_convo.GetContentNodeById(prnod).RemoveNodeFromSubNode(f_convo.GetContentNodeById(rnod));
+                //treeView1.SelectedNode.Remove();
+                refreshTreeView();
+                
+            }
+            catch { MessageBox.Show("remove node failed...make sure there are no remaining links referring to this node or sub nodes of this node. A link node pointing to a deleted node will cause problems."); }
+        }
+        public List<int> foundLinkedNodesIdList = new List<int>();
+        public void removeAllLinksToNodeAndSubnodes(ContentNode node)
+        {
+            //clear find list
+            foundLinkedNodesIdList.Clear();
+            //find all nodes that link to this node
+            findAllLinkedNodesToGivenNodeId(f_convo.subNodes[0], node.idNum);
+            //delete all nodes in found list
+            foreach (int id in foundLinkedNodesIdList)
+            {
+                ContentNode n = getParentNodeById(f_convo.subNodes[0], id);
+                if (n != null)
+                {
+                    foreach (ContentNode sn in n.subNodes)
+                    {
+                        if (sn.idNum == id)
+                        {
+                            n.subNodes.Remove(sn);
+                            break;
+                        }
+                    }
                 }
             }
-            catch { MessageBox.Show("remove node failed"); }
+
+            foreach (ContentNode subNode in node.subNodes)
+            {
+                removeAllLinksToNodeAndSubnodes(subNode);
+            }
+        }
+        public void findAllLinkedNodesToGivenNodeId(ContentNode node, int idPointedTo)
+        {
+            //go through entire convo and find all nodes that linkTo the given node 'idPointedTo'
+            if (node.linkTo == idPointedTo)
+            {
+                foundLinkedNodesIdList.Add(node.idNum);
+            }
+            foreach (ContentNode subNode in node.subNodes)
+            {
+                findAllLinkedNodesToGivenNodeId(subNode, idPointedTo);
+            }
+        }
+        public ContentNode getParentNodeById(ContentNode node, int idOfChild)
+        {
+            foreach(ContentNode subn in node.subNodes)
+            {
+                if (subn.idNum == idOfChild)
+                {
+                    return node;
+                }
+            }
+            foreach (ContentNode sn in node.subNodes)
+            {
+                ContentNode n = getParentNodeById(sn, idOfChild);
+                if (n != null)
+                {
+                    return n;
+                }
+            }
+            return null;
         }
         public void CopyNodes()
         {

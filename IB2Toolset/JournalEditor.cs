@@ -80,7 +80,7 @@ namespace IB2Toolset
                 string _nodeTag = treeView1.SelectedNode.Name;
                 if (treeView1.SelectedNode.Parent != null)
                 {
-                    GetChildByTag(_nodeTag).EntryText = richTextBox1.Text;
+                    GetChildByTag(treeView1.SelectedNode.Parent.Name, _nodeTag).EntryText = richTextBox1.Text;
                 }
             }
         }
@@ -231,14 +231,19 @@ namespace IB2Toolset
             }
             return -1;
         }
-        public JournalEntry GetChildByTag(string _nodeTag)
+        public JournalEntry GetChildByTag(string parentTag, string childTag)
         {
             foreach (JournalQuest cust in prntForm.journal)
             {
-                foreach (JournalEntry chd in cust.Entries)
+                if (cust.Tag.Equals(parentTag))
                 {
-                    if (chd.Tag == _nodeTag)
-                        return chd;
+                    foreach (JournalEntry chd in cust.Entries)
+                    {
+                        if (chd.Tag.Equals(childTag))
+                        {
+                            return chd;
+                        }
+                    }
                 }
             }
             return null;
@@ -283,8 +288,8 @@ namespace IB2Toolset
                 }
                 else
                 {
-                    propertyGrid1.SelectedObject = GetChildByTag(_nodeTag);
-                    richTextBox1.Text = GetChildByTag(_nodeTag).EntryText;
+                    propertyGrid1.SelectedObject = GetChildByTag(treeView1.SelectedNode.Parent.Name, _nodeTag);
+                    richTextBox1.Text = GetChildByTag(treeView1.SelectedNode.Parent.Name, _nodeTag).EntryText;
                 }
             }
         }
