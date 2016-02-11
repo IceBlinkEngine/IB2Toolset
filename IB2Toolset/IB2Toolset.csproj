@@ -131,6 +131,7 @@
     <Compile Include="EncountersForm.Designer.cs">
       <DependentUpon>EncountersForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FullScreenEffectLayer.cs" />
     <Compile Include="GlobalListItem.cs" />
     <Compile Include="GlobalString.cs" />
     <Compile Include="LocalInt.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="EncounterEditor.designer.cs">
       <DependentUpon>EncounterEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="WeatherEffect.cs" />
     <Compile Include="WorldMapEditor.cs">
       <SubType>Form</SubType>
     </Compile>
