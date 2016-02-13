@@ -155,6 +155,7 @@ namespace IB2Toolset
         private string entryTitle = "newTitle";
         private string entryText = "quest entry text";
         private string tag = "tag";
+        private int entryId = 0;
         private bool endPoint = false;
         #endregion
 
@@ -182,6 +183,12 @@ namespace IB2Toolset
         {
             get { return tag; }
             set { tag = value; }
+        }
+        [CategoryAttribute("JournalEntry"), DescriptionAttribute("Assign an integer that can be used to do comparison checks on the current state of the quest with the gcCheckJournalEntry script.")]
+        public int EntryId
+        {
+            get { return entryId; }
+            set { entryId = value; }
         }
         [CategoryAttribute("JournalEntry"), DescriptionAttribute("TRUE means that the quest is considered completed upon reaching this entry. FALSE means that this quest is still active upon reaching this entry.")]
         public bool EndPoint
