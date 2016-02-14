@@ -115,6 +115,7 @@ namespace IB2Toolset
         private string _goldLabelSingular = "Gold";
         private string _goldLabelPlural = "Gold";
         private int _borderAreaSize = 0;
+        private bool _useAllTileSystem = false;
 
         #endregion
 
@@ -162,6 +163,14 @@ namespace IB2Toolset
         {
             get { return _useSmoothMovement; }
             set { _useSmoothMovement = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag determines if the builder is using the new all tile system. If true, all single image background maps for areas will be converted into a folder of sliced tiles after loading (or reloading) an image for the area.")]
+        public bool useAllTileSystem
+        {
+            get { return _useAllTileSystem; }
+            set { _useAllTileSystem = value; }
+
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using the scifi Orbitron font (light).")]
