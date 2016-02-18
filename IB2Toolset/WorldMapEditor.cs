@@ -972,7 +972,10 @@ namespace IB2Toolset
             lastSquareClicked.Y = currentSquareClicked.Y;
             currentSquareClicked.X = gridX;
             currentSquareClicked.Y = gridY;
-
+            if (!mouseInMapArea(gridX, gridY))
+            {
+                return;
+            }
             switch (e.Button)
             {
                 #region Left Button
@@ -1927,7 +1930,7 @@ namespace IB2Toolset
                 DrawRectangle(rect, SharpDX.Color.Magenta, 2);
             }
             #endregion
-            #region Draw To Be Placed Prop
+            #region Draw To Be Placed Prop/Tile
             if (prntForm.PropSelected)
             {
                 try
@@ -1939,7 +1942,20 @@ namespace IB2Toolset
                         DrawD2DBitmap(GetFromBitmapList(selectedBitmapFilename), src, dst, 0, false);
                     }
                 }
-                catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
+                catch (Exception ex) { MessageBox.Show("failed mouse move update to be placed prop: " + ex.ToString()); }
+            }
+            else if (rbtnPaintTile.Checked)
+            {
+                try
+                {
+                    if (!currentTileFilename.Equals(""))
+                    {
+                        SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(currentTileFilename).PixelSize.Width, GetFromBitmapList(currentTileFilename).PixelSize.Height);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, sqr, sqr);
+                        DrawD2DBitmap(GetFromBitmapList(currentTileFilename), src, dst, 0, false);
+                    }
+                }
+                catch (Exception ex) { MessageBox.Show("failed mouse move update to be placed tile: " + ex.ToString()); }
             }
             #endregion
         }
