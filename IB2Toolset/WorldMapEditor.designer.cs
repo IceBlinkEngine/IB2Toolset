@@ -79,18 +79,18 @@
             this.btnMinusLeftX = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnRefreshMap = new System.Windows.Forms.Button();
             this.btnLoadMap = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.numBGLocY = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.numBGLocX = new System.Windows.Forms.NumericUpDown();
-            this.panelView = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btnRemoveMap = new System.Windows.Forms.Button();
+            this.timerRenderLoop = new System.Windows.Forms.Timer(this.components);
             this.panelNoScrollOnFocus1 = new IB2Toolset.PanelNoScrollOnFocus();
+            this.panelView = new System.Windows.Forms.Panel();
             this.panel3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -403,9 +403,9 @@
             // btnProperties
             // 
             this.btnProperties.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProperties.Location = new System.Drawing.Point(142, 604);
+            this.btnProperties.Location = new System.Drawing.Point(142, 579);
             this.btnProperties.Name = "btnProperties";
-            this.btnProperties.Size = new System.Drawing.Size(106, 48);
+            this.btnProperties.Size = new System.Drawing.Size(106, 47);
             this.btnProperties.TabIndex = 76;
             this.btnProperties.Text = "Area Properties";
             this.btnProperties.UseVisualStyleBackColor = true;
@@ -413,9 +413,9 @@
             // 
             // lblMouseInfo
             // 
-            this.lblMouseInfo.Location = new System.Drawing.Point(134, 659);
+            this.lblMouseInfo.Location = new System.Drawing.Point(134, 634);
             this.lblMouseInfo.Name = "lblMouseInfo";
-            this.lblMouseInfo.Size = new System.Drawing.Size(121, 30);
+            this.lblMouseInfo.Size = new System.Drawing.Size(121, 63);
             this.lblMouseInfo.TabIndex = 73;
             this.lblMouseInfo.Text = "CURSOR/GRID";
             // 
@@ -669,17 +669,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "X";
             // 
-            // btnRefreshMap
-            // 
-            this.btnRefreshMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshMap.Location = new System.Drawing.Point(142, 572);
-            this.btnRefreshMap.Name = "btnRefreshMap";
-            this.btnRefreshMap.Size = new System.Drawing.Size(106, 30);
-            this.btnRefreshMap.TabIndex = 80;
-            this.btnRefreshMap.Text = "Refresh Map";
-            this.btnRefreshMap.UseVisualStyleBackColor = true;
-            this.btnRefreshMap.Click += new System.EventHandler(this.btnRefreshMap_Click);
-            // 
             // btnLoadMap
             // 
             this.btnLoadMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -738,22 +727,6 @@
             this.numBGLocX.TabIndex = 0;
             this.numBGLocX.ValueChanged += new System.EventHandler(this.numBGLocX_ValueChanged);
             // 
-            // panelView
-            // 
-            this.panelView.BackColor = System.Drawing.Color.Gainsboro;
-            this.panelView.ContextMenuStrip = this.contextMenuStrip1;
-            this.panelView.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.panelView.Location = new System.Drawing.Point(-2, -2);
-            this.panelView.Name = "panelView";
-            this.panelView.Size = new System.Drawing.Size(800, 800);
-            this.panelView.TabIndex = 16;
-            this.panelView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseClick);
-            this.panelView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseDown);
-            this.panelView.MouseEnter += new System.EventHandler(this.panelView_MouseEnter);
-            this.panelView.MouseLeave += new System.EventHandler(this.panelView_MouseLeave);
-            this.panelView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseMove);
-            this.panelView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panelView_PreviewKeyDown);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -781,6 +754,11 @@
             this.btnRemoveMap.UseVisualStyleBackColor = true;
             this.btnRemoveMap.Click += new System.EventHandler(this.btnRemoveMap_Click);
             // 
+            // timerRenderLoop
+            // 
+            this.timerRenderLoop.Interval = 16;
+            this.timerRenderLoop.Tick += new System.EventHandler(this.timerRenderLoop_Tick);
+            // 
             // panelNoScrollOnFocus1
             // 
             this.panelNoScrollOnFocus1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -795,6 +773,20 @@
             this.panelNoScrollOnFocus1.Size = new System.Drawing.Size(765, 713);
             this.panelNoScrollOnFocus1.TabIndex = 77;
             // 
+            // panelView
+            // 
+            this.panelView.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelView.ContextMenuStrip = this.contextMenuStrip1;
+            this.panelView.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.panelView.Location = new System.Drawing.Point(-2, -2);
+            this.panelView.Name = "panelView";
+            this.panelView.Size = new System.Drawing.Size(5000, 5000);
+            this.panelView.TabIndex = 16;
+            this.panelView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseClick);
+            this.panelView.MouseEnter += new System.EventHandler(this.panelView_MouseEnter);
+            this.panelView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseMove);
+            this.panelView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panelView_PreviewKeyDown);
+            // 
             // WorldMapEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -802,7 +794,6 @@
             this.ClientSize = new System.Drawing.Size(1172, 737);
             this.Controls.Add(this.panelNoScrollOnFocus1);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.btnRefreshMap);
             this.Controls.Add(this.gbMapSize);
             this.Controls.Add(this.chkGrid);
             this.Controls.Add(this.btnProperties);
@@ -815,6 +806,8 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "WorldMapEditor";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorldMapEditor_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WorldMapEditor_FormClosed);
             this.Load += new System.EventHandler(this.WorldMapEditor_Load);
             this.panel3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
@@ -883,7 +876,6 @@
         private System.Windows.Forms.Button btnPlusRightX;
         private System.Windows.Forms.Button btnMinusRightX;
         private System.Windows.Forms.Button btnMinusLeftX;
-        private System.Windows.Forms.Button btnRefreshMap;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton rbtnZoom5x;
         private System.Windows.Forms.RadioButton rbtnZoom2x;
@@ -903,6 +895,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnRemoveMap;
+        private System.Windows.Forms.Timer timerRenderLoop;
     }
 }
 

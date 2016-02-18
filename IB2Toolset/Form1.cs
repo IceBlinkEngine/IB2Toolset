@@ -209,6 +209,19 @@ namespace IB2Toolset
             MessageBox.Show("not implemented yet");            
         }
 
+        public void errorLog(string text)
+        {
+            if (_mainDirectory == null)
+            {
+                _mainDirectory = Directory.GetCurrentDirectory();
+            }
+            using (StreamWriter writer = new StreamWriter(_mainDirectory + "//IB2ToolsetErrorLog.txt", true))
+            {
+                writer.Write(DateTime.Now + ": ");
+                writer.WriteLine(text);
+            }
+        }
+
         #region File Handling
         private void openModule(string filename)
         {            
