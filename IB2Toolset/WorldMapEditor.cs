@@ -2010,8 +2010,10 @@ namespace IB2Toolset
                 {
                     if (!currentTileFilename.Equals(""))
                     {
+                        float scalerX = GetFromBitmapList(currentTileFilename).PixelSize.Width / 100;
+                        float scalerY = GetFromBitmapList(currentTileFilename).PixelSize.Height / 100;
                         SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(currentTileFilename).PixelSize.Width, GetFromBitmapList(currentTileFilename).PixelSize.Height);
-                        SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, sqr, sqr);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
                         DrawD2DBitmap(GetFromBitmapList(currentTileFilename), src, dst, tileToBePlaced.angle, tileToBePlaced.mirror, tileToBePlaced.xshift, tileToBePlaced.yshift);
                     }
                 }
