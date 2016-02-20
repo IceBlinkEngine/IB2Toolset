@@ -75,7 +75,6 @@
             this.btnMinusLeftX = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnRefreshMap = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.btnPlacePCs = new System.Windows.Forms.Button();
             this.btnDeleteCreatures = new System.Windows.Forms.Button();
@@ -93,6 +92,7 @@
             this.btnLoadMap = new System.Windows.Forms.Button();
             this.chkUseMapImage = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.timerRenderLoop = new System.Windows.Forms.Timer(this.components);
             this.panel3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -358,7 +358,7 @@
             // btnProperties
             // 
             this.btnProperties.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProperties.Location = new System.Drawing.Point(142, 542);
+            this.btnProperties.Location = new System.Drawing.Point(142, 513);
             this.btnProperties.Name = "btnProperties";
             this.btnProperties.Size = new System.Drawing.Size(106, 48);
             this.btnProperties.TabIndex = 76;
@@ -368,9 +368,9 @@
             // 
             // lblMouseInfo
             // 
-            this.lblMouseInfo.Location = new System.Drawing.Point(9, 625);
+            this.lblMouseInfo.Location = new System.Drawing.Point(139, 571);
             this.lblMouseInfo.Name = "lblMouseInfo";
-            this.lblMouseInfo.Size = new System.Drawing.Size(121, 30);
+            this.lblMouseInfo.Size = new System.Drawing.Size(109, 44);
             this.lblMouseInfo.TabIndex = 73;
             this.lblMouseInfo.Text = "CURSOR/GRID";
             // 
@@ -626,17 +626,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "X";
             // 
-            // btnRefreshMap
-            // 
-            this.btnRefreshMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshMap.Location = new System.Drawing.Point(142, 510);
-            this.btnRefreshMap.Name = "btnRefreshMap";
-            this.btnRefreshMap.Size = new System.Drawing.Size(106, 30);
-            this.btnRefreshMap.TabIndex = 80;
-            this.btnRefreshMap.Text = "Refresh Map";
-            this.btnRefreshMap.UseVisualStyleBackColor = true;
-            this.btnRefreshMap.Click += new System.EventHandler(this.btnRefreshMap_Click);
-            // 
             // groupBox10
             // 
             this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -795,7 +784,7 @@
             this.panelView.Cursor = System.Windows.Forms.Cursors.Cross;
             this.panelView.Location = new System.Drawing.Point(-2, -2);
             this.panelView.Name = "panelView";
-            this.panelView.Size = new System.Drawing.Size(800, 800);
+            this.panelView.Size = new System.Drawing.Size(1600, 1600);
             this.panelView.TabIndex = 16;
             this.panelView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseClick);
             this.panelView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseDown);
@@ -830,6 +819,11 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // timerRenderLoop
+            // 
+            this.timerRenderLoop.Interval = 16;
+            this.timerRenderLoop.Tick += new System.EventHandler(this.timerRenderLoop_Tick);
+            // 
             // EncounterEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -839,7 +833,6 @@
             this.Controls.Add(this.btnLoadMap);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox10);
-            this.Controls.Add(this.btnRefreshMap);
             this.Controls.Add(this.gbMapSize);
             this.Controls.Add(this.chkGrid);
             this.Controls.Add(this.panelNoScrollOnFocus1);
@@ -924,7 +917,6 @@
         private System.Windows.Forms.Button btnPlusRightX;
         private System.Windows.Forms.Button btnMinusRightX;
         private System.Windows.Forms.Button btnMinusLeftX;
-        private System.Windows.Forms.Button btnRefreshMap;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton rbtnZoom5x;
         private System.Windows.Forms.RadioButton rbtnZoom2x;
@@ -946,6 +938,7 @@
         private System.Windows.Forms.Button btnLoadMap;
         private System.Windows.Forms.CheckBox chkUseMapImage;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Timer timerRenderLoop;
     }
 }
 

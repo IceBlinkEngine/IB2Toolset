@@ -876,8 +876,8 @@ namespace IB2Toolset
         }
         public void drawSelectionBox(int gridx, int gridy)
         {
-            int dx = gridx * sqr;
-            int dy = gridy * sqr;
+            //GDI int dx = gridx * sqr;
+            //GDI int dy = gridy * sqr;
             //draw selection box around tile                
             //GDI Pen pen = new Pen(Color.DarkMagenta, 2);
             //GDI Rectangle rect = new Rectangle(dx + 1, dy + 1, sqr - 2, sqr - 2);

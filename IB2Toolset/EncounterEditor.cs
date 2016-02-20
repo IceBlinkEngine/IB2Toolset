@@ -11,6 +11,10 @@ using Newtonsoft.Json;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using SharpDX.Direct2D1;
+using Bitmap = System.Drawing.Bitmap;
+using SharpDX.DXGI;
+using SharpDX.DirectWrite;
 
 namespace IB2Toolset
 {
@@ -20,13 +24,15 @@ namespace IB2Toolset
         public Module mod;
 
         private List<TileBitmapNamePair> tileList = new List<TileBitmapNamePair>();
-        private Graphics device;
-        private Bitmap surface;
-        private Bitmap mapBitmap;
+        //GDI private Graphics device;
+        //GDI private Bitmap surface;
+        //GDI private Bitmap mapBitmap;
+        public SharpDX.Direct2D1.Bitmap mapBitmapD2D;
         private Bitmap selectedBitmap;
-        public Bitmap g_walkPass;
-        public Bitmap g_walkBlock;
-        public Bitmap g_LoSBlock;
+        public string selectedBitmapFilename = "";
+        //GDI public Bitmap g_walkPass;
+        //GDI public Bitmap g_walkBlock;
+        //GDI public Bitmap g_LoSBlock;
         private int sqr = 25;
         private int mSizeW = 800;
         private int mSizeH = 800;
@@ -39,13 +45,14 @@ namespace IB2Toolset
         public int _selectedLbxEncounterIndex = 0;
         public int _selectedLbxCreatureIndex = 0;
         public string currentTileFilename = "t_grass";
+        public tilepropToBePlacedSettings tileToBePlaced;
         public bool tileSelected = true;
         public bool PcSelected = false;
         public bool CrtSelected = false;
-        Font drawFont = new Font("Arial", 6);
-        Font drawFontNum = new Font("Arial", 24);
-        SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-        Pen blackPen = new Pen(Color.Black, 1);
+        //GDI Font drawFont = new Font("Arial", 6);
+        //GDI Font drawFontNum = new Font("Arial", 24);
+        //GDI SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+        //GDI Pen blackPen = new Pen(Color.Black, 1);
         public Point currentSquareClicked = new Point(0, 0);
         public Point lastSquareClicked = new Point(0, 0);
         public selectionStruct selectedTile;
@@ -55,8 +62,20 @@ namespace IB2Toolset
         public Creature le_selectedCreature = new Creature();
         public Prop le_selectedProp = new Prop();
         //public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
-        public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
+        //GDI public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
         public Encounter thisEnc = new Encounter();
+
+        #region Direct2D Stuff
+        public bool useDirect2D = true;
+        public SharpDX.Direct2D1.Factory Factory2D { get; private set; }
+        public SharpDX.DirectWrite.Factory FactoryDWrite { get; private set; }
+        public WindowRenderTarget RenderTarget2D { get; private set; }
+        public SolidColorBrush SceneColorBrush { get; private set; }
+        public Dictionary<string, SharpDX.Direct2D1.Bitmap> commonBitmapList = new Dictionary<string, SharpDX.Direct2D1.Bitmap>();
+        public Point selectionBoxLocation = new Point(-1, -1);
+        public TextFormat textFormat;
+        public TextLayout textLayout;
+        #endregion
 
         public EncounterEditor(Module m, ParentForm p)
         {
@@ -65,7 +84,7 @@ namespace IB2Toolset
             prntForm = p;
             thisEnc = prntForm.encountersList[prntForm._selectedLbxEncounterIndex];
             createTileImageButtons();
-            surface = new Bitmap(mSizeW, mSizeH);
+            /*//GDI surface = new Bitmap(mSizeW, mSizeH);
             panelView.BackgroundImage = surface;            
             device = Graphics.FromImage(surface);
             if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png"))
@@ -105,12 +124,11 @@ namespace IB2Toolset
                     MessageBox.Show("failed to load walk_pass, los_block, and walk_block bitmaps: " + ex.ToString());
                     //le_game.errorLog("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
                 }
-            }
+            }*/
             refreshCmbItems();
             refreshLbxItems();
             refreshGoldDrop();
-        }
-        
+        }        
         private void EncounterEditor_Load(object sender, EventArgs e)
         {
             //LoadEncounters();
@@ -127,15 +145,23 @@ namespace IB2Toolset
             //createNewArea(thisEnc.MapSizeX, thisEnc.MapSizeY);
 
             //set up level drawing surface
-            panelView.Width = thisEnc.MapSizeX * sqr;
-            panelView.Height = thisEnc.MapSizeY * sqr;           
-            surface = new Bitmap(panelView.Size.Width, panelView.Size.Height);
+            //GDI panelView.Width = thisEnc.MapSizeX * sqr;
+            //GDI panelView.Height = thisEnc.MapSizeY * sqr;           
+            //GDI surface = new Bitmap(panelView.Size.Width, panelView.Size.Height);
             //UpdatePB();
-            device = Graphics.FromImage(surface);
-            panelView.BackgroundImage = (Image)surface;
+            //GDI device = Graphics.FromImage(surface);
+            //GDI panelView.BackgroundImage = (Image)surface;
 
             rbtnInfo.Checked = true;
             rbtnZoom1x.Checked = true;
+            InitDirect2DAndDirectWrite();
+        }
+        public void resetTileToBePlacedSettings()
+        {
+            tileToBePlaced.angle = 0;
+            tileToBePlaced.mirror = false;
+            tileToBePlaced.xshift = 0;
+            tileToBePlaced.yshift = 0;
         }
 
         #region Encounter Stuff
@@ -207,10 +233,10 @@ namespace IB2Toolset
 
         private void resetPanelAndDeviceSize()
         {
-            panelView.Width = thisEnc.MapSizeX * sqr;
-            panelView.Height = thisEnc.MapSizeY * sqr;
-            surface = new Bitmap(thisEnc.MapSizeX * sqr, thisEnc.MapSizeY * sqr);
-            device = Graphics.FromImage(surface);
+            //GDI panelView.Width = thisEnc.MapSizeX * sqr;
+            //GDI panelView.Height = thisEnc.MapSizeY * sqr;
+            //GDI surface = new Bitmap(thisEnc.MapSizeX * sqr, thisEnc.MapSizeY * sqr);
+            //GDI device = Graphics.FromImage(surface);
         }
         private void createTileImageButtons()
         {
@@ -259,11 +285,10 @@ namespace IB2Toolset
                 }
             }
             return null;
-        }
-        
+        }        
         private void refreshMap(bool refreshAll)
         {
-            this.Cursor = Cursors.WaitCursor;
+            /*//GDI this.Cursor = Cursors.WaitCursor;
             if (thisEnc == null) { return; }
             if (refreshAll)
             {
@@ -458,93 +483,6 @@ namespace IB2Toolset
                         }
                     }
                     #endregion
-                    #region Old system for reference (to be deleted after new system is fully tested)
-                    //draw tile map
-                    /*for (int y = 0; y < thisEnc.MapSizeY; y++)
-                    {
-                        for (int x = 0; x < thisEnc.MapSizeX; x++)
-                        {
-                            if ((refreshAll) || (currentSquareClicked == new Point(x, y)) || (lastSquareClicked == new Point(x, y)))
-                            {
-                                TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
-                                Bitmap lyr1 = null;
-                                Bitmap lyr2 = null;
-                                Bitmap lyr3 = null;
-                                Rectangle src1 = new Rectangle(0, 0, 50, 50);
-                                Rectangle src2 = new Rectangle(0, 0, 50, 50);
-                                Rectangle src3 = new Rectangle(0, 0, 50, 50);
-                                //check to see if 100x100 tile image size
-                                if (getTileByName(tile.Layer1Filename) != null)
-                                {
-                                    lyr1 = getTileByName(tile.Layer1Filename).bitmap;
-                                    src1 = new Rectangle(0, 0, lyr1.Width, lyr1.Height);
-                                }
-                                if (getTileByName(tile.Layer2Filename) != null)
-                                {
-                                    lyr2 = getTileByName(tile.Layer2Filename).bitmap;
-                                    src2 = new Rectangle(0, 0, lyr2.Width, lyr2.Height);
-                                }
-                                if (getTileByName(tile.Layer3Filename) != null)
-                                {
-                                    lyr3 = getTileByName(tile.Layer3Filename).bitmap;
-                                    src3 = new Rectangle(0, 0, lyr3.Width, lyr3.Height);
-                                }
-
-                                Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                                //draw layer 1 first
-                                if (checkBox1.Checked)
-                                {
-                                    if (lyr1 != null)
-                                    {
-                                        device.DrawImage(lyr1, target, src1, GraphicsUnit.Pixel);
-                                    }
-                                }
-                                //draw layer 2
-                                if (checkBox2.Checked)
-                                {
-                                    if (lyr2 != null)
-                                    {
-                                        device.DrawImage(lyr2, target, src2, GraphicsUnit.Pixel);
-                                    }
-                                }
-                                //draw layer 3
-                                if (checkBox3.Checked)
-                                {
-                                    if (lyr3 != null)
-                                    {
-                                        device.DrawImage(lyr3, target, src3, GraphicsUnit.Pixel);
-                                    }
-                                }
-                                //draw square walkmesh and LoS stuff
-                                Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
-                                if (chkGrid.Checked) //if show grid is turned on, draw grid squares
-                                {
-                                    if (tile.LoSBlocked)
-                                    {
-                                        device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
-                                        device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
-                                    }
-                                    if (tile.Walkable)
-                                    {
-                                        device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
-                                    }
-                                    else
-                                    {
-                                        target = new Rectangle(x * sqr + 1, y * sqr + 1, sqr - 1, sqr - 1);
-                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
-                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
-                                        device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
-                                    }
-                                }
-                                target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                                if (chkGrid.Checked)
-                                {
-                                    //device.DrawRectangle(blackPen, target);
-                                }
-                            }
-                        }
-                    }*/
-                    #endregion
                 }
 
                 //draw creatures
@@ -578,156 +516,92 @@ namespace IB2Toolset
                     cnt++;
                 }
 
-                /*TODOint cnt = 0;
-                foreach (Prop prpRef in thisEnc.Props)
+                            /*TODOint cnt = 0;
+                            foreach (Prop prpRef in thisEnc.Props)
+                            {
+                                int cspx = prpRef.LocationX;
+                                int cspy = prpRef.LocationY;
+                                if ((refreshAll) || (currentSquareClicked == new Point(cspx, cspy)) || (lastSquareClicked == new Point(cspx, cspy)))
+                                {                        
+                                    spritePropDraw(cspx, cspy, cnt);
+                                }
+                                cnt++;
+                            }*/
+            /*TODOforeach (Trigger t in thisEnc.Triggers)
+            {
+                foreach (Coordinate p in t.TriggerSquaresList)
                 {
-                    int cspx = prpRef.LocationX;
-                    int cspy = prpRef.LocationY;
-                    if ((refreshAll) || (currentSquareClicked == new Point(cspx, cspy)) || (lastSquareClicked == new Point(cspx, cspy)))
-                    {                        
-                        spritePropDraw(cspx, cspy, cnt);
-                    }
-                    cnt++;
-                }*/
-                /*TODOforeach (Trigger t in thisEnc.Triggers)
-                {
-                    foreach (Coordinate p in t.TriggerSquaresList)
+                    if ((refreshAll) || (currentSquareClicked == new Point(p.X, p.Y)) || (lastSquareClicked == new Point(p.X, p.Y)))
                     {
-                        if ((refreshAll) || (currentSquareClicked == new Point(p.X, p.Y)) || (lastSquareClicked == new Point(p.X, p.Y)))
+                        int dx = p.X * sqr;
+                        int dy = p.Y * sqr;
+                        Pen pen = new Pen(Color.Orange, 2);
+                        if ((t.Event1Type == "encounter") || (t.Event2Type == "encounter") || (t.Event3Type == "encounter"))
                         {
-                            int dx = p.X * sqr;
-                            int dy = p.Y * sqr;
-                            Pen pen = new Pen(Color.Orange, 2);
-                            if ((t.Event1Type == "encounter") || (t.Event2Type == "encounter") || (t.Event3Type == "encounter"))
-                            {
-                                pen = new Pen(Color.Red, 2);
-                            }
-                            else if (t.Event1Type == "conversation")
-                            {
-                                pen = new Pen(Color.Yellow, 2);
-                            }
-                            else if (t.Event1Type == "script")
-                            {
-                                pen = new Pen(Color.Blue, 2);
-                            }
-                            else if (t.Event1Type == "transition")
-                            {
-                                pen = new Pen(Color.Lime, 2);
-                            }
-                            Rectangle rect = new Rectangle(dx + 3, dy + 3, sqr - 6, sqr - 6);
-                            device.DrawRectangle(pen, rect);
+                            pen = new Pen(Color.Red, 2);
                         }
+                        else if (t.Event1Type == "conversation")
+                        {
+                            pen = new Pen(Color.Yellow, 2);
+                        }
+                        else if (t.Event1Type == "script")
+                        {
+                            pen = new Pen(Color.Blue, 2);
+                        }
+                        else if (t.Event1Type == "transition")
+                        {
+                            pen = new Pen(Color.Lime, 2);
+                        }
+                        Rectangle rect = new Rectangle(dx + 3, dy + 3, sqr - 6, sqr - 6);
+                        device.DrawRectangle(pen, rect);
                     }
-                }*/
-                UpdatePB();
+                }
+            }*/
+            /*//GDI UpdatePB();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("failed on refresh map: " + ex.ToString());                
-            }            
+            }*/
         }
         private void spritePropDraw(int cspx, int cspy, int spriteListIndex)
         {
             //source image
-            Bitmap prpBitmap = propBitmapList[spriteListIndex];
+            //GDI Bitmap prpBitmap = propBitmapList[spriteListIndex];
             //Rectangle source = new Rectangle(0, 0, le_selectedProp.propBitmap.Width, le_selectedProp.propBitmap.Height);
-            Rectangle source = new Rectangle(0, 0, prpBitmap.Width, prpBitmap.Height);
+            //GDI Rectangle source = new Rectangle(0, 0, prpBitmap.Width, prpBitmap.Height);
             //target location
-            Rectangle target = new Rectangle(cspx * sqr, cspy * sqr, sqr, sqr);
+            //GDI Rectangle target = new Rectangle(cspx * sqr, cspy * sqr, sqr, sqr);
             //draw sprite
-            device.DrawImage((Image)prpBitmap, target, source, GraphicsUnit.Pixel);
+            //GDI device.DrawImage((Image)prpBitmap, target, source, GraphicsUnit.Pixel);
         }
-        /*private void drawTileSettings()
-        {
-            //for (int index = 0; index < area.MapSizeInSquares.Width * area.MapSizeInSquares.Height; index++)
-            /*for (int x = 0; x < area.MapSizeX; x++)
-            {
-                for (int y = 0; y < area.MapSizeY; y++)
-                {
-                    if (chkGrid.Checked) //if show grid is turned on, draw grid squares
-                    {
-                        if (area.Tiles[y * this.area.MapSizeX + x].LoSBlocked)
-                        {
-                            Rectangle src = new Rectangle(0, 0, sqr, sqr);
-                            int dx = x * sqr;
-                            int dy = y * sqr;
-                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                            device.DrawImage(g_LoSBlock, target, src, GraphicsUnit.Pixel);
-                        }
-                        if (area.Tiles[y * this.area.MapSizeX + x].Walkable)
-                        {
-                            Rectangle src = new Rectangle(0, 0, sqr, sqr);
-                            int dx = x * sqr;
-                            int dy = y * sqr;
-                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                            device.DrawImage(g_walkPass, target, src, GraphicsUnit.Pixel);
-                        }
-                        else
-                        {
-                            Rectangle src = new Rectangle(0, 0, sqr, sqr);
-                            int dx = x * sqr;
-                            int dy = y * sqr;
-                            Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
-                            device.DrawImage(g_walkBlock, target, src, GraphicsUnit.Pixel);
-                        }
-                    }
-                }
-            }*/
-            /*foreach (Trigger t in area.Triggers)
-            {
-                foreach (Coordinate p in t.TriggerSquaresList)
-                {
-                    int dx = p.X * sqr;
-                    int dy = p.Y * sqr;
-                    Pen pen = new Pen(Color.Orange, 2);
-                    if ((t.Event1Type == "encounter") || (t.Event2Type == "encounter") || (t.Event3Type == "encounter"))
-                    {
-                        pen = new Pen(Color.Red, 2);
-                    }
-                    else if (t.Event1Type == "conversation")
-                    {
-                        pen = new Pen(Color.Yellow, 2);
-                    }
-                    else if (t.Event1Type == "script")
-                    {
-                        pen = new Pen(Color.Blue, 2);
-                    }
-                    else if (t.Event1Type == "transition")
-                    {
-                        pen = new Pen(Color.Lime, 2);
-                    }
-                    Rectangle rect = new Rectangle(dx + 3, dy + 3, sqr - 6, sqr - 6);
-                    device.DrawRectangle(pen, rect);
-                }
-            }*/
-            //panelView.BackgroundImage = surface;
-        //}*/
         public void drawSelectionBox(int gridx, int gridy)
         {
             //draw selection box around tile
-            int dx = gridx * sqr;
-            int dy = gridy * sqr;
-            Pen pen = new Pen(Color.DarkMagenta, 2);
-            Rectangle rect = new Rectangle(dx + 1, dy + 1, sqr - 2, sqr - 2);
-            device.DrawRectangle(pen, rect);
+            //GDI int dx = gridx * sqr;
+            //GDI int dy = gridy * sqr;
+            //GDI Pen pen = new Pen(Color.DarkMagenta, 2);
+            //GDI Rectangle rect = new Rectangle(dx + 1, dy + 1, sqr - 2, sqr - 2);
+            //GDI device.DrawRectangle(pen, rect);
 
             //save changes
-            UpdatePB();
+            //GDI UpdatePB();
         }
         public void UpdatePB()
         {
-            this.Cursor = Cursors.Default;
-            panelView.BackgroundImage = surface;
-            panelView.Invalidate();
-        }        
-        
+            //GDI this.Cursor = Cursors.Default;
+            //GDI panelView.BackgroundImage = surface;
+            //GDI panelView.Invalidate();
+        }
+
         private void panelView_MouseMove(object sender, MouseEventArgs e)
         {            
             gridX = e.X / sqr;
             gridY = e.Y / sqr;
             if (!mouseInMapArea(gridX, gridY)) { return; }
-            lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();            
-            if (prntForm.PropSelected)
+            lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
+            panelView.Focus();
+            /*//GDI if (prntForm.PropSelected)
             {
                 refreshMap(true);
                 try
@@ -769,7 +643,7 @@ namespace IB2Toolset
                         clickDrawArea(e);
                     }
                 }
-            }
+            }*/
         }
         private void panelView_MouseDown(object sender, MouseEventArgs e)
         {
@@ -818,7 +692,7 @@ namespace IB2Toolset
         }
         private void panelView_MouseLeave(object sender, EventArgs e)
         {
-            try
+            /*//GDI try
             {
                 //refreshMap();
                 //UpdatePB();
@@ -826,7 +700,7 @@ namespace IB2Toolset
             catch (Exception ex)
             {
                 MessageBox.Show("failed on mouse leave map: " + ex.ToString());
-            }
+            }*/
         }
         private void panelView_MouseEnter(object sender, EventArgs e)
         {
@@ -907,7 +781,7 @@ namespace IB2Toolset
                         {
                             thisEnc.encounterPcStartLocations.Add(new Coordinate(gridX, gridY));
                         }
-                        refreshMap(true);
+                        //GDI refreshMap(true);
                     }
                     #endregion
                     #region Creature Selected
@@ -920,7 +794,7 @@ namespace IB2Toolset
                         crtRef.creatureStartLocationX = gridX;
                         crtRef.creatureStartLocationY = gridY;
                         thisEnc.encounterCreatureRefsList.Add(crtRef);
-                        refreshMap(true);
+                        //GDI refreshMap(true);
                     }
                     #endregion
                     #region Tile Selected
@@ -934,6 +808,10 @@ namespace IB2Toolset
                         if (radioButton1.Checked)
                         {
                             thisEnc.encounterTiles[selectedTile.index].Layer1Filename = currentTileFilename;
+                            thisEnc.encounterTiles[selectedTile.index].Layer1Rotate = tileToBePlaced.angle;
+                            thisEnc.encounterTiles[selectedTile.index].Layer1Mirror = tileToBePlaced.mirror;
+                            thisEnc.encounterTiles[selectedTile.index].Layer1Xshift = tileToBePlaced.xshift;
+                            thisEnc.encounterTiles[selectedTile.index].Layer1Yshift = tileToBePlaced.yshift;
                             //if shift key is down, draw all between here and lastclickedsquare
                             if (Control.ModifierKeys == Keys.Shift)
                             {
@@ -959,8 +837,12 @@ namespace IB2Toolset
                                     for (int y = startY; y <= endY; y++)
                                     {
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Filename = currentTileFilename;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Rotate = tileToBePlaced.angle;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Mirror = tileToBePlaced.mirror;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Xshift = tileToBePlaced.xshift;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Yshift = tileToBePlaced.yshift;
                                         currentSquareClicked = new Point(x, y);
-                                        refreshMap(false);
+                                        //GDI refreshMap(false);
                                     }
                                 }
                             }
@@ -968,6 +850,10 @@ namespace IB2Toolset
                         else if (radioButton2.Checked)
                         {
                             thisEnc.encounterTiles[selectedTile.index].Layer2Filename = currentTileFilename;
+                            thisEnc.encounterTiles[selectedTile.index].Layer2Rotate = tileToBePlaced.angle;
+                            thisEnc.encounterTiles[selectedTile.index].Layer2Mirror = tileToBePlaced.mirror;
+                            thisEnc.encounterTiles[selectedTile.index].Layer2Xshift = tileToBePlaced.xshift;
+                            thisEnc.encounterTiles[selectedTile.index].Layer2Yshift = tileToBePlaced.yshift;
                             if (Control.ModifierKeys == Keys.Shift)
                             {
                                 Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
@@ -991,8 +877,12 @@ namespace IB2Toolset
                                     for (int y = startY; y <= endY; y++)
                                     {
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Filename = currentTileFilename;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Rotate = tileToBePlaced.angle;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Mirror = tileToBePlaced.mirror;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Xshift = tileToBePlaced.xshift;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Yshift = tileToBePlaced.yshift;
                                         currentSquareClicked = new Point(x, y);
-                                        refreshMap(false);
+                                        //GDI refreshMap(false);
                                     }
                                 }
                             }
@@ -1000,6 +890,10 @@ namespace IB2Toolset
                         else if (radioButton3.Checked)
                         {
                             thisEnc.encounterTiles[selectedTile.index].Layer3Filename = currentTileFilename;
+                            thisEnc.encounterTiles[selectedTile.index].Layer3Rotate = tileToBePlaced.angle;
+                            thisEnc.encounterTiles[selectedTile.index].Layer3Mirror = tileToBePlaced.mirror;
+                            thisEnc.encounterTiles[selectedTile.index].Layer3Xshift = tileToBePlaced.xshift;
+                            thisEnc.encounterTiles[selectedTile.index].Layer3Yshift = tileToBePlaced.yshift;
                             if (Control.ModifierKeys == Keys.Shift)
                             {
                                 Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
@@ -1023,13 +917,17 @@ namespace IB2Toolset
                                     for (int y = startY; y <= endY; y++)
                                     {
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Filename = currentTileFilename;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Rotate = tileToBePlaced.angle;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Mirror = tileToBePlaced.mirror;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Xshift = tileToBePlaced.xshift;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Yshift = tileToBePlaced.yshift;
                                         currentSquareClicked = new Point(x, y);
-                                        refreshMap(false);
+                                        //GDI refreshMap(false);
                                     }
                                 }
                             }
                         }
-                        refreshMap(false);
+                        //GDI refreshMap(false);
                     }
                     #endregion
                     #region Prop Selected
@@ -1179,7 +1077,7 @@ namespace IB2Toolset
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         thisEnc.encounterTiles[selectedTile.index].Walkable = false;
-                        refreshMap(false);
+                        //GDI refreshMap(false);
                     }
                     #endregion
                     #region LoS mesh Toggle Selected (Make LoS Blocked)
@@ -1189,7 +1087,7 @@ namespace IB2Toolset
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         thisEnc.encounterTiles[selectedTile.index].LoSBlocked = true;
-                        refreshMap(false);
+                        //GDI refreshMap(false);
                     }
                     #endregion
                     #region None Selected
@@ -1204,8 +1102,9 @@ namespace IB2Toolset
                         //loop through all the objects
                         //if has that location, add the tag to the list                    
                         //draw selection box
-                        refreshMap(false);
-                        drawSelectionBox(gridX, gridY);
+                        //GDI refreshMap(false);
+                        //GDI drawSelectionBox(gridX, gridY);
+                        selectionBoxLocation = new Point(gridX, gridY);
                         txtSelectedIconInfo.Text = "";
 
                         foreach (CreatureRefs crt in thisEnc.encounterCreatureRefsList)
@@ -1269,7 +1168,7 @@ namespace IB2Toolset
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         thisEnc.encounterTiles[selectedTile.index].Walkable = true;
-                        refreshMap(false);
+                        //GDI refreshMap(false);
                     }
                     #endregion
                     #region LoS mesh Toggle Selected (Make LoS Visible)
@@ -1279,7 +1178,7 @@ namespace IB2Toolset
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         thisEnc.encounterTiles[selectedTile.index].LoSBlocked = false;
-                        refreshMap(false);
+                        //GDI refreshMap(false);
                     }
                     #endregion
                     else
@@ -1292,19 +1191,15 @@ namespace IB2Toolset
                         prntForm.CreatureSelected = false;
                         prntForm.PropSelected = false;
                         prntForm.currentSelectedTrigger = null;
-                        refreshMap(true);
-                        UpdatePB();
+                        //GDI refreshMap(true);
+                        //GDI UpdatePB();
                         rbtnInfo.Checked = true;
+                        resetTileToBePlacedSettings();
                     }
                     break;
                 #endregion
             }
         }
-        private void btnRefreshMap_Click(object sender, EventArgs e)
-        {
-            refreshMap(true);
-        }
-        
         private void btnFillWithSelected_Click(object sender, EventArgs e)
         {
             for (int x = 0; x < thisEnc.MapSizeX; x++)
@@ -1330,16 +1225,455 @@ namespace IB2Toolset
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            refreshMap(true);
+            //GDI refreshMap(true);
         }
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            refreshMap(true);
+            //GDI refreshMap(true);
         }
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-            refreshMap(true);
+            //GDI refreshMap(true);
         }
+
+        #region DIRECT2D STUFF
+        private void InitDirect2DAndDirectWrite()
+        {
+            Factory2D = new SharpDX.Direct2D1.Factory();
+            FactoryDWrite = new SharpDX.DirectWrite.Factory();
+
+            var properties = new HwndRenderTargetProperties();
+            properties.Hwnd = panelView.Handle;
+            properties.PixelSize = new SharpDX.Size2(panelView.ClientSize.Width, panelView.ClientSize.Height);
+            properties.PresentOptions = PresentOptions.None;
+
+            RenderTarget2D = new WindowRenderTarget(Factory2D, new RenderTargetProperties(new SharpDX.Direct2D1.PixelFormat(Format.R8G8B8A8_UNorm, AlphaMode.Premultiplied)), properties);
+            RenderTarget2D.AntialiasMode = AntialiasMode.PerPrimitive;
+            RenderTarget2D.TextAntialiasMode = TextAntialiasMode.Cleartype;
+
+            SceneColorBrush = new SolidColorBrush(RenderTarget2D, SharpDX.Color.Black);
+            //TODO dispose of all of these objects upon closing this editor
+            try
+            {
+                mapBitmapD2D = GetFromBitmapList(thisEnc.MapImage);
+            }
+            catch (Exception ex)
+            {
+                prntForm.errorLog(ex.ToString());
+            }
+            timerRenderLoop.Start();
+        }
+        public void CleanUpDrawTextResources()
+        {
+            if (textFormat != null)
+            {
+                textFormat.Dispose();
+                textFormat = null;
+            }
+            if (textLayout != null)
+            {
+                textLayout.Dispose();
+                textLayout = null;
+            }
+        }
+        public void DrawText(string text, float xLoc, float yLoc, float scaler)
+        {
+            DrawText(text, xLoc, yLoc, scaler, SharpDX.Color.White);
+        }
+        public void DrawText(string text, float x, float y, float scaler, SharpDX.Color fontColor)
+        {
+            CleanUpDrawTextResources();
+            using (SolidColorBrush scb = new SolidColorBrush(RenderTarget2D, fontColor))
+            {
+                textFormat = new TextFormat(FactoryDWrite, "Arial", scaler);
+                //textFormat = new TextFormat(factoryDWrite, thisFont.FontFamily.Name, fw, fs, FontStretch.Normal, thisFont.Height) { TextAlignment = TextAlignment.Leading, ParagraphAlignment = ParagraphAlignment.Near };
+                //textFormat = new TextFormat(factoryDWrite, FontFamilyName, CurrentFontCollection, fw, fs, FontStretch.Normal, scaler) { TextAlignment = TextAlignment.Leading, ParagraphAlignment = ParagraphAlignment.Near };
+                textLayout = new TextLayout(FactoryDWrite, text, textFormat, this.Width, this.Height);
+                RenderTarget2D.DrawTextLayout(new SharpDX.Vector2(x, y), textLayout, scb, DrawTextOptions.None);
+            }
+        }
+        public void DrawD2DBitmap(SharpDX.Direct2D1.Bitmap bitmap, SharpDX.RectangleF source, SharpDX.RectangleF target, int angleInDegrees, bool mirror, int Xshift, int Yshift)
+        {
+            int mir = 1;
+            if (mirror) { mir = -1; }
+            //convert degrees to radians
+            float angle = (float)(Math.PI * 2 * (float)angleInDegrees / (float)360);
+            float xshf = (float)Xshift * (float)sqr / 50f;
+            float yshf = (float)Yshift * (float)sqr / 50f;
+            SharpDX.Vector2 center = new SharpDX.Vector2(target.Left + (target.Width / 2), target.Top + (target.Height / 2));
+            RenderTarget2D.Transform = SharpDX.Matrix.Transformation2D(center, 0, new SharpDX.Vector2(mir, 1), center, angle, new SharpDX.Vector2(xshf, yshf));
+            SharpDX.RectangleF trg = new SharpDX.RectangleF(target.Left, target.Top, target.Width, target.Height);
+            SharpDX.RectangleF src = new SharpDX.RectangleF(source.Left, source.Top, source.Width, source.Height);
+            RenderTarget2D.DrawBitmap(bitmap, trg, 1.0f, BitmapInterpolationMode.Linear, src);
+            RenderTarget2D.Transform = SharpDX.Matrix3x2.Identity;
+        }
+        public void DrawRectangle(SharpDX.RectangleF rect, SharpDX.Color penColor, int penWidth)
+        {
+            using (SolidColorBrush scb = new SolidColorBrush(RenderTarget2D, penColor))
+            {
+                RenderTarget2D.DrawRectangle(rect, scb, penWidth);
+            }
+        }
+        public System.Drawing.Bitmap LoadBitmapGDI(string filename)
+        {
+            System.Drawing.Bitmap bm = null;
+            try
+            {
+                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\" + filename + ".png"))
+                {
+                    bm = new System.Drawing.Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\" + filename + ".png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\" + filename))
+                {
+                    bm = new System.Drawing.Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\" + filename);
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + filename + ".png"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + filename + ".png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + filename + ".jpg"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + filename + ".jpg");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + filename))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + filename);
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\" + filename + ".png"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\" + filename + ".png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\" + filename + ".jpg"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\" + filename + ".jpg");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\" + filename))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\" + filename);
+                }
+                else
+                {
+                    bm = new System.Drawing.Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\graphics\\missingtexture.png");
+                }
+            }
+            catch (Exception ex)
+            {
+                prntForm.errorLog(ex.ToString());
+                if (bm == null)
+                {
+                    bm = new System.Drawing.Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\graphics\\missingtexture.png");
+                    return bm;
+                }
+            }
+            return bm;
+        }
+        public SharpDX.Direct2D1.Bitmap LoadBitmap(string file) //change this to LoadBitmap
+        {
+            // Loads from file using System.Drawing.Image
+            using (var bitmap = LoadBitmapGDI(file)) //change this to LoadBitmapGDI
+            {
+                var sourceArea = new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height);
+                var bitmapProperties = new BitmapProperties(new SharpDX.Direct2D1.PixelFormat(Format.R8G8B8A8_UNorm, AlphaMode.Premultiplied));
+                var size = new SharpDX.Size2(bitmap.Width, bitmap.Height);
+
+                // Transform pixels from BGRA to RGBA
+                int stride = bitmap.Width * sizeof(int);
+                using (var tempStream = new SharpDX.DataStream(bitmap.Height * stride, true, true))
+                {
+                    // Lock System.Drawing.Bitmap
+                    var bitmapData = bitmap.LockBits(sourceArea, ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+
+                    // Convert all pixels 
+                    for (int y = 0; y < bitmap.Height; y++)
+                    {
+                        int offset = bitmapData.Stride * y;
+                        for (int x = 0; x < bitmap.Width; x++)
+                        {
+                            // Not optimized 
+                            byte B = System.Runtime.InteropServices.Marshal.ReadByte(bitmapData.Scan0, offset++);
+                            byte G = System.Runtime.InteropServices.Marshal.ReadByte(bitmapData.Scan0, offset++);
+                            byte R = System.Runtime.InteropServices.Marshal.ReadByte(bitmapData.Scan0, offset++);
+                            byte A = System.Runtime.InteropServices.Marshal.ReadByte(bitmapData.Scan0, offset++);
+                            int rgba = R | (G << 8) | (B << 16) | (A << 24);
+                            tempStream.Write(rgba);
+                        }
+                    }
+                    bitmap.UnlockBits(bitmapData);
+                    tempStream.Position = 0;
+                    return new SharpDX.Direct2D1.Bitmap(RenderTarget2D, size, tempStream, stride, bitmapProperties);
+                }
+            }
+        }
+        public SharpDX.Direct2D1.Bitmap GetFromBitmapList(string fileNameWithOutExt)
+        {
+            //check to see if in list already and return bitmap if it is found
+            if (commonBitmapList.ContainsKey(fileNameWithOutExt))
+            {
+                return commonBitmapList[fileNameWithOutExt];
+            }
+            //try loading and adding to list and return bitmap
+            else
+            {
+                commonBitmapList.Add(fileNameWithOutExt, LoadBitmap(fileNameWithOutExt));
+                return commonBitmapList[fileNameWithOutExt];
+            }
+        }
+        public void DisposeAllD2D()
+        {
+            //dispose of all bitmaps
+            foreach (SharpDX.Direct2D1.Bitmap bm in commonBitmapList.Values)
+            {
+                if (bm != null)
+                {
+                    bm.Dispose();
+                }
+            }
+            commonBitmapList.Clear();
+            DisposeOfBitmap(ref mapBitmapD2D);
+            SceneColorBrush.Dispose();
+            RenderTarget2D.Dispose();
+            FactoryDWrite.Dispose();
+            Factory2D.Dispose();
+        }
+        public void DisposeOfBitmap(ref SharpDX.Direct2D1.Bitmap bmp)
+        {
+            if (bmp != null)
+            {
+                bmp.Dispose();
+                bmp = null;
+            }
+        }
+        public void Render()
+        {
+            try
+            {
+                RenderTarget2D.BeginDraw();
+                RenderTarget2D.Clear(SharpDX.Color.Black);
+                redrawMain();
+                RenderTarget2D.EndDraw();
+            }
+            catch (Exception ex)
+            {
+                prntForm.errorLog(ex.ToString());
+            }
+        }
+        public void redrawMain()
+        {
+            if (thisEnc == null) { return; }
+            if ((thisEnc.UseMapImage) && (!thisEnc.MapImage.Equals("none")) && (mapBitmapD2D != null))
+            {
+                SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, mapBitmapD2D.PixelSize.Width, mapBitmapD2D.PixelSize.Height);
+                SharpDX.RectangleF dst = new SharpDX.RectangleF(0, 0, thisEnc.MapSizeX * sqr, thisEnc.MapSizeY * sqr);
+                DrawD2DBitmap(mapBitmapD2D, src, dst, 0, false, 0, 0);
+            }
+            #region Draw Layer 1
+            if (checkBox1.Checked)
+            {
+                for (int y = 0; y < thisEnc.MapSizeY; y++)
+                {
+                    for (int x = 0; x < thisEnc.MapSizeX; x++)
+                    {
+                        TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                        if (!tile.Layer1Filename.Equals("t_blank"))
+                        {
+                            float scalerX = GetFromBitmapList(tile.Layer1Filename).PixelSize.Width / 100;
+                            float scalerY = GetFromBitmapList(tile.Layer1Filename).PixelSize.Height / 100;
+                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer1Filename).PixelSize.Width, GetFromBitmapList(tile.Layer1Filename).PixelSize.Height);
+                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer1Filename), src, dst, tile.Layer1Rotate, tile.Layer1Mirror, tile.Layer1Xshift, tile.Layer1Yshift);
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region Draw Layer 2
+            if (checkBox2.Checked)
+            {
+                for (int y = 0; y < thisEnc.MapSizeY; y++)
+                {
+                    for (int x = 0; x < thisEnc.MapSizeX; x++)
+                    {
+                        TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                        if (!tile.Layer2Filename.Equals("t_blank"))
+                        {
+                            float scalerX = GetFromBitmapList(tile.Layer2Filename).PixelSize.Width / 100;
+                            float scalerY = GetFromBitmapList(tile.Layer2Filename).PixelSize.Height / 100;
+                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer2Filename).PixelSize.Width, GetFromBitmapList(tile.Layer2Filename).PixelSize.Height);
+                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer2Filename), src, dst, tile.Layer2Rotate, tile.Layer2Mirror, tile.Layer2Xshift, tile.Layer2Yshift);
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region Draw Layer 3
+            if (checkBox3.Checked)
+            {
+                for (int y = 0; y < thisEnc.MapSizeY; y++)
+                {
+                    for (int x = 0; x < thisEnc.MapSizeX; x++)
+                    {
+                        TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                        if (!tile.Layer3Filename.Equals("t_blank"))
+                        {
+                            float scalerX = GetFromBitmapList(tile.Layer3Filename).PixelSize.Width / 100;
+                            float scalerY = GetFromBitmapList(tile.Layer3Filename).PixelSize.Height / 100;
+                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer3Filename).PixelSize.Width, GetFromBitmapList(tile.Layer3Filename).PixelSize.Height);
+                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer3Filename), src, dst, tile.Layer3Rotate, tile.Layer3Mirror, tile.Layer3Xshift, tile.Layer3Yshift);
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region Draw Grid
+            for (int y = 0; y < thisEnc.MapSizeY; y++)
+            {
+                for (int x = 0; x < thisEnc.MapSizeX; x++)
+                {
+                    TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                    //draw square walkmesh and LoS stuff
+                    SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("walk_pass").PixelSize.Width, GetFromBitmapList("walk_pass").PixelSize.Height);
+                    SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+                    if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                    {
+                        if (tile.LoSBlocked)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("los_block"), src, dst, 0, false, 0, 0);
+                        }
+                        if (tile.Walkable)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("walk_pass"), src, dst, 0, false, 0, 0);
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("walk_block"), src, dst, 0, false, 0, 0);
+
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region Draw creatures
+            foreach (CreatureRefs crtRef in thisEnc.encounterCreatureRefsList)
+            {
+                int cspx = crtRef.creatureStartLocationX * sqr;
+                int cspy = crtRef.creatureStartLocationY * sqr;
+                Creature crt = prntForm.getCreatureByResRef(crtRef.creatureResRef);
+                SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(crt.cr_tokenFilename).PixelSize.Width, GetFromBitmapList(crt.cr_tokenFilename).PixelSize.Width);
+                SharpDX.RectangleF dst = new SharpDX.RectangleF(cspx, cspy, sqr, sqr);
+                if (GetFromBitmapList(crt.cr_tokenFilename).PixelSize.Width > 100)
+                {
+                    dst = new SharpDX.RectangleF(cspx, cspy, sqr * 2, sqr * 2);
+                }
+                DrawD2DBitmap(GetFromBitmapList(crt.cr_tokenFilename), src, dst, 0, false, 0, 0);
+                //GDI device.DrawImage(crt.creatureIconBitmap, dst, src, GraphicsUnit.Pixel);
+                float scaler = 1.0f;
+                if (sqr == 50) { scaler = 10.0f; }
+                else if (sqr == 25) { scaler = 5.0f; }
+                else if (sqr == 10) { scaler = 2.0f; }
+                DrawText(crtRef.creatureTag, cspx, cspy + (sqr / 2), scaler, SharpDX.Color.Yellow);
+                //TODO device.DrawString(crtRef.creatureTag, drawFont, drawBrush, new Point(cspx, cspy + (sqr / 2)));
+            }
+            #endregion
+            #region Draw PCs
+            int cnt = 0;
+            foreach (Coordinate PCpoint in thisEnc.encounterPcStartLocations)
+            {
+                int cspx = PCpoint.X * sqr;
+                int cspy = PCpoint.Y * sqr;
+                float scaler = 1.0f;
+                if (sqr == 50) { scaler = 50f; }
+                else if (sqr == 25) { scaler = 25f; }
+                else if (sqr == 10) { scaler = 10f; }
+                DrawText((cnt + 1).ToString(), cspx + 5, cspy, scaler, SharpDX.Color.Yellow);
+                //TODO device.DrawString((cnt + 1).ToString(), drawFontNum, drawBrush, new Point(cspx, cspy + 5));
+                cnt++;
+            }
+            #endregion
+
+            #region Draw Props
+            /*TODO foreach (Prop prpRef in area.Props)
+            {
+                SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(prpRef.ImageFileName).PixelSize.Width, GetFromBitmapList(prpRef.ImageFileName).PixelSize.Height);
+                SharpDX.RectangleF dst = new SharpDX.RectangleF(prpRef.LocationX * sqr, prpRef.LocationY * sqr, sqr, sqr);
+                DrawD2DBitmap(GetFromBitmapList(prpRef.ImageFileName), src, dst, 0, false, 0, 0);
+            }*/
+            #endregion
+            #region Draw Triggers
+            /*TODO foreach (Trigger t in area.Triggers)
+            {
+                foreach (Coordinate p in t.TriggerSquaresList)
+                {
+                    int dx = p.X * sqr;
+                    int dy = p.Y * sqr;
+                    //Pen pen = new Pen(Color.Orange, 2);
+                    SharpDX.Color clr = SharpDX.Color.Orange;
+                    if ((t.Event1Type == "encounter") || (t.Event2Type == "encounter") || (t.Event3Type == "encounter"))
+                    {
+                        clr = SharpDX.Color.Red;
+                    }
+                    else if (t.Event1Type == "conversation")
+                    {
+                        clr = SharpDX.Color.Yellow;
+                    }
+                    else if (t.Event1Type == "script")
+                    {
+                        clr = SharpDX.Color.Blue;
+                    }
+                    else if (t.Event1Type == "transition")
+                    {
+                        clr = SharpDX.Color.Lime;
+                    }
+                    SharpDX.RectangleF rect = new SharpDX.RectangleF(dx + 3, dy + 3, sqr - 6, sqr - 6);
+                    DrawRectangle(rect, clr, 2);
+                }
+            }*/
+            #endregion
+            #region Draw Selection Box
+            if (selectionBoxLocation.X != -1)
+            {
+                int dx = selectionBoxLocation.X * sqr;
+                int dy = selectionBoxLocation.Y * sqr;
+                SharpDX.RectangleF rect = new SharpDX.RectangleF(dx + 1, dy + 1, sqr - 2, sqr - 2);
+                DrawRectangle(rect, SharpDX.Color.Magenta, 2);
+            }
+            #endregion
+            #region Draw To Be Placed Prop/Tile
+            if (prntForm.PropSelected)
+            {
+                /*TODO try
+                {
+                    if (!selectedBitmapFilename.Equals(""))
+                    {
+                        SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(selectedBitmapFilename).PixelSize.Width, GetFromBitmapList(selectedBitmapFilename).PixelSize.Height);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, sqr, sqr);
+                        DrawD2DBitmap(GetFromBitmapList(selectedBitmapFilename), src, dst, 0, false, 0, 0);
+                    }
+                }
+                catch (Exception ex) { MessageBox.Show("failed mouse move update to be placed prop: " + ex.ToString()); }
+                */
+            }
+            else if (rbtnPaintTile.Checked)
+            {
+                try
+                {
+                    if (!currentTileFilename.Equals(""))
+                    {
+                        float scalerX = GetFromBitmapList(currentTileFilename).PixelSize.Width / 100;
+                        float scalerY = GetFromBitmapList(currentTileFilename).PixelSize.Height / 100;
+                        SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(currentTileFilename).PixelSize.Width, GetFromBitmapList(currentTileFilename).PixelSize.Height);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                        DrawD2DBitmap(GetFromBitmapList(currentTileFilename), src, dst, tileToBePlaced.angle, tileToBePlaced.mirror, tileToBePlaced.xshift, tileToBePlaced.yshift);
+                    }
+                }
+                catch (Exception ex) { MessageBox.Show("failed mouse move update to be placed tile: " + ex.ToString()); }
+            }
+            #endregion
+        }
+        #endregion
 
         #region Methods
         private void loadAreaObjectBitmapLists()
@@ -1406,16 +1740,16 @@ namespace IB2Toolset
                 thisEnc.encounterTiles.Add(newTile);
             }
             refreshLeftPanelInfo();
-            panelView.Width = thisEnc.MapSizeX * sqr;
-            panelView.Height = thisEnc.MapSizeY * sqr;
-            panelView.BackgroundImage = (Image)surface;
-            device = Graphics.FromImage(surface);
-            if (surface == null)
-            {
-                MessageBox.Show("returned a null Map bitmap");
-                return;
-            }
-            refreshMap(true);
+            //GDI panelView.Width = thisEnc.MapSizeX * sqr;
+            //GDI panelView.Height = thisEnc.MapSizeY * sqr;
+            //GDI panelView.BackgroundImage = (Image)surface;
+            //GDI device = Graphics.FromImage(surface);
+            //GDI if (surface == null)
+            //GDI {
+            //GDI MessageBox.Show("returned a null Map bitmap");
+            //GDI return;
+            //GDI }
+            //GDI refreshMap(true);
         }
         private void resetAreaTileValues(int width, int height)
         {
@@ -1437,13 +1771,14 @@ namespace IB2Toolset
             selectedTile.x = gridX;
             selectedTile.y = gridY;
             selectedTile.index = gridY * thisEnc.MapSizeX + gridX;
-            drawSelectionBox(gridX, gridY);
+            //GDI drawSelectionBox(gridX, gridY);
+            selectionBoxLocation = new Point(gridX, gridY);
         }
         private void mapSizeChangeStuff()
         {
             lblMapSizeX.Text = thisEnc.MapSizeX.ToString();
             lblMapSizeY.Text = thisEnc.MapSizeY.ToString();
-            resetPanelAndDeviceSize();
+            //GDI resetPanelAndDeviceSize();
         }
         public void ResetAllToFalse()
         {
@@ -1491,12 +1826,12 @@ namespace IB2Toolset
         private void btnDeletePCs_Click(object sender, EventArgs e)
         {
             thisEnc.encounterPcStartLocations.Clear();
-            refreshMap(true);
+            //GDI refreshMap(true);
         }
         private void btnDeleteCreatures_Click(object sender, EventArgs e)
         {
             thisEnc.encounterCreatureRefsList.Clear();
-            refreshMap(true);
+            //GDI refreshMap(true);
         }
         private void flPanelTab1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -1521,8 +1856,9 @@ namespace IB2Toolset
         }
         private void EncounterEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
-            device.Dispose();
-            surface.Dispose();
+            DisposeAllD2D();
+            //GDI device.Dispose();
+            //GDI surface.Dispose();
             //gfxSelected.Dispose();
             //selectedBitmap.Dispose();
             //this.Close();
@@ -1574,7 +1910,7 @@ namespace IB2Toolset
                     // remove at index of matched location
                     thisEnc.encounterCreatureRefsList.RemoveAt(cnt);
                     //crtBitmapList.RemoveAt(cnt);
-                    refreshMap(true);
+                    //GDI refreshMap(true);
                     return;
                 }
                 cnt++;
@@ -1641,7 +1977,7 @@ namespace IB2Toolset
         }
         private void chkGrid_CheckedChanged(object sender, EventArgs e)
         {
-            refreshMap(true);
+            //GDI refreshMap(true);
         }
         public void HandleContextMenuClick(object sender, EventArgs e)
         {
@@ -1669,6 +2005,62 @@ namespace IB2Toolset
                     return;
                 }
             }*/
+        }
+        private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 50;
+            resetPanelAndDeviceSize();
+            //GDI refreshMap(true);
+        }
+        private void rbtnZoom2x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 25;
+            resetPanelAndDeviceSize();
+            //GDI refreshMap(true);
+        }
+        private void rbtnZoom5x_CheckedChanged(object sender, EventArgs e)
+        {
+            sqr = 10;
+            resetPanelAndDeviceSize();
+            //GDI refreshMap(true);
+        }
+        private void btnLoadMap_Click(object sender, EventArgs e)
+        {
+            if (mod.moduleName != "NewModule")
+            {
+                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics";
+            }
+            else
+            {
+                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\default\\NewModule\\graphics";
+            }
+            //Empty the FileName text box of the dialog
+            openFileDialog1.FileName = String.Empty;
+            openFileDialog1.Filter = "Map (*.jpg)|*.jpg";
+            openFileDialog1.FilterIndex = 1;
+
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                using (Bitmap testSize = new Bitmap(Path.GetFullPath(openFileDialog1.FileName)))
+                {
+                    thisEnc.MapSizeX = testSize.Width / sqr;
+                    thisEnc.MapSizeY = testSize.Height / sqr;
+                }
+                string filename = Path.GetFullPath(openFileDialog1.FileName);
+                thisEnc.MapImage = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                mapBitmapD2D = GetFromBitmapList(thisEnc.MapImage);
+                thisEnc.UseMapImage = true;
+                resetAreaTileValues(thisEnc.MapSizeX, thisEnc.MapSizeY);
+                //GDI mapSizeChangeStuff();
+                chkUseMapImage.Checked = true;
+                //GDI refreshMap(true);
+            }
+        }
+        private void chkUseMapImage_CheckedChanged(object sender, EventArgs e)
+        {
+            thisEnc.UseMapImage = chkUseMapImage.Checked;
+            //GDI refreshMap(true);
         }
         private void btnPlusLeftX_Click(object sender, EventArgs e)
         {
@@ -1821,6 +2213,64 @@ namespace IB2Toolset
                 refreshMap(true);
                 UpdatePB();
                 rbtnInfo.Checked = true;
+                resetTileToBePlacedSettings();
+            }
+            else if (e.KeyCode == Keys.R)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    if (Control.ModifierKeys == Keys.Shift)
+                    {
+                        tileToBePlaced.angle -= 1;
+                    }
+                    else
+                    {
+                        tileToBePlaced.angle -= 90;
+                    }
+                    if (tileToBePlaced.angle > 360)
+                    {
+                        tileToBePlaced.angle -= 360;
+                    }
+                    if (tileToBePlaced.angle < 0)
+                    {
+                        tileToBePlaced.angle += 360;
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.W)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.yshift--;
+                }
+            }
+            else if (e.KeyCode == Keys.S)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.yshift++;
+                }
+            }
+            else if (e.KeyCode == Keys.A)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.xshift--;
+                }
+            }
+            else if (e.KeyCode == Keys.D)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.xshift++;
+                }
+            }
+            else if (e.KeyCode == Keys.M)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.mirror = !tileToBePlaced.mirror;
+                }
             }
             else if (e.KeyCode == Keys.Delete)
             {
@@ -1863,64 +2313,10 @@ namespace IB2Toolset
         }
         #endregion
 
-        private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
+        
+        private void timerRenderLoop_Tick(object sender, EventArgs e)
         {
-            sqr = 50;
-            resetPanelAndDeviceSize();
-            refreshMap(true);
-        }
-
-        private void rbtnZoom2x_CheckedChanged(object sender, EventArgs e)
-        {
-            sqr = 25;
-            resetPanelAndDeviceSize();
-            refreshMap(true);
-        }
-
-        private void rbtnZoom5x_CheckedChanged(object sender, EventArgs e)
-        {
-            sqr = 10;
-            resetPanelAndDeviceSize();
-            refreshMap(true);
-        }
-
-        private void btnLoadMap_Click(object sender, EventArgs e)
-        {
-            if (mod.moduleName != "NewModule")
-            {
-                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics";
-            }
-            else
-            {
-                openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\default\\NewModule\\graphics";
-            }
-            //Empty the FileName text box of the dialog
-            openFileDialog1.FileName = String.Empty;
-            openFileDialog1.Filter = "Map (*.jpg)|*.jpg";
-            openFileDialog1.FilterIndex = 1;
-
-            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
-            {
-                using (Bitmap testSize = new Bitmap(Path.GetFullPath(openFileDialog1.FileName)))
-                {
-                    thisEnc.MapSizeX = testSize.Width / sqr;
-                    thisEnc.MapSizeY = testSize.Height / sqr;
-                }
-                string filename = Path.GetFullPath(openFileDialog1.FileName);
-                thisEnc.MapImage = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
-                thisEnc.UseMapImage = true;                
-                resetAreaTileValues(thisEnc.MapSizeX, thisEnc.MapSizeY);
-                mapSizeChangeStuff();
-                chkUseMapImage.Checked = true;
-                refreshMap(true);
-            }
-        }
-
-        private void chkUseMapImage_CheckedChanged(object sender, EventArgs e)
-        {
-            thisEnc.UseMapImage = chkUseMapImage.Checked;
-            refreshMap(true);
+            Render();
         }
     }    
 }
