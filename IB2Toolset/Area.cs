@@ -51,7 +51,7 @@ namespace IB2Toolset
         private string _effectChannelScript2 = "deactivateChannel2";
         private string _effectChannelScript3 = "deactivateChannel3";
         private string _effectChannelScript4 = "deactivateChannel4";
-        private WeatherEffect _areaWeather = new WeatherEffect();
+        private string _areaWeatherTag = "";
 
         private string _easternNeighbourArea = "";
         private string _westernNeighbourArea = "";
@@ -315,11 +315,12 @@ namespace IB2Toolset
             get { return areaLocalStrings; }
             set { areaLocalStrings = value; }
         }
-        [CategoryAttribute("05 - Full Screen Effects"), DescriptionAttribute("current weather system for this area"), Browsable(false)]
-        public WeatherEffect areaWeather
+        //add converter and cmb functionality later
+        [CategoryAttribute("05 - Full Screen Effects"), DescriptionAttribute("tag of weather object for this area"), Browsable(false)]
+        public string areaWeatherTag
         {
-            get { return _areaWeather; }
-            set { _areaWeather = value; }
+            get { return _areaWeatherTag; }
+            set { _areaWeatherTag = value; }
         }
         #endregion
 

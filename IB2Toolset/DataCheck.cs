@@ -166,6 +166,26 @@ namespace IB2Toolset
                     }
                 }
             }
+            foreach (WeatherEffect it in frm.weatherEffectsList)
+            {
+                foreach (WeatherEffect itck in frm.weatherEffectsList)
+                {
+                    if ((it != itck) && (it.tag.Equals(itck.tag)))
+                    {
+                        frm.logText("WEATHEREFFECTS ERROR: " + it.name + " has the same tag as " + itck.name + Environment.NewLine);
+                    }
+                }
+            }
+            foreach (Weather it in frm.weathersList)
+            {
+                foreach (Weather itck in frm.weathersList)
+                {
+                    if ((it != itck) && (it.tag.Equals(itck.tag)))
+                    {
+                        frm.logText("WEATHER ERROR: " + it.name + " has the same tag as " + itck.name + Environment.NewLine);
+                    }
+                }
+            }
         }
         public void CheckModuleProperties()
         {

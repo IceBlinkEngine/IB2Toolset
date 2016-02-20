@@ -180,6 +180,21 @@
     <Compile Include="Schedules.cs" />
     <Compile Include="TileBitmapNamePair.cs" />
     <Compile Include="TileEnc.cs" />
+    <Compile Include="Weather.cs" />
+    <Compile Include="WeatherEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WeatherEditor.Designer.cs">
+      <DependentUpon>WeatherEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherTypeList.cs" />
+    <Compile Include="WeatherTypeListItem.cs" />
+    <Compile Include="WeatherEffectsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WeatherEffectsEditor.Designer.cs">
+      <DependentUpon>WeatherEffectsEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="VariablesEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -349,6 +364,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RulesEditor.resx">
       <DependentUpon>RulesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WeatherEditor.resx">
+      <DependentUpon>WeatherEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WeatherEffectsEditor.resx">
+      <DependentUpon>WeatherEffectsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VariablesEditor.resx">
       <DependentUpon>VariablesEditor.cs</DependentUpon>

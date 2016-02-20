@@ -68,6 +68,7 @@
   "mustUsePreMadePC": false,
   "useRealTimeTimer": false,
   "useSmoothMovement": true,
+  "useAllTileSystem": false,
   "useOrbitronFont": false,
   "useUIBackground": false,
   "fontFilename": "Metamorphous-Regular.ttf",

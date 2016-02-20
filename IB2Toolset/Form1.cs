@@ -30,6 +30,8 @@ namespace IB2Toolset
         public List<Race> racesList = new List<Race>();
         public List<Spell> spellsList = new List<Spell>();
         public List<Trait> traitsList = new List<Trait>();
+        public List<WeatherEffect> weatherEffectsList = new List<WeatherEffect>();
+        public List<Weather> weathersList = new List<Weather>();
         public List<Effect> effectsList = new List<Effect>();
         public List<string> itemsParentNodeList = new List<string>();
         public List<string> creaturesParentNodeList = new List<string>();
@@ -127,6 +129,8 @@ namespace IB2Toolset
             //openSkills(_mainDirectory + "\\data\\NewModule\\data\\" + mod.SkillsFileName);
             openSpells(_mainDirectory + "\\default\\NewModule\\data\\spells.json");
             openTraits(_mainDirectory + "\\default\\NewModule\\data\\traits.json");
+            openWeatherEffects(_mainDirectory + "\\default\\NewModule\\data\\weatherEffects.json");
+            openWeathers(_mainDirectory + "\\default\\NewModule\\data\\weathers.json");
             openEffects(_mainDirectory + "\\default\\NewModule\\data\\effects.json");
             //game.errorLog("Starting IceBlink Toolset");
             saveAsTemp();
@@ -397,6 +401,33 @@ namespace IB2Toolset
                 MessageBox.Show("Couldn't find traits.json file. Will create a new one upon saving module.");
             }            
         }
+
+        private void openWeatherEffects(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                weatherEffectsList.Clear();
+                weatherEffectsList = loadWeatherEffectsFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find weatherEffects.json file. Will create a new one upon saving module.");
+            }
+        }
+
+        private void openWeathers(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                weathersList.Clear();
+                weathersList = loadWeathersFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find weathers.json file. Will create a new one upon saving module.");
+            }
+        }
+
         private void openFiles()
         {
             openFileDialog1.InitialDirectory = Environment.CurrentDirectory + "\\modules";
@@ -422,6 +453,8 @@ namespace IB2Toolset
                 openRaces(directory + "\\data\\races.json");
                 openSpells(directory + "\\data\\spells.json");
                 openTraits(directory + "\\data\\traits.json");
+                openWeatherEffects(directory + "\\data\\weatherEffects.json");
+                openWeathers(directory + "\\data\\weathers.json");
                 openEffects(directory + "\\data\\effects.json");
                 refreshDropDownLists();
                 this.Text = "IceBlink 2 Toolset - " + mod.moduleLabelName;
@@ -441,6 +474,8 @@ namespace IB2Toolset
             loadRacesTagsList();
             loadSpellTagsList();
             loadEffectTagsList();
+            loadWeatherEffectsTagsList();
+            loadWeatherEffectsNamesList();
         }
         public void loadSpriteDropdownList()
         {
@@ -554,6 +589,107 @@ namespace IB2Toolset
                 DropdownStringLists.effectTagsTypeStringList.Add(ef.tag);
             }
         }
+        public void loadWeatherEffectsTagsList()
+        {
+            DropdownStringLists.weatherEffectsTagsTypeStringList = new List<string>();
+            DropdownStringLists.weatherEffectsTagsTypeStringList.Add("none");
+            foreach (WeatherEffect ef in this.weatherEffectsList)
+            {
+                DropdownStringLists.weatherEffectsTagsTypeStringList.Add(ef.tag);
+            }
+        }
+        public void loadWeatherEffectsNamesList()
+        {
+            DropdownStringLists.weatherEffectsNamesTypeStringList = new List<string>();
+            DropdownStringLists.weatherEffectsNamesTypeStringList.Add("none");
+            foreach (WeatherEffect ef in this.weatherEffectsList)
+            {
+                DropdownStringLists.weatherEffectsNamesTypeStringList.Add(ef.name);
+            }
+        }
+
+        public void loadWeatherTagsList()
+        {
+            DropdownStringLists.weathersTagsTypeStringList = new List<string>();
+            DropdownStringLists.weathersTagsTypeStringList.Add("none");
+            foreach (Weather ef in this.weathersList)
+            {
+                DropdownStringLists.weathersTagsTypeStringList.Add(ef.tag);
+            }
+        }
+
+        public class EffectTagTypeConverter : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            //true means show a combobox
+            return true;
+        }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            //true will limit to list. false will show the list, but allow free-form entry
+            return true;
+        }
+        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(DropdownStringLists.effectTagsTypeStringList);
+        }
+    }
+
+        public class WeatherEffectsTagTypeConverter : StringConverter
+        {
+            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+            {
+                //true means show a combobox
+                return true;
+            }
+            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+            {
+                //true will limit to list. false will show the list, but allow free-form entry
+                return true;
+            }
+            public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+            {
+                return new StandardValuesCollection(DropdownStringLists.weatherEffectsTagsTypeStringList);
+            }
+        }
+
+        public class WeatherEffectsNameTypeConverter : StringConverter
+        {
+            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+            {
+                //true means show a combobox
+                return true;
+            }
+            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+            {
+                //true will limit to list. false will show the list, but allow free-form entry
+                return true;
+            }
+            public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+            {
+                return new StandardValuesCollection(DropdownStringLists.weatherEffectsNamesTypeStringList);
+            }
+        }
+
+        public class WeathersTagTypeConverter : StringConverter
+        {
+            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+            {
+                //true means show a combobox
+                return true;
+            }
+            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+            {
+                //true will limit to list. false will show the list, but allow free-form entry
+                return true;
+            }
+            public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+            {
+                return new StandardValuesCollection(DropdownStringLists.weathersTagsTypeStringList);
+            }
+        }
+
         private void fillScriptList()
         {
             scriptList.Clear();
@@ -730,6 +866,8 @@ namespace IB2Toolset
                 saveRacesFile(fullPathDirectory + "\\data\\races.json");
                 saveSpellsFile(fullPathDirectory + "\\data\\spells.json");
                 saveTraitsFile(fullPathDirectory + "\\data\\traits.json");
+                saveWeatherEffectsFile(fullPathDirectory + "\\data\\weatherEffects.json");
+                saveWeathersFile(fullPathDirectory + "\\data\\weathers.json");
                 saveEffectsFile(fullPathDirectory + "\\data\\effects.json");
                 // save convos that are open
                 foreach (Convo convo in openConvosList)
@@ -964,6 +1102,16 @@ namespace IB2Toolset
         {
             TraitEditor tEdit = new TraitEditor(mod, this);
             tEdit.ShowDialog();
+        }
+        private void weatherEffectsEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WeatherEffectsEditor weEdit = new WeatherEffectsEditor(mod, this);
+            weEdit.ShowDialog();
+        }
+        private void weatherEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WeatherEditor weEdit = new WeatherEditor(mod, this);
+            weEdit.ShowDialog();
         }
         private void effectEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1657,6 +1805,84 @@ namespace IB2Toolset
             }
             return null;
         }
+
+
+        public void saveWeatherEffectsFile(string filename)
+        {
+            string json = JsonConvert.SerializeObject(weatherEffectsList, Newtonsoft.Json.Formatting.Indented);
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.Write(json.ToString());
+            }
+        }
+        public List<WeatherEffect> loadWeatherEffectsFile(string filename)
+        {
+            List<WeatherEffect> toReturn = null;
+
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(filename))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (List<WeatherEffect>)serializer.Deserialize(file, typeof(List<WeatherEffect>));
+            }
+            return toReturn;
+        }
+        public WeatherEffect getWeatherEffectByTag(string tag)
+        {
+            foreach (WeatherEffect ts in weatherEffectsList)
+            {
+                if (ts.tag == tag) return ts;
+            }
+            return null;
+        }
+        public WeatherEffect getWeatherEffectByName(string name)
+        {
+            foreach (WeatherEffect ts in weatherEffectsList)
+            {
+                if (ts.name == name) return ts;
+            }
+            return null;
+        }
+
+
+        public void saveWeathersFile(string filename)
+        {
+            string json = JsonConvert.SerializeObject(weathersList, Newtonsoft.Json.Formatting.Indented);
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.Write(json.ToString());
+            }
+        }
+        public List<Weather> loadWeathersFile(string filename)
+        {
+            List<Weather> toReturn = null;
+
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(filename))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (List<Weather>)serializer.Deserialize(file, typeof(List<Weather>));
+            }
+            return toReturn;
+        }
+        public Weather getWeatherByTag(string tag)
+        {
+            foreach (Weather ts in weathersList)
+            {
+                if (ts.tag == tag) return ts;
+            }
+            return null;
+        }
+        public Weather getWeatherByName(string name)
+        {
+            foreach (Weather ts in weathersList)
+            {
+                if (ts.name == name) return ts;
+            }
+            return null;
+        }
+
+
 
         public void saveEffectsFile(string filename)
         {

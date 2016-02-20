@@ -684,7 +684,7 @@
             this.pnlTrig.Controls.Add(this.gbE1);
             this.pnlTrig.Location = new System.Drawing.Point(12, 6);
             this.pnlTrig.Name = "pnlTrig";
-            this.pnlTrig.Size = new System.Drawing.Size(282, 916);
+            this.pnlTrig.Size = new System.Drawing.Size(282, 729);
             this.pnlTrig.TabIndex = 6;
             // 
             // rtxtScript
@@ -696,7 +696,7 @@
             this.rtxtScript.Location = new System.Drawing.Point(3, 725);
             this.rtxtScript.Name = "rtxtScript";
             this.rtxtScript.ReadOnly = true;
-            this.rtxtScript.Size = new System.Drawing.Size(257, 188);
+            this.rtxtScript.Size = new System.Drawing.Size(257, 1);
             this.rtxtScript.TabIndex = 19;
             this.rtxtScript.Text = "";
             this.rtxtScript.WordWrap = false;
@@ -953,11 +953,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 928);
+            this.ClientSize = new System.Drawing.Size(304, 741);
             this.Controls.Add(this.pnlTrig);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
-            this.MinimumSize = new System.Drawing.Size(284, 38);
+            this.MinimumSize = new System.Drawing.Size(284, 39);
             this.Name = "TriggerEventsForm";
             this.Text = "TriggerEvents";
             this.gbTrigger.ResumeLayout(false);

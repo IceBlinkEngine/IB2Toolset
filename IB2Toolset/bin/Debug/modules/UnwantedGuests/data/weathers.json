@@ -1,0 +1,124 @@
+[
+  {
+    "weatherTypeLists": [
+      {
+        "weatherTypeListItems": [
+          {
+            "weatherEffectTag": "newWeatherEffectTag_9422",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9445",
+            "name": "none",
+            "chance": 0,
+            "duration": 0
+          },
+          {
+            "weatherEffectTag": "none",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9446",
+            "name": "newWeatherTypeListItem",
+            "chance": 0,
+            "duration": 0
+          },
+          {
+            "weatherEffectTag": "none",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9456",
+            "name": "newWeatherTypeListItem",
+            "chance": 0,
+            "duration": 0
+          }
+        ],
+        "tag": "newWeatherTypeListTag_9435",
+        "name": "cloudsA"
+      },
+      {
+        "weatherTypeListItems": [
+          {
+            "weatherEffectTag": "none",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9453",
+            "name": "newWeatherTypeListItem",
+            "chance": 0,
+            "duration": 0
+          },
+          {
+            "weatherEffectTag": "newWeatherEffectTag_9428",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9454",
+            "name": "newWeatherTypeListItem",
+            "chance": 0,
+            "duration": 0
+          }
+        ],
+        "tag": "newWeatherTypeListTag_9437",
+        "name": "CloudsB"
+      },
+      {
+        "weatherTypeListItems": [],
+        "tag": "newWeatherTypeListTag_9436",
+        "name": "XCloudsB"
+      },
+      {
+        "weatherTypeListItems": [],
+        "tag": "newWeatherTypeListTag_9442",
+        "name": "newWeatherTypeList"
+      }
+    ],
+    "tag": "newWeatherTag_9433",
+    "name": "test weather"
+  },
+  {
+    "weatherTypeLists": [
+      {
+        "weatherTypeListItems": [],
+        "tag": "newWeatherTypeListTag_9439",
+        "name": "newWeatherTypeList1"
+      },
+      {
+        "weatherTypeListItems": [],
+        "tag": "newWeatherTypeListTag_9441",
+        "name": "newWeatherTypeList2"
+      },
+      {
+        "weatherTypeListItems": [
+          {
+            "weatherEffectTag": "newWeatherEffectTag_9422",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9450",
+            "name": "newWeatherTypeListItem",
+            "chance": 0,
+            "duration": 0
+          },
+          {
+            "weatherEffectTag": "none",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9452",
+            "name": "newWeatherTypeListItem",
+            "chance": 0,
+            "duration": 0
+          },
+          {
+            "weatherEffectTag": "newWeatherEffectTag_9424",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9449",
+            "name": "newWeatherTypeListItem2",
+            "chance": 0,
+            "duration": 0
+          },
+          {
+            "weatherEffectTag": "newWeatherEffectTag_9428",
+            "weatherEffectName": "none",
+            "tag": "newWeatherTypeListItemTag_9448",
+            "name": "newWeatherTypeListItem3",
+            "chance": 0,
+            "duration": 0
+          }
+        ],
+        "tag": "newWeatherTypeListTag_9440",
+        "name": "newWeatherTypeList3"
+      }
+    ],
+    "tag": "newWeatherTag_9438",
+    "name": "test weather 2"
+  }
+]
