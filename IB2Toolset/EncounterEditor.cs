@@ -162,6 +162,8 @@ namespace IB2Toolset
             tileToBePlaced.mirror = false;
             tileToBePlaced.xshift = 0;
             tileToBePlaced.yshift = 0;
+            tileToBePlaced.xscale = 0;
+            tileToBePlaced.yscale = 0;
         }
 
         #region Encounter Stuff
@@ -812,6 +814,8 @@ namespace IB2Toolset
                             thisEnc.encounterTiles[selectedTile.index].Layer1Mirror = tileToBePlaced.mirror;
                             thisEnc.encounterTiles[selectedTile.index].Layer1Xshift = tileToBePlaced.xshift;
                             thisEnc.encounterTiles[selectedTile.index].Layer1Yshift = tileToBePlaced.yshift;
+                            thisEnc.encounterTiles[selectedTile.index].Layer1Xscale = tileToBePlaced.xscale;
+                            thisEnc.encounterTiles[selectedTile.index].Layer1Yscale = tileToBePlaced.yscale;
                             //if shift key is down, draw all between here and lastclickedsquare
                             if (Control.ModifierKeys == Keys.Shift)
                             {
@@ -841,6 +845,8 @@ namespace IB2Toolset
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Mirror = tileToBePlaced.mirror;
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Xshift = tileToBePlaced.xshift;
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Yshift = tileToBePlaced.yshift;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Xscale = tileToBePlaced.xscale;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer1Yscale = tileToBePlaced.yscale;
                                         currentSquareClicked = new Point(x, y);
                                         //GDI refreshMap(false);
                                     }
@@ -854,6 +860,8 @@ namespace IB2Toolset
                             thisEnc.encounterTiles[selectedTile.index].Layer2Mirror = tileToBePlaced.mirror;
                             thisEnc.encounterTiles[selectedTile.index].Layer2Xshift = tileToBePlaced.xshift;
                             thisEnc.encounterTiles[selectedTile.index].Layer2Yshift = tileToBePlaced.yshift;
+                            thisEnc.encounterTiles[selectedTile.index].Layer2Xscale = tileToBePlaced.xscale;
+                            thisEnc.encounterTiles[selectedTile.index].Layer2Yscale = tileToBePlaced.yscale;
                             if (Control.ModifierKeys == Keys.Shift)
                             {
                                 Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
@@ -881,6 +889,8 @@ namespace IB2Toolset
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Mirror = tileToBePlaced.mirror;
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Xshift = tileToBePlaced.xshift;
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Yshift = tileToBePlaced.yshift;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Xscale = tileToBePlaced.xscale;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer2Yscale = tileToBePlaced.yscale;
                                         currentSquareClicked = new Point(x, y);
                                         //GDI refreshMap(false);
                                     }
@@ -894,6 +904,8 @@ namespace IB2Toolset
                             thisEnc.encounterTiles[selectedTile.index].Layer3Mirror = tileToBePlaced.mirror;
                             thisEnc.encounterTiles[selectedTile.index].Layer3Xshift = tileToBePlaced.xshift;
                             thisEnc.encounterTiles[selectedTile.index].Layer3Yshift = tileToBePlaced.yshift;
+                            thisEnc.encounterTiles[selectedTile.index].Layer3Xscale = tileToBePlaced.xscale;
+                            thisEnc.encounterTiles[selectedTile.index].Layer3Yscale = tileToBePlaced.yscale;
                             if (Control.ModifierKeys == Keys.Shift)
                             {
                                 Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
@@ -921,6 +933,8 @@ namespace IB2Toolset
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Mirror = tileToBePlaced.mirror;
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Xshift = tileToBePlaced.xshift;
                                         thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Yshift = tileToBePlaced.yshift;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Xscale = tileToBePlaced.xscale;
+                                        thisEnc.encounterTiles[y * thisEnc.MapSizeX + x].Layer3Yscale = tileToBePlaced.yscale;
                                         currentSquareClicked = new Point(x, y);
                                         //GDI refreshMap(false);
                                     }
@@ -1294,14 +1308,20 @@ namespace IB2Toolset
         }
         public void DrawD2DBitmap(SharpDX.Direct2D1.Bitmap bitmap, SharpDX.RectangleF source, SharpDX.RectangleF target, int angleInDegrees, bool mirror, int Xshift, int Yshift)
         {
+            DrawD2DBitmap(bitmap, source, target, angleInDegrees, mirror, Xshift, Yshift, 0, 0);
+        }
+        public void DrawD2DBitmap(SharpDX.Direct2D1.Bitmap bitmap, SharpDX.RectangleF source, SharpDX.RectangleF target, int angleInDegrees, bool mirror, int Xshift, int Yshift, int Xscale, int Yscale)
+        {
             int mir = 1;
             if (mirror) { mir = -1; }
             //convert degrees to radians
             float angle = (float)(Math.PI * 2 * (float)angleInDegrees / (float)360);
             float xshf = (float)Xshift * (float)sqr / 50f;
             float yshf = (float)Yshift * (float)sqr / 50f;
+            float xscl = 1f + (((float)Xscale * (float)sqr / 50f) / 50f);
+            float yscl = 1f + (((float)Yscale * (float)sqr / 50f) / 50f);
             SharpDX.Vector2 center = new SharpDX.Vector2(target.Left + (target.Width / 2), target.Top + (target.Height / 2));
-            RenderTarget2D.Transform = SharpDX.Matrix.Transformation2D(center, 0, new SharpDX.Vector2(mir, 1), center, angle, new SharpDX.Vector2(xshf, yshf));
+            RenderTarget2D.Transform = SharpDX.Matrix.Transformation2D(center, 0, new SharpDX.Vector2(mir * xscl, yscl), center, angle, new SharpDX.Vector2(xshf, yshf));
             SharpDX.RectangleF trg = new SharpDX.RectangleF(target.Left, target.Top, target.Width, target.Height);
             SharpDX.RectangleF src = new SharpDX.RectangleF(source.Left, source.Top, source.Width, source.Height);
             RenderTarget2D.DrawBitmap(bitmap, trg, 1.0f, BitmapInterpolationMode.Linear, src);
@@ -1480,7 +1500,7 @@ namespace IB2Toolset
                             float scalerY = GetFromBitmapList(tile.Layer1Filename).PixelSize.Height / 100;
                             SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer1Filename).PixelSize.Width, GetFromBitmapList(tile.Layer1Filename).PixelSize.Height);
                             SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
-                            DrawD2DBitmap(GetFromBitmapList(tile.Layer1Filename), src, dst, tile.Layer1Rotate, tile.Layer1Mirror, tile.Layer1Xshift, tile.Layer1Yshift);
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer1Filename), src, dst, tile.Layer1Rotate, tile.Layer1Mirror, tile.Layer1Xshift, tile.Layer1Yshift, tile.Layer1Xscale, tile.Layer1Yscale);
                         }
                     }
                 }
@@ -1500,7 +1520,7 @@ namespace IB2Toolset
                             float scalerY = GetFromBitmapList(tile.Layer2Filename).PixelSize.Height / 100;
                             SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer2Filename).PixelSize.Width, GetFromBitmapList(tile.Layer2Filename).PixelSize.Height);
                             SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
-                            DrawD2DBitmap(GetFromBitmapList(tile.Layer2Filename), src, dst, tile.Layer2Rotate, tile.Layer2Mirror, tile.Layer2Xshift, tile.Layer2Yshift);
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer2Filename), src, dst, tile.Layer2Rotate, tile.Layer2Mirror, tile.Layer2Xshift, tile.Layer2Yshift, tile.Layer2Xscale, tile.Layer2Yscale);
                         }
                     }
                 }
@@ -1520,7 +1540,7 @@ namespace IB2Toolset
                             float scalerY = GetFromBitmapList(tile.Layer3Filename).PixelSize.Height / 100;
                             SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer3Filename).PixelSize.Width, GetFromBitmapList(tile.Layer3Filename).PixelSize.Height);
                             SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
-                            DrawD2DBitmap(GetFromBitmapList(tile.Layer3Filename), src, dst, tile.Layer3Rotate, tile.Layer3Mirror, tile.Layer3Xshift, tile.Layer3Yshift);
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer3Filename), src, dst, tile.Layer3Rotate, tile.Layer3Mirror, tile.Layer3Xshift, tile.Layer3Yshift, tile.Layer3Xscale, tile.Layer3Yscale);
                         }
                     }
                 }
@@ -1666,7 +1686,7 @@ namespace IB2Toolset
                         float scalerY = GetFromBitmapList(currentTileFilename).PixelSize.Height / 100;
                         SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(currentTileFilename).PixelSize.Width, GetFromBitmapList(currentTileFilename).PixelSize.Height);
                         SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
-                        DrawD2DBitmap(GetFromBitmapList(currentTileFilename), src, dst, tileToBePlaced.angle, tileToBePlaced.mirror, tileToBePlaced.xshift, tileToBePlaced.yshift);
+                        DrawD2DBitmap(GetFromBitmapList(currentTileFilename), src, dst, tileToBePlaced.angle, tileToBePlaced.mirror, tileToBePlaced.xshift, tileToBePlaced.yshift, tileToBePlaced.xscale, tileToBePlaced.yscale);
                     }
                 }
                 catch (Exception ex) { MessageBox.Show("failed mouse move update to be placed tile: " + ex.ToString()); }
@@ -2235,6 +2255,22 @@ namespace IB2Toolset
                     {
                         tileToBePlaced.angle += 360;
                     }
+                }
+            }
+            else if (e.KeyCode == Keys.Q)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.xscale--;
+                    tileToBePlaced.yscale--;
+                }
+            }
+            else if (e.KeyCode == Keys.E)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.xscale++;
+                    tileToBePlaced.yscale++;
                 }
             }
             else if (e.KeyCode == Keys.W)

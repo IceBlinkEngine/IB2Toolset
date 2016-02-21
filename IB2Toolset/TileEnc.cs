@@ -22,6 +22,12 @@ namespace IB2Toolset
         public bool Layer1Mirror = false;
         public bool Layer2Mirror = false;
         public bool Layer3Mirror = false;
+        public int Layer1Xscale = 0;
+        public int Layer2Xscale = 0;
+        public int Layer3Xscale = 0;
+        public int Layer1Yscale = 0;
+        public int Layer2Yscale = 0;
+        public int Layer3Yscale = 0;
         public bool Walkable = true;
         public bool LoSBlocked = false;
 
