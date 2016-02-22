@@ -64,7 +64,17 @@ namespace IB2Toolset
 
         public WeatherTypeList DeepCopy()
         {
-            WeatherTypeList other = (WeatherTypeList)this.MemberwiseClone();
+            //WeatherTypeList other = (WeatherTypeList)this.MemberwiseClone();
+            WeatherTypeList other = new WeatherTypeList();
+            other._name = this._name;
+            other.name = this.name;
+            other._tag = this._tag;
+            other.tag = this.tag;
+            foreach (WeatherTypeListItem wtli in this.weatherTypeListItems)
+            {
+                WeatherTypeListItem wtli2 = wtli.DeepCopy();
+                other.weatherTypeListItems.Add(wtli2);
+            }            
             return other;
         }
     }

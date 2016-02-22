@@ -14,7 +14,7 @@ namespace IB2Toolset
         private string _name = "change weather effect above instead"; //name in toolset
         private string _combinedInfo = "change values in 01 instead"; //name in toolset
         private int _chance = 0; //chance
-        private int _duration = 0; //duration
+        private int _duration = 50; //duration
         //private string _weatherEffectTag = "none";
         private string _weatherEffectName = "none";
         //public string weatherEffectName = "none";
@@ -131,7 +131,18 @@ namespace IB2Toolset
 
         public WeatherTypeListItem DeepCopy()
         {
-            WeatherTypeListItem other = (WeatherTypeListItem)this.MemberwiseClone();
+            //WeatherTypeListItem other = (WeatherTypeListItem)this.MemberwiseClone();
+            //WeatherTypeListItem other = (WeatherTypeListItem)this.Clone();
+            WeatherTypeListItem other = new WeatherTypeListItem();
+            other._name = this._name;
+            other.name = this.name;
+            other._tag = this._tag;
+            other.tag = this.tag;
+            other._chance = this._chance;
+            other.chance = this.chance;
+            other._weatherEffectName = this._weatherEffectName;
+            other.weatherEffectName = this.weatherEffectName;
+
             return other;
         }
     }

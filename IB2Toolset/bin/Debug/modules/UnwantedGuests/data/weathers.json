@@ -4,55 +4,27 @@
       {
         "weatherTypeListItems": [
           {
-            "weatherEffectName": "cloudsA",
-            "tag": "newWeatherTypeListItemTag_9467",
-            "name": "cloudsA",
-            "combinedInfo": "cloudsA (50%) (100 ticks)",
-            "chance": 50,
-            "duration": 100
+            "weatherEffectName": "clear",
+            "tag": "newWeatherTypeListItemTag_9461",
+            "name": "clear",
+            "combinedInfo": "clear (10%) (50 ticks)",
+            "chance": 10,
+            "duration": 50
           },
           {
-            "weatherEffectName": "cloudsB",
-            "tag": "newWeatherTypeListItemTag_9468",
-            "name": "cloudsB",
-            "combinedInfo": "cloudsB (50%) (100 ticks)",
-            "chance": 50,
-            "duration": 100
+            "weatherEffectName": "clear",
+            "tag": "newWeatherTypeListItemTag_9463",
+            "name": "clear",
+            "combinedInfo": "clear (10%) (50 ticks)",
+            "chance": 10,
+            "duration": 50
           }
         ],
-        "tag": "newWeatherTypeListTag_9466",
+        "tag": "newWeatherTypeListTag_9460",
         "name": "entryList"
-      },
-      {
-        "weatherTypeListItems": [
-          {
-            "weatherEffectName": "cloudsA",
-            "tag": "newWeatherTypeListItemTag_9470",
-            "name": "cloudsA",
-            "combinedInfo": "cloudsA (100%) (100 ticks)",
-            "chance": 100,
-            "duration": 100
-          }
-        ],
-        "tag": "newWeatherTypeListTag_9471",
-        "name": "cloudsB"
-      },
-      {
-        "weatherTypeListItems": [
-          {
-            "weatherEffectName": "cloudsB",
-            "tag": "newWeatherTypeListItemTag_9473",
-            "name": "cloudsB",
-            "combinedInfo": "cloudsB (100%) (100 ticks)",
-            "chance": 100,
-            "duration": 100
-          }
-        ],
-        "tag": "newWeatherTypeListTag_9472",
-        "name": "cloudsA"
       }
     ],
-    "tag": "newWeatherTag_9465",
-    "name": "cloudTest"
+    "tag": "newWeatherTag_9459",
+    "name": "spring"
   }
 ]
