@@ -229,5 +229,49 @@ namespace IB2Toolset
         {
 
         }
+
+        public FullScreenEffectLayer DeepCopy()
+        {
+            //WeatherTypeList other = (WeatherTypeList)this.MemberwiseClone();
+            FullScreenEffectLayer other = new FullScreenEffectLayer();
+            other.activateTargetChannelInParallelToThisChannel = this.activateTargetChannelInParallelToThisChannel;
+            other.changeableByWeatherScript = this.changeableByWeatherScript;
+            other.changeCounter = this.changeCounter;
+            other.changeFrameCounter = this.changeFrameCounter;
+            other.changeLimit = this.changeLimit;
+            other.changeNumberOfFrames = this.changeNumberOfFrames;
+            other.containEffectInsideAreaBorders = this.containEffectInsideAreaBorders;
+            other.directionalOverride = this.directionalOverride;
+            other.fullScreenAnimationSpeed = this.fullScreenAnimationSpeed;
+            other.fullScreenAnimationSpeedX = this.fullScreenAnimationSpeedX;
+            other.fullScreenAnimationSpeedY = this.fullScreenAnimationSpeedY;
+            other.fullScreenEffectChanceToOccur = this.fullScreenEffectChanceToOccur;
+            other.fullScreenEffectLayerIsActive = this.fullScreenEffectLayerIsActive;
+            other.fullScreenEffectLayerIsTop = this.fullScreenEffectLayerIsTop;
+            other.fullScreenEffectLayerName = this.fullScreenEffectLayerName;
+            other.fullScreenEffectOrderNumber = this.fullScreenEffectOrderNumber;
+            other.isChanging = this.isChanging;
+            other.numberOfCyclesPerOccurence = this.numberOfCyclesPerOccurence;
+            other.overrideDelayLimit = this.overrideDelayLimit;
+            other.overrideIsNoScrollSource = this.overrideIsNoScrollSource;
+            other.overrideDelayCounter = this.overrideDelayCounter;
+            other.overrideSpeedX = this.overrideSpeedX;
+            other.overrideSpeedY = this.overrideSpeedY;
+            other.useCyclicFade = this.useCyclicFade;
+            other.useFullScreenEffectLayer = this.useFullScreenEffectLayer;
+
+            /*
+            other.name = this.name;
+            other._tag = this._tag;
+            other.tag = this.tag;
+            foreach (WeatherTypeListItem wtli in this.weatherTypeListItems)
+            {
+                WeatherTypeListItem wtli2 = wtli.DeepCopy();
+                other.weatherTypeListItems.Add(wtli2);
+            }
+            */
+            return other;
+        }
+
     }
 }

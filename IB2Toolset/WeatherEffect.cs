@@ -62,7 +62,17 @@ namespace IB2Toolset
 
         public WeatherEffect DeepCopy()
         {
-            WeatherEffect other = (WeatherEffect)this.MemberwiseClone();
+            //WeatherEffect other = (WeatherEffect)this.MemberwiseClone();
+            WeatherEffect other = new WeatherEffect();
+            other.name = this.name;
+            other._name = this._name;
+            other.tag = this.tag;
+            other._tag = this._tag;
+            foreach (FullScreenEffectLayer fsel in this.WeatherLayers)
+            {
+                FullScreenEffectLayer fsel2 = fsel.DeepCopy();
+                other.WeatherLayers.Add(fsel2);
+            }
             return other;
         }
     }
