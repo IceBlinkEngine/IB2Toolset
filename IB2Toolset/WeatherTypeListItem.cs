@@ -140,6 +140,8 @@ namespace IB2Toolset
             other.tag = this.tag;
             other._chance = this._chance;
             other.chance = this.chance;
+            other._duration = this._duration;
+            other.duration = this.duration;
             other._weatherEffectName = this._weatherEffectName;
             other.weatherEffectName = this.weatherEffectName;
 
