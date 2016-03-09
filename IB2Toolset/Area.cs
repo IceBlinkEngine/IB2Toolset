@@ -15,6 +15,8 @@ namespace IB2Toolset
     {
         #region Fields
         private string filename = "newArea";
+        private int areaVisibleDistance = 2;
+        private bool restingAllowed = false;
         private string imageFileName = "none";
         public int backgroundImageStartLocX = 0;
         public int backgroundImageStartLocY = 0;
@@ -73,6 +75,18 @@ namespace IB2Toolset
         {
             get { return filename; }
             set { filename = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("How far you can normally see in this area (radius in squares)")]
+        public int AreaVisibleDistance
+        {
+            get { return areaVisibleDistance; }
+            set { areaVisibleDistance = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("true = Can rest anywhere in this area, false = Can only rest in designated squares if they exist")]
+        public bool RestingAllowed
+        {
+            get { return restingAllowed; }
+            set { restingAllowed = value; }
         }
         /*[CategoryAttribute("01 - Main"), ReadOnly(true)]
         public bool IsWorldMap
