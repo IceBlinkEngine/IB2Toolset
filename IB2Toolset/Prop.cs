@@ -22,6 +22,7 @@ namespace IB2Toolset
         private int _LocationX = 0;
         private int _LocationY = 0;
         private string _ImageFileName = "blank";
+        private bool _PropFacingLeft = true;
         private bool _HasCollision = false;
         private string _PropName = "newPropName";
         private string _propTag = "newProp";
@@ -67,6 +68,7 @@ namespace IB2Toolset
             get { return _LocationY; }
             set { _LocationY = value; }
         }
+        [EditorAttribute(typeof(FileNameSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [CategoryAttribute("02 - Sprite"), DescriptionAttribute("Filename for the prop's token (no extension).")]
         public string ImageFileName
         {
@@ -78,6 +80,12 @@ namespace IB2Toolset
         {
             get { return _HasCollision; }
             set { _HasCollision = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("if true, the prop will start off facing left; if false, will start facing right.")]
+        public bool PropFacingLeft
+        {
+            get { return _PropFacingLeft; }
+            set { _PropFacingLeft = value; }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("if true, the prop is visible. if false, the prop is hidden.")]
         public bool isShown

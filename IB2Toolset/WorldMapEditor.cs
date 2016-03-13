@@ -1978,7 +1978,7 @@ namespace IB2Toolset
             {
                 SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(prpRef.ImageFileName).PixelSize.Width, GetFromBitmapList(prpRef.ImageFileName).PixelSize.Height);
                 SharpDX.RectangleF dst = new SharpDX.RectangleF(prpRef.LocationX * sqr, prpRef.LocationY * sqr, sqr, sqr);
-                DrawD2DBitmap(GetFromBitmapList(prpRef.ImageFileName), src, dst, 0, false, 0, 0);
+                DrawD2DBitmap(GetFromBitmapList(prpRef.ImageFileName), src, dst, 0, !prpRef.PropFacingLeft, 0, 0);
             }
             #endregion
             #region Draw Triggers
