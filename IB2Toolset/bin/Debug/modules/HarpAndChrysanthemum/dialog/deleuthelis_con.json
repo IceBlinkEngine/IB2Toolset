@@ -37,7 +37,7 @@
               "NodeNpcName": "",
               "NodeSound": "none",
               "conversationText": "I am glad that you can speak civilly to me, <i>darthiir</i>.",
-              "IsExpanded": true,
+              "IsExpanded": false,
               "subNodes": [
                 {
                   "idNum": 3,
@@ -62,7 +62,7 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "Continue",
                       "IsExpanded": true,
                       "subNodes": [
                         {
@@ -75,7 +75,7 @@
                           "NodePortraitBitmap": "",
                           "NodeNpcName": "",
                           "NodeSound": "none",
-                          "conversationText": "",
+                          "conversationText": "What can I do for you?  You are new here, and an adventurer, so I suppose you are full of questions.",
                           "IsExpanded": true,
                           "subNodes": [],
                           "actions": [],
@@ -99,7 +99,7 @@
             },
             {
               "idNum": 6,
-              "orderNum": 0,
+              "orderNum": 1,
               "pcNode": true,
               "linkTo": 0,
               "ShowOnlyOnce": false,
@@ -108,7 +108,7 @@
               "NodeNpcName": "",
               "NodeSound": "none",
               "conversationText": "Appearances can be deceiving, but in this case you are right.",
-              "IsExpanded": true,
+              "IsExpanded": false,
               "subNodes": [
                 {
                   "idNum": 7,
@@ -146,7 +146,7 @@
                           "NodePortraitBitmap": "",
                           "NodeNpcName": "",
                           "NodeSound": "none",
-                          "conversationText": "",
+                          "conversationText": "This inn makes Drawn Swords something of a diamond in the rough--the rough that is the Backlands.  It is a free settlement and a safe haven, and we elves have an interest in keeping it that way.|***ga_local_int-->String::why_here    String::1    String::deleuthelis    |",
                           "IsExpanded": true,
                           "subNodes": [],
                           "actions": [],
@@ -179,7 +179,7 @@
                     },
                     {
                       "idNum": 10,
-                      "orderNum": 0,
+                      "orderNum": 1,
                       "pcNode": true,
                       "linkTo": 0,
                       "ShowOnlyOnce": false,
@@ -213,7 +213,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "Continue",
                               "IsExpanded": true,
                               "subNodes": [
                                 {
@@ -239,7 +239,7 @@
                                       "NodePortraitBitmap": "",
                                       "NodeNpcName": "",
                                       "NodeSound": "none",
-                                      "conversationText": "",
+                                      "conversationText": "Continue",
                                       "IsExpanded": true,
                                       "subNodes": [
                                         {
@@ -278,7 +278,7 @@
                                                   "NodePortraitBitmap": "",
                                                   "NodeNpcName": "",
                                                   "NodeSound": "none",
-                                                  "conversationText": "",
+                                                  "conversationText": "Many elves claim mastery of the bow, but according to legend Reluvethel was favored by Solonor Thelandira himself.  He could send an arrow from a mountaintop that would find the eye of an orc in the valley.",
                                                   "IsExpanded": true,
                                                   "subNodes": [],
                                                   "actions": [],
@@ -307,7 +307,7 @@
                                             },
                                             {
                                               "idNum": 100002,
-                                              "orderNum": 0,
+                                              "orderNum": 1,
                                               "pcNode": true,
                                               "linkTo": 53,
                                               "ShowOnlyOnce": false,
@@ -315,7 +315,7 @@
                                               "NodePortraitBitmap": "",
                                               "NodeNpcName": "",
                                               "NodeSound": "none",
-                                              "conversationText": "",
+                                              "conversationText": "I would like to ask you something else.",
                                               "IsExpanded": true,
                                               "subNodes": [],
                                               "actions": [],
@@ -324,7 +324,7 @@
                                             },
                                             {
                                               "idNum": 100003,
-                                              "orderNum": 0,
+                                              "orderNum": 2,
                                               "pcNode": true,
                                               "linkTo": 60,
                                               "ShowOnlyOnce": false,
@@ -332,7 +332,7 @@
                                               "NodePortraitBitmap": "",
                                               "NodeNpcName": "",
                                               "NodeSound": "none",
-                                              "conversationText": "",
+                                              "conversationText": "Interesting.  Farewell.",
                                               "IsExpanded": true,
                                               "subNodes": [],
                                               "actions": [],
@@ -387,7 +387,7 @@
                     },
                     {
                       "idNum": 20,
-                      "orderNum": 0,
+                      "orderNum": 2,
                       "pcNode": true,
                       "linkTo": 0,
                       "ShowOnlyOnce": false,
@@ -421,7 +421,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "Continue",
                               "IsExpanded": true,
                               "subNodes": [
                                 {
@@ -447,7 +447,7 @@
                                       "NodePortraitBitmap": "",
                                       "NodeNpcName": "",
                                       "NodeSound": "none",
-                                      "conversationText": "",
+                                      "conversationText": "I would like to ask you something else.",
                                       "IsExpanded": true,
                                       "subNodes": [],
                                       "actions": [],
@@ -456,7 +456,7 @@
                                     },
                                     {
                                       "idNum": 100005,
-                                      "orderNum": 0,
+                                      "orderNum": 1,
                                       "pcNode": true,
                                       "linkTo": 60,
                                       "ShowOnlyOnce": false,
@@ -464,7 +464,7 @@
                                       "NodePortraitBitmap": "",
                                       "NodeNpcName": "",
                                       "NodeSound": "none",
-                                      "conversationText": "",
+                                      "conversationText": "Interesting.  Farewell.",
                                       "IsExpanded": true,
                                       "subNodes": [],
                                       "actions": [],
@@ -512,7 +512,7 @@
                     },
                     {
                       "idNum": 26,
-                      "orderNum": 0,
+                      "orderNum": 3,
                       "pcNode": true,
                       "linkTo": 0,
                       "ShowOnlyOnce": false,
@@ -546,7 +546,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "Continue",
                               "IsExpanded": true,
                               "subNodes": [
                                 {
@@ -572,7 +572,7 @@
                                       "NodePortraitBitmap": "",
                                       "NodeNpcName": "",
                                       "NodeSound": "none",
-                                      "conversationText": "",
+                                      "conversationText": "Continue",
                                       "IsExpanded": true,
                                       "subNodes": [
                                         {
@@ -598,7 +598,7 @@
                                               "NodePortraitBitmap": "",
                                               "NodeNpcName": "",
                                               "NodeSound": "none",
-                                              "conversationText": "",
+                                              "conversationText": "I would like to ask you something else.",
                                               "IsExpanded": true,
                                               "subNodes": [],
                                               "actions": [],
@@ -607,7 +607,7 @@
                                             },
                                             {
                                               "idNum": 100007,
-                                              "orderNum": 0,
+                                              "orderNum": 1,
                                               "pcNode": true,
                                               "linkTo": 60,
                                               "ShowOnlyOnce": false,
@@ -615,7 +615,7 @@
                                               "NodePortraitBitmap": "",
                                               "NodeNpcName": "",
                                               "NodeSound": "none",
-                                              "conversationText": "",
+                                              "conversationText": "Interesting.  Farewell.",
                                               "IsExpanded": true,
                                               "subNodes": [],
                                               "actions": [],
@@ -660,7 +660,7 @@
                         },
                         {
                           "idNum": 34,
-                          "orderNum": 0,
+                          "orderNum": 1,
                           "pcNode": false,
                           "linkTo": 0,
                           "ShowOnlyOnce": false,
@@ -681,7 +681,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "Continue",
                               "IsExpanded": true,
                               "subNodes": [
                                 {
@@ -707,7 +707,7 @@
                                       "NodePortraitBitmap": "",
                                       "NodeNpcName": "",
                                       "NodeSound": "none",
-                                      "conversationText": "",
+                                      "conversationText": "Continue",
                                       "IsExpanded": true,
                                       "subNodes": [
                                         {
@@ -733,7 +733,7 @@
                                               "NodePortraitBitmap": "",
                                               "NodeNpcName": "",
                                               "NodeSound": "none",
-                                              "conversationText": "",
+                                              "conversationText": "Continue",
                                               "IsExpanded": true,
                                               "subNodes": [
                                                 {
@@ -759,7 +759,7 @@
                                                       "NodePortraitBitmap": "",
                                                       "NodeNpcName": "",
                                                       "NodeSound": "none",
-                                                      "conversationText": "",
+                                                      "conversationText": "I would like to ask you something else.",
                                                       "IsExpanded": true,
                                                       "subNodes": [],
                                                       "actions": [],
@@ -768,7 +768,7 @@
                                                     },
                                                     {
                                                       "idNum": 100009,
-                                                      "orderNum": 0,
+                                                      "orderNum": 1,
                                                       "pcNode": true,
                                                       "linkTo": 60,
                                                       "ShowOnlyOnce": false,
@@ -776,7 +776,7 @@
                                                       "NodePortraitBitmap": "",
                                                       "NodeNpcName": "",
                                                       "NodeSound": "none",
-                                                      "conversationText": "",
+                                                      "conversationText": "Interesting.  Farewell.",
                                                       "IsExpanded": true,
                                                       "subNodes": [],
                                                       "actions": [],
@@ -857,7 +857,7 @@
             },
             {
               "idNum": 43,
-              "orderNum": 0,
+              "orderNum": 2,
               "pcNode": true,
               "linkTo": 0,
               "ShowOnlyOnce": false,
@@ -866,7 +866,7 @@
               "NodeNpcName": "",
               "NodeSound": "none",
               "conversationText": "[<i>Shrug.</i>]",
-              "IsExpanded": true,
+              "IsExpanded": false,
               "subNodes": [
                 {
                   "idNum": 44,
@@ -891,7 +891,7 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "What brings you here?||***ga_local_int-->String::del_talked    String::++    String::    ***gc_local_int-->NOT::True    String::why_here    String::1    String::deleuthelis    ||",
                       "IsExpanded": true,
                       "subNodes": [],
                       "actions": [],
@@ -900,7 +900,7 @@
                     },
                     {
                       "idNum": 100011,
-                      "orderNum": 0,
+                      "orderNum": 1,
                       "pcNode": true,
                       "linkTo": 10,
                       "ShowOnlyOnce": false,
@@ -908,7 +908,7 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "What can you tell me of this region?|***ga_local_int-->String::del_talked    String::++    String::    |",
                       "IsExpanded": true,
                       "subNodes": [],
                       "actions": [],
@@ -917,7 +917,7 @@
                     },
                     {
                       "idNum": 100012,
-                      "orderNum": 0,
+                      "orderNum": 2,
                       "pcNode": true,
                       "linkTo": 20,
                       "ShowOnlyOnce": false,
@@ -925,7 +925,7 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "You mentioned an elf named Reluvethel.  What more can you tell me of him?||***ga_local_int-->String::del_talked    String::++    String::    ***gc_local_int-->NOT::False    String::ranger_talked    String::1    String::deleuthelis    ||",
                       "IsExpanded": true,
                       "subNodes": [],
                       "actions": [],
@@ -934,7 +934,7 @@
                     },
                     {
                       "idNum": 100013,
-                      "orderNum": 0,
+                      "orderNum": 3,
                       "pcNode": true,
                       "linkTo": 26,
                       "ShowOnlyOnce": false,
@@ -942,7 +942,7 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "Tell me a bit of the folk of Drawn Swords.|***gc_comp_remove-->NOT::True    String::ianth    |",
                       "IsExpanded": true,
                       "subNodes": [],
                       "actions": [],
@@ -951,7 +951,7 @@
                     },
                     {
                       "idNum": 49,
-                      "orderNum": 0,
+                      "orderNum": 4,
                       "pcNode": true,
                       "linkTo": 0,
                       "ShowOnlyOnce": false,
@@ -994,7 +994,7 @@
         },
         {
           "idNum": 50,
-          "orderNum": 0,
+          "orderNum": 1,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -1016,7 +1016,7 @@
               "NodeNpcName": "",
               "NodeSound": "none",
               "conversationText": "Greetings to you.  If that is the case, why are you here?",
-              "IsExpanded": true,
+              "IsExpanded": false,
               "subNodes": [
                 {
                   "idNum": 52,
@@ -1067,7 +1067,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "What can you tell me of this region?|***ga_local_int-->String::del_talked    String::++    String::    |",
                               "IsExpanded": true,
                               "subNodes": [],
                               "actions": [],
@@ -1076,7 +1076,7 @@
                             },
                             {
                               "idNum": 100015,
-                              "orderNum": 0,
+                              "orderNum": 1,
                               "pcNode": true,
                               "linkTo": 8,
                               "ShowOnlyOnce": false,
@@ -1084,7 +1084,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "What brings you here?||***ga_local_int-->String::del_talked    String::++    String::    ***gc_local_int-->NOT::True    String::why_here    String::1    String::deleuthelis    ||",
                               "IsExpanded": true,
                               "subNodes": [],
                               "actions": [],
@@ -1093,7 +1093,7 @@
                             },
                             {
                               "idNum": 100016,
-                              "orderNum": 0,
+                              "orderNum": 2,
                               "pcNode": true,
                               "linkTo": 20,
                               "ShowOnlyOnce": false,
@@ -1101,7 +1101,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "You mentioned an elf named Reluvethel.  What more can you tell me of him?||***ga_local_int-->String::del_talked    String::++    String::    ***gc_local_int-->NOT::False    String::ranger_talked    String::1    String::deleuthelis    ||",
                               "IsExpanded": true,
                               "subNodes": [],
                               "actions": [],
@@ -1110,7 +1110,7 @@
                             },
                             {
                               "idNum": 100017,
-                              "orderNum": 0,
+                              "orderNum": 3,
                               "pcNode": true,
                               "linkTo": 26,
                               "ShowOnlyOnce": false,
@@ -1118,7 +1118,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "Tell me a bit of the folk of Drawn Swords.|***gc_comp_remove-->NOT::True    String::ianth    |",
                               "IsExpanded": true,
                               "subNodes": [],
                               "actions": [],
@@ -1127,7 +1127,7 @@
                             },
                             {
                               "idNum": 100018,
-                              "orderNum": 0,
+                              "orderNum": 4,
                               "pcNode": true,
                               "linkTo": 49,
                               "ShowOnlyOnce": false,
@@ -1135,7 +1135,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "I have no questions at the moment.  Farewell.",
                               "IsExpanded": true,
                               "subNodes": [],
                               "actions": [],
@@ -1154,7 +1154,7 @@
                     },
                     {
                       "idNum": 60,
-                      "orderNum": 0,
+                      "orderNum": 1,
                       "pcNode": true,
                       "linkTo": 0,
                       "ShowOnlyOnce": false,
@@ -1184,7 +1184,7 @@
                 },
                 {
                   "idNum": 61,
-                  "orderNum": 0,
+                  "orderNum": 1,
                   "pcNode": false,
                   "linkTo": 0,
                   "ShowOnlyOnce": false,
@@ -1205,7 +1205,7 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "I would like to ask you something else.",
                       "IsExpanded": true,
                       "subNodes": [],
                       "actions": [],
@@ -1214,7 +1214,7 @@
                     },
                     {
                       "idNum": 100020,
-                      "orderNum": 0,
+                      "orderNum": 1,
                       "pcNode": true,
                       "linkTo": 60,
                       "ShowOnlyOnce": false,
@@ -1222,7 +1222,7 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "Interesting.  Farewell.",
                       "IsExpanded": true,
                       "subNodes": [],
                       "actions": [],
@@ -1241,7 +1241,7 @@
             },
             {
               "idNum": 64,
-              "orderNum": 0,
+              "orderNum": 1,
               "pcNode": true,
               "linkTo": 0,
               "ShowOnlyOnce": false,
@@ -1250,7 +1250,7 @@
               "NodeNpcName": "",
               "NodeSound": "none",
               "conversationText": "Fair be our meeting.",
-              "IsExpanded": true,
+              "IsExpanded": false,
               "subNodes": [
                 {
                   "idNum": 100021,
@@ -1262,7 +1262,7 @@
                   "NodePortraitBitmap": "",
                   "NodeNpcName": "",
                   "NodeSound": "none",
-                  "conversationText": "",
+                  "conversationText": "What can I do for you?  You are new here, and an adventurer, so I suppose you are full of questions.",
                   "IsExpanded": true,
                   "subNodes": [],
                   "actions": [],
@@ -1302,7 +1302,7 @@
         },
         {
           "idNum": 66,
-          "orderNum": 0,
+          "orderNum": 2,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -1323,8 +1323,8 @@
               "NodePortraitBitmap": "",
               "NodeNpcName": "",
               "NodeSound": "none",
-              "conversationText": "",
-              "IsExpanded": true,
+              "conversationText": "Continue",
+              "IsExpanded": false,
               "subNodes": [
                 {
                   "idNum": 100022,
@@ -1336,7 +1336,7 @@
                   "NodePortraitBitmap": "",
                   "NodeNpcName": "",
                   "NodeSound": "none",
-                  "conversationText": "",
+                  "conversationText": "What can I do for you?  You are new here, and an adventurer, so I suppose you are full of questions.",
                   "IsExpanded": true,
                   "subNodes": [],
                   "actions": [],
@@ -1376,7 +1376,7 @@
         },
         {
           "idNum": 69,
-          "orderNum": 0,
+          "orderNum": 3,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -1397,7 +1397,7 @@
               "NodePortraitBitmap": "",
               "NodeNpcName": "",
               "NodeSound": "none",
-              "conversationText": "",
+              "conversationText": "What brings you here?||***ga_local_int-->String::del_talked    String::++    String::    ***gc_local_int-->NOT::True    String::why_here    String::1    String::deleuthelis    ||",
               "IsExpanded": true,
               "subNodes": [],
               "actions": [],
@@ -1406,7 +1406,7 @@
             },
             {
               "idNum": 100024,
-              "orderNum": 0,
+              "orderNum": 1,
               "pcNode": true,
               "linkTo": 10,
               "ShowOnlyOnce": false,
@@ -1414,7 +1414,7 @@
               "NodePortraitBitmap": "",
               "NodeNpcName": "",
               "NodeSound": "none",
-              "conversationText": "",
+              "conversationText": "What can you tell me of this region?|***ga_local_int-->String::del_talked    String::++    String::    |",
               "IsExpanded": true,
               "subNodes": [],
               "actions": [],
@@ -1423,7 +1423,7 @@
             },
             {
               "idNum": 100025,
-              "orderNum": 0,
+              "orderNum": 2,
               "pcNode": true,
               "linkTo": 20,
               "ShowOnlyOnce": false,
@@ -1431,7 +1431,7 @@
               "NodePortraitBitmap": "",
               "NodeNpcName": "",
               "NodeSound": "none",
-              "conversationText": "",
+              "conversationText": "You mentioned an elf named Reluvethel.  What more can you tell me of him?||***ga_local_int-->String::del_talked    String::++    String::    ***gc_local_int-->NOT::False    String::ranger_talked    String::1    String::deleuthelis    ||",
               "IsExpanded": true,
               "subNodes": [],
               "actions": [],
@@ -1440,7 +1440,7 @@
             },
             {
               "idNum": 100026,
-              "orderNum": 0,
+              "orderNum": 3,
               "pcNode": true,
               "linkTo": 26,
               "ShowOnlyOnce": false,
@@ -1448,7 +1448,7 @@
               "NodePortraitBitmap": "",
               "NodeNpcName": "",
               "NodeSound": "none",
-              "conversationText": "",
+              "conversationText": "Tell me a bit of the folk of Drawn Swords.|***gc_comp_remove-->NOT::True    String::ianth    |",
               "IsExpanded": true,
               "subNodes": [],
               "actions": [],
@@ -1457,7 +1457,7 @@
             },
             {
               "idNum": 74,
-              "orderNum": 0,
+              "orderNum": 4,
               "pcNode": true,
               "linkTo": 0,
               "ShowOnlyOnce": false,
@@ -1479,7 +1479,7 @@
         },
         {
           "idNum": 75,
-          "orderNum": 0,
+          "orderNum": 4,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -1500,7 +1500,7 @@
       "isLink": false
     }
   ],
-  "ConvoFileName": "deleuthelis_con.json",
+  "ConvoFileName": "deleuthelis_con",
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,

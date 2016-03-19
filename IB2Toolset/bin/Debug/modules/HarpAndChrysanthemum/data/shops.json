@@ -1,7 +1,7 @@
 [
   {
-    "shopTag": "meroShop",
-    "shopName": "Mero's General Store",
+    "shopTag": "danmar_store",
+    "shopName": "Danmar's General Store",
     "shopItemRefs": [
       {
         "resref": "chainmail",
@@ -279,8 +279,8 @@
     ]
   },
   {
-    "shopTag": "fifurShop",
-    "shopName": "Fifur's Fine Wares",
+    "shopTag": "hezro_store",
+    "shopName": "Hezro's Fine Wares",
     "shopItemRefs": [
       {
         "resref": "chainmail",

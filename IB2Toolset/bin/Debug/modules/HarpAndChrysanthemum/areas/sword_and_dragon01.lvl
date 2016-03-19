@@ -6262,7 +6262,7 @@
     {
       "LocationX": 4,
       "LocationY": 10,
-      "ImageFileName": "prp_gangcleric",
+      "ImageFileName": "prp_c_dself3",
       "HasCollision": false,
       "PropFacingLeft": true,
       "isShown": true,
@@ -6442,7 +6442,7 @@
     {
       "LocationX": 1,
       "LocationY": 4,
-      "ImageFileName": "prp_fifur",
+      "ImageFileName": "prp_c_kelbn",
       "HasCollision": false,
       "PropFacingLeft": true,
       "isShown": true,
@@ -6514,7 +6514,7 @@
     {
       "LocationX": 8,
       "LocationY": 2,
-      "ImageFileName": "prp_roland",
+      "ImageFileName": "prp_c_asia32",
       "HasCollision": false,
       "PropFacingLeft": true,
       "isShown": true,
@@ -6640,7 +6640,7 @@
   "AreaSounds": "house",
   "AreaSoundsDelay": 0,
   "AreaSoundsDelayRandomAdder": 0,
-  "NextIdNumber": 152,
+  "NextIdNumber": 166,
   "OnHeartBeatLogicTree": "none",
   "OnHeartBeatParms": "",
   "OnHeartBeatIBScript": "none",

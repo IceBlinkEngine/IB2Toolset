@@ -23,13 +23,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Hail Amaunator!|***gc_rand_1of-->NOT::False    Int::20    |",
+          "conversationText": "Hail Amaunator!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 25,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -43,7 +61,7 @@
         },
         {
           "idNum": 2,
-          "orderNum": 0,
+          "orderNum": 1,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -51,13 +69,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "The sun will rise again!|***gc_rand_1of-->NOT::False    Int::19    |",
+          "conversationText": "The sun will rise again!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 26,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -71,7 +107,7 @@
         },
         {
           "idNum": 3,
-          "orderNum": 0,
+          "orderNum": 2,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -79,13 +115,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "I am spreading the word of the Risen Sun.|***gc_rand_1of-->NOT::False    Int::18    |",
+          "conversationText": "I am spreading the word of the Risen Sun.",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 27,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -99,7 +153,7 @@
         },
         {
           "idNum": 4,
-          "orderNum": 0,
+          "orderNum": 3,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -107,13 +161,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Have you heard the good news?|***gc_rand_1of-->NOT::False    Int::17    |",
+          "conversationText": "Have you heard the good news?",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 28,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -127,7 +199,7 @@
         },
         {
           "idNum": 5,
-          "orderNum": 0,
+          "orderNum": 4,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -135,13 +207,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Have you heard of Daelegoth the Miracle-Worker?|***gc_rand_1of-->NOT::False    Int::16    |",
+          "conversationText": "Have you heard of Daelegoth the Miracle-Worker?",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 29,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -155,7 +245,7 @@
         },
         {
           "idNum": 6,
-          "orderNum": 0,
+          "orderNum": 5,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -163,13 +253,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "The eternal sun now shines in Elversult!|***gc_rand_1of-->NOT::False    Int::15    |",
+          "conversationText": "The eternal sun now shines in Elversult!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 30,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -183,7 +291,7 @@
         },
         {
           "idNum": 7,
-          "orderNum": 0,
+          "orderNum": 6,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -191,13 +299,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Lathander is dead!  Long live Lathander-Amaunator!|***gc_rand_1of-->NOT::False    Int::14    |",
+          "conversationText": "Lathander is dead!  Long live Lathander-Amaunator!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 31,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -211,7 +337,7 @@
         },
         {
           "idNum": 8,
-          "orderNum": 0,
+          "orderNum": 7,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -219,13 +345,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "My god is a wondrous god.|***gc_rand_1of-->NOT::False    Int::13    |",
+          "conversationText": "My god is a wondrous god.",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 32,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -239,7 +383,7 @@
         },
         {
           "idNum": 9,
-          "orderNum": 0,
+          "orderNum": 8,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -247,9 +391,27 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "The Ascension is at hand.|***gc_rand_1of-->NOT::False    Int::12    |",
+          "conversationText": "The Ascension is at hand.",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 33,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
@@ -267,7 +429,7 @@
         },
         {
           "idNum": 10,
-          "orderNum": 0,
+          "orderNum": 9,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -275,13 +437,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Look into the light!|***gc_rand_1of-->NOT::False    Int::11    |",
+          "conversationText": "Look into the light!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 34,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -295,7 +475,7 @@
         },
         {
           "idNum": 11,
-          "orderNum": 0,
+          "orderNum": 10,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -303,13 +483,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "There is no darkness too deep for the light of Amaunator.|***gc_rand_1of-->NOT::False    Int::10    |",
+          "conversationText": "There is no darkness too deep for the light of Amaunator.",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 35,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -323,7 +521,7 @@
         },
         {
           "idNum": 12,
-          "orderNum": 0,
+          "orderNum": 11,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -331,13 +529,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "When Amaunator rises again, Abeir-Toril will be bathed in his glorious fire.|***gc_rand_1of-->NOT::False    Int::9    |",
+          "conversationText": "When Amaunator rises again, Abeir-Toril will be bathed in his glorious fire.",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 36,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -351,7 +567,7 @@
         },
         {
           "idNum": 13,
-          "orderNum": 0,
+          "orderNum": 12,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -359,13 +575,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Heed the Word of Amaunator!|***gc_rand_1of-->NOT::False    Int::8    |",
+          "conversationText": "Heed the Word of Amaunator!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 43,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -379,7 +613,7 @@
         },
         {
           "idNum": 14,
-          "orderNum": 0,
+          "orderNum": 13,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -387,13 +621,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "The wise do not listen; the foolish do not hear; only the worshipful know the truth.|***gc_rand_1of-->NOT::False    Int::7    |",
+          "conversationText": "The wise do not listen; the foolish do not hear; only the worshipful know the truth.",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 42,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -407,7 +659,7 @@
         },
         {
           "idNum": 15,
-          "orderNum": 0,
+          "orderNum": 14,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -415,9 +667,27 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Fallen Netheril is nothing to the new Kingdom of Amaunator!|***gc_rand_1of-->NOT::False    Int::6    |",
+          "conversationText": "Fallen Netheril is nothing to the new Kingdom of Amaunator!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 41,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
@@ -435,7 +705,7 @@
         },
         {
           "idNum": 16,
-          "orderNum": 0,
+          "orderNum": 15,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -443,13 +713,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Eternal summer, eternal noon, eternal life!|***gc_rand_1of-->NOT::False    Int::5    |",
+          "conversationText": "Eternal summer, eternal noon, eternal life!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 40,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -463,7 +751,7 @@
         },
         {
           "idNum": 17,
-          "orderNum": 0,
+          "orderNum": 16,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -471,13 +759,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "As the sun outshines the stars, so too will Amaunator outshine the other gods.|***gc_rand_1of-->NOT::False    Int::4    |",
+          "conversationText": "As the sun outshines the stars, so too will Amaunator outshine the other gods.",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 39,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -491,7 +797,7 @@
         },
         {
           "idNum": 18,
-          "orderNum": 0,
+          "orderNum": 17,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -499,13 +805,31 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Cursed be the unbelievers.  Believe, or burn!|***gc_rand_1of-->NOT::False    Int::3    |",
+          "conversationText": "Cursed be the unbelievers.  Believe, or burn!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 38,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -519,7 +843,7 @@
         },
         {
           "idNum": 19,
-          "orderNum": 0,
+          "orderNum": 18,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -527,7 +851,7 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Do not disdain the blessings of the Risen Sun.|***gc_rand_1of-->NOT::False    Int::2    |",
+          "conversationText": "Do not disdain the blessings of the Risen Sun.",
           "IsExpanded": true,
           "subNodes": [
             {
@@ -554,7 +878,7 @@
               ],
               "conditions": [
                 {
-                  "c_script": "gc_deity(nonIBscript)",
+                  "c_script": "gcCheckIsRace.cs",
                   "c_btnAndOr": null,
                   "c_and": false,
                   "c_not": false,
@@ -568,7 +892,7 @@
             },
             {
               "idNum": 21,
-              "orderNum": 0,
+              "orderNum": 1,
               "pcNode": true,
               "linkTo": 0,
               "ShowOnlyOnce": false,
@@ -590,7 +914,7 @@
               ],
               "conditions": [
                 {
-                  "c_script": "gc_deity(nonIBscript)",
+                  "c_script": "gcCheckIsRace.cs",
                   "c_btnAndOr": null,
                   "c_and": false,
                   "c_not": false,
@@ -604,7 +928,7 @@
             },
             {
               "idNum": 22,
-              "orderNum": 0,
+              "orderNum": 2,
               "pcNode": true,
               "linkTo": 0,
               "ShowOnlyOnce": false,
@@ -618,7 +942,7 @@
               "actions": [],
               "conditions": [
                 {
-                  "c_script": "gc_deity(nonIBscript)",
+                  "c_script": "gcCheckIsRace.cs",
                   "c_btnAndOr": null,
                   "c_and": false,
                   "c_not": false,
@@ -629,12 +953,29 @@
                 }
               ],
               "isLink": false
+            },
+            {
+              "idNum": 37,
+              "orderNum": 3,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
             }
           ],
           "actions": [],
           "conditions": [
             {
-              "c_script": "gc_rand_1of(nonIBscript)",
+              "c_script": "gcRand1of.cs",
               "c_btnAndOr": null,
               "c_and": false,
               "c_not": false,
@@ -648,7 +989,7 @@
         },
         {
           "idNum": 23,
-          "orderNum": 0,
+          "orderNum": 19,
           "pcNode": false,
           "linkTo": 0,
           "ShowOnlyOnce": false,
@@ -658,7 +999,25 @@
           "NodeSound": "none",
           "conversationText": "Hear the word of Daelegoth Orndeir, Regent of the Sun!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 44,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [],
           "isLink": false
@@ -669,11 +1028,11 @@
       "isLink": false
     }
   ],
-  "ConvoFileName": "ezbollus_con.json",
+  "ConvoFileName": "ezbollus_con",
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "",
+  "NpcPortraitBitmap": "prp_c_kelbn.png",
   "DefaultNpcName": "",
-  "NextIdNum": 24
+  "NextIdNum": 44
 }

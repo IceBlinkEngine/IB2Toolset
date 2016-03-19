@@ -1,198 +1,411 @@
 [
   {
-    "Name": "The Search for Ian",
-    "Tag": "ianQuest",
+    "Name": "Safe Passage to Langdale",
+    "Tag": "safe_path",
     "Entries": [
       {
-        "EntryTitle": "Begin the Search",
-        "EntryText": "You have decided to wait no longer for your brother to return.  Traveling in a small group is the only way to avoid attention of enemies.  Journey to Langdale and beyond to find your brother.",
-        "Tag": "ian1",
+        "EntryTitle": "Safe Passage to Langdale",
+        "EntryText": "Roland has asked you to find a safe passage to Langdale.  He needs to deliver some goods and can not wait much longer for the road to become safer.  Send a messenger to Roland when you have found a safe path to Langdale.",
+        "Tag": "10",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Camp Site",
-        "EntryText": "You have discovered a camp where you suspect your brother's group spent the night.  A deck of cards, that you recognized as a set from your home, was accidentally left here.",
-        "Tag": "ian2",
-        "EndPoint": false
-      },
-      {
-        "EntryTitle": "To Langdale and Lorenwaite",
-        "EntryText": "Lendel has informed you that your brother is recovering in Lorenwaite (the home of the Eastern Elves).  Travel to Langdale and then to Lorenwaite to meet him.",
-        "Tag": "ian3",
-        "EndPoint": false
-      },
-      {
-        "EntryTitle": "To The Dark Woods",
-        "EntryText": "Rillian has informed you that Ian has left Lorenwaite.  Ian left a message for you and your family.  He intends to find and free his companions and friends, if they yet live.  If they have been murdered, he intends to avenge their death.  Most likely he has returned to the scene of their ambush.  Their camp, which was ambushed by orcs, was in the Dark Woods.  You should travel there to find Ian.",
-        "Tag": "ian4",
-        "EndPoint": false
-      },
-      {
-        "EntryTitle": "Found Ian",
-        "EntryText": "You have found Ian.",
-        "Tag": "ian5",
+        "EntryTitle": "Safe Passage to Langdale",
+        "EntryText": "Lendel will inform Roland of the safe passage to Langdale.",
+        "Tag": "20",
+        "EntryId": 0,
         "EndPoint": true
       }
     ]
   },
   {
-    "Name": "Kinstan Tree Spirits",
-    "Tag": "KinstanTS",
+    "Name": "Help Kinstan Tree Spirits",
+    "Tag": "tree_spirits",
     "Entries": [
       {
-        "EntryTitle": "Save Tree Spirits",
+        "EntryTitle": "Help Kinstan Tree Spirits",
         "EntryText": "A Tree Spirit has pleaded with you to save them from the Forest Gnolls.  the Gnolls have been cutting down the trees in the area which has led to the death of many of the Tree Spirits in the area.   You have agreed to convince the Gnolls to leave the area.",
-        "Tag": "kinstanTS1",
+        "Tag": "10",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Attempted Negotiations",
+        "EntryTitle": "Help Kinstan Tree Spirits",
         "EntryText": "You attempted to reason with the King of the Forest Gnolls.",
-        "Tag": "kinstanTS2",
+        "Tag": "20",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Defeated the Gnolls",
+        "EntryTitle": "Help Kinstan Tree Spirits",
         "EntryText": "You have defeated the Forest Gnolls.",
-        "Tag": "kinstanTS3",
+        "Tag": "30",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Saved Tree Spirits",
+        "EntryTitle": "Help Kinstan Tree Spirits",
         "EntryText": "You have dealt with the Forest Gnolls and saved the Kinstan Tree Spirits.",
-        "Tag": "kinstanTS4",
+        "Tag": "40",
+        "EntryId": 0,
+        "EndPoint": true
+      }
+    ]
+  },
+  {
+    "Name": "Help Tree Spirits of the Dark Woods",
+    "Tag": "tree_spirits2",
+    "Entries": [
+      {
+        "EntryTitle": "Help Tree Spirits of the Dark Woods",
+        "EntryText": "A Tree Spirit has pleaded with you to save them from the source of water poisoning.  You have agreed to find the source and remove it.",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Help Tree Spirits of the Dark Woods",
+        "EntryText": "You have removed the source of the river's poisoning by defeating the Lizard Queen.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Help Tree Spirits of the Dark Woods",
+        "EntryText": "You have saved the Dark Woods Tree Spirits from the Lizard Queen's poisoning.",
+        "Tag": "30",
+        "EntryId": 0,
+        "EndPoint": true
+      }
+    ]
+  },
+  {
+    "Name": "The Search for Ian",
+    "Tag": "search_ian",
+    "Entries": [
+      {
+        "EntryTitle": "The Search for Ian",
+        "EntryText": "You have decided to wait no longer for your brother to return.  Traveling in a small group is the only way to avoid attention of enemies.  Journey to Langdale and beyond to find your brother.  ",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "The Search for Ian",
+        "EntryText": "You have discovered a camp where you suspect your brother's group spent the night.  A deck of cards, that you recognized as a set from your home, was accidentally left here.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "The Search for Ian",
+        "EntryText": "Lendel has informed you that your brother is recovering in Lorenwaite (the home of the Eastern Elves).  Travel to Langdale and then to Lorenwaite to meet him.",
+        "Tag": "30",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "The Search for Ian",
+        "EntryText": "Rillian has informed you that Ian has left Lorenwaite.  Ian left a message for you and your family.  He intends to find and free his companions and friends, if they yet live.  If they have been murdered, he intends to avenge their death.  Most likely he has returned to the scene of their ambush.  Their camp, which was ambushed by orcs, was in the Dark Woods.  You should travel there to find Ian.",
+        "Tag": "40",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "The Search for Ian",
+        "EntryText": "You have found Ian.",
+        "Tag": "50",
+        "EntryId": 0,
+        "EndPoint": true
+      }
+    ]
+  },
+  {
+    "Name": "Remove the Lizard Queen and Followers from the Region",
+    "Tag": "lizard_queen",
+    "Entries": [
+      {
+        "EntryTitle": "Remove the Lizard Queen and Followers from the Region",
+        "EntryText": "You have agreed to help the Glenfax Guild and remove the Lizardfolk threat.",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Remove the Lizard Queen and Followers from the Region",
+        "EntryText": "You have defeated the Lizard Queen.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Remove the Lizard Queen and Followers from the Region",
+        "EntryText": "You have helped the Glenfax Guild by defeating the Lizard Queen.",
+        "Tag": "30",
+        "EntryId": 0,
         "EndPoint": true
       }
     ]
   },
   {
     "Name": "Find Kylee's Kitten",
-    "Tag": "kylee",
+    "Tag": "kylee_kitten",
     "Entries": [
       {
-        "EntryTitle": "Find Kitten",
-        "EntryText": "Kylee asked you to help her find her kitten. He is probably around town somewhere.",
-        "Tag": "kylee10",
+        "EntryTitle": "Find Kylee's Kitten",
+        "EntryText": "You have agreed to help Kylee find her lost kitten.",
+        "Tag": "10",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Found Kitten",
-        "EntryText": "You found Kylee's kitten. You should probably let her know where he is.",
-        "Tag": "kylee20",
+        "EntryTitle": "Find Kylee's Kitten",
+        "EntryText": "You have found Kylee's kitten and should let her know.",
+        "Tag": "20",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Told Kylee About Kitten",
+        "EntryTitle": "Find Kylee's Kitten",
         "EntryText": "You found Kylee's kitten and let her know where to find him.",
-        "Tag": "kylee30",
+        "Tag": "30",
+        "EntryId": 0,
         "EndPoint": true
       }
     ]
   },
   {
     "Name": "Kendra's Ring",
-    "Tag": "kendra",
+    "Tag": "kendra_ring",
     "Entries": [
       {
-        "EntryTitle": "Find Kendra's Ring",
+        "EntryTitle": "Kendra's Ring",
         "EntryText": "Kendra has told you of her picnic a few moths ago where they were attacked by a large flying beast.  The beast flew away with her locked chest containing a family heirloom, a ring.  If you come across the ring, you have agreed to return it to her.",
-        "Tag": "kendra10",
+        "Tag": "10",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Returned Ring",
+        "EntryTitle": "Kendra's Ring",
         "EntryText": "You have returned Kendra's ring to her.",
-        "Tag": "kendra20",
+        "Tag": "20",
+        "EntryId": 0,
         "EndPoint": true
       }
     ]
   },
   {
     "Name": "Poison for Selyna",
-    "Tag": "selyna",
+    "Tag": "selyna_poison",
     "Entries": [
       {
-        "EntryTitle": "Find Pure Poison",
+        "EntryTitle": "Poison for Selyna",
         "EntryText": "Selyna has asked you to find some of the poison that has caused the sickness of those who drank from the stream.  Without the source poison, she may not be able to create an antidote that will cure them.  It must be a pure amount of the poison and not diluted.",
-        "Tag": "selyna10",
+        "Tag": "10",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Delivered Poison for Antidote",
+        "EntryTitle": "Poison for Selyna",
         "EntryText": "You have collected some of the source poison and given it to Selyna.  She will now be able to create an antidote that will cure those who are sick.",
-        "Tag": "selyna20",
+        "Tag": "20",
+        "EntryId": 0,
         "EndPoint": true
       }
     ]
   },
   {
-    "Name": "Dark Woods Tree Spirit",
-    "Tag": "DarkWoodsTS",
-    "Entries": [
-      {
-        "EntryTitle": "Find Water Poisoning Source",
-        "EntryText": "A Tree Spirit has pleaded with you to save them from the source of water poisoning.  You have agreed to find the source and remove it.",
-        "Tag": "darkwoodsTS10",
-        "EndPoint": false
-      },
-      {
-        "EntryTitle": "Saved Tree Spirits",
-        "EntryText": "You have removed the source of the river's poisoning by defeating the Lizard Queen. You have saved the Dark Woods Tree Spirits from the Lizard Queen's poisoning.",
-        "Tag": "darkwoodsTS20",
-        "EndPoint": false
-      }
-    ]
-  },
-  {
-    "Name": "Lizard Queen",
-    "Tag": "lizardqueen",
-    "Entries": [
-      {
-        "EntryTitle": "Help the Guild",
-        "EntryText": "You have agreed to help the Glenfax Guild and remove the Lizardfolk threat.",
-        "Tag": "lizardqueen10",
-        "EndPoint": false
-      },
-      {
-        "EntryTitle": "Saved the Guild",
-        "EntryText": "You have helped the Glenfax Guild by defeating the Lizard Queen.",
-        "Tag": "lizardqueen20",
-        "EndPoint": false
-      }
-    ]
-  },
-  {
     "Name": "Ian's Companions",
-    "Tag": "IanComps",
+    "Tag": "ians_companions",
     "Entries": [
       {
-        "EntryTitle": "Find Ian's Companions",
+        "EntryTitle": "Ian's Companions",
         "EntryText": "You have decided to search for Ian's companions who were taken prisoners by the ambushing orcs.  Ian has detected their path leading to the South Grimstan Forest.  You should travel there to search for clues.  They must be freed, if they yet live, or avenged.",
-        "Tag": "iancomps10",
+        "Tag": "10",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Freed Companion's",
+        "EntryTitle": "Ian's Companions",
         "EntryText": "You have freed Ian's captured companions from the evil orcs.",
-        "Tag": "iancomps20",
+        "Tag": "20",
+        "EntryId": 0,
         "EndPoint": true
       }
     ]
   },
   {
     "Name": "Return to Brinsby",
-    "Tag": "BrinsbyReturn",
+    "Tag": "return_brinsby",
     "Entries": [
       {
-        "EntryTitle": "Return Home",
+        "EntryTitle": "Return to Brinsby",
         "EntryText": "Now that Ian's companions have been saved, you should return home to Brinsby and your family.",
-        "Tag": "brinsbyreturn10",
+        "Tag": "10",
+        "EntryId": 0,
         "EndPoint": false
       },
       {
-        "EntryTitle": "Returned Home",
+        "EntryTitle": "Return to Brinsby",
         "EntryText": "You have returned to Brinsby and reunited your family.",
-        "Tag": "brinsbyreturn20",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": true
+      }
+    ]
+  },
+  {
+    "Name": "Father's Caravan",
+    "Tag": "fathers_caravan",
+    "Entries": [
+      {
+        "EntryTitle": "Father's Caravan",
+        "EntryText": "You have decided to continue your brother's investigation into the fate of your father's caravan.  Your brother, Ian, has suggested to take the passage through the Grimstan Mountains as this is most likely the path they would have taken.",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Father's Caravan",
+        "EntryText": "Sivel has told you of your father's caravan passing through the Grimstan Valley over 10 years ago.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Father's Caravan",
+        "EntryText": "Suril has suggested that you meet with Jerun (the leader of the people living in Charnia) to discuss the best options for rescuing your father and the others.",
+        "Tag": "30",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Father's Caravan",
+        "EntryText": "You have met with Jerun and have decided on how to go about rescuing your father.",
+        "Tag": "40",
+        "EntryId": 0,
+        "EndPoint": true
+      }
+    ]
+  },
+  {
+    "Name": "Remove Red Dragon",
+    "Tag": "red_dragon",
+    "Entries": [
+      {
+        "EntryTitle": "Remove Red Dragon",
+        "EntryText": "Sivel has asked you to remove the young red dragon from the cave near their village.",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Remove Red Dragon",
+        "EntryText": "You have removed the young red dragon from the caves and thus protecting Sivel and his people.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": true
+      }
+    ]
+  },
+  {
+    "Name": "Visit Charnian Hideout",
+    "Tag": "hideout",
+    "Entries": [
+      {
+        "EntryTitle": "Visit Charnian Hideout",
+        "EntryText": "Numblin has told you of the hideout in the Tregorn Forest where many of the surviving Charnians live.  Travel to Tregorn Forest and search for a pile of leaves.  The entrance is under a pile of leaves.",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Visit Charnian Hideout",
+        "EntryText": "You found the Charnian hideout and have met with Suril about the state of the region.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": true
+      }
+    ]
+  },
+  {
+    "Name": "Storming the Fortress",
+    "Tag": "storm_fortress",
+    "Entries": [
+      {
+        "EntryTitle": "Storming the Fortress",
+        "EntryText": "You have agreed to remove all the Zornians from Charnia.  First you should take care of all the Zornians patrolling the town and then take care of their leader in the tower.  Report back to Jerun, in the tomb, once you have completed the task.",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Storming the Fortress",
+        "EntryText": "Jerun, Suril, and the Charnians will begin to prepare themselves for the inevitable attack by Zorn's minions.  You now can prepare for your secret assault on Zorn's fortress to rescue your father.  Travel to the forest leading to Zorn's Castle.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Storming the Fortress",
+        "EntryText": "You saved your father and his friends.  Your father, Adwen, has instructed you to hunt down the witch before she is able to gather another army and attack Charnia.",
+        "Tag": "30",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Storming the Fortress",
+        "EntryText": "You encountered the witch and she escaped through a cave entrance.  It may be an escape route or lead to her inner chambers.  Prepare wisely if you choose to track her down.",
+        "Tag": "40",
+        "EntryId": 0,
+        "EndPoint": false
+      }
+    ]
+  },
+  {
+    "Name": "Defeat Zornians in Charnia",
+    "Tag": "zornian_leader",
+    "Entries": [
+      {
+        "EntryTitle": "Defeat Zornians in Charnia",
+        "EntryText": "You have agreed to defeat all Zornians in Charnia including those in the tower.",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Defeat Zornians in Charnia",
+        "EntryText": "You managed to defeat the Zornian Commander and his followers.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": true
+      }
+    ]
+  },
+  {
+    "Name": "Help the Wolverines",
+    "Tag": "wolverines",
+    "Entries": [
+      {
+        "EntryTitle": "Help the Wolverines",
+        "EntryText": "You have agreed to help the wolverines rid themselves of the murderous creature in the northern cave.",
+        "Tag": "10",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Help the Wolverines",
+        "EntryText": "You defeated the fell troll.",
+        "Tag": "20",
+        "EntryId": 0,
+        "EndPoint": false
+      },
+      {
+        "EntryTitle": "Help the Wolverines",
+        "EntryText": "You have saved the wolverines from the fell troll and they now refer to you as their greatest hero of all time.",
+        "Tag": "30",
+        "EntryId": 0,
         "EndPoint": true
       }
     ]

@@ -23,7 +23,7 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Why hello!  If you do not mind my saying so, sir, that hat of yours has seen better days.|***gc_check_item-->NOT::False    String::vromans_hat    Int::1    ***gc_journal_entry-->NOT::False    String::Q_MANFRED    String::>5    |",
+          "conversationText": "Why hello!  If you do not mind my saying so, sir, that hat of yours has seen better days.",
           "IsExpanded": true,
           "subNodes": [
             {
@@ -36,7 +36,7 @@
               "NodePortraitBitmap": "",
               "NodeNpcName": "",
               "NodeSound": "none",
-              "conversationText": "",
+              "conversationText": "Continue",
               "IsExpanded": true,
               "subNodes": [
                 {
@@ -62,7 +62,7 @@
                       "NodePortraitBitmap": "",
                       "NodeNpcName": "",
                       "NodeSound": "none",
-                      "conversationText": "",
+                      "conversationText": "Continue",
                       "IsExpanded": true,
                       "subNodes": [
                         {
@@ -88,7 +88,7 @@
                               "NodePortraitBitmap": "",
                               "NodeNpcName": "",
                               "NodeSound": "none",
-                              "conversationText": "",
+                              "conversationText": "Continue",
                               "IsExpanded": true,
                               "subNodes": [
                                 {
@@ -114,7 +114,7 @@
                                       "NodePortraitBitmap": "",
                                       "NodeNpcName": "",
                                       "NodeSound": "none",
-                                      "conversationText": "",
+                                      "conversationText": "Continue",
                                       "IsExpanded": true,
                                       "subNodes": [
                                         {
@@ -140,7 +140,7 @@
                                               "NodePortraitBitmap": "",
                                               "NodeNpcName": "",
                                               "NodeSound": "none",
-                                              "conversationText": "",
+                                              "conversationText": "Continue",
                                               "IsExpanded": true,
                                               "subNodes": [
                                                 {
@@ -153,7 +153,7 @@
                                                   "NodePortraitBitmap": "",
                                                   "NodeNpcName": "",
                                                   "NodeSound": "none",
-                                                  "conversationText": "[<i>Vroman looks confounded.</i>]  I have not been this upset since I found out my brother was dead.|***gc_journal_entry-->NOT::False    String::Q_MANFRED    String::<45    |",
+                                                  "conversationText": "[<i>Vroman looks confounded.</i>]  I have not been this upset since I found out my brother was dead.",
                                                   "IsExpanded": true,
                                                   "subNodes": [
                                                     {
@@ -166,7 +166,7 @@
                                                       "NodePortraitBitmap": "",
                                                       "NodeNpcName": "",
                                                       "NodeSound": "none",
-                                                      "conversationText": "",
+                                                      "conversationText": "Continue",
                                                       "IsExpanded": true,
                                                       "subNodes": [
                                                         {
@@ -192,7 +192,7 @@
                                                               "NodePortraitBitmap": "",
                                                               "NodeNpcName": "",
                                                               "NodeSound": "none",
-                                                              "conversationText": "In truth, Vroman, I would prefer it if your hat were a plain and modest skullcap.||***haberdasher_script-->***ga_take_gold-->Int::50    Int::0    ***ga_give_item-->String::vromans_skullcap    Int::1    Int::0    ***gc_check_gold-->NOT::False    Int::50    Int::0    ||",
+                                                              "conversationText": "In truth, Vroman, I would prefer it if your hat were a plain and modest skullcap.",
                                                               "IsExpanded": true,
                                                               "subNodes": [
                                                                 {
@@ -205,7 +205,7 @@
                                                                   "NodePortraitBitmap": "",
                                                                   "NodeNpcName": "",
                                                                   "NodeSound": "none",
-                                                                  "conversationText": "There you are, sir!  The hat has been altered to your friend's specifications.|***ga_fade_from_black-->Float::4    |",
+                                                                  "conversationText": "There you are, sir!  The hat has been altered to your friend's specifications.",
                                                                   "IsExpanded": true,
                                                                   "subNodes": [
                                                                     {
@@ -218,7 +218,7 @@
                                                                       "NodePortraitBitmap": "",
                                                                       "NodeNpcName": "",
                                                                       "NodeSound": "none",
-                                                                      "conversationText": "",
+                                                                      "conversationText": "Continue",
                                                                       "IsExpanded": true,
                                                                       "subNodes": [
                                                                         {
@@ -244,7 +244,7 @@
                                                                               "NodePortraitBitmap": "",
                                                                               "NodeNpcName": "",
                                                                               "NodeSound": "none",
-                                                                              "conversationText": "",
+                                                                              "conversationText": "End Dialog",
                                                                               "IsExpanded": true,
                                                                               "subNodes": [],
                                                                               "actions": [],
@@ -262,31 +262,16 @@
                                                                       "isLink": false
                                                                     }
                                                                   ],
-                                                                  "actions": [
-                                                                    {
-                                                                      "a_script": "ga_fade_from_black(nonIBscript)",
-                                                                      "a_parameter_1": "4",
-                                                                      "a_parameter_2": null,
-                                                                      "a_parameter_3": null,
-                                                                      "a_parameter_4": null
-                                                                    }
-                                                                  ],
+                                                                  "actions": [],
                                                                   "conditions": [],
                                                                   "isLink": false
                                                                 }
                                                               ],
                                                               "actions": [
                                                                 {
-                                                                  "a_script": "haberdasher_script(nonIBscript)",
-                                                                  "a_parameter_1": null,
-                                                                  "a_parameter_2": null,
-                                                                  "a_parameter_3": null,
-                                                                  "a_parameter_4": null
-                                                                },
-                                                                {
-                                                                  "a_script": "ga_take_gold(nonIBscript)",
+                                                                  "a_script": "gaTakeGold.cs",
                                                                   "a_parameter_1": "50",
-                                                                  "a_parameter_2": "0",
+                                                                  "a_parameter_2": null,
                                                                   "a_parameter_3": null,
                                                                   "a_parameter_4": null
                                                                 },
@@ -294,7 +279,7 @@
                                                                   "a_script": "gaGiveItem.cs",
                                                                   "a_parameter_1": "vromans_skullcap",
                                                                   "a_parameter_2": "1",
-                                                                  "a_parameter_3": "0",
+                                                                  "a_parameter_3": null,
                                                                   "a_parameter_4": null
                                                                 }
                                                               ],
@@ -305,7 +290,7 @@
                                                                   "c_and": false,
                                                                   "c_not": false,
                                                                   "c_parameter_1": "50",
-                                                                  "c_parameter_2": "0",
+                                                                  "c_parameter_2": null,
                                                                   "c_parameter_3": null,
                                                                   "c_parameter_4": null
                                                                 }
@@ -322,7 +307,7 @@
                                                               "NodePortraitBitmap": "",
                                                               "NodeNpcName": "",
                                                               "NodeSound": "none",
-                                                              "conversationText": "I would like it better if it had no brim and was more rounded at the top.||***haberdasher_script-->***ga_take_gold-->Int::50    Int::0    ***ga_give_item-->String::vromans_rounded    Int::1    Int::0    ***gc_check_gold-->NOT::False    Int::50    Int::0    ||",
+                                                              "conversationText": "I would like it better if it had no brim and was more rounded at the top.",
                                                               "IsExpanded": true,
                                                               "subNodes": [
                                                                 {
@@ -345,16 +330,9 @@
                                                               ],
                                                               "actions": [
                                                                 {
-                                                                  "a_script": "haberdasher_script(nonIBscript)",
-                                                                  "a_parameter_1": null,
-                                                                  "a_parameter_2": null,
-                                                                  "a_parameter_3": null,
-                                                                  "a_parameter_4": null
-                                                                },
-                                                                {
-                                                                  "a_script": "ga_take_gold(nonIBscript)",
+                                                                  "a_script": "gaTakeGold.cs",
                                                                   "a_parameter_1": "50",
-                                                                  "a_parameter_2": "0",
+                                                                  "a_parameter_2": null,
                                                                   "a_parameter_3": null,
                                                                   "a_parameter_4": null
                                                                 },
@@ -362,7 +340,7 @@
                                                                   "a_script": "gaGiveItem.cs",
                                                                   "a_parameter_1": "vromans_rounded",
                                                                   "a_parameter_2": "1",
-                                                                  "a_parameter_3": "0",
+                                                                  "a_parameter_3": null,
                                                                   "a_parameter_4": null
                                                                 }
                                                               ],
@@ -373,7 +351,7 @@
                                                                   "c_and": false,
                                                                   "c_not": false,
                                                                   "c_parameter_1": "50",
-                                                                  "c_parameter_2": "0",
+                                                                  "c_parameter_2": null,
                                                                   "c_parameter_3": null,
                                                                   "c_parameter_4": null
                                                                 }
@@ -390,7 +368,7 @@
                                                               "NodePortraitBitmap": "",
                                                               "NodeNpcName": "",
                                                               "NodeSound": "none",
-                                                              "conversationText": "Perhaps you should have it lined with fur for the approaching winter.||***haberdasher_script-->***ga_take_gold-->Int::50    Int::0    ***ga_give_item-->String::vromans_furred    Int::1    Int::0    ***gc_check_gold-->NOT::False    Int::50    Int::0    ||",
+                                                              "conversationText": "Perhaps you should have it lined with fur for the approaching winter.",
                                                               "IsExpanded": true,
                                                               "subNodes": [
                                                                 {
@@ -413,16 +391,9 @@
                                                               ],
                                                               "actions": [
                                                                 {
-                                                                  "a_script": "haberdasher_script(nonIBscript)",
-                                                                  "a_parameter_1": null,
-                                                                  "a_parameter_2": null,
-                                                                  "a_parameter_3": null,
-                                                                  "a_parameter_4": null
-                                                                },
-                                                                {
-                                                                  "a_script": "ga_take_gold(nonIBscript)",
+                                                                  "a_script": "gaTakeGold.cs",
                                                                   "a_parameter_1": "50",
-                                                                  "a_parameter_2": "0",
+                                                                  "a_parameter_2": null,
                                                                   "a_parameter_3": null,
                                                                   "a_parameter_4": null
                                                                 },
@@ -430,7 +401,7 @@
                                                                   "a_script": "gaGiveItem.cs",
                                                                   "a_parameter_1": "vromans_furred",
                                                                   "a_parameter_2": "1",
-                                                                  "a_parameter_3": "0",
+                                                                  "a_parameter_3": null,
                                                                   "a_parameter_4": null
                                                                 }
                                                               ],
@@ -441,7 +412,7 @@
                                                                   "c_and": false,
                                                                   "c_not": false,
                                                                   "c_parameter_1": "50",
-                                                                  "c_parameter_2": "0",
+                                                                  "c_parameter_2": null,
                                                                   "c_parameter_3": null,
                                                                   "c_parameter_4": null
                                                                 }
@@ -458,7 +429,7 @@
                                                               "NodePortraitBitmap": "",
                                                               "NodeNpcName": "",
                                                               "NodeSound": "none",
-                                                              "conversationText": "A hood would suit you better.||***haberdasher_script-->***ga_take_gold-->Int::50    Int::0    ***ga_give_item-->String::vromans_hood    Int::1    Int::0    ***gc_check_gold-->NOT::False    Int::50    Int::0    ||",
+                                                              "conversationText": "A hood would suit you better.",
                                                               "IsExpanded": true,
                                                               "subNodes": [
                                                                 {
@@ -481,16 +452,9 @@
                                                               ],
                                                               "actions": [
                                                                 {
-                                                                  "a_script": "haberdasher_script(nonIBscript)",
-                                                                  "a_parameter_1": null,
-                                                                  "a_parameter_2": null,
-                                                                  "a_parameter_3": null,
-                                                                  "a_parameter_4": null
-                                                                },
-                                                                {
-                                                                  "a_script": "ga_take_gold(nonIBscript)",
+                                                                  "a_script": "gaTakeGold.cs",
                                                                   "a_parameter_1": "50",
-                                                                  "a_parameter_2": "0",
+                                                                  "a_parameter_2": null,
                                                                   "a_parameter_3": null,
                                                                   "a_parameter_4": null
                                                                 },
@@ -498,7 +462,7 @@
                                                                   "a_script": "gaGiveItem.cs",
                                                                   "a_parameter_1": "vromans_hood",
                                                                   "a_parameter_2": "1",
-                                                                  "a_parameter_3": "0",
+                                                                  "a_parameter_3": null,
                                                                   "a_parameter_4": null
                                                                 }
                                                               ],
@@ -509,7 +473,7 @@
                                                                   "c_and": false,
                                                                   "c_not": false,
                                                                   "c_parameter_1": "50",
-                                                                  "c_parameter_2": "0",
+                                                                  "c_parameter_2": null,
                                                                   "c_parameter_3": null,
                                                                   "c_parameter_4": null
                                                                 }
@@ -552,8 +516,8 @@
                                                       "c_and": false,
                                                       "c_not": false,
                                                       "c_parameter_1": "Q_MANFRED",
-                                                      "c_parameter_2": "<45",
-                                                      "c_parameter_3": null,
+                                                      "c_parameter_2": "<",
+                                                      "c_parameter_3": "45",
                                                       "c_parameter_4": null
                                                     }
                                                   ],
@@ -569,7 +533,7 @@
                                                   "NodePortraitBitmap": "",
                                                   "NodeNpcName": "",
                                                   "NodeSound": "none",
-                                                  "conversationText": "[<i>Vroman looks confounded.</i>]  I have not been this upset since I mistook the body of Nevin for that of my brother.|***gc_journal_entry-->NOT::False    String::Q_MANFRED    String::>45    |",
+                                                  "conversationText": "[<i>Vroman looks confounded.</i>]  I have not been this upset since I mistook the body of Nevin for that of my brother.",
                                                   "IsExpanded": true,
                                                   "subNodes": [
                                                     {
@@ -582,7 +546,7 @@
                                                       "NodePortraitBitmap": "",
                                                       "NodeNpcName": "",
                                                       "NodeSound": "none",
-                                                      "conversationText": "",
+                                                      "conversationText": "Continue",
                                                       "IsExpanded": true,
                                                       "subNodes": [
                                                         {
@@ -616,8 +580,8 @@
                                                       "c_and": false,
                                                       "c_not": false,
                                                       "c_parameter_1": "Q_MANFRED",
-                                                      "c_parameter_2": ">45",
-                                                      "c_parameter_3": null,
+                                                      "c_parameter_2": ">",
+                                                      "c_parameter_3": "45",
                                                       "c_parameter_4": null
                                                     }
                                                   ],
@@ -687,8 +651,8 @@
               "c_and": false,
               "c_not": false,
               "c_parameter_1": "Q_MANFRED",
-              "c_parameter_2": ">5",
-              "c_parameter_3": null,
+              "c_parameter_2": ">",
+              "c_parameter_3": "5",
               "c_parameter_4": null
             }
           ],
@@ -704,9 +668,27 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Greetings!|***gc_check_item-->NOT::True    String::vromans_hat    Int::1    |",
+          "conversationText": "Greetings!",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 34,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
@@ -732,9 +714,27 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Greetings!  Please come speak to me later--[<i>Looking at Vroman</i>]--I believe we have some business to discuss.|***gc_journal_entry-->NOT::False    String::Q_MANFRED    String::<5    |",
+          "conversationText": "Greetings!  Please come speak to me later--[<i>Looking at Vroman</i>]--I believe we have some business to discuss.",
           "IsExpanded": true,
-          "subNodes": [],
+          "subNodes": [
+            {
+              "idNum": 35,
+              "orderNum": 0,
+              "pcNode": true,
+              "linkTo": 0,
+              "ShowOnlyOnce": false,
+              "NodeIsActive": true,
+              "NodePortraitBitmap": "",
+              "NodeNpcName": "",
+              "NodeSound": "none",
+              "conversationText": "End Dialog",
+              "IsExpanded": true,
+              "subNodes": [],
+              "actions": [],
+              "conditions": [],
+              "isLink": false
+            }
+          ],
           "actions": [],
           "conditions": [
             {
@@ -743,8 +743,8 @@
               "c_and": false,
               "c_not": false,
               "c_parameter_1": "Q_MANFRED",
-              "c_parameter_2": "<5",
-              "c_parameter_3": null,
+              "c_parameter_2": "<",
+              "c_parameter_3": "5",
               "c_parameter_4": null
             }
           ],
@@ -760,7 +760,7 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "Ah, do you seek an alteration to your hat, good sir?  It will only cost you fifty gold pieces.|***gc_check_item-->NOT::False    String::vromans_hat    Int::1    ***gc_journal_entry-->NOT::False    String::Q_MANFRED    String::>5    |",
+          "conversationText": "Ah, do you seek an alteration to your hat, good sir?  It will only cost you fifty gold pieces.",
           "IsExpanded": true,
           "subNodes": [
             {
@@ -773,7 +773,7 @@
               "NodePortraitBitmap": "",
               "NodeNpcName": "",
               "NodeSound": "none",
-              "conversationText": "",
+              "conversationText": "Continue",
               "IsExpanded": true,
               "subNodes": [
                 {
@@ -817,8 +817,8 @@
               "c_and": false,
               "c_not": false,
               "c_parameter_1": "Q_MANFRED",
-              "c_parameter_2": ">5",
-              "c_parameter_3": null,
+              "c_parameter_2": ">",
+              "c_parameter_3": "5",
               "c_parameter_4": null
             }
           ],
@@ -834,7 +834,7 @@
   "Narration": false,
   "PartyChat": false,
   "SpeakToMainPcOnly": false,
-  "NpcPortraitBitmap": "",
+  "NpcPortraitBitmap": "prp_c_asia32.png",
   "DefaultNpcName": "",
-  "NextIdNum": 33
+  "NextIdNum": 35
 }

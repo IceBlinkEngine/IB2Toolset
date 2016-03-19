@@ -903,10 +903,10 @@ namespace IB2Toolset
             if (!mouseInMapArea(gridX, gridY)) { return; }
             lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
             panelView.Focus();
-            /*//GDI if (prntForm.PropSelected)
+            if (prntForm.PropSelected)
             {
                 // TODO re-implement continuous drawing of props once converted to use Direct2D
-                refreshMap(true);
+                /*refreshMap(true);
                 try
                 {
                     if (selectedBitmap != null)
@@ -922,7 +922,7 @@ namespace IB2Toolset
                 catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
                 //save changes
                 UpdatePB();
-
+                */
             }
             else if (currentPoint != new Point(gridX, gridY))
             {
@@ -947,7 +947,7 @@ namespace IB2Toolset
                         clickDrawArea(e);
                     }
                 }
-            }*///GDI             
+            }//GDI             
         }
         private void panelView_MouseEnter(object sender, EventArgs e)
         {
