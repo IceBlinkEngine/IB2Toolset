@@ -188,6 +188,11 @@ namespace IB2Toolset
             {
                 createNewArea(area.MapSizeX, area.MapSizeY);
                 area.Filename = g_filename;
+                if (useDirect2D)
+                {
+                    //TODO add D2D stuff
+                    InitDirect2DAndDirectWrite();
+                }
             }
             lblMapSizeX.Text = area.MapSizeX.ToString();
             lblMapSizeY.Text = area.MapSizeY.ToString();
