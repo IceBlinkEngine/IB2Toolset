@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -138,34 +138,34 @@ namespace IB2Toolset
             get { return _moduleVersion; }
             set { _moduleVersion = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Filename of the Player to use as the default starting PC or the forced pre-made PC if that flag (mustUsePreMadePC) is true.")]
+        [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("Filename of the Player to use as the default starting PC or the forced pre-made PC if that flag (mustUsePreMadePC) is true.")]
         public string defaultPlayerFilename
         {
             get { return _defaultPlayerFilename; }
             set { _defaultPlayerFilename = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Set this flag to true if you only want the player to use the pre-made PC identified in defaultPlayerFilename property. The player will not be given an option to create a character.")]
+        [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("Set this flag to true if you only want the player to use the pre-made PC identified in defaultPlayerFilename property. The player will not be given an option to create a character.")]
         public bool mustUsePreMadePC
         {
             get { return _mustUsePreMadePC; }
             set { _mustUsePreMadePC = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates the realTime timer. It will make a new turn on main map happen after a number of realtime milliseconds defined in realTimeTimerLengthInMilliSecond. Its main purpose is to have moving NPC and creatures who even move when the party just stands idly. It does not affect combat which never has a real time component")]
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This flag activates the realTime timer. It will make a new turn on main map happen after a number of realtime milliseconds defined in realTimeTimerLengthInMilliSecond. Its main purpose is to have moving NPC and creatures who even move when the party just stands idly. It does not affect combat which never has a real time component")]
         public bool useRealTimeTimer
         {
             get { return _useRealTimeTimer; }
             set { _useRealTimeTimer = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using smooth movements of props (gliding).")]
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This flag activates using smooth movements of props (gliding).")]
         public bool useSmoothMovement
         {
             get { return _useSmoothMovement; }
             set { _useSmoothMovement = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag determines if the builder is using the new all tile system. If true, all single image background maps for areas will be converted into a folder of sliced tiles after loading (or reloading) an image for the area.")]
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This flag determines if the builder is using the new all tile system. If true, all single image background maps for areas will be converted into a folder of sliced tiles after loading (or reloading) an image for the area.")]
         public bool useAllTileSystem
         {
             get { return _useAllTileSystem; }
@@ -173,69 +173,69 @@ namespace IB2Toolset
 
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using the scifi Orbitron font (light).")]
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This flag activates using the scifi Orbitron font (light).")]
         public bool useOrbitronFont
         {
             get { return _useOrbitronFont; }
             set { _useOrbitronFont = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using UI background graphics.")]
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This flag activates using UI background graphics.")]
         public bool useUIBackground
         {
             get { return _useUIBackground; }
             set { _useUIBackground = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("The file name of the font including extension (ex. Metamorphous-Regular.ttf)")]
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("The file name of the font including extension (ex. Metamorphous-Regular.ttf)")]
         public string fontFilename
         {
             get { return _fontFilename; }
             set { _fontFilename = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("The font name. Often is different from the file name. To find out your font's name: find the font file in your modules 'fonts' folder (assuming you already placed the font there), right click on it and select 'preview', the font name is under 'Font name:' (ex. Metamorphous)")]
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("The font name. Often is different from the file name. To find out your font's name: find the font file in your modules 'fonts' folder (assuming you already placed the font there), right click on it and select 'preview', the font name is under 'Font name:' (ex. Metamorphous)")]
         public string fontName
         {
             get { return _fontName; }
             set { _fontName = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("A multiplier used to adjust the font size so that your custom font will fit well with the UI...keep trying different values until everything works well. This is a float value type so you can use a decimal value. (ex: 1.015 or 0.97 or 0.8 etc.)")]
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("A multiplier used to adjust the font size so that your custom font will fit well with the UI...keep trying different values until everything works well. This is a float value type so you can use a decimal value. (ex: 1.015 or 0.97 or 0.8 etc.)")]
         public float fontD2DScaleMultiplier
         {
             get { return _fontD2DScaleMultiplier; }
             set { _fontD2DScaleMultiplier = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This sets the number of lines of text that will be shown in the main map and combat log box. Best way to determine the appropriate vaule is to first pick the font size multipler (see fontD2DScaleMultiplier) and then run the game and click on some of the toggle buttons until you fill the log box and then count the number of lines that are displayed. Use that number for this property.")]
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This sets the number of lines of text that will be shown in the main map and combat log box. Best way to determine the appropriate vaule is to first pick the font size multipler (see fontD2DScaleMultiplier) and then run the game and click on some of the toggle buttons until you fill the log box and then count the number of lines that are displayed. Use that number for this property.")]
         public int logNumberOfLines
         {
             get { return _logNumberOfLines; }
             set { _logNumberOfLines = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Spell singular form (ex. Spell, Power, etc.)")]
+        [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for Spell singular form (ex. Spell, Power, etc.)")]
         public string spellLabelSingular
         {
             get { return _spellLabelSingular; }
             set { _spellLabelSingular = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Spell plural form (ex. Spells, Powers, etc.)")]
+        [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for Spell plural form (ex. Spells, Powers, etc.)")]
         public string spellLabelPlural
         {
             get { return _spellLabelPlural; }
             set { _spellLabelPlural = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Gold singular form (ex. Gold, Credit, etc.)")]
+        [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for Gold singular form (ex. Gold, Credit, etc.)")]
         public string goldLabelSingular
         {
             get { return _goldLabelSingular; }
             set { _goldLabelSingular = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Label used for Gold plural form (ex. Gold, Credits, etc.)")]
+        [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for Gold plural form (ex. Gold, Credits, etc.)")]
         public string goldLabelPlural
         {
             get { return _goldLabelPlural; }
             set { _goldLabelPlural = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("The total number of player made characters allowed in the party (default is 1, max PCs in a party is 6)")]
+        [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("The total number of player made characters allowed in the party (default is 1, max PCs in a party is 6)")]
         public int numberOfPlayerMadePcsAllowed
         {
             get { return _numberOfPlayerMadePcsAllowed; }
@@ -255,7 +255,7 @@ namespace IB2Toolset
                 }
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("The maximum total number of players that can be in the party (only values of 1-6 accepted)")]
+        [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("The maximum total number of players that can be in the party (only values of 1-6 accepted)")]
         public int MaxPartySize
         {
             get { return maxPartySize; }
@@ -302,62 +302,63 @@ namespace IB2Toolset
             set { _nextIdNumber = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("The duration in real time milliseconds after which a new turn on main map takes place. Default is 1500, which 1.5 seconds.")]
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("The duration in real time milliseconds after which a new turn on main map takes place. Default is 1500, which 1.5 seconds.")]
         public int realTimeTimerLengthInMilliSeconds
         {
             get { return _realTimeTimerLengthInMilliSeconds; }
             set { _realTimeTimerLengthInMilliSeconds = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("If you use an area border, like marble stone in Haarkenwold, set here how many squares broad that border is for the purpose of automatic transitions to neighbouring maps.")]
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("If you use an area border, like marble stone in Harkenwold, set here how many squares broad that border is for the purpose of automatic transitions to neighbouring maps.")]
         public int borderAreaSize
         {
             get { return _borderAreaSize; }
             set { _borderAreaSize = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Current value for World Time in generic units")]
+        [CategoryAttribute("02 - Starting Conditions"), DescriptionAttribute("Current value for World Time in generic units")]
         public int WorldTime
         {
             get { return worldTime; }
             set { worldTime = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Filename of starting Area (DO NOT include \".lvl\" extension)")]
+        [CategoryAttribute("02 - Starting Conditions"), DescriptionAttribute("Filename of starting Area (DO NOT include \".lvl\" extension)")]
         public string startingArea
         {
             get { return _startingArea; }
             set { _startingArea = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Starting X location in starting area")]
+        [CategoryAttribute("02 - Starting Conditions"), DescriptionAttribute("Starting X location in starting area")]
         public int startingPlayerPositionX
         {
             get { return _startingPlayerPositionX; }
             set { _startingPlayerPositionX = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Starting Y location in starting area")]
+        [CategoryAttribute("02 - Starting Conditions"), DescriptionAttribute("Starting Y location in starting area")]
         public int startingPlayerPositionY
         {
             get { return _startingPlayerPositionY; }
             set { _startingPlayerPositionY = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Starting party gold")]
+        [CategoryAttribute("02 - Starting Conditions"), DescriptionAttribute("Starting party gold")]
         public int partyGold
         {
             get { return _partyGold; }
             set { _partyGold = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("filename of the default party token image (minus the extension)")]
+        [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("filename of the default party token image (minus the extension)")]
         public string partyTokenFilename
         {
             get { return _partyTokenFilename; }
             set { _partyTokenFilename = value; }
         }
 
+        /*
         [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
         [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the end of each move on any area map (not combat)")]
         public string OnHeartBeatLogicTree
@@ -371,15 +372,16 @@ namespace IB2Toolset
             get { return onHeartBeatParms; }
             set { onHeartBeatParms = value; }
         }
+        */
 
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
-        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the end of each move on any area map (not combat)")]
+        [CategoryAttribute("06 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the end of each move on any area map (not combat)")]
         public string OnHeartBeatIBScript
         {
             get { return onHeartBeatIBScript; }
             set { onHeartBeatIBScript = value; }
         }
-        [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("06 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string OnHeartBeatIBScriptParms
         {
             get { return onHeartBeatIBScriptParms; }
