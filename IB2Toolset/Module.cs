@@ -116,6 +116,9 @@ namespace IB2Toolset
         private string _goldLabelPlural = "Gold";
         private int _borderAreaSize = 0;
         private bool _useAllTileSystem = false;
+        private bool _useMinimalisticUI = false;
+        private bool _useManualCombatCam = false;
+        private bool _useCombatSmoothMovement = false;
 
         #endregion
 
@@ -386,6 +389,27 @@ namespace IB2Toolset
         {
             get { return onHeartBeatIBScriptParms; }
             set { onHeartBeatIBScriptParms = value; }
+        }
+
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This activates a less space occupying UI, mainly removing some of the UI backgrounds")]
+        public bool useMinimalisticUI
+        {
+            get { return _useMinimalisticUI; }
+            set { _useMinimalisticUI = value; }
+        }
+
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This grants manual control over combat camera, even during cretaure moves. Once a pc is damaged or attacked though, the camera focuses on the pc")]
+        public bool useManualCombatCam
+        {
+            get { return _useManualCombatCam; }
+            set { _useManualCombatCam = value; }
+        }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This activates idle glide anmiations as well as move glide animations for creatures in combat")]
+        public bool useCombatSmoothMovement
+        {
+            get { return _useCombatSmoothMovement; }
+            set { _useCombatSmoothMovement = value; }
         }
 
         #endregion
