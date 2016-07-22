@@ -9,7 +9,7 @@ using System.Windows.Forms;
 //using IceBlinkCore;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class Blueprints : DockContent
     {
@@ -53,7 +53,7 @@ namespace IB2Toolset
             Dictionary<string, bool> nodeStates = SaveTreeState(tvCreatures);
             tvCreatures.Nodes.Clear();
             prntForm.creaturesParentNodeList.Clear();
-            foreach (Creature crt in prntForm.creaturesList)
+            foreach (Creature crt in prntForm.mod.moduleCreaturesList)
             {
                 if (!CheckExistsCreatureCategory(crt.cr_parentNodeName))
                     prntForm.creaturesParentNodeList.Add(crt.cr_parentNodeName);
@@ -79,7 +79,7 @@ namespace IB2Toolset
         }
         private void PopulateTreeViewCreatures(string parentName, TreeNode parentNode)
         {
-            var filteredItems = prntForm.creaturesList.Where(item => item.cr_parentNodeName == parentName);
+            var filteredItems = prntForm.mod.moduleCreaturesList.Where(item => item.cr_parentNodeName == parentName);
 
             TreeNode childNode;
             foreach (var i in filteredItems.ToList())
@@ -98,7 +98,7 @@ namespace IB2Toolset
         }
         public Creature GetCreature(string _nodeTag)
         {
-            foreach (Creature crt in prntForm.creaturesList)
+            foreach (Creature crt in prntForm.mod.moduleCreaturesList)
             {
                 if (crt.cr_tag == _nodeTag)
                     return crt;
@@ -108,7 +108,7 @@ namespace IB2Toolset
         public int GetCreatureIndex(string _nodeTag)
         {
             int cnt = 0;
-            foreach (Creature crt in prntForm.creaturesList)
+            foreach (Creature crt in prntForm.mod.moduleCreaturesList)
             {
                 if (crt.cr_tag == _nodeTag)
                     return cnt;
@@ -163,7 +163,7 @@ namespace IB2Toolset
             newCreature.cr_parentNodeName = "New Category";
             newCreature.cr_tag = "newTag_" + prntForm.mod.nextIdNumber;
             prntForm.nodeCount++;
-            prntForm.creaturesList.Add(newCreature);
+            prntForm.mod.moduleCreaturesList.Add(newCreature);
             UpdateTreeViewCreatures();
         }
         private void btnRemoveCreature_Click_1(object sender, EventArgs e)
@@ -173,7 +173,7 @@ namespace IB2Toolset
                 try
                 {
                     string _nodeTag = tvCreatures.SelectedNode.Name;
-                    prntForm.creaturesList.RemoveAt(GetCreatureIndex(_nodeTag));
+                    prntForm.mod.moduleCreaturesList.RemoveAt(GetCreatureIndex(_nodeTag));
                     tvCreatures.Nodes.RemoveAt(tvCreatures.SelectedNode.Index);
                     UpdateTreeViewCreatures();
                     // The Remove button was clicked.
@@ -197,9 +197,9 @@ namespace IB2Toolset
                 try
                 {
                     string _nodeTag = tvCreatures.SelectedNode.Name;
-                    Creature newCreature = prntForm.creaturesList[GetCreatureIndex(_nodeTag)].DeepCopy();
+                    Creature newCreature = prntForm.mod.moduleCreaturesList[GetCreatureIndex(_nodeTag)].DeepCopy();
                     newCreature.cr_tag = "newTag_" + prntForm.mod.nextIdNumber;
-                    prntForm.creaturesList.Add(newCreature);
+                    prntForm.mod.moduleCreaturesList.Add(newCreature);
                     UpdateTreeViewCreatures();
                 }
                 catch
@@ -211,7 +211,7 @@ namespace IB2Toolset
         }
         private void btnSortCreatures_Click(object sender, EventArgs e)
         {
-            prntForm.creaturesList = prntForm.creaturesList.OrderBy(o => o.cr_parentNodeName).ThenBy(o => o.cr_name).ToList();
+            prntForm.mod.moduleCreaturesList = prntForm.mod.moduleCreaturesList.OrderBy(o => o.cr_parentNodeName).ThenBy(o => o.cr_name).ToList();
             UpdateTreeViewCreatures();
         }
         #endregion
@@ -223,7 +223,7 @@ namespace IB2Toolset
             Dictionary<string, bool> nodeStates = SaveTreeState(tvItems);
             tvItems.Nodes.Clear();
             prntForm.itemsParentNodeList.Clear();
-            foreach (Item item in prntForm.itemsList)
+            foreach (Item item in prntForm.mod.moduleItemsList)
             {
                 if (!CheckExistsItemCategory(item.ItemCategoryName))
                     prntForm.itemsParentNodeList.Add(item.ItemCategoryName);
@@ -249,7 +249,7 @@ namespace IB2Toolset
         }
         private void PopulateTreeViewItems(string parentName, TreeNode parentNode)
         {
-            var filteredItems = prntForm.itemsList.Where(item => item.ItemCategoryName == parentName);
+            var filteredItems = prntForm.mod.moduleItemsList.Where(item => item.ItemCategoryName == parentName);
 
             TreeNode childNode;
             foreach (var i in filteredItems.ToList())
@@ -268,7 +268,7 @@ namespace IB2Toolset
         }
         public Item GetItem(string _nodeTag)
         {
-            foreach (Item item in prntForm.itemsList)
+            foreach (Item item in prntForm.mod.moduleItemsList)
             {
                 if (item.tag == _nodeTag)
                     return item;
@@ -278,7 +278,7 @@ namespace IB2Toolset
         public int GetItemIndex(string _nodeTag)
         {
             int cnt = 0;
-            foreach (Item item in prntForm.itemsList)
+            foreach (Item item in prntForm.mod.moduleItemsList)
             {
                 if (item.tag == _nodeTag)
                     return cnt;
@@ -313,7 +313,7 @@ namespace IB2Toolset
             newItem.ItemCategoryName = "New Category";
             newItem.tag = "newTag_" + prntForm.mod.nextIdNumber;
             prntForm.nodeCount++;
-            prntForm.itemsList.Add(newItem);
+            prntForm.mod.moduleItemsList.Add(newItem);
             UpdateTreeViewItems();
         }
         private void btnRemoveItem_Click_1(object sender, EventArgs e)
@@ -323,7 +323,7 @@ namespace IB2Toolset
                 try
                 {
                     string _nodeTag = tvItems.SelectedNode.Name;
-                    prntForm.itemsList.RemoveAt(GetItemIndex(_nodeTag));
+                    prntForm.mod.moduleItemsList.RemoveAt(GetItemIndex(_nodeTag));
                     tvItems.Nodes.RemoveAt(tvItems.SelectedNode.Index);
                     UpdateTreeViewItems();
                 }
@@ -341,9 +341,9 @@ namespace IB2Toolset
                 try
                 {
                     string _nodeTag = tvItems.SelectedNode.Name;
-                    Item newItem = prntForm.itemsList[GetItemIndex(_nodeTag)].DeepCopy();
+                    Item newItem = prntForm.mod.moduleItemsList[GetItemIndex(_nodeTag)].DeepCopy();
                     newItem.tag = "newTag_" + prntForm.mod.nextIdNumber;
-                    prntForm.itemsList.Add(newItem);
+                    prntForm.mod.moduleItemsList.Add(newItem);
                     UpdateTreeViewItems();
                 }
                 catch
@@ -355,7 +355,7 @@ namespace IB2Toolset
         }
         private void btnSortItems_Click(object sender, EventArgs e)
         {
-            prntForm.itemsList = prntForm.itemsList.OrderBy(o => o.ItemCategoryName).ThenBy(o => o.name).ToList();
+            prntForm.mod.moduleItemsList = prntForm.mod.moduleItemsList.OrderBy(o => o.ItemCategoryName).ThenBy(o => o.name).ToList();
             UpdateTreeViewItems();
         }
         #endregion
@@ -367,7 +367,7 @@ namespace IB2Toolset
             Dictionary<string, bool> nodeStates = SaveTreeState(tvProps);
             tvProps.Nodes.Clear();
             prntForm.propsParentNodeList.Clear();
-            foreach (Prop prp in prntForm.propsList)
+            foreach (Prop prp in prntForm.mod.modulePropsList)
             {
                 if (!CheckExistsPropCategory(prp.PropCategoryName))
                     prntForm.propsParentNodeList.Add(prp.PropCategoryName);
@@ -393,7 +393,7 @@ namespace IB2Toolset
         }
         private void PopulateTreeViewProps(string parentName, TreeNode parentNode)
         {
-            var filteredProps = prntForm.propsList.Where(prp => prp.PropCategoryName == parentName);
+            var filteredProps = prntForm.mod.modulePropsList.Where(prp => prp.PropCategoryName == parentName);
 
             TreeNode childNode;
             foreach (var pr in filteredProps.ToList())
@@ -412,7 +412,7 @@ namespace IB2Toolset
         }
         public Prop GetProp(string _nodeTag)
         {
-            foreach (Prop prp in prntForm.propsList)
+            foreach (Prop prp in prntForm.mod.modulePropsList)
             {
                 if (prp.PropTag == _nodeTag)
                     return prp;
@@ -422,7 +422,7 @@ namespace IB2Toolset
         public int GetPropIndex(string _nodeTag)
         {
             int cnt = 0;
-            foreach (Prop prp in prntForm.propsList)
+            foreach (Prop prp in prntForm.mod.modulePropsList)
             {
                 if (prp.PropTag == _nodeTag)
                     return cnt;
@@ -474,7 +474,7 @@ namespace IB2Toolset
             newProp.PropCategoryName = "New Category";
             newProp.PropTag = "newPropTag_" + prntForm.mod.nextIdNumber;
             prntForm.nodeCount++;
-            prntForm.propsList.Add(newProp);
+            prntForm.mod.modulePropsList.Add(newProp);
             UpdateTreeViewProps();
         }
         private void btnRemoveProp_Click_1(object sender, EventArgs e)
@@ -484,7 +484,7 @@ namespace IB2Toolset
                 try
                 {
                     string _nodeTag = tvProps.SelectedNode.Name;
-                    prntForm.propsList.RemoveAt(GetPropIndex(_nodeTag));
+                    prntForm.mod.modulePropsList.RemoveAt(GetPropIndex(_nodeTag));
                     tvProps.Nodes.RemoveAt(tvProps.SelectedNode.Index);
                     UpdateTreeViewProps();
                 }
@@ -502,9 +502,9 @@ namespace IB2Toolset
                 try
                 {
                     string _nodeTag = tvProps.SelectedNode.Name;
-                    Prop newProp = prntForm.propsList[GetPropIndex(_nodeTag)].DeepCopy();
+                    Prop newProp = prntForm.mod.modulePropsList[GetPropIndex(_nodeTag)].DeepCopy();
                     newProp.PropTag = "newPropTag_" + prntForm.mod.nextIdNumber;
-                    prntForm.propsList.Add(newProp);
+                    prntForm.mod.modulePropsList.Add(newProp);
                     UpdateTreeViewProps();
                 }
                 catch
@@ -516,7 +516,7 @@ namespace IB2Toolset
         }
         private void btnSortProps_Click(object sender, EventArgs e)
         {
-            prntForm.propsList = prntForm.propsList.OrderBy(o => o.PropCategoryName).ThenBy(o => o.PropName).ToList();
+            prntForm.mod.modulePropsList = prntForm.mod.modulePropsList.OrderBy(o => o.PropCategoryName).ThenBy(o => o.PropName).ToList();
             UpdateTreeViewProps();
         }
         #endregion            

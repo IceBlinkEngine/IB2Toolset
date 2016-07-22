@@ -10,15 +10,15 @@ using System.Windows.Forms;
 using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class ContainerEditor : DockContent
     {
         List<Item> cte_itemsList = new List<Item>();
-        IB2Toolset.Container cte_container = new IB2Toolset.Container();
+        IB2miniToolset.Container cte_container = new IB2miniToolset.Container();
         public ParentForm prntForm;
 
-        public ContainerEditor(List<Item> items, IB2Toolset.Container container, ParentForm p)
+        public ContainerEditor(List<Item> items, IB2miniToolset.Container container, ParentForm p)
         {
             InitializeComponent();
             cte_itemsList = items;

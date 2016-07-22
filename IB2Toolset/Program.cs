@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     static class Program
     {

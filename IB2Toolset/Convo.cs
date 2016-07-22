@@ -7,7 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     [Serializable]
     public class Convo

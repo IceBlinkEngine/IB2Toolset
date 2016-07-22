@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class ConversationsForm : DockContent
     {
@@ -54,7 +54,7 @@ namespace IB2Toolset
         {
             Convo newConvo = new Convo();
             newConvo.ConvoFileName = "new conversation";
-            prntForm.mod.moduleConvosList.Add(newConvo.ConvoFileName);
+            prntForm.mod.moduleConvosList.Add(newConvo.ConvoFileName);            
             refreshListBoxConvos();
             // should I create a new file at this point?
         }

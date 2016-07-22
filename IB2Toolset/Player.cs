@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class Player
     {

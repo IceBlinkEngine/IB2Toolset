@@ -9,7 +9,7 @@ using System.IO;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class Area
     {
@@ -17,56 +17,64 @@ namespace IB2Toolset
         private string filename = "newArea";
         private int areaVisibleDistance = 2;
         private bool restingAllowed = false;
-        private string imageFileName = "none";
-        public int backgroundImageStartLocX = 0;
-        public int backgroundImageStartLocY = 0;
+        //private string imageFileName = "none";
+        //public int backgroundImageStartLocX = 0;
+        //public int backgroundImageStartLocY = 0;
         private int mapSizeX = 16;
         private int mapSizeY = 16;
-        //private bool isWorldMap = false;
         private bool useMiniMapFogOfWar = false;
         private bool _areaDark = false;
         private bool useDayNightCycle = false;
         private int timePerSquare = 6;              //currently in minutes
-        private string areaMusic = "none";
-        private int areaMusicDelay = 0;
-        private int areaMusicDelayRandomAdder = 0;
-        private string areaSounds = "none";
-        private int areaSoundsDelay = 0;
-        private int areaSoundsDelayRandomAdder = 0;
-        private List<Tile> tiles = new List<Tile>();
+        //private string areaMusic = "none";
+        //private int areaMusicDelay = 0;
+        //private int areaMusicDelayRandomAdder = 0;
+        //private string areaSounds = "none";
+        //private int areaSoundsDelay = 0;
+        //private int areaSoundsDelayRandomAdder = 0;
+        //private List<Tile> tiles = new List<Tile>();
+        public List<string> Layer1Filename = new List<string>();
+        public List<int> Layer1Rotate = new List<int>();
+        public List<int> Layer1Mirror = new List<int>();
+        public List<string> Layer2Filename = new List<string>();
+        public List<int> Layer2Rotate = new List<int>();
+        public List<int> Layer2Mirror = new List<int>();
+        public List<int> Walkable = new List<int>();
+        public List<int> LoSBlocked = new List<int>();
+        public List<int> Visible = new List<int>();
         private List<Prop> props = new List<Prop>();
         private List<Trigger> triggers = new List<Trigger>();
-        //private string musicFileName = "forest.mp3";
         private int nextIdNumber = 100;
-        private string onHeartBeatLogicTree = "none";
-        private string onHeartBeatParms = "";
+        //private string musicFileName = "forest.mp3";
+        //private string onHeartBeatLogicTree = "none";
+        //private string onHeartBeatParms = "";
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
-        private List<LocalInt> areaLocalInts = new List<LocalInt>();
-        private List<LocalString> areaLocalStrings = new List<LocalString>();
+        //private List<LocalInt> areaLocalInts = new List<LocalInt>();
+        //private List<LocalString> areaLocalStrings = new List<LocalString>();
         private string _inGameAreaName = "newArea";
-        private bool _useMiniProps = false;
-        private bool _useSuperTinyProps = false;
+        //private bool _useMiniProps = false;
+        //private bool _useSuperTinyProps = false;
 
-        private string _areaWeatherScript = "";
-        private string _effectChannelScript1 = "deactivateChannel1";
-        private string _effectChannelScript2 = "deactivateChannel2";
-        private string _effectChannelScript3 = "deactivateChannel3";
-        private string _effectChannelScript4 = "deactivateChannel4";
-        private string _areaWeatherTag = "";
-        private string _areaWeatherName = "";
+        //private string _areaWeatherScript = "";
+        //private string _effectChannelScript1 = "deactivateChannel1";
+        //private string _effectChannelScript2 = "deactivateChannel2";
+        //private string _effectChannelScript3 = "deactivateChannel3";
+        //private string _effectChannelScript4 = "deactivateChannel4";
+        //private string _areaWeatherTag = "";
+        //private string _areaWeatherName = "";
 
-        private string _easternNeighbourArea = "";
-        private string _westernNeighbourArea = "";
-        private string _northernNeighbourArea = "";
-        private string _southernNeighbourArea = "";
+        //private string _easternNeighbourArea = "";
+        //private string _westernNeighbourArea = "";
+        //private string _northernNeighbourArea = "";
+        //private string _southernNeighbourArea = "";
 
-        public string sourceBitmapName = "";
-        public bool isJPGMap = false;
-        public bool isPNGMap = false;
+        //public string sourceBitmapName = "";
+        //public bool isJPGMap = false;
+        //public bool isPNGMap = false;
 
-        private bool _drawWithLessVisibleSeamsButMorePixelated = false;
-        private bool _use100pixSquares = false;
+        //private bool _drawWithLessVisibleSeamsButMorePixelated = false;
+        //private bool _use100pixSquares = false;
 
         #endregion
 
@@ -89,12 +97,6 @@ namespace IB2Toolset
             get { return restingAllowed; }
             set { restingAllowed = value; }
         }
-        /*[CategoryAttribute("01 - Main"), ReadOnly(true)]
-        public bool IsWorldMap
-        {
-            get { return isWorldMap; }
-            set { isWorldMap = value; }
-        }*/
         [CategoryAttribute("01 - Main")]
         public bool UseMiniMapFogOfWar
         {
@@ -107,94 +109,6 @@ namespace IB2Toolset
             get { return _inGameAreaName; }
             set { _inGameAreaName = value; }
         }
-
-        /*
-        [CategoryAttribute("01 - Main")]
-        public string areaWeatherScript
-        {
-            get { return _areaWeatherScript; }
-            set { _areaWeatherScript = value; }
-        }
-        */
-
-        [CategoryAttribute("03 - PLW: Neighbouring areas")]
-        public string easternNeighbourArea
-        {
-            get { return _easternNeighbourArea; }
-            set { _easternNeighbourArea = value; }
-        }
-        [CategoryAttribute("03 - PLW: Neighbouring areas")]
-        public string westernNeighbourArea
-        {
-            get { return _westernNeighbourArea; }
-            set { _westernNeighbourArea = value; }
-        }
-        [CategoryAttribute("03 - PLW: Neighbouring areas")]
-        public string northernNeighbourArea
-        {
-            get { return _northernNeighbourArea; }
-            set { _northernNeighbourArea = value; }
-        }
-        [CategoryAttribute("03 - PLW: Neighbouring areas")]
-        public string southernNeighbourArea
-        {
-            get { return _southernNeighbourArea; }
-            set { _southernNeighbourArea = value; }
-        }
-        /*
-        [CategoryAttribute("01 - Main")]
-        public string effectChannelScript1
-        {
-            get { return _effectChannelScript1; }
-            set { _effectChannelScript1 = value; }
-        }
-        [CategoryAttribute("01 - Main")]
-        public string effectChannelScript2
-        {
-            get { return _effectChannelScript2; }
-            set { _effectChannelScript2 = value; }
-        }
-        [CategoryAttribute("01 - Main")]
-        public string effectChannelScript3
-        {
-            get { return _effectChannelScript3; }
-            set { _effectChannelScript3 = value; }
-        }
-        [CategoryAttribute("01 - Main")]
-        public string effectChannelScript4
-        {
-            get { return _effectChannelScript4; }
-            set { _effectChannelScript4 = value; }
-        }
-        */
-
-        [CategoryAttribute("04 - PLW")]
-        public bool useMiniProps
-        {
-            get { return _useMiniProps; }
-            set { _useMiniProps = value; }
-        }
-        [CategoryAttribute("04 - PLW")]
-        public bool useSuperTinyProps
-        {
-            get { return _useSuperTinyProps; }
-            set { _useSuperTinyProps = value; }
-        }
-
-        [CategoryAttribute("04 - PLW")]
-        public bool drawWithLessVisibleSeamsButMorePixelated
-        {
-            get { return _drawWithLessVisibleSeamsButMorePixelated; }
-            set { _drawWithLessVisibleSeamsButMorePixelated = value; }
-        }
-
-        [CategoryAttribute("04 - PLW")]
-        public bool use100pixSquares
-        {
-            get { return _use100pixSquares; }
-            set { _use100pixSquares = value; }
-        }
-
         [CategoryAttribute("01 - Main")]
         public bool areaDark
         {
@@ -214,12 +128,6 @@ namespace IB2Toolset
             set { timePerSquare = value; }
         }
         [CategoryAttribute("08 - Properties that are ony readable"), DescriptionAttribute("These properties cannot be changed in toolset; you can read them in and use them via IBScript though"), ReadOnly(true)]
-        public string ImageFileName
-        {
-            get { return imageFileName; }
-            set { imageFileName = value; }
-        }
-        [CategoryAttribute("08 - Properties that are ony readable"), DescriptionAttribute("These properties cannot be changed in toolset; you can read them in and use them via IBScript though"), ReadOnly(true)]
         public int MapSizeX
         {
             get { return mapSizeX; }
@@ -231,12 +139,12 @@ namespace IB2Toolset
             get { return mapSizeY; }
             set { mapSizeY = value; }
         }
-        [CategoryAttribute("07 - Lists with objects contained in this area"), ReadOnly(true), Browsable(false)]
+        /*[CategoryAttribute("07 - Lists with objects contained in this area"), ReadOnly(true), Browsable(false)]
         public List<Tile> Tiles
         {
             get { return tiles; }
             set { tiles = value; }
-        }
+        }*/
         [CategoryAttribute("07 - Lists with objects contained in this area"), ReadOnly(true)]
         public List<Prop> Props
         {
@@ -249,44 +157,6 @@ namespace IB2Toolset
             get { return triggers; }
             set { triggers = value; }
         }
-        [Browsable(true), TypeConverter(typeof(MusicConverter))]
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Filename of music for the area (include extension)")]
-        public string AreaMusic
-        {
-            get { return areaMusic; }
-            set { areaMusic = value; }
-        }
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Delay between replaying music (in milliseconds)")]
-        public int AreaMusicDelay
-        {
-            get { return areaMusicDelay; }
-            set { areaMusicDelay = value; }
-        }
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Add a random amount of delay (between 0 and this value) to the AreaMusicDelay value (in milliseconds)")]
-        public int AreaMusicDelayRandomAdder
-        {
-            get { return areaMusicDelayRandomAdder; }
-            set { areaMusicDelayRandomAdder = value; }
-        }
-        [Browsable(true), TypeConverter(typeof(MusicConverter))]
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Filename of sounds for the area (include extension)")]
-        public string AreaSounds
-        {
-            get { return areaSounds; }
-            set { areaSounds = value; }
-        }
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Delay between replaying area sounds (in milliseconds)")]
-        public int AreaSoundsDelay
-        {
-            get { return areaSoundsDelay; }
-            set { areaSoundsDelay = value; }
-        }
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Add a random amount of delay (between 0 and this value) to the AreaSoundsDelay value (in milliseconds)")]
-        public int AreaSoundsDelayRandomAdder
-        {
-            get { return areaSoundsDelayRandomAdder; }
-            set { areaSoundsDelayRandomAdder = value; }
-        }
         [CategoryAttribute("08 - Properties that are ony readable"), DescriptionAttribute("These properties cannot be changed in toolset; you can read them in and use them via IBScript though"), ReadOnly(true)]
         public int NextIdNumber
         {
@@ -297,23 +167,6 @@ namespace IB2Toolset
             }
             set { nextIdNumber = value; }
         }
-
-        /*
-        [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("03 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the end of each move on this area map (not combat)")]
-        public string OnHeartBeatLogicTree
-        {
-            get { return onHeartBeatLogicTree; }
-            set { onHeartBeatLogicTree = value; }
-        }
-        [CategoryAttribute("03 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
-        public string OnHeartBeatParms
-        {
-            get { return onHeartBeatParms; }
-            set { onHeartBeatParms = value; }
-        }
-        */
-
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
         [CategoryAttribute("05 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the end of each move on this area map (not combat)")]
         public string OnHeartBeatIBScript
@@ -327,34 +180,6 @@ namespace IB2Toolset
             get { return onHeartBeatIBScriptParms; }
             set { onHeartBeatIBScriptParms = value; }
         }
-        [CategoryAttribute("06 - Locals"), DescriptionAttribute("These Local Variables will be saved in the save games")]
-        public List<LocalInt> AreaLocalInts
-        {
-            get { return areaLocalInts; }
-            set { areaLocalInts = value; }
-        }
-        [CategoryAttribute("06 - Locals"), DescriptionAttribute("These Local Variables will be saved in the save games")]
-        public List<LocalString> AreaLocalStrings
-        {
-            get { return areaLocalStrings; }
-            set { areaLocalStrings = value; }
-        }
-        //add converter and cmb functionality later
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("tag of weather object for this area"), Browsable(false)]
-        public string areaWeatherTag
-        {
-            get { return _areaWeatherTag; }
-            set { _areaWeatherTag = value; }
-        }
-
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("name of weather object for this area")]
-        public string areaWeatherName
-        {
-            get { return _areaWeatherName; }
-            set { _areaWeatherName = value; }
-        }
-
-
         #endregion
 
         public Area()

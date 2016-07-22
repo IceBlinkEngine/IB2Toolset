@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class TriggerEventsForm : DockContent
     {
@@ -403,22 +403,19 @@ namespace IB2Toolset
         public void refreshLists()
         {
             containersList.Clear();
-            foreach (Container c in prntForm.containersList)
+            foreach (Container c in prntForm.mod.moduleContainersList)
             {
                 containersList.Add(c.containerTag);
             }
             
             convosList.Clear();
             convosList = new List<string>(prntForm.mod.moduleConvosList);
-
-            logictreesList.Clear();
-            logictreesList = new List<string>(prntForm.mod.moduleLogicTreesList);
-
+                        
             ibscriptsList.Clear();
             ibscriptsList = new List<string>(prntForm.mod.moduleIBScriptsList);
 
             encountersList.Clear();
-            foreach (Encounter c in prntForm.encountersList)
+            foreach (Encounter c in prntForm.mod.moduleEncountersList)
             {
                 encountersList.Add(c.encounterName);
             }

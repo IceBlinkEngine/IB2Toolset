@@ -10,32 +10,30 @@ using System.Drawing;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class Encounter
     {
         private string encName = "newEncounter";
-        public char[,] encounterMapLayout = new char[7, 7];
-        private string mapImage = "none";
-        private bool useMapImage = false;
+        //private string mapImage = "none";
+        //private bool useMapImage = false;
         private bool useDayNightCycle = false;
-        public int MapSizeX = 7;
-        public int MapSizeY = 7;
-        public List<TileEnc> encounterTiles = new List<TileEnc>();
+        public int MapSizeX = 11;
+        public int MapSizeY = 11;
+        //public List<TileEnc> encounterTiles = new List<TileEnc>();
+        public List<string> Layer1Filename = new List<string>();
+        public List<int> Layer1Rotate = new List<int>();
+        public List<int> Layer1Mirror = new List<int>();
+        public List<string> Layer2Filename = new List<string>();
+        public List<int> Layer2Rotate = new List<int>();
+        public List<int> Layer2Mirror = new List<int>();
+        public List<int> Walkable = new List<int>();
+        public List<int> LoSBlocked = new List<int>();
         public List<CreatureRefs> encounterCreatureRefsList = new List<CreatureRefs>();
         public List<string> encounterCreatureList = new List<string>();
         public List<ItemRefs> encounterInventoryRefsList = new List<ItemRefs>();
         public List<Coordinate> encounterPcStartLocations = new List<Coordinate>();
-        public int goldDrop = 0;
-        private string areaMusic = "none";
-        private int areaMusicDelay = 0;
-        private int areaMusicDelayRandomAdder = 0;
-        private string onStartCombatRoundLogicTree = "none";
-        private string onStartCombatRoundParms = "";
-        private string onStartCombatTurnLogicTree = "none";
-        private string onStartCombatTurnParms = "";
-        private string onEndCombatLogicTree = "none";
-        private string onEndCombatParms = "";
+        public int goldDrop = 0;        
         private string onSetupCombatIBScript = "none";
         private string onSetupCombatIBScriptParms = "";
         private string onStartCombatRoundIBScript = "none";
@@ -51,83 +49,12 @@ namespace IB2Toolset
             get { return encName; }
             set { encName = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Map image file name (do NOT include file extension). Image must be 350x350 pixels.")]
-        public string MapImage
-        {
-            get { return mapImage; }
-            set { mapImage = value; }
-        }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("if True, the encounter will use the single image from the MapImage filename instead of using the tiles.")]
-        public bool UseMapImage
-        {
-            get { return useMapImage; }
-            set { useMapImage = value; }
-        }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Set to true if this encounter will use the day/night cycle tinting.")]
         public bool UseDayNightCycle
         {
             get { return useDayNightCycle; }
             set { useDayNightCycle = value; }
         }
-        [Browsable(true), TypeConverter(typeof(MusicConverter))]
-        [CategoryAttribute("02 - Music"), DescriptionAttribute("Filename of music for the area (no extension)")]
-        public string AreaMusic
-        {
-            get { return areaMusic; }
-            set { areaMusic = value; }
-        }
-        [CategoryAttribute("02 - Music"), DescriptionAttribute("Delay between replaying music (in milliseconds)")]
-        public int AreaMusicDelay
-        {
-            get { return areaMusicDelay; }
-            set { areaMusicDelay = value; }
-        }
-        [CategoryAttribute("02 - Music"), DescriptionAttribute("Add a random amount of delay (between 0 and this value) to the AreaMusicDelay value (in milliseconds)")]
-        public int AreaMusicDelayRandomAdder
-        {
-            get { return areaMusicDelayRandomAdder; }
-            set { areaMusicDelayRandomAdder = value; }
-        }
-        [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the start of each combat round")]
-        public string OnStartCombatRoundLogicTree
-        {
-            get { return onStartCombatRoundLogicTree; }
-            set { onStartCombatRoundLogicTree = value; }
-        }
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
-        public string OnStartCombatRoundParms
-        {
-            get { return onStartCombatRoundParms; }
-            set { onStartCombatRoundParms = value; }
-        }
-        [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the start of each PC and Enemy turn in combat")]
-        public string OnStartCombatTurnLogicTree
-        {
-            get { return onStartCombatTurnLogicTree; }
-            set { onStartCombatTurnLogicTree = value; }
-        }
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
-        public string OnStartCombatTurnParms
-        {
-            get { return onStartCombatTurnParms; }
-            set { onStartCombatTurnParms = value; }
-        }
-        [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the end of combat")]
-        public string OnEndCombatLogicTree
-        {
-            get { return onEndCombatLogicTree; }
-            set { onEndCombatLogicTree = value; }
-        }
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
-        public string OnEndCombatParms
-        {
-            get { return onEndCombatParms; }
-            set { onEndCombatParms = value; }
-        }
-
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
         [CategoryAttribute("02 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run once at setup of combat, before first combat round")]
         public string OnSetupCombatIBScript
@@ -189,19 +116,7 @@ namespace IB2Toolset
         {
             Encounter copy = new Encounter();
             copy = (Encounter)this.MemberwiseClone();
-            
-            copy.encounterTiles = new List<TileEnc>();
-            foreach (TileEnc s in this.encounterTiles)
-            {
-                TileEnc newTileEnc = new TileEnc();
-                newTileEnc.Layer1Filename = s.Layer1Filename;
-                newTileEnc.Layer2Filename = s.Layer2Filename;
-                newTileEnc.Layer3Filename = s.Layer3Filename;
-                newTileEnc.LoSBlocked = s.LoSBlocked;
-                newTileEnc.Walkable = s.Walkable;
-                copy.encounterTiles.Add(newTileEnc);
-            }
-
+                        
             copy.encounterCreatureRefsList = new List<CreatureRefs>();
             foreach (CreatureRefs s in this.encounterCreatureRefsList)
             {
@@ -236,18 +151,71 @@ namespace IB2Toolset
                 copy.encounterPcStartLocations.Add(newCoor);
             }
 
+            copy.Layer1Filename = new List<string>();
+            foreach (string s in this.Layer1Filename)
+            {
+                copy.Layer1Filename.Add(s);
+            }
+            copy.Layer1Mirror = new List<int>();
+            foreach (int s in this.Layer1Mirror)
+            {
+                copy.Layer1Mirror.Add(s);
+            }
+            copy.Layer1Rotate = new List<int>();
+            foreach (int s in this.Layer1Rotate)
+            {
+                copy.Layer1Rotate.Add(s);
+            }
+            copy.Layer2Filename = new List<string>();
+            foreach (string s in this.Layer2Filename)
+            {
+                copy.Layer2Filename.Add(s);
+            }
+            copy.Layer2Mirror = new List<int>();
+            foreach (int s in this.Layer2Mirror)
+            {
+                copy.Layer2Mirror.Add(s);
+            }
+            copy.Layer2Rotate = new List<int>();
+            foreach (int s in this.Layer2Rotate)
+            {
+                copy.Layer2Rotate.Add(s);
+            }
+            copy.Walkable = new List<int>();
+            foreach (int s in this.Walkable)
+            {
+                copy.Walkable.Add(s);
+            }
+            copy.LoSBlocked = new List<int>();
+            foreach (int s in this.LoSBlocked)
+            {
+                copy.LoSBlocked.Add(s);
+            }
             return copy;
         }
         public void SetAllToGrass()
         {
-            for (int x = 0; x < this.MapSizeX; x++)
+            for (int index = 0; index < (this.MapSizeX * this.MapSizeY); index++)
+            {
+                this.Layer1Filename.Add("t_grass");
+                this.Layer1Rotate.Add(0);
+                this.Layer1Mirror.Add(0);
+                this.Layer2Filename.Add("t_blank");
+                this.Layer2Rotate.Add(0);
+                this.Layer2Mirror.Add(0);
+                this.Walkable.Add(1);
+                this.LoSBlocked.Add(0);
+            }
+
+            /*for (int x = 0; x < this.MapSizeX; x++)
             {
                 for (int y = 0; y < this.MapSizeY; y++)
                 {
                     TileEnc t = new TileEnc();
-                    encounterTiles.Add(t);                                        
+                    encounterTiles.Add(t);   
+                                                         
                 }
-            }
+            }*/
         }
     }  
 }

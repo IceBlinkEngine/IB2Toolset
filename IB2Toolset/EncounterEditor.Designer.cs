@@ -1,4 +1,4 @@
-﻿namespace IB2Toolset
+﻿namespace IB2miniToolset
 {
     partial class EncounterEditor
     {
@@ -87,7 +87,7 @@
             this.lbxItems = new System.Windows.Forms.ListBox();
             this.btnAddItems = new System.Windows.Forms.Button();
             this.btnRemoveItems = new System.Windows.Forms.Button();
-            this.panelNoScrollOnFocus1 = new IB2Toolset.PanelNoScrollOnFocus();
+            this.panelNoScrollOnFocus1 = new IB2miniToolset.PanelNoScrollOnFocus();
             this.panelView = new System.Windows.Forms.Panel();
             this.btnLoadMap = new System.Windows.Forms.Button();
             this.chkUseMapImage = new System.Windows.Forms.CheckBox();

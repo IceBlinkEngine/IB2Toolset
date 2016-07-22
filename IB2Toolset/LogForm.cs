@@ -9,7 +9,7 @@ using System.Windows.Forms;
 //using IceBlinkCore;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class LogForm : DockContent
     {

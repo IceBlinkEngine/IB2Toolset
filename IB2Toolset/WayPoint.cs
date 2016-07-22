@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class WayPoint
     {

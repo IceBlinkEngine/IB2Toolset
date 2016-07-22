@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class DataCheck
     {
@@ -37,7 +37,7 @@ namespace IB2Toolset
 
         public void CheckCasterNoKnownSpells()
         {
-            foreach (Creature crt in frm.creaturesList)
+            foreach (Creature crt in frm.mod.moduleCreaturesList)
             {
                 if ((crt.cr_ai == "GeneralCaster") && (crt.knownSpellsTags.Count == 0))
                 {
@@ -47,20 +47,20 @@ namespace IB2Toolset
         }
         public void CheckEncounterMapsNoFileExtension()
         {
-            foreach (Encounter enc in frm.encountersList)
+            /*foreach (Encounter enc in frm.encountersList)
             {
                 if ((enc.UseMapImage) && (enc.MapImage.Contains('.')))
                 {
                     frm.logText("ENCOUNTER ERROR: " + enc.encounterName + " should NOT have a file extension at end of map image filename: " + enc.MapImage + Environment.NewLine);
                 }
-            }
+            }*/
         }
         public void CheckDuplicateTagsOrResRef()
         {
             //check creatures, items, props, containers, shops, encounters, races, classes, spells, traits, journal
-            foreach (Creature crt in frm.creaturesList)
+            foreach (Creature crt in frm.mod.moduleCreaturesList)
             {
-                foreach (Creature crtck in frm.creaturesList)
+                foreach (Creature crtck in frm.mod.moduleCreaturesList)
                 {
                     if ((crt != crtck) && (crt.cr_tag.Equals(crtck.cr_tag)))
                     {
@@ -72,9 +72,9 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (Item crt in frm.itemsList)
+            foreach (Item crt in frm.mod.moduleItemsList)
             {
-                foreach (Item crtck in frm.itemsList)
+                foreach (Item crtck in frm.mod.moduleItemsList)
                 {
                     if ((crt != crtck) && (crt.tag.Equals(crtck.tag)))
                     {
@@ -86,9 +86,9 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (Prop it in frm.propsList)
+            foreach (Prop it in frm.mod.modulePropsList)
             {
-                foreach (Prop itck in frm.propsList)
+                foreach (Prop itck in frm.mod.modulePropsList)
                 {
                     if ((it != itck) && (it.PropTag.Equals(itck.PropTag)))
                     {
@@ -96,9 +96,9 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (Container it in frm.containersList)
+            foreach (Container it in frm.mod.moduleContainersList)
             {
-                foreach (Container itck in frm.containersList)
+                foreach (Container itck in frm.mod.moduleContainersList)
                 {
                     if ((it != itck) && (it.containerTag.Equals(itck.containerTag)))
                     {
@@ -106,9 +106,9 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (Shop it in frm.shopsList)
+            foreach (Shop it in frm.mod.moduleShopsList)
             {
-                foreach (Shop itck in frm.shopsList)
+                foreach (Shop itck in frm.mod.moduleShopsList)
                 {
                     if ((it != itck) && (it.shopTag.Equals(itck.shopTag)))
                     {
@@ -116,9 +116,9 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (Encounter it in frm.encountersList)
+            foreach (Encounter it in frm.mod.moduleEncountersList)
             {
-                foreach (Encounter itck in frm.encountersList)
+                foreach (Encounter itck in frm.mod.moduleEncountersList)
                 {
                     if ((it != itck) && (it.encounterName.Equals(itck.encounterName)))
                     {
@@ -126,9 +126,9 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (Race it in frm.racesList)
+            foreach (Race it in frm.mod.moduleRacesList)
             {
-                foreach (Race itck in frm.racesList)
+                foreach (Race itck in frm.mod.moduleRacesList)
                 {
                     if ((it != itck) && (it.tag.Equals(itck.tag)))
                     {
@@ -136,9 +136,9 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (PlayerClass it in frm.playerClassesList)
+            foreach (PlayerClass it in frm.mod.modulePlayerClassList)
             {
-                foreach (PlayerClass itck in frm.playerClassesList)
+                foreach (PlayerClass itck in frm.mod.modulePlayerClassList)
                 {
                     if ((it != itck) && (it.tag.Equals(itck.tag)))
                     {
@@ -146,9 +146,9 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (Spell it in frm.spellsList)
+            foreach (Spell it in frm.mod.moduleSpellsList)
             {
-                foreach (Spell itck in frm.spellsList)
+                foreach (Spell itck in frm.mod.moduleSpellsList)
                 {
                     if ((it != itck) && (it.tag.Equals(itck.tag)))
                     {
@@ -156,33 +156,13 @@ namespace IB2Toolset
                     }
                 }
             }
-            foreach (Trait it in frm.traitsList)
+            foreach (Trait it in frm.mod.moduleTraitsList)
             {
-                foreach (Trait itck in frm.traitsList)
+                foreach (Trait itck in frm.mod.moduleTraitsList)
                 {
                     if ((it != itck) && (it.tag.Equals(itck.tag)))
                     {
                         frm.logText("TRAITS ERROR: " + it.name + " has the same tag as " + itck.name + Environment.NewLine);
-                    }
-                }
-            }
-            foreach (WeatherEffect it in frm.weatherEffectsList)
-            {
-                foreach (WeatherEffect itck in frm.weatherEffectsList)
-                {
-                    if ((it != itck) && (it.tag.Equals(itck.tag)))
-                    {
-                        frm.logText("WEATHEREFFECTS ERROR: " + it.name + " has the same tag as " + itck.name + Environment.NewLine);
-                    }
-                }
-            }
-            foreach (Weather it in frm.weathersList)
-            {
-                foreach (Weather itck in frm.weathersList)
-                {
-                    if ((it != itck) && (it.tag.Equals(itck.tag)))
-                    {
-                        frm.logText("WEATHER ERROR: " + it.name + " has the same tag as " + itck.name + Environment.NewLine);
                     }
                 }
             }
@@ -304,7 +284,7 @@ namespace IB2Toolset
         public void CheckContainers()
         {
             //check for empty containers
-            foreach (Container c in frm.containersList)
+            foreach (Container c in frm.mod.moduleContainersList)
             {
                 if (c.containerItemRefs.Count == 0)
                 {
@@ -315,7 +295,7 @@ namespace IB2Toolset
         public void CheckEncounters()
         {
             //check for encounter with no creatures and/or no starting PC locations or less than 6
-            foreach (Encounter enc in frm.encountersList)
+            foreach (Encounter enc in frm.mod.moduleEncountersList)
             {
                 if (enc.encounterCreatureRefsList.Count == 0)
                 {
@@ -327,9 +307,9 @@ namespace IB2Toolset
                 }
                 //check to see if any tiles are non-walkable
                 int foundOne = 0;
-                foreach (TileEnc t in enc.encounterTiles)
+                foreach (int t in enc.Walkable)
                 {
-                    if (!t.Walkable)
+                    if (t == 0)
                     {
                         foundOne++;
                         break;

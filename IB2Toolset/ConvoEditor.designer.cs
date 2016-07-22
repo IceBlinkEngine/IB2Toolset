@@ -1,4 +1,4 @@
-﻿namespace IB2Toolset
+﻿namespace IB2miniToolset
 {
     partial class ConvoEditor
     {
@@ -1332,11 +1332,11 @@
             // 
             // conditionBindingSource
             // 
-            this.conditionBindingSource.DataSource = typeof(IB2Toolset.Condition);
+            this.conditionBindingSource.DataSource = typeof(IB2miniToolset.Condition);
             // 
             // conditionBindingSource1
             // 
-            this.conditionBindingSource1.DataSource = typeof(IB2Toolset.Condition);
+            this.conditionBindingSource1.DataSource = typeof(IB2miniToolset.Condition);
             // 
             // btnCondCopySelected
             // 
