@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class JournalEditor : Form
     {
@@ -25,12 +25,12 @@ namespace IB2miniToolset
         }
         private void JournalEditor_Load(object sender, EventArgs e)
         {
-            if (prntForm.mod.moduleJournal.Count == 0)
+            if (prntForm.journal.Count == 0)
             {
                 JournalQuest newCat = new JournalQuest();
                 //newCat.OrderIndex = prntForm.journal.categories.Count;
                 newCat.Tag = "catTag" + prntForm.mod.nextIdNumber.ToString();
-                prntForm.mod.moduleJournal.Add(newCat);
+                prntForm.journal.Add(newCat);
                 JournalEntry newEntry = new JournalEntry();
                 //newEntry.OrderIndex = newCat.Entries.Count;
                 newEntry.Tag = "entryTag" + prntForm.mod.nextIdNumber.ToString();
@@ -191,7 +191,7 @@ namespace IB2miniToolset
         private void UpdateTreeView()
         {
             treeView1.Nodes.Clear();
-            foreach (JournalQuest pnt in prntForm.mod.moduleJournal)
+            foreach (JournalQuest pnt in prntForm.journal)
             {
                 TreeNode parentNode = treeView1.Nodes.Add(pnt.Name);
                 parentNode.Name = pnt.Tag;
@@ -211,7 +211,7 @@ namespace IB2miniToolset
         }
         public JournalQuest GetParentByTag(string _nodeTag)
         {
-            foreach (JournalQuest cust in prntForm.mod.moduleJournal)
+            foreach (JournalQuest cust in prntForm.journal)
             {
                 if (cust.Tag == _nodeTag)
                     return cust;
@@ -221,7 +221,7 @@ namespace IB2miniToolset
         public int GetIndexOfParentByTag(string _nodeTag)
         {
             int index = 0;
-            foreach (JournalQuest cust in prntForm.mod.moduleJournal)
+            foreach (JournalQuest cust in prntForm.journal)
             {
                 if (cust.Tag == _nodeTag)
                 {
@@ -233,7 +233,7 @@ namespace IB2miniToolset
         }
         public JournalEntry GetChildByTag(string parentTag, string childTag)
         {
-            foreach (JournalQuest cust in prntForm.mod.moduleJournal)
+            foreach (JournalQuest cust in prntForm.journal)
             {
                 if (cust.Tag.Equals(parentTag))
                 {
@@ -250,7 +250,7 @@ namespace IB2miniToolset
         }
         public JournalQuest GetParentOfChildByTag(string _nodeTag)
         {
-            foreach (JournalQuest cust in prntForm.mod.moduleJournal)
+            foreach (JournalQuest cust in prntForm.journal)
             {
                 foreach (JournalEntry chd in cust.Entries)
                 {
@@ -262,7 +262,7 @@ namespace IB2miniToolset
         }
         public int GetIndexOfChildByTag(string _nodeTag)
         {
-            foreach (JournalQuest cust in prntForm.mod.moduleJournal)
+            foreach (JournalQuest cust in prntForm.journal)
             {
                 int index = 0;
                 foreach (JournalEntry chd in cust.Entries)
@@ -298,7 +298,7 @@ namespace IB2miniToolset
             JournalQuest newParent = new JournalQuest();
             //newParent.OrderIndex = prntForm.journal.categories.Count;
             newParent.Tag = "catTag" + prntForm.mod.nextIdNumber.ToString(); 
-            prntForm.mod.moduleJournal.Add(newParent);
+            prntForm.journal.Add(newParent);
             UpdateTreeView();
         }
         private void AddChild(string parentTag)
@@ -312,12 +312,12 @@ namespace IB2miniToolset
         }
         private void RemoveParent()
         {
-            prntForm.mod.moduleJournal.Remove(GetParentByTag(currentSelectedNode.Name));
+            prntForm.journal.Remove(GetParentByTag(currentSelectedNode.Name));
             UpdateTreeView();
         }
         private void RemoveChild()
         {
-            foreach (JournalQuest cust in prntForm.mod.moduleJournal)
+            foreach (JournalQuest cust in prntForm.journal)
             {
                 foreach (JournalEntry chd in cust.Entries)
                 {

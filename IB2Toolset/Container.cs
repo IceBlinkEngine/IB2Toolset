@@ -8,7 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 //using IceBlink;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     /*public class Containers
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     [Serializable]
     public class ContentNode
@@ -17,6 +17,7 @@ namespace IB2miniToolset
         public bool NodeIsActive = true;
         public string NodePortraitBitmap = "";
         public string NodeNpcName = "";
+        public string NodeSound = "none";
         public string conversationText = "Continue";
         public bool IsExpanded = true;
         public List<ContentNode> subNodes = new List<ContentNode>();

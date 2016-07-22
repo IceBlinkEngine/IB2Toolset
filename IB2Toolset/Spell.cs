@@ -11,8 +11,53 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 //using IceBlink;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
+    /*public class Spells
+    {
+        public List<Spell> spellList = new List<Spell>();
+
+        public Spells()
+        {
+        }
+        public void saveSpellsFile(string filename)
+        {
+            string json = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.Write(json.ToString());
+            }
+        }
+        public Spells loadSpellsFile(string filename)
+        {
+            Spells toReturn = null;
+
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(filename))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (Spells)serializer.Deserialize(file, typeof(Spells));
+            }
+            return toReturn;
+        }
+        public Spell getSpellByTag(string tag)
+        {
+            foreach (Spell s in spellList)
+            {
+                if (s.tag == tag) return s;
+            }
+            return null;
+        }
+        public Spell getSpellByName(string name)
+        {
+            foreach (Spell s in spellList)
+            {
+                if (s.name == name) return s;
+            }
+            return null;
+        }
+    }*/
+
     public class Spell
     {        
         public enum EffectType

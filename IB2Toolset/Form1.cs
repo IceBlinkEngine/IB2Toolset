@@ -13,30 +13,32 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using Newtonsoft.Json;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class ParentForm : Form
     {
         //added comment here to push a change
         public string _mainDirectory;
         public Module mod = new Module();
-        //public List<JournalQuest> journal = new List<JournalQuest>();
-        //public List<Creature> creaturesList = new List<Creature>();
-        //public List<Container> containersList = new List<Container>();
-        //public List<Shop> shopsList = new List<Shop>();
-        //public List<Encounter> encountersList = new List<Encounter>();
-        //public List<Item> itemsList = new List<Item>();
-        //public List<Prop> propsList = new List<Prop>();
-        //public List<PlayerClass> playerClassesList = new List<PlayerClass>();
-        //public List<Race> racesList = new List<Race>();
-        //public List<Spell> spellsList = new List<Spell>();
-        //public List<Trait> traitsList = new List<Trait>();
-        //public List<Effect> effectsList = new List<Effect>();
+        public List<JournalQuest> journal = new List<JournalQuest>();
+        public List<Creature> creaturesList = new List<Creature>();
+        public List<Container> containersList = new List<Container>();
+        public List<Shop> shopsList = new List<Shop>();
+        public List<Encounter> encountersList = new List<Encounter>();
+        public List<Item> itemsList = new List<Item>();
+        public List<Prop> propsList = new List<Prop>();
+        public List<PlayerClass> playerClassesList = new List<PlayerClass>();
+        public List<Race> racesList = new List<Race>();
+        public List<Spell> spellsList = new List<Spell>();
+        public List<Trait> traitsList = new List<Trait>();
+        public List<WeatherEffect> weatherEffectsList = new List<WeatherEffect>();
+        public List<Weather> weathersList = new List<Weather>();
+        public List<Effect> effectsList = new List<Effect>();
         public List<string> itemsParentNodeList = new List<string>();
         public List<string> creaturesParentNodeList = new List<string>();
         public List<string> propsParentNodeList = new List<string>();
-        //public List<Area> openAreasList = new List<Area>();
-        //public List<Convo> openConvosList = new List<Convo>();
+        public List<Area> openAreasList = new List<Area>();
+        public List<Convo> openConvosList = new List<Convo>();
         public List<string> scriptList = new List<string>();
         public List<Condition> copiedConditionalsList = new List<Condition>();
         public List<Action> copiedActionsList = new List<Action>();
@@ -128,6 +130,8 @@ namespace IB2miniToolset
             //openSkills(_mainDirectory + "\\data\\NewModule\\data\\" + mod.SkillsFileName);
             openSpells(_mainDirectory + "\\default\\NewModule\\data\\spells.json");
             openTraits(_mainDirectory + "\\default\\NewModule\\data\\traits.json");
+            openWeatherEffects(_mainDirectory + "\\default\\NewModule\\data\\weatherEffects.json");
+            openWeathers(_mainDirectory + "\\default\\NewModule\\data\\weathers.json");
             openEffects(_mainDirectory + "\\default\\NewModule\\data\\effects.json");
             //game.errorLog("Starting IceBlink Toolset");
             saveAsTemp();
@@ -242,8 +246,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleCreaturesList.Clear();
-                //mod.moduleCreaturesList = loadCreaturesFile(filename);
+                creaturesList.Clear();
+                creaturesList = loadCreaturesFile(filename);
             }
             else
             {
@@ -254,7 +258,7 @@ namespace IB2miniToolset
         }
         private void loadCreatureSprites()
         {
-            foreach (Creature crt in mod.moduleCreaturesList)
+            foreach (Creature crt in creaturesList)
             {
                 crt.LoadCreatureBitmap(this);                
             }     
@@ -263,8 +267,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleItemsList.Clear();
-                //mod.moduleItemsList = loadItemsFile(filename);
+                itemsList.Clear();
+                itemsList = loadItemsFile(filename);
             }
             else
             {
@@ -275,7 +279,7 @@ namespace IB2miniToolset
         }
         private void loadItemSprites()
         {
-            foreach (Item it in mod.moduleItemsList)
+            foreach (Item it in itemsList)
             {
                 it.LoadItemBitmap(this);
             }
@@ -284,8 +288,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.modulePropsList.Clear();
-                //mod.modulePropsList = loadPropsFile(filename);
+                propsList.Clear();
+                propsList = loadPropsFile(filename);
             }
             else
             {
@@ -296,7 +300,7 @@ namespace IB2miniToolset
         }
         private void loadPropSprites()
         {
-            foreach (Prop prp in mod.modulePropsList)
+            foreach (Prop prp in propsList)
             {
                 prp.LoadPropBitmap(this);
             }
@@ -305,8 +309,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleShopsList.Clear();
-                //mod.moduleShopsList = loadShopsFile(filename);
+                shopsList.Clear();
+                shopsList = loadShopsFile(filename);
             }
             else
             {
@@ -317,8 +321,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleContainersList.Clear();
-                //mod.moduleContainersList = loadContainersFile(filename);                
+                containersList.Clear();
+                containersList = loadContainersFile(filename);                
             }
             else
             {
@@ -330,8 +334,8 @@ namespace IB2miniToolset
         {            
             if (File.Exists(filename))
             {
-                mod.moduleEncountersList.Clear();
-                //mod.moduleEncountersList = loadEncountersFile(filename);                
+                encountersList.Clear();
+                encountersList = loadEncountersFile(filename);                
             }
             else
             {
@@ -343,8 +347,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleJournal.Clear();
-                //mod.moduleJournal = loadJournalFile(filename);
+                journal.Clear();
+                journal = loadJournalFile(filename);
             }
             else
             {
@@ -355,8 +359,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleEffectsList.Clear();
-                //mod.moduleEffectsList = loadEffectsFile(filename);
+                effectsList.Clear();
+                effectsList = loadEffectsFile(filename);
             }
             else
             {
@@ -367,8 +371,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.modulePlayerClassList.Clear();
-                //mod.modulePlayerClassList = loadPlayerClassesFile(filename);
+                playerClassesList.Clear();
+                playerClassesList = loadPlayerClassesFile(filename);
             }
             else
             {
@@ -379,8 +383,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleRacesList.Clear();
-                //mod.moduleRacesList = loadRacesFile(filename);
+                racesList.Clear();
+                racesList = loadRacesFile(filename);
             }
             else
             {
@@ -391,8 +395,8 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleSpellsList.Clear();
-                //mod.moduleSpellsList = loadSpellsFile(filename);
+                spellsList.Clear();
+                spellsList = loadSpellsFile(filename);
             }
             else
             {
@@ -403,15 +407,41 @@ namespace IB2miniToolset
         {
             if (File.Exists(filename))
             {
-                mod.moduleTraitsList.Clear();
-                //mod.moduleTraitsList = loadTraitsFile(filename);
+                traitsList.Clear();
+                traitsList = loadTraitsFile(filename);
             }
             else
             {
                 MessageBox.Show("Couldn't find traits.json file. Will create a new one upon saving module.");
             }            
         }
-                
+
+        private void openWeatherEffects(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                weatherEffectsList.Clear();
+                weatherEffectsList = loadWeatherEffectsFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find weatherEffects.json file. Will create a new one upon saving module.");
+            }
+        }
+
+        private void openWeathers(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                weathersList.Clear();
+                weathersList = loadWeathersFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find weathers.json file. Will create a new one upon saving module.");
+            }
+        }
+
         private void openFiles()
         {
             openFileDialog1.InitialDirectory = Environment.CurrentDirectory + "\\modules";
@@ -437,6 +467,8 @@ namespace IB2miniToolset
                 openRaces(directory + "\\data\\races.json");
                 openSpells(directory + "\\data\\spells.json");
                 openTraits(directory + "\\data\\traits.json");
+                openWeatherEffects(directory + "\\data\\weatherEffects.json");
+                openWeathers(directory + "\\data\\weathers.json");
                 openEffects(directory + "\\data\\effects.json");
                 refreshDropDownLists();
                 this.Text = "IceBlink 2 Toolset - " + mod.moduleLabelName;
@@ -456,6 +488,8 @@ namespace IB2miniToolset
             loadRacesTagsList();
             loadSpellTagsList();
             loadEffectTagsList();
+            loadWeatherEffectsTagsList();
+            loadWeatherEffectsNamesList();
         }
         public void loadSpriteDropdownList()
         {
@@ -518,7 +552,7 @@ namespace IB2miniToolset
         {
             DropdownStringLists.encounterTypeStringList = new List<string>();
             DropdownStringLists.encounterTypeStringList.Add("none");
-            foreach (Encounter enc in this.mod.moduleEncountersList)
+            foreach (Encounter enc in this.encountersList)
             {
                 DropdownStringLists.encounterTypeStringList.Add(enc.encounterName);
             }
@@ -538,7 +572,7 @@ namespace IB2miniToolset
         public void loadPlayerClassesTagsList()
         {
             DropdownStringLists.playerClassTagsTypeStringList = new List<string>();
-            foreach (PlayerClass pcl in this.mod.modulePlayerClassList)
+            foreach (PlayerClass pcl in this.playerClassesList)
             {
                 DropdownStringLists.playerClassTagsTypeStringList.Add(pcl.tag);
             }
@@ -546,7 +580,7 @@ namespace IB2miniToolset
         public void loadRacesTagsList()
         {
             DropdownStringLists.raceTagsTypeStringList = new List<string>();
-            foreach (Race rc in this.mod.moduleRacesList)
+            foreach (Race rc in this.racesList)
             {
                 DropdownStringLists.raceTagsTypeStringList.Add(rc.tag);
             }
@@ -555,7 +589,7 @@ namespace IB2miniToolset
         {
             DropdownStringLists.spellTagsTypeStringList = new List<string>();
             DropdownStringLists.spellTagsTypeStringList.Add("none");
-            foreach (Spell sp in this.mod.moduleSpellsList)
+            foreach (Spell sp in this.spellsList)
             {
                 DropdownStringLists.spellTagsTypeStringList.Add(sp.tag);
             }
@@ -564,13 +598,59 @@ namespace IB2miniToolset
         {
             DropdownStringLists.effectTagsTypeStringList = new List<string>();
             DropdownStringLists.effectTagsTypeStringList.Add("none");
-            foreach (Effect ef in this.mod.moduleEffectsList)
+            foreach (Effect ef in this.effectsList)
             {
                 DropdownStringLists.effectTagsTypeStringList.Add(ef.tag);
             }
         }
-        
-        /*public class EffectTagTypeConverter : StringConverter
+        public void loadWeatherEffectsTagsList()
+        {
+            DropdownStringLists.weatherEffectsTagsTypeStringList = new List<string>();
+            DropdownStringLists.weatherEffectsTagsTypeStringList.Add("none");
+            foreach (WeatherEffect ef in this.weatherEffectsList)
+            {
+                DropdownStringLists.weatherEffectsTagsTypeStringList.Add(ef.tag);
+            }
+        }
+        public void loadWeatherEffectsNamesList()
+        {
+            DropdownStringLists.weatherEffectsNamesTypeStringList = new List<string>();
+            DropdownStringLists.weatherEffectsNamesTypeStringList.Add("none");
+            foreach (WeatherEffect ef in this.weatherEffectsList)
+            {
+                DropdownStringLists.weatherEffectsNamesTypeStringList.Add(ef.name);
+            }
+        }
+
+        public void loadWeatherTagsList()
+        {
+            DropdownStringLists.weathersTagsTypeStringList = new List<string>();
+            DropdownStringLists.weathersTagsTypeStringList.Add("none");
+            foreach (Weather ef in this.weathersList)
+            {
+                DropdownStringLists.weathersTagsTypeStringList.Add(ef.tag);
+            }
+        }
+
+        public class EffectTagTypeConverter : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            //true means show a combobox
+            return true;
+        }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            //true will limit to list. false will show the list, but allow free-form entry
+            return true;
+        }
+        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(DropdownStringLists.effectTagsTypeStringList);
+        }
+    }
+
+        public class WeatherEffectsTagTypeConverter : StringConverter
         {
             public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
             {
@@ -584,10 +664,46 @@ namespace IB2miniToolset
             }
             public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
             {
-                return new StandardValuesCollection(DropdownStringLists.effectTagsTypeStringList);
+                return new StandardValuesCollection(DropdownStringLists.weatherEffectsTagsTypeStringList);
             }
-        }*/
-                
+        }
+
+        public class WeatherEffectsNameTypeConverter : StringConverter
+        {
+            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+            {
+                //true means show a combobox
+                return true;
+            }
+            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+            {
+                //true will limit to list. false will show the list, but allow free-form entry
+                return true;
+            }
+            public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+            {
+                return new StandardValuesCollection(DropdownStringLists.weatherEffectsNamesTypeStringList);
+            }
+        }
+
+        public class WeathersTagTypeConverter : StringConverter
+        {
+            public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+            {
+                //true means show a combobox
+                return true;
+            }
+            public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+            {
+                //true will limit to list. false will show the list, but allow free-form entry
+                return true;
+            }
+            public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+            {
+                return new StandardValuesCollection(DropdownStringLists.weathersTagsTypeStringList);
+            }
+        }
+
         private void fillScriptList()
         {
             scriptList.Clear();
@@ -734,7 +850,7 @@ namespace IB2miniToolset
             try
             {
                 //clean up the spellsAllowed and traitsAllowed
-                foreach (PlayerClass pcls in mod.modulePlayerClassList)
+                foreach (PlayerClass pcls in playerClassesList)
                 {
                     for (int i = pcls.spellsAllowed.Count - 1; i >= 0; i--)
                     {
@@ -753,20 +869,22 @@ namespace IB2miniToolset
                 }
                 //mod.VersionIB = game.IBVersion;
                 mod.saveModuleFile(fullPathDirectory + "\\" + mod.moduleName + ".mod");
-                //saveCreaturesFile(fullPathDirectory + "\\data\\creatures.json");
-                //saveItemsFile(fullPathDirectory + "\\data\\items.json");
-                //saveContainersFile(fullPathDirectory + "\\data\\containers.json");
-                //saveShopsFile(fullPathDirectory + "\\data\\shops.json");
-                //saveEncountersFile(fullPathDirectory + "\\data\\encounters.json");
-                //savePropsFile(fullPathDirectory + "\\data\\props.json");
-                //saveJournalFile(fullPathDirectory + "\\data\\journal.json");
-                //savePlayerClassesFile(fullPathDirectory + "\\data\\playerClasses.json");
-                //saveRacesFile(fullPathDirectory + "\\data\\races.json");
-                //saveSpellsFile(fullPathDirectory + "\\data\\spells.json");
-                //saveTraitsFile(fullPathDirectory + "\\data\\traits.json");
-                //saveEffectsFile(fullPathDirectory + "\\data\\effects.json");
+                saveCreaturesFile(fullPathDirectory + "\\data\\creatures.json");
+                saveItemsFile(fullPathDirectory + "\\data\\items.json");
+                saveContainersFile(fullPathDirectory + "\\data\\containers.json");
+                saveShopsFile(fullPathDirectory + "\\data\\shops.json");
+                saveEncountersFile(fullPathDirectory + "\\data\\encounters.json");
+                savePropsFile(fullPathDirectory + "\\data\\props.json");
+                saveJournalFile(fullPathDirectory + "\\data\\journal.json");
+                savePlayerClassesFile(fullPathDirectory + "\\data\\playerClasses.json");
+                saveRacesFile(fullPathDirectory + "\\data\\races.json");
+                saveSpellsFile(fullPathDirectory + "\\data\\spells.json");
+                saveTraitsFile(fullPathDirectory + "\\data\\traits.json");
+                saveWeatherEffectsFile(fullPathDirectory + "\\data\\weatherEffects.json");
+                saveWeathersFile(fullPathDirectory + "\\data\\weathers.json");
+                saveEffectsFile(fullPathDirectory + "\\data\\effects.json");
                 // save convos that are open
-                /*foreach (Convo convo in openConvosList)
+                foreach (Convo convo in openConvosList)
                 {
                     try
                     {
@@ -776,7 +894,7 @@ namespace IB2miniToolset
                     {
                         MessageBox.Show("Error: Could not save Convo file to disk. Original error: " + ex.Message);
                     }
-                }*/
+                }
                 // save logic trees that are open
                 /*//REMOVEforeach (LogicTree logtre in openLogicTreesList)
                 {
@@ -790,7 +908,7 @@ namespace IB2miniToolset
                     }
                 }*/
                 // save areas that are open
-                /*foreach (Area a in openAreasList)
+                foreach (Area a in openAreasList)
                 {
                     try
                     {
@@ -800,7 +918,7 @@ namespace IB2miniToolset
                     {
                         MessageBox.Show("Error: Could not save area file to disk. Original error: " + ex.Message);
                     }
-                }*/
+                }
             }
             catch { MessageBox.Show("failed to createFiles"); }
         }
@@ -998,7 +1116,17 @@ namespace IB2miniToolset
         {
             TraitEditor tEdit = new TraitEditor(mod, this);
             tEdit.ShowDialog();
-        }        
+        }
+        private void weatherEffectsEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WeatherEffectsEditor weEdit = new WeatherEffectsEditor(mod, this);
+            weEdit.ShowDialog();
+        }
+        private void weatherEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WeatherEditor weEdit = new WeatherEditor(mod, this);
+            weEdit.ShowDialog();
+        }
         private void effectEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EffectEditor eEdit = new EffectEditor(mod, this);
@@ -1131,7 +1259,7 @@ namespace IB2miniToolset
                 try
                 {
                     string _nodeTag = frmBlueprints.tvCreatures.SelectedNode.Name;
-                    iconBitmap = (Bitmap)mod.moduleCreaturesList[frmBlueprints.GetCreatureIndex(_nodeTag)].creatureIconBitmap.Clone();
+                    iconBitmap = (Bitmap)creaturesList[frmBlueprints.GetCreatureIndex(_nodeTag)].creatureIconBitmap.Clone();
                     frmIconSprite.pbIcon.BackgroundImage = (Image)iconBitmap;
                     if (iconBitmap == null) { MessageBox.Show("returned a null icon bitmap"); }
                 }
@@ -1144,9 +1272,9 @@ namespace IB2miniToolset
             string name = GetImageFilename("tkn_");
             if (name != "none")
             {
-                mod.moduleCreaturesList[frmBlueprints.GetCreatureIndex(_nodeTag)].cr_tokenFilename = name;
+                creaturesList[frmBlueprints.GetCreatureIndex(_nodeTag)].cr_tokenFilename = name;
             }
-            mod.moduleCreaturesList[frmBlueprints.GetCreatureIndex(_nodeTag)].LoadCreatureBitmap(this);
+            creaturesList[frmBlueprints.GetCreatureIndex(_nodeTag)].LoadCreatureBitmap(this);
             refreshIconCreatures();
             /*using (var sel = new SpriteSelector(game, mod))
             {
@@ -1195,7 +1323,7 @@ namespace IB2miniToolset
                 try
                 {
                     string _nodeTag = frmBlueprints.tvItems.SelectedNode.Name;
-                    iconBitmap = (Bitmap)mod.moduleItemsList[frmBlueprints.GetItemIndex(_nodeTag)].itemIconBitmap.Clone();
+                    iconBitmap = (Bitmap)itemsList[frmBlueprints.GetItemIndex(_nodeTag)].itemIconBitmap.Clone();
                     frmIconSprite.pbIcon.BackgroundImage = (Image)iconBitmap;
                     if (iconBitmap == null) { MessageBox.Show("returned a null icon bitmap"); }
                 }
@@ -1208,9 +1336,9 @@ namespace IB2miniToolset
             string name = GetImageFilename("it_");
             if (name != "none")
             {
-                mod.moduleItemsList[frmBlueprints.GetItemIndex(_nodeTag)].itemImage = name;
+                itemsList[frmBlueprints.GetItemIndex(_nodeTag)].itemImage = name;
             }
-            mod.moduleItemsList[frmBlueprints.GetItemIndex(_nodeTag)].LoadItemBitmap(this);
+            itemsList[frmBlueprints.GetItemIndex(_nodeTag)].LoadItemBitmap(this);
             refreshIconItems();
             /*using (var sel = new ItemImageSelector(game, mod))
             {
@@ -1275,7 +1403,7 @@ namespace IB2miniToolset
                 try
                 {
                     string _nodeTag = frmBlueprints.tvProps.SelectedNode.Name;
-                    iconBitmap = (Bitmap)mod.modulePropsList[frmBlueprints.GetPropIndex(_nodeTag)].propBitmap.Clone();
+                    iconBitmap = (Bitmap)propsList[frmBlueprints.GetPropIndex(_nodeTag)].propBitmap.Clone();
                     frmIconSprite.pbIcon.BackgroundImage = (Image)iconBitmap;
                     if (iconBitmap == null) { MessageBox.Show("returned a null icon bitmap"); }
                 }
@@ -1288,9 +1416,9 @@ namespace IB2miniToolset
             string name = GetImageFilename("prp_");
             if (name != "none")
             {
-                mod.modulePropsList[frmBlueprints.GetPropIndex(_nodeTag)].ImageFileName = name;
+                propsList[frmBlueprints.GetPropIndex(_nodeTag)].ImageFileName = name;
             }
-            mod.modulePropsList[frmBlueprints.GetPropIndex(_nodeTag)].LoadPropBitmap(this);
+            propsList[frmBlueprints.GetPropIndex(_nodeTag)].LoadPropBitmap(this);
             refreshIconProps();
             /*using (var sel = new PropSpriteSelector(game, mod))
             {
@@ -1322,15 +1450,15 @@ namespace IB2miniToolset
         #endregion                                                                        
 
         #region Save, Load and Get module data files                
-        /*public void saveCreaturesFile(string filename)
+        public void saveCreaturesFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleCreaturesList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(creaturesList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Creature> loadCreaturesFile(string filename)
+        }
+        public List<Creature> loadCreaturesFile(string filename)
         {
             List<Creature> toReturn = null;
 
@@ -1341,10 +1469,10 @@ namespace IB2miniToolset
                 toReturn = (List<Creature>)serializer.Deserialize(file, typeof(List<Creature>));
             }
             return toReturn;
-        }*/
+        }
         public Creature getCreature(string name)
         {
-            foreach (Creature cr in mod.moduleCreaturesList)
+            foreach (Creature cr in creaturesList)
             {
                 if (cr.cr_name == name) return cr;
             }
@@ -1352,7 +1480,7 @@ namespace IB2miniToolset
         }
         public Creature getCreatureByTag(string tag)
         {
-            foreach (Creature crtag in mod.moduleCreaturesList)
+            foreach (Creature crtag in creaturesList)
             {
                 if (crtag.cr_tag == tag) return crtag;
             }
@@ -1360,22 +1488,22 @@ namespace IB2miniToolset
         }
         public Creature getCreatureByResRef(string resref)
         {
-            foreach (Creature crt in mod.moduleCreaturesList)
+            foreach (Creature crt in creaturesList)
             {
                 if (crt.cr_resref == resref) return crt;
             }
             return null;
         }
 
-        /*public void saveItemsFile(string filename)
+        public void saveItemsFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleItemsList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(itemsList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Item> loadItemsFile(string filename)
+        }
+        public List<Item> loadItemsFile(string filename)
         {
             List<Item> toReturn = null;
 
@@ -1386,10 +1514,10 @@ namespace IB2miniToolset
                 toReturn = (List<Item>)serializer.Deserialize(file, typeof(List<Item>));
             }
             return toReturn;
-        }*/
+        }
         public Item getItem(string name)
         {
-            foreach (Item it in mod.moduleItemsList)
+            foreach (Item it in itemsList)
             {
                 if (it.name == name) return it;
             }
@@ -1397,22 +1525,22 @@ namespace IB2miniToolset
         }
         public Item getItemByTag(string tag)
         {
-            foreach (Item it in mod.moduleItemsList)
+            foreach (Item it in itemsList)
             {
                 if (it.tag == tag) return it;
             }
             return null;
         }
 
-        /*public void saveContainersFile(string filename)
+        public void saveContainersFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleContainersList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(containersList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Container> loadContainersFile(string filename)
+        }
+        public List<Container> loadContainersFile(string filename)
         {
             List<Container> toReturn = null;
 
@@ -1423,25 +1551,25 @@ namespace IB2miniToolset
                 toReturn = (List<Container>)serializer.Deserialize(file, typeof(List<Container>));
             }
             return toReturn;
-        }*/
+        }
         public Container getContainer(string tag)
         {
-            foreach (Container cont in mod.moduleContainersList)
+            foreach (Container cont in containersList)
             {
                 if (cont.containerTag == tag) return cont;
             }
             return null;
         }
 
-        /*public void saveShopsFile(string filename)
+        public void saveShopsFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleShopsList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(shopsList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Shop> loadShopsFile(string filename)
+        }
+        public List<Shop> loadShopsFile(string filename)
         {
             List<Shop> toReturn = null;
 
@@ -1452,10 +1580,10 @@ namespace IB2miniToolset
                 toReturn = (List<Shop>)serializer.Deserialize(file, typeof(List<Shop>));
             }
             return toReturn;
-        }*/
+        }
         public Shop getShopByTag(string tag)
         {
-            foreach (Shop shp in mod.moduleShopsList)
+            foreach (Shop shp in shopsList)
             {
                 if (shp.shopTag == tag)
                 {
@@ -1465,15 +1593,15 @@ namespace IB2miniToolset
             return null;
         }
 
-        /*public void saveEncountersFile(string filename)
+        public void saveEncountersFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleEncountersList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(encountersList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Encounter> loadEncountersFile(string filename)
+        }
+        public List<Encounter> loadEncountersFile(string filename)
         {
             List<Encounter> toReturn = null;
 
@@ -1484,25 +1612,25 @@ namespace IB2miniToolset
                 toReturn = (List<Encounter>)serializer.Deserialize(file, typeof(List<Encounter>));
             }
             return toReturn;
-        }*/
+        }
         public Encounter getEncounter(string name)
         {
-            foreach (Encounter encounter in mod.moduleEncountersList)
+            foreach (Encounter encounter in encountersList)
             {
                 if (encounter.encounterName == name) return encounter;
             }
             return null;
         }
 
-        /*public void savePropsFile(string filename)
+        public void savePropsFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.modulePropsList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(propsList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Prop> loadPropsFile(string filename)
+        }
+        public List<Prop> loadPropsFile(string filename)
         {
             List<Prop> toReturn = null;
 
@@ -1513,25 +1641,25 @@ namespace IB2miniToolset
                 toReturn = (List<Prop>)serializer.Deserialize(file, typeof(List<Prop>));
             }
             return toReturn;
-        }*/
+        }
         public Prop getPropByTag(string tag)
         {
-            foreach (Prop it in mod.modulePropsList)
+            foreach (Prop it in propsList)
             {
                 if (it.PropTag == tag) return it;
             }
             return null;
         }
 
-        /*public void saveJournalFile(string filename)
+        public void saveJournalFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleJournal, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(journal, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<JournalQuest> loadJournalFile(string filename)
+        }
+        public List<JournalQuest> loadJournalFile(string filename)
         {
             List<JournalQuest> toReturn = null;
 
@@ -1542,10 +1670,10 @@ namespace IB2miniToolset
                 toReturn = (List<JournalQuest>)serializer.Deserialize(file, typeof(List<JournalQuest>));
             }
             return toReturn;
-        }*/
+        }
         public JournalQuest getJournalCategoryByName(string name)
         {
-            foreach (JournalQuest it in mod.moduleJournal)
+            foreach (JournalQuest it in journal)
             {
                 if (it.Name == name) return it;
             }
@@ -1553,22 +1681,22 @@ namespace IB2miniToolset
         }
         public JournalQuest getJournalCategoryByTag(string tag)
         {
-            foreach (JournalQuest it in mod.moduleJournal)
+            foreach (JournalQuest it in journal)
             {
                 if (it.Tag == tag) return it;
             }
             return null;
         }
 
-        /*public void savePlayerClassesFile(string filename)
+        public void savePlayerClassesFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.modulePlayerClassList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(playerClassesList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<PlayerClass> loadPlayerClassesFile(string filename)
+        }
+        public List<PlayerClass> loadPlayerClassesFile(string filename)
         {
             List<PlayerClass> toReturn = null;
 
@@ -1579,25 +1707,25 @@ namespace IB2miniToolset
                 toReturn = (List<PlayerClass>)serializer.Deserialize(file, typeof(List<PlayerClass>));
             }
             return toReturn;
-        }*/
+        }
         public PlayerClass getPlayerClassByTag(string tag)
         {
-            foreach (PlayerClass ts in mod.modulePlayerClassList)
+            foreach (PlayerClass ts in playerClassesList)
             {
                 if (ts.tag == tag) return ts;
             }
             return null;
         }
 
-        /*public void saveRacesFile(string filename)
+        public void saveRacesFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleRacesList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(racesList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Race> loadRacesFile(string filename)
+        }
+        public List<Race> loadRacesFile(string filename)
         {
             List<Race> toReturn = null;
 
@@ -1608,25 +1736,25 @@ namespace IB2miniToolset
                 toReturn = (List<Race>)serializer.Deserialize(file, typeof(List<Race>));
             }
             return toReturn;
-        }*/
+        }
         public Race getRaceByTag(string tag)
         {
-            foreach (Race ts in mod.moduleRacesList)
+            foreach (Race ts in racesList)
             {
                 if (ts.tag == tag) return ts;
             }
             return null;
         }
 
-        /*public void saveSpellsFile(string filename)
+        public void saveSpellsFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleSpellsList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(spellsList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Spell> loadSpellsFile(string filename)
+        }
+        public List<Spell> loadSpellsFile(string filename)
         {
             List<Spell> toReturn = null;
 
@@ -1637,10 +1765,10 @@ namespace IB2miniToolset
                 toReturn = (List<Spell>)serializer.Deserialize(file, typeof(List<Spell>));
             }
             return toReturn;
-        }*/
+        }
         public Spell getSpellByTag(string tag)
         {
-            foreach (Spell s in mod.moduleSpellsList)
+            foreach (Spell s in spellsList)
             {
                 if (s.tag == tag) return s;
             }
@@ -1648,22 +1776,22 @@ namespace IB2miniToolset
         }
         public Spell getSpellByName(string name)
         {
-            foreach (Spell s in mod.moduleSpellsList)
+            foreach (Spell s in spellsList)
             {
                 if (s.name == name) return s;
             }
             return null;
         }
 
-        /*public void saveTraitsFile(string filename)
+        public void saveTraitsFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleTraitsList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(traitsList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Trait> loadTraitsFile(string filename)
+        }
+        public List<Trait> loadTraitsFile(string filename)
         {
             List<Trait> toReturn = null;
 
@@ -1674,10 +1802,10 @@ namespace IB2miniToolset
                 toReturn = (List<Trait>)serializer.Deserialize(file, typeof(List<Trait>));
             }
             return toReturn;
-        }*/
+        }
         public Trait getTraitByTag(string tag)
         {
-            foreach (Trait ts in mod.moduleTraitsList)
+            foreach (Trait ts in traitsList)
             {
                 if (ts.tag == tag) return ts;
             }
@@ -1685,22 +1813,100 @@ namespace IB2miniToolset
         }
         public Trait getTraitByName(string name)
         {
-            foreach (Trait ts in mod.moduleTraitsList)
+            foreach (Trait ts in traitsList)
             {
                 if (ts.name == name) return ts;
             }
             return null;
         }
 
-        /*public void saveEffectsFile(string filename)
+
+        public void saveWeatherEffectsFile(string filename)
         {
-            string json = JsonConvert.SerializeObject(mod.moduleEffectsList, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(weatherEffectsList, Newtonsoft.Json.Formatting.Indented);
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.Write(json.ToString());
             }
-        }*/
-        /*public List<Effect> loadEffectsFile(string filename)
+        }
+        public List<WeatherEffect> loadWeatherEffectsFile(string filename)
+        {
+            List<WeatherEffect> toReturn = null;
+
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(filename))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (List<WeatherEffect>)serializer.Deserialize(file, typeof(List<WeatherEffect>));
+            }
+            return toReturn;
+        }
+        public WeatherEffect getWeatherEffectByTag(string tag)
+        {
+            foreach (WeatherEffect ts in weatherEffectsList)
+            {
+                if (ts.tag == tag) return ts;
+            }
+            return null;
+        }
+        public WeatherEffect getWeatherEffectByName(string name)
+        {
+            foreach (WeatherEffect ts in weatherEffectsList)
+            {
+                if (ts.name == name) return ts;
+            }
+            return null;
+        }
+
+
+        public void saveWeathersFile(string filename)
+        {
+            string json = JsonConvert.SerializeObject(weathersList, Newtonsoft.Json.Formatting.Indented);
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.Write(json.ToString());
+            }
+        }
+        public List<Weather> loadWeathersFile(string filename)
+        {
+            List<Weather> toReturn = null;
+
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(filename))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (List<Weather>)serializer.Deserialize(file, typeof(List<Weather>));
+            }
+            return toReturn;
+        }
+        public Weather getWeatherByTag(string tag)
+        {
+            foreach (Weather ts in weathersList)
+            {
+                if (ts.tag == tag) return ts;
+            }
+            return null;
+        }
+        public Weather getWeatherByName(string name)
+        {
+            foreach (Weather ts in weathersList)
+            {
+                if (ts.name == name) return ts;
+            }
+            return null;
+        }
+
+
+
+        public void saveEffectsFile(string filename)
+        {
+            string json = JsonConvert.SerializeObject(effectsList, Newtonsoft.Json.Formatting.Indented);
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.Write(json.ToString());
+            }
+        }
+        public List<Effect> loadEffectsFile(string filename)
         {
             List<Effect> toReturn = null;
 
@@ -1711,10 +1917,10 @@ namespace IB2miniToolset
                 toReturn = (List<Effect>)serializer.Deserialize(file, typeof(List<Effect>));
             }
             return toReturn;
-        }*/
+        }
         public Effect getEffectByTag(string tag)
         {
-            foreach (Effect ef in mod.moduleEffectsList)
+            foreach (Effect ef in effectsList)
             {
                 if (ef.tag == tag) return ef;
             }
@@ -1725,11 +1931,11 @@ namespace IB2miniToolset
         //can delete this after the next update...use only once per module.
         private void copyTagsToResrefsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Creature crt in mod.moduleCreaturesList)
+            foreach (Creature crt in creaturesList)
             {
                 crt.cr_resref = crt.cr_tag;
             }
-            foreach (Encounter enc in mod.moduleEncountersList)
+            foreach (Encounter enc in encountersList)
             {
                 foreach (CreatureRefs crtRef in enc.encounterCreatureRefsList)
                 {
@@ -1741,7 +1947,7 @@ namespace IB2miniToolset
         }
         private void copyItemTagsToResrefsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Item it in mod.moduleItemsList)
+            foreach (Item it in itemsList)
             {
                 it.resref = it.tag;
             }
@@ -1790,13 +1996,13 @@ namespace IB2miniToolset
                     try
                     {
                         areaObj = areaObj.loadAreaFile(g_directory + "\\" + ar + ".lvl");
-                        foreach (string t in areaObj.Layer1Filename)
+                        foreach (Tile t in areaObj.Tiles)
                         {
-                            if (!tilenames.Contains(t)) { tilenames.Add(t); }
-                        }
-                        foreach (string t in areaObj.Layer2Filename)
-                        {
-                            if (!tilenames.Contains(t)) { tilenames.Add(t); }
+                            if (!tilenames.Contains(t.Layer1Filename)) { tilenames.Add(t.Layer1Filename); }
+                            if (!tilenames.Contains(t.Layer2Filename)) { tilenames.Add(t.Layer2Filename); }
+                            if (!tilenames.Contains(t.Layer3Filename)) { tilenames.Add(t.Layer3Filename); }
+                            if (!tilenames.Contains(t.Layer4Filename)) { tilenames.Add(t.Layer4Filename); }
+                            if (!tilenames.Contains(t.Layer5Filename)) { tilenames.Add(t.Layer5Filename); }
                         }
                     }
                     catch (Exception ex)
@@ -1807,15 +2013,13 @@ namespace IB2miniToolset
             }
             
             //iterate over each encounter and add tile names to List<string> if not already contained
-            foreach (Encounter enc in mod.moduleEncountersList)
+            foreach (Encounter enc in encountersList)
             {
-                foreach (string t in enc.Layer1Filename)
+                foreach (TileEnc t in enc.encounterTiles)
                 {
-                    if (!tilenames.Contains(t)) { tilenames.Add(t); }
-                }
-                foreach (string t in enc.Layer2Filename)
-                {
-                    if (!tilenames.Contains(t)) { tilenames.Add(t); }
+                    if (!tilenames.Contains(t.Layer1Filename)) { tilenames.Add(t.Layer1Filename); }
+                    if (!tilenames.Contains(t.Layer2Filename)) { tilenames.Add(t.Layer2Filename); }
+                    if (!tilenames.Contains(t.Layer3Filename)) { tilenames.Add(t.Layer3Filename); }
                 }
             }
             //write out list to a file 'tiles_used.txt', one tile per line

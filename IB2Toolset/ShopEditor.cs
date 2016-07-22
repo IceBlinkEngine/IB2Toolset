@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class ShopEditor : Form
     {
@@ -31,18 +31,18 @@ namespace IB2miniToolset
         private void ShopEditor_Load(object sender, EventArgs e)
         {
             cmbItems.DataSource = null;
-            cmbItems.DataSource = prntForm.mod.moduleItemsList;
+            cmbItems.DataSource = prntForm.itemsList;
             cmbItems.DisplayMember = "name";
             refreshLbxItems();
             refreshListBox();
         }
         private void lbxShops_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((lbxShops.SelectedIndex >= 0) && (prntForm.mod.moduleShopsList != null))
+            if ((lbxShops.SelectedIndex >= 0) && (prntForm.shopsList != null))
             {
                 selectedLbxIndex = lbxShops.SelectedIndex;
                 lbxShops.SelectedIndex = selectedLbxIndex;
-                propertyGrid1.SelectedObject = prntForm.mod.moduleShopsList[selectedLbxIndex];
+                propertyGrid1.SelectedObject = prntForm.shopsList[selectedLbxIndex];
                 refreshLbxItems();
                 refreshListBox();
             }
@@ -52,19 +52,19 @@ namespace IB2miniToolset
 
             Shop newShop = new Shop();
             newShop.shopTag = "newShopTag" + prntForm.mod.nextIdNumber.ToString();
-            prntForm.mod.moduleShopsList.Add(newShop);
+            prntForm.shopsList.Add(newShop);
             refreshListBox();
         }
         private void btnRemoveShop_Click(object sender, EventArgs e)
         {
-            if (prntForm.mod.moduleShopsList.Count > 0)
+            if (prntForm.shopsList.Count > 0)
             {
                 if (lbxShops.Items.Count > 0)
                 {
                     try
                     {
                         int selectedIndex = lbxShops.SelectedIndex;
-                        prntForm.mod.moduleShopsList.RemoveAt(selectedIndex);
+                        prntForm.shopsList.RemoveAt(selectedIndex);
                     }
                     catch { }
                     prntForm._selectedLbxContainerIndex = 0;
@@ -76,24 +76,24 @@ namespace IB2miniToolset
         }
         private void btnDuplicateShop_Click(object sender, EventArgs e)
         {
-            if (prntForm.mod.moduleShopsList.Count > 0)
+            if (prntForm.shopsList.Count > 0)
             {
-                Shop newCopy = prntForm.mod.moduleShopsList[selectedLbxIndex].DeepCopy();
+                Shop newCopy = prntForm.shopsList[selectedLbxIndex].DeepCopy();
                 newCopy.shopTag = "newCopiedShopTag_" + prntForm.mod.nextIdNumber.ToString();
-                prntForm.mod.moduleShopsList.Add(newCopy);
+                prntForm.shopsList.Add(newCopy);
                 refreshListBox();
                 refreshLbxItems();
             }
         }
         private void btnAddItems_Click(object sender, EventArgs e)
         {
-            if (prntForm.mod.moduleShopsList.Count > 0)
+            if (prntForm.shopsList.Count > 0)
             {
                 try
                 {
-                    Item it = prntForm.mod.moduleItemsList[cmbItems.SelectedIndex];
+                    Item it = prntForm.itemsList[cmbItems.SelectedIndex];
                     ItemRefs newIR = prntForm.createItemRefsFromItem(it);
-                    prntForm.mod.moduleShopsList[selectedLbxIndex].shopItemRefs.Add(newIR);
+                    prntForm.shopsList[selectedLbxIndex].shopItemRefs.Add(newIR);
                 }
                 catch { }
             }
@@ -108,7 +108,7 @@ namespace IB2miniToolset
                 {
                     if (lbxItems.SelectedIndex >= 0)
                     {
-                        prntForm.mod.moduleShopsList[selectedLbxIndex].shopItemRefs.RemoveAt(lbxItems.SelectedIndex);
+                        prntForm.shopsList[selectedLbxIndex].shopItemRefs.RemoveAt(lbxItems.SelectedIndex);
                     }
                 }
                 catch { }
@@ -125,11 +125,11 @@ namespace IB2miniToolset
         #region Methods
         private void refreshListBox()
         {
-            if (prntForm.mod.moduleShopsList.Count > 0)
+            if (prntForm.shopsList.Count > 0)
             {
                 lbxShops.BeginUpdate();
                 lbxShops.DataSource = null;
-                lbxShops.DataSource = prntForm.mod.moduleShopsList;
+                lbxShops.DataSource = prntForm.shopsList;
                 lbxShops.DisplayMember = "shopTag";
                 lbxShops.EndUpdate();
             }
@@ -142,13 +142,13 @@ namespace IB2miniToolset
         }
         public void refreshLbxItems()
         {
-            if (prntForm.mod.moduleShopsList.Count > 0)
+            if (prntForm.shopsList.Count > 0)
             {
-                if (prntForm.mod.moduleShopsList[selectedLbxIndex].shopItemRefs.Count > 0)
+                if (prntForm.shopsList[selectedLbxIndex].shopItemRefs.Count > 0)
                 {
                     lbxItems.BeginUpdate();
                     lbxItems.DataSource = null;
-                    lbxItems.DataSource = prntForm.mod.moduleShopsList[selectedLbxIndex].shopItemRefs;
+                    lbxItems.DataSource = prntForm.shopsList[selectedLbxIndex].shopItemRefs;
                     lbxItems.DisplayMember = "name";
                     lbxItems.EndUpdate();
                 }

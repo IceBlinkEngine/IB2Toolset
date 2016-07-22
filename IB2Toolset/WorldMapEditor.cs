@@ -15,7 +15,7 @@ using SharpDX.Direct2D1;
 using Bitmap = System.Drawing.Bitmap;
 using SharpDX.DXGI;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public struct selectionStruct
     {
@@ -26,7 +26,11 @@ namespace IB2miniToolset
     public struct tilepropToBePlacedSettings
     {
         public int angle;
-        public int mirror;
+        public bool mirror;
+        public int xshift;
+        public int yshift;
+        public int xscale;
+        public int yscale;
     }
 
     public partial class WorldMapEditor : DockContent
@@ -35,10 +39,18 @@ namespace IB2miniToolset
         public Module mod;
 
         private List<TileBitmapNamePair> tileList = new List<TileBitmapNamePair>();
-        //public SharpDX.Direct2D1.Bitmap gameMapBitmapD2D;
+        //GDI private Graphics device;
+        //GDI private Bitmap surface;
+        //GDI public Bitmap gameMapBitmap;
+        public SharpDX.Direct2D1.Bitmap gameMapBitmapD2D;
         private Bitmap selectedBitmap;
         public string selectedBitmapFilename = "";
+        //GDI public Bitmap g_walkPass;
+        //GDI public Bitmap g_walkBlock;
+        //GDI public Bitmap g_LoSBlock;
         private int sqr = 25;
+        private int mSizeW = 800;
+        private int mSizeH = 800;
         private Point currentPoint = new Point(0, 0);
         private Point lastPoint = new Point(0, 0);
         private int gridX = 0;
@@ -50,8 +62,10 @@ namespace IB2miniToolset
         public string currentTileFilename = "t_grass";
         public tilepropToBePlacedSettings tileToBePlaced;
         public bool tileSelected = true;
+        //GDI Pen blackPen = new Pen(Color.Black, 1);
         public Point currentSquareClicked = new Point(0, 0);
         public Point lastSquareClicked = new Point(0, 0);
+        //public Font fontArial;
         public string g_filename = "";
         public string g_directory = "";
         public Area area;
@@ -60,9 +74,16 @@ namespace IB2miniToolset
         public string lastSelectedObjectTag;
         public string lastSelectedObjectResRef;
         public Prop le_selectedProp = new Prop();
-        
+        //GDI public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
+        //GDI public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
+
         public Bitmap sourceBitmap;
+        //public string sourceBitmapName = "";
         string[] args = new string[2];
+        string xCells = "";
+        string yCells = "";
+
+        bool calledFromLoadButton = false;
         bool firstTimeLoadingMap = true;
 
         #region Direct2D Stuff
@@ -151,7 +172,7 @@ namespace IB2miniToolset
             area.MapSizeY = 16;
 
             // try and load the file selected if it exists
-            /*string g_filename = mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+            string g_filename = mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
             string g_directory = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
             string filenameNoExtension = Path.GetFileNameWithoutExtension(mod.moduleAreasList[prntForm._selectedLbxAreaIndex]);
             if (File.Exists(g_directory + "\\" + g_filename + ".lvl"))
@@ -172,7 +193,7 @@ namespace IB2miniToolset
                     //TODO add D2D stuff
                     InitDirect2DAndDirectWrite();
                 }
-            }*/
+            }
             lblMapSizeX.Text = area.MapSizeX.ToString();
             lblMapSizeY.Text = area.MapSizeY.ToString();
             //set up level drawing surface
@@ -200,20 +221,23 @@ namespace IB2miniToolset
             }
 
             //refreshCmbBoxes();
-            //prntForm.openAreasList.Add(area);
+            prntForm.openAreasList.Add(area);
             rbtnInfo.Checked = true;
             rbtnZoom1x.Checked = true;
-            InitDirect2DAndDirectWrite();
             //refreshMap(true);
-            //numBGLocX.Value = area.backgroundImageStartLocX;
-            //numBGLocY.Value = area.backgroundImageStartLocY;
+            numBGLocX.Value = area.backgroundImageStartLocX;
+            numBGLocY.Value = area.backgroundImageStartLocY;
             //Set this map to be a WORLD MAP
             //area.IsWorldMap = true;
         }
         public void resetTileToBePlacedSettings()
         {
             tileToBePlaced.angle = 0;
-            tileToBePlaced.mirror = 0;
+            tileToBePlaced.mirror = false;
+            tileToBePlaced.xshift = 0;
+            tileToBePlaced.yshift = 0;
+            tileToBePlaced.xscale = 0;
+            tileToBePlaced.yscale = 0;
         }
         private void resetPanelAndDeviceSize()
         {
@@ -996,9 +1020,13 @@ namespace IB2miniToolset
                         #region Layer 1
                         if (radioButton1.Checked)
                         {
-                            area.Layer1Filename[selectedTile.index] = currentTileFilename;
-                            //area.Tiles[selectedTile.index].Layer1Rotate = tileToBePlaced.angle;
-                            //area.Tiles[selectedTile.index].Layer1Mirror = tileToBePlaced.mirror;
+                            area.Tiles[selectedTile.index].Layer1Filename = currentTileFilename;
+                            area.Tiles[selectedTile.index].Layer1Rotate = tileToBePlaced.angle;
+                            area.Tiles[selectedTile.index].Layer1Mirror = tileToBePlaced.mirror;
+                            area.Tiles[selectedTile.index].Layer1Xshift = tileToBePlaced.xshift;
+                            area.Tiles[selectedTile.index].Layer1Yshift = tileToBePlaced.yshift;
+                            area.Tiles[selectedTile.index].Layer1Xscale = tileToBePlaced.xscale;
+                            area.Tiles[selectedTile.index].Layer1Yscale = tileToBePlaced.yscale;
                             //if shift key is down, draw all between here and lastclickedsquare
                             if (Control.ModifierKeys == Keys.Shift)
                             {
@@ -1023,9 +1051,13 @@ namespace IB2miniToolset
                                 {
                                     for (int y = startY; y <= endY; y++)
                                     {
-                                        area.Layer1Filename[y * area.MapSizeX + x] = currentTileFilename;
-                                        //area.Tiles[y * area.MapSizeX + x].Layer1Rotate = tileToBePlaced.angle;
-                                        //area.Tiles[y * area.MapSizeX + x].Layer1Mirror = tileToBePlaced.mirror;
+                                        area.Tiles[y * area.MapSizeX + x].Layer1Filename = currentTileFilename;
+                                        area.Tiles[y * area.MapSizeX + x].Layer1Rotate = tileToBePlaced.angle;
+                                        area.Tiles[y * area.MapSizeX + x].Layer1Mirror = tileToBePlaced.mirror;
+                                        area.Tiles[y * area.MapSizeX + x].Layer1Xshift = tileToBePlaced.xshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer1Yshift = tileToBePlaced.yshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer1Xscale = tileToBePlaced.xscale;
+                                        area.Tiles[y * area.MapSizeX + x].Layer1Yscale = tileToBePlaced.yscale;
                                         currentSquareClicked = new Point(x, y);
                                         //GDI refreshMap(false);
                                     }
@@ -1036,9 +1068,13 @@ namespace IB2miniToolset
                         #region Layer 2
                         else if (radioButton2.Checked)
                         {
-                            area.Layer2Filename[selectedTile.index] = currentTileFilename;
-                            //area.Tiles[selectedTile.index].Layer2Rotate = tileToBePlaced.angle;
-                            //area.Tiles[selectedTile.index].Layer2Mirror = tileToBePlaced.mirror;
+                            area.Tiles[selectedTile.index].Layer2Filename = currentTileFilename;
+                            area.Tiles[selectedTile.index].Layer2Rotate = tileToBePlaced.angle;
+                            area.Tiles[selectedTile.index].Layer2Mirror = tileToBePlaced.mirror;
+                            area.Tiles[selectedTile.index].Layer2Xshift = tileToBePlaced.xshift;
+                            area.Tiles[selectedTile.index].Layer2Yshift = tileToBePlaced.yshift;
+                            area.Tiles[selectedTile.index].Layer2Xscale = tileToBePlaced.xscale;
+                            area.Tiles[selectedTile.index].Layer2Yscale = tileToBePlaced.yscale;
                             if (Control.ModifierKeys == Keys.Shift)
                             {
                                 Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
@@ -1061,9 +1097,151 @@ namespace IB2miniToolset
                                 {
                                     for (int y = startY; y <= endY; y++)
                                     {
-                                        area.Layer2Filename[y * area.MapSizeX + x] = currentTileFilename;
-                                        //area.Tiles[y * area.MapSizeX + x].Layer2Rotate = tileToBePlaced.angle;
-                                        //area.Tiles[y * area.MapSizeX + x].Layer2Mirror = tileToBePlaced.mirror;
+                                        area.Tiles[y * area.MapSizeX + x].Layer2Filename = currentTileFilename;
+                                        area.Tiles[y * area.MapSizeX + x].Layer2Rotate = tileToBePlaced.angle;
+                                        area.Tiles[y * area.MapSizeX + x].Layer2Mirror = tileToBePlaced.mirror;
+                                        area.Tiles[y * area.MapSizeX + x].Layer2Xshift = tileToBePlaced.xshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer2Yshift = tileToBePlaced.yshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer2Xscale = tileToBePlaced.xscale;
+                                        area.Tiles[y * area.MapSizeX + x].Layer2Yscale = tileToBePlaced.yscale;
+                                        currentSquareClicked = new Point(x, y);
+                                        //GDI refreshMap(false);
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+                        #region Layer 3
+                        else if (radioButton3.Checked)
+                        {
+                            area.Tiles[selectedTile.index].Layer3Filename = currentTileFilename;
+                            area.Tiles[selectedTile.index].Layer3Rotate = tileToBePlaced.angle;
+                            area.Tiles[selectedTile.index].Layer3Mirror = tileToBePlaced.mirror;
+                            area.Tiles[selectedTile.index].Layer3Xshift = tileToBePlaced.xshift;
+                            area.Tiles[selectedTile.index].Layer3Yshift = tileToBePlaced.yshift;
+                            area.Tiles[selectedTile.index].Layer3Xscale = tileToBePlaced.xscale;
+                            area.Tiles[selectedTile.index].Layer3Yscale = tileToBePlaced.yscale;
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        area.Tiles[y * area.MapSizeX + x].Layer3Filename = currentTileFilename;
+                                        area.Tiles[y * area.MapSizeX + x].Layer3Rotate = tileToBePlaced.angle;
+                                        area.Tiles[y * area.MapSizeX + x].Layer3Mirror = tileToBePlaced.mirror;
+                                        area.Tiles[y * area.MapSizeX + x].Layer3Xshift = tileToBePlaced.xshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer3Yshift = tileToBePlaced.yshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer3Xscale = tileToBePlaced.xscale;
+                                        area.Tiles[y * area.MapSizeX + x].Layer3Yscale = tileToBePlaced.yscale;
+                                        currentSquareClicked = new Point(x, y);
+                                        //GDI refreshMap(false);
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+                        #region Layer 4
+                        else if (radioButton4.Checked)
+                        {
+                            area.Tiles[selectedTile.index].Layer4Filename = currentTileFilename;
+                            area.Tiles[selectedTile.index].Layer4Rotate = tileToBePlaced.angle;
+                            area.Tiles[selectedTile.index].Layer4Mirror = tileToBePlaced.mirror;
+                            area.Tiles[selectedTile.index].Layer4Xshift = tileToBePlaced.xshift;
+                            area.Tiles[selectedTile.index].Layer4Yshift = tileToBePlaced.yshift;
+                            area.Tiles[selectedTile.index].Layer4Xscale = tileToBePlaced.xscale;
+                            area.Tiles[selectedTile.index].Layer4Yscale = tileToBePlaced.yscale;
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        area.Tiles[y * area.MapSizeX + x].Layer4Filename = currentTileFilename;
+                                        area.Tiles[y * area.MapSizeX + x].Layer4Rotate = tileToBePlaced.angle;
+                                        area.Tiles[y * area.MapSizeX + x].Layer4Mirror = tileToBePlaced.mirror;
+                                        area.Tiles[y * area.MapSizeX + x].Layer4Xshift = tileToBePlaced.xshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer4Yshift = tileToBePlaced.yshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer4Xscale = tileToBePlaced.xscale;
+                                        area.Tiles[y * area.MapSizeX + x].Layer4Yscale = tileToBePlaced.yscale;
+                                        currentSquareClicked = new Point(x, y);
+                                        //GDI refreshMap(false);
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+                        #region Layer 5
+                        else if (radioButton5.Checked)
+                        {
+                            area.Tiles[selectedTile.index].Layer5Filename = currentTileFilename;
+                            area.Tiles[selectedTile.index].Layer5Rotate = tileToBePlaced.angle;
+                            area.Tiles[selectedTile.index].Layer5Mirror = tileToBePlaced.mirror;
+                            area.Tiles[selectedTile.index].Layer5Xshift = tileToBePlaced.xshift;
+                            area.Tiles[selectedTile.index].Layer5Yshift = tileToBePlaced.yshift;
+                            area.Tiles[selectedTile.index].Layer5Xscale = tileToBePlaced.xscale;
+                            area.Tiles[selectedTile.index].Layer5Yscale = tileToBePlaced.yscale;
+                            if (Control.ModifierKeys == Keys.Shift)
+                            {
+                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                int startX = lSqr.X;
+                                int startY = lSqr.Y;
+                                int endX = cSqr.X;
+                                int endY = cSqr.Y;
+                                if (lSqr.X >= cSqr.X)
+                                {
+                                    startX = cSqr.X;
+                                    endX = lSqr.X;
+                                }
+                                if (lSqr.Y >= cSqr.Y)
+                                {
+                                    startY = cSqr.Y;
+                                    endY = lSqr.Y;
+                                }
+                                for (int x = startX; x <= endX; x++)
+                                {
+                                    for (int y = startY; y <= endY; y++)
+                                    {
+                                        area.Tiles[y * area.MapSizeX + x].Layer5Filename = currentTileFilename;
+                                        area.Tiles[y * area.MapSizeX + x].Layer5Rotate = tileToBePlaced.angle;
+                                        area.Tiles[y * area.MapSizeX + x].Layer5Mirror = tileToBePlaced.mirror;
+                                        area.Tiles[y * area.MapSizeX + x].Layer5Xshift = tileToBePlaced.xshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer5Yshift = tileToBePlaced.yshift;
+                                        area.Tiles[y * area.MapSizeX + x].Layer5Xscale = tileToBePlaced.xscale;
+                                        area.Tiles[y * area.MapSizeX + x].Layer5Yscale = tileToBePlaced.yscale;
                                         currentSquareClicked = new Point(x, y);
                                         //GDI refreshMap(false);
                                     }
@@ -1214,7 +1392,7 @@ namespace IB2miniToolset
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        area.Walkable[selectedTile.index] = 0;
+                        area.Tiles[selectedTile.index].Walkable = false;
                         //GDI refreshMap(false);
                     }
                     #endregion
@@ -1224,7 +1402,7 @@ namespace IB2miniToolset
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        area.LoSBlocked[selectedTile.index] = 1;
+                        area.Tiles[selectedTile.index].LoSBlocked = true;
                         //GDI refreshMap(false);
                     }
                     #endregion
@@ -1291,7 +1469,7 @@ namespace IB2miniToolset
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        area.Walkable[selectedTile.index] = 1;
+                        area.Tiles[selectedTile.index].Walkable = true;
                         //GDI refreshMap(false);
                     }
                     #endregion
@@ -1301,7 +1479,7 @@ namespace IB2miniToolset
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        area.LoSBlocked[selectedTile.index] = 0;
+                        area.Tiles[selectedTile.index].LoSBlocked = false;
                         //GDI refreshMap(false);
                     }
                     #endregion
@@ -1334,11 +1512,23 @@ namespace IB2miniToolset
                     selectedTile.index = y * area.MapSizeX + x;
                     if (radioButton1.Checked)
                     {
-                        area.Layer1Filename[selectedTile.index] = currentTileFilename;
+                        area.Tiles[selectedTile.index].Layer1Filename = currentTileFilename;
                     }
                     else if (radioButton2.Checked)
                     {
-                        area.Layer2Filename[selectedTile.index] = currentTileFilename;
+                        area.Tiles[selectedTile.index].Layer2Filename = currentTileFilename;
+                    }
+                    else if (radioButton3.Checked)
+                    {
+                        area.Tiles[selectedTile.index].Layer3Filename = currentTileFilename;
+                    }
+                    else if (radioButton4.Checked)
+                    {
+                        area.Tiles[selectedTile.index].Layer4Filename = currentTileFilename;
+                    }
+                    else if (radioButton5.Checked)
+                    {
+                        area.Tiles[selectedTile.index].Layer5Filename = currentTileFilename;
                     }
                 }
             }
@@ -1380,17 +1570,34 @@ namespace IB2miniToolset
             RenderTarget2D.AntialiasMode = AntialiasMode.PerPrimitive;
             RenderTarget2D.TextAntialiasMode = TextAntialiasMode.Cleartype;
 
-            SceneColorBrush = new SolidColorBrush(RenderTarget2D, SharpDX.Color.Black);            
+            SceneColorBrush = new SolidColorBrush(RenderTarget2D, SharpDX.Color.Black);
+            //TODO dispose of all of these objects upon closing this editor
+            try
+            {
+                gameMapBitmapD2D = GetFromBitmapList(area.ImageFileName);
+            }
+            catch (Exception ex)
+            {
+                prntForm.errorLog(ex.ToString());
+            }
             timerRenderLoop.Start();
         }
-        public void DrawD2DBitmap(SharpDX.Direct2D1.Bitmap bitmap, SharpDX.RectangleF source, SharpDX.RectangleF target, int angleInDegrees, int mirror)
+        public void DrawD2DBitmap(SharpDX.Direct2D1.Bitmap bitmap, SharpDX.RectangleF source, SharpDX.RectangleF target, int angleInDegrees, bool mirror, int Xshift, int Yshift)
+        {
+            DrawD2DBitmap(bitmap, source, target, angleInDegrees, mirror, Xshift, Yshift, 0, 0);
+        }
+        public void DrawD2DBitmap(SharpDX.Direct2D1.Bitmap bitmap, SharpDX.RectangleF source, SharpDX.RectangleF target, int angleInDegrees, bool mirror, int Xshift, int Yshift, int Xscale, int Yscale)
         {
             int mir = 1;
-            if (mirror == 1) { mir = -1; }
+            if (mirror) { mir = -1; }
             //convert degrees to radians
             float angle = (float)(Math.PI * 2 * (float)angleInDegrees / (float)360);
+            float xshf = (float)Xshift * (float)sqr / 50f;
+            float yshf = (float)Yshift * (float)sqr / 50f;
+            float xscl = 1f + (((float)Xscale * (float)sqr / 50f) / 50f);
+            float yscl = 1f + (((float)Yscale * (float)sqr / 50f) / 50f);
             SharpDX.Vector2 center = new SharpDX.Vector2(target.Left + (target.Width / 2), target.Top + (target.Height / 2));
-            RenderTarget2D.Transform = SharpDX.Matrix.Transformation2D(center, 0, new SharpDX.Vector2(mir * 1.0f, 1.0f), center, angle, new SharpDX.Vector2(0, 0));
+            RenderTarget2D.Transform = SharpDX.Matrix.Transformation2D(center, 0, new SharpDX.Vector2(mir * xscl, yscl), center, angle, new SharpDX.Vector2(xshf, yshf));
             SharpDX.RectangleF trg = new SharpDX.RectangleF(target.Left, target.Top, target.Width, target.Height);
             SharpDX.RectangleF src = new SharpDX.RectangleF(source.Left, source.Top, source.Width, source.Height);
             RenderTarget2D.DrawBitmap(bitmap, trg, 1.0f, BitmapInterpolationMode.Linear, src);
@@ -1439,6 +1646,18 @@ namespace IB2miniToolset
                 else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\" + filename))
                 {
                     bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\" + filename);
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + filename + ".png"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + filename + ".png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + filename + ".jpg"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + filename + ".jpg");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + filename))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + filename);
                 }
                 else
                 {
@@ -1518,6 +1737,7 @@ namespace IB2miniToolset
                 }
             }
             commonBitmapList.Clear();
+            DisposeOfBitmap(ref gameMapBitmapD2D);
             SceneColorBrush.Dispose();
             RenderTarget2D.Dispose();
             FactoryDWrite.Dispose();
@@ -1546,7 +1766,85 @@ namespace IB2miniToolset
             }
         }
         public void redrawMain()
-        {            
+        {
+            if ((!area.ImageFileName.Equals("none")) && (gameMapBitmapD2D != null))
+            {
+                SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, gameMapBitmapD2D.PixelSize.Width, gameMapBitmapD2D.PixelSize.Height);
+                SharpDX.RectangleF dst = new SharpDX.RectangleF(area.backgroundImageStartLocX * sqr, area.backgroundImageStartLocY * sqr, sqr * (gameMapBitmapD2D.PixelSize.Width / 50), sqr * (gameMapBitmapD2D.PixelSize.Height / 50));
+                DrawD2DBitmap(gameMapBitmapD2D, src, dst, 0, false, 0, 0, 0, 0);
+            }
+            if (mod.useAllTileSystem)
+            {
+                #region Draw Layer 0
+                if (area.sourceBitmapName != "")
+                {
+                    if (firstTimeLoadingMap)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                    }
+                    int tileCounter = 0;
+                    for (int y = 0; y < area.MapSizeY; y++)
+                    {
+                        for (int x = 0; x < area.MapSizeX; x++)
+                        {                            
+                            Tile tile = area.Tiles[y * area.MapSizeX + x];
+                            //Bitmap lyr0 = null;
+                            try
+                            {
+                                tile.Layer0Filename = area.sourceBitmapName + tileCounter.ToString();
+                            }
+                            catch { }
+                            if ((tile.Layer0Filename != null) && (tile.Layer0Filename != "") && tile.Layer0Filename != "t_blank")
+                            {
+                                /*if (area.isPNGMap)
+                                {
+                                    string bitMapPath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + tile.Layer0Filename + ".png";
+                                }
+                                if (area.isJPGMap)
+                                {
+                                    string bitMapPath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + tile.Layer0Filename + ".jpg";
+                                }*/
+                                tileCounter++;
+                                /*try
+                                {
+                                    if (area.isPNGMap)
+                                    {
+                                        lyr0 = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + tile.Layer0Filename + ".png");
+                                        //int block = 3;
+                                    }
+                                    if (area.isJPGMap)
+                                    {
+                                        lyr0 = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + tile.Layer0Filename + ".jpg");
+                                        //int block = 3;
+                                    }
+                                }
+                                catch
+                                {
+
+                                }*/
+
+                                /*if (lyr0 != null)
+                                {
+                                    float scalerX = 1;
+                                    float scalerY = 1;
+                                    Rectangle src = new Rectangle(0, 0, lyr0.Width, lyr0.Height);
+                                    Rectangle dst = new Rectangle(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                    device.DrawImage(lyr0, dst, src, GraphicsUnit.Pixel);
+                                }*/
+                                SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer0Filename).PixelSize.Width, GetFromBitmapList(tile.Layer0Filename).PixelSize.Height);
+                                SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+                                DrawD2DBitmap(GetFromBitmapList(tile.Layer0Filename), src, dst, 0, false, 0, 0);
+                            }                            
+                        }
+                    }
+                    if (firstTimeLoadingMap)
+                    {
+                        this.Cursor = Cursors.Default;
+                        firstTimeLoadingMap = false;
+                    }                    
+                }
+                #endregion
+            }
             #region Draw Layer 1
             if (checkBox1.Checked)
             {
@@ -1554,12 +1852,14 @@ namespace IB2miniToolset
                 {
                     for (int x = 0; x < area.MapSizeX; x++)
                     {                        
-                        string tile = area.Layer1Filename[y * area.MapSizeX + x];
-                        if (!tile.Equals("t_blank"))
+                        Tile tile = area.Tiles[y * area.MapSizeX + x];
+                        if (!tile.Layer1Filename.Equals("t_blank"))
                         {
-                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile).PixelSize.Width, GetFromBitmapList(tile).PixelSize.Height);
-                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr), (int)(sqr));
-                            DrawD2DBitmap(GetFromBitmapList(tile), src, dst, area.Layer1Rotate[y * area.MapSizeX + x], area.Layer1Mirror[y * area.MapSizeX + x]);
+                            float scalerX = GetFromBitmapList(tile.Layer1Filename).PixelSize.Width / 100;
+                            float scalerY = GetFromBitmapList(tile.Layer1Filename).PixelSize.Height / 100;
+                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer1Filename).PixelSize.Width, GetFromBitmapList(tile.Layer1Filename).PixelSize.Height);
+                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer1Filename), src, dst, tile.Layer1Rotate, tile.Layer1Mirror, tile.Layer1Xshift, tile.Layer1Yshift, tile.Layer1Xscale, tile.Layer1Yscale);
                         }
                     }
                 }
@@ -1572,12 +1872,74 @@ namespace IB2miniToolset
                 {
                     for (int x = 0; x < area.MapSizeX; x++)
                     {
-                        string tile = area.Layer2Filename[y * area.MapSizeX + x];
-                        if (!tile.Equals("t_blank"))
+                        Tile tile = area.Tiles[y * area.MapSizeX + x];
+                        if (!tile.Layer2Filename.Equals("t_blank"))
                         {
-                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile).PixelSize.Width, GetFromBitmapList(tile).PixelSize.Height);
-                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr), (int)(sqr));
-                            DrawD2DBitmap(GetFromBitmapList(tile), src, dst, area.Layer2Rotate[y * area.MapSizeX + x], area.Layer2Mirror[y * area.MapSizeX + x]);
+                            float scalerX = GetFromBitmapList(tile.Layer2Filename).PixelSize.Width / 100;
+                            float scalerY = GetFromBitmapList(tile.Layer2Filename).PixelSize.Height / 100;
+                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer2Filename).PixelSize.Width, GetFromBitmapList(tile.Layer2Filename).PixelSize.Height);
+                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer2Filename), src, dst, tile.Layer2Rotate, tile.Layer2Mirror, tile.Layer2Xshift, tile.Layer2Yshift, tile.Layer2Xscale, tile.Layer2Yscale);
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region Draw Layer 3
+            if (checkBox3.Checked)
+            {
+                for (int y = 0; y < area.MapSizeY; y++)
+                {
+                    for (int x = 0; x < area.MapSizeX; x++)
+                    {
+                        Tile tile = area.Tiles[y * area.MapSizeX + x];
+                        if (!tile.Layer3Filename.Equals("t_blank"))
+                        {
+                            float scalerX = GetFromBitmapList(tile.Layer3Filename).PixelSize.Width / 100;
+                            float scalerY = GetFromBitmapList(tile.Layer3Filename).PixelSize.Height / 100;
+                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer3Filename).PixelSize.Width, GetFromBitmapList(tile.Layer3Filename).PixelSize.Height);
+                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer3Filename), src, dst, tile.Layer3Rotate, tile.Layer3Mirror, tile.Layer3Xshift, tile.Layer3Yshift, tile.Layer3Xscale, tile.Layer3Yscale);
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region Draw Layer 4
+            if (checkBox4.Checked)
+            {
+                for (int y = 0; y < area.MapSizeY; y++)
+                {
+                    for (int x = 0; x < area.MapSizeX; x++)
+                    {
+                        Tile tile = area.Tiles[y * area.MapSizeX + x];
+                        if (!tile.Layer4Filename.Equals("t_blank"))
+                        {
+                            float scalerX = GetFromBitmapList(tile.Layer4Filename).PixelSize.Width / 100;
+                            float scalerY = GetFromBitmapList(tile.Layer4Filename).PixelSize.Height / 100;
+                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer4Filename).PixelSize.Width, GetFromBitmapList(tile.Layer4Filename).PixelSize.Height);
+                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer4Filename), src, dst, tile.Layer4Rotate, tile.Layer4Mirror, tile.Layer4Xshift, tile.Layer4Yshift, tile.Layer4Xscale, tile.Layer4Yscale);
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region Draw Layer 5
+            if (checkBox5.Checked)
+            {
+                for (int y = 0; y < area.MapSizeY; y++)
+                {
+                    for (int x = 0; x < area.MapSizeX; x++)
+                    {
+                        Tile tile = area.Tiles[y * area.MapSizeX + x];
+                        if (!tile.Layer5Filename.Equals("t_blank"))
+                        {
+                            float scalerX = GetFromBitmapList(tile.Layer5Filename).PixelSize.Width / 100;
+                            float scalerY = GetFromBitmapList(tile.Layer5Filename).PixelSize.Height / 100;
+                            SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer5Filename).PixelSize.Width, GetFromBitmapList(tile.Layer5Filename).PixelSize.Height);
+                            SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                            DrawD2DBitmap(GetFromBitmapList(tile.Layer5Filename), src, dst, tile.Layer5Rotate, tile.Layer5Mirror, tile.Layer5Xshift, tile.Layer5Yshift, tile.Layer5Xscale, tile.Layer5Yscale);
                         }
                     }
                 }
@@ -1589,7 +1951,7 @@ namespace IB2miniToolset
             {
                 for (int x = 0; x < area.MapSizeX; x++)
                 {                    
-                    //Tile tile = area.Tiles[y * area.MapSizeX + x];                    
+                    Tile tile = area.Tiles[y * area.MapSizeX + x];                    
                     //draw square walkmesh and LoS stuff
                     //SharpDX.Direct2D1.Bitmap bm = GetFromBitmapList("walk_pass");
                     //Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
@@ -1598,17 +1960,17 @@ namespace IB2miniToolset
                     SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
                     if (chkGrid.Checked) //if show grid is turned on, draw grid squares
                     {
-                        if (area.LoSBlocked[y * area.MapSizeX + x] == 1)
+                        if (tile.LoSBlocked)
                         {
-                            DrawD2DBitmap(GetFromBitmapList("los_block"), src, dst, 0, 0);
+                            DrawD2DBitmap(GetFromBitmapList("los_block"), src, dst, 0, false, 0, 0);
                         }
-                        if (area.Walkable[y * area.MapSizeX + x] == 1)
+                        if (tile.Walkable)
                         {
-                            DrawD2DBitmap(GetFromBitmapList("walk_pass"), src, dst, 0, 0);
+                            DrawD2DBitmap(GetFromBitmapList("walk_pass"), src, dst, 0, false, 0, 0);
                         }
                         else
                         {
-                            DrawD2DBitmap(GetFromBitmapList("walk_block"), src, dst, 0, 0);
+                            DrawD2DBitmap(GetFromBitmapList("walk_block"), src, dst, 0, false, 0, 0);
                             
                         }
                     }                   
@@ -1621,9 +1983,7 @@ namespace IB2miniToolset
             {
                 SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(prpRef.ImageFileName).PixelSize.Width, GetFromBitmapList(prpRef.ImageFileName).PixelSize.Height);
                 SharpDX.RectangleF dst = new SharpDX.RectangleF(prpRef.LocationX * sqr, prpRef.LocationY * sqr, sqr, sqr);
-                int mirror = 0;
-                if (!prpRef.PropFacingLeft) { mirror = 1; }
-                DrawD2DBitmap(GetFromBitmapList(prpRef.ImageFileName), src, dst, 0, mirror);
+                DrawD2DBitmap(GetFromBitmapList(prpRef.ImageFileName), src, dst, 0, !prpRef.PropFacingLeft, 0, 0);
             }
             #endregion
             #region Draw Triggers
@@ -1674,7 +2034,7 @@ namespace IB2miniToolset
                     {
                         SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(selectedBitmapFilename).PixelSize.Width, GetFromBitmapList(selectedBitmapFilename).PixelSize.Height);
                         SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, sqr, sqr);
-                        DrawD2DBitmap(GetFromBitmapList(selectedBitmapFilename), src, dst, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList(selectedBitmapFilename), src, dst, 0, false, 0, 0, 0, 0);
                     }
                 }
                 catch (Exception ex) { MessageBox.Show("failed mouse move update to be placed prop: " + ex.ToString()); }
@@ -1685,11 +2045,11 @@ namespace IB2miniToolset
                 {
                     if (!currentTileFilename.Equals(""))
                     {
+                        float scalerX = GetFromBitmapList(currentTileFilename).PixelSize.Width / 100;
+                        float scalerY = GetFromBitmapList(currentTileFilename).PixelSize.Height / 100;
                         SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(currentTileFilename).PixelSize.Width, GetFromBitmapList(currentTileFilename).PixelSize.Height);
-                        SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, (int)(sqr), (int)(sqr));
-                        int mirror = 0;
-                        if (tileToBePlaced.mirror == 1) { mirror = 1; }
-                        DrawD2DBitmap(GetFromBitmapList(currentTileFilename), src, dst, tileToBePlaced.angle, mirror);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(gridX * sqr, gridY * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                        DrawD2DBitmap(GetFromBitmapList(currentTileFilename), src, dst, tileToBePlaced.angle, tileToBePlaced.mirror, tileToBePlaced.xshift, tileToBePlaced.yshift, tileToBePlaced.xscale, tileToBePlaced.yscale);
                     }
                 }
                 catch (Exception ex) { MessageBox.Show("failed mouse move update to be placed tile: " + ex.ToString()); }
@@ -1797,7 +2157,7 @@ namespace IB2miniToolset
             g_filename = Path.GetFileNameWithoutExtension(saveFileDialog1.FileName);
             g_directory = Path.GetDirectoryName(saveFileDialog1.FileName);
             area.Filename = g_filename;
-            //area.ImageFileName = Path.GetFileNameWithoutExtension(saveFileDialog1.FileName);
+            area.ImageFileName = Path.GetFileNameWithoutExtension(saveFileDialog1.FileName);
             saveTilemapFile();
         }
         public void saveTilemapFile()
@@ -1820,24 +2180,53 @@ namespace IB2miniToolset
             area.MapSizeY = height;
             for (int index = 0; index < (width * height); index++)
             {
-                area.Layer1Filename.Add("t_grass");
-                area.Layer1Rotate.Add(0);
-                area.Layer1Mirror.Add(0);
-                area.Layer2Filename.Add("t_blank");
-                area.Layer2Rotate.Add(0);
-                area.Layer2Mirror.Add(0);
-                area.Walkable.Add(1);
-                area.LoSBlocked.Add(0);
-                area.Visible.Add(0);
+                Tile newTile = new Tile();
+                newTile.Walkable = true;
+                newTile.LoSBlocked = false;
+                newTile.Visible = false;
+                area.Tiles.Add(newTile);
             }
+            //GDI gameMapBitmap = null;
             refreshLeftPanelInfo();
-        }        
+            
+            if (useDirect2D)
+            {
+                //TODO set panel to use D2D
+            }
+            /*//GDI else
+            {
+                panelView.Width = area.MapSizeX * sqr;
+                panelView.Height = area.MapSizeY * sqr;
+                panelView.BackgroundImage = (Image)surface;
+                device = Graphics.FromImage(surface);
+                if (surface == null)
+                {
+                    MessageBox.Show("returned a null Map bitmap");
+                    return;
+                }
+            }*/
+            //GDI refreshMap(true);
+        }
+        private void resetAreaTileValues(int width, int height)
+        {
+            //create tilemap
+            area.MapSizeX = width;
+            area.MapSizeY = height;
+            for (int index = 0; index < (width * height); index++)
+            {
+                Tile newTile = new Tile();
+                newTile.Walkable = true;
+                newTile.LoSBlocked = false;
+                newTile.Visible = false;
+                area.Tiles.Add(newTile);
+            }
+        }
         public void refreshLeftPanelInfo()
         {
             lblMapSizeX.Text = area.MapSizeX.ToString();
             lblMapSizeY.Text = area.MapSizeY.ToString();
-            //numBGLocX.Value = area.backgroundImageStartLocX;
-            //numBGLocY.Value = area.backgroundImageStartLocY;
+            numBGLocX.Value = area.backgroundImageStartLocX;
+            numBGLocY.Value = area.backgroundImageStartLocY;
             selectedTile.x = gridX;
             selectedTile.y = gridY;
             selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1855,7 +2244,188 @@ namespace IB2miniToolset
         #region Event Handlers
         private void btnLoadMap_Click(object sender, EventArgs e)
         {
-            
+            if (mod.useAllTileSystem)
+            {
+                #region new tile cutting system
+                if (mod.moduleName != "NewModule")
+                {
+                    openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics";
+                }
+                else
+                {
+                    openFileDialog1.InitialDirectory = prntForm._mainDirectory + "\\default\\NewModule";
+                }
+                bool isPng = false;
+                bool isJpg = false;
+                openFileDialog1.FileName = String.Empty;
+                //allow .png maps, too (their transparency allows to show bottom layer full screen effects, like the sea)
+                openFileDialog1.Filter = "Map (*.jpg)|*.jpg|Map (*.png)|*.png";
+                openFileDialog1.FilterIndex = 1;
+
+                DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+                if (result == DialogResult.OK) // Test result.  
+                {
+                    string pictureType = Path.GetFullPath(openFileDialog1.FileName);
+
+                    if (pictureType.Contains("png"))
+                    {
+                        isPng = true;
+                        area.isPNGMap = true;
+                    }
+                    if (pictureType.Contains("jpg"))
+                    {
+                        isJpg = true;
+                        area.isJPGMap = true;
+                    }
+
+                    Bitmap testSize = new Bitmap(Path.GetFullPath(openFileDialog1.FileName));
+                    if ((testSize.Width > 5000) || (testSize.Height > 5000))
+                    {
+                        MessageBox.Show("Map images must be no more than 5000x5000 pixels, i.e. 100x100 squares");
+                        return;
+                    }
+
+                    //openLevel and refreshMap methods need area.ImageFileName != "none" to fire
+                    //let us "none" and null here for starters to circumvent the reular load and draw of a background map en block
+                    string filename = Path.GetFullPath(openFileDialog1.FileName);
+                    //area.ImageFileName = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                    //gameMapBitmap = new Bitmap(filename);
+                    area.ImageFileName = "none";
+                    //GDI gameMapBitmap = null;
+
+                    //from here on we have hijacked the load button, we know the path and filename (together: filename)
+                    //to our target map that is to be cut int 50x50 pieces
+                    //these tiles will be uniquley named, numbered and stored in an own subfolder
+                    //a new layer 0 will draw them like all the other tiles on screen
+                    //if (gameMapBitmap == null)
+                    //{
+                    //MessageBox.Show("returned a null bitmap");
+                    //}
+
+                    //this is our source bitmap, ready for the cutting
+                    //also name of the bitmap later ot be used for directory of its tiles as well as prefix in every of its tiles names (swamp0, swamp1, swamp2, etc.)
+
+
+                    area.sourceBitmapName = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                    sourceBitmap = new Bitmap(filename);
+
+                    //we need to:
+                    //1. likely load it? Or is this only for the sharpdx
+                    //2. Set up a loop running in increments of 50 through x and y, starting from zero up to x/y size of bitmap-1
+                    //maybe just copy this from the normal tile draw routine 
+
+                    //Rectangle srcBG = new Rectangle(0, 0, gameMapBitmap.Width, gameMapBitmap.Height);
+                    //Rectangle dstBG = new Rectangle(area.backgroundImageStartLocX * sqr, area.backgroundImageStartLocY * sqr, sqr * (gameMapBitmap.Width / 50), sqr * (gameMapBitmap.Height / 50));
+                    //device.DrawImage(gameMapBitmap, dstBG, srcBG, GraphicsUnit.Pixel);
+
+                    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                    //trying to implemnt solution from codeproject
+
+                    //xCells = (sourceBitmap.Width / 50).ToString();
+                    //yCells = (sourceBitmap.Height / 50).ToString();
+
+                    //args[0] = "50";
+                    //args[1] = "50";
+
+                    //ushort width = 50;
+                    //ushort height = 50;
+
+                    int columns = sourceBitmap.Width / 100;
+                    int rows = sourceBitmap.Height / 100;
+                    int cells = columns * rows;
+
+                    string dir = "";
+                    try
+                    {
+                        dir = Path.GetDirectoryName(filename) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(filename);
+                        if (!Directory.Exists(dir))
+                        {
+                            Directory.CreateDirectory(dir);
+                        }
+                        //else
+                        //{
+                        //Directory.
+                        //}
+                    }
+                    catch
+                    {
+                        //Console.WriteLine("Error 6: Cannot create directory for cells.");
+                        //return -6;
+                    }
+                    //Console.WriteLine();
+                    //Console.WriteLine("About to split image in {0} rows x {1} columns = {2} cells...", rows, columns, cells);
+                    //Console.WriteLine();
+                    //int cellpadding = (cells - 1).ToString().Length;
+                    //int rowpadding = (rows - 1).ToString().Length;
+                    string cellfile;
+                    string cellpath;
+                    int squarePixSize = 50;
+                    if (area.use100pixSquares)
+                    {
+                        squarePixSize = 100;
+                    }
+                    else
+                    {
+                        squarePixSize = 50;
+                    }
+
+                    try
+                    {
+                        for (int row = 0; row < rows; row++)
+                        {
+                            //Console.Write("Row " + row.ToString().PadLeft(rowpadding, ' ') + ":  ");
+                            for (int column = 0; column < columns; column++)
+                            {
+                                cellfile = area.sourceBitmapName + (row * columns + column).ToString();
+                                if (isPng)
+                                {
+                                    cellpath = dir + Path.DirectorySeparatorChar + cellfile + ".png";
+                                    sourceBitmap.Clone(new Rectangle(column * squarePixSize, row * squarePixSize, squarePixSize, squarePixSize), sourceBitmap.PixelFormat).Save(cellpath);
+                                }
+
+                                if (isJpg)
+                                {
+                                    cellpath = dir + Path.DirectorySeparatorChar + cellfile + ".jpg";
+                                    sourceBitmap.Clone(new Rectangle(column * squarePixSize, row * squarePixSize, squarePixSize, squarePixSize), sourceBitmap.PixelFormat).Save(cellpath);
+                                }
+
+
+
+                                //foreach (string f in Directory.GetFiles(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\", "*.png"))
+                                //{
+                                //TileBitmapNamePair t = new TileBitmapNamePair((Bitmap)bit.Clone(), Path.GetFileNameWithoutExtension(f));
+                                //tileList.Add(t);
+                                //}
+
+                                //foreach (string f in Directory.GetFiles(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\", "*.png"))
+                                //{
+                                //TileBitmapNamePair t = new TileBitmapNamePair((Bitmap)bit.Clone(), Path.GetFileNameWithoutExtension(f));
+                                //tileList.Add(t);
+                                //}
+
+
+                                //Console.Write(cellfile + "  ");
+                            }
+                            //Console.WriteLine();
+                        }
+                        //Console.WriteLine();
+                        //Console.WriteLine("{0} files written to disk.", cells);
+                        //Console.WriteLine();
+                    }
+                    catch (Exception ex)
+                    {
+                        //Console.WriteLine("Error 7: " + ex.Message);
+                        //return -7;
+                    }
+                    //return cells;
+                    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                    calledFromLoadButton = true;
+                    //GDI refreshMap(true);
+                }
+                #endregion
+            }
+            else
+            {
                 #region old system
                 if (mod.moduleName != "NewModule")
                 {
@@ -1879,7 +2449,8 @@ namespace IB2miniToolset
                         return;
                     }
                     string filename = Path.GetFullPath(openFileDialog1.FileName);
-                    //area.ImageFileName = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                    area.ImageFileName = Path.GetFileNameWithoutExtension(openFileDialog1.FileName);
+                    gameMapBitmapD2D = GetFromBitmapList(area.ImageFileName);
                     //GDI gameMapBitmap = new Bitmap(filename);
 
                     //GDI if (gameMapBitmap == null)
@@ -1889,25 +2460,25 @@ namespace IB2miniToolset
                     //GDI refreshMap(true);
                 }
                 #endregion
-            
+            }
         }
         private void btnRemoveMap_Click(object sender, EventArgs e)
         {
-            //area.ImageFileName = "none";
+            area.ImageFileName = "none";
             //GDI refreshMap(true);
         }
         private void numBGLocX_ValueChanged(object sender, EventArgs e)
         {
-            //area.backgroundImageStartLocX = (int)numBGLocX.Value;
+            area.backgroundImageStartLocX = (int)numBGLocX.Value;
         }
         private void numBGLocY_ValueChanged(object sender, EventArgs e)
         {
-            //area.backgroundImageStartLocY = (int)numBGLocY.Value;
+            area.backgroundImageStartLocY = (int)numBGLocY.Value;
         }
         private void WorldMapEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             //MessageBox.Show("closing editor and removing from openAreaList");
-            //prntForm.openAreasList.Remove(area);
+            prntForm.openAreasList.Remove(area);
         }
         private void WorldMapEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -2107,19 +2678,10 @@ namespace IB2miniToolset
         {
             //y * area.MapSizeX + x
             int oldX = area.MapSizeX;
-            for (int i = area.Layer1Filename.Count - oldX; i >= 0; i -= oldX)
+            for (int i = area.Tiles.Count - oldX; i >= 0; i -= oldX)
             {
-                //Tile newTile = new Tile();
-                //area.Tiles.Insert(i, newTile);
-                area.Layer1Filename.Insert(i, "t_grass");
-                area.Layer1Rotate.Insert(i, 0);
-                area.Layer1Mirror.Insert(i, 0);
-                area.Layer2Filename.Insert(i, "t_blank");
-                area.Layer2Rotate.Insert(i, 0);
-                area.Layer2Mirror.Insert(i, 0);
-                area.Walkable.Insert(i, 1);
-                area.LoSBlocked.Insert(i, 0);
-                area.Visible.Insert(i, 0);
+                Tile newTile = new Tile();
+                area.Tiles.Insert(i, newTile);
             }
             foreach (Prop prpRef in area.Props)
             {
@@ -2139,18 +2701,9 @@ namespace IB2miniToolset
         {
             //y * area.MapSizeX + x
             int oldX = area.MapSizeX;
-            for (int i = area.Layer1Filename.Count - oldX; i >= 0; i -= oldX)
+            for (int i = area.Tiles.Count - oldX; i >= 0; i -= oldX)
             {
-                //area.Tiles.RemoveAt(i);
-                area.Layer1Filename.RemoveAt(i);
-                area.Layer1Rotate.RemoveAt(i);
-                area.Layer1Mirror.RemoveAt(i);
-                area.Layer2Filename.RemoveAt(i);
-                area.Layer2Rotate.RemoveAt(i);
-                area.Layer2Mirror.RemoveAt(i);
-                area.Walkable.RemoveAt(i);
-                area.LoSBlocked.RemoveAt(i);
-                area.Visible.RemoveAt(i);
+                area.Tiles.RemoveAt(i);
             }
             foreach (Prop prpRef in area.Props)
             {
@@ -2170,19 +2723,10 @@ namespace IB2miniToolset
         {
             //y * area.MapSizeX + x
             int oldX = area.MapSizeX;
-            for (int i = area.Layer1Filename.Count - 1; i >= 0; i -= oldX)
+            for (int i = area.Tiles.Count - 1; i >= 0; i -= oldX)
             {
-                //Tile newTile = new Tile();
-                //area.Tiles.Insert(i + 1, newTile);
-                area.Layer1Filename.Insert(i+1, "t_grass");
-                area.Layer1Rotate.Insert(i+1, 0);
-                area.Layer1Mirror.Insert(i+1, 0);
-                area.Layer2Filename.Insert(i+1, "t_blank");
-                area.Layer2Rotate.Insert(i+1, 0);
-                area.Layer2Mirror.Insert(i+1, 0);
-                area.Walkable.Insert(i+1, 1);
-                area.LoSBlocked.Insert(i+1, 0);
-                area.Visible.Insert(i+1, 0);
+                Tile newTile = new Tile();
+                area.Tiles.Insert(i + 1, newTile);
             }
             area.MapSizeX++;
             mapSizeChangeStuff();
@@ -2191,18 +2735,9 @@ namespace IB2miniToolset
         {
             //y * area.MapSizeX + x
             int oldX = area.MapSizeX;
-            for (int i = area.Layer1Filename.Count - 1; i >= 0; i -= oldX)
+            for (int i = area.Tiles.Count - 1; i >= 0; i -= oldX)
             {
-                //area.Tiles.RemoveAt(i);
-                area.Layer1Filename.RemoveAt(i);
-                area.Layer1Rotate.RemoveAt(i);
-                area.Layer1Mirror.RemoveAt(i);
-                area.Layer2Filename.RemoveAt(i);
-                area.Layer2Rotate.RemoveAt(i);
-                area.Layer2Mirror.RemoveAt(i);
-                area.Walkable.RemoveAt(i);
-                area.LoSBlocked.RemoveAt(i);
-                area.Visible.RemoveAt(i);
+                area.Tiles.RemoveAt(i);
             }
             area.MapSizeX--;
             mapSizeChangeStuff();
@@ -2212,17 +2747,8 @@ namespace IB2miniToolset
             //y * area.MapSizeX + x
             for (int i = 0; i < area.MapSizeX; i++)
             {
-                //Tile newTile = new Tile();
-                //area.Tiles.Insert(0, newTile);
-                area.Layer1Filename.Insert(0, "t_grass");
-                area.Layer1Rotate.Insert(0, 0);
-                area.Layer1Mirror.Insert(0, 0);
-                area.Layer2Filename.Insert(0, "t_blank");
-                area.Layer2Rotate.Insert(0, 0);
-                area.Layer2Mirror.Insert(0, 0);
-                area.Walkable.Insert(0, 1);
-                area.LoSBlocked.Insert(0, 0);
-                area.Visible.Insert(0, 0);
+                Tile newTile = new Tile();
+                area.Tiles.Insert(0, newTile);
             }
             foreach (Prop prpRef in area.Props)
             {
@@ -2243,16 +2769,7 @@ namespace IB2miniToolset
             //y * area.MapSizeX + x
             for (int i = 0; i < area.MapSizeX; i++)
             {
-                //area.Tiles.RemoveAt(0);
-                area.Layer1Filename.RemoveAt(0);
-                area.Layer1Rotate.RemoveAt(0);
-                area.Layer1Mirror.RemoveAt(0);
-                area.Layer2Filename.RemoveAt(0);
-                area.Layer2Rotate.RemoveAt(0);
-                area.Layer2Mirror.RemoveAt(0);
-                area.Walkable.RemoveAt(0);
-                area.LoSBlocked.RemoveAt(0);
-                area.Visible.RemoveAt(0);
+                area.Tiles.RemoveAt(0);
             }
             foreach (Prop prpRef in area.Props)
             {
@@ -2273,17 +2790,8 @@ namespace IB2miniToolset
             //y * area.MapSizeX + x
             for (int i = 0; i < area.MapSizeX; i++)
             {
-                //Tile newTile = new Tile();
-                //area.Tiles.Add(newTile);
-                area.Layer1Filename.Add("t_grass");
-                area.Layer1Rotate.Add(0);
-                area.Layer1Mirror.Add(0);
-                area.Layer2Filename.Add("t_blank");
-                area.Layer2Rotate.Add(0);
-                area.Layer2Mirror.Add(0);
-                area.Walkable.Add(1);
-                area.LoSBlocked.Add(0);
-                area.Visible.Add(0);
+                Tile newTile = new Tile();
+                area.Tiles.Add(newTile);
             }
             area.MapSizeY++;
             mapSizeChangeStuff();
@@ -2293,17 +2801,7 @@ namespace IB2miniToolset
             //y * area.MapSizeX + x
             for (int i = 0; i < area.MapSizeX; i++)
             {
-                //area.Tiles.RemoveAt(area.Tiles.Count - 1);
-                int total = area.Visible.Count;
-                area.Layer1Filename.RemoveAt(total - 1);
-                area.Layer1Rotate.RemoveAt(total - 1);
-                area.Layer1Mirror.RemoveAt(total - 1);
-                area.Layer2Filename.RemoveAt(total - 1);
-                area.Layer2Rotate.RemoveAt(total - 1);
-                area.Layer2Mirror.RemoveAt(total - 1);
-                area.Walkable.RemoveAt(total - 1);
-                area.LoSBlocked.RemoveAt(total - 1);
-                area.Visible.RemoveAt(total - 1);
+                area.Tiles.RemoveAt(area.Tiles.Count - 1);
             }
             area.MapSizeY--;
             mapSizeChangeStuff();
@@ -2351,18 +2849,55 @@ namespace IB2miniToolset
                     }
                 }
             }
+            else if (e.KeyCode == Keys.Q)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.xscale--;
+                    tileToBePlaced.yscale--;
+                }
+            }
+            else if (e.KeyCode == Keys.E)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.xscale++;
+                    tileToBePlaced.yscale++;
+                }
+            }
+            else if (e.KeyCode == Keys.W)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.yshift--;
+                }
+            }
+            else if (e.KeyCode == Keys.S)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.yshift++;
+                }
+            }
+            else if (e.KeyCode == Keys.A)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.xshift--;
+                }
+            }
+            else if (e.KeyCode == Keys.D)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    tileToBePlaced.xshift++;
+                }
+            }
             else if (e.KeyCode == Keys.M)
             {
                 if (rbtnPaintTile.Checked)
                 {
-                    if (tileToBePlaced.mirror == 0)
-                    {
-                        tileToBePlaced.mirror = 1;
-                    }
-                    else
-                    {
-                        tileToBePlaced.mirror = 0;
-                    }
+                    tileToBePlaced.mirror = !tileToBePlaced.mirror;
                 }
             }
             else if (e.KeyCode == Keys.Delete)

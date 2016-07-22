@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public class Coordinate
     {

@@ -1,4 +1,4 @@
-﻿namespace IB2miniToolset
+﻿namespace IB2Toolset
 {
     partial class WorldMapEditor
     {
@@ -89,7 +89,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.btnRemoveMap = new System.Windows.Forms.Button();
             this.timerRenderLoop = new System.Windows.Forms.Timer(this.components);
-            this.panelNoScrollOnFocus1 = new IB2miniToolset.PanelNoScrollOnFocus();
+            this.panelNoScrollOnFocus1 = new IB2Toolset.PanelNoScrollOnFocus();
             this.panelView = new System.Windows.Forms.Panel();
             this.panel3.SuspendLayout();
             this.groupBox6.SuspendLayout();

@@ -10,7 +10,7 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using ScintillaNET;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class IBScriptEditor : DockContent
     { 

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class TraitEditor : Form
     {
@@ -31,7 +31,7 @@ namespace IB2miniToolset
         {
             lbxTraits.BeginUpdate();
             lbxTraits.DataSource = null;
-            lbxTraits.DataSource = prntForm.mod.moduleTraitsList;
+            lbxTraits.DataSource = prntForm.traitsList;
             lbxTraits.DisplayMember = "name";
             lbxTraits.EndUpdate();
         }
@@ -40,7 +40,7 @@ namespace IB2miniToolset
             Trait newTS = new Trait();
             newTS.name = "newTrait";
             newTS.tag = "newTraitTag_" + prntForm.mod.nextIdNumber.ToString();
-            prntForm.mod.moduleTraitsList.Add(newTS);
+            prntForm.traitsList.Add(newTS);
             refreshListBox();
         }
         private void btnRemoveTrait_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace IB2miniToolset
                     // The Remove button was clicked.
                     int selectedIndex = lbxTraits.SelectedIndex;
                     //mod.ModuleContainersList.containers.RemoveAt(selectedIndex);
-                    prntForm.mod.moduleTraitsList.RemoveAt(selectedIndex);
+                    prntForm.traitsList.RemoveAt(selectedIndex);
                 }
                 catch { }
                 selectedLbxIndex = 0;
@@ -62,18 +62,18 @@ namespace IB2miniToolset
         }        
         private void btnDuplicateTrait_Click(object sender, EventArgs e)
         {
-            Trait newCopy = prntForm.mod.moduleTraitsList[selectedLbxIndex].DeepCopy();
+            Trait newCopy = prntForm.traitsList[selectedLbxIndex].DeepCopy();
             newCopy.tag = "newTraitTag_" + prntForm.mod.nextIdNumber.ToString();
-            prntForm.mod.moduleTraitsList.Add(newCopy);
+            prntForm.traitsList.Add(newCopy);
             refreshListBox();
         }
         private void lbxTraits_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if ((lbxTraits.SelectedIndex >= 0) && (prntForm.mod.moduleTraitsList != null))
+            if ((lbxTraits.SelectedIndex >= 0) && (prntForm.traitsList != null))
             {
                 selectedLbxIndex = lbxTraits.SelectedIndex;
                 lbxTraits.SelectedIndex = selectedLbxIndex;
-                propertyGrid1.SelectedObject = prntForm.mod.moduleTraitsList[selectedLbxIndex];
+                propertyGrid1.SelectedObject = prntForm.traitsList[selectedLbxIndex];
             }
         } 
         private void propertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -83,9 +83,9 @@ namespace IB2miniToolset
         private void checkForNewTraits()
         {
             bool foundOne = false;
-            foreach (PlayerClass cl in prntForm.mod.modulePlayerClassList)
+            foreach (PlayerClass cl in prntForm.playerClassesList)
             {
-                foreach (Trait tr in prntForm.mod.moduleTraitsList)
+                foreach (Trait tr in prntForm.traitsList)
                 {
                     foreach (TraitAllowed ta in cl.traitsAllowed)
                     {
@@ -112,11 +112,11 @@ namespace IB2miniToolset
         private void checkForDeletedTraits()
         {
             bool foundOne = false;
-            foreach (PlayerClass cl in prntForm.mod.modulePlayerClassList)
+            foreach (PlayerClass cl in prntForm.playerClassesList)
             {
                 for (int i = cl.traitsAllowed.Count - 1; i >= 0; i--)
                 {
-                    foreach (Trait tr in prntForm.mod.moduleTraitsList)
+                    foreach (Trait tr in prntForm.traitsList)
                     {
                         if (tr.tag == cl.traitsAllowed[i].tag)
                         {
@@ -143,7 +143,7 @@ namespace IB2miniToolset
 
         private void btnSort_Click(object sender, EventArgs e)
         {
-            prntForm.mod.moduleTraitsList = prntForm.mod.moduleTraitsList.OrderBy(o => o.name).ToList();
+            prntForm.traitsList = prntForm.traitsList.OrderBy(o => o.name).ToList();
             refreshListBox();
         }       
     }

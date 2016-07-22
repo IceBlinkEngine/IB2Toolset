@@ -10,7 +10,7 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 //using IceBlink;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     /*public class PlayerClasses
     {

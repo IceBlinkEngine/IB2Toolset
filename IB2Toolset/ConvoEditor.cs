@@ -14,7 +14,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class ConvoEditor : DockContent
     { 
@@ -94,13 +94,13 @@ namespace IB2miniToolset
             chkMainPcOnly.Checked = f_convo.SpeakToMainPcOnly;
             SortConversation(f_convo);
             ResetOrderNumBasedOnIndex(f_convo.subNodes[0]);
-            //prntForm.openConvosList.Add(f_convo);
+            prntForm.openConvosList.Add(f_convo);
             fillScriptList();            
         }
         private void ConvoEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             //MessageBox.Show("closing editor and removing from openConvosList");
-            //prntForm.openConvosList.Remove(f_convo);
+            prntForm.openConvosList.Remove(f_convo);
         }
         private void tsAddNode_Click(object sender, EventArgs e)
         {
@@ -224,7 +224,11 @@ namespace IB2miniToolset
         }
         private void txtNodeSound_TextChanged(object sender, EventArgs e)
         {
-            
+            if (Convert.ToInt32(treeView1.SelectedNode.Name) != 0)
+            {
+                int pnod = Convert.ToInt32(treeView1.SelectedNode.Name);
+                f_convo.GetContentNodeById(pnod).NodeSound = txtNodeSound.Text;
+            }
         }
         private void txtNodeNpcName_TextChanged(object sender, EventArgs e)
         {
@@ -330,6 +334,7 @@ namespace IB2miniToolset
                 if (nod != null)
                 {
                     txtText.Text = nod.conversationText;
+                    txtNodeSound.Text = nod.NodeSound;
                     chkDoOnceOnly.Checked = nod.ShowOnlyOnce;
                     txtNodeNpcName.Text = nod.NodeNpcName;
                     //txtText.Text = treeView1.SelectedNode.Text.ToString();
@@ -1538,7 +1543,7 @@ namespace IB2miniToolset
         private void btnActAdd_Click(object sender, EventArgs e)
         {
             int node = Convert.ToInt32(treeView1.SelectedNode.Name);
-            IB2miniToolset.Action newAction = new IB2miniToolset.Action();
+            IB2Toolset.Action newAction = new IB2Toolset.Action();
             newAction.a_script = "none";
             newAction.a_parameter_1 = null;
             newAction.a_parameter_2 = null;
@@ -1625,7 +1630,7 @@ namespace IB2miniToolset
         private void btnActPaste_Click(object sender, EventArgs e)
         {
             int node = Convert.ToInt32(treeView1.SelectedNode.Name);
-            foreach (IB2miniToolset.Action c in prntForm.copiedActionsList)
+            foreach (IB2Toolset.Action c in prntForm.copiedActionsList)
             {
                 f_convo.GetContentNodeById(node).actions.Add(c.DeepCopy());
             }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IB2miniToolset.Properties {
+namespace IB2Toolset.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

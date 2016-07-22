@@ -1,4 +1,4 @@
-﻿namespace IB2miniToolset
+﻿namespace IB2Toolset
 {
     partial class PlayerClassEditor
     {

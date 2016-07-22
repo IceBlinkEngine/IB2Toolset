@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class IBScriptForm : DockContent
     {

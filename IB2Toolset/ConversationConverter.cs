@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public class SpriteConverter : StringConverter
     {

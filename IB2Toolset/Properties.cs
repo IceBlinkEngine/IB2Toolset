@@ -9,7 +9,7 @@ using System.Windows.Forms;
 //using IceBlinkCore;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class IceBlinkProperties : DockContent
     {

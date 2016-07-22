@@ -10,7 +10,7 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 //using IceBlink;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public class Creature
     {
@@ -85,6 +85,8 @@ namespace IB2miniToolset
         //private ScriptSelectEditorReturnObject onScoringHit = new ScriptSelectEditorReturnObject();  
         private List<string> _knownSpellsTags = new List<string>();
 	    public List<Effect> cr_effectsList = new List<Effect>();
+        private List<LocalInt> creatureLocalInts = new List<LocalInt>();
+        private List<LocalString> creatureLocalStrings = new List<LocalString>();
         
         #endregion
 
@@ -443,6 +445,18 @@ namespace IB2miniToolset
                 _category = value;
             }
         }
+        [CategoryAttribute("04 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
+        public List<LocalInt> CreatureLocalInts
+        {
+            get { return creatureLocalInts; }
+            set { creatureLocalInts = value; }
+        }
+        [CategoryAttribute("04 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
+        public List<LocalString> CreatureLocalStrings
+        {
+            get { return creatureLocalStrings; }
+            set { creatureLocalStrings = value; }
+        }
         #endregion
 
         public Creature()
@@ -475,7 +489,25 @@ namespace IB2miniToolset
             foreach (string s in this.knownSpellsTags)
             {
                 other.knownSpellsTags.Add(s);
-            }            
+            }
+            other.CreatureLocalInts = new List<LocalInt>();
+            foreach (LocalInt l in this.CreatureLocalInts)
+            {
+                LocalInt Lint = new LocalInt();
+                Lint.Key = l.Key;
+                Lint.Value = l.Value;
+                other.CreatureLocalInts.Add(Lint);
+            }
+            other.CreatureLocalStrings = new List<LocalString>();
+            foreach (LocalString l in this.CreatureLocalStrings)
+            {
+                LocalString Lstr = new LocalString();
+                Lstr.Key = l.Key;
+                Lstr.Value = l.Value;
+                other.CreatureLocalStrings.Add(Lstr);
+            }
+            //other.EffectsList = new Effects();            
+            //other.onScoringHit = this.onScoringHit.DeepCopy();            
             return other;
         }
     }

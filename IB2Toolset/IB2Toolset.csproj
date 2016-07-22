@@ -142,6 +142,7 @@
       <DependentUpon>EncountersForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileNameSelectEditor.cs" />
+    <Compile Include="FullScreenEffectLayer.cs" />
     <Compile Include="GlobalListItem.cs" />
     <Compile Include="GlobalString.cs" />
     <Compile Include="LocalInt.cs" />
@@ -153,12 +154,22 @@
     <Compile Include="IBScriptEditor.designer.cs">
       <DependentUpon>IBScriptEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicTreeEditor.cs" />
+    <Compile Include="LogicTreeEditor.designer.cs">
+      <DependentUpon>LogicTreeEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="IBScriptForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IBScriptForm.Designer.cs">
       <DependentUpon>IBScriptForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicTreeForm.cs" />
+    <Compile Include="LogicTreeForm.Designer.cs">
+      <DependentUpon>LogicTreeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogicTree.cs" />
+    <Compile Include="LogicTreeNode.cs" />
     <Compile Include="MergerEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +191,21 @@
     <Compile Include="Schedules.cs" />
     <Compile Include="TileBitmapNamePair.cs" />
     <Compile Include="TileEnc.cs" />
+    <Compile Include="Weather.cs" />
+    <Compile Include="WeatherEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WeatherEditor.Designer.cs">
+      <DependentUpon>WeatherEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherTypeList.cs" />
+    <Compile Include="WeatherTypeListItem.cs" />
+    <Compile Include="WeatherEffectsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WeatherEffectsEditor.Designer.cs">
+      <DependentUpon>WeatherEffectsEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="VariablesEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +219,7 @@
     <Compile Include="EncounterEditor.designer.cs">
       <DependentUpon>EncounterEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="WeatherEffect.cs" />
     <Compile Include="WorldMapEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -331,8 +358,14 @@
     <EmbeddedResource Include="IBScriptEditor.resx">
       <DependentUpon>IBScriptEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogicTreeEditor.resx">
+      <DependentUpon>LogicTreeEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IBScriptForm.resx">
       <DependentUpon>IBScriptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogicTreeForm.resx">
+      <DependentUpon>LogicTreeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MergerEditor.resx">
       <DependentUpon>MergerEditor.cs</DependentUpon>
@@ -342,6 +375,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RulesEditor.resx">
       <DependentUpon>RulesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WeatherEditor.resx">
+      <DependentUpon>WeatherEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WeatherEffectsEditor.resx">
+      <DependentUpon>WeatherEffectsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VariablesEditor.resx">
       <DependentUpon>VariablesEditor.cs</DependentUpon>

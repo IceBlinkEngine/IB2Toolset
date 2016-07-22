@@ -9,7 +9,7 @@ using System.Windows.Forms;
 //using IceBlinkCore;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class ContainersForm : DockContent
     {
@@ -29,7 +29,7 @@ namespace IB2miniToolset
             lbxContainers.BeginUpdate();
             lbxContainers.DataSource = null;
             //lbxContainers.DataSource = mod.ModuleContainersList.containers;
-            lbxContainers.DataSource = prntForm.mod.moduleContainersList;
+            lbxContainers.DataSource = prntForm.containersList;
             lbxContainers.DisplayMember = "ContainerTag";
             lbxContainers.EndUpdate();
             //}
@@ -39,7 +39,7 @@ namespace IB2miniToolset
             try
             {
                 //mod.ModuleContainersList.containers[_selectedLbxContainerIndex].containerName = txtContainerName.Text;
-                prntForm.mod.moduleContainersList[prntForm._selectedLbxContainerIndex].containerTag = txtContainerName.Text;
+                prntForm.containersList[prntForm._selectedLbxContainerIndex].containerTag = txtContainerName.Text;
                 refreshListBoxContainers();
                 //containersList.containers[_selectedLbx1Index].containerName = txtName.Text;
                 //refreshListBox1();
@@ -48,10 +48,10 @@ namespace IB2miniToolset
         }
         private void btnAddContainer_Click_1(object sender, EventArgs e)
         {
-            IB2miniToolset.Container newContainer = new IB2miniToolset.Container();
+            IB2Toolset.Container newContainer = new IB2Toolset.Container();
             newContainer.containerTag = "new Container";
             //mod.ModuleContainersList.containers.Add(newContainer);
-            prntForm.mod.moduleContainersList.Add(newContainer);
+            prntForm.containersList.Add(newContainer);
             refreshListBoxContainers();
             //refreshListBox1();
             //refreshPanelInfo();
@@ -65,7 +65,7 @@ namespace IB2miniToolset
                     // The Remove button was clicked.
                     int selectedIndex = lbxContainers.SelectedIndex;
                     //mod.ModuleContainersList.containers.RemoveAt(selectedIndex);
-                    prntForm.mod.moduleContainersList.RemoveAt(selectedIndex);
+                    prntForm.containersList.RemoveAt(selectedIndex);
                 }
                 catch { }
                 prntForm._selectedLbxContainerIndex = 0;
@@ -86,11 +86,11 @@ namespace IB2miniToolset
         }
         private void lbxContainers_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if ((lbxContainers.SelectedIndex >= 0) && (prntForm.mod.moduleContainersList != null))
+            if ((lbxContainers.SelectedIndex >= 0) && (prntForm.containersList != null))
             {
                 prntForm._selectedLbxContainerIndex = lbxContainers.SelectedIndex;
                 //txtContainerName.Text = mod.ModuleContainersList.containers[_selectedLbxContainerIndex].ContainerName;
-                txtContainerName.Text = prntForm.mod.moduleContainersList[prntForm._selectedLbxContainerIndex].containerTag;
+                txtContainerName.Text = prntForm.containersList[prntForm._selectedLbxContainerIndex].containerTag;
                 lbxContainers.SelectedIndex = prntForm._selectedLbxContainerIndex;
             }
         }
@@ -104,7 +104,7 @@ namespace IB2miniToolset
                 {
                     try
                     {
-                        prntForm.mod.moduleContainersList[prntForm._selectedLbxContainerIndex].containerTag = newName.RenameText;
+                        prntForm.containersList[prntForm._selectedLbxContainerIndex].containerTag = newName.RenameText;
                         refreshListBoxContainers();
                     }
                     catch { }
@@ -129,7 +129,7 @@ namespace IB2miniToolset
         }
         private void btnSort_Click(object sender, EventArgs e)
         {
-            prntForm.mod.moduleContainersList = prntForm.mod.moduleContainersList.OrderBy(o => o.containerTag).ToList();
+            prntForm.containersList = prntForm.containersList.OrderBy(o => o.containerTag).ToList();
             refreshListBoxContainers();
         }
         private void btnDuplicate_Click(object sender, EventArgs e)
@@ -138,10 +138,10 @@ namespace IB2miniToolset
             {
                 try
                 {
-                    IB2miniToolset.Container newContainer = new IB2miniToolset.Container();
-                    newContainer = prntForm.mod.moduleContainersList[prntForm._selectedLbxContainerIndex].DeepCopy();
-                    newContainer.containerTag = prntForm.mod.moduleContainersList[prntForm._selectedLbxContainerIndex].containerTag + "-Copy";
-                    prntForm.mod.moduleContainersList.Add(newContainer);
+                    IB2Toolset.Container newContainer = new IB2Toolset.Container();
+                    newContainer = prntForm.containersList[prntForm._selectedLbxContainerIndex].DeepCopy();
+                    newContainer.containerTag = prntForm.containersList[prntForm._selectedLbxContainerIndex].containerTag + "-Copy";
+                    prntForm.containersList.Add(newContainer);
                     refreshListBoxContainers();
                 }
                 catch { }
@@ -151,8 +151,8 @@ namespace IB2miniToolset
 
         private void EditContainer()
         {
-            IB2miniToolset.Container selectedCont = prntForm.mod.moduleContainersList[prntForm._selectedLbxContainerIndex];
-            ContainerEditor cont = new ContainerEditor(prntForm.mod.moduleItemsList, selectedCont, prntForm);
+            IB2Toolset.Container selectedCont = prntForm.containersList[prntForm._selectedLbxContainerIndex];
+            ContainerEditor cont = new ContainerEditor(prntForm.itemsList, selectedCont, prntForm);
             cont.ShowDialog();
         }
     }

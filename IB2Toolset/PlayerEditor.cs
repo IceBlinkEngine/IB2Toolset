@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace IB2miniToolset
+namespace IB2Toolset
 {
     public partial class PlayerEditor : Form
     {
@@ -155,7 +155,7 @@ namespace IB2miniToolset
         {
             itemsHeadList.Clear();
             itemsHeadList.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if (it.category == "Head")
                 {
@@ -165,7 +165,7 @@ namespace IB2miniToolset
             
             itemsNeckList.Clear();
             itemsNeckList.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if (it.category == "Neck")
                 {
@@ -175,7 +175,7 @@ namespace IB2miniToolset
 
             itemsBodyList.Clear();
             itemsBodyList.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if (it.category == "Armor")
                 {
@@ -185,7 +185,7 @@ namespace IB2miniToolset
 
             itemsMainHandList.Clear();
             itemsMainHandList.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if ((it.category == "Melee") || (it.category == "Ranged"))
                 {
@@ -195,7 +195,7 @@ namespace IB2miniToolset
 
             itemsOffHandList.Clear();
             itemsOffHandList.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if (it.category == "Shield")
                 {
@@ -205,7 +205,7 @@ namespace IB2miniToolset
 
             itemsRing1List.Clear();
             itemsRing1List.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if (it.category == "Ring")
                 {
@@ -215,7 +215,7 @@ namespace IB2miniToolset
 
             itemsRing2List.Clear();
             itemsRing2List.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if (it.category == "Ring")
                 {
@@ -225,7 +225,7 @@ namespace IB2miniToolset
 
             itemsFeetList.Clear();
             itemsFeetList.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if (it.category == "Feet")
                 {
@@ -235,7 +235,7 @@ namespace IB2miniToolset
 
             itemsAmmoList.Clear();
             itemsAmmoList.Add(new ItemRefs());
-            foreach (Item it in prntForm.mod.moduleItemsList)
+            foreach (Item it in prntForm.itemsList)
             {
                 if (it.category == "Ammo")
                 {
@@ -305,7 +305,7 @@ namespace IB2miniToolset
         {
             cbxKnownSpells.BeginUpdate();
             cbxKnownSpells.DataSource = null;
-            cbxKnownSpells.DataSource = prntForm.mod.moduleSpellsList;
+            cbxKnownSpells.DataSource = prntForm.spellsList;
             cbxKnownSpells.DisplayMember = "name";
             cbxKnownSpells.EndUpdate();
 
@@ -330,7 +330,7 @@ namespace IB2miniToolset
         {
             cbxKnownTraits.BeginUpdate();
             cbxKnownTraits.DataSource = null;
-            cbxKnownTraits.DataSource = prntForm.mod.moduleTraitsList;
+            cbxKnownTraits.DataSource = prntForm.traitsList;
             cbxKnownTraits.DisplayMember = "name";
             cbxKnownTraits.EndUpdate();
 
