@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class PlayerClassEditor : Form
     {
@@ -50,8 +50,8 @@ namespace IB2Toolset
             //newPlayerClass.setupXpTable();
             //newPlayerClass.setupSavingThrowTables();
             //newPlayerClass.setupTables();
-            prntForm.playerClassesList.Add(newPlayerClass);
-            selectedLbxIndex = prntForm.playerClassesList.Count - 1;
+            prntForm.mod.modulePlayerClassList.Add(newPlayerClass);
+            selectedLbxIndex = prntForm.mod.modulePlayerClassList.Count - 1;
             fillAllowedSkillList();
             fillAllowedSpellList();
             fillAllowedTraitList();
@@ -67,7 +67,7 @@ namespace IB2Toolset
                     // The Remove button was clicked.
                     int selectedIndex = lbxPlayerClasses.SelectedIndex;
                     //mod.ModuleContainersList.containers.RemoveAt(selectedIndex);
-                    prntForm.playerClassesList.RemoveAt(selectedIndex);
+                    prntForm.mod.modulePlayerClassList.RemoveAt(selectedIndex);
                 }
                 catch { }
                 selectedLbxIndex = 0;
@@ -77,18 +77,18 @@ namespace IB2Toolset
         }
         private void btnDuplicatePlayerClass_Click(object sender, EventArgs e)
         {
-            PlayerClass newCopy = prntForm.playerClassesList[selectedLbxIndex].DeepCopy();
+            PlayerClass newCopy = prntForm.mod.modulePlayerClassList[selectedLbxIndex].DeepCopy();
             newCopy.tag = "newPlayerClassTag_" + prntForm.mod.nextIdNumber.ToString();
-            prntForm.playerClassesList.Add(newCopy);
+            prntForm.mod.modulePlayerClassList.Add(newCopy);
             refreshListBox();
         }
         private void lbxPlayerClasses_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((lbxPlayerClasses.SelectedIndex >= 0) && (prntForm.playerClassesList != null))
+            if ((lbxPlayerClasses.SelectedIndex >= 0) && (prntForm.mod.modulePlayerClassList != null))
             {
                 selectedLbxIndex = lbxPlayerClasses.SelectedIndex;
                 lbxPlayerClasses.SelectedIndex = selectedLbxIndex;
-                propertyGrid1.SelectedObject = prntForm.playerClassesList[selectedLbxIndex];
+                propertyGrid1.SelectedObject = prntForm.mod.modulePlayerClassList[selectedLbxIndex];
                 refreshItemsAllowed();
                 refreshSkillsAllowed();
                 setupSkillsDataGridView();
@@ -102,22 +102,22 @@ namespace IB2Toolset
         }
         private void lbxPlayerClasses_MouseClick(object sender, MouseEventArgs e)
         {
-            prntForm.playerClassesList[selectedLbxIndex].itemsAllowed.Clear();
+            prntForm.mod.modulePlayerClassList[selectedLbxIndex].itemsAllowed.Clear();
             foreach (object itemChecked in cbxItemsAllowed.CheckedItems)
             {
                 Item chkdItem = (Item)itemChecked;
-                prntForm.playerClassesList[selectedLbxIndex].itemsAllowed.Add(prntForm.createItemRefsFromItem(chkdItem));
+                prntForm.mod.modulePlayerClassList[selectedLbxIndex].itemsAllowed.Add(prntForm.createItemRefsFromItem(chkdItem));
             }
         }
         private void PlayerClassEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            prntForm.playerClassesList[selectedLbxIndex].itemsAllowed.Clear();
+            prntForm.mod.modulePlayerClassList[selectedLbxIndex].itemsAllowed.Clear();
             foreach (object itemChecked in cbxItemsAllowed.CheckedItems)
             {
                 Item chkdItem = (Item)itemChecked;
-                prntForm.playerClassesList[selectedLbxIndex].itemsAllowed.Add(prntForm.createItemRefsFromItem(chkdItem));
+                prntForm.mod.modulePlayerClassList[selectedLbxIndex].itemsAllowed.Add(prntForm.createItemRefsFromItem(chkdItem));
             }
-            foreach (PlayerClass pcls in prntForm.playerClassesList)
+            foreach (PlayerClass pcls in prntForm.mod.modulePlayerClassList)
             {
                 for (int i = pcls.spellsAllowed.Count - 1; i >= 0; i--)
                 {
@@ -224,9 +224,9 @@ namespace IB2Toolset
         private void checkForNewTraits()
         {
             bool foundOne = false;
-            foreach (PlayerClass cl in prntForm.playerClassesList)
+            foreach (PlayerClass cl in prntForm.mod.modulePlayerClassList)
             {
-                foreach (Trait tr in prntForm.traitsList)
+                foreach (Trait tr in prntForm.mod.moduleTraitsList)
                 {
                     foreach (TraitAllowed ta in cl.traitsAllowed)
                     {
@@ -253,11 +253,11 @@ namespace IB2Toolset
         private void checkForDeletedTraits()
         {
             bool foundOne = false;
-            foreach (PlayerClass cl in prntForm.playerClassesList)
+            foreach (PlayerClass cl in prntForm.mod.modulePlayerClassList)
             {
                 for (int i = cl.traitsAllowed.Count - 1; i >= 0; i--)
                 {
-                    foreach (Trait tr in prntForm.traitsList)
+                    foreach (Trait tr in prntForm.mod.moduleTraitsList)
                     {
                         if (tr.tag == cl.traitsAllowed[i].tag)
                         {
@@ -279,9 +279,9 @@ namespace IB2Toolset
         private void checkForNewSpells()
         {
             bool foundOne = false;
-            foreach (PlayerClass cl in prntForm.playerClassesList)
+            foreach (PlayerClass cl in prntForm.mod.modulePlayerClassList)
             {
-                foreach (Spell sp in prntForm.spellsList)
+                foreach (Spell sp in prntForm.mod.moduleSpellsList)
                 {
                     foreach (SpellAllowed sa in cl.spellsAllowed)
                     {
@@ -308,11 +308,11 @@ namespace IB2Toolset
         private void checkForDeletedSpells()
         {
             bool foundOne = false;
-            foreach (PlayerClass cl in prntForm.playerClassesList)
+            foreach (PlayerClass cl in prntForm.mod.modulePlayerClassList)
             {
                 for (int i = cl.spellsAllowed.Count - 1; i >= 0; i--)
                 {
-                    foreach (Spell sp in prntForm.spellsList)
+                    foreach (Spell sp in prntForm.mod.moduleSpellsList)
                     {
                         if (sp.tag == cl.spellsAllowed[i].tag)
                         {
@@ -335,7 +335,7 @@ namespace IB2Toolset
         {
             lbxPlayerClasses.BeginUpdate();
             lbxPlayerClasses.DataSource = null;
-            lbxPlayerClasses.DataSource = prntForm.playerClassesList;
+            lbxPlayerClasses.DataSource = prntForm.mod.modulePlayerClassList;
             lbxPlayerClasses.DisplayMember = "name";
             lbxPlayerClasses.EndUpdate();
         }
@@ -343,7 +343,7 @@ namespace IB2Toolset
         {
             cbxItemsAllowed.BeginUpdate();
             cbxItemsAllowed.DataSource = null;
-            cbxItemsAllowed.DataSource = prntForm.itemsList;
+            cbxItemsAllowed.DataSource = prntForm.mod.moduleItemsList;
             cbxItemsAllowed.DisplayMember = "name";
             cbxItemsAllowed.EndUpdate();
 
@@ -356,7 +356,7 @@ namespace IB2Toolset
             for (int i = 0; i < cbxItemsAllowed.Items.Count; i++)
             {
                 Item thisItem = (Item)cbxItemsAllowed.Items[i];
-                if (prntForm.playerClassesList[selectedLbxIndex].containsItemRefsWithResRef((string)thisItem.resref))
+                if (prntForm.mod.modulePlayerClassList[selectedLbxIndex].containsItemRefsWithResRef((string)thisItem.resref))
                 {
                     cbxItemsAllowed.SetItemChecked(i, true);
                 }
@@ -397,22 +397,22 @@ namespace IB2Toolset
         }
         private void fillAllowedSpellList()
         {
-            foreach (Spell sp in prntForm.spellsList)
+            foreach (Spell sp in prntForm.mod.moduleSpellsList)
             {
                 SpellAllowed newSA = new SpellAllowed();
                 newSA.name = sp.name;
                 newSA.tag = sp.tag;
-                prntForm.playerClassesList[selectedLbxIndex].spellsAllowed.Add(newSA);
+                prntForm.mod.modulePlayerClassList[selectedLbxIndex].spellsAllowed.Add(newSA);
             }
         }
         private void fillAllowedTraitList()
         {
-            foreach (Trait tr in prntForm.traitsList)
+            foreach (Trait tr in prntForm.mod.moduleTraitsList)
             {
                 TraitAllowed newTA = new TraitAllowed();
                 newTA.name = tr.name;
                 newTA.tag = tr.tag;
-                prntForm.playerClassesList[selectedLbxIndex].traitsAllowed.Add(newTA);
+                prntForm.mod.modulePlayerClassList[selectedLbxIndex].traitsAllowed.Add(newTA);
             }
         }
         private void setupSkillsDataGridView()
@@ -462,7 +462,7 @@ namespace IB2Toolset
         }
         private void setupSpellsDataGridView()
         {            
-            dgvSpellsAllowed.DataSource = prntForm.playerClassesList[selectedLbxIndex].spellsAllowed;
+            dgvSpellsAllowed.DataSource = prntForm.mod.modulePlayerClassList[selectedLbxIndex].spellsAllowed;
             dgvSpellsAllowed.Refresh();
             dgvSpellsAllowed.AutoGenerateColumns = false;
 
@@ -507,7 +507,7 @@ namespace IB2Toolset
         }
         private void setupTraitsDataGridView()
         {
-            dgvTraitsAllowed.DataSource = prntForm.playerClassesList[selectedLbxIndex].traitsAllowed;
+            dgvTraitsAllowed.DataSource = prntForm.mod.modulePlayerClassList[selectedLbxIndex].traitsAllowed;
             dgvTraitsAllowed.AutoGenerateColumns = false;
 
             DataGridViewColumn column0 = new DataGridViewCheckBoxColumn();
@@ -553,7 +553,7 @@ namespace IB2Toolset
 
         private void btnSort_Click(object sender, EventArgs e)
         {
-            prntForm.playerClassesList = prntForm.playerClassesList.OrderBy(o => o.name).ToList();
+            prntForm.mod.modulePlayerClassList = prntForm.mod.modulePlayerClassList.OrderBy(o => o.name).ToList();
             refreshListBox();
         }
 

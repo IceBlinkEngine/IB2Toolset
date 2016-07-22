@@ -1,4 +1,4 @@
-﻿namespace IB2Toolset
+﻿namespace IB2miniToolset
 {
     partial class ParentForm
     {
@@ -218,7 +218,7 @@
             // tsbSaveIncremental
             // 
             this.tsbSaveIncremental.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSaveIncremental.Image = global::IB2Toolset.Properties.Resources.incrementSaveIcon;
+            this.tsbSaveIncremental.Image = global::IB2miniToolset.Properties.Resources.incrementSaveIcon;
             this.tsbSaveIncremental.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbSaveIncremental.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSaveIncremental.Name = "tsbSaveIncremental";
@@ -563,14 +563,12 @@
             this.weatherEffectsEditorToolStripMenuItem.Name = "weatherEffectsEditorToolStripMenuItem";
             this.weatherEffectsEditorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.weatherEffectsEditorToolStripMenuItem.Text = "Weather Effect Editor";
-            this.weatherEffectsEditorToolStripMenuItem.Click += new System.EventHandler(this.weatherEffectsEditorToolStripMenuItem_Click);
             // 
             // weatherEditorToolStripMenuItem
             // 
             this.weatherEditorToolStripMenuItem.Name = "weatherEditorToolStripMenuItem";
             this.weatherEditorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.weatherEditorToolStripMenuItem.Text = "Weather Editor";
-            this.weatherEditorToolStripMenuItem.Click += new System.EventHandler(this.weatherEditorToolStripMenuItem_Click);
             // 
             // spellEditorToolStripMenuItem
             // 

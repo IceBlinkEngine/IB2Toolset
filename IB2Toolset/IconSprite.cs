@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 //using IceBlinkCore;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class IconSprite : DockContent
     {
@@ -60,7 +60,7 @@ namespace IB2Toolset
                     int index = prntForm.frmBlueprints.GetCreatureIndex(_nodeTag);
                     if (index >= 0)
                     {
-                        Creature crt = prntForm.creaturesList[index];
+                        Creature crt = prntForm.mod.moduleCreaturesList[index];
                         crt.knownSpellsTags.Clear();
                         foreach (object itemChecked in cbxKnownSpells.CheckedItems)
                         {
@@ -76,7 +76,7 @@ namespace IB2Toolset
         {
             cbxKnownSpells.BeginUpdate();
             cbxKnownSpells.DataSource = null;
-            cbxKnownSpells.DataSource = prntForm.spellsList;
+            cbxKnownSpells.DataSource = prntForm.mod.moduleSpellsList;
             cbxKnownSpells.DisplayMember = "name";
             cbxKnownSpells.EndUpdate();
 
@@ -93,7 +93,7 @@ namespace IB2Toolset
                     if (prntForm.lastSelectedCreatureNodeName != "")
                     {
                         string _nodeTag = prntForm.lastSelectedCreatureNodeName;
-                        Creature crt = prntForm.creaturesList[prntForm.frmBlueprints.GetCreatureIndex(_nodeTag)];
+                        Creature crt = prntForm.mod.moduleCreaturesList[prntForm.frmBlueprints.GetCreatureIndex(_nodeTag)];
                         refreshingList = true;
                         for (int i = 0; i < cbxKnownSpells.Items.Count; i++)
                         {

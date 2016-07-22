@@ -6,7 +6,7 @@ using System.Drawing;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public enum TriggerType
     {
@@ -64,7 +64,7 @@ namespace IB2Toolset
         private string event3Parm3 = "none";
         private string event3Parm4 = "none";
 
-        private bool ConversationCannotBeAvoided = true;
+        //private bool ConversationCannotBeAvoided = true;
 
         #endregion
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class FileNameSelectEditor : UITypeEditor
     {

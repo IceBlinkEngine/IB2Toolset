@@ -1,4 +1,4 @@
-﻿namespace IB2Toolset
+﻿namespace IB2miniToolset
 {
     partial class AreaForm
     {

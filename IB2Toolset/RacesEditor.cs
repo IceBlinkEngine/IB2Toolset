@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class RacesEditor : Form
     {
@@ -38,7 +38,7 @@ namespace IB2Toolset
             Race newRace = new Race();
             newRace.name = "newRace";
             newRace.tag = "newRace_" + prntForm.mod.nextIdNumber.ToString();
-            prntForm.racesList.Add(newRace);
+            prntForm.mod.moduleRacesList.Add(newRace);
             fillAllowedTraitList();
             refreshListBox();
         }
@@ -51,7 +51,7 @@ namespace IB2Toolset
                     // The Remove button was clicked.
                     int selectedIndex = lbxRaces.SelectedIndex;
                     //mod.ModuleContainersList.containers.RemoveAt(selectedIndex);
-                    prntForm.racesList.RemoveAt(selectedIndex);
+                    prntForm.mod.moduleRacesList.RemoveAt(selectedIndex);
                 }
                 catch { }
                 selectedLbxIndex = 0;
@@ -61,18 +61,18 @@ namespace IB2Toolset
         }
         private void btnDuplicateRace_Click(object sender, EventArgs e)
         {
-            Race newCopy = prntForm.racesList[selectedLbxIndex].DeepCopy();
+            Race newCopy = prntForm.mod.moduleRacesList[selectedLbxIndex].DeepCopy();
             newCopy.tag = "newRaceTag_" + prntForm.mod.nextIdNumber.ToString();
-            prntForm.racesList.Add(newCopy);
+            prntForm.mod.moduleRacesList.Add(newCopy);
             refreshListBox();
         }
         private void lbxRaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((lbxRaces.SelectedIndex >= 0) && (prntForm.playerClassesList != null))
+            if ((lbxRaces.SelectedIndex >= 0) && (prntForm.mod.modulePlayerClassList != null))
             {
                 selectedLbxIndex = lbxRaces.SelectedIndex;
                 lbxRaces.SelectedIndex = selectedLbxIndex;
-                propertyGrid1.SelectedObject = prntForm.racesList[selectedLbxIndex];
+                propertyGrid1.SelectedObject = prntForm.mod.moduleRacesList[selectedLbxIndex];
                 refreshClassesAllowed();
                 setupTraitsDataGridView();
             }
@@ -87,22 +87,22 @@ namespace IB2Toolset
         }
         private void lbxRaces_MouseClick(object sender, MouseEventArgs e)
         {
-            prntForm.racesList[selectedLbxIndex].classesAllowed.Clear();
+            prntForm.mod.moduleRacesList[selectedLbxIndex].classesAllowed.Clear();
             foreach (object itemChecked in cbxClassesAllowed.CheckedItems)
             {
                 PlayerClass chkdItem = (PlayerClass)itemChecked;
-                prntForm.racesList[selectedLbxIndex].classesAllowed.Add(chkdItem.tag);
+                prntForm.mod.moduleRacesList[selectedLbxIndex].classesAllowed.Add(chkdItem.tag);
             }
         }
         private void RacesEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            prntForm.racesList[selectedLbxIndex].classesAllowed.Clear();
+            prntForm.mod.moduleRacesList[selectedLbxIndex].classesAllowed.Clear();
             foreach (object itemChecked in cbxClassesAllowed.CheckedItems)
             {
                 PlayerClass chkdItem = (PlayerClass)itemChecked;
-                prntForm.racesList[selectedLbxIndex].classesAllowed.Add(chkdItem.tag);
+                prntForm.mod.moduleRacesList[selectedLbxIndex].classesAllowed.Add(chkdItem.tag);
             }
-            foreach (Race rc in prntForm.racesList)
+            foreach (Race rc in prntForm.mod.moduleRacesList)
             {
                 for (int i = rc.traitsAllowed.Count - 1; i >= 0; i--)
                 {
@@ -124,7 +124,7 @@ namespace IB2Toolset
         {
             lbxRaces.BeginUpdate();
             lbxRaces.DataSource = null;
-            lbxRaces.DataSource = prntForm.racesList;
+            lbxRaces.DataSource = prntForm.mod.moduleRacesList;
             lbxRaces.DisplayMember = "name";
             lbxRaces.EndUpdate();
         }
@@ -132,7 +132,7 @@ namespace IB2Toolset
         {
             cbxClassesAllowed.BeginUpdate();
             cbxClassesAllowed.DataSource = null;
-            cbxClassesAllowed.DataSource = prntForm.playerClassesList;
+            cbxClassesAllowed.DataSource = prntForm.mod.modulePlayerClassList;
             cbxClassesAllowed.DisplayMember = "name";
             cbxClassesAllowed.EndUpdate();
 
@@ -145,7 +145,7 @@ namespace IB2Toolset
             for (int i = 0; i < cbxClassesAllowed.Items.Count; i++)
             {
                 PlayerClass thisPlayerClass = (PlayerClass)cbxClassesAllowed.Items[i];
-                if (prntForm.racesList[selectedLbxIndex].classesAllowed.Contains((string)thisPlayerClass.tag))
+                if (prntForm.mod.moduleRacesList[selectedLbxIndex].classesAllowed.Contains((string)thisPlayerClass.tag))
                 {
                     cbxClassesAllowed.SetItemChecked(i, true);
                 }
@@ -154,9 +154,9 @@ namespace IB2Toolset
         private void checkForNewTraits()
         {
             bool foundOne = false;
-            foreach (Race rc in prntForm.racesList)
+            foreach (Race rc in prntForm.mod.moduleRacesList)
             {
-                foreach (Trait tr in prntForm.traitsList)
+                foreach (Trait tr in prntForm.mod.moduleTraitsList)
                 {
                     foreach (TraitAllowed ta in rc.traitsAllowed)
                     {
@@ -183,11 +183,11 @@ namespace IB2Toolset
         private void checkForDeletedTraits()
         {
             bool foundOne = false;
-            foreach (Race rc in prntForm.racesList)
+            foreach (Race rc in prntForm.mod.moduleRacesList)
             {
                 for (int i = rc.traitsAllowed.Count - 1; i >= 0; i--)
                 {
-                    foreach (Trait tr in prntForm.traitsList)
+                    foreach (Trait tr in prntForm.mod.moduleTraitsList)
                     {
                         if (tr.tag == rc.traitsAllowed[i].tag)
                         {
@@ -208,17 +208,17 @@ namespace IB2Toolset
         }
         private void fillAllowedTraitList()
         {
-            foreach (Trait tr in prntForm.traitsList)
+            foreach (Trait tr in prntForm.mod.moduleTraitsList)
             {
                 TraitAllowed newTA = new TraitAllowed();
                 newTA.name = tr.name;
                 newTA.tag = tr.tag;
-                prntForm.racesList[selectedLbxIndex].traitsAllowed.Add(newTA);
+                prntForm.mod.moduleRacesList[selectedLbxIndex].traitsAllowed.Add(newTA);
             }
         }
         private void setupTraitsDataGridView()
         {
-            dgvTraitsAllowed.DataSource = prntForm.racesList[selectedLbxIndex].traitsAllowed;
+            dgvTraitsAllowed.DataSource = prntForm.mod.moduleRacesList[selectedLbxIndex].traitsAllowed;
             dgvTraitsAllowed.AutoGenerateColumns = false;
 
             DataGridViewColumn column0 = new DataGridViewCheckBoxColumn();
@@ -264,7 +264,7 @@ namespace IB2Toolset
 
         private void btnSort_Click(object sender, EventArgs e)
         {
-            prntForm.racesList = prntForm.racesList.OrderBy(o => o.name).ToList();
+            prntForm.mod.moduleRacesList = prntForm.mod.moduleRacesList.OrderBy(o => o.name).ToList();
             refreshListBox();            
         }
     }

@@ -10,55 +10,12 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 //using IceBlink;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
-    /*[Serializable]
-    public class Shops
-    {
-        //[XmlArrayItem("Shops")]
-        public List<Shop> shopsList = new List<Shop>();
-        
-        public Shops()
-        {
-        }
-        public void saveShopsFile(string filename)
-        {
-            string json = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-            using (StreamWriter sw = new StreamWriter(filename))
-            {
-                sw.Write(json.ToString());
-            }
-        }
-        public Shops loadShopsFile(string filename)
-        {
-            Shops toReturn = null;
-
-            // deserialize JSON directly from a file
-            using (StreamReader file = File.OpenText(filename))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                toReturn = (Shops)serializer.Deserialize(file, typeof(Shops));
-            }
-            return toReturn;
-        }
-        public Shop getShopByTag(string tag)
-        {
-            foreach (Shop shp in shopsList)
-            {
-                if (shp.shopTag == tag)
-                {
-                    return shp;
-                }
-            }
-            return null;
-        }
-    }*/
-
     public class Shop
     {
         private string _shopTag = "newShopTag";
         private string _shopName = "newShopName";
-        //private List<string> _shopItemTags = new List<string>();
         private List<ItemRefs> _shopItemRefs = new List<ItemRefs>();
 
         public string shopTag

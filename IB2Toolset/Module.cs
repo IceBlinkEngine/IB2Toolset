@@ -9,12 +9,11 @@ using System.Drawing;
 using Newtonsoft.Json;
 //using IceBlink;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class Module
     {
         #region Fields
-        //private string moduleFolderName = "";
         private string _moduleName = "";
         private string _moduleLabelName = "";
         private int _moduleVersion = 1;
@@ -43,6 +42,7 @@ namespace IB2Toolset
         public List<Container> moduleContainersList = new List<Container>();
         public List<Shop> moduleShopsList = new List<Shop>();
         public List<Creature> moduleCreaturesList = new List<Creature>();
+        public List<Prop> modulePropsList = new List<Prop>();
         public List<JournalQuest> moduleJournal = new List<JournalQuest>();
         public List<PlayerClass> modulePlayerClassList = new List<PlayerClass>();
         public List<Race> moduleRacesList = new List<Race>();
@@ -51,7 +51,6 @@ namespace IB2Toolset
         public List<Effect> moduleEffectsList = new List<Effect>();
         public List<string> moduleAreasList = new List<string>();
         public List<string> moduleConvosList = new List<string>();
-        public List<string> moduleLogicTreesList = new List<string>();
         public List<string> moduleIBScriptsList = new List<string>();
         public List<Area> moduleAreasObjects = new List<Area>();
         public List<GlobalInt> moduleGlobalInts = new List<GlobalInt>();
@@ -70,8 +69,6 @@ namespace IB2Toolset
         public bool showPartyToken = false;
         private string _partyTokenFilename = "prp_party";
         public List<Player> playerList = new List<Player>();
-        //public List<Item> partyInventoryList = new List<Item>();
-        //public List<string> partyInventoryTagList = new List<string>();
         public List<ItemRefs> partyInventoryRefsList = new List<ItemRefs>();
         public List<JournalQuest> partyJournalQuests = new List<JournalQuest>();
         public List<JournalQuest> partyJournalCompleted = new List<JournalQuest>();
@@ -93,18 +90,12 @@ namespace IB2Toolset
         public bool showAutosaveMessage = true;
         public bool allowAutosave = true;
         public int combatAnimationSpeed = 25;
-        private string onHeartBeatLogicTree = "none";
-        private string onHeartBeatParms = "";
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
-        //suggesting here to have realTime off as default, but smoothMove on by default
-        //this stays true to 100% turn based, but adds some nice visual indication for the direction a prop comes from/moves to
         private bool _useRealTimeTimer = false;
-        private bool _useSmoothMovement = true;
         private int _realTimeTimerLengthInMilliSeconds = 1500;
         public int attackFromBehindToHitModifier = 2;
         public int attackFromBehindDamageModifier = 0;
-        private bool _useOrbitronFont = false;
         private bool _useUIBackground = false;
         private string _fontName = "Metamorphous";
         private string _fontFilename = "Metamorphous-Regular.ttf";
@@ -114,12 +105,6 @@ namespace IB2Toolset
         private string _spellLabelPlural = "Spells";
         private string _goldLabelSingular = "Gold";
         private string _goldLabelPlural = "Gold";
-        private int _borderAreaSize = 0;
-        private bool _useAllTileSystem = false;
-        private bool _useMinimalisticUI = false;
-        private bool _useManualCombatCam = false;
-        private bool _useCombatSmoothMovement = false;
-
         #endregion
 
         #region Properties
@@ -159,28 +144,6 @@ namespace IB2Toolset
         {
             get { return _useRealTimeTimer; }
             set { _useRealTimeTimer = value; }
-        }
-
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This flag activates using smooth movements of props (gliding).")]
-        public bool useSmoothMovement
-        {
-            get { return _useSmoothMovement; }
-            set { _useSmoothMovement = value; }
-        }
-
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This flag determines if the builder is using the new all tile system. If true, all single image background maps for areas will be converted into a folder of sliced tiles after loading (or reloading) an image for the area.")]
-        public bool useAllTileSystem
-        {
-            get { return _useAllTileSystem; }
-            set { _useAllTileSystem = value; }
-
-        }
-
-        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This flag activates using the scifi Orbitron font (light).")]
-        public bool useOrbitronFont
-        {
-            get { return _useOrbitronFont; }
-            set { _useOrbitronFont = value; }
         }
 
         [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This flag activates using UI background graphics.")]
@@ -312,13 +275,6 @@ namespace IB2Toolset
             set { _realTimeTimerLengthInMilliSeconds = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("If you use an area border, like marble stone in Harkenwold, set here how many squares broad that border is for the purpose of automatic transitions to neighbouring maps.")]
-        public int borderAreaSize
-        {
-            get { return _borderAreaSize; }
-            set { _borderAreaSize = value; }
-        }
-
         [CategoryAttribute("02 - Starting Conditions"), DescriptionAttribute("Current value for World Time in generic units")]
         public int WorldTime
         {
@@ -360,23 +316,7 @@ namespace IB2Toolset
             get { return _partyTokenFilename; }
             set { _partyTokenFilename = value; }
         }
-
-        /*
-        [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the end of each move on any area map (not combat)")]
-        public string OnHeartBeatLogicTree
-        {
-            get { return onHeartBeatLogicTree; }
-            set { onHeartBeatLogicTree = value; }
-        }
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
-        public string OnHeartBeatParms
-        {
-            get { return onHeartBeatParms; }
-            set { onHeartBeatParms = value; }
-        }
-        */
-
+        
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
         [CategoryAttribute("06 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run at the end of each move on any area map (not combat)")]
         public string OnHeartBeatIBScript
@@ -389,29 +329,7 @@ namespace IB2Toolset
         {
             get { return onHeartBeatIBScriptParms; }
             set { onHeartBeatIBScriptParms = value; }
-        }
-
-        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This activates a less space occupying UI, mainly removing some of the UI backgrounds")]
-        public bool useMinimalisticUI
-        {
-            get { return _useMinimalisticUI; }
-            set { _useMinimalisticUI = value; }
-        }
-
-        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This grants manual control over combat camera, even during cretaure moves. Once a pc is damaged or attacked though, the camera focuses on the pc")]
-        public bool useManualCombatCam
-        {
-            get { return _useManualCombatCam; }
-            set { _useManualCombatCam = value; }
-        }
-
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This activates idle glide anmiations as well as move glide animations for creatures in combat")]
-        public bool useCombatSmoothMovement
-        {
-            get { return _useCombatSmoothMovement; }
-            set { _useCombatSmoothMovement = value; }
-        }
-
+        }        
         #endregion
 
         public Module()

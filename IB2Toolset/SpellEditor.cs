@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class SpellEditor : Form
     {
@@ -31,7 +31,7 @@ namespace IB2Toolset
         {
             lbxSpells.BeginUpdate();
             lbxSpells.DataSource = null;
-            lbxSpells.DataSource = prntForm.spellsList;
+            lbxSpells.DataSource = prntForm.mod.moduleSpellsList;
             lbxSpells.DisplayMember = "name";
             lbxSpells.EndUpdate();
         }
@@ -40,7 +40,7 @@ namespace IB2Toolset
             Spell newTS = new Spell();
             newTS.name = "newSpell";
             newTS.tag = "newSpellTag_" + prntForm.mod.nextIdNumber.ToString();
-            prntForm.spellsList.Add(newTS);
+            prntForm.mod.moduleSpellsList.Add(newTS);
             refreshListBox();
         }
         private void btnRemoveSpell_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace IB2Toolset
                     // The Remove button was clicked.
                     int selectedIndex = lbxSpells.SelectedIndex;
                     //mod.ModuleContainersList.containers.RemoveAt(selectedIndex);
-                    prntForm.spellsList.RemoveAt(selectedIndex);
+                    prntForm.mod.moduleSpellsList.RemoveAt(selectedIndex);
                 }
                 catch { }
                 selectedLbxIndex = 0;
@@ -62,18 +62,18 @@ namespace IB2Toolset
         }
         private void btnDuplicateSpell_Click(object sender, EventArgs e)
         {
-            Spell newCopy = prntForm.spellsList[selectedLbxIndex].DeepCopy();
+            Spell newCopy = prntForm.mod.moduleSpellsList[selectedLbxIndex].DeepCopy();
             newCopy.tag = "newSpellTag_" + prntForm.mod.nextIdNumber.ToString();
-            prntForm.spellsList.Add(newCopy);
+            prntForm.mod.moduleSpellsList.Add(newCopy);
             refreshListBox();
         }
         private void lbxSpells_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((lbxSpells.SelectedIndex >= 0) && (prntForm.spellsList != null))
+            if ((lbxSpells.SelectedIndex >= 0) && (prntForm.mod.moduleSpellsList != null))
             {
                 selectedLbxIndex = lbxSpells.SelectedIndex;
                 lbxSpells.SelectedIndex = selectedLbxIndex;
-                propertyGrid1.SelectedObject = prntForm.spellsList[selectedLbxIndex];
+                propertyGrid1.SelectedObject = prntForm.mod.moduleSpellsList[selectedLbxIndex];
             }
         }
         private void propertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -83,9 +83,9 @@ namespace IB2Toolset
         private void checkForNewSpells()
         {
             bool foundOne = false;
-            foreach (PlayerClass cl in prntForm.playerClassesList)
+            foreach (PlayerClass cl in prntForm.mod.modulePlayerClassList)
             {
-                foreach (Spell sp in prntForm.spellsList)
+                foreach (Spell sp in prntForm.mod.moduleSpellsList)
                 {
                     foreach (SpellAllowed sa in cl.spellsAllowed)
                     {
@@ -112,11 +112,11 @@ namespace IB2Toolset
         private void checkForDeletedSpells()
         {
             bool foundOne = false;
-            foreach (PlayerClass cl in prntForm.playerClassesList)
+            foreach (PlayerClass cl in prntForm.mod.modulePlayerClassList)
             {
                 for (int i = cl.spellsAllowed.Count - 1; i >= 0; i--)
                 {
-                    foreach (Spell sp in prntForm.spellsList)
+                    foreach (Spell sp in prntForm.mod.moduleSpellsList)
                     {
                         if (sp.tag == cl.spellsAllowed[i].tag)
                         {
@@ -143,7 +143,7 @@ namespace IB2Toolset
 
         private void btnSort_Click(object sender, EventArgs e)
         {
-            prntForm.spellsList = prntForm.spellsList.OrderBy(o => o.name).ToList();
+            prntForm.mod.moduleSpellsList = prntForm.mod.moduleSpellsList.OrderBy(o => o.name).ToList();
             refreshListBox();
         }        
     }

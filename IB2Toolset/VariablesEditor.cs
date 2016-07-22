@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 //using IceBlinkCore;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class VariablesEditor : Form
     {

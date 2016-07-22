@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class TileBitmapNamePair
     {

@@ -14,7 +14,7 @@ using System.ComponentModel.Design;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class Item : INotifyPropertyChanged
     {

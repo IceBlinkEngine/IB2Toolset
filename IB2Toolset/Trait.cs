@@ -10,53 +10,8 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 //using IceBlink;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
-    /*public class Traits
-    {
-        public List<Trait> traitList = new List<Trait>();
-
-        public Traits()
-        {
-        }
-        public void saveTraitsFile(string filename)
-        {
-            string json = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-            using (StreamWriter sw = new StreamWriter(filename))
-            {
-                sw.Write(json.ToString());
-            }
-        }
-        public Traits loadTraitsFile(string filename)
-        {
-            Traits toReturn = null;
-
-            // deserialize JSON directly from a file
-            using (StreamReader file = File.OpenText(filename))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                toReturn = (Traits)serializer.Deserialize(file, typeof(Traits));
-            }
-            return toReturn;
-        }
-        public Trait getTraitByTag(string tag)
-        {
-            foreach (Trait ts in traitList)
-            {
-                if (ts.tag == tag) return ts;
-            }
-            return null;
-        }
-        public Trait getTraitByName(string name)
-        {
-            foreach (Trait ts in traitList)
-            {
-                if (ts.name == name) return ts;
-            }
-            return null;
-        }
-    }*/
-
     public class Trait
     {        
         #region Fields        

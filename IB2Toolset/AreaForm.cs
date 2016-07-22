@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class AreaForm : DockContent
     {
@@ -74,6 +74,7 @@ namespace IB2Toolset
             Area newArea = new Area();
             newArea.Filename = "new area";
             prntForm.mod.moduleAreasList.Add(newArea.Filename);
+            prntForm.mod.moduleAreasObjects.Add(newArea);
             refreshListBoxAreas();
             // should I create a new file at this point?
         }

@@ -34,7 +34,7 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
 	public sealed class MultilineStringEditor : UITypeEditor
 	{

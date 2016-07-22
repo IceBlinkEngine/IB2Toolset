@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public partial class MergerEditor : Form
     {
@@ -40,7 +40,7 @@ namespace IB2Toolset
                 {
                     if (!classExists(classListImport[lbxImport.SelectedIndex]))
                     {
-                        prntForm.playerClassesList.Add(classListImport[lbxImport.SelectedIndex].DeepCopy());
+                        prntForm.mod.modulePlayerClassList.Add(classListImport[lbxImport.SelectedIndex].DeepCopy());
                         refreshImportListBox();
                         refreshMainListBox();
                     }
@@ -49,7 +49,7 @@ namespace IB2Toolset
                 {
                     if (!raceExists(raceListImport[lbxImport.SelectedIndex]))
                     {
-                        prntForm.racesList.Add(raceListImport[lbxImport.SelectedIndex].DeepCopy());
+                        prntForm.mod.moduleRacesList.Add(raceListImport[lbxImport.SelectedIndex].DeepCopy());
                         refreshImportListBox();
                         refreshMainListBox();
                     }
@@ -58,7 +58,7 @@ namespace IB2Toolset
                 {
                     if (!spellExists(spellListImport[lbxImport.SelectedIndex]))
                     {
-                        prntForm.spellsList.Add(spellListImport[lbxImport.SelectedIndex].DeepCopy());
+                        prntForm.mod.moduleSpellsList.Add(spellListImport[lbxImport.SelectedIndex].DeepCopy());
                         refreshImportListBox();
                         refreshMainListBox();
                     }
@@ -67,7 +67,7 @@ namespace IB2Toolset
                 {
                     if (!traitExists(traitListImport[lbxImport.SelectedIndex]))
                     {
-                        prntForm.traitsList.Add(traitListImport[lbxImport.SelectedIndex].DeepCopy());
+                        prntForm.mod.moduleTraitsList.Add(traitListImport[lbxImport.SelectedIndex].DeepCopy());
                         refreshImportListBox();
                         refreshMainListBox();
                     }
@@ -76,7 +76,7 @@ namespace IB2Toolset
                 {
                     if (!effectExists(effectListImport[lbxImport.SelectedIndex]))
                     {
-                        prntForm.effectsList.Add(effectListImport[lbxImport.SelectedIndex].DeepCopy());
+                        prntForm.mod.moduleEffectsList.Add(effectListImport[lbxImport.SelectedIndex].DeepCopy());
                         refreshImportListBox();
                         refreshMainListBox();
                     }
@@ -85,7 +85,7 @@ namespace IB2Toolset
                 {
                     if (!creatureExists(creatureListImport[lbxImport.SelectedIndex]))
                     {
-                        prntForm.creaturesList.Add(creatureListImport[lbxImport.SelectedIndex].DeepCopy());
+                        prntForm.mod.moduleCreaturesList.Add(creatureListImport[lbxImport.SelectedIndex].DeepCopy());
                         refreshImportListBox();
                         refreshMainListBox();
                     }
@@ -94,7 +94,7 @@ namespace IB2Toolset
                 {
                     if (!itemExists(itemListImport[lbxImport.SelectedIndex]))
                     {
-                        prntForm.itemsList.Add(itemListImport[lbxImport.SelectedIndex].DeepCopy());
+                        prntForm.mod.moduleItemsList.Add(itemListImport[lbxImport.SelectedIndex].DeepCopy());
                         refreshImportListBox();
                         refreshMainListBox();
                     }
@@ -126,7 +126,7 @@ namespace IB2Toolset
         }
         private void loadAllData(string folderpath)
         {
-            try
+            /*try
             {
                 classListImport = prntForm.loadPlayerClassesFile(folderpath + "\\playerClasses.json");
             }
@@ -173,7 +173,7 @@ namespace IB2Toolset
             catch (Exception ex)
             {
                 MessageBox.Show("failed to open import classes file: " + ex.ToString());
-            }
+            }*/
             /*try
             {
                 propListImport = prntForm.loadPropsFile(folderpath + "\\props.prp");
@@ -182,14 +182,14 @@ namespace IB2Toolset
             {
                 MessageBox.Show("failed to open import props file: " + ex.ToString());
             }*/
-            try
+            /*try
             {
                 itemListImport = prntForm.loadItemsFile(folderpath + "\\items.json");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("failed to open import items file: " + ex.ToString());
-            }
+            }*/
         }
         private void cmbDataType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -212,31 +212,31 @@ namespace IB2Toolset
             {
                 if (cmbDataType.SelectedIndex == 0) //Class
                 {
-                    pgMain.SelectedObject = prntForm.playerClassesList[lbxMain.SelectedIndex];
+                    pgMain.SelectedObject = prntForm.mod.modulePlayerClassList[lbxMain.SelectedIndex];
                 }
                 else if (cmbDataType.SelectedIndex == 1) //Race
                 {
-                    pgMain.SelectedObject = prntForm.racesList[lbxMain.SelectedIndex];
+                    pgMain.SelectedObject = prntForm.mod.moduleRacesList[lbxMain.SelectedIndex];
                 }
                 else if (cmbDataType.SelectedIndex == 2) //Spell
                 {
-                    pgMain.SelectedObject = prntForm.spellsList[lbxMain.SelectedIndex];
+                    pgMain.SelectedObject = prntForm.mod.moduleSpellsList[lbxMain.SelectedIndex];
                 }
                 else if (cmbDataType.SelectedIndex == 3) //Trait
                 {
-                    pgMain.SelectedObject = prntForm.traitsList[lbxMain.SelectedIndex];
+                    pgMain.SelectedObject = prntForm.mod.moduleTraitsList[lbxMain.SelectedIndex];
                 }
                 else if (cmbDataType.SelectedIndex == 4) //Effect
                 {
-                    pgMain.SelectedObject = prntForm.effectsList[lbxMain.SelectedIndex];
+                    pgMain.SelectedObject = prntForm.mod.moduleEffectsList[lbxMain.SelectedIndex];
                 }
                 else if (cmbDataType.SelectedIndex == 5) //Creature
                 {
-                    pgMain.SelectedObject = prntForm.creaturesList[lbxMain.SelectedIndex];
+                    pgMain.SelectedObject = prntForm.mod.moduleCreaturesList[lbxMain.SelectedIndex];
                 }
                 else if (cmbDataType.SelectedIndex == 6) //Item
                 {
-                    pgMain.SelectedObject = prntForm.itemsList[lbxMain.SelectedIndex];
+                    pgMain.SelectedObject = prntForm.mod.moduleItemsList[lbxMain.SelectedIndex];
                 }
                 /*else if (cmbDataType.SelectedIndex == 7) //Prop
                 {
@@ -291,7 +291,7 @@ namespace IB2Toolset
             {
                 lbxMain.BeginUpdate();
                 lbxMain.DataSource = null;
-                lbxMain.DataSource = prntForm.playerClassesList;
+                lbxMain.DataSource = prntForm.mod.modulePlayerClassList;
                 lbxMain.DisplayMember = "name";
                 lbxMain.EndUpdate();
             }
@@ -299,7 +299,7 @@ namespace IB2Toolset
             {
                 lbxMain.BeginUpdate();
                 lbxMain.DataSource = null;
-                lbxMain.DataSource = prntForm.racesList;
+                lbxMain.DataSource = prntForm.mod.moduleRacesList;
                 lbxMain.DisplayMember = "name";
                 lbxMain.EndUpdate();
             }
@@ -307,7 +307,7 @@ namespace IB2Toolset
             {
                 lbxMain.BeginUpdate();
                 lbxMain.DataSource = null;
-                lbxMain.DataSource = prntForm.spellsList;
+                lbxMain.DataSource = prntForm.mod.moduleSpellsList;
                 lbxMain.DisplayMember = "name";
                 lbxMain.EndUpdate();
             }
@@ -315,7 +315,7 @@ namespace IB2Toolset
             {
                 lbxMain.BeginUpdate();
                 lbxMain.DataSource = null;
-                lbxMain.DataSource = prntForm.traitsList;
+                lbxMain.DataSource = prntForm.mod.moduleTraitsList;
                 lbxMain.DisplayMember = "name";
                 lbxMain.EndUpdate();
             }
@@ -323,7 +323,7 @@ namespace IB2Toolset
             {
                 lbxMain.BeginUpdate();
                 lbxMain.DataSource = null;
-                lbxMain.DataSource = prntForm.effectsList;
+                lbxMain.DataSource = prntForm.mod.moduleEffectsList;
                 lbxMain.DisplayMember = "name";
                 lbxMain.EndUpdate();
             }
@@ -331,7 +331,7 @@ namespace IB2Toolset
             {
                 lbxMain.BeginUpdate();
                 lbxMain.DataSource = null;
-                lbxMain.DataSource = prntForm.creaturesList;
+                lbxMain.DataSource = prntForm.mod.moduleCreaturesList;
                 lbxMain.DisplayMember = "cr_name";
                 lbxMain.EndUpdate();
             }
@@ -339,7 +339,7 @@ namespace IB2Toolset
             {
                 lbxMain.BeginUpdate();
                 lbxMain.DataSource = null;
-                lbxMain.DataSource = prntForm.itemsList;
+                lbxMain.DataSource = prntForm.mod.moduleItemsList;
                 lbxMain.DisplayMember = "name";
                 lbxMain.EndUpdate();
             }
@@ -421,7 +421,7 @@ namespace IB2Toolset
         }        
         private bool classExists(PlayerClass itImp)
         {
-            foreach (PlayerClass it in prntForm.playerClassesList)
+            foreach (PlayerClass it in prntForm.mod.modulePlayerClassList)
             {
                 if (it.tag == itImp.tag)
                 {
@@ -432,7 +432,7 @@ namespace IB2Toolset
         }
         private bool raceExists(Race itImp)
         {
-            foreach (Race it in prntForm.racesList)
+            foreach (Race it in prntForm.mod.moduleRacesList)
             {
                 if (it.tag == itImp.tag)
                 {
@@ -443,7 +443,7 @@ namespace IB2Toolset
         }
         private bool spellExists(Spell itImp)
         {
-            foreach (Spell it in prntForm.spellsList)
+            foreach (Spell it in prntForm.mod.moduleSpellsList)
             {
                 if (it.tag == itImp.tag)
                 {
@@ -454,7 +454,7 @@ namespace IB2Toolset
         }
         private bool traitExists(Trait itImp)
         {
-            foreach (Trait it in prntForm.traitsList)
+            foreach (Trait it in prntForm.mod.moduleTraitsList)
             {
                 if (it.tag == itImp.tag)
                 {
@@ -465,7 +465,7 @@ namespace IB2Toolset
         }
         private bool effectExists(Effect itImp)
         {
-            foreach (Effect it in prntForm.effectsList)
+            foreach (Effect it in prntForm.mod.moduleEffectsList)
             {
                 if (it.tag == itImp.tag)
                 {
@@ -476,7 +476,7 @@ namespace IB2Toolset
         }
         private bool creatureExists(Creature itImp)
         {
-            foreach (Creature it in prntForm.creaturesList)
+            foreach (Creature it in prntForm.mod.moduleCreaturesList)
             {
                 if (it.cr_resref == itImp.cr_resref)
                 {
@@ -487,7 +487,7 @@ namespace IB2Toolset
         }
         private bool itemExists(Item itImp)
         {
-            foreach (Item it in prntForm.itemsList)
+            foreach (Item it in prntForm.mod.moduleItemsList)
             {
                 if (it.resref == itImp.resref)
                 {
@@ -498,7 +498,7 @@ namespace IB2Toolset
         }
         private bool propExists(Prop itImp)
         {
-            foreach (Prop it in prntForm.propsList)
+            foreach (Prop it in prntForm.mod.modulePropsList)
             {
                 if (it.PropTag == itImp.PropTag)
                 {

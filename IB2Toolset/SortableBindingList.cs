@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Collections;
 using System.Reflection;
 
-namespace IB2Toolset
+namespace IB2miniToolset
 {
     public class SortableBindingList<T> : BindingList<T>
     {
