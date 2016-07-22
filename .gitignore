@@ -185,3 +185,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/IB2Toolset/bin/Debug/modules
+/IB2Toolset/bin/Debug/module_backups
