@@ -53,6 +53,7 @@ namespace IB2Toolset
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
         private bool _unavoidableConversation = false;
+        private bool _isLight = false;
         #endregion
 
         #region Properties
@@ -222,6 +223,12 @@ namespace IB2Toolset
         {
             get { return _unavoidableConversation; }
             set { _unavoidableConversation = value; }
+        }
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("True = is 2 square radius light of yellowish color, flickering and position shifting, ie think torch like")]
+        public bool isLight
+        {
+            get { return _isLight; }
+            set { _isLight = value; }
         }
         [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("If the party is within this range radius (in squares) and the Prop is a chaser (isChaser = true), the Prop will start chasing the party.")]
         public int ChaserDetectRangeRadius

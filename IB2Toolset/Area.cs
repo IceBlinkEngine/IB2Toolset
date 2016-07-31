@@ -67,6 +67,7 @@ namespace IB2Toolset
 
         private bool _drawWithLessVisibleSeamsButMorePixelated = false;
         private bool _use100pixSquares = false;
+        private bool _useLightSystem = false;
 
         #endregion
 
@@ -193,6 +194,13 @@ namespace IB2Toolset
         {
             get { return _use100pixSquares; }
             set { _use100pixSquares = value; }
+        }
+
+        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Activates the light system, as of now NEEDS useAllTileSystem property of module set to true: makes all areas that dont use day&nigth cycle turn into pitch black darkness; you need to place props with isLight property set to true to lighten them up; also in nights, such props spend extra light.")]
+        public bool useLightSystem
+        {
+            get { return _useLightSystem; }
+            set { _useLightSystem = value; }
         }
 
         [CategoryAttribute("01 - Main")]

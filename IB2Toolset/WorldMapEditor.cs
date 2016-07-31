@@ -2330,10 +2330,6 @@ namespace IB2Toolset
                     //ushort width = 50;
                     //ushort height = 50;
 
-                    int columns = sourceBitmap.Width / 100;
-                    int rows = sourceBitmap.Height / 100;
-                    int cells = columns * rows;
-
                     string dir = "";
                     try
                     {
@@ -2368,7 +2364,9 @@ namespace IB2Toolset
                     {
                         squarePixSize = 50;
                     }
-
+                    int columns = sourceBitmap.Width / squarePixSize;
+                    int rows = sourceBitmap.Height / squarePixSize;
+                    int cells = columns * rows;
                     try
                     {
                         for (int row = 0; row < rows; row++)
