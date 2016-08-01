@@ -54,6 +54,7 @@ namespace IB2Toolset
         private string onHeartBeatIBScriptParms = "";
         private bool _unavoidableConversation = false;
         private bool _isLight = false;
+        private bool _hasHalo = false;
         #endregion
 
         #region Properties
@@ -229,6 +230,12 @@ namespace IB2Toolset
         {
             get { return _isLight; }
             set { _isLight = value; }
+        }
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("True = draws the color of the light and its intense glow, False = colorless light with no glow, ideal for extending light range of other light sources, just place two squares away from them and light up large areas")]
+        public bool hasHalo
+        {
+            get { return _hasHalo; }
+            set { _hasHalo = value; }
         }
         [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("If the party is within this range radius (in squares) and the Prop is a chaser (isChaser = true), the Prop will start chasing the party.")]
         public int ChaserDetectRangeRadius
