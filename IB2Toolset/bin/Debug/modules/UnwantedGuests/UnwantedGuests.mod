@@ -144,7 +144,7 @@
   "MaxPartySize": 6,
   "moduleDescription": "Short module tutorial on how to make a simple module.",
   "moduleCredits": "<big><b>Unwanted Guests</b></big><BR>\r\n<BR>\r\n-visit the forums for more info:<BR>\r\nwww.iceblinkengine.com/forums",
-  "nextIdNumber": 9912,
+  "nextIdNumber": 9930,
   "realTimeTimerLengthInMilliSeconds": 1500,
   "borderAreaSize": 0,
   "WorldTime": 0,
@@ -155,7 +155,10 @@
   "partyTokenFilename": "prp_party",
   "OnHeartBeatIBScript": "none",
   "OnHeartBeatIBScriptParms": "",
-  "useMinimalisticUI": false,
-  "useManualCombatCam": false,
-  "useCombatSmoothMovement": false
+  "useMinimalisticUI": true,
+  "useManualCombatCam": true,
+  "useCombatSmoothMovement": false,
+  "partyLightColor": "blue",
+  "partyRingHaloIntensity": 0.5,
+  "partyFocalHaloIntensity": 1.2
 }

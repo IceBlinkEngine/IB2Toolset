@@ -119,6 +119,9 @@ namespace IB2Toolset
         private bool _useMinimalisticUI = false;
         private bool _useManualCombatCam = false;
         private bool _useCombatSmoothMovement = false;
+        private string _partyLightColor = "yellow";
+        private float _partyRingHaloIntensity = 1f;
+        private float _partyFocalHaloIntensity = 1f;
 
         #endregion
 
@@ -411,6 +414,29 @@ namespace IB2Toolset
             get { return _useCombatSmoothMovement; }
             set { _useCombatSmoothMovement = value; }
         }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Light related: yellow, red, orange, green, blue an purple are possible. Yellow is less intense and rather default.")]
+        public string partyLightColor
+        {
+            get { return _partyLightColor; }
+            set { _partyLightColor = value; }
+        }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the ring around the light center becomes. Keep between 0.1f and 1.9f as suggestion.")]
+        public float partyRingHaloIntensity
+        {
+            get { return _partyRingHaloIntensity; }
+            set { _partyRingHaloIntensity = value; }
+        }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the center of the light becomes. Keep between 0.1f and 1.9f as suggestion.")]
+        public float partyFocalHaloIntensity
+        {
+            get { return _partyFocalHaloIntensity; }
+            set { _partyFocalHaloIntensity = value; }
+        }
+
+       
 
         #endregion
 

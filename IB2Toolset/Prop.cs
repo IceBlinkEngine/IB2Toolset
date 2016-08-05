@@ -55,6 +55,11 @@ namespace IB2Toolset
         private bool _unavoidableConversation = false;
         private bool _isLight = false;
         private bool _hasHalo = false;
+        private float _focalIntensity = 1.0f;
+        private float _ringIntensity = 1.0f;
+
+
+
         #endregion
 
         #region Properties
@@ -225,17 +230,29 @@ namespace IB2Toolset
             get { return _unavoidableConversation; }
             set { _unavoidableConversation = value; }
         }
-        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("True = is 2 square radius light of yellowish color, flickering and position shifting, ie think torch like")]
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("Light related - true = is 2 square radius light of yellowish color, flickering and position shifting, ie think torch like")]
         public bool isLight
         {
             get { return _isLight; }
             set { _isLight = value; }
         }
-        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("True = draws the color of the light and its intense glow, False = colorless light with no glow, ideal for extending light range of other light sources, just place two squares away from them and light up large areas")]
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("Light related - true = draws the color of the light and its intense glow, False = colorless light with no glow, ideal for extending light range of other light sources, just place two squares away from them and light up large areas")]
         public bool hasHalo
         {
             get { return _hasHalo; }
             set { _hasHalo = value; }
+        }
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the center of the light becomes. Keep between 0.1f and 1.9f as suggestion.")]
+        public float focalIntensity
+        {
+            get { return _focalIntensity; }
+            set { _focalIntensity = value; }
+        }
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the rings (outside center) of the light become. Keep between 0.1f and 1.9f as suggestion.")]
+        public float ringIntensity
+        {
+            get { return _ringIntensity; }
+            set { _ringIntensity = value; }
         }
         [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("If the party is within this range radius (in squares) and the Prop is a chaser (isChaser = true), the Prop will start chasing the party.")]
         public int ChaserDetectRangeRadius

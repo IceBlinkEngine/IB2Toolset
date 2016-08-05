@@ -69,6 +69,13 @@ namespace IB2Toolset
         private bool _use100pixSquares = false;
         private bool _useLightSystem = false;
 
+        private float _flickerSlowDownFactor = 1f;
+        private float _shifterSlowDownFactor = 1f;
+        private bool _noFlicker = false;
+        private bool _noPositionShift = false;
+        private float _minimumDarkness = 12;
+        private float _maxLightMultiplier = 1;
+
         #endregion
 
         #region Properties
@@ -196,11 +203,53 @@ namespace IB2Toolset
             set { _use100pixSquares = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Activates the light system, as of now NEEDS useAllTileSystem property of module set to true: makes all areas that dont use day&nigth cycle turn into pitch black darkness; you need to place props with isLight property set to true to lighten them up; also in nights, such props spend extra light.")]
+        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related - true: Activates the light system, as of now NEEDS useAllTileSystem property of module set to true: makes all areas that dont use day&nigth cycle turn into pitch black darkness; you need to place props with isLight property set to true to lighten them up; also in nights, such props spend extra light.")]
         public bool useLightSystem
         {
             get { return _useLightSystem; }
             set { _useLightSystem = value; }
+        }
+
+        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related - true: Lights on this map do not osciliate, ie the brightness/darkness of the lit squares does not change over time.")]
+        public bool noFlicker
+        {
+            get { return _noFlicker; }
+            set { _noFlicker = value; }
+        }
+
+        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related - true: Lights on this map do not dance, ie the shadows and lit areas only move when the party moves or a prop that is also a light source moves.")]
+        public bool noPositionShift
+        {
+            get { return _noPositionShift; }
+            set { _noPositionShift = value; }
+        }
+
+        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related: This is multiplied with the default flicker speed (osciliation); values above 1, like 1.1f, increase it therefore while values below 1, like 0.9f, decrease it; Try to stay between 0.1f and 1.9f.")]
+        public float flickerSlowDownFactor
+        {
+            get { return _flickerSlowDownFactor; }
+            set { _flickerSlowDownFactor = value; }
+        }
+
+        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related: This is multiplied with the default shifter speed (dancing shadows); values above 1, like 1.1f, increase it therefore while values below 1, like 0.9f, decrease it; Try to stay between 0.1f and 1.9f.")]
+        public float shifterSlowDownFactor
+        {
+            get { return _shifterSlowDownFactor; }
+            set { _shifterSlowDownFactor = value; }
+        }
+
+        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related: Defaults to 12. The higher, the more and the deeper shadows stay even at full light. Try to stay between 0f and 50f.")]
+        public float minimumDarkness
+        {
+            get { return _minimumDarkness; }
+            set { _minimumDarkness = value; }
+        }
+
+        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related: Defaults to 1. This is multiplied with the current brightness level: the higher, the more shadows vanish when light osciliates into brightness. Try to stay between 0.1f and 1.9f.")]
+        public float maxLightMultiplier
+        {
+            get { return _maxLightMultiplier; }
+            set { _maxLightMultiplier = value; }
         }
 
         [CategoryAttribute("01 - Main")]
