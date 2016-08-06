@@ -23,7 +23,7 @@
           "NodePortraitBitmap": "",
           "NodeNpcName": "",
           "NodeSound": "none",
-          "conversationText": "This is a test of launching a conversation from item use.",
+          "conversationText": "This for testing a convo from an item.",
           "IsExpanded": true,
           "subNodes": [
             {
