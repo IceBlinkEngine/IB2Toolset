@@ -122,6 +122,7 @@ namespace IB2Toolset
         private string _partyLightColor = "yellow";
         private float _partyRingHaloIntensity = 1f;
         private float _partyFocalHaloIntensity = 1f;
+        private bool _useMathGridFade = false;
 
         #endregion
 
@@ -413,6 +414,13 @@ namespace IB2Toolset
         {
             get { return _useCombatSmoothMovement; }
             set { _useCombatSmoothMovement = value; }
+        }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This activates an alternative way for displaying fog of war (which is utter black by default): it will be shown as some kind of grid paper, clearly recognizable from darkness. By replacing (but keepign the name) the .pngs offScreen, offScreen5, offScreen6 and offScreen7 in your module's UI folder you can use even customized graphics for fog of war.")]
+        public bool useMathGridFade
+        {
+            get { return _useMathGridFade; }
+            set { _useMathGridFade = value; }
         }
 
         [CategoryAttribute("07 - PLW"), DescriptionAttribute("Light related: yellow, red, orange, green, blue an purple are possible. Yellow is less intense and rather default.")]
