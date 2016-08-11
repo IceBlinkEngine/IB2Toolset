@@ -123,6 +123,7 @@ namespace IB2Toolset
         private float _partyRingHaloIntensity = 1f;
         private float _partyFocalHaloIntensity = 1f;
         private bool _useMathGridFade = false;
+        private int _durationInStepsOfPartyLightItems = 250;
 
         #endregion
 
@@ -428,6 +429,13 @@ namespace IB2Toolset
         {
             get { return _partyLightColor; }
             set { _partyLightColor = value; }
+        }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Ligt related: Define here how many steps on map an activated party light source lasts, defaults to 250. Please note that light energy is only consume din darkenss or at night.")]
+        public int durationInStepsOfPartyLightItems
+        {
+            get { return _durationInStepsOfPartyLightItems; }
+            set { _durationInStepsOfPartyLightItems = value; }
         }
 
         [CategoryAttribute("07 - PLW"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the ring around the light center becomes. Keep between 0.1f and 1.9f as suggestion.")]
