@@ -145,7 +145,7 @@
   "MaxPartySize": 6,
   "moduleDescription": "Short module tutorial on how to make a simple module.",
   "moduleCredits": "<big><b>Unwanted Guests</b></big><BR>\r\n<BR>\r\n-visit the forums for more info:<BR>\r\nwww.iceblinkengine.com/forums",
-  "nextIdNumber": 9950,
+  "nextIdNumber": 9957,
   "realTimeTimerLengthInMilliSeconds": 1500,
   "borderAreaSize": 0,
   "WorldTime": 0,
@@ -161,6 +161,7 @@
   "useCombatSmoothMovement": false,
   "useMathGridFade": false,
   "partyLightColor": "blue",
+  "durationInStepsOfPartyLightItems": 250,
   "partyRingHaloIntensity": 0.5,
   "partyFocalHaloIntensity": 1.2
 }
