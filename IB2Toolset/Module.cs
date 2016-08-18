@@ -125,6 +125,30 @@ namespace IB2Toolset
         private bool _useMathGridFade = false;
         private int _durationInStepsOfPartyLightItems = 250;
 
+        private string _nameOfFirstDayOfTheWeek = "Monday";
+        private string _nameOfSecondDayOfTheWeek = "Tuesday";
+        private string _nameOfThirdDayOfTheWeek = "Wednesday";
+        private string _nameOfFourthDayOfTheWeek = "Thursday";
+        private string _nameOfFifthDayOfTheWeek = "Friday";
+        private string _nameOfSixthDayOfTheWeek = "Saturday";
+        private string _nameOfSeventhDayOfTheWeek = "Sunday";
+
+        private string _nameOfFirstMonth = "January";
+        private string _nameOfSecondMonth = "February";
+        private string _nameOfThirdMonth = "March";
+        private string _nameOfFourthMonth = "April";
+        private string _nameOfFifthMonth = "May";
+        private string _nameOfSixthMonth = "June";
+        private string _nameOfSeventhMonth = "July";
+        private string _nameOfEighthMonth = "August";
+        private string _nameOfNinthMonth = "September";
+        private string _nameOfTenthMonth = "October";
+        private string _nameOfEleventhMonth = "November";
+        private string _nameOfTwelfthMonth = "December";
+
+        private int _maxNumberOfRationsAllowed = 7;
+        private int _maxNumberOfLightSourcesAllowed = 7;
+
         #endregion
 
         #region Properties
@@ -179,6 +203,135 @@ namespace IB2Toolset
             get { return _useAllTileSystem; }
             set { _useAllTileSystem = value; }
 
+        }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfFirstDayOfTheWeek
+        {
+            get { return _nameOfFirstDayOfTheWeek; }
+            set { _nameOfFirstDayOfTheWeek = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfSecondDayOfTheWeek
+        {
+            get { return _nameOfSecondDayOfTheWeek; }
+            set { _nameOfSecondDayOfTheWeek = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfThirdDayOfTheWeek
+        {
+            get { return _nameOfThirdDayOfTheWeek; }
+            set { _nameOfThirdDayOfTheWeek = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfFourthDayOfTheWeek
+        {
+            get { return _nameOfFourthDayOfTheWeek; }
+            set { _nameOfFourthDayOfTheWeek = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfFifthDayOfTheWeek
+        {
+            get { return _nameOfFifthDayOfTheWeek; }
+            set { _nameOfFifthDayOfTheWeek = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfSixthDayOfTheWeek
+        {
+            get { return _nameOfSixthDayOfTheWeek; }
+            set { _nameOfSixthDayOfTheWeek = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfSeventhDayOfTheWeek
+        {
+            get { return _nameOfSeventhDayOfTheWeek; }
+            set { _nameOfSeventhDayOfTheWeek = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfFirstMonth
+        {
+            get { return _nameOfFirstMonth; }
+            set { _nameOfFirstMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfSecondMonth
+        {
+            get { return _nameOfSecondMonth; }
+            set { _nameOfSecondMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfThirdMonth
+        {
+            get { return _nameOfThirdMonth; }
+            set { _nameOfThirdMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfFourthMonth
+        {
+            get { return _nameOfFourthMonth; }
+            set { _nameOfFourthMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfFifthMonth
+        {
+            get { return _nameOfFifthMonth; }
+            set { _nameOfFifthMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfSixthMonth
+        {
+            get { return _nameOfSixthMonth; }
+            set { _nameOfSixthMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfSeventhMonth
+        {
+            get { return _nameOfSeventhMonth; }
+            set { _nameOfSeventhMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfEighthMonth
+        {
+            get { return _nameOfEighthMonth; }
+            set { _nameOfEighthMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfNinthMonth
+        {
+            get { return _nameOfNinthMonth; }
+            set { _nameOfNinthMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfTenthMonth
+        {
+            get { return _nameOfTenthMonth; }
+            set { _nameOfTenthMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfEleventhMonth
+        {
+            get { return _nameOfEleventhMonth; }
+            set { _nameOfEleventhMonth = value; }
+        }
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        public string nameOfTwelfthMonth
+        {
+            get { return _nameOfTwelfthMonth; }
+            set { _nameOfTwelfthMonth = value; }
+        }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Max number of rations allowed in party inventory.")]
+        public int maxNumberOfRationsAllowed
+        {
+            get { return _maxNumberOfRationsAllowed; }
+            set { _maxNumberOfRationsAllowed = value; }
+        }
+
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Max number of light source items allowed in party inventory")]
+        public int maxNumberOfLightSourcesAllowed
+        {
+            get { return _maxNumberOfLightSourcesAllowed; }
+            set { _maxNumberOfLightSourcesAllowed = value; }
         }
 
         [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This flag activates using the scifi Orbitron font (light).")]
@@ -317,7 +470,7 @@ namespace IB2Toolset
             set { _realTimeTimerLengthInMilliSeconds = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("If you use an area border, like marble stone in Harkenwold, set here how many squares broad that border is for the purpose of automatic transitions to neighbouring maps.")]
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("If you use an area border, like marble stone in Hearkenwold, set here how many squares broad that border is for the purpose of automatic transitions to neighbouring maps.")]
         public int borderAreaSize
         {
             get { return _borderAreaSize; }
