@@ -814,6 +814,8 @@ namespace IB2Toolset
         private string _name = "none";
         private bool _canNotBeUnequipped = false;
         private int _quantity = 1; //useful for stacking and ammo
+        private bool _isLightSource = false;
+        private bool _isRation = false;
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("ResRef of the item reference (must be left the same as the blueprint item's resref)")]
         public string resref
@@ -838,6 +840,18 @@ namespace IB2Toolset
         {
             get { return _canNotBeUnequipped; }
             set { _canNotBeUnequipped = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("isLightSource")]
+        public bool isLightSource
+        {
+            get { return _isLightSource; }
+            set { _isLightSource = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("isRation")]
+        public bool isRation
+        {
+            get { return _isRation; }
+            set { _isRation = value; }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Number quantity of this item (useful for stacking items and ammo.")]
         public int quantity

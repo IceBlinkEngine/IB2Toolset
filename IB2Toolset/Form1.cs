@@ -1391,6 +1391,9 @@ namespace IB2Toolset
             newIR.resref = it.resref;
             newIR.quantity = it.quantity;
             newIR.canNotBeUnequipped = it.canNotBeUnequipped;
+            newIR.isLightSource = it.isLightSource;
+            newIR.isRation = it.isRation;
+
             return newIR;
         }
         #endregion
