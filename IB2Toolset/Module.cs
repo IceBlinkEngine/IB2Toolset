@@ -149,6 +149,8 @@ namespace IB2Toolset
         private int _maxNumberOfRationsAllowed = 7;
         private int _maxNumberOfLightSourcesAllowed = 7;
 
+        private bool _useRationSystem = false;
+
         #endregion
 
         #region Properties
@@ -205,12 +207,21 @@ namespace IB2Toolset
 
         }
 
+        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This turns on the ration system: consumes one ration every 24h, doing 20% of max hp/sp daamge to sp/hp once no needed ration is present; also resting requires and consumes one extra ration.")]
+        public bool useRationSystem
+        {
+            get { return _useRationSystem; }
+            set { _useRationSystem = value; }
+        }
+
         [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
         public string nameOfFirstDayOfTheWeek
         {
             get { return _nameOfFirstDayOfTheWeek; }
             set { _nameOfFirstDayOfTheWeek = value; }
         }
+
+        //private bool _useRationSystem = false;
         [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
         public string nameOfSecondDayOfTheWeek
         {

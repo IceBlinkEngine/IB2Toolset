@@ -97,7 +97,11 @@ namespace IB2Toolset
         private int _damageTypeResistanceValueFire = 0;
         private int _damageTypeResistanceValueMagic = 0;
         private int _damageTypeResistanceValuePoison = 0;
-        private string _typeOfDamage = "Normal"; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison        
+        private string _typeOfDamage = "Normal"; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison  
+
+        private bool _isRation = false;
+        private bool _isLightSource = false;
+
         #endregion
 
         #region Properties        
@@ -348,6 +352,32 @@ namespace IB2Toolset
                 _isStackable = value;
             }
         }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This item will add to ration counter in the clock line and be consumed as ration each 24h or on rest.")]
+        public bool isRation
+        {
+            get
+            {
+                return _isRation;
+            }
+            set
+            {
+                _isRation = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This item is a ligth source - you must also correctly set up IBScript on useItemIBScriptHook adn its paarmerts (see torch example item).")]
+        public bool isLightSource 
+        {
+            get
+            {
+                return _isLightSource;
+            }
+            set
+            {
+                _isLightSource = value;
+            }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Does not require a successful 'to hit' roll, always hits target (ex. mage bolt wand).")]
         public bool automaticallyHitsTarget
         {
@@ -360,6 +390,9 @@ namespace IB2Toolset
                 _automaticallyHitsTarget = value;
             }
         }
+
+        //private bool isRation = false;
+        //private bool isLightSource = false;
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Item Attack Bonus...Can be used to account for enchantments as well.")]
         public int attackBonus
         {
