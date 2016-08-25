@@ -702,9 +702,10 @@
             // 
             // ParentForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 457);
+            //this.ClientSize = new System.Drawing.Size(408, 228);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.statusStrip1);
