@@ -684,7 +684,8 @@
             this.pnlTrig.Controls.Add(this.gbE1);
             this.pnlTrig.Location = new System.Drawing.Point(12, 6);
             this.pnlTrig.Name = "pnlTrig";
-            this.pnlTrig.Size = new System.Drawing.Size(282, 729);
+            //this.pnlTrig.Size = new System.Drawing.Size(282, 729);
+            this.pnlTrig.Size = new System.Drawing.Size(240, 729);
             this.pnlTrig.TabIndex = 6;
             // 
             // rtxtScript
@@ -951,7 +952,7 @@
             // 
             // TriggerEventsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6f, 14f);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 741);
             this.Controls.Add(this.pnlTrig);

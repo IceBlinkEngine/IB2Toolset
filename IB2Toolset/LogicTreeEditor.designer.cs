@@ -1045,7 +1045,7 @@
             // 
             // LogicTreeEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6f, 14f);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 516);
             this.Controls.Add(this.toolStrip1);
