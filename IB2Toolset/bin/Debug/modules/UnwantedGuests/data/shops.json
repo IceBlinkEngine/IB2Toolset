@@ -256,5 +256,155 @@
         "quantity": 20
       }
     ]
+  },
+  {
+    "shopTag": "rationShop",
+    "shopName": "newShopName",
+    "shopItemRefs": [
+      {
+        "resref": "torch",
+        "tag": "newTag_9931_9989",
+        "name": "Torch",
+        "canNotBeUnequipped": false,
+        "isLightSource": true,
+        "isRation": false,
+        "quantity": 1
+      },
+      {
+        "resref": "torch",
+        "tag": "newTag_9931_9990",
+        "name": "Torch",
+        "canNotBeUnequipped": false,
+        "isLightSource": true,
+        "isRation": false,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9991",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9992",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9993",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9994",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9995",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9996",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9997",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9998",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_9999",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_10000",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_10001",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_10002",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_10003",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      },
+      {
+        "resref": "ration",
+        "tag": "newTag_9963_10004",
+        "name": "Ration",
+        "canNotBeUnequipped": false,
+        "isLightSource": false,
+        "isRation": true,
+        "quantity": 1
+      }
+    ]
   }
 ]
