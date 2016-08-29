@@ -500,7 +500,7 @@
             this.rbtnPaintTrigger.Size = new System.Drawing.Size(103, 61);
             this.rbtnPaintTrigger.TabIndex = 0;
             this.rbtnPaintTrigger.TabStop = true;
-            this.rbtnPaintTrigger.Text = "Paint\r\nNew\r\nTrigger";
+            this.rbtnPaintTrigger.Text = "New\r\nTrigger";
             this.rbtnPaintTrigger.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnPaintTrigger.UseVisualStyleBackColor = true;
             this.rbtnPaintTrigger.CheckedChanged += new System.EventHandler(this.rbtnPaintTrigger_CheckedChanged);

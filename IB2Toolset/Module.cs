@@ -99,13 +99,13 @@ namespace IB2Toolset
         private string onHeartBeatIBScriptParms = "";
         //suggesting here to have realTime off as default, but smoothMove on by default
         //this stays true to 100% turn based, but adds some nice visual indication for the direction a prop comes from/moves to
-        private bool _useRealTimeTimer = false;
+        private bool _useRealTimeTimer = true;
         private bool _useSmoothMovement = true;
-        private int _realTimeTimerLengthInMilliSeconds = 1500;
+        private int _realTimeTimerLengthInMilliSeconds = 7000;
         public int attackFromBehindToHitModifier = 2;
         public int attackFromBehindDamageModifier = 0;
         private bool _useOrbitronFont = false;
-        private bool _useUIBackground = false;
+        private bool _useUIBackground = true;
         private string _fontName = "Metamorphous";
         private string _fontFilename = "Metamorphous-Regular.ttf";
         private float _fontD2DScaleMultiplier = 1.0f;
@@ -115,10 +115,10 @@ namespace IB2Toolset
         private string _goldLabelSingular = "Gold";
         private string _goldLabelPlural = "Gold";
         private int _borderAreaSize = 0;
-        private bool _useAllTileSystem = false;
-        private bool _useMinimalisticUI = false;
-        private bool _useManualCombatCam = false;
-        private bool _useCombatSmoothMovement = false;
+        private bool _useAllTileSystem = true;
+        private bool _useMinimalisticUI = true;
+        private bool _useManualCombatCam = true;
+        private bool _useCombatSmoothMovement = true;
         private string _partyLightColor = "yellow";
         private float _partyRingHaloIntensity = 1f;
         private float _partyFocalHaloIntensity = 1f;
@@ -149,7 +149,7 @@ namespace IB2Toolset
         private int _maxNumberOfRationsAllowed = 7;
         private int _maxNumberOfLightSourcesAllowed = 7;
 
-        private bool _useRationSystem = false;
+        private bool _useRationSystem = true;
 
         #endregion
 
@@ -185,21 +185,21 @@ namespace IB2Toolset
             set { _mustUsePreMadePC = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This flag activates the realTime timer. It will make a new turn on main map happen after a number of realtime milliseconds defined in realTimeTimerLengthInMilliSecond. Its main purpose is to have moving NPC and creatures who even move when the party just stands idly. It does not affect combat which never has a real time component")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates the realTime timer. It will make a new turn on main map happen after a number of realtime milliseconds defined in realTimeTimerLengthInMilliSecond. Its main purpose is to have moving NPC and creatures who even move when the party just stands idly. It does not affect combat which never has a real time component")]
         public bool useRealTimeTimer
         {
             get { return _useRealTimeTimer; }
             set { _useRealTimeTimer = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This flag activates using smooth movements of props (gliding).")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using smooth movements of props (gliding).")]
         public bool useSmoothMovement
         {
             get { return _useSmoothMovement; }
             set { _useSmoothMovement = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This flag determines if the builder is using the new all tile system. If true, all single image background maps for areas will be converted into a folder of sliced tiles after loading (or reloading) an image for the area.")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag determines if the builder is using the new all tile system. If true, all single image background maps for areas will be converted into a folder of sliced tiles after loading (or reloading) an image for the area.")]
         public bool useAllTileSystem
         {
             get { return _useAllTileSystem; }
@@ -207,14 +207,14 @@ namespace IB2Toolset
 
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This turns on the ration system: consumes one ration every 24h, doing 20% of max hp/sp daamge to sp/hp once no needed ration is present; also resting requires and consumes one extra ration.")]
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("This turns on the ration system: consumes one ration every 24h, doing 20% of max hp/sp daamge to sp/hp once no needed ration is present; also resting requires and consumes one extra ration.")]
         public bool useRationSystem
         {
             get { return _useRationSystem; }
             set { _useRationSystem = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+         [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfFirstDayOfTheWeek
         {
             get { return _nameOfFirstDayOfTheWeek; }
@@ -222,123 +222,123 @@ namespace IB2Toolset
         }
 
         //private bool _useRationSystem = false;
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfSecondDayOfTheWeek
         {
             get { return _nameOfSecondDayOfTheWeek; }
             set { _nameOfSecondDayOfTheWeek = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+        [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfThirdDayOfTheWeek
         {
             get { return _nameOfThirdDayOfTheWeek; }
             set { _nameOfThirdDayOfTheWeek = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+       [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfFourthDayOfTheWeek
         {
             get { return _nameOfFourthDayOfTheWeek; }
             set { _nameOfFourthDayOfTheWeek = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+       [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfFifthDayOfTheWeek
         {
             get { return _nameOfFifthDayOfTheWeek; }
             set { _nameOfFifthDayOfTheWeek = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+      [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfSixthDayOfTheWeek
         {
             get { return _nameOfSixthDayOfTheWeek; }
             set { _nameOfSixthDayOfTheWeek = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+       [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfSeventhDayOfTheWeek
         {
             get { return _nameOfSeventhDayOfTheWeek; }
             set { _nameOfSeventhDayOfTheWeek = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+ [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfFirstMonth
         {
             get { return _nameOfFirstMonth; }
             set { _nameOfFirstMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+       [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfSecondMonth
         {
             get { return _nameOfSecondMonth; }
             set { _nameOfSecondMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+     [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfThirdMonth
         {
             get { return _nameOfThirdMonth; }
             set { _nameOfThirdMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+      [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfFourthMonth
         {
             get { return _nameOfFourthMonth; }
             set { _nameOfFourthMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+       [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfFifthMonth
         {
             get { return _nameOfFifthMonth; }
             set { _nameOfFifthMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+    [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfSixthMonth
         {
             get { return _nameOfSixthMonth; }
             set { _nameOfSixthMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+  [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfSeventhMonth
         {
             get { return _nameOfSeventhMonth; }
             set { _nameOfSeventhMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+   [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfEighthMonth
         {
             get { return _nameOfEighthMonth; }
             set { _nameOfEighthMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+     [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfNinthMonth
         {
             get { return _nameOfNinthMonth; }
             set { _nameOfNinthMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+     [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfTenthMonth
         {
             get { return _nameOfTenthMonth; }
             set { _nameOfTenthMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+     [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfEleventhMonth
         {
             get { return _nameOfEleventhMonth; }
             set { _nameOfEleventhMonth = value; }
         }
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Just enter the name you wnat to see displayed ingame for this.")]
+       [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for calendar, displayed ingame")]
         public string nameOfTwelfthMonth
         {
             get { return _nameOfTwelfthMonth; }
             set { _nameOfTwelfthMonth = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Max number of rations allowed in party inventory.")]
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("Max number of rations allowed in party inventory.")]
         public int maxNumberOfRationsAllowed
         {
             get { return _maxNumberOfRationsAllowed; }
             set { _maxNumberOfRationsAllowed = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Max number of light source items allowed in party inventory")]
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("Max number of light source items allowed in party inventory")]
         public int maxNumberOfLightSourcesAllowed
         {
             get { return _maxNumberOfLightSourcesAllowed; }
@@ -474,14 +474,14 @@ namespace IB2Toolset
             set { _nextIdNumber = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("The duration in real time milliseconds after which a new turn on main map takes place. Default is 1500, which 1.5 seconds.")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The duration in real time milliseconds after which a new turn on main map takes place. Default is 1500, which 1.5 seconds.")]
         public int realTimeTimerLengthInMilliSeconds
         {
             get { return _realTimeTimerLengthInMilliSeconds; }
             set { _realTimeTimerLengthInMilliSeconds = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("If you use an area border, like marble stone in Hearkenwold, set here how many squares broad that border is for the purpose of automatic transitions to neighbouring maps.")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("If you use an area border, like marble stone in Hearkenwold, set here how many squares broad that border is for the purpose of automatic transitions to neighbouring maps.")]
         public int borderAreaSize
         {
             get { return _borderAreaSize; }
@@ -574,47 +574,52 @@ namespace IB2Toolset
             set { _useManualCombatCam = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This activates idle glide anmiations as well as move glide animations for creatures in combat")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This activates idle glide anmiations as well as move glide animations for creatures in combat")]
         public bool useCombatSmoothMovement
         {
             get { return _useCombatSmoothMovement; }
             set { _useCombatSmoothMovement = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("This activates an alternative way for displaying fog of war (which is utter black by default): it will be shown as some kind of grid paper, clearly recognizable from darkness. By replacing (but keepign the name) the .pngs offScreen, offScreen5, offScreen6 and offScreen7 in your module's UI folder you can use even customized graphics for fog of war.")]
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This activates an alternative way for displaying fog of war (which is utter black by default): it will be shown as some kind of grid paper, clearly recognizable from darkness. By replacing (but keepign the name) the .pngs offScreen, offScreen5, offScreen6 and offScreen7 in your module's UI folder you can use even customized graphics for fog of war.")]
         public bool useMathGridFade
         {
             get { return _useMathGridFade; }
             set { _useMathGridFade = value; }
         }
-
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Light related: yellow, red, orange, green, blue an purple are possible. Yellow is less intense and rather default.")]
+        /*
+        [CategoryAttribute("07 - Light"), DescriptionAttribute("Light related: yellow, red, orange, green, blue an purple are possible. Yellow is less intense and rather default.")]
         public string partyLightColor
         {
             get { return _partyLightColor; }
             set { _partyLightColor = value; }
         }
+         */
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Ligt related: Define here how many steps on map an activated party light source lasts, defaults to 250. Please note that light energy is only consume din darkenss or at night.")]
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("Define here how many steps on map an activated party light source lasts, defaults to 250. Please note that light energy is only consume din darkenss or at night.")]
         public int durationInStepsOfPartyLightItems
         {
             get { return _durationInStepsOfPartyLightItems; }
             set { _durationInStepsOfPartyLightItems = value; }
         }
 
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the ring around the light center becomes. Keep between 0.1f and 1.9f as suggestion.")]
+        /*
+        [CategoryAttribute("07 - Light"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the ring around the light center becomes. Keep between 0.1f and 1.9f as suggestion.")]
         public float partyRingHaloIntensity
         {
             get { return _partyRingHaloIntensity; }
             set { _partyRingHaloIntensity = value; }
         }
-
-        [CategoryAttribute("07 - PLW"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the center of the light becomes. Keep between 0.1f and 1.9f as suggestion.")]
+         */
+        
+        /*
+        [CategoryAttribute("07 - Light"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the center of the light becomes. Keep between 0.1f and 1.9f as suggestion.")]
         public float partyFocalHaloIntensity
         {
             get { return _partyFocalHaloIntensity; }
             set { _partyFocalHaloIntensity = value; }
         }
+        */
 
        
 

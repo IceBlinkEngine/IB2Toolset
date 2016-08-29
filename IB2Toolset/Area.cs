@@ -85,7 +85,7 @@ namespace IB2Toolset
             get { return filename; }
             set { filename = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("How far you can normally see in this area (radius in squares)")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("How far you can normally see in this area (radius in squares)")]
         public int AreaVisibleDistance
         {
             get { return areaVisibleDistance; }
@@ -125,25 +125,25 @@ namespace IB2Toolset
         }
         */
 
-        [CategoryAttribute("03 - PLW: Neighbouring areas")]
+        [CategoryAttribute("03 - Scale and neighbouring areas")]
         public string easternNeighbourArea
         {
             get { return _easternNeighbourArea; }
             set { _easternNeighbourArea = value; }
         }
-        [CategoryAttribute("03 - PLW: Neighbouring areas")]
+        [CategoryAttribute("03 - Scale and neighbouring areas")]
         public string westernNeighbourArea
         {
             get { return _westernNeighbourArea; }
             set { _westernNeighbourArea = value; }
         }
-        [CategoryAttribute("03 - PLW: Neighbouring areas")]
+       [CategoryAttribute("03 - Scale and neighbouring areas")]
         public string northernNeighbourArea
         {
             get { return _northernNeighbourArea; }
             set { _northernNeighbourArea = value; }
         }
-        [CategoryAttribute("03 - PLW: Neighbouring areas")]
+       [CategoryAttribute("03 - Scale and neighbouring areas")]
         public string southernNeighbourArea
         {
             get { return _southernNeighbourArea; }
@@ -176,95 +176,96 @@ namespace IB2Toolset
         }
         */
 
-        [CategoryAttribute("04 - PLW")]
+        [CategoryAttribute("03 - Scale and neighbouring areas")]
         public bool useMiniProps
         {
             get { return _useMiniProps; }
             set { _useMiniProps = value; }
         }
-        [CategoryAttribute("04 - PLW")]
+        [CategoryAttribute("03 - Scale and neighbouring areas")]
         public bool useSuperTinyProps
         {
             get { return _useSuperTinyProps; }
             set { _useSuperTinyProps = value; }
         }
 
-        [CategoryAttribute("04 - PLW")]
+        [CategoryAttribute("01 - Main")]
         public bool drawWithLessVisibleSeamsButMorePixelated
         {
             get { return _drawWithLessVisibleSeamsButMorePixelated; }
             set { _drawWithLessVisibleSeamsButMorePixelated = value; }
         }
 
-        [CategoryAttribute("04 - PLW")]
+        [CategoryAttribute("01 - Main")]
         public bool use100pixSquares
         {
             get { return _use100pixSquares; }
             set { _use100pixSquares = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related - true: Activates the light system, as of now NEEDS useAllTileSystem property of module set to true: makes all areas that dont use day&nigth cycle turn into pitch black darkness; you need to place props with isLight property set to true to lighten them up; also in nights, such props spend extra light.")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Light related - true: Activates the light system, as of now NEEDS useAllTileSystem property of module set to true: makes all areas that dont use day&nigth cycle turn into pitch black darkness; you need to place props with isLight property set to true to lighten them up; also in nights, such props spend extra light.")]
         public bool useLightSystem
         {
             get { return _useLightSystem; }
             set { _useLightSystem = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related - true: Lights on this map do not osciliate, ie the brightness/darkness of the lit squares does not change over time.")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Light related - true: Lights on this map do not osciliate, ie the brightness/darkness of the lit squares does not change over time.")]
         public bool noFlicker
         {
             get { return _noFlicker; }
             set { _noFlicker = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related - true: Lights on this map do not dance, ie the shadows and lit areas only move when the party moves or a prop that is also a light source moves.")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Light related - true: Lights on this map do not dance, ie the shadows and lit areas only move when the party moves or a prop that is also a light source moves.")]
         public bool noPositionShift
         {
             get { return _noPositionShift; }
             set { _noPositionShift = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related: This is multiplied with the default flicker speed (osciliation); values above 1, like 1.1f, increase it therefore while values below 1, like 0.9f, decrease it; Try to stay between 0.1f and 1.9f.")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Light related: This is multiplied with the default flicker speed (osciliation); values above 1, like 1.1f, increase it therefore while values below 1, like 0.9f, decrease it; Try to stay between 0.1f and 1.9f.")]
         public float flickerSlowDownFactor
         {
             get { return _flickerSlowDownFactor; }
             set { _flickerSlowDownFactor = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related: This is multiplied with the default shifter speed (dancing shadows); values above 1, like 1.1f, increase it therefore while values below 1, like 0.9f, decrease it; Try to stay between 0.1f and 1.9f.")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Light related: This is multiplied with the default shifter speed (dancing shadows); values above 1, like 1.1f, increase it therefore while values below 1, like 0.9f, decrease it; Try to stay between 0.1f and 1.9f.")]
         public float shifterSlowDownFactor
         {
             get { return _shifterSlowDownFactor; }
             set { _shifterSlowDownFactor = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related: Defaults to 12. The higher, the more and the deeper shadows stay even at full light. Try to stay between 0f and 50f.")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Light related: Defaults to 12. The higher, the more and the deeper shadows stay even at full light. Try to stay between 0f and 50f.")]
         public float minimumDarkness
         {
             get { return _minimumDarkness; }
             set { _minimumDarkness = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("Light related: Defaults to 1. This is multiplied with the current brightness level: the higher, the more shadows vanish when light osciliates into brightness. Try to stay between 0.1f and 1.9f.")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Light related: Defaults to 1. This is multiplied with the current brightness level: the higher, the more shadows vanish when light osciliates into brightness. Try to stay between 0.1f and 1.9f.")]
         public float maxLightMultiplier
         {
             get { return _maxLightMultiplier; }
             set { _maxLightMultiplier = value; }
         }
 
-        [CategoryAttribute("01 - Main")]
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("A older value from the time before the light system. Leave at false unless you already use it for your module. Areas with useLightSystem set to true and UseDayNightCycle set to false, get dark automatically now.")]
         public bool areaDark
         {
             get { return _areaDark; }
             set { _areaDark = value; }
         }
-        [CategoryAttribute("01 - Main")]
+        [CategoryAttribute("04 - Light and visibility")]
         public bool UseDayNightCycle
         {
             get { return useDayNightCycle; }
             set { useDayNightCycle = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("How much game world time passes with each square move (in minutes)")]
+        
+        [CategoryAttribute("03 - Scale and neighbouring areas"), DescriptionAttribute("How much game world time passes with each square move (in minutes)")]
         public int TimePerSquare
         {
             get { return timePerSquare; }
@@ -397,14 +398,14 @@ namespace IB2Toolset
             set { areaLocalStrings = value; }
         }
         //add converter and cmb functionality later
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("tag of weather object for this area"), Browsable(false)]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("tag of weather object for this area"), Browsable(false)]
         public string areaWeatherTag
         {
             get { return _areaWeatherTag; }
             set { _areaWeatherTag = value; }
         }
 
-        [CategoryAttribute("04 - PLW"), DescriptionAttribute("name of weather object for this area")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("name of weather object for this area")]
         public string areaWeatherName
         {
             get { return _areaWeatherName; }
