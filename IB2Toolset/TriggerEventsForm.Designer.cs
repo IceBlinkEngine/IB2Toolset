@@ -357,6 +357,8 @@
             this.cmbE1tag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbE1tag.DropDownWidth = 200;
             this.cmbE1tag.FormattingEnabled = true;
+            System.Windows.Forms.BindingContext cmbE1tag = new System.Windows.Forms.BindingContext();
+            this.cmbE1tag.BindingContext = cmbE1tag;
             this.cmbE1tag.Location = new System.Drawing.Point(9, 137);
             this.cmbE1tag.Name = "cmbE1tag";
             this.cmbE1tag.Size = new System.Drawing.Size(114, 21);
@@ -605,6 +607,8 @@
             // 
             this.cmbE2tag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbE2tag.FormattingEnabled = true;
+            System.Windows.Forms.BindingContext cmbE2tag = new System.Windows.Forms.BindingContext();
+            this.cmbE2tag.BindingContext = cmbE2tag;
             this.cmbE2tag.Location = new System.Drawing.Point(9, 137);
             this.cmbE2tag.Name = "cmbE2tag";
             this.cmbE2tag.Size = new System.Drawing.Size(114, 21);
@@ -884,6 +888,8 @@
             // 
             this.cmbE3tag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbE3tag.FormattingEnabled = true;
+            System.Windows.Forms.BindingContext cmbE3tag = new System.Windows.Forms.BindingContext();
+            this.cmbE3tag.BindingContext = cmbE3tag;
             this.cmbE3tag.Location = new System.Drawing.Point(9, 137);
             this.cmbE3tag.Name = "cmbE3tag";
             this.cmbE3tag.Size = new System.Drawing.Size(114, 21);
