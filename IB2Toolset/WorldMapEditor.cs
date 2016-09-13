@@ -1449,10 +1449,28 @@ namespace IB2Toolset
                                     prntForm.currentSelectedTrigger = t;
                                     prntForm.frmTriggerEvents.refreshTriggers();
                                     panelView.ContextMenuStrip.Items.Add(t.TriggerTag, null, handler); //string, image, handler
-                                    //prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
                                 }
                             }
                         }
+
+                        //height level system: add tile property info
+                        int tileCounter = 0;
+                        foreach (Tile t in area.Tiles)
+                        {
+                            int locationX = tileCounter % area.MapSizeX;
+                            int locationY = tileCounter / area.MapSizeX;
+                            tileCounter++;
+                            if ((locationX == newPoint.X) && (locationY == newPoint.Y))
+                            {
+                                    txtSelectedIconInfo.Text = "Tile (x" + locationX.ToString() + " / y" + locationY.ToString() + ")" + Environment.NewLine;
+                                    lastSelectedObjectTag = tileCounter.ToString();
+                                    //lastSelectedObjectTag = "Tile (x" + locationX.ToString() + "/ y" + locationY.ToString() + ")";
+                                    panelView.ContextMenuStrip.Items.Add(lastSelectedObjectTag, null, handler); //string, image, handler
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                            }
+                        }
+
                         //if the list is less than 2, do nothing
                         if (panelView.ContextMenuStrip.Items.Count > 1)
                         {
@@ -2655,7 +2673,22 @@ namespace IB2Toolset
                     return;
                 }
             }
-        }
+
+            int tileCounter = 0;
+            foreach (Tile t in area.Tiles)
+            {
+                if (tileCounter.ToString() == menuItm.Text)
+                {
+                    int locationX = tileCounter % area.MapSizeX;
+                    int locationY = tileCounter / area.MapSizeX;
+                    txtSelectedIconInfo.Text = "Tile (x" + locationX.ToString() + " / y" + locationY.ToString() + ")" + Environment.NewLine;
+                    lastSelectedObjectTag = tileCounter.ToString();
+                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                    return;
+                }
+                tileCounter++;
+            }
+            }
         private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
         {
             sqr = 50;

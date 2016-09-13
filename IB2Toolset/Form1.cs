@@ -164,7 +164,7 @@ namespace IB2Toolset
             else if (persistString == typeof(IconSprite).ToString())
                 return frmIconSprite;
             else if (persistString == typeof(Blueprints).ToString())
-                return frmBlueprints;
+                return frmBlueprints;   
             else if (persistString == typeof(AreaForm).ToString())
                 return frmAreas;
             else if (persistString == typeof(TriggerEventsForm).ToString())

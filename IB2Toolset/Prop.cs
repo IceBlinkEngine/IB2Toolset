@@ -21,6 +21,7 @@ namespace IB2Toolset
 
         private int _LocationX = 0;
         private int _LocationY = 0;
+        private int _LocationZ = 0;
         private string _ImageFileName = "blank";
         private bool _PropFacingLeft = true;
         private bool _HasCollision = false;
@@ -74,6 +75,12 @@ namespace IB2Toolset
         {
             get { return _LocationY; }
             set { _LocationY = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Current Z location on map.")]
+        public int LocationZ
+        {
+            get { return _LocationZ; }
+            set { _LocationZ = value; }
         }
         [EditorAttribute(typeof(FileNameSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [CategoryAttribute("02 - Sprite"), DescriptionAttribute("Filename for the prop's token (no extension).")]
