@@ -66,21 +66,21 @@ namespace IB2Toolset
         public bool isNSBridge = false;
         public bool isShadowCaster = false;
 
-        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tiel is a ramp: you can leave this ramp towards one height level deeper neighbouring tiles; note the hight level of the current tile is the top of the ramp, also ramps work from all directions")]
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tile is a ramp: you can leave this ramp towards one height level lower neighbouring tiles; note that the height level of the current tile is the top of the ramp, also ramps work from all directions")]
         public bool IsRamp
         {
             get { return isRamp; }
             set { isRamp = value; }
         }
 
-        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tiel is a ramp: you can leave this ramp towards one height level deeper neighbouring tiles; note the hight level of the current tile is the top of the ramp, also ramps work from all directions")]
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tile is east-west bridge: it can be traversed east-west on same height level as the bridge itself (move on bridge) or north-south from one height level lower than bridge (under bridge); note the hight level of the current tile is the top of the bridge")]
         public bool IsEWBridge
         {
             get { return isEWBridge; }
             set { isEWBridge = value; }
         }
 
-        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tiel is a ramp: you can leave this ramp towards one height level deeper neighbouring tiles; note the hight level of the current tile is the top of the ramp, also ramps work from all directions")]
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tile is north-south bridge: it can be traversed north-south on same height level as the bridge itself (move on bridge) or east-west from one height level lower than bridge (under bridge); note the hight level of the current tile is the top of the bridge")]
         public bool IsNSBridge
         {
             get { return isNSBridge; }

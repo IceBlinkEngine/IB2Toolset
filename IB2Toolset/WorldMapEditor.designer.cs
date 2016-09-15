@@ -61,6 +61,7 @@
             this.txtSelectedIconInfo = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rbtnPaintTile = new System.Windows.Forms.RadioButton();
+            this.rbtnHeightLevel = new System.Windows.Forms.RadioButton();
             this.rbtnEditTrigger = new System.Windows.Forms.RadioButton();
             this.rbtnPaintTrigger = new System.Windows.Forms.RadioButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -452,6 +453,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rbtnPaintTile);
+            this.groupBox2.Controls.Add(this.rbtnHeightLevel);
             this.groupBox2.Controls.Add(this.rbtnInfo);
             this.groupBox2.Controls.Add(this.rbtnLoS);
             this.groupBox2.Controls.Add(this.rbtnEditTrigger);
@@ -469,13 +471,28 @@
             this.rbtnPaintTile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnPaintTile.Location = new System.Drawing.Point(9, 53);
             this.rbtnPaintTile.Name = "rbtnPaintTile";
-            this.rbtnPaintTile.Size = new System.Drawing.Size(103, 45);
+            this.rbtnPaintTile.Size = new System.Drawing.Size(50, 45);
+            //this.rbtnPaintTile.Size = new System.Drawing.Size(103, 45);
             this.rbtnPaintTile.TabIndex = 6;
             this.rbtnPaintTile.TabStop = true;
             this.rbtnPaintTile.Text = "Paint\r\nTiles";
             this.rbtnPaintTile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnPaintTile.UseVisualStyleBackColor = true;
             this.rbtnPaintTile.CheckedChanged += new System.EventHandler(this.rbtnPaintTile_CheckedChanged);
+            // 
+            // rbtnHeightLevel
+            // 
+            this.rbtnHeightLevel.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnHeightLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnHeightLevel.Location = new System.Drawing.Point(62, 53);
+            this.rbtnHeightLevel.Name = "rbtnHeightLevel";
+            this.rbtnHeightLevel.Size = new System.Drawing.Size(50, 45);
+            this.rbtnHeightLevel.TabIndex = 6;
+            this.rbtnHeightLevel.TabStop = true;
+            this.rbtnHeightLevel.Text = "Height\r\nLevel";
+            this.rbtnHeightLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnHeightLevel.UseVisualStyleBackColor = true;
+            this.rbtnHeightLevel.CheckedChanged += new System.EventHandler(this.rbtnHeightLevel_CheckedChanged);
             // 
             // rbtnEditTrigger
             // 
@@ -863,6 +880,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.CheckBox chkGrid;
         private System.Windows.Forms.RadioButton rbtnPaintTile;
+        private System.Windows.Forms.RadioButton rbtnHeightLevel;
         private System.Windows.Forms.GroupBox gbMapSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
