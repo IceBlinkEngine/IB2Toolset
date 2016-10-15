@@ -14,6 +14,7 @@ using System.Drawing.Imaging;
 using SharpDX.Direct2D1;
 using Bitmap = System.Drawing.Bitmap;
 using SharpDX.DXGI;
+using SharpDX.DirectWrite;
 
 namespace IB2Toolset
 {
@@ -94,6 +95,8 @@ namespace IB2Toolset
         public SolidColorBrush SceneColorBrush { get; private set; }
         public Dictionary<string, SharpDX.Direct2D1.Bitmap> commonBitmapList = new Dictionary<string, SharpDX.Direct2D1.Bitmap>();
         public Point selectionBoxLocation = new Point(-1, -1);
+        public TextFormat textFormat;
+        public TextLayout textLayout;
         #endregion
 
         public WorldMapEditor(Module m, ParentForm p)
@@ -1389,6 +1392,15 @@ namespace IB2Toolset
                     }
                     #endregion
                     #region Walkmesh Toggle Selected (Make Non-Walkable)
+                    //height level system:
+                    else if (rbtnHeightLevel.Checked)
+                    {
+                        selectedTile.index = gridY * area.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        area.Tiles[selectedTile.index].heightLevel += 1;
+                        //GDI refreshMap(false);
+                    }
                     else if (rbtnWalkable.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1449,10 +1461,28 @@ namespace IB2Toolset
                                     prntForm.currentSelectedTrigger = t;
                                     prntForm.frmTriggerEvents.refreshTriggers();
                                     panelView.ContextMenuStrip.Items.Add(t.TriggerTag, null, handler); //string, image, handler
-                                    //prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
                                 }
                             }
                         }
+
+                        //height level system: add tile property info
+                        int tileCounter = 0;
+                        foreach (Tile t in area.Tiles)
+                        {
+                            int locationX = tileCounter % area.MapSizeX;
+                            int locationY = tileCounter / area.MapSizeX;
+                            tileCounter++;
+                            if ((locationX == newPoint.X) && (locationY == newPoint.Y))
+                            {
+                                    txtSelectedIconInfo.Text = "Tile (x" + locationX.ToString() + " / y" + locationY.ToString() + ")" + Environment.NewLine;
+                                    lastSelectedObjectTag = tileCounter.ToString();
+                                    //lastSelectedObjectTag = "Tile (x" + locationX.ToString() + "/ y" + locationY.ToString() + ")";
+                                    //panelView.ContextMenuStrip.Items.Add(lastSelectedObjectTag, null, handler); //string, image, handler
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                            }
+                        }
+
                         //if the list is less than 2, do nothing
                         if (panelView.ContextMenuStrip.Items.Count > 1)
                         {
@@ -1474,6 +1504,38 @@ namespace IB2Toolset
                         area.Tiles[selectedTile.index].Walkable = true;
                         //GDI refreshMap(false);
                     }
+                    else if (rbtnHeightLevel.Checked)
+                    {
+                        selectedTile.index = gridY * area.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        area.Tiles[selectedTile.index].heightLevel -= 1;
+                        //break;
+                        //ContextMenuStrip.Items.Clear();
+                        //contextMenuStrip1.Items.Clear();
+                        //ContextMenu.MenuItems.Clear();
+                        //to do
+                        /*
+                        contextMenuStrip1.Items.Clear();
+                        lastSelectedObjectTag = "";
+                        panelView.ContextMenuStrip.Items.Clear();
+
+                        //contextMenuStrip1.Items.Clear();
+                        //when left click, get location
+                        //gridX = e.X / sqr;
+                        //gridY = e.Y / sqr;
+                        Point newPoint = new Point(gridX, gridY);
+                        EventHandler handler = new EventHandler(HandleContextMenuClick);
+                        //loop through all the objects
+                        //if has that location, add the tag to the list                    
+                        //draw selection box
+                        //GDI refreshMap(false);
+                        //GDI drawSelectionBox(gridX, gridY);
+                        selectionBoxLocation = new Point(gridX, gridY);
+                        txtSelectedIconInfo.Text = "";
+                        //GDI refreshMap(false);
+                        */
+                    }
                     #endregion
                     #region LoS mesh Toggle Selected (Make LoS Visible)
                     else if (rbtnLoS.Checked)
@@ -1492,6 +1554,10 @@ namespace IB2Toolset
                         prntForm.logText(Environment.NewLine);
                         prntForm.selectedLevelMapCreatureTag = "";
                         prntForm.selectedLevelMapPropTag = "";
+                        //
+                        //lastSelectedObjectTag = "";
+                        //panelView.ContextMenuStrip.Items.Clear();
+                        //
                         prntForm.CreatureSelected = false;
                         prntForm.PropSelected = false;
                         prntForm.currentSelectedTrigger = null;
@@ -1975,7 +2041,32 @@ namespace IB2Toolset
                             DrawD2DBitmap(GetFromBitmapList("walk_block"), src, dst, 0, false, 0, 0);
                             
                         }
-                    }                   
+
+                        //DrawText((cnt + 1).ToString(), cspx + 5, cspy, scaler, SharpDX.Color.Yellow);
+
+
+                        //height level system: toDO draw text for height level here
+                        float scaler = 1.0f;
+                        if (sqr == 50) { scaler = 15.0f; }
+                        else if (sqr == 25) { scaler = 7.5f; }
+                        else if (sqr == 10) { scaler = 3.0f; }
+                        DrawText(tile.heightLevel.ToString(), dst.X, dst.Y, scaler, SharpDX.Color.Yellow);
+
+                        if(tile.IsRamp)
+                        {
+                            DrawText("R", dst.X + (sqr/4), dst.Y + (sqr/4), scaler * 1.1f, SharpDX.Color.Yellow);
+                        }
+
+                        if (tile.IsEWBridge)
+                        {
+                            DrawText("EW", dst.X + (sqr / 4), dst.Y + (sqr / 4), scaler * 1.1f, SharpDX.Color.Yellow);
+                        }
+
+                        if (tile.IsNSBridge)
+                        {
+                            DrawText("NS", dst.X + (sqr / 4), dst.Y + (sqr / 4), scaler * 1.1f, SharpDX.Color.Yellow);
+                        }
+                    }
                 }
             }
             #endregion
@@ -2061,6 +2152,38 @@ namespace IB2Toolset
         #endregion
 
         #region Methods
+
+        public void CleanUpDrawTextResources()
+        {
+            if (textFormat != null)
+            {
+                textFormat.Dispose();
+                textFormat = null;
+            }
+            if (textLayout != null)
+            {
+                textLayout.Dispose();
+                textLayout = null;
+            }
+        }
+        public void DrawText(string text, float xLoc, float yLoc, float scaler)
+        {
+            DrawText(text, xLoc, yLoc, scaler, SharpDX.Color.White);
+        }
+        public void DrawText(string text, float x, float y, float scaler, SharpDX.Color fontColor)
+        {
+            CleanUpDrawTextResources();
+            using (SolidColorBrush scb = new SolidColorBrush(RenderTarget2D, fontColor))
+            {
+                textFormat = new TextFormat(FactoryDWrite, "Arial", scaler);
+                //textFormat = new TextFormat(factoryDWrite, thisFont.FontFamily.Name, fw, fs, FontStretch.Normal, thisFont.Height) { TextAlignment = TextAlignment.Leading, ParagraphAlignment = ParagraphAlignment.Near };
+                //textFormat = new TextFormat(factoryDWrite, FontFamilyName, CurrentFontCollection, fw, fs, FontStretch.Normal, scaler) { TextAlignment = TextAlignment.Leading, ParagraphAlignment = ParagraphAlignment.Near };
+                textLayout = new TextLayout(FactoryDWrite, text, textFormat, this.Width, this.Height);
+                RenderTarget2D.DrawTextLayout(new SharpDX.Vector2(x, y), textLayout, scb, DrawTextOptions.None);
+            }
+        }
+
+
         private void loadAreaObjectBitmapLists()
         {
             /*//GDI foreach (Prop prp in area.Props)
@@ -2547,6 +2670,21 @@ namespace IB2Toolset
                 //UpdatePB();
             }
         }
+        private void rbtnHeightLevel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnHeightLevel.Checked)
+            {
+                prntForm.logText("editing height level");
+                prntForm.logText(Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                //refreshMap(true);
+                //UpdatePB();
+            }
+        }
         private void rbtnLoS_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnLoS.Checked)
@@ -2655,7 +2793,22 @@ namespace IB2Toolset
                     return;
                 }
             }
-        }
+
+            int tileCounter = 0;
+            foreach (Tile t in area.Tiles)
+            {
+                if (tileCounter.ToString() == menuItm.Text)
+                {
+                    int locationX = tileCounter % area.MapSizeX;
+                    int locationY = tileCounter / area.MapSizeX;
+                    txtSelectedIconInfo.Text = "Tile (x" + locationX.ToString() + " / y" + locationY.ToString() + ")" + Environment.NewLine;
+                    lastSelectedObjectTag = tileCounter.ToString();
+                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                    return;
+                }
+                tileCounter++;
+            }
+            }
         private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
         {
             sqr = 50;
