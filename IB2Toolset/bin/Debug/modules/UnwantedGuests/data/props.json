@@ -2,6 +2,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_treasure",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -42,6 +43,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_campfireoff",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -82,6 +84,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_doorh",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -122,6 +125,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_doorv",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -162,6 +166,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_wmtrans",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -202,6 +207,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_earawen",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -242,6 +248,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_pileofrocks",
     "HasCollision": true,
     "PropFacingLeft": true,
@@ -282,6 +289,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_campfireoff",
     "HasCollision": true,
     "PropFacingLeft": true,
@@ -322,6 +330,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_captive",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -362,6 +371,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_giant",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -402,6 +412,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_gnollleader",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -442,6 +453,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_campfireoff",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -482,6 +494,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_lightYellow",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -522,6 +535,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_lightGreen",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -562,6 +576,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_lightRed",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -602,6 +617,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_lightBlue",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -642,6 +658,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_lightOrange",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -682,6 +699,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_lightPurple",
     "HasCollision": false,
     "PropFacingLeft": true,
@@ -722,6 +740,7 @@
   {
     "LocationX": 0,
     "LocationY": 0,
+    "LocationZ": 0,
     "ImageFileName": "prp_earawen",
     "HasCollision": false,
     "PropFacingLeft": true,

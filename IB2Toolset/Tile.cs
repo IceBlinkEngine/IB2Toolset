@@ -87,6 +87,20 @@ namespace IB2Toolset
             set { isNSBridge = value; }
         }
 
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Height level of the currently selcted tile.")]
+        public int HeightLevel
+        {
+            get { return heightLevel; }
+            set { heightLevel = value; }
+        }
+
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Whne set to true, the tile casts autoshados on lower tiles.")]
+        public bool IsShadowCaster
+        {
+            get { return isShadowCaster; }
+            set { isShadowCaster = value; }
+        }
+
         public Tile()
         {
         }

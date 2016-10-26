@@ -91,6 +91,7 @@ namespace IB2Toolset
         private string _spellScript = "none";
         private string _spellEffectTag = "none";
         private List<EffectTagForDropDownList> _removeEffectTagList = new List<EffectTagForDropDownList>();
+        private List<EffectTagForDropDownList> _spellEffectTagList = new List<EffectTagForDropDownList>();
         #endregion
 
         #region Properties
@@ -319,6 +320,13 @@ namespace IB2Toolset
         {
             get { return _removeEffectTagList; }
             set { _removeEffectTagList = value; }
+        }
+        //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
+        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("List of EffectTags of this spell")]
+        public List<EffectTagForDropDownList> spellEffectTagList
+        {
+            get { return _spellEffectTagList; }
+            set { _spellEffectTagList = value; }
         }
         #endregion
 
