@@ -147,6 +147,7 @@
     <Compile Include="GlobalString.cs" />
     <Compile Include="LocalInt.cs" />
     <Compile Include="LocalListItem.cs" />
+    <Compile Include="LocalImmunityString.cs" />
     <Compile Include="LocalString.cs" />
     <Compile Include="IBScriptEditor.cs">
       <SubType>Form</SubType>

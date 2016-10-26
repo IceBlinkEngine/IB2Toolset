@@ -30,6 +30,17 @@ namespace IB2Toolset
         private bool _isStackableDuration = false;
         private bool _usedForUpdateStats = false;
         private string _effectScript = "efGeneric";
+        private List<LocalImmunityString> _affectNeverTagList = new List<LocalImmunityString>();
+        private List<LocalImmunityString> _affectOnlyTagList = new List<LocalImmunityString>();
+
+        /*
+        [CategoryAttribute("04 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
+        public List<LocalString> CreatureLocalStrings
+        {
+            get { return creatureLocalStrings; }
+            set { creatureLocalStrings = value; }
+        }
+        */
 
         private string _saveCheckType = "none"; //none, reflex, will, fortitude
         private int _saveCheckDC = 10;
@@ -105,6 +116,21 @@ namespace IB2Toolset
                 _name = value;
             }
         }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Entries added here mark pc (trait tags) and creatures (local string values) that are immune to this effect.")]
+        public List<LocalImmunityString> affectNeverTagList
+        {
+            get { return _affectNeverTagList; }
+            set { _affectNeverTagList = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Entries added here mark the ONLY pc(trait tags) and creatures(local string values) that can be affected by this effect.")]
+        public List<LocalImmunityString> affectOnlyTagList
+        {
+            get { return _affectOnlyTagList; }
+            set { _affectOnlyTagList = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the Effect (Must be unique)")]
         public string tag
         {
