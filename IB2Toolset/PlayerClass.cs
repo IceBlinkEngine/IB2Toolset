@@ -72,6 +72,8 @@ namespace IB2Toolset
         //private SortableBindingList<SpellAllowed> _spellsAllowed = new SortableBindingList<SpellAllowed>();
         private SortableBindingList<TraitAllowed> _traitsAllowed = new SortableBindingList<TraitAllowed>();
         private SortableBindingList<SpellAllowed> _spellsAllowed = new SortableBindingList<SpellAllowed>();
+        private string _labelForCastAction = "casts";
+        private string _labelForTheSpellsButtonInCombat = "CAST";
         #endregion
 
         #region Properties
@@ -86,6 +88,18 @@ namespace IB2Toolset
             {
                 _name = value;
             }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the cast action in log")]
+        public string labelForCastAction
+        {
+            get { return _labelForCastAction; }
+            set { _labelForCastAction = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the cast button in combat")]
+        public string labelForTheSpellsButtonInCombat
+        {
+            get { return _labelForTheSpellsButtonInCombat; }
+            set { _labelForTheSpellsButtonInCombat = value; }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the PlayerClass (Must be unique)")]
         public string tag

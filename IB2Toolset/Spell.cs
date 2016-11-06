@@ -80,6 +80,7 @@ namespace IB2Toolset
         private string _spellStartSound = "none";
         private string _spellEndSound = "none";
         private int _costSP = 0;
+        private int _costHP = 0;
         private string _spellTargetType = "Enemy";
         //private TargetType spellTargetType = TargetType.Enemy;
         private string _spellEffectType = "Damage";
@@ -89,6 +90,7 @@ namespace IB2Toolset
         private int _range = 0;
         //private ScriptSelectEditorReturnObject spellScript = new ScriptSelectEditorReturnObject();
         private string _spellScript = "none";
+        private string _additionalCustomLogTextOnCast = "none";
         private string _spellEffectTag = "none";
         private List<EffectTagForDropDownList> _removeEffectTagList = new List<EffectTagForDropDownList>();
         private List<EffectTagForDropDownList> _spellEffectTagList = new List<EffectTagForDropDownList>();
@@ -208,6 +210,18 @@ namespace IB2Toolset
                 _costSP = value;
             }
         }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("How much HP this Spell costs")]
+        public int costHP
+        {
+            get
+            {
+                return _costHP;
+            }
+            set
+            {
+                _costHP = value;
+            }
+        }
         /*[CategoryAttribute("02 - Target"), DescriptionAttribute("The type of target for this spell")]
         public TargetType SpellTargetType
         {
@@ -306,6 +320,13 @@ namespace IB2Toolset
         {
             get { return _spellScript; }
             set { _spellScript = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("this text appears additionally in log when the spell is cast")]
+        //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        public string additionalCustomLogTextOnCast
+        {
+            get { return _additionalCustomLogTextOnCast; }
+            set { _additionalCustomLogTextOnCast = value; }
         }
         [Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
         [CategoryAttribute("01 - Main"), DescriptionAttribute("the effect to use for this Spell")]

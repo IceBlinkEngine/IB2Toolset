@@ -72,7 +72,7 @@ namespace IB2Toolset
         public ItemRefs RingRefs = new ItemRefs();
         public ItemRefs Ring2Refs = new ItemRefs();
         public ItemRefs FeetRefs = new ItemRefs();
-        public ItemRefs AmmoRefs = new ItemRefs();
+        public ItemRefs AmmoRefs = new ItemRefs(); 
         //public string HeadTag = "";
         //public string NeckTag = "";
         //public string BodyTag = "";

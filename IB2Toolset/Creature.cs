@@ -81,7 +81,8 @@ namespace IB2Toolset
         private string _onDeathLogicTree = "none";
         private string _onDeathParms = "";
         private string _onDeathIBScript = "none";
-        private string _onDeathIBScriptParms = ""; 
+        private string _onDeathIBScriptParms = "";
+        private string _labelForCastAction = "casts";
         //private ScriptSelectEditorReturnObject onScoringHit = new ScriptSelectEditorReturnObject();  
         private List<string> _knownSpellsTags = new List<string>();
 	    public List<Effect> cr_effectsList = new List<Effect>();
@@ -255,6 +256,12 @@ namespace IB2Toolset
         {
             get { return _onScoringHit; }
             set { _onScoringHit = value; }
+        }
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("label for the cast action in log")]
+        public string labelForCastAction
+        {
+            get { return _labelForCastAction; }
+            set { _labelForCastAction = value; }
         }
         [CategoryAttribute("03 - Scripts"), DescriptionAttribute("(not used yet)optional input parameters if using a LogicTree...comma separated parameters")]
         public string onScoringHitParms

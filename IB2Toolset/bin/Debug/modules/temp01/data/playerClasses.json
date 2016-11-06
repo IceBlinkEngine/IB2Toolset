@@ -1,6 +1,8 @@
 [
   {
     "name": "Fighter",
+    "labelForCastAction": "casts",
+    "labelForTheSpellsButtonInCombat": "CAST",
     "tag": "fighter",
     "UsableByPlayer": true,
     "description": "Skilled warrior. Gains the Cleave trait at level 2 and two attacks per round at level 4.",
@@ -391,6 +393,8 @@
   },
   {
     "name": "Cleric",
+    "labelForCastAction": "casts",
+    "labelForTheSpellsButtonInCombat": "CAST",
     "tag": "cleric",
     "UsableByPlayer": true,
     "description": "A capable combatant with divine magic as well.",
@@ -718,6 +722,8 @@
   },
   {
     "name": "Ranger",
+    "labelForCastAction": "casts",
+    "labelForTheSpellsButtonInCombat": "CAST",
     "tag": "ranger",
     "UsableByPlayer": true,
     "description": "Adept for survival in the wild, skilled with a bow, and learns a few spells at later levels. Gains Point Blank Shot trait at level 2.",
@@ -1119,6 +1125,8 @@
   },
   {
     "name": "Wizard",
+    "labelForCastAction": "casts",
+    "labelForTheSpellsButtonInCombat": "CAST",
     "tag": "wizard",
     "UsableByPlayer": true,
     "description": "The Wizard class is capable of casting powerful arcane spells.",
@@ -1433,6 +1441,8 @@
   },
   {
     "name": "Thief",
+    "labelForCastAction": "casts",
+    "labelForTheSpellsButtonInCombat": "CAST",
     "tag": "thief",
     "UsableByPlayer": true,
     "description": "The thief uses agility and stealth to manage a battle field and is useful in finding and disarming traps.",

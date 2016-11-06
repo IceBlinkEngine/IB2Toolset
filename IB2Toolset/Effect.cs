@@ -32,15 +32,9 @@ namespace IB2Toolset
         private string _effectScript = "efGeneric";
         private List<LocalImmunityString> _affectNeverTagList = new List<LocalImmunityString>();
         private List<LocalImmunityString> _affectOnlyTagList = new List<LocalImmunityString>();
-
-        /*
-        [CategoryAttribute("04 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
-        public List<LocalString> CreatureLocalStrings
-        {
-            get { return creatureLocalStrings; }
-            set { creatureLocalStrings = value; }
-        }
-        */
+        private bool _endEffectWhenCarrierTakesDamage = false;
+        private bool _saveOnlyHalvesDamage = false;
+        private bool _repeatTerminalSaveEachRound = false;
 
         private string _saveCheckType = "none"; //none, reflex, will, fortitude
         private int _saveCheckDC = 10;
@@ -276,7 +270,48 @@ namespace IB2Toolset
             {
                 _usedForUpdateStats = value;
             }
-        }        
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The saving throw is peated each roud - one success terminates the effect")]
+        public bool repeatTerminalSaveEachRound
+        {
+            get
+            {
+                return _repeatTerminalSaveEachRound;
+            }
+            set
+            {
+                _repeatTerminalSaveEachRound = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Determines whether the effect is removed once the cretaure or pc that has the effect takes damage")]
+        public bool endEffectWhenCarrierTakesDamage
+        {
+            get
+            {
+                return _endEffectWhenCarrierTakesDamage;
+            }
+            set
+            {
+                _endEffectWhenCarrierTakesDamage = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Determines whether the effect is removed once the cretaure or pc that has the effect takes damage")]
+        public bool saveOnlyHalvesDamage
+        {
+            get
+            {
+                return _saveOnlyHalvesDamage;
+            }
+            set
+            {
+                _saveOnlyHalvesDamage = value;
+            }
+        }
+
+
         /*[CategoryAttribute("02 - Scripts"), DescriptionAttribute("fires on each round or turn")]
         [Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public ScriptSelectEditorReturnObject EffectScript

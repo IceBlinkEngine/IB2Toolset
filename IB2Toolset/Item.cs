@@ -32,7 +32,8 @@ namespace IB2Toolset
         //private ScriptSelectEditorReturnObject onWhileEquipped = new ScriptSelectEditorReturnObject();
         //private DamageType typeOfDamage = DamageType.Slashing;
         private string _itemImage = "blank";
-        private string _name = "none"; //item name    
+        private string _name = "none"; //item name
+        private string _labelForTheCastAction = "casts";
         private string _tag = "none"; //item unique tag name    
         private string _resref = "none"; //item resref name
         private string _desc = "enter item's description here"; //item detailed description
@@ -116,6 +117,19 @@ namespace IB2Toolset
             {
                 _name = value;
                 this.NotifyPropertyChanged("name");
+            }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the cast action when using this item in log")]
+        public string labelForTheCastAction
+        {
+            get
+            {
+                return _labelForTheCastAction;
+            }
+            set
+            {
+                _labelForTheCastAction = value;
+                this.NotifyPropertyChanged("labelForTheCastAction");
             }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the Item (will be given an unique tag for each placed instance of an item)")]
