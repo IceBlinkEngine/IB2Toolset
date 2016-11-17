@@ -30,11 +30,12 @@ namespace IB2Toolset
         private bool _isStackableDuration = false;
         private bool _usedForUpdateStats = false;
         private string _effectScript = "efGeneric";
-        private List<LocalImmunityString> _affectNeverTagList = new List<LocalImmunityString>();
-        private List<LocalImmunityString> _affectOnlyTagList = new List<LocalImmunityString>();
+        private List<LocalImmunityString> _affectNeverList = new List<LocalImmunityString>();
+        private List<LocalImmunityString> _affectOnlyList = new List<LocalImmunityString>();
         private bool _endEffectWhenCarrierTakesDamage = false;
         private bool _saveOnlyHalvesDamage = false;
         private bool _repeatTerminalSaveEachRound = false;
+        private bool _isPermanent = false;
 
         private string _saveCheckType = "none"; //none, reflex, will, fortitude
         private int _saveCheckDC = 10;
@@ -112,17 +113,17 @@ namespace IB2Toolset
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Entries added here mark pc (trait tags) and creatures (local string values) that are immune to this effect.")]
-        public List<LocalImmunityString> affectNeverTagList
+        public List<LocalImmunityString> affectNeverList
         {
-            get { return _affectNeverTagList; }
-            set { _affectNeverTagList = value; }
+            get { return _affectNeverList; }
+            set { _affectNeverList = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Entries added here mark the ONLY pc(trait tags) and creatures(local string values) that can be affected by this effect.")]
-        public List<LocalImmunityString> affectOnlyTagList
+        public List<LocalImmunityString> affectOnlyList
         {
-            get { return _affectOnlyTagList; }
-            set { _affectOnlyTagList = value; }
+            get { return _affectOnlyList; }
+            set { _affectOnlyList = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the Effect (Must be unique)")]
@@ -282,6 +283,19 @@ namespace IB2Toolset
             set
             {
                 _repeatTerminalSaveEachRound = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This effect is used by a passive trait, it is permannetly added to the player charcter on acquisition of the trait (that in turn contains this effect's tag in its effects list)")]
+        public bool isPermanent
+        {
+            get
+            {
+                return _isPermanent;
+            }
+            set
+            {
+               _isPermanent = value;
             }
         }
 

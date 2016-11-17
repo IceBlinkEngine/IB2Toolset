@@ -72,8 +72,11 @@ namespace IB2Toolset
         //private SortableBindingList<SpellAllowed> _spellsAllowed = new SortableBindingList<SpellAllowed>();
         private SortableBindingList<TraitAllowed> _traitsAllowed = new SortableBindingList<TraitAllowed>();
         private SortableBindingList<SpellAllowed> _spellsAllowed = new SortableBindingList<SpellAllowed>();
-        private string _labelForCastAction = "casts";
-        private string _labelForTheSpellsButtonInCombat = "CAST";
+        private string _labelForCastAction = "CAST";
+        private string _labelForTheSpellsButtonInCombat = "SPELL";
+        private string _labelForUseTraitAction = "USE";
+        private string _labelForTheUseTraitButtonInCombat = "TRAIT";
+        private string _modifierFromSPRelevantAttribute = "intelligence";
         #endregion
 
         #region Properties
@@ -100,6 +103,24 @@ namespace IB2Toolset
         {
             get { return _labelForTheSpellsButtonInCombat; }
             set { _labelForTheSpellsButtonInCombat = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the use trait action in log")]
+        public string labelForUseTraitAction
+        {
+            get { return _labelForUseTraitAction; }
+            set { _labelForUseTraitAction = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the use trait button in combat")]
+        public string labelForTheUseTraitButtonInCombat
+        {
+            get { return _labelForTheUseTraitButtonInCombat; }
+            set { _labelForTheUseTraitButtonInCombat = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("name of attribute taht is used for sp calculation for this class, eg intelligence or wisdom")]
+        public string modifierFromSPRelevantAttribute
+        {
+            get { return _modifierFromSPRelevantAttribute; }
+            set { _modifierFromSPRelevantAttribute = value; }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the PlayerClass (Must be unique)")]
         public string tag
@@ -370,6 +391,13 @@ namespace IB2Toolset
         private bool _automaticallyLearned = false;
         //private bool _needsSpecificTrainingToLearn = false;
         private bool _allow = false;
+        
+        //InCombat, OutOfCombat, Always, Passive
+        //Passive flags a trait that cannot be used like a spell, ie is not active
+        private string _useableInSituation = "Passive";
+        
+        //contains tag of one spell that is cast when the trait is used (inside and/or outside combat, see below)
+        private string _associatedSpellTag = "none";
 
         public string name
         {
@@ -380,6 +408,7 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("name");
             }
         }
+
         public string tag
         {
             get { return _tag; }
@@ -389,6 +418,27 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("tag");
             }
         }
+
+        public string usableInSituation
+        {
+            get { return _useableInSituation; }
+            set
+            {
+                _useableInSituation = value;
+                this.NotifyPropertyChanged("usableInSituation");
+            }
+        }
+
+        public string associatedSpellTag
+        {
+            get { return _associatedSpellTag; }
+            set
+            {
+                _associatedSpellTag = value;
+                this.NotifyPropertyChanged("associatedSpellTag");
+            }
+        }
+
         public int atWhatLevelIsAvailable
         {
             get { return _atWhatLevelIsAvailable; }

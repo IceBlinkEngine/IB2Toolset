@@ -80,6 +80,9 @@ namespace IB2Toolset
         private int _range = 0;
         //private ScriptSelectEditorReturnObject spellScript = new ScriptSelectEditorReturnObject();
         private string _traitScript = "none";
+        private string _associatedSpellTag = "none";
+        private List<EffectTagForDropDownList> _traitEffectTagList = new List<EffectTagForDropDownList>();
+
         #endregion
 
         #region Properties  
@@ -95,6 +98,13 @@ namespace IB2Toolset
                 _name = value;
             }
         }
+        //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("List of EffectTags of this trait")]
+        public List<EffectTagForDropDownList> traitEffectTagList
+        {
+            get { return _traitEffectTagList; }
+            set { _traitEffectTagList = value; }
+        }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the Trait (Must be unique)")]
         public string tag
         {
@@ -105,6 +115,18 @@ namespace IB2Toolset
             set
             {
                 _tag = value;
+            }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the spell called when using this active trait")]
+        public string associatedSpellTag
+        {
+            get
+            {
+                return _associatedSpellTag;
+            }
+            set
+            {
+                _associatedSpellTag = value;
             }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Image icon of the Trait")]

@@ -1,8 +1,11 @@
 [
   {
     "name": "Fighter",
-    "labelForCastAction": "casts",
-    "labelForTheSpellsButtonInCombat": "CAST",
+    "labelForCastAction": "CAST",
+    "labelForTheSpellsButtonInCombat": "SPELL",
+    "labelForUseTraitAction": "USE",
+    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "modifierFromSPRelevantAttribute": "intelligence",
     "tag": "fighter",
     "UsableByPlayer": true,
     "description": "Skilled warrior. Gains the Cleave trait at level 2 and two attacks per round at level 4.",
@@ -363,6 +366,8 @@
       {
         "name": "Cleave",
         "tag": "cleave",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
         "allow": true
@@ -370,6 +375,8 @@
       {
         "name": "Two Attacks",
         "tag": "twoAttack",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -377,6 +384,8 @@
       {
         "name": "Intimidate (L2)",
         "tag": "intimidate2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -384,6 +393,8 @@
       {
         "name": "Intimidate (L1)",
         "tag": "intimidate",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
         "allow": true
@@ -393,8 +404,11 @@
   },
   {
     "name": "Cleric",
-    "labelForCastAction": "casts",
-    "labelForTheSpellsButtonInCombat": "CAST",
+    "labelForCastAction": "CAST",
+    "labelForTheSpellsButtonInCombat": "SPELL",
+    "labelForUseTraitAction": "USE",
+    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "modifierFromSPRelevantAttribute": "intelligence",
     "tag": "cleric",
     "UsableByPlayer": true,
     "description": "A capable combatant with divine magic as well.",
@@ -656,6 +670,8 @@
       {
         "name": "Diplomacy (L2)",
         "tag": "diplomacy2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -663,6 +679,8 @@
       {
         "name": "Diplomacy (L1)",
         "tag": "diplomacy",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
         "allow": true
@@ -722,8 +740,11 @@
   },
   {
     "name": "Ranger",
-    "labelForCastAction": "casts",
-    "labelForTheSpellsButtonInCombat": "CAST",
+    "labelForCastAction": "CAST",
+    "labelForTheSpellsButtonInCombat": "SPELL",
+    "labelForUseTraitAction": "USE",
+    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "modifierFromSPRelevantAttribute": "intelligence",
     "tag": "ranger",
     "UsableByPlayer": true,
     "description": "Adept for survival in the wild, skilled with a bow, and learns a few spells at later levels. Gains Point Blank Shot trait at level 2.",
@@ -1066,6 +1087,8 @@
       {
         "name": "Point Blank Shot",
         "tag": "pointblankshot",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": true,
         "allow": true
@@ -1073,6 +1096,8 @@
       {
         "name": "Spot",
         "tag": "spot",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
         "allow": true
@@ -1080,6 +1105,8 @@
       {
         "name": "Intimidate (L1)",
         "tag": "intimidate",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
         "allow": true
@@ -1087,6 +1114,8 @@
       {
         "name": "Intimidate (L2)",
         "tag": "intimidate2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -1094,6 +1123,8 @@
       {
         "name": "Spot (L2)",
         "tag": "spot2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -1125,8 +1156,11 @@
   },
   {
     "name": "Wizard",
-    "labelForCastAction": "casts",
-    "labelForTheSpellsButtonInCombat": "CAST",
+    "labelForCastAction": "CAST",
+    "labelForTheSpellsButtonInCombat": "SPELL",
+    "labelForUseTraitAction": "USE",
+    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "modifierFromSPRelevantAttribute": "intelligence",
     "tag": "wizard",
     "UsableByPlayer": true,
     "description": "The Wizard class is capable of casting powerful arcane spells.",
@@ -1361,6 +1395,8 @@
       {
         "name": "Bluff (L1)",
         "tag": "bluff",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
         "allow": true
@@ -1368,6 +1404,8 @@
       {
         "name": "Bluff (L2)",
         "tag": "bluff2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -1375,6 +1413,8 @@
       {
         "name": "Diplomacy (L1)",
         "tag": "diplomacy",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
         "allow": true
@@ -1382,6 +1422,8 @@
       {
         "name": "Diplomacy (L2)",
         "tag": "diplomacy2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -1441,8 +1483,11 @@
   },
   {
     "name": "Thief",
-    "labelForCastAction": "casts",
-    "labelForTheSpellsButtonInCombat": "CAST",
+    "labelForCastAction": "CAST",
+    "labelForTheSpellsButtonInCombat": "SPELL",
+    "labelForUseTraitAction": "USE",
+    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "modifierFromSPRelevantAttribute": "intelligence",
     "tag": "thief",
     "UsableByPlayer": true,
     "description": "The thief uses agility and stealth to manage a battle field and is useful in finding and disarming traps.",
@@ -1740,6 +1785,8 @@
       {
         "name": "Sneak Attack",
         "tag": "sneakattack",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
         "allow": true
@@ -1747,6 +1794,8 @@
       {
         "name": "Critical Strike",
         "tag": "criticalstrike",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
         "allow": true
@@ -1754,6 +1803,8 @@
       {
         "name": "Evasion",
         "tag": "evasion",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
         "allow": true
@@ -1761,6 +1812,8 @@
       {
         "name": "Bluff (L1)",
         "tag": "bluff",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
         "allow": true
@@ -1768,6 +1821,8 @@
       {
         "name": "Bluff (L2)",
         "tag": "bluff2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -1775,6 +1830,8 @@
       {
         "name": "Diplomacy (L1)",
         "tag": "diplomacy",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
         "allow": true
@@ -1782,6 +1839,8 @@
       {
         "name": "Diplomacy (L2)",
         "tag": "diplomacy2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
         "allow": true
@@ -1789,6 +1848,8 @@
       {
         "name": "Pick Pocket (L1)",
         "tag": "pickpocket",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
         "allow": true
@@ -1796,6 +1857,8 @@
       {
         "name": "Pick Pocket (L2)",
         "tag": "pickpocket2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
         "allow": true
@@ -1803,6 +1866,8 @@
       {
         "name": "Spot (L1)",
         "tag": "spot",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
         "allow": true
@@ -1810,6 +1875,8 @@
       {
         "name": "Spot (L2)",
         "tag": "spot2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
         "allow": true
@@ -1817,6 +1884,8 @@
       {
         "name": "Stealth (L1)",
         "tag": "stealth",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
         "allow": true
@@ -1824,6 +1893,8 @@
       {
         "name": "Stealth (L2)",
         "tag": "stealth2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
         "allow": true
@@ -1831,6 +1902,8 @@
       {
         "name": "Disable Device (L1)",
         "tag": "disabledevice",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
         "allow": true
@@ -1838,6 +1911,8 @@
       {
         "name": "Disable Device (L2)",
         "tag": "disabledevice2",
+        "usableInSituation": "Passive",
+        "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
         "allow": true

@@ -124,6 +124,7 @@ namespace IB2Toolset
         private float _partyFocalHaloIntensity = 1f;
         private bool _useMathGridFade = false;
         private int _durationInStepsOfPartyLightItems = 250;
+        private int _resistanceMaxValue = 85;
 
         private string _nameOfFirstDayOfTheWeek = "Monday";
         private string _nameOfSecondDayOfTheWeek = "Tuesday";
@@ -603,6 +604,13 @@ namespace IB2Toolset
             set { _durationInStepsOfPartyLightItems = value; }
         }
 
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The maximum percentage any resistance value can ever reach, a hard cap.")]
+        public int resistanceMaxValue
+        {
+            get { return _resistanceMaxValue; }
+            set { _resistanceMaxValue = value; }
+        }
+
         /*
         [CategoryAttribute("07 - Light"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the ring around the light center becomes. Keep between 0.1f and 1.9f as suggestion.")]
         public float partyRingHaloIntensity
@@ -611,7 +619,7 @@ namespace IB2Toolset
             set { _partyRingHaloIntensity = value; }
         }
          */
-        
+
         /*
         [CategoryAttribute("07 - Light"), DescriptionAttribute("Light related: defaults to 1.0f. The higher, the more colorful the center of the light becomes. Keep between 0.1f and 1.9f as suggestion.")]
         public float partyFocalHaloIntensity
@@ -621,7 +629,7 @@ namespace IB2Toolset
         }
         */
 
-       
+
 
         #endregion
 

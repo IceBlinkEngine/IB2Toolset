@@ -105,6 +105,11 @@ namespace IB2Toolset
 	    public int damageTypeResistanceTotalMagic = 0;
 	    public int damageTypeResistanceTotalPoison = 0;
 
+        //we might need fields for these when designing premade player characters? To be discussed.
+        public List<string> knownUsableTraitsTags = new List<string>();
+        public List<string> knownOutsideCombatUsableTraitsTags = new List<string>();
+        public List<string> knownInCombatUsableTraitsTags = new List<string>();
+
         [CategoryAttribute("00 - Main"), DescriptionAttribute("Name of the player")]
         public string name
         {

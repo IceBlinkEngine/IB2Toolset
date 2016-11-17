@@ -241,6 +241,7 @@ namespace IB2Toolset
                         TraitAllowed newTA = new TraitAllowed();
                         newTA.name = tr.name;
                         newTA.tag = tr.tag;
+                        newTA.usableInSituation = tr.useableInSituation;
                         cl.traitsAllowed.Add(newTA);
                     }
                     else
@@ -412,6 +413,7 @@ namespace IB2Toolset
                 TraitAllowed newTA = new TraitAllowed();
                 newTA.name = tr.name;
                 newTA.tag = tr.tag;
+                newTA.usableInSituation = tr.useableInSituation;
                 prntForm.playerClassesList[selectedLbxIndex].traitsAllowed.Add(newTA);
             }
         }
