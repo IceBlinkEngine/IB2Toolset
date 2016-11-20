@@ -242,6 +242,7 @@ namespace IB2Toolset
                         newTA.name = tr.name;
                         newTA.tag = tr.tag;
                         newTA.usableInSituation = tr.useableInSituation;
+                        newTA.associatedSpellTag = tr.associatedSpellTag;
                         cl.traitsAllowed.Add(newTA);
                     }
                     else
@@ -414,6 +415,7 @@ namespace IB2Toolset
                 newTA.name = tr.name;
                 newTA.tag = tr.tag;
                 newTA.usableInSituation = tr.useableInSituation;
+                newTA.associatedSpellTag = tr.associatedSpellTag;
                 prntForm.playerClassesList[selectedLbxIndex].traitsAllowed.Add(newTA);
             }
         }

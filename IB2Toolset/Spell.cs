@@ -370,6 +370,11 @@ namespace IB2Toolset
             {
                 other.removeEffectTagList.Add(s);
             }
+            other.spellEffectTagList = new List<EffectTagForDropDownList>();
+            foreach (EffectTagForDropDownList s in this.spellEffectTagList)
+            {
+                other.spellEffectTagList.Add(s);
+            }
             return other;
         }
     }

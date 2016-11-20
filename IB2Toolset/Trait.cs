@@ -324,6 +324,11 @@ namespace IB2Toolset
         public Trait DeepCopy()
         {
             Trait other = (Trait)this.MemberwiseClone();
+            other.traitEffectTagList = new List<EffectTagForDropDownList>();
+            foreach (EffectTagForDropDownList s in this.traitEffectTagList)
+            {
+                other.traitEffectTagList.Add(s);
+            }
             return other;
         }
     }
