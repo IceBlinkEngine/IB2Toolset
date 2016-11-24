@@ -1,6 +1,7 @@
 [
   {
     "name": "Chainmail Armor",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "chainmail",
     "resref": "chainmail",
@@ -74,6 +75,7 @@
   },
   {
     "name": "Large Shield",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "largeshield",
     "resref": "largeshield",
@@ -147,6 +149,7 @@
   },
   {
     "name": "Leather Armor",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "larmor1",
     "resref": "larmor1",
@@ -220,6 +223,7 @@
   },
   {
     "name": "Studded Leather Armor",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "studdedLeather",
     "resref": "studdedLeather",
@@ -293,6 +297,7 @@
   },
   {
     "name": "Platemail Armor",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "platemail",
     "resref": "platemail",
@@ -366,6 +371,7 @@
   },
   {
     "name": "Robes",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "robes",
     "resref": "robes",
@@ -439,6 +445,7 @@
   },
   {
     "name": "Camping Kit",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "campingKit",
     "resref": "campingKit",
@@ -512,6 +519,7 @@
   },
   {
     "name": "Emerald",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "emerald",
     "resref": "emerald",
@@ -585,6 +593,7 @@
   },
   {
     "name": "Gold Ring",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "goldring",
     "resref": "goldring",
@@ -658,6 +667,7 @@
   },
   {
     "name": "Golden Goblet",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "goblet",
     "resref": "goblet",
@@ -731,6 +741,7 @@
   },
   {
     "name": "Ring of Protection",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "ringOfProtection",
     "resref": "ringOfProtection",
@@ -804,6 +815,7 @@
   },
   {
     "name": "Ring of Fire Resistance",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "ringOfFireResist",
     "resref": "ringOfFireResist",
@@ -877,6 +889,7 @@
   },
   {
     "name": "Healing Potion",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "healingPotion",
     "resref": "healingPotion",
@@ -950,6 +963,7 @@
   },
   {
     "name": "Extra Healing Potion",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "healingPotionExtra",
     "resref": "healingPotionExtra",
@@ -1023,6 +1037,7 @@
   },
   {
     "name": "Spell Points Potion",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "spPotion",
     "resref": "spPotion",
@@ -1096,6 +1111,11 @@
   },
   {
     "name": "Battle Axe",
+    "entriesForPcTags": [
+      {
+        "Value": "axe"
+      }
+    ],
     "labelForTheCastAction": "casts",
     "tag": "battleaxe",
     "resref": "battleaxe",
@@ -1169,6 +1189,7 @@
   },
   {
     "name": "Crossbow",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "crossbow",
     "resref": "crossbow",
@@ -1242,6 +1263,7 @@
   },
   {
     "name": "Dagger",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "dagger01",
     "resref": "dagger01",
@@ -1315,6 +1337,7 @@
   },
   {
     "name": "Elvish Short Sword +1",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "elvishshortsword",
     "resref": "elvishshortsword",
@@ -1388,6 +1411,7 @@
   },
   {
     "name": "Fire Dagger",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "fireDagger",
     "resref": "fireDagger",
@@ -1461,6 +1485,7 @@
   },
   {
     "name": "Flaming Long Sword",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "fireLongSword",
     "resref": "fireLongSword",
@@ -1534,6 +1559,7 @@
   },
   {
     "name": "Hand Axe",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "handaxe",
     "resref": "handaxe",
@@ -1607,6 +1633,7 @@
   },
   {
     "name": "Long Bow",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "lbow1",
     "resref": "lbow1",
@@ -1680,6 +1707,7 @@
   },
   {
     "name": "Long Sword",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "lsword01",
     "resref": "lsword01",
@@ -1753,6 +1781,7 @@
   },
   {
     "name": "Mace",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "mace",
     "resref": "mace",
@@ -1826,6 +1855,7 @@
   },
   {
     "name": "Short Bow",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "shortBow",
     "resref": "shortBow",
@@ -1899,6 +1929,7 @@
   },
   {
     "name": "Short Sword",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "ssword01",
     "resref": "ssword01",
@@ -1972,6 +2003,7 @@
   },
   {
     "name": "Sling",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "sling",
     "resref": "sling",
@@ -2045,6 +2077,7 @@
   },
   {
     "name": "Sling of Fire",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "fireSling",
     "resref": "fireSling",
@@ -2118,6 +2151,7 @@
   },
   {
     "name": "Spear",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "spear",
     "resref": "spear",
@@ -2191,6 +2225,7 @@
   },
   {
     "name": "Arrow",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "arrow",
     "resref": "arrow",
@@ -2264,6 +2299,7 @@
   },
   {
     "name": "Stone",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "stone",
     "resref": "stone",
@@ -2337,6 +2373,7 @@
   },
   {
     "name": "Stone of Fire",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "stonefire",
     "resref": "stonefire",
@@ -2410,6 +2447,7 @@
   },
   {
     "name": "Magic Amulet",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "magicamulet",
     "resref": "magicamulet",
@@ -2483,6 +2521,7 @@
   },
   {
     "name": "Magic Book",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "magicbook",
     "resref": "magicbook",
@@ -2556,6 +2595,7 @@
   },
   {
     "name": "Bolt",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "bolt",
     "resref": "bolt",
@@ -2629,6 +2669,7 @@
   },
   {
     "name": "Ring of Power",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "lilyringofpower",
     "resref": "lilyringofpower",
@@ -2702,6 +2743,7 @@
   },
   {
     "name": "Mace of Stunning",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "maceofstunning",
     "resref": "maceofstunning",
@@ -2775,6 +2817,7 @@
   },
   {
     "name": "Two Handed Sword of the Defender",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "thsworddefender",
     "resref": "thsworddefender",
@@ -2848,6 +2891,7 @@
   },
   {
     "name": "Poison Dagger",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "poisonDagger",
     "resref": "poisonDagger",
@@ -2921,6 +2965,7 @@
   },
   {
     "name": "Bomb of Fire",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "firebomb",
     "resref": "firebomb",
@@ -2994,6 +3039,7 @@
   },
   {
     "name": "Minor Healing Potion",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "minorhealpotion",
     "resref": "minorhealpotion",
@@ -3067,6 +3113,7 @@
   },
   {
     "name": "Antidote Potion",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "antidote",
     "resref": "antidote",
@@ -3140,6 +3187,7 @@
   },
   {
     "name": "Flaming Axe",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "newTag_9360",
     "resref": "battleaxeFlaming",
@@ -3213,6 +3261,7 @@
   },
   {
     "name": "Corrosive Sword",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "newTag_9362",
     "resref": "lsword01Corrosive",
@@ -3286,6 +3335,7 @@
   },
   {
     "name": "Torch",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "newTag_9931",
     "resref": "torch",
@@ -3359,6 +3409,7 @@
   },
   {
     "name": "Ration",
+    "entriesForPcTags": [],
     "labelForTheCastAction": "casts",
     "tag": "newTag_9963",
     "resref": "ration",

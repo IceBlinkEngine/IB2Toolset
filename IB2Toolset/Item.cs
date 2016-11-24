@@ -103,6 +103,8 @@ namespace IB2Toolset
         private bool _isRation = false;
         private bool _isLightSource = false;
 
+        private List<LocalImmunityString> _entriesForPcTags = new List<LocalImmunityString>();
+
         #endregion
 
         #region Properties        
@@ -118,6 +120,13 @@ namespace IB2Toolset
                 _name = value;
                 this.NotifyPropertyChanged("name");
             }
+        }
+        //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("List of tags added to pc's pcTags list upon equipping this item; when unequiping this item, the entry is removed again from pc's pcTags list.")]
+        public List<LocalImmunityString> entriesForPcTags
+        {
+            get { return _entriesForPcTags; }
+            set { _entriesForPcTags = value; }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the cast action when using this item in log")]
         public string labelForTheCastAction

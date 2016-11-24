@@ -1,5 +1,7 @@
 [
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Mage Bolt",
     "tag": "mageBolt",
     "spellImage": "sp_magebolt",
@@ -23,6 +25,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Mage Armor",
     "tag": "mageArmor",
     "spellImage": "sp_magearmor",
@@ -46,6 +50,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Sleep",
     "tag": "sleep",
     "spellImage": "sp_sleep",
@@ -69,6 +75,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Web",
     "tag": "web",
     "spellImage": "sp_web",
@@ -92,6 +100,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Minor Regeneration",
     "tag": "minorRegen",
     "spellImage": "sp_regeneration",
@@ -115,6 +125,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Ice Storm",
     "tag": "iceStorm",
     "spellImage": "sp_icestorm",
@@ -138,6 +150,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Fireball",
     "tag": "fireball",
     "spellImage": "sp_fireball",
@@ -161,6 +175,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Minor Healing",
     "tag": "minorHealing",
     "spellImage": "sp_minorheal",
@@ -184,6 +200,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Bless",
     "tag": "bless",
     "spellImage": "sp_bless",
@@ -207,6 +225,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Magic Stone",
     "tag": "magicStone",
     "spellImage": "sp_magicstone",
@@ -230,6 +250,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Moderate Healing",
     "tag": "moderateHealing",
     "spellImage": "sp_moderateheal",
@@ -253,6 +275,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Blast of Light",
     "tag": "blastOfLight",
     "spellImage": "sp_blastoflight",
@@ -276,6 +300,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Hold",
     "tag": "hold",
     "spellImage": "sp_hold",
@@ -299,6 +325,8 @@
     "spellEffectTagList": []
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Mass Minor Healing",
     "tag": "massMinorHealing",
     "spellImage": "sp_massheal",

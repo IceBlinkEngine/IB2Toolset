@@ -109,6 +109,7 @@ namespace IB2Toolset
         public List<string> knownUsableTraitsTags = new List<string>();
         public List<string> knownOutsideCombatUsableTraitsTags = new List<string>();
         public List<string> knownInCombatUsableTraitsTags = new List<string>();
+        public List<string> pcTags = new List<string>();
 
         [CategoryAttribute("00 - Main"), DescriptionAttribute("Name of the player")]
         public string name

@@ -94,6 +94,9 @@ namespace IB2Toolset
         private string _spellEffectTag = "none";
         private List<EffectTagForDropDownList> _removeEffectTagList = new List<EffectTagForDropDownList>();
         private List<EffectTagForDropDownList> _spellEffectTagList = new List<EffectTagForDropDownList>();
+        public List<LocalImmunityString> traitWorksOnlyWhen = new List<LocalImmunityString>();
+        public List<LocalImmunityString> traitWorksNeverWhen = new List<LocalImmunityString>();
+
         #endregion
 
         #region Properties
@@ -375,6 +378,18 @@ namespace IB2Toolset
             {
                 other.spellEffectTagList.Add(s);
             }
+            other.traitWorksNeverWhen = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.traitWorksNeverWhen)
+            {
+                other.traitWorksNeverWhen.Add(s);
+            }
+            other.traitWorksOnlyWhen = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.traitWorksOnlyWhen)
+            {
+                other.traitWorksOnlyWhen.Add(s);
+            }
+
+
             return other;
         }
     }

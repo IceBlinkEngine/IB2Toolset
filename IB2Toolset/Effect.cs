@@ -96,6 +96,8 @@ namespace IB2Toolset
         private int _modifyDamageTypeResistancePoison = 0;
         private int _modifyNumberOfMeleeAttacks = 0;
         private int _modifyNumberOfRangedAttacks = 0;
+        public List<LocalImmunityString> traitWorksOnlyWhen = new List<LocalImmunityString>();
+        public List<LocalImmunityString> traitWorksNeverWhen = new List<LocalImmunityString>();
         #endregion
 
         #region Properties
@@ -642,6 +644,26 @@ namespace IB2Toolset
         public Effect DeepCopy()
         {
             Effect other = (Effect)this.MemberwiseClone();
+            other.traitWorksNeverWhen = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.traitWorksNeverWhen)
+            {
+                other.traitWorksNeverWhen.Add(s);
+            }
+            other.traitWorksOnlyWhen = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.traitWorksOnlyWhen)
+            {
+                other.traitWorksOnlyWhen.Add(s);
+            }
+            other.affectOnlyList = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.affectOnlyList)
+            {
+                other.affectOnlyList.Add(s);
+            }
+            other.affectNeverList = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.affectNeverList)
+            {
+                other.affectNeverList.Add(s);
+            }
             return other;
         }
     }

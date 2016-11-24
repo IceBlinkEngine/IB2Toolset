@@ -399,6 +399,11 @@ namespace IB2Toolset
         //contains tag of one spell that is cast when the trait is used (inside and/or outside combat, see below)
         private string _associatedSpellTag = "none";
 
+        //add more work for these below!! to do
+        private List<EffectTagForDropDownList> _traitEffectTagList = new List<EffectTagForDropDownList>();
+        private List<LocalImmunityString> _traitWorksOnlyWhen = new List<LocalImmunityString>();
+        private List<LocalImmunityString> _traitWorksNeverWhen = new List<LocalImmunityString>();
+
         public string name
         {
             get { return _name; }
@@ -475,6 +480,37 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("allow");
             }
         }
+        /*
+        public List<LocalImmunityString> traitWorksNeverWhen
+        {
+            get { return _traitWorksNeverWhen; }
+            set
+            {
+                _traitWorksNeverWhen = value;
+                this.NotifyPropertyChanged("traitWorksNeverWhen");
+            }
+        }
+
+        public List<LocalImmunityString> traitWorksOnlyWhen
+        {
+            get { return _traitWorksOnlyWhen; }
+            set
+            {
+                _traitWorksOnlyWhen = value;
+                this.NotifyPropertyChanged("traitWorksOnlyWhen");
+            }
+        }
+
+        public List<EffectTagForDropDownList> traitEffectTagList
+        {
+            get { return _traitEffectTagList; }
+            set
+            {
+               _ traitEffectTagList = value;
+                this.NotifyPropertyChanged("traitEffectTagList");
+            }
+        }
+        */
 
         public TraitAllowed()
         {
@@ -487,6 +523,24 @@ namespace IB2Toolset
         public TraitAllowed DeepCopy()
         {
             TraitAllowed other = (TraitAllowed)this.MemberwiseClone();
+            /*
+            other.traitEffectTagList = new List<EffectTagForDropDownList>();
+            foreach (EffectTagForDropDownList s in this.traitEffectTagList)
+            {
+                other.traitEffectTagList.Add(s);
+            }
+            other.traitWorksNeverWhen = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.traitWorksNeverWhen)
+            {
+                other.traitWorksNeverWhen.Add(s);
+            }
+            other.traitWorksOnlyWhen = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.traitWorksOnlyWhen)
+            {
+                other.traitWorksOnlyWhen.Add(s);
+            }
+            */
+
             return other;
         }
     }

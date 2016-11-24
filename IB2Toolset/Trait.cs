@@ -82,6 +82,8 @@ namespace IB2Toolset
         private string _traitScript = "none";
         private string _associatedSpellTag = "none";
         private List<EffectTagForDropDownList> _traitEffectTagList = new List<EffectTagForDropDownList>();
+        private List<LocalImmunityString> _traitWorksOnlyWhen = new List<LocalImmunityString>();
+        private List<LocalImmunityString> _traitWorksNeverWhen = new List<LocalImmunityString>();
 
         #endregion
 
@@ -104,6 +106,20 @@ namespace IB2Toolset
         {
             get { return _traitEffectTagList; }
             set { _traitEffectTagList = value; }
+        }
+        //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("List of tags in pcTags list of a pc that each will allow this trait to work (permanent effect, active use trait); multiple entries are connected with OR")]
+        public List<LocalImmunityString> traitWorksOnlyWhen
+        {
+            get { return _traitWorksOnlyWhen; }
+            set { _traitWorksOnlyWhen = value; }
+        }
+        //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("List of tags in pcTags list of a pc that each will prevent this trait from working (permanent effect, active use trait); multiples entries are connected with OR; overrides any entries that allow a trait to work")]
+        public List<LocalImmunityString> traitWorksNeverWhen
+        {
+            get { return _traitWorksNeverWhen; }
+            set { _traitWorksNeverWhen = value; }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the Trait (Must be unique)")]
         public string tag
@@ -328,6 +344,16 @@ namespace IB2Toolset
             foreach (EffectTagForDropDownList s in this.traitEffectTagList)
             {
                 other.traitEffectTagList.Add(s);
+            }
+            other.traitWorksNeverWhen = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.traitWorksNeverWhen)
+            {
+                other.traitWorksNeverWhen.Add(s);
+            }
+            other.traitWorksOnlyWhen = new List<LocalImmunityString>();
+            foreach (LocalImmunityString s in this.traitWorksOnlyWhen)
+            {
+                other.traitWorksOnlyWhen.Add(s);
             }
             return other;
         }

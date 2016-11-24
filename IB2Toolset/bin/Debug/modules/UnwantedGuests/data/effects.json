@@ -1,5 +1,7 @@
 [
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Hold",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -71,6 +73,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Bless",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -142,6 +146,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Mage Armor",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -213,6 +219,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Resist Cold",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -284,6 +292,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Resist Fire",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -355,6 +365,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Minor Regeneration",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -426,6 +438,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Poisoned Light",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -497,6 +511,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Poisoned Medium",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -568,6 +584,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Sleep",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -639,6 +657,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Web",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -710,6 +730,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Flame Fingers",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -781,6 +803,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Spider Poison Minor",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -852,6 +876,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "Generic Remove Effect",
     "affectNeverList": [],
     "affectOnlyList": [],
@@ -923,6 +949,8 @@
     "modifyNumberOfRangedAttacks": 0
   },
   {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
     "name": "SuperStrength+20",
     "affectNeverList": [],
     "affectOnlyList": [],
