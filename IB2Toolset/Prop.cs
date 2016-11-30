@@ -59,11 +59,84 @@ namespace IB2Toolset
         private float _focalIntensity = 1.0f;
         private float _ringIntensity = 1.0f;
 
+        private int _maxNumberOfFrames = 1;
+        private float _updateTicksNeededTillNextFrame = 20;
+        private float _chanceToTriggerAnimationCycle = 100;
+        private int _propFrameHeight = 100;
+        private int _sizeFactor = 100;
+        private bool _doOnce = false;
+        private bool _animationIsActive = true;
+        private bool _hiddenWhenComplete = false;
+        private bool _hiddenWhenNotActive = false;
 
 
         #endregion
 
         #region Properties
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("Set the number of frames of this prop. 1 means a non-animated prop.")]
+        public int maxNumberOfFrames
+        {
+            get { return _maxNumberOfFrames; }
+            set { _maxNumberOfFrames = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("The speed of the animation (should be independent from cpu or gpu speed). Higher is slower. Trying with default of 20.")]
+        public float updateTicksNeededTillNextFrame
+        {
+            get { return _updateTicksNeededTillNextFrame; }
+            set { _updateTicksNeededTillNextFrame = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("The chance of triggering an animation cycle per second in percent. Defaults to 100. Use this for props that make randomized pauses before starting another animation cycle.")]
+        public float chanceToTriggerAnimationCycle
+        {
+            get { return _chanceToTriggerAnimationCycle; }
+            set { _chanceToTriggerAnimationCycle = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("The height in pixels of one frame of this prop. Defaults to 100.")]
+        public int propFrameHeight
+        {
+            get { return _propFrameHeight; }
+            set { _propFrameHeight = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("This scales the animated props x and y dimension by the entered number of precent points. Defaults to 100. Note that you always place the top left corner of a prop.")]
+        public int sizeFactor
+        {
+            get { return _sizeFactor; }
+            set { _sizeFactor = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("Thé prop animation is played only once and then animationIsActive is set to fale; setting animationIsActive to true via script will allow for  another animation cycle.")]
+        public bool doOnce
+        {
+            get { return _doOnce; }
+            set { _doOnce = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("Setting this to false turns teh animation off. Can be de/activated via script.")]
+        public bool animationIsActive
+        {
+            get { return _animationIsActive; }
+            set { _animationIsActive = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("The prop is invisible when animation is not currently running, ideal for making occassionaly happening ambience animations as e.g. ground fog (when combined with chanceToTriggerAnimationCycle)")]
+        public bool hiddenWhenComplete
+        {
+            get { return _hiddenWhenComplete; }
+            set { _hiddenWhenComplete = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("The prop is invisible when animation is not currently running, ideal for making occassionaly happening ambience animations as e.g. ground fog (when combined with chanceToTriggerAnimationCycle)")]
+        public bool hiddenWhenNotActive
+        {
+            get { return _hiddenWhenNotActive; }
+            set { _hiddenWhenNotActive = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Current X location on map.")]
         public int LocationX
         {

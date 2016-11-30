@@ -458,5 +458,34 @@
       }
     ],
     "spellEffectTagList": []
+  },
+  {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
+    "name": "Bloody Whirlwind",
+    "tag": "newSpellTag_10498",
+    "spellImage": "sp_magebolt",
+    "description": "",
+    "useableInSituation": "InCombat",
+    "spriteFilename": "none",
+    "spriteEndingFilename": "none",
+    "spellStartSound": "none",
+    "spellEndSound": "none",
+    "costSP": 0,
+    "costHP": 3,
+    "spellTargetType": "Enemy",
+    "spellEffectType": "Damage",
+    "aoeShape": "Circle",
+    "aoeRadius": 1,
+    "range": 1,
+    "spellScript": "none",
+    "additionalCustomLogTextOnCast": "none",
+    "spellEffectTag": "none",
+    "removeEffectTagList": [],
+    "spellEffectTagList": [
+      {
+        "tag": "newEffectTag_10494"
+      }
+    ]
   }
 ]
