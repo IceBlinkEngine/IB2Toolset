@@ -68,11 +68,26 @@ namespace IB2Toolset
         private bool _animationIsActive = true;
         private bool _hiddenWhenComplete = false;
         private bool _hiddenWhenNotActive = false;
-
+        private int _numberOfCyclesNeededForCompletion = 1;
+        private int _framesNeededForFullFadeInOut = 0;
 
         #endregion
 
         #region Properties
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("This determines how swiftly your animated prop fades in and out after all frames have been done (numberOfCyclesNeededForCompletion * maxNumberOfFrames). Whens et to 0 (Deafult), tehre'sno fade in or out. The higher, the more slowly the fading happens. Please do not enter a number higher than half of (numberOfCyclesNeededForCompletion * maxNumberOfFrames). E.g. 15 framesNeededForFullFadeInOut feels quite nicely if you need  avalue for orientation.")]
+        public int framesNeededForFullFadeInOut
+        {
+            get { return _framesNeededForFullFadeInOut; }
+            set { _framesNeededForFullFadeInOut = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("This determines how many times ou want the animation to repeat before it is considered complete. DoOnce will only register once all cycles have been done. ChanceToTriggerAnimationCycle will trigger the number of cycles specified here.")]
+        public int numberOfCyclesNeededForCompletion
+        {
+            get { return _numberOfCyclesNeededForCompletion; }
+            set { _numberOfCyclesNeededForCompletion = value; }
+        }
 
         [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("Set the number of frames of this prop. 1 means a non-animated prop.")]
         public int maxNumberOfFrames
