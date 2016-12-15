@@ -1262,9 +1262,6 @@ namespace IB2Toolset
                         prntForm.logText(selectedProp);
                         prntForm.logText(Environment.NewLine);
 
-                        //gridX = e.X / sqr;
-                        //gridY = e.Y / sqr;
-
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         // verify that there is no creature, blocked, or PC already on this location
@@ -1279,17 +1276,7 @@ namespace IB2Toolset
                         newProp.LocationX = gridX;
                         newProp.LocationY = gridY;
                         area.Props.Add(newProp);
-                        // show the item on the map
-                        if (mod.moduleName != "NewModule")
-                        {
-                            //GDI Bitmap newBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\graphics\\" + le_selectedProp.ImageFileName + ".png");
-                            //GDI propBitmapList.Add(newBitmap);
-                        }
-                        else
-                        {
-                            //do nothing if default module
-                        }
-                        //GDI refreshMap(false);
+                       
                     }
                     #endregion
                     #region Paint New Trigger Selected

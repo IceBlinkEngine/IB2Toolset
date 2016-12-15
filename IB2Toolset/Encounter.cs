@@ -44,6 +44,8 @@ namespace IB2Toolset
         private string onStartCombatTurnIBScriptParms = "";
         private string onEndCombatIBScript = "none";
         private string onEndCombatIBScriptParms = "";
+        public List<Trigger> Triggers = new List<Trigger>();
+        public List<Prop> propsList = new List<Prop>();
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of Encounter, must be unique")]
         public string encounterName
@@ -249,5 +251,14 @@ namespace IB2Toolset
                 }
             }
         }
+
+        public Trigger getTriggerByTag(string tag)
+         {  
+             foreach (Trigger it in Triggers)  
+             {  
+                 if (it.TriggerTag == tag) return it;  
+             }  
+            return null;  
+         }  
     }  
 }

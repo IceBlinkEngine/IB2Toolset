@@ -339,6 +339,36 @@ namespace IB2Toolset
                 {
                     frm.logText("ENCOUNTER ERROR: " + enc.encounterName + " all tiles are walkable, was that intended?" + Environment.NewLine);
                 }
+
+                //go through all triggers and check for missing data  
+                                foreach (Trigger trg in enc.Triggers)
+                                    {
+                                        //check if transition with no destination  
+                                        if ((trg.Event1Type == "transition") && ((trg.Event1TransPointX == 0) && (trg.Event1TransPointY == 0)))
+                                            {
+                         frm.logText("TRIGGER ERROR: " + enc.encounterName + ": trigger " + trg.TriggerTag + "event1 has a x=0 and y=0 location, is that intended?" + Environment.NewLine);
+                                            }
+                                        if ((trg.Event2Type == "transition") && ((trg.Event2TransPointX == 0) && (trg.Event2TransPointY == 0)))
+                                            {
+                         frm.logText("TRIGGER ERROR: " + enc.encounterName + ": trigger " + trg.TriggerTag + "event2 has a x=0 and y=0 location, is that intended?" + Environment.NewLine);
+                                            }
+                                        if ((trg.Event3Type == "transition") && ((trg.Event3TransPointX == 0) && (trg.Event3TransPointY == 0)))
+                                            {
+                         frm.logText("TRIGGER ERROR: " + enc.encounterName + ": trigger " + trg.TriggerTag + "event3 has a x=0 and y=0 location, is that intended?" + Environment.NewLine);
+                                            }
+                                        if ((trg.Event1Type != "none") && (trg.Event1FilenameOrTag == "none"))
+                                            {
+                         frm.logText("TRIGGER ERROR: " + enc.encounterName + ": trigger " + trg.TriggerTag + ": event1 has type of " + trg.Event1Type + " but filename/tag of 'none'" + Environment.NewLine);
+                                            }
+                                        if ((trg.Event2Type != "none") && (trg.Event2FilenameOrTag == "none"))
+                                            {
+                         frm.logText("TRIGGER ERROR: " + enc.encounterName + ": trigger " + trg.TriggerTag + ": event2 has type of " + trg.Event2Type + " but filename/tag of 'none'" + Environment.NewLine);
+                                            }
+                                        if ((trg.Event3Type != "none") && (trg.Event3FilenameOrTag == "none"))
+                                            {
+                         frm.logText("TRIGGER ERROR: " + enc.encounterName + ": trigger " + trg.TriggerTag + ": event3 has type of " + trg.Event3Type + " but filename/tag of 'none'" + Environment.NewLine);
+                                            }
+                                    }
             }
         }
     }

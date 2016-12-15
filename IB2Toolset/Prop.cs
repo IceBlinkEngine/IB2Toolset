@@ -49,8 +49,8 @@ namespace IB2Toolset
 	    private int _ChaserGiveUpChasingRangeRadius = 3;
 	    private int _ChaserChaseDuration = 24;
 	    private int _RandomMoverRadius = 5;
-        private string onHeartBeatLogicTree = "none";
-        private string onHeartBeatParms = "";
+        //private string onHeartBeatLogicTree = "none";
+        //private string onHeartBeatParms = "";
         private string onHeartBeatIBScript = "none";
         private string onHeartBeatIBScriptParms = "";
         private bool _unavoidableConversation = false;
@@ -71,9 +71,87 @@ namespace IB2Toolset
         private int _numberOfCyclesNeededForCompletion = 1;
         private int _framesNeededForFullFadeInOut = 0;
 
+        private string _OnEnterSquareIBScript = "none";  
+        private string _OnEnterSquareIBScriptParms = "";
+
+        private string _OnEnterSquareScript = "none";  
+        private string _OnEnterSquareScriptParm1 = "none";  
+        private string _OnEnterSquareScriptParm2 = "none";  
+        private string _OnEnterSquareScriptParm3 = "none";  
+        private string _OnEnterSquareScriptParm4 = "none";  
+        private int _numberOfScriptCallsRemaining = 999;  
+        private bool _canBeTriggeredByPc = true;  
+        private bool _canBeTriggeredByCreature = true;
+
         #endregion
 
         #region Properties
+
+
+        [Browsable(true), TypeConverter(typeof(IBScriptConverter))]  
+        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("IBScript name to be run for this Prop when a Player or Creature stands on this Prop")]  
+        public string OnEnterSquareIBScript  
+        {  
+            get { return _OnEnterSquareIBScript; }  
+            set { _OnEnterSquareIBScript = value; }  
+        }
+
+        [Browsable(true), TypeConverter(typeof(ScriptConverter))]  
+         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Script name to be run for this Prop when a Player or Creature stands on this Prop")]  
+         public string OnEnterSquareScript  
+         {  
+             get { return _OnEnterSquareScript; }  
+             set { _OnEnterSquareScript = value; }  
+         }  
+         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 1 to be used for this Script hook (leave as 'none' if not used)")]  
+         public string OnEnterSquareScriptParm1
+         {  
+             get { return _OnEnterSquareScriptParm1; }  
+             set { _OnEnterSquareScriptParm1 = value; }  
+         }  
+         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 2 to be used for this Script hook (leave as 'none' if not used)")]  
+         public string OnEnterSquareScriptParm2
+         {  
+             get { return _OnEnterSquareScriptParm2; }  
+             set { _OnEnterSquareScriptParm2 = value; }  
+         }  
+         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 3 to be used for this Script hook (leave as 'none' if not used)")]  
+         public string OnEnterSquareScriptParm3
+         {  
+             get { return _OnEnterSquareScriptParm3; }  
+             set { _OnEnterSquareScriptParm3 = value; }  
+         }  
+         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 4 to be used for this Script hook (leave as 'none' if not used)")]  
+         public string OnEnterSquareScriptParm4
+         {  
+             get { return _OnEnterSquareScriptParm4; }  
+             set { _OnEnterSquareScriptParm4 = value; }  
+         }  
+         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("if true, the prop OnEnterSquareIBScript can be triggered by Players; if false, Players will not trigger the ibscript.")]  
+         public bool canBeTriggeredByPc
+         {  
+             get { return _canBeTriggeredByPc; }  
+             set { _canBeTriggeredByPc = value; }  
+         }  
+         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("if true, the prop OnEnterSquareIBScript can be triggered by Creatures; if false, Creatures will not trigger the ibscript.")]  
+         public bool canBeTriggeredByCreature
+         {  
+             get { return _canBeTriggeredByCreature; }  
+             set { _canBeTriggeredByCreature = value; }  
+         }  
+         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("The number of times that the OnEnterSquare script or IBScript can be triggered. Each time the script is triggered, this number will be decremented by one. Once this number reaches zero, the Prop will be removed from the encounter map.")]  
+         public int numberOfScriptCallsRemaining
+         {  
+             get { return _numberOfScriptCallsRemaining; }  
+             set { _numberOfScriptCallsRemaining = value; }  
+         }  
+      
+        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]  
+        public string OnEnterSquareIBScriptParms
+        {  
+            get { return _OnEnterSquareIBScriptParms; }  
+            set { _OnEnterSquareIBScriptParms = value; }  
+        }  
 
         [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("This determines how swiftly your animated prop fades in and out after all frames have been done (numberOfCyclesNeededForCompletion * maxNumberOfFrames). Whens et to 0 (Deafult), tehre'sno fade in or out. The higher, the more slowly the fading happens. Please do not enter a number higher than half of (numberOfCyclesNeededForCompletion * maxNumberOfFrames). E.g. 15 framesNeededForFullFadeInOut feels quite nicely if you need  avalue for orientation.")]
         public int framesNeededForFullFadeInOut
@@ -171,7 +249,7 @@ namespace IB2Toolset
             set { _LocationZ = value; }
         }
         [EditorAttribute(typeof(FileNameSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
-        [CategoryAttribute("02 - Sprite"), DescriptionAttribute("Filename for the prop's token (no extension).")]
+        [CategoryAttribute("02 - Sprite"), DescriptionAttribute("Filename for the prop's token (no extension). Use the IconSprite tab to change this image.")]
         public string ImageFileName
         {
             get { return _ImageFileName; }
@@ -373,19 +451,7 @@ namespace IB2Toolset
             get { return _RandomMoverRadius; }
             set { _RandomMoverRadius = value; }
         }
-        [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("03 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run for this Prop at the end of each move on this area map (not combat)")]
-        public string OnHeartBeatLogicTree
-        {
-            get { return onHeartBeatLogicTree; }
-            set { onHeartBeatLogicTree = value; }
-        }
-        [CategoryAttribute("03 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
-        public string OnHeartBeatParms
-        {
-            get { return onHeartBeatParms; }
-            set { onHeartBeatParms = value; }
-        }
+        
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
         [CategoryAttribute("03 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run for this Prop at the end of each move on this area map (not combat)")]
         public string OnHeartBeatIBScript

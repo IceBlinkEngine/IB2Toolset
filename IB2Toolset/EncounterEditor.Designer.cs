@@ -63,6 +63,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.chkGrid = new System.Windows.Forms.CheckBox();
             this.gbMapSize = new System.Windows.Forms.GroupBox();
+            //this.lblMapSizeError = new System.Windows.Forms.Label();
             this.btnMinusBottumY = new System.Windows.Forms.Button();
             this.btnPlusBottumY = new System.Windows.Forms.Button();
             this.btnMinusTopY = new System.Windows.Forms.Button();
@@ -435,7 +436,7 @@
             // rbtnEditTrigger
             // 
             this.rbtnEditTrigger.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnEditTrigger.Enabled = false;
+            //this.rbtnEditTrigger.Enabled = false;
             this.rbtnEditTrigger.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnEditTrigger.Location = new System.Drawing.Point(9, 175);
             this.rbtnEditTrigger.Name = "rbtnEditTrigger";
@@ -450,7 +451,7 @@
             // rbtnPaintTrigger
             // 
             this.rbtnPaintTrigger.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnPaintTrigger.Enabled = false;
+            //this.rbtnPaintTrigger.Enabled = false;
             this.rbtnPaintTrigger.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnPaintTrigger.Location = new System.Drawing.Point(9, 106);
             this.rbtnPaintTrigger.Name = "rbtnPaintTrigger";

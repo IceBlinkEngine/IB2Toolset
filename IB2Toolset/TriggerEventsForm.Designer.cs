@@ -32,6 +32,12 @@
             this.chkTrigOnce = new System.Windows.Forms.CheckBox();
             this.txtTrigTag = new System.Windows.Forms.TextBox();
             this.gbTrigger = new System.Windows.Forms.GroupBox();
+            this.gbCombatOnly = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.numTriggerCallsAllowed = new System.Windows.Forms.NumericUpDown();
+            this.chkTriggeredByCreatures = new System.Windows.Forms.CheckBox();
+            this.chkTriggeredByPc = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbE1 = new System.Windows.Forms.GroupBox();
             this.gbE1transition = new System.Windows.Forms.GroupBox();
@@ -102,6 +108,8 @@
             this.chkE3once = new System.Windows.Forms.CheckBox();
             this.chkE3enabled = new System.Windows.Forms.CheckBox();
             this.gbTrigger.SuspendLayout();
+            this.gbCombatOnly.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTriggerCallsAllowed)).BeginInit();
             this.gbE1.SuspendLayout();
             this.gbE1transition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numE1y)).BeginInit();
@@ -154,20 +162,96 @@
             // 
             // gbTrigger
             // 
+            this.gbTrigger.Controls.Add(this.gbCombatOnly);
             this.gbTrigger.Controls.Add(this.label1);
             this.gbTrigger.Controls.Add(this.txtTrigTag);
             this.gbTrigger.Controls.Add(this.chkTrigOnce);
             this.gbTrigger.Controls.Add(this.chkTrigEnabled);
             this.gbTrigger.Location = new System.Drawing.Point(3, 3);
             this.gbTrigger.Name = "gbTrigger";
-            this.gbTrigger.Size = new System.Drawing.Size(257, 73);
+            this.gbTrigger.Size = new System.Drawing.Size(257, 145);
             this.gbTrigger.TabIndex = 3;
             this.gbTrigger.TabStop = false;
             this.gbTrigger.Text = "TRIGGER PROPERTIES";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
+            
+            //
+            // gbCombatOnly  
+            //   
+            this.gbCombatOnly.Controls.Add(this.label27);
+            this.gbCombatOnly.Controls.Add(this.label26);
+            this.gbCombatOnly.Controls.Add(this.numTriggerCallsAllowed);
+            this.gbCombatOnly.Controls.Add(this.chkTriggeredByCreatures);
+            this.gbCombatOnly.Controls.Add(this.chkTriggeredByPc);
+            this.gbCombatOnly.Location = new System.Drawing.Point(6, 65);
+            this.gbCombatOnly.Name = "gbCombatOnly";
+            this.gbCombatOnly.Size = new System.Drawing.Size(245, 76);
+            this.gbCombatOnly.TabIndex = 4;
+            this.gbCombatOnly.TabStop = false;
+            this.gbCombatOnly.Text = "Combat Only Settings";
+
+            //   
+            // label27  
+            //   
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(52, 58);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(159, 13);
+            this.label27.TabIndex = 9;
+            this.label27.Text = "before it will be disabled/deleted";
+            //   
+            // label26  
+            //   
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(50, 44);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(182, 13);
+            this.label26.TabIndex = 8;
+            this.label26.Text = "Number of times trigger can be called";
+            //   
+            // numTriggerCallsAllowed  
+            //   
+            this.numTriggerCallsAllowed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numTriggerCallsAllowed.Location = new System.Drawing.Point(6, 46);
+            this.numTriggerCallsAllowed.Maximum = new decimal(new int[] {
+             1000,
+             0,
+             0,
+             0});
+            this.numTriggerCallsAllowed.Name = "numTriggerCallsAllowed";
+            this.numTriggerCallsAllowed.Size = new System.Drawing.Size(42, 23);
+            this.numTriggerCallsAllowed.TabIndex = 7;
+            this.numTriggerCallsAllowed.Value = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numTriggerCallsAllowed.ValueChanged += new System.EventHandler(this.numTriggerCallsAllowed_ValueChanged);
+                        //   
+                        // chkTriggeredByCreatures  
+                        //   
+            this.chkTriggeredByCreatures.AutoSize = true;
+            this.chkTriggeredByCreatures.Location = new System.Drawing.Point(6, 29);
+            this.chkTriggeredByCreatures.Name = "chkTriggeredByCreatures";
+            this.chkTriggeredByCreatures.Size = new System.Drawing.Size(172, 17);
+            this.chkTriggeredByCreatures.TabIndex = 6;
+            this.chkTriggeredByCreatures.Text = "Can Be Triggered By Creatures";
+            this.chkTriggeredByCreatures.UseVisualStyleBackColor = true;
+            this.chkTriggeredByCreatures.CheckedChanged += new System.EventHandler(this.chkTriggeredByCreatures_CheckedChanged);
+                        //   
+                        // chkTriggeredByPc  
+                        //   
+            this.chkTriggeredByPc.AutoSize = true;
+            this.chkTriggeredByPc.Location = new System.Drawing.Point(6, 13);
+            this.chkTriggeredByPc.Name = "chkTriggeredByPc";
+            this.chkTriggeredByPc.Size = new System.Drawing.Size(146, 17);
+            this.chkTriggeredByPc.TabIndex = 5;
+            this.chkTriggeredByPc.Text = "Can Be Triggered By PCs";
+            this.chkTriggeredByPc.UseVisualStyleBackColor = true;
+            this.chkTriggeredByPc.CheckedChanged += new System.EventHandler(this.chkTriggeredByPc_CheckedChanged);
+                       // 
+                       // label1
+                       // 
+                       this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(4, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
@@ -185,7 +269,7 @@
             this.gbE1.Controls.Add(this.label2);
             this.gbE1.Controls.Add(this.chkE1once);
             this.gbE1.Controls.Add(this.chkE1enabled);
-            this.gbE1.Location = new System.Drawing.Point(3, 83);
+            this.gbE1.Location = new System.Drawing.Point(3, 154);
             this.gbE1.Name = "gbE1";
             this.gbE1.Size = new System.Drawing.Size(257, 208);
             this.gbE1.TabIndex = 4;
@@ -357,8 +441,8 @@
             this.cmbE1tag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbE1tag.DropDownWidth = 200;
             this.cmbE1tag.FormattingEnabled = true;
-            System.Windows.Forms.BindingContext cmbE1tag = new System.Windows.Forms.BindingContext();
-            this.cmbE1tag.BindingContext = cmbE1tag;
+            //System.Windows.Forms.BindingContext cmbE1tag = new System.Windows.Forms.BindingContext();
+            //this.cmbE1tag.BindingContext = cmbE1tag;
             this.cmbE1tag.Location = new System.Drawing.Point(9, 137);
             this.cmbE1tag.Name = "cmbE1tag";
             this.cmbE1tag.Size = new System.Drawing.Size(114, 21);
@@ -436,7 +520,7 @@
             this.gbE2.Controls.Add(this.label17);
             this.gbE2.Controls.Add(this.chkE2once);
             this.gbE2.Controls.Add(this.chkE2enabled);
-            this.gbE2.Location = new System.Drawing.Point(3, 297);
+            this.gbE2.Location = new System.Drawing.Point(3, 364);
             this.gbE2.Name = "gbE2";
             this.gbE2.Size = new System.Drawing.Size(257, 208);
             this.gbE2.TabIndex = 5;
@@ -607,8 +691,8 @@
             // 
             this.cmbE2tag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbE2tag.FormattingEnabled = true;
-            System.Windows.Forms.BindingContext cmbE2tag = new System.Windows.Forms.BindingContext();
-            this.cmbE2tag.BindingContext = cmbE2tag;
+            //System.Windows.Forms.BindingContext cmbE2tag = new System.Windows.Forms.BindingContext();
+            //this.cmbE2tag.BindingContext = cmbE2tag;
             this.cmbE2tag.Location = new System.Drawing.Point(9, 137);
             this.cmbE2tag.Name = "cmbE2tag";
             this.cmbE2tag.Size = new System.Drawing.Size(114, 21);
@@ -689,7 +773,7 @@
             this.pnlTrig.Location = new System.Drawing.Point(12, 6);
             this.pnlTrig.Name = "pnlTrig";
             //this.pnlTrig.Size = new System.Drawing.Size(282, 729);
-            this.pnlTrig.Size = new System.Drawing.Size(240, 729);
+            this.pnlTrig.Size = new System.Drawing.Size(240, 812);
             this.pnlTrig.TabIndex = 6;
             // 
             // rtxtScript
@@ -698,10 +782,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtxtScript.BackColor = System.Drawing.Color.White;
-            this.rtxtScript.Location = new System.Drawing.Point(3, 725);
+            this.rtxtScript.Location = new System.Drawing.Point(3, 787);
             this.rtxtScript.Name = "rtxtScript";
             this.rtxtScript.ReadOnly = true;
-            this.rtxtScript.Size = new System.Drawing.Size(257, 1);
+            this.rtxtScript.Size = new System.Drawing.Size(257, 22);
             this.rtxtScript.TabIndex = 19;
             this.rtxtScript.Text = "";
             this.rtxtScript.WordWrap = false;
@@ -717,7 +801,7 @@
             this.gbE3.Controls.Add(this.label25);
             this.gbE3.Controls.Add(this.chkE3once);
             this.gbE3.Controls.Add(this.chkE3enabled);
-            this.gbE3.Location = new System.Drawing.Point(3, 511);
+            this.gbE3.Location = new System.Drawing.Point(3, 575);
             this.gbE3.Name = "gbE3";
             this.gbE3.Size = new System.Drawing.Size(257, 208);
             this.gbE3.TabIndex = 6;
@@ -888,8 +972,8 @@
             // 
             this.cmbE3tag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbE3tag.FormattingEnabled = true;
-            System.Windows.Forms.BindingContext cmbE3tag = new System.Windows.Forms.BindingContext();
-            this.cmbE3tag.BindingContext = cmbE3tag;
+            //System.Windows.Forms.BindingContext cmbE3tag = new System.Windows.Forms.BindingContext();
+            //this.cmbE3tag.BindingContext = cmbE3tag;
             this.cmbE3tag.Location = new System.Drawing.Point(9, 137);
             this.cmbE3tag.Name = "cmbE3tag";
             this.cmbE3tag.Size = new System.Drawing.Size(114, 21);
@@ -960,7 +1044,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6f, 14f);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 741);
+            this.ClientSize = new System.Drawing.Size(304, 824);
             this.Controls.Add(this.pnlTrig);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
@@ -969,6 +1053,10 @@
             this.Text = "TriggerEvents";
             this.gbTrigger.ResumeLayout(false);
             this.gbTrigger.PerformLayout();
+            this.gbCombatOnly.ResumeLayout(false);
+            this.gbCombatOnly.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTriggerCallsAllowed)).EndInit();
+
             this.gbE1.ResumeLayout(false);
             this.gbE1.PerformLayout();
             this.gbE1transition.ResumeLayout(false);
@@ -1073,5 +1161,12 @@
         private System.Windows.Forms.CheckBox chkE3once;
         private System.Windows.Forms.CheckBox chkE3enabled;
         public System.Windows.Forms.RichTextBox rtxtScript;
+        private System.Windows.Forms.GroupBox gbCombatOnly;  
+        private System.Windows.Forms.CheckBox chkTriggeredByPc;  
+        private System.Windows.Forms.Label label26;  
+        private System.Windows.Forms.NumericUpDown numTriggerCallsAllowed;  
+        private System.Windows.Forms.CheckBox chkTriggeredByCreatures;  
+        private System.Windows.Forms.Label label27;
+
     }
 }

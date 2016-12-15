@@ -66,6 +66,10 @@ namespace IB2Toolset
 
         private bool ConversationCannotBeAvoided = true;
 
+        public int numberOfScriptCallsRemaining = 999;  
+        public bool canBeTriggeredByPc = true;  
+        public bool canBeTriggeredByCreature = true;
+
         #endregion
 
         #region Properties

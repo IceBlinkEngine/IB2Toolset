@@ -96,10 +96,24 @@ namespace IB2Toolset
         private List<EffectTagForDropDownList> _spellEffectTagList = new List<EffectTagForDropDownList>();
         public List<LocalImmunityString> traitWorksOnlyWhen = new List<LocalImmunityString>();
         public List<LocalImmunityString> traitWorksNeverWhen = new List<LocalImmunityString>();
+        private bool _isUsedForCombatSquareEffect = false;
 
         #endregion
 
         #region Properties
+        [CategoryAttribute("02 - Target"), DescriptionAttribute("Does this spell apply effects to combat squares?")]  
+         public bool isUsedForCombatSquareEffect
+        {  
+            get  
+            {
+                return _isUsedForCombatSquareEffect;  
+            }  
+            set  
+            {  
+                _isUsedForCombatSquareEffect = value;  
+            }  
+        }  
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of the Spell")]
         public string name
         {

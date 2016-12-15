@@ -43,8 +43,9 @@ namespace IB2Toolset
         public List<string> creatureResRefProperties = new List<string>() { "creatureResRef", "creatureTag", "creatureStartLocationX", "creatureStartLocationY"};
         public List<string> areaProperties = new List<string>() { "SizeOfProps", "Filename", "UseMiniMapFogOfWar", "areaDark", "UseDayNightCycle", "TimePerSquare", "MusicFileName", "ImageFileName", "MapSizeX", "MapSizeY", "AreaMusic", "AreaSounds", "SizeOfTriggers", "SizeOFAreaLocalInts", "SizeOfAreaLocalStrings", "OnHeartBeatIBScript", "OnHeartBeatIBScriptParms", "inGameAreaName" };
         public List<string> encounterProperties = new List<string>() { "encounterName", "MapImage", "UseMapImage", "UseDayNightCycle", "MapSizeX", "MapSizeY", "goldDrop", "AreaMusic", "AreaMusicDelay", "AreaMusicDelayRandomAdder", "OnSetupCombatIBScript", "OnSetupCombatIBScriptParms", "OnStartCombatRoundIBScript", "OnStartCombatRoundIBScriptParms", "OnStartCombatTurnIBScript", "OnStartCombatTurnIBScriptParms", "OnEndCombatIBScript", "OnEndCombatIBScriptParms", "SizeOfEncounterTiles", "SizeOfEncounterCreatureRefsList", "SizeOfEncounterCreatureList", "SizeOfEncounterInventoryRefsList", "SizeOfEncounterPcStartLocations"};
-        public List<string> currentEncounterProperties = new List<string>() { "encounterName", "MapImage", "UseMapImage", "UseDayNightCycle", "MapSizeX", "MapSizeY", "goldDrop", "AreaMusic", "AreaMusicDelay", "AreaMusicDelayRandomAdder", "OnSetupCombatIBScript", "OnSetupCombatIBScriptParms", "OnStartCombatRoundIBScript", "OnStartCombatRoundIBScriptParms", "OnStartCombatTurnIBScript", "OnStartCombatTurnIBScriptParms", "OnEndCombatIBScript", "OnEndCombatIBScriptParms", "SizeOfEncounterTiles", "SizeOfEncounterCreatureRefsList", "SizeOfEncounterCreatureList", "SizeOfEncounterInventoryRefsList", "SizeOfEncounterPcStartLocations" };
-        
+        //public List<string> currentEncounterProperties = new List<string>() { "encounterName", "MapImage", "UseMapImage", "UseDayNightCycle", "MapSizeX", "MapSizeY", "goldDrop", "AreaMusic", "AreaMusicDelay", "AreaMusicDelayRandomAdder", "OnSetupCombatIBScript", "OnSetupCombatIBScriptParms", "OnStartCombatRoundIBScript", "OnStartCombatRoundIBScriptParms", "OnStartCombatTurnIBScript", "OnStartCombatTurnIBScriptParms", "OnEndCombatIBScript", "OnEndCombatIBScriptParms", "SizeOfEncounterTiles", "SizeOfEncounterCreatureRefsList", "SizeOfEncounterCreatureList", "SizeOfEncounterInventoryRefsList", "SizeOfEncounterPcStartLocations" };
+        public List<string> currentEncounterProperties = new List<string>() { "encounterName", "MapImage", "UseMapImage", "UseDayNightCycle", "MapSizeX", "MapSizeY", "goldDrop", "triggerScriptCalledFromSquareLocX", "triggerScriptCalledFromSquareLocY", "AreaMusic", "AreaMusicDelay", "AreaMusicDelayRandomAdder", "OnSetupCombatIBScript", "OnSetupCombatIBScriptParms", "OnStartCombatRoundIBScript", "OnStartCombatRoundIBScriptParms", "OnStartCombatTurnIBScript", "OnStartCombatTurnIBScriptParms", "OnEndCombatIBScript", "OnEndCombatIBScriptParms", "SizeOfEncounterTiles", "SizeOfEncounterCreatureRefsList", "SizeOfEncounterCreatureList", "SizeOfEncounterInventoryRefsList", "SizeOfEncounterPcStartLocations" };            
+
 
 
 
@@ -497,42 +498,42 @@ namespace IB2Toolset
                 //player
                 if (cmbFunctions.SelectedIndex == 3)
                 {
-                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfPlayerList; @i++)" + "\n" + "   %Player[@i]." + text + "\n" + "next" + "\n";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfPlayerList; @i ++)" + "\n" + "   %Player[@i]." + text + "\n" + "next" + "\n";
                     wantedPosition += text.Length;
                     
                 }
                 //prop
                 else if (cmbFunctions.SelectedIndex == 4)
                 {
-                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleAreasObjects; @i++)" + "\n" + "   for (@j = 0; @j < %Area[@i].SizeOfProps; @j++)" + "\n" + "      %Prop{@j}.Area[@i]." + text + "\n" + "   next" + "\n" + "next" + "\n";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleAreasObjects; @i ++)" + "\n" + "   for (@j = 0; @j < %Area[@i].SizeOfProps; @j ++)" + "\n" + "      %Prop{@j}.Area[@i]." + text + "\n" + "   next" + "\n" + "next" + "\n";
                     wantedPosition += text.Length;
                 }
 
                 //CreatureInCurrentEncounter
                 else if (cmbFunctions.SelectedIndex == 5)
                 {
-                    text = "\n" + "for (@i = 0; @i <  %CurrentEncounter.SizeOfEncounterCreatureList; @i++)" + "\n" + "   %CreatureInCurrentEncounter[@i]." + text + "\n" + "next" + "\n";
+                    text = "\n" + "for (@i = 0; @i <  %CurrentEncounter.SizeOfEncounterCreatureList; @i ++)" + "\n" + "   %CreatureInCurrentEncounter[@i]." + text + "\n" + "next" + "\n";
                     wantedPosition += text.Length;
                 }
 
                 //CreatureResRef
                 else if (cmbFunctions.SelectedIndex == 6)
                 {
-                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleEncountersList; @i++)" + "\n" + "   for (@j = 0; @j < %Encounter[@i].SizeOfEncounterCreatureRefsList; @j++)" + "\n" + "      %CreatureResRef{@j}.Encounter[@i]." + text + "\n" + "   next" + "\n" + "next" + "\n";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleEncountersList; @i ++)" + "\n" + "   for (@j = 0; @j < %Encounter[@i].SizeOfEncounterCreatureRefsList; @j ++)" + "\n" + "      %CreatureResRef{@j}.Encounter[@i]." + text + "\n" + "   next" + "\n" + "next" + "\n";
                     wantedPosition += text.Length;
                 }
                     
                 //Area
                 else if (cmbFunctions.SelectedIndex == 7)
                 {
-                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleAreasObjects; @i++)" + "\n" + "   %Area[@i]." + text + "\n" + "next" + "\n";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleAreasObjects; @i ++)" + "\n" + "   %Area[@i]." + text + "\n" + "next" + "\n";
                     wantedPosition += text.Length;
                 }
 
                 //Encounter
                 else if (cmbFunctions.SelectedIndex == 8)
                 {
-                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleEncountersList; @i++)" + "\n" + "   %Encounter[@i]." + text + "\n" + "next" + "\n";
+                    text = "\n" + "for (@i = 0; @i < %Mod.SizeOfModuleEncountersList; @i ++)" + "\n" + "   %Encounter[@i]." + text + "\n" + "next" + "\n";
                     wantedPosition += text.Length;
                 }
                 //CurrentEncounter
@@ -572,7 +573,7 @@ namespace IB2Toolset
                 {
                     if (text == "for")
                     {
-                        text = "\n" + "for (@i = 0; @i < XXX; @i++)" + "\n" + "\n" + "next" + "\n";
+                        text = "\n" + "for (@i = 0; @i < XXX; @i ++)" + "\n" + "\n" + "next" + "\n";
                         wantedPosition += text.Length;
                     }
                     else if (text == "if")
