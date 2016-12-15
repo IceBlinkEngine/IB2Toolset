@@ -19,6 +19,9 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        private bool _isTrap = false;  
+        private int _trapDCforDisableCheck = 10;
+
         private int _LocationX = 0;
         private int _LocationY = 0;
         private int _LocationZ = 0;
@@ -120,7 +123,22 @@ namespace IB2Toolset
          {  
              get { return _OnEnterSquareScriptParm3; }  
              set { _OnEnterSquareScriptParm3 = value; }  
-         }  
+         }
+
+        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("if true, the prop is used as a trap and can be disabled by a thief (pass/fail check made) or other selected classes.")]  
+        public bool isTrap  
+        {  
+             get { return _isTrap; }  
+             set { _isTrap = value; }  
+        }
+          
+        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("the Difficulty Check value used when a Player tries to disable this trap.")]  
+        public int trapDCforDisableCheck
+        {  
+             get { return _trapDCforDisableCheck; }  
+             set { _trapDCforDisableCheck = value; }  
+        }  
+          
          [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 4 to be used for this Script hook (leave as 'none' if not used)")]  
          public string OnEnterSquareScriptParm4
          {  

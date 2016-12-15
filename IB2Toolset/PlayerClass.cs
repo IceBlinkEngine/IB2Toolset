@@ -77,6 +77,10 @@ namespace IB2Toolset
         private string _labelForUseTraitAction = "USE";
         private string _labelForTheUseTraitButtonInCombat = "TRAIT";
         private string _modifierFromSPRelevantAttribute = "intelligence";
+        //sort later which type of spell labeling to use
+        private string _spellLabelSingular = "Spell";  
+        private string _spellLabelPlural = "Spells";
+
         #endregion
 
         #region Properties
@@ -122,6 +126,21 @@ namespace IB2Toolset
             get { return _modifierFromSPRelevantAttribute; }
             set { _modifierFromSPRelevantAttribute = value; }
         }
+
+        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label used for Spell singular form on cast screens (ex. Spell, Trait, Power, etc.)")]  
+        public string spellLabelSingular  
+        {  
+             get { return _spellLabelSingular; }  
+             set { _spellLabelSingular = value; }  
+        }
+          
+        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label used for Spell plural form on cast screens (ex. Spells, Traits, Powers, etc.)")]  
+        public string spellLabelPlural
+        {  
+            get { return _spellLabelPlural; }
+            set { _spellLabelPlural = value; }  
+        }  
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the PlayerClass (Must be unique)")]
         public string tag
         {
