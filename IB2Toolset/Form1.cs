@@ -456,6 +456,14 @@ namespace IB2Toolset
                 string filename = Path.GetFullPath(openFileDialog1.FileName);
                 string directory = Path.GetDirectoryName(openFileDialog1.FileName);
                 openModule(filename);
+                foreach (Item it in mod.moduleItemsList)
+                {
+                     if (it.attackRange == 0)
+                     {
+                         it.attackRange = 1;
+                     }
+                }
+
                 openCreatures(directory + "\\data\\creatures.json");
                 openItems(directory + "\\data\\items.json");
                 openContainers(directory + "\\data\\containers.json");
