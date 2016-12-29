@@ -9049,6 +9049,8 @@
       }
     ],
     "goldDrop": 0,
+    "Triggers": [],
+    "propsList": [],
     "encounterName": "combattest",
     "MapImage": "none",
     "UseMapImage": false,
@@ -20213,6 +20215,8 @@
       }
     ],
     "goldDrop": 0,
+    "Triggers": [],
+    "propsList": [],
     "encounterName": "spidermover",
     "MapImage": "none",
     "UseMapImage": false,
@@ -25973,6 +25977,8 @@
       }
     ],
     "goldDrop": 0,
+    "Triggers": [],
+    "propsList": [],
     "encounterName": "spiders",
     "MapImage": "homeusEnc",
     "UseMapImage": true,
@@ -27327,6 +27333,8 @@
       }
     ],
     "goldDrop": 0,
+    "Triggers": [],
+    "propsList": [],
     "encounterName": "TestEnc",
     "MapImage": "none",
     "UseMapImage": false,
@@ -33087,6 +33095,8 @@
       }
     ],
     "goldDrop": 0,
+    "Triggers": [],
+    "propsList": [],
     "encounterName": "spiderAttack",
     "MapImage": "homeusEnc",
     "UseMapImage": true,

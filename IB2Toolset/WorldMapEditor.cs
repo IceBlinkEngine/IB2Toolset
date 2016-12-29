@@ -1386,6 +1386,7 @@ namespace IB2Toolset
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         area.Tiles[selectedTile.index].heightLevel += 1;
+                        calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
                     else if (rbtnWalkable.Checked)
@@ -1497,6 +1498,7 @@ namespace IB2Toolset
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         area.Tiles[selectedTile.index].heightLevel -= 1;
+                        calculateHeightShadows();
                         //break;
                         //ContextMenuStrip.Items.Clear();
                         //contextMenuStrip1.Items.Clear();
@@ -1830,6 +1832,587 @@ namespace IB2Toolset
             }
             if (mod.useAllTileSystem)
             {
+                //calculate shadow state of a shaded tile alredy on toolset level
+                //two advantages: faster at runtime and enjoy correct shaodw graphics while building in toolset
+                //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                /*
+
+                public void drawHeightLevelShadows()
+        {
+            if (mod.useAllTileSystem)
+            {
+                #region new system
+                gv.mod.indexOfNorthernNeighbour = -1;
+                gv.mod.indexOfSouthernNeighbour = -1;
+                gv.mod.indexOfEasternNeighbour = -1;
+                gv.mod.indexOfWesternNeighbour = -1;
+                gv.mod.indexOfNorthEasternNeighbour = -1;
+                gv.mod.indexOfNorthWesternNeighbour = -1;
+                gv.mod.indexOfSouthEasternNeighbour = -1;
+                gv.mod.indexOfSouthWesternNeighbour = -1;
+
+                gv.mod.seamlessModififierMinX = 0;
+                mod.seamlessModififierMaxX = 0;
+                gv.mod.seamlessModififierMinY = 0;
+                gv.mod.seamlessModififierMaxY = 0;
+
+                #region neighbours
+                if ((gv.mod.currentArea.northernNeighbourArea != "") && (gv.mod.PlayerLocationY <= gv.playerOffsetY))
+                {
+                    gv.mod.seamlessModififierMinY = gv.playerOffsetY - gv.mod.PlayerLocationY;
+                    for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.currentArea.northernNeighbourArea)
+                        {
+                            gv.mod.indexOfNorthernNeighbour = i;
+                        }
+                    }
+
+                    if (gv.mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].easternNeighbourArea != "")
+                    {
+                        if (gv.mod.PlayerLocationX > (gv.mod.currentArea.MapSizeX - gv.playerOffsetX - 1))
+                        {
+                            gv.mod.seamlessModififierMaxX = gv.mod.PlayerLocationX - (gv.mod.currentArea.MapSizeX - gv.playerOffsetX - 1);
+                        }
+                        for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                        {
+                            if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].easternNeighbourArea)
+                            {
+                                gv.mod.indexOfNorthEasternNeighbour = i;
+                            }
+                        }
+                    }
+
+                    if (gv.mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].westernNeighbourArea != "")
+                    {
+                        if (gv.mod.PlayerLocationX <= gv.playerOffsetX) 
+                        {
+                        gv.mod.seamlessModififierMinX = gv.playerOffsetX - gv.mod.PlayerLocationX;
+                        }
+
+                        for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                        {
+                            if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].westernNeighbourArea)
+                            {
+                                gv.mod.indexOfNorthWesternNeighbour = i;
+                            }
+                        }
+                    }
+                }
+
+                if ((gv.mod.currentArea.southernNeighbourArea != "") && (gv.mod.PlayerLocationY > (gv.mod.currentArea.MapSizeY - gv.playerOffsetY - 1)))
+                {
+
+                    gv.mod.seamlessModififierMaxY = gv.mod.PlayerLocationY - (gv.mod.currentArea.MapSizeY - gv.playerOffsetY - 1);
+                    for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.currentArea.southernNeighbourArea)
+                        {
+                            gv.mod.indexOfSouthernNeighbour = i;
+                        }
+                    }
+
+                    if (gv.mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].easternNeighbourArea != "")
+                    {
+                        if (gv.mod.PlayerLocationX > (gv.mod.currentArea.MapSizeX - gv.playerOffsetX - 1))
+                        {
+                            gv.mod.seamlessModififierMaxX = gv.mod.PlayerLocationX - (gv.mod.currentArea.MapSizeX - gv.playerOffsetX - 1);
+                        }
+                        for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                        {
+                            if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].easternNeighbourArea)
+                            {
+                                gv.mod.indexOfSouthEasternNeighbour = i;
+                            }
+                        }
+                    }
+
+                    if (gv.mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].westernNeighbourArea != "")
+                    {
+                        if (gv.mod.PlayerLocationX <= gv.playerOffsetX)
+                        {
+                            gv.mod.seamlessModififierMinX = gv.playerOffsetX - gv.mod.PlayerLocationX;
+                        }
+                        for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                        {
+                            if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].westernNeighbourArea)
+                            {
+                                gv.mod.indexOfSouthWesternNeighbour = i;
+                            }
+                        }
+                    }
+                }
+
+                if ((gv.mod.currentArea.westernNeighbourArea != "") && (gv.mod.PlayerLocationX <= gv.playerOffsetX))
+                {
+                    gv.mod.seamlessModififierMinX = gv.playerOffsetX - gv.mod.PlayerLocationX;
+                    for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.currentArea.westernNeighbourArea)
+                        {
+                            gv.mod.indexOfWesternNeighbour = i;
+                        }
+                    }
+
+                    if (gv.mod.moduleAreasObjects[gv.mod.indexOfWesternNeighbour].northernNeighbourArea != "")
+                    {
+                        
+                        if (gv.mod.PlayerLocationY <= gv.playerOffsetY)
+                        {
+                            gv.mod.seamlessModififierMinY = gv.playerOffsetY - gv.mod.PlayerLocationY;
+                        }
+                        
+                        for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                        {
+                            if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.moduleAreasObjects[gv.mod.indexOfWesternNeighbour].northernNeighbourArea)
+                            {
+                                gv.mod.indexOfNorthWesternNeighbour = i;
+                            }
+                        }
+                    }
+
+                    if (gv.mod.moduleAreasObjects[gv.mod.indexOfWesternNeighbour].southernNeighbourArea != "")
+                    {
+
+                        if (gv.mod.PlayerLocationY > (gv.mod.currentArea.MapSizeY - gv.playerOffsetY - 1))
+                        {
+                            gv.mod.seamlessModififierMaxY = gv.mod.PlayerLocationY - (gv.mod.currentArea.MapSizeY - gv.playerOffsetY - 1);
+                        }
+                        
+                        for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                        {
+                            if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.moduleAreasObjects[gv.mod.indexOfWesternNeighbour].southernNeighbourArea)
+                            {
+                                gv.mod.indexOfSouthWesternNeighbour = i;
+                            }
+                        }
+                    }
+                }
+
+                if ((gv.mod.currentArea.easternNeighbourArea != "") && (gv.mod.PlayerLocationX > (gv.mod.currentArea.MapSizeX - gv.playerOffsetX - 1)))
+                {
+                    gv.mod.seamlessModififierMaxX = gv.mod.PlayerLocationX - (gv.mod.currentArea.MapSizeX - gv.playerOffsetX - 1);
+                    for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.currentArea.easternNeighbourArea)
+                        {
+                            gv.mod.indexOfEasternNeighbour = i;
+                        }
+                    }
+
+                    if (gv.mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].northernNeighbourArea != "")
+                    {
+                        if (gv.mod.PlayerLocationY <= gv.playerOffsetY)
+                        {
+                            gv.mod.seamlessModififierMinY = gv.playerOffsetY - gv.mod.PlayerLocationY;
+                        }
+                        
+                        for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                        {
+                            if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].northernNeighbourArea)
+                            {
+                                gv.mod.indexOfNorthEasternNeighbour = i;
+                            }
+                        }
+                    }
+
+                    if (gv.mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].southernNeighbourArea != "")
+                    {
+                        if (gv.mod.PlayerLocationY > (gv.mod.currentArea.MapSizeY - gv.playerOffsetY - 1))
+                        {
+                            gv.mod.seamlessModififierMaxY = gv.mod.PlayerLocationY - (gv.mod.currentArea.MapSizeY - gv.playerOffsetY - 1);
+                        }
+                        for (int i = 0; i < gv.mod.moduleAreasObjects.Count; i++)
+                        {
+                            if (gv.mod.moduleAreasObjects[i].Filename == gv.mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].southernNeighbourArea)
+                            {
+                                gv.mod.indexOfSouthEasternNeighbour = i;
+                            }
+                        }
+                    }
+                }
+                #endregion
+                //foreach (Area a in gv.mod.moduleAreasObjects)
+
+                int minX = mod.PlayerLocationX - gv.playerOffsetX - 3; //using -2 in case a large tile (3x3) needs to start off the visible map space to be seen
+                if (minX < -gv.mod.seamlessModififierMinX -1) { minX = -gv.mod.seamlessModififierMinX - 1; }
+                int minY = mod.PlayerLocationY - gv.playerOffsetY - 3; //using -2 in case a large tile (3x3) needs to start off the visible map space to be seen
+                if (minY < -gv.mod.seamlessModififierMinY - 1) { minY = -gv.mod.seamlessModififierMinY - 1; }
+
+                int maxX = mod.PlayerLocationX + gv.playerOffsetX + 1;
+                if (maxX > this.mod.currentArea.MapSizeX + gv.mod.seamlessModififierMaxX) { maxX = this.mod.currentArea.MapSizeX + gv.mod.seamlessModififierMaxX; }
+                int maxY = mod.PlayerLocationY + gv.playerOffsetY +1;
+                if (maxY > this.mod.currentArea.MapSizeY + gv.mod.seamlessModififierMaxY) { maxY = this.mod.currentArea.MapSizeY + gv.mod.seamlessModififierMaxY; }
+
+                #region Draw Layer 1
+                for (int x = minX; x < maxX; x++)
+                {
+                    for (int y = minY; y < maxY; y++)
+                    {
+                        //Tile tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                        bool situationFound = false;
+                        bool drawTile = true;
+                        int index = -1;
+                        Tile tile = new Tile();
+
+                        //nine situations where a tile can be:
+                        //tile on north-western map (diagonal situation)
+                        if ((x < 0) && (y < 0) && (!situationFound))
+                        {
+                            situationFound = true;
+                            if (gv.mod.indexOfNorthWesternNeighbour != -1)
+                            {
+                                int transformedX = mod.moduleAreasObjects[gv.mod.indexOfNorthWesternNeighbour].MapSizeX + x;
+                                int transformedY = mod.moduleAreasObjects[gv.mod.indexOfNorthWesternNeighbour].MapSizeY + y;
+                                tile = mod.moduleAreasObjects[gv.mod.indexOfNorthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfNorthWesternNeighbour].MapSizeX + transformedX];
+                                index = gv.mod.indexOfNorthWesternNeighbour;
+
+                                //now we know the potentially shaded tile, we need information on how it is shaded
+                                //this requires information on the height levels of all neighbouring tiles, relative to the current tile's height
+                                //this requires a loop checking the tiles neighbouring the current tile
+                                //main difficulty is that the neighbouring tiles can very well be on different maps than the currrent tile
+                                //consequence is we will need to nest the above mechanism again 
+                                for (int nx = -1; nx < 2; nx++)
+                                {
+                                    for (int ny = -1; ny < 2; ny++)
+                                    {
+                                        //nine situations where a shadow granting tile can be:
+                                        //shadow granting tile on north-western map (diagonal situation)
+                                        if ((x + nx < 0) && (y + ny < 0) && (!situationFound))
+                                        {
+
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                drawTile = false;
+                            }
+                        }
+                        //tile on south-westernmap (diagonal situation)
+                        if ((x < 0) && (y > (gv.mod.currentArea.MapSizeY - 1)) && (!situationFound))
+                        {
+                            situationFound = true;
+                            if (gv.mod.indexOfSouthWesternNeighbour != -1)
+                            {
+                                int transformedX = mod.moduleAreasObjects[gv.mod.indexOfSouthWesternNeighbour].MapSizeX + x;
+                                int transformedY = y - gv.mod.currentArea.MapSizeY;
+                                tile = mod.moduleAreasObjects[gv.mod.indexOfSouthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfSouthWesternNeighbour].MapSizeX + transformedX];
+                                index = gv.mod.indexOfSouthWesternNeighbour;
+                            }
+                            else
+                            {
+                                drawTile = false;
+                            }
+                        }
+                        //tile on south-easternmap (diagonal situation)
+                        if ((x > (gv.mod.currentArea.MapSizeX - 1)) && (y > (gv.mod.currentArea.MapSizeY - 1)) && (!situationFound))
+                        {
+                            situationFound = true;
+                            if (gv.mod.indexOfSouthEasternNeighbour != -1)
+                            {
+                                int transformedX = x - gv.mod.currentArea.MapSizeX;
+                                int transformedY = y - gv.mod.currentArea.MapSizeY;
+                                tile = mod.moduleAreasObjects[gv.mod.indexOfSouthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfSouthEasternNeighbour].MapSizeX + transformedX];
+                                index = gv.mod.indexOfSouthEasternNeighbour;
+                            }
+                            else
+                            {
+                                drawTile = false;
+                            }
+                        }
+                        //tile on north-easternmap (diagonal situation)
+                        if ((x > (gv.mod.currentArea.MapSizeX - 1)) && (y < 0) && (!situationFound))
+                        {
+                            situationFound = true;
+                            if (gv.mod.indexOfNorthEasternNeighbour != -1)
+                            {
+                                int transformedX = x - gv.mod.currentArea.MapSizeX;
+                                int transformedY = mod.moduleAreasObjects[gv.mod.indexOfNorthEasternNeighbour].MapSizeY + y;
+                                tile = mod.moduleAreasObjects[gv.mod.indexOfNorthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfNorthEasternNeighbour].MapSizeX + transformedX];
+                                index = gv.mod.indexOfNorthEasternNeighbour;
+                            }
+                            else
+                            {
+                                drawTile = false;
+                            }
+                        }
+                        //tile on western map
+                        if ((x < 0) && (!situationFound))
+                        {
+                            situationFound = true;
+                            if (gv.mod.indexOfWesternNeighbour != -1)
+                            {
+                                int transformedX = mod.moduleAreasObjects[gv.mod.indexOfWesternNeighbour].MapSizeX + x;
+                                int transformedY = y;
+                                tile = mod.moduleAreasObjects[gv.mod.indexOfWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfWesternNeighbour].MapSizeX + transformedX];
+                                index = gv.mod.indexOfWesternNeighbour;
+                            }
+                            else
+                            {
+                                drawTile = false;
+                            }
+                        }
+                        //tile on southern map
+                        if ((y > (gv.mod.currentArea.MapSizeY - 1)) && (!situationFound))
+                        {
+                            situationFound = true;
+                            if (gv.mod.indexOfSouthernNeighbour != -1)
+                            {
+                                int transformedX = x;
+                                int transformedY = y - gv.mod.currentArea.MapSizeY;
+                                tile = mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].MapSizeX + transformedX];
+                                index = gv.mod.indexOfSouthernNeighbour;
+                            }
+                            else
+                            {
+                                drawTile = false;
+                            }
+                        }
+                        //tile on eastern map
+                        if ((x > (gv.mod.currentArea.MapSizeX - 1)) && (!situationFound))
+                        {
+                            situationFound = true;
+                            if (gv.mod.indexOfEasternNeighbour != -1)
+                            {
+                                int transformedX = x - gv.mod.currentArea.MapSizeX;
+                                int transformedY = y;
+                                tile = mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].MapSizeX + transformedX];
+                                index = gv.mod.indexOfEasternNeighbour;
+                            }
+                            else
+                            {
+                                drawTile = false;
+                            }
+                        }
+                        //tile on northern map
+                        if ((y < 0) && (!situationFound))
+                        {
+                            situationFound = true;
+                            if (gv.mod.indexOfNorthernNeighbour != -1)
+                            {
+                                int transformedX = x;
+                                int transformedY = mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].MapSizeY + y;
+                                tile = mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].MapSizeX + transformedX];
+                                index = gv.mod.indexOfNorthernNeighbour;
+                            }
+                            else
+                            {
+                                drawTile = false;
+                            }
+                        }
+                        //tile is on current map
+                        if (!situationFound)
+                        {
+                            tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                        }
+
+                        if (drawTile)
+                        {
+                            try
+                            {
+
+                                bool tileBitmapIsLoadedAlready = false;
+                                int indexOfLoadedTile = -1;
+                                for (int i = 0; i < gv.mod.loadedTileBitmapsNames.Count; i++)
+                                {
+                                    if (gv.mod.loadedTileBitmapsNames[i] == tile.Layer1Filename)
+                                    {
+                                        tileBitmapIsLoadedAlready = true;
+                                        indexOfLoadedTile = i;
+                                        break;
+                                    }
+                                }
+
+                                //hurghx
+                                if (!tileBitmapIsLoadedAlready)
+                                {
+                                    gv.mod.loadedTileBitmapsNames.Add(tile.Layer1Filename);
+                                    string backup = mod.currentArea.sourceBitmapName;
+                                    if (index != -1)
+                                    {
+                                        mod.currentArea.sourceBitmapName = mod.moduleAreasObjects[index].sourceBitmapName;
+                                    }
+                                    tile.tileBitmap1 = gv.cc.LoadBitmap(tile.Layer1Filename);
+                                    //tile.tileBitmap0 = gv.cc.LoadBitmapSubdirectory(tile.Layer0Filename, gv.mod.currentArea);
+                                    mod.currentArea.sourceBitmapName = backup;
+
+                                    //tile.tileBitmap1 = gv.cc.LoadBitmap(tile.Layer1Filename);
+
+                                    int tlX = (x - mod.PlayerLocationX + gv.playerOffsetX) * gv.squareSize;
+                                    int tlY = (y - mod.PlayerLocationY + gv.playerOffsetY) * gv.squareSize;
+                                    float scalerX = tile.tileBitmap1.PixelSize.Width / 100;
+                                    float scalerY = tile.tileBitmap1.PixelSize.Height / 100;
+                                    int brX = (int)(gv.squareSize * scalerX);
+                                    int brY = (int)(gv.squareSize * scalerY);
+                                    IbRect src = new IbRect(0, 0, tile.tileBitmap1.PixelSize.Width, tile.tileBitmap1.PixelSize.Height);
+                                    IbRect dst = new IbRect(tlX + gv.oXshift + mapStartLocXinPixels, tlY, brX, brY);
+
+                                    gv.mod.loadedTileBitmaps.Add(tile.tileBitmap1);
+                                    gv.DrawBitmap(tile.tileBitmap1, src, dst);
+                                }
+                                else
+                                {
+                                    int tlX = (x - mod.PlayerLocationX + gv.playerOffsetX) * gv.squareSize;
+                                    int tlY = (y - mod.PlayerLocationY + gv.playerOffsetY) * gv.squareSize;
+                                    float scalerX = gv.mod.loadedTileBitmaps[indexOfLoadedTile].PixelSize.Width / 100;
+                                    float scalerY = gv.mod.loadedTileBitmaps[indexOfLoadedTile].PixelSize.Height / 100;
+                                    int brX = (int)(gv.squareSize * scalerX);
+                                    int brY = (int)(gv.squareSize * scalerY);
+                                    IbRect src = new IbRect(0, 0, gv.mod.loadedTileBitmaps[indexOfLoadedTile].PixelSize.Width, gv.mod.loadedTileBitmaps[indexOfLoadedTile].PixelSize.Height);
+                                    IbRect dst = new IbRect(tlX + gv.oXshift + mapStartLocXinPixels, tlY, brX, brY);
+
+                                    gv.DrawBitmap(gv.mod.loadedTileBitmaps[indexOfLoadedTile], src, dst);
+                                }
+
+                                //gv.DrawBitmap(gv.cc.tileBitmapList[tile.Layer1Filename], src, dst);
+                            }
+                            catch { }
+                        }
+                    }
+                }
+                #endregion
+                
+                #endregion
+            }
+            else //old system using single image background and no load tile images on demand
+            {
+                #region old system
+                int minX = mod.PlayerLocationX - gv.playerOffsetX - 2; //using -2 in case a large tile (3x3) needs to start off the visible map space to be seen
+                if (minX < 0) { minX = 0; }
+                int minY = mod.PlayerLocationY - gv.playerOffsetY - 2; //using -2 in case a large tile (3x3) needs to start off the visible map space to be seen
+                if (minY < 0) { minY = 0; }
+
+                int maxX = mod.PlayerLocationX + gv.playerOffsetX + 1;
+                if (maxX > this.mod.currentArea.MapSizeX) { maxX = this.mod.currentArea.MapSizeX; }
+                int maxY = mod.PlayerLocationY + gv.playerOffsetY + 2; // use 2 so that extends down to bottom of screen
+                if (maxY > this.mod.currentArea.MapSizeY) { maxY = this.mod.currentArea.MapSizeY; }
+
+                #region Draw Layer 1
+                for (int x = minX; x < maxX; x++)
+                {
+                    for (int y = minY; y < maxY; y++)
+                    {
+                        Tile tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                        int tlX = (x - mod.PlayerLocationX + gv.playerOffsetX) * gv.squareSize;
+                        int tlY = (y - mod.PlayerLocationY + gv.playerOffsetY) * gv.squareSize;
+                        float scalerX = gv.cc.GetFromTileBitmapList(tile.Layer1Filename).PixelSize.Width / 100;
+                        float scalerY = gv.cc.GetFromTileBitmapList(tile.Layer1Filename).PixelSize.Height / 100;
+                        int brX = (int)(gv.squareSize * scalerX);
+                        int brY = (int)(gv.squareSize * scalerY);
+
+                        try
+                        {
+                            IbRect src = new IbRect(0, 0, gv.cc.GetFromTileBitmapList(tile.Layer1Filename).PixelSize.Width, gv.cc.GetFromTileBitmapList(tile.Layer1Filename).PixelSize.Height);
+                            IbRect dst = new IbRect(tlX + gv.oXshift + mapStartLocXinPixels, tlY, brX, brY);
+                            gv.DrawBitmap(gv.cc.GetFromTileBitmapList(tile.Layer1Filename), src, dst, tile.Layer1Rotate, tile.Layer1Mirror, tile.Layer1Xshift, tile.Layer1Yshift, tile.Layer1Xscale, tile.Layer1Yscale);
+                        }
+                        catch { }
+                    }
+                }
+                #endregion
+                #region Draw Layer 2
+                for (int x = minX; x < maxX; x++)
+                {
+                    for (int y = minY; y < maxY; y++)
+                    {
+                        Tile tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                        int tlX = (x - mod.PlayerLocationX + gv.playerOffsetX) * gv.squareSize;
+                        int tlY = (y - mod.PlayerLocationY + gv.playerOffsetY) * gv.squareSize;
+                        float scalerX = gv.cc.GetFromTileBitmapList(tile.Layer2Filename).PixelSize.Width / 100;
+                        float scalerY = gv.cc.GetFromTileBitmapList(tile.Layer2Filename).PixelSize.Height / 100;
+                        int brX = (int)(gv.squareSize * scalerX);
+                        int brY = (int)(gv.squareSize * scalerY);
+
+                        try
+                        {
+                            IbRect src = new IbRect(0, 0, gv.cc.GetFromTileBitmapList(tile.Layer2Filename).PixelSize.Width, gv.cc.GetFromTileBitmapList(tile.Layer2Filename).PixelSize.Height);
+                            IbRect dst = new IbRect(tlX + gv.oXshift + mapStartLocXinPixels, tlY, brX, brY);
+                            gv.DrawBitmap(gv.cc.GetFromTileBitmapList(tile.Layer2Filename), src, dst, tile.Layer2Rotate, tile.Layer2Mirror, tile.Layer2Xshift, tile.Layer2Yshift, tile.Layer2Xscale, tile.Layer2Yscale);
+                        }
+                        catch { }
+                    }
+                }
+                #endregion
+                #region Draw Layer 3
+                for (int x = minX; x < maxX; x++)
+                {
+                    for (int y = minY; y < maxY; y++)
+                    {
+                        Tile tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                        int tlX = (x - mod.PlayerLocationX + gv.playerOffsetX) * gv.squareSize;
+                        int tlY = (y - mod.PlayerLocationY + gv.playerOffsetY) * gv.squareSize;
+                        float scalerX = gv.cc.GetFromTileBitmapList(tile.Layer3Filename).PixelSize.Width / 100;
+                        float scalerY = gv.cc.GetFromTileBitmapList(tile.Layer3Filename).PixelSize.Height / 100;
+                        int brX = (int)(gv.squareSize * scalerX);
+                        int brY = (int)(gv.squareSize * scalerY);
+
+                        try
+                        {
+                            IbRect src = new IbRect(0, 0, gv.cc.GetFromTileBitmapList(tile.Layer3Filename).PixelSize.Width, gv.cc.GetFromTileBitmapList(tile.Layer3Filename).PixelSize.Height);
+                            IbRect dst = new IbRect(tlX + gv.oXshift + mapStartLocXinPixels, tlY, brX, brY);
+                            gv.DrawBitmap(gv.cc.GetFromTileBitmapList(tile.Layer3Filename), src, dst, tile.Layer3Rotate, tile.Layer3Mirror, tile.Layer3Xshift, tile.Layer3Yshift, tile.Layer3Xscale, tile.Layer3Yscale);
+                        }
+                        catch { }
+                    }
+                }
+                #endregion
+                #region Draw Layer 4
+                for (int x = minX; x < maxX; x++)
+                {
+                    for (int y = minY; y < maxY; y++)
+                    {
+                        Tile tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                        int tlX = (x - mod.PlayerLocationX + gv.playerOffsetX) * gv.squareSize;
+                        int tlY = (y - mod.PlayerLocationY + gv.playerOffsetY) * gv.squareSize;
+                        float scalerX = gv.cc.GetFromTileBitmapList(tile.Layer4Filename).PixelSize.Width / 100;
+                        float scalerY = gv.cc.GetFromTileBitmapList(tile.Layer4Filename).PixelSize.Height / 100;
+                        int brX = (int)(gv.squareSize * scalerX);
+                        int brY = (int)(gv.squareSize * scalerY);
+
+                        try
+                        {
+                            IbRect src = new IbRect(0, 0, gv.cc.GetFromTileBitmapList(tile.Layer4Filename).PixelSize.Width, gv.cc.GetFromTileBitmapList(tile.Layer4Filename).PixelSize.Height);
+                            IbRect dst = new IbRect(tlX + gv.oXshift + mapStartLocXinPixels, tlY, brX, brY);
+                            gv.DrawBitmap(gv.cc.GetFromTileBitmapList(tile.Layer4Filename), src, dst, tile.Layer4Rotate, tile.Layer4Mirror, tile.Layer4Xshift, tile.Layer4Yshift, tile.Layer4Xscale, tile.Layer4Yscale);
+                        }
+                        catch { }
+                    }
+                }
+                #endregion
+                #region Draw Layer 5
+                for (int x = minX; x < maxX; x++)
+                {
+                    for (int y = minY; y < maxY; y++)
+                    {
+                        Tile tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                        int tlX = (x - mod.PlayerLocationX + gv.playerOffsetX) * gv.squareSize;
+                        int tlY = (y - mod.PlayerLocationY + gv.playerOffsetY) * gv.squareSize;
+                        float scalerX = gv.cc.GetFromTileBitmapList(tile.Layer5Filename).PixelSize.Width / 100;
+                        float scalerY = gv.cc.GetFromTileBitmapList(tile.Layer5Filename).PixelSize.Height / 100;
+                        int brX = (int)(gv.squareSize * scalerX);
+                        int brY = (int)(gv.squareSize * scalerY);
+
+                        try
+                        {
+                            IbRect src = new IbRect(0, 0, gv.cc.GetFromTileBitmapList(tile.Layer5Filename).PixelSize.Width, gv.cc.GetFromTileBitmapList(tile.Layer5Filename).PixelSize.Height);
+                            IbRect dst = new IbRect(tlX + gv.oXshift + mapStartLocXinPixels, tlY, brX, brY);
+                            gv.DrawBitmap(gv.cc.GetFromTileBitmapList(tile.Layer5Filename), src, dst, tile.Layer5Rotate, tile.Layer5Mirror, tile.Layer5Xshift, tile.Layer5Yshift, tile.Layer5Xscale, tile.Layer5Yscale);
+                        }
+                        catch { }
+                    }
+                }
+                #endregion
+
+                #endregion
+            }
+        }
+
+                */
+                //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
                 #region Draw Layer 0
                 if (area.sourceBitmapName != "")
                 {
@@ -2135,10 +2718,1460 @@ namespace IB2Toolset
                 catch (Exception ex) { MessageBox.Show("failed mouse move update to be placed tile: " + ex.ToString()); }
             }
             #endregion
-        }
+
+            #region draw Height Shadows
+
+            for (int y = 0; y < area.MapSizeY; y++)
+            {
+                for (int x = 0; x < area.MapSizeX; x++)
+                {
+                    Tile tile = area.Tiles[y * area.MapSizeX + x];
+                    if ( tile.heightLevel != 0)
+                    {
+                        int ghg = 0;
+                    }
+                    SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("longShadow").PixelSize.Width, GetFromBitmapList("longShadow").PixelSize.Height);
+                    SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+
+                    if (tile.isInLongShadeN)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("longShadow"), src, dst, 180, false, 0, 0);
+                    }
+                    else if (tile.isInShortShadeN)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);
+                    }
+
+                    if (tile.isInLongShadeE)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("longShadow"), src, dst, 270, false, 0, 0);
+                    }
+                    else if (tile.isInShortShadeE)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
+                    }
+
+                    if (tile.isInLongShadeS)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("longShadow"), src, dst, 0, false, 0, 0);
+                    }
+                    else if (tile.isInShortShadeS)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
+                    }
+
+                    if (tile.isInLongShadeW)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("longShadow"), src, dst, 90, false, 0, 0);
+                    }
+                    else if (tile.isInShortShadeW)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
+                    }
+
+                    if (!tile.isInLongShadeN && !tile.isInShortShadeN && !tile.isInLongShadeW && !tile.isInShortShadeW)
+                    {
+                        if (tile.isInLongShadeNW)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 180, false, 0, 0);
+                        }
+                        else if (tile.isInShortShadeNW)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 180, false, 0, 0);
+                        }
+                    }
+
+                    if (!tile.isInLongShadeN && !tile.isInShortShadeN && !tile.isInLongShadeE && !tile.isInShortShadeE)
+                    {
+                        if (tile.isInLongShadeNE)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 270, false, 0, 0);
+                        }
+                        else if (tile.isInShortShadeNE)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 270, false, 0, 0);
+                        }
+                    }
+
+                    if (!tile.isInLongShadeS && !tile.isInShortShadeS && !tile.isInLongShadeE && !tile.isInShortShadeE)
+                    {
+                        if (tile.isInLongShadeSE)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 0, false, 0, 0);
+                        }
+                        else if (tile.isInShortShadeSE)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 0, false, 0, 0);
+                        }
+                    }
+
+                    if (!tile.isInLongShadeS && !tile.isInShortShadeS && !tile.isInLongShadeW && !tile.isInShortShadeW)
+                    {
+                        if (tile.isInLongShadeSW)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 90, false, 0, 0);
+                        }
+                        else if (tile.isInShortShadeSW)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 90, false, 0, 0);
+                        }
+                    }
+                }
+            }
+
+
+                        #endregion
+
+                        /*
+                        #region Draw Height Shadows
+
+                        int indexOfNorthernNeighbour = -1;
+                        int indexOfSouthernNeighbour = -1;
+                        int indexOfEasternNeighbour = -1;
+                        int indexOfWesternNeighbour = -1;
+                        int indexOfNorthEasternNeighbour = -1;
+                        int indexOfNorthWesternNeighbour = -1;
+                        int indexOfSouthEasternNeighbour = -1;
+                        int indexOfSouthWesternNeighbour = -1;
+
+                        #region neighbours
+                        if ((area.northernNeighbourArea != ""))
+                        {
+                            for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                            {
+                                if (mod.moduleAreasObjects[i].Filename == area.northernNeighbourArea)
+                                {
+                                   indexOfNorthernNeighbour = i;
+                                }
+                            }
+
+                            if (mod.moduleAreasObjects[indexOfNorthernNeighbour].easternNeighbourArea != "")
+                            {
+                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                                {
+                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfNorthernNeighbour].easternNeighbourArea)
+                                    {
+                                        indexOfNorthEasternNeighbour = i;
+                                    }
+                                }
+                            }
+
+                            if (mod.moduleAreasObjects[indexOfNorthernNeighbour].westernNeighbourArea != "")
+                            {
+                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                                {
+                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfNorthernNeighbour].westernNeighbourArea)
+                                    {
+                                        indexOfNorthWesternNeighbour = i;
+                                    }
+                                }
+                            }
+                        }
+
+                        if ((area.southernNeighbourArea != ""))
+                        {
+                            for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                            {
+                                if (mod.moduleAreasObjects[i].Filename == area.southernNeighbourArea)
+                                {
+                                    indexOfSouthernNeighbour = i;
+                                }
+                            }
+
+                            if (mod.moduleAreasObjects[indexOfSouthernNeighbour].easternNeighbourArea != "")
+                            {
+                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                                {
+                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfSouthernNeighbour].easternNeighbourArea)
+                                    {
+                                        indexOfSouthEasternNeighbour = i;
+                                    }
+                                }
+                            }
+
+                            if (mod.moduleAreasObjects[indexOfSouthernNeighbour].westernNeighbourArea != "")
+                            {
+
+                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                                {
+                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfSouthernNeighbour].westernNeighbourArea)
+                                    {
+                                        indexOfSouthWesternNeighbour = i;
+                                    }
+                                }
+                            }
+                        }
+
+                        if ((area.westernNeighbourArea != ""))
+                        {              
+                            for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                            {
+                                if (mod.moduleAreasObjects[i].Filename == area.westernNeighbourArea)
+                                {
+                                    indexOfWesternNeighbour = i;
+                                }
+                            }
+
+                            if (mod.moduleAreasObjects[indexOfWesternNeighbour].northernNeighbourArea != "")
+                            {
+                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                                {
+                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfWesternNeighbour].northernNeighbourArea)
+                                    {
+                                        indexOfNorthWesternNeighbour = i;
+                                    }
+                                }
+                            }
+
+                            if (mod.moduleAreasObjects[indexOfWesternNeighbour].southernNeighbourArea != "")
+                            {
+
+                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                                {
+                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfWesternNeighbour].southernNeighbourArea)
+                                    {
+                                        indexOfSouthWesternNeighbour = i;
+                                    }
+                                }
+                            }
+                        }
+
+                        if ((area.easternNeighbourArea != ""))
+                        {
+                            for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                            {
+                                if (mod.moduleAreasObjects[i].Filename == area.easternNeighbourArea)
+                                {
+                                    indexOfEasternNeighbour = i;
+                                }
+                            }
+
+                            if (mod.moduleAreasObjects[indexOfEasternNeighbour].northernNeighbourArea != "")
+                            {
+                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                                {
+                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfEasternNeighbour].northernNeighbourArea)
+                                    {
+                                        indexOfNorthEasternNeighbour = i;
+                                    }
+                                }
+                            }
+
+                            if (mod.moduleAreasObjects[indexOfEasternNeighbour].southernNeighbourArea != "")
+                            {
+                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                                {
+                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfEasternNeighbour].southernNeighbourArea)
+                                    {
+                                        indexOfSouthEasternNeighbour = i;
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+
+                        for (int y = 0; y < area.MapSizeY; y++)
+                        {
+                            for (int x = 0; x < area.MapSizeX; x++)
+                            {
+                                Tile tile = area.Tiles[y * area.MapSizeX + x];
+
+                                for (int yS = -1; yS < 2; yS++)
+                                {
+                                    for (int xS = -1; xS < 2; xS++)
+                                    {
+                                        //**********************************************************************************
+                                        //int index = -1;
+                                        Tile tileCaster = new Tile();
+
+                                        //nine situations where a caster tile can be:
+                                        //caster tile on north-western map (diagonal situation)
+                                        if ((x + xS < 0) && (y + yS < 0))
+                                        {
+                                            if (indexOfNorthWesternNeighbour != -1)
+                                            {
+                                                int transformedX = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + x + xS;
+                                                int transformedY = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeY + y + yS;
+                                                tileCaster = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        tile.isInLongShadeNW = true;
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        tile.isInShortShadeNW = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.isInShortShadeNW = false;
+                                                        tile.isInLongShadeNW = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    tile.isInShortShadeNW = false;
+                                                    tile.isInLongShadeNW = false;
+                                                }
+                                            }
+                                        }
+
+                                        //caster tile on south-western map (diagonal situation)
+                                        if ((x + xS < 0) && (y + yS > area.MapSizeY - 1))
+                                        {
+                                            if (indexOfSouthWesternNeighbour != -1)
+                                            {
+                                                int transformedX = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + x + xS;
+                                                int transformedY = y + yS - area.MapSizeY;
+                                                tileCaster = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        tile.isInLongShadeSW = true;
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        tile.isInShortShadeSW = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.isInShortShadeSW = false;
+                                                        tile.isInLongShadeSW = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    tile.isInShortShadeSW = false;
+                                                    tile.isInLongShadeSW = false;
+                                                }
+
+
+                                            }
+
+                                        }
+
+
+                                        //***********************
+                                        //caster tile on south-eastern map (diagonal situation)
+                                        if ((x + xS > area.MapSizeX - 1) && (y + yS > area.MapSizeY - 1))
+                                        {
+                                            if (indexOfSouthEasternNeighbour != -1)
+                                            {
+                                                int transformedX = x + xS - area.MapSizeX;
+                                                int transformedY = y + yS - area.MapSizeY;
+                                                tileCaster = mod.moduleAreasObjects[indexOfSouthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthEasternNeighbour].MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        tile.isInLongShadeSE = true;
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        tile.isInShortShadeSE = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.isInShortShadeSE = false;
+                                                        tile.isInLongShadeSE = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    tile.isInShortShadeSE = false;
+                                                    tile.isInLongShadeSE = false;
+                                                }
+                                            }
+                                        }
+
+                                        //caster tile on north-eastern map (diagonal situation)
+                                        if ((x + xS > area.MapSizeX - 1) && (y + yS < 0))
+                                        {
+                                            if (indexOfNorthEasternNeighbour != -1)
+                                            {
+                                                int transformedX = x + xS - area.MapSizeX;
+                                                int transformedY = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeY + y + yS; ;
+                                                tileCaster = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        tile.isInLongShadeNE = true;
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        tile.isInShortShadeNE = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.isInShortShadeNE = false;
+                                                        tile.isInLongShadeNE = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    tile.isInShortShadeNE = false;
+                                                    tile.isInLongShadeNE = false;
+                                                }
+                                            }
+                                        }
+
+                                        //caster tile on western map (non-diagonal)
+                                        if ((x + xS < 0) && (y + yS >= 0) && (y + yS < area.MapSizeY))
+                                        {
+                                            if (indexOfWesternNeighbour != -1)
+                                            {
+                                                int transformedX = mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + x + xS;
+                                                int transformedY = y + yS;
+                                                tileCaster = mod.moduleAreasObjects[indexOfWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        if (yS == -1)
+                                                        {
+                                                            tile.isInLongShadeNW = true;
+                                                        }
+                                                        if (yS == 0)
+                                                        {
+                                                            tile.isInLongShadeW = true;
+                                                        }
+                                                        if (yS == 1)
+                                                        {
+                                                            tile.isInLongShadeSW = true;
+                                                        }
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        if (yS == -1)
+                                                        {
+                                                            tile.isInShortShadeNW = true;
+                                                        }
+                                                        if (yS == 0)
+                                                        {
+                                                            tile.isInShortShadeW = true;
+                                                        }
+                                                        if (yS == 1)
+                                                        {
+                                                            tile.isInShortShadeSW = true;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.isInShortShadeNW = false;
+                                                        tile.isInLongShadeNW = false;
+                                                        tile.isInShortShadeW = false;
+                                                        tile.isInLongShadeW = false;
+                                                        tile.isInShortShadeSW = false;
+                                                        tile.isInLongShadeSW = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    tile.isInShortShadeNW = false;
+                                                    tile.isInLongShadeNW = false;
+                                                    tile.isInShortShadeW = false;
+                                                    tile.isInLongShadeW = false;
+                                                    tile.isInShortShadeSW = false;
+                                                    tile.isInLongShadeSW = false;
+                                                }
+                                            }
+                                        }
+
+                                        //caster tile on eastern map (non-diagonal)
+                                        if ((x + xS >= area.MapSizeX) && (y + yS >= 0) && (y + yS < area.MapSizeY))
+                                        {
+                                            if (indexOfEasternNeighbour != -1)
+                                            {
+                                                int transformedX = x + xS - area.MapSizeX;
+                                                int transformedY = y + yS;
+                                                tileCaster = mod.moduleAreasObjects[indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfEasternNeighbour].MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        if (yS == -1)
+                                                        {
+                                                            tile.isInLongShadeNE = true;
+                                                        }
+                                                        if (yS == 0)
+                                                        {
+                                                            tile.isInLongShadeE = true;
+                                                        }
+                                                        if (yS == 1)
+                                                        {
+                                                            tile.isInLongShadeSE = true;
+                                                        }
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        if (yS == -1)
+                                                        {
+                                                            tile.isInShortShadeNE = true;
+                                                        }
+                                                        if (yS == 0)
+                                                        {
+                                                            tile.isInShortShadeE = true;
+                                                        }
+                                                        if (yS == 1)
+                                                        {
+                                                            tile.isInShortShadeSE = true;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.isInShortShadeNE = false;
+                                                        tile.isInLongShadeNE = false;
+                                                        tile.isInShortShadeE = false;
+                                                        tile.isInLongShadeE = false;
+                                                        tile.isInShortShadeSE = false;
+                                                        tile.isInLongShadeSE = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    tile.isInShortShadeNE = false;
+                                                    tile.isInLongShadeNE = false;
+                                                    tile.isInShortShadeE = false;
+                                                    tile.isInLongShadeE = false;
+                                                    tile.isInShortShadeSE = false;
+                                                    tile.isInLongShadeSE = false;
+                                                }
+                                            }
+                                        }
+
+
+                                        //caster tile on southern map (non-diagonal)
+                                        if ((y + yS >= area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                                        {
+                                            if (indexOfSouthernNeighbour != -1)
+                                            {
+                                                int transformedX = x + xS;
+                                                int transformedY = y + yS - area.MapSizeY;
+                                                tileCaster = mod.moduleAreasObjects[indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthernNeighbour].MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        if (xS == -1)
+                                                        {
+                                                            tile.isInLongShadeSW = true;
+                                                        }
+                                                        if (xS == 0)
+                                                        {
+                                                            tile.isInLongShadeS = true;
+                                                        }
+                                                        if (xS == 1)
+                                                        {
+                                                            tile.isInLongShadeSE = true;
+                                                        }
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        if (xS == -1)
+                                                        {
+                                                            tile.isInShortShadeSW = true;
+                                                        }
+                                                        if (xS == 0)
+                                                        {
+                                                            tile.isInShortShadeS = true;
+                                                        }
+                                                        if (xS == 1)
+                                                        {
+                                                            tile.isInShortShadeSE = true;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.isInShortShadeSE = false;
+                                                        tile.isInLongShadeSE = false;
+                                                        tile.isInShortShadeS = false;
+                                                        tile.isInLongShadeS = false;
+                                                        tile.isInShortShadeSW = false;
+                                                        tile.isInLongShadeSW = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    tile.isInShortShadeSE = false;
+                                                    tile.isInLongShadeSE = false;
+                                                    tile.isInShortShadeS = false;
+                                                    tile.isInLongShadeS = false;
+                                                    tile.isInShortShadeSW = false;
+                                                    tile.isInLongShadeSW = false;
+                                                }
+                                            }
+                                        }
+
+                                        //caster tile on northern map (non-diagonal)
+                                        if ((y + yS < 0) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                                        {
+                                            if (indexOfNorthernNeighbour != -1)
+                                            {
+                                                int transformedX = x + xS;
+                                                int transformedY = mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeY + y + yS; ;
+                                                tileCaster = mod.moduleAreasObjects[indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        if (xS == -1)
+                                                        {
+                                                            tile.isInLongShadeNW = true;
+                                                            tile.isInShortShadeNW = false;
+                                                        }
+                                                        if (xS == 0)
+                                                        {
+                                                            tile.isInLongShadeN = true;
+                                                            tile.isInShortShadeN = false;
+                                                        }
+                                                        if (xS == 1)
+                                                        {
+                                                            tile.isInLongShadeNE = true;
+                                                            tile.isInShortShadeNE = false;
+                                                        }
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        if (xS == -1)
+                                                        {
+                                                            tile.isInShortShadeNW = true;
+                                                            tile.isInLongShadeNW = false;
+                                                        }
+                                                        if (xS == 0)
+                                                        {
+                                                            tile.isInShortShadeN = true;
+                                                            tile.isInLongShadeN = false;
+                                                        }
+                                                        if (xS == 1)
+                                                        {
+                                                            tile.isInShortShadeNE = true;
+                                                            tile.isInLongShadeNE = false;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (xS == -1)
+                                                        {
+                                                            tile.isInLongShadeNW = false;
+                                                            tile.isInShortShadeNW = false;
+                                                        }
+                                                        if (xS == 0)
+                                                        {
+                                                            tile.isInLongShadeN = false;
+                                                            tile.isInShortShadeN = false;
+                                                        }
+                                                        if (xS == 1)
+                                                        {
+                                                            tile.isInLongShadeNE = false;
+                                                            tile.isInShortShadeNE = false;
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (xS == -1)
+                                                    {
+                                                        tile.isInLongShadeNW = false;
+                                                        tile.isInShortShadeNW = false;
+                                                    }
+                                                    if (xS == 0)
+                                                    {
+                                                        tile.isInLongShadeN = false;
+                                                        tile.isInShortShadeN = false;
+                                                    }
+                                                    if (xS == 1)
+                                                    {
+                                                        tile.isInLongShadeNE = false;
+                                                        tile.isInShortShadeNE = false;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        //caster tile is on this map
+                                        if ((y + yS >= 0) && (y + yS < area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                                        {
+                                                int transformedX = x + xS;
+                                                int transformedY = y + yS; ;
+                                                tileCaster = area.Tiles[transformedY * area.MapSizeX + transformedX];
+
+                                                //casts shadow and is no ramp
+                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                                {
+                                                    //check for long shadows
+                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                                    {
+                                                        if ((xS == -1) &&  (yS == -1))
+                                                        {
+                                                            tile.isInLongShadeNW = true;
+                                                        }
+
+                                                    }
+
+                                                    //check for short shadows
+                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                                    {
+                                                        if (xS == -1)
+                                                        {
+                                                            tile.isInShortShadeNW = true;
+                                                        }
+                                                        if (xS == 0)
+                                                        {
+                                                            tile.isInShortShadeN = true;
+                                                        }
+                                                        if (xS == 1)
+                                                        {
+                                                            tile.isInShortShadeNE = true;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.isInShortShadeNE = false;
+                                                        tile.isInLongShadeNE = false;
+                                                        tile.isInShortShadeN = false;
+                                                        tile.isInLongShadeN = false;
+                                                        tile.isInShortShadeNW = false;
+                                                        tile.isInLongShadeNW = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    tile.isInShortShadeNE = false;
+                                                    tile.isInLongShadeNE = false;
+                                                    tile.isInShortShadeN = false;
+                                                    tile.isInLongShadeN = false;
+                                                    tile.isInShortShadeNW = false;
+                                                    tile.isInLongShadeNW = false;
+                                                }
+                                        }
+
+                                        //**********************
+
+
+
+                                        //tile on southern map
+                                        if ((y > (gv.mod.currentArea.MapSizeY - 1)) && (!situationFound))
+                                        {
+                                            situationFound = true;
+                                            if (gv.mod.indexOfSouthernNeighbour != -1)
+                                            {
+                                                int transformedX = x;
+                                                int transformedY = y - gv.mod.currentArea.MapSizeY;
+                                                tile = mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].MapSizeX + transformedX];
+                                                index = gv.mod.indexOfSouthernNeighbour;
+                                            }
+                                            else
+                                            {
+                                                drawTile = false;
+                                            }
+                                        }
+                                        //tile on eastern map
+                                        if ((x > (gv.mod.currentArea.MapSizeX - 1)) && (!situationFound))
+                                        {
+                                            situationFound = true;
+                                            if (gv.mod.indexOfEasternNeighbour != -1)
+                                            {
+                                                int transformedX = x - gv.mod.currentArea.MapSizeX;
+                                                int transformedY = y;
+                                                tile = mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].MapSizeX + transformedX];
+                                                index = gv.mod.indexOfEasternNeighbour;
+                                            }
+                                            else
+                                            {
+                                                drawTile = false;
+                                            }
+                                        }
+                                        //tile on northern map
+                                        if ((y < 0) && (!situationFound))
+                                        {
+                                            situationFound = true;
+                                            if (gv.mod.indexOfNorthernNeighbour != -1)
+                                            {
+                                                int transformedX = x;
+                                                int transformedY = mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].MapSizeY + y;
+                                                tile = mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].MapSizeX + transformedX];
+                                                index = gv.mod.indexOfNorthernNeighbour;
+                                            }
+                                            else
+                                            {
+                                                drawTile = false;
+                                            }
+                                        }
+                                        //tile is on current map
+                                        if (!situationFound)
+                                        {
+                                            tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                                        }
+
+
+
+
+                                        //****************************************************************************************
+
+                                    }//close inner y loop
+                                }//close inner x loop
+
+
+                                float scalerX = GetFromBitmapList(tile.Layer1Filename).PixelSize.Width / 100;
+                                float scalerY = GetFromBitmapList(tile.Layer1Filename).PixelSize.Height / 100;
+                                SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer1Filename).PixelSize.Width, GetFromBitmapList(tile.Layer1Filename).PixelSize.Height);
+                                SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                                DrawD2DBitmap(GetFromBitmapList(tile.Layer1Filename), src, dst, tile.Layer1Rotate, tile.Layer1Mirror, tile.Layer1Xshift, tile.Layer1Yshift, tile.Layer1Xscale, tile.Layer1Yscale);
+                                }//closer outer y loop 
+                            }//close outer x loop
+
+                        #endregion
+                        */
+                    }
         #endregion
 
         #region Methods
+
+        public void calculateHeightShadows()
+        {
+            string filePath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas\\";
+            mod.loadAreas(filePath);
+
+            #region Calculate Height Shadows
+
+            int indexOfNorthernNeighbour = -1;
+            int indexOfSouthernNeighbour = -1;
+            int indexOfEasternNeighbour = -1;
+            int indexOfWesternNeighbour = -1;
+            int indexOfNorthEasternNeighbour = -1;
+            int indexOfNorthWesternNeighbour = -1;
+            int indexOfSouthEasternNeighbour = -1;
+            int indexOfSouthWesternNeighbour = -1;
+
+            #region neighbours
+            if ((area.northernNeighbourArea != ""))
+            {
+                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                {
+                    if (mod.moduleAreasObjects[i].Filename == area.northernNeighbourArea)
+                    {
+                        indexOfNorthernNeighbour = i;
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfNorthernNeighbour].easternNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfNorthernNeighbour].easternNeighbourArea)
+                        {
+                            indexOfNorthEasternNeighbour = i;
+                        }
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfNorthernNeighbour].westernNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfNorthernNeighbour].westernNeighbourArea)
+                        {
+                            indexOfNorthWesternNeighbour = i;
+                        }
+                    }
+                }
+            }
+
+            if ((area.southernNeighbourArea != ""))
+            {
+                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                {
+                    if (mod.moduleAreasObjects[i].Filename == area.southernNeighbourArea)
+                    {
+                        indexOfSouthernNeighbour = i;
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfSouthernNeighbour].easternNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfSouthernNeighbour].easternNeighbourArea)
+                        {
+                            indexOfSouthEasternNeighbour = i;
+                        }
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfSouthernNeighbour].westernNeighbourArea != "")
+                {
+
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfSouthernNeighbour].westernNeighbourArea)
+                        {
+                            indexOfSouthWesternNeighbour = i;
+                        }
+                    }
+                }
+            }
+
+            if ((area.westernNeighbourArea != ""))
+            {
+                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                {
+                    if (mod.moduleAreasObjects[i].Filename == area.westernNeighbourArea)
+                    {
+                        indexOfWesternNeighbour = i;
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfWesternNeighbour].northernNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfWesternNeighbour].northernNeighbourArea)
+                        {
+                            indexOfNorthWesternNeighbour = i;
+                        }
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfWesternNeighbour].southernNeighbourArea != "")
+                {
+
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfWesternNeighbour].southernNeighbourArea)
+                        {
+                            indexOfSouthWesternNeighbour = i;
+                        }
+                    }
+                }
+            }
+
+            if ((area.easternNeighbourArea != ""))
+            {
+                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                {
+                    if (mod.moduleAreasObjects[i].Filename == area.easternNeighbourArea)
+                    {
+                        indexOfEasternNeighbour = i;
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfEasternNeighbour].northernNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfEasternNeighbour].northernNeighbourArea)
+                        {
+                            indexOfNorthEasternNeighbour = i;
+                        }
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfEasternNeighbour].southernNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfEasternNeighbour].southernNeighbourArea)
+                        {
+                            indexOfSouthEasternNeighbour = i;
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            for (int y = 0; y < area.MapSizeY; y++)
+            {
+                for (int x = 0; x < area.MapSizeX; x++)
+                {
+                    Tile tile = area.Tiles[y * area.MapSizeX + x];
+                    tile.isInShortShadeN = false;
+                    tile.isInShortShadeE = false;
+                    tile.isInShortShadeS = false;
+                    tile.isInShortShadeW = false;
+                    tile.isInShortShadeNE = false;
+                    tile.isInShortShadeSE = false;
+                    tile.isInShortShadeSW = false;
+                    tile.isInShortShadeNW = false;
+
+                    tile.isInLongShadeN = false;
+                    tile.isInLongShadeE = false;
+                    tile.isInLongShadeS = false;
+                    tile.isInLongShadeW = false;
+                    tile.isInLongShadeNE = false;
+                    tile.isInLongShadeSE = false;
+                    tile.isInLongShadeSW = false;
+                    tile.isInLongShadeNW = false;
+
+                    for (int yS = -1; yS < 2; yS++)
+                    {
+                        for (int xS = -1; xS < 2; xS++)
+                        {
+                            //**********************************************************************************
+                            //int index = -1;
+                            Tile tileCaster = new Tile();
+
+
+                            //nine situations where a caster tile can be:
+                            //caster tile on north-western map (diagonal situation)
+                            if ((x + xS < 0) && (y + yS < 0))
+                            {
+                                if (indexOfNorthWesternNeighbour != -1)
+                                {
+                                    int transformedX = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + x + xS;
+                                    int transformedY = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeY + y + yS;
+                                    tileCaster = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInLongShadeNW = true;
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeNW = true;
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            //caster tile on south-western map (diagonal situation)
+                            if ((x + xS < 0) && (y + yS > area.MapSizeY - 1))
+                            {
+                                if (indexOfSouthWesternNeighbour != -1)
+                                {
+                                    int transformedX = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + x + xS;
+                                    int transformedY = y + yS - area.MapSizeY;
+                                    tileCaster = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInLongShadeSW = true;
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeSW = true;
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            //***********************
+                            //caster tile on south-eastern map (diagonal situation)
+                            if ((x + xS > area.MapSizeX - 1) && (y + yS > area.MapSizeY - 1))
+                            {
+                                if (indexOfSouthEasternNeighbour != -1)
+                                {
+                                    int transformedX = x + xS - area.MapSizeX;
+                                    int transformedY = y + yS - area.MapSizeY;
+                                    tileCaster = mod.moduleAreasObjects[indexOfSouthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthEasternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInLongShadeSE = true;
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeSE = true;
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            //caster tile on north-eastern map (diagonal situation)
+                            if ((x + xS > area.MapSizeX - 1) && (y + yS < 0))
+                            {
+                                if (indexOfNorthEasternNeighbour != -1)
+                                {
+                                    int transformedX = x + xS - area.MapSizeX;
+                                    int transformedY = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeY + y + yS; ;
+                                    tileCaster = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInLongShadeNE = true;
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeNE = true;
+                                        }
+
+                                    }
+                                }
+                            }
+
+                            //caster tile on western map (non-diagonal)
+                            if ((x + xS < 0) && (y + yS >= 0) && (y + yS < area.MapSizeY))
+                            {
+                                if (indexOfWesternNeighbour != -1)
+                                {
+                                    int transformedX = mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + x + xS;
+                                    int transformedY = y + yS;
+                                    tileCaster = mod.moduleAreasObjects[indexOfWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInLongShadeNW = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInLongShadeW = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInLongShadeSW = true;
+                                            }
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInShortShadeW = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInShortShadeSW = true;
+                                            }
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            //caster tile on eastern map (non-diagonal)
+                            if ((x + xS >= area.MapSizeX) && (y + yS >= 0) && (y + yS < area.MapSizeY))
+                            {
+                                if (indexOfEasternNeighbour != -1)
+                                {
+                                    int transformedX = x + xS - area.MapSizeX;
+                                    int transformedY = y + yS;
+                                    tileCaster = mod.moduleAreasObjects[indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfEasternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInLongShadeNE = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInLongShadeE = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInLongShadeSE = true;
+                                            }
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInShortShadeE = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInShortShadeSE = true;
+                                            }
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            //caster tile on southern map (non-diagonal)
+                            if ((y + yS >= area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                            {
+                                if (indexOfSouthernNeighbour != -1)
+                                {
+                                    int transformedX = x + xS;
+                                    int transformedY = y + yS - area.MapSizeY;
+                                    tileCaster = mod.moduleAreasObjects[indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthernNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInLongShadeSW = true;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInLongShadeS = true;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInLongShadeSE = true;
+                                            }
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInShortShadeSW = true;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInShortShadeS = true;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInShortShadeSE = true;
+                                            }
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            //caster tile on northern map (non-diagonal)
+                            if ((y + yS < 0) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                            {
+                                if (indexOfNorthernNeighbour != -1)
+                                {
+                                    int transformedX = x + xS;
+                                    int transformedY = mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeY + y + yS; ;
+                                    tileCaster = mod.moduleAreasObjects[indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInLongShadeNW = true;
+                                                //tile.isInShortShadeNW = false;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInLongShadeN = true;
+                                                //tile.isInShortShadeN = false;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInLongShadeNE = true;
+                                                //tile.isInShortShadeNE = false;
+                                            }
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                                //tile.isInLongShadeNW = false;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInShortShadeN = true;
+                                                //tile.isInLongShadeN = false;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                                //tile.isInLongShadeNE = false;
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+
+                            //caster tile is on this map
+                            if ((y + yS >= 0) && (y + yS < area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                            {
+                                int transformedX = x + xS;
+                                int transformedY = y + yS; ;
+                                tileCaster = area.Tiles[transformedY * area.MapSizeX + transformedX];
+
+                                //casts shadow and is no ramp
+                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                {
+                                    //check for long shadows
+                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                    {
+                                        if ((xS == -1) && (yS == -1))
+                                        {
+                                            tile.isInLongShadeNW = true;
+                                        }
+                                        if ((xS == 0) && (yS == -1))
+                                        {
+                                            tile.isInLongShadeN = true;
+                                        }
+                                        if ((xS == 1) && (yS == -1))
+                                        {
+                                            tile.isInLongShadeNE = true;
+                                        }
+                                        if ((xS == 1) && (yS == 0))
+                                        {
+                                            tile.isInLongShadeE = true;
+                                        }
+                                        if ((xS == 1) && (yS == 1))
+                                        {
+                                            tile.isInLongShadeSE = true;
+                                        }
+                                        if ((xS == 0) && (yS == 1))
+                                        {
+                                            tile.isInLongShadeS = true;
+                                        }
+                                        if ((xS == -1) && (yS == 1))
+                                        {
+                                            tile.isInLongShadeSW = true;
+                                        }
+                                        if ((xS == -1) && (yS == 0))
+                                        {
+                                            tile.isInLongShadeW = true;
+                                        }
+                                    }
+
+                                    //check for short shadows
+                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                    {
+                                        if ((xS == -1) && (yS == -1))
+                                        {
+                                            tile.isInShortShadeNW = true;
+                                        }
+                                        if ((xS == 0) && (yS == -1))
+                                        {
+                                            tile.isInShortShadeN = true;
+                                        }
+                                        if ((xS == 1) && (yS == -1))
+                                        {
+                                            tile.isInShortShadeNE = true;
+                                        }
+                                        if ((xS == 1) && (yS == 0))
+                                        {
+                                            tile.isInShortShadeE = true;
+                                        }
+                                        if ((xS == 1) && (yS == 1))
+                                        {
+                                            tile.isInShortShadeSE = true;
+                                        }
+                                        if ((xS == 0) && (yS == 1))
+                                        {
+                                            tile.isInShortShadeS = true;
+                                        }
+                                        if ((xS == -1) && (yS == 1))
+                                        {
+                                            tile.isInShortShadeSW = true;
+                                        }
+                                        if ((xS == -1) && (yS == 0))
+                                        {
+                                            tile.isInShortShadeW = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            mod.moduleAreasObjects.Clear();
+        }
 
         public void CleanUpDrawTextResources()
         {

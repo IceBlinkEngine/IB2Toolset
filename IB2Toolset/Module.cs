@@ -667,7 +667,7 @@ namespace IB2Toolset
             {
                 try
                 {
-                    newArea = newArea.loadAreaFile(path + areaName + ".level");
+                    newArea = newArea.loadAreaFile(path + areaName + ".lvl");
                     if (newArea == null)
                     {
                         MessageBox.Show("returned a null area filling areaList");

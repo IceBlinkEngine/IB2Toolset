@@ -64,7 +64,26 @@ namespace IB2Toolset
         public bool isRamp = false;
         public bool isEWBridge = false;
         public bool isNSBridge = false;
-        public bool isShadowCaster = false;
+        public bool isShadowCaster = true;
+
+        public bool isInShortShadeN = false;
+        public bool isInShortShadeE = false;
+        public bool isInShortShadeS = false;
+        public bool isInShortShadeW = false;
+        public bool isInShortShadeNE = false;
+        public bool isInShortShadeSE = false;
+        public bool isInShortShadeSW = false;
+        public bool isInShortShadeNW = false;
+
+        public bool isInLongShadeN = false;
+        public bool isInLongShadeE = false;
+        public bool isInLongShadeS = false;
+        public bool isInLongShadeW = false;
+        public bool isInLongShadeNE = false;
+        public bool isInLongShadeSE = false;
+        public bool isInLongShadeSW = false;
+        public bool isInLongShadeNW = false;
+
 
         [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tile is a ramp: you can leave this ramp towards one height level lower neighbouring tiles; note that the height level of the current tile is the top of the ramp, also ramps work from all directions")]
         public bool IsRamp

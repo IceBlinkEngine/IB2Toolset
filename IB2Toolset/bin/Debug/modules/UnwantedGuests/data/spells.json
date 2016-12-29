@@ -2,6 +2,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Flame Fingers",
     "tag": "flameFingers",
     "spellImage": "sp_flamefingers",
@@ -27,6 +28,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Mage Bolt",
     "tag": "mageBolt",
     "spellImage": "sp_magebolt",
@@ -52,6 +54,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Mage Armor",
     "tag": "mageArmor",
     "spellImage": "sp_magearmor",
@@ -77,6 +80,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Sleep",
     "tag": "sleep",
     "spellImage": "sp_sleep",
@@ -102,6 +106,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Web",
     "tag": "web",
     "spellImage": "sp_web",
@@ -127,6 +132,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Minor Regeneration",
     "tag": "minorRegen",
     "spellImage": "sp_regeneration",
@@ -152,6 +158,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Ice Storm",
     "tag": "iceStorm",
     "spellImage": "sp_icestorm",
@@ -177,6 +184,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Fireball",
     "tag": "fireball",
     "spellImage": "sp_fireball",
@@ -202,6 +210,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Lightning",
     "tag": "lightning",
     "spellImage": "sp_lightning",
@@ -227,6 +236,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Minor Healing",
     "tag": "minorHealing",
     "spellImage": "sp_minorheal",
@@ -252,6 +262,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Bless",
     "tag": "bless",
     "spellImage": "sp_bless",
@@ -277,6 +288,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Magic Stone",
     "tag": "magicStone",
     "spellImage": "sp_magicstone",
@@ -302,6 +314,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Moderate Healing",
     "tag": "moderateHealing",
     "spellImage": "sp_moderateheal",
@@ -327,6 +340,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Blast of Light",
     "tag": "blastOfLight",
     "spellImage": "sp_blastoflight",
@@ -352,6 +366,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Hold",
     "tag": "hold",
     "spellImage": "sp_hold",
@@ -377,6 +392,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Mass Minor Healing",
     "tag": "massMinorHealing",
     "spellImage": "sp_massheal",
@@ -402,6 +418,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Spider Bite Poison Minor",
     "tag": "spiderPoisonMinor",
     "spellImage": "sp_flamefingers",
@@ -427,6 +444,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Remove Poison",
     "tag": "removePoison",
     "spellImage": "sp_magebolt",
@@ -462,6 +480,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "isUsedForCombatSquareEffect": false,
     "name": "Bloody Whirlwind",
     "tag": "newSpellTag_10498",
     "spellImage": "sp_magebolt",
