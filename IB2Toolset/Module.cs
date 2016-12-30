@@ -660,24 +660,27 @@ namespace IB2Toolset
             }
             return toReturn;
         }
-        public void loadAreas(string path)
+        public void loadAreas(string path, Area area)
         {
             Area newArea = new Area();
             foreach (string areaName in moduleAreasList)
             {
-                try
+                if (areaName == area.northernNeighbourArea || areaName == area.southernNeighbourArea || areaName == area.easternNeighbourArea || areaName == area.westernNeighbourArea)
                 {
-                    newArea = newArea.loadAreaFile(path + areaName + ".lvl");
-                    if (newArea == null)
+                    try
                     {
-                        MessageBox.Show("returned a null area filling areaList");
+                        newArea = newArea.loadAreaFile(path + areaName + ".lvl");
+                        if (newArea == null)
+                        {
+                            MessageBox.Show("returned a null area filling areaList");
+                        }
+                        moduleAreasObjects.Add(newArea);
+                        //MessageBox.Show("open file success");
                     }
-                    moduleAreasObjects.Add(newArea);
-                    //MessageBox.Show("open file success");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("failed to open all files: " + ex.ToString() + ex.Message);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("failed to open all files: " + ex.ToString() + ex.Message);
+                    }
                 }
             }
         }

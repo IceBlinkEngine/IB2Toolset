@@ -2781,6 +2781,14 @@ namespace IB2Toolset
                         }
                     }
 
+                    else if (!tile.isInLongShadeN && !tile.isInLongShadeW)
+                    {
+                        if (tile.isInLongShadeNW)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 180, false, 0, 0);
+                        }
+                    }
+
                     if (!tile.isInLongShadeN && !tile.isInShortShadeN && !tile.isInLongShadeE && !tile.isInShortShadeE)
                     {
                         if (tile.isInLongShadeNE)
@@ -2790,6 +2798,14 @@ namespace IB2Toolset
                         else if (tile.isInShortShadeNE)
                         {
                             DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 270, false, 0, 0);
+                        }
+                    }
+
+                    else if (!tile.isInLongShadeN && !tile.isInLongShadeE)
+                    {
+                        if (tile.isInLongShadeNE)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 270, false, 0, 0);
                         }
                     }
 
@@ -2805,6 +2821,14 @@ namespace IB2Toolset
                         }
                     }
 
+                    else if (!tile.isInLongShadeS && !tile.isInLongShadeE)
+                    {
+                        if (tile.isInLongShadeSE)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 0, false, 0, 0);
+                        }
+                    }
+
                     if (!tile.isInLongShadeS && !tile.isInShortShadeS && !tile.isInLongShadeW && !tile.isInShortShadeW)
                     {
                         if (tile.isInLongShadeSW)
@@ -2814,6 +2838,14 @@ namespace IB2Toolset
                         else if (tile.isInShortShadeSW)
                         {
                             DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 90, false, 0, 0);
+                        }
+                    }
+
+                    else if (!tile.isInLongShadeS && !tile.isInLongShadeW)
+                    {
+                        if (tile.isInLongShadeSW)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 90, false, 0, 0);
                         }
                     }
                 }
@@ -3573,7 +3605,7 @@ namespace IB2Toolset
         public void calculateHeightShadows()
         {
             string filePath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas\\";
-            mod.loadAreas(filePath);
+            mod.loadAreas(filePath, area);
 
             #region Calculate Height Shadows
 
@@ -3780,6 +3812,13 @@ namespace IB2Toolset
                                         }
 
                                     }
+                                    else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                    {
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInShortShadeNW = true;
+                                        }
+                                    }
 
                                 }
                             }
@@ -3804,6 +3843,13 @@ namespace IB2Toolset
 
                                         //check for short shadows
                                         else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeSW = true;
+                                        }
+                                    }
+                                    else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                    {
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
                                         {
                                             tile.isInShortShadeSW = true;
                                         }
@@ -3838,6 +3884,13 @@ namespace IB2Toolset
                                         }
 
                                     }
+                                    else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                    {
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInShortShadeSE = true;
+                                        }
+                                    }
 
                                 }
                             }
@@ -3866,6 +3919,13 @@ namespace IB2Toolset
                                             tile.isInShortShadeNE = true;
                                         }
 
+                                    }
+                                    else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                    {
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInShortShadeNE = true;
+                                        }
                                     }
                                 }
                             }
@@ -3916,6 +3976,24 @@ namespace IB2Toolset
                                             }
                                         }
 
+                                    }
+                                    else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                    {
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInShortShadeW = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInShortShadeSW = true;
+                                            }
+                                        }
                                     }
 
                                 }
@@ -3968,6 +4046,24 @@ namespace IB2Toolset
                                         }
 
                                     }
+                                    else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                    {
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInShortShadeE = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInShortShadeSE = true;
+                                            }
+                                        }
+                                    }
 
                                 }
                             }
@@ -4019,6 +4115,25 @@ namespace IB2Toolset
                                         }
 
                                     }
+                                    else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                    {
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInShortShadeSW = true;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInShortShadeS = true;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInShortShadeSE = true;
+                                            }
+                                        }
+                                    }
+
 
                                 }
                             }
@@ -4076,6 +4191,27 @@ namespace IB2Toolset
                                         }
 
                                     }
+                                    else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                    {
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                                //tile.isInShortShadeNW = false;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInShortShadeN = true;
+                                                //tile.isInShortShadeN = false;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                                //tile.isInShortShadeNE = false;
+                                            }
+                                        }
+                                    }
                                 }
                             }
 
@@ -4128,6 +4264,44 @@ namespace IB2Toolset
 
                                     //check for short shadows
                                     else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                    {
+                                        if ((xS == -1) && (yS == -1))
+                                        {
+                                            tile.isInShortShadeNW = true;
+                                        }
+                                        if ((xS == 0) && (yS == -1))
+                                        {
+                                            tile.isInShortShadeN = true;
+                                        }
+                                        if ((xS == 1) && (yS == -1))
+                                        {
+                                            tile.isInShortShadeNE = true;
+                                        }
+                                        if ((xS == 1) && (yS == 0))
+                                        {
+                                            tile.isInShortShadeE = true;
+                                        }
+                                        if ((xS == 1) && (yS == 1))
+                                        {
+                                            tile.isInShortShadeSE = true;
+                                        }
+                                        if ((xS == 0) && (yS == 1))
+                                        {
+                                            tile.isInShortShadeS = true;
+                                        }
+                                        if ((xS == -1) && (yS == 1))
+                                        {
+                                            tile.isInShortShadeSW = true;
+                                        }
+                                        if ((xS == -1) && (yS == 0))
+                                        {
+                                            tile.isInShortShadeW = true;
+                                        }
+                                    }
+                                }
+                                else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
+                                {
+                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
                                     {
                                         if ((xS == -1) && (yS == -1))
                                         {
