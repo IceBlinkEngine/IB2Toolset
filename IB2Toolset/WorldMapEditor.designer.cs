@@ -62,6 +62,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rbtnPaintTile = new System.Windows.Forms.RadioButton();
             this.rbtnHeightLevel = new System.Windows.Forms.RadioButton();
+
+            this.rbtnBridgeEW = new System.Windows.Forms.RadioButton();
+            this.rbtnBridgeNS = new System.Windows.Forms.RadioButton();
+            this.rbtnDownToN = new System.Windows.Forms.RadioButton();
+            this.rbtnDownToE = new System.Windows.Forms.RadioButton();
+            this.rbtnDownToS = new System.Windows.Forms.RadioButton();
+            this.rbtnDownToW = new System.Windows.Forms.RadioButton();
+
             this.rbtnEditTrigger = new System.Windows.Forms.RadioButton();
             this.rbtnPaintTrigger = new System.Windows.Forms.RadioButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -363,12 +371,12 @@
             // 
             this.rbtnLoS.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnLoS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnLoS.Location = new System.Drawing.Point(9, 303);
+            this.rbtnLoS.Location = new System.Drawing.Point(9, 333);
             this.rbtnLoS.Name = "rbtnLoS";
-            this.rbtnLoS.Size = new System.Drawing.Size(103, 45);
+            this.rbtnLoS.Size = new System.Drawing.Size(103, 31);
             this.rbtnLoS.TabIndex = 5;
             this.rbtnLoS.TabStop = true;
-            this.rbtnLoS.Text = "Toggle\r\nLine-of-Sight";
+            this.rbtnLoS.Text = "Line-of-Sight";
             this.rbtnLoS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnLoS.UseVisualStyleBackColor = true;
             this.rbtnLoS.CheckedChanged += new System.EventHandler(this.rbtnLoS_CheckedChanged);
@@ -391,12 +399,12 @@
             // 
             this.rbtnWalkable.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnWalkable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnWalkable.Location = new System.Drawing.Point(9, 250);
+            this.rbtnWalkable.Location = new System.Drawing.Point(9, 300);
             this.rbtnWalkable.Name = "rbtnWalkable";
-            this.rbtnWalkable.Size = new System.Drawing.Size(103, 45);
+            this.rbtnWalkable.Size = new System.Drawing.Size(103, 28);
             this.rbtnWalkable.TabIndex = 3;
             this.rbtnWalkable.TabStop = true;
-            this.rbtnWalkable.Text = "Toggle\r\nWalkable";
+            this.rbtnWalkable.Text = "Walkable";
             this.rbtnWalkable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnWalkable.UseVisualStyleBackColor = true;
             this.rbtnWalkable.CheckedChanged += new System.EventHandler(this.rbtnWalkable_CheckedChanged);
@@ -454,6 +462,14 @@
             // 
             this.groupBox2.Controls.Add(this.rbtnPaintTile);
             this.groupBox2.Controls.Add(this.rbtnHeightLevel);
+
+            this.groupBox2.Controls.Add(this.rbtnBridgeEW);
+            this.groupBox2.Controls.Add(this.rbtnBridgeNS);
+            this.groupBox2.Controls.Add(this.rbtnDownToN);
+            this.groupBox2.Controls.Add(this.rbtnDownToE);
+            this.groupBox2.Controls.Add(this.rbtnDownToS);
+            this.groupBox2.Controls.Add(this.rbtnDownToW);
+
             this.groupBox2.Controls.Add(this.rbtnInfo);
             this.groupBox2.Controls.Add(this.rbtnLoS);
             this.groupBox2.Controls.Add(this.rbtnEditTrigger);
@@ -489,21 +505,105 @@
             this.rbtnHeightLevel.Size = new System.Drawing.Size(50, 45);
             this.rbtnHeightLevel.TabIndex = 6;
             this.rbtnHeightLevel.TabStop = true;
-            this.rbtnHeightLevel.Text = "Height\r\nLevel";
+            this.rbtnHeightLevel.Text = "Height";
             this.rbtnHeightLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnHeightLevel.UseVisualStyleBackColor = true;
             this.rbtnHeightLevel.CheckedChanged += new System.EventHandler(this.rbtnHeightLevel_CheckedChanged);
+            // 
+            // rbtnBridgeEW
+            // 
+            this.rbtnBridgeEW.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnBridgeEW.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnBridgeEW.Location = new System.Drawing.Point(62, 106);
+            this.rbtnBridgeEW.Name = "rbtnBridgeEW";
+            this.rbtnBridgeEW.Size = new System.Drawing.Size(50, 24);
+            this.rbtnBridgeEW.TabIndex = 6;
+            this.rbtnBridgeEW.TabStop = true;
+            this.rbtnBridgeEW.Text = "BrEW";
+            this.rbtnBridgeEW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnBridgeEW.UseVisualStyleBackColor = true;
+            this.rbtnBridgeEW.CheckedChanged += new System.EventHandler(this.rbtnBridgeEW_CheckedChanged);
+            // 
+            // rbtnBridgeNS
+            // 
+            this.rbtnBridgeNS.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnBridgeNS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnBridgeNS.Location = new System.Drawing.Point(62, 137);
+            this.rbtnBridgeNS.Name = "rbtnBridgeNS";
+            this.rbtnBridgeNS.Size = new System.Drawing.Size(50, 27);
+            this.rbtnBridgeNS.TabIndex = 6;
+            this.rbtnBridgeNS.TabStop = true;
+            this.rbtnBridgeNS.Text = "BrNS";
+            this.rbtnBridgeNS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnBridgeNS.UseVisualStyleBackColor = true;
+            this.rbtnBridgeNS.CheckedChanged += new System.EventHandler(this.rbtnBridgeNS_CheckedChanged);
+            // 
+            // rbtnDownToN
+            // 
+            this.rbtnDownToN.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnDownToN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnDownToN.Location = new System.Drawing.Point(62, 168);
+            this.rbtnDownToN.Name = "rbtnDownToN";
+            this.rbtnDownToN.Size = new System.Drawing.Size(50, 27);
+            this.rbtnDownToN.TabIndex = 6;
+            this.rbtnDownToN.TabStop = true;
+            this.rbtnDownToN.Text = "StN";
+            this.rbtnDownToN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnDownToN.UseVisualStyleBackColor = true;
+            this.rbtnDownToN.CheckedChanged += new System.EventHandler(this.rbtnDownToN_CheckedChanged);
+            // 
+            // rbtnDownToE
+            // 
+            this.rbtnDownToE.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnDownToE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnDownToE.Location = new System.Drawing.Point(9, 106);
+            this.rbtnDownToE.Name = "rbtnDownToE";
+            this.rbtnDownToE.Size = new System.Drawing.Size(50, 27);
+            this.rbtnDownToE.TabIndex = 6;
+            this.rbtnDownToE.TabStop = true;
+            this.rbtnDownToE.Text = "StE";
+            this.rbtnDownToE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnDownToE.UseVisualStyleBackColor = true;
+            this.rbtnDownToE.CheckedChanged += new System.EventHandler(this.rbtnDownToE_CheckedChanged);
+            // 
+            // rbtnDownToS
+            // 
+            this.rbtnDownToS.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnDownToS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnDownToS.Location = new System.Drawing.Point(9, 137);
+            this.rbtnDownToS.Name = "rbtnDownToS";
+            this.rbtnDownToS.Size = new System.Drawing.Size(50, 27);
+            this.rbtnDownToS.TabIndex = 6;
+            this.rbtnDownToS.TabStop = true;
+            this.rbtnDownToS.Text = "StS";
+            this.rbtnDownToS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnDownToS.UseVisualStyleBackColor = true;
+            this.rbtnDownToS.CheckedChanged += new System.EventHandler(this.rbtnDownToS_CheckedChanged);
+            // 
+            // rbtnDownToW
+            // 
+            this.rbtnDownToW.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnDownToW.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnDownToW.Location = new System.Drawing.Point(9, 168);
+            this.rbtnDownToW.Name = "rbtnDownToW";
+            this.rbtnDownToW.Size = new System.Drawing.Size(50, 27);
+            this.rbtnDownToW.TabIndex = 6;
+            this.rbtnDownToW.TabStop = true;
+            this.rbtnDownToW.Text = "StW";
+            this.rbtnDownToW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnDownToW.UseVisualStyleBackColor = true;
+            this.rbtnDownToW.CheckedChanged += new System.EventHandler(this.rbtnDownToW_CheckedChanged);
             // 
             // rbtnEditTrigger
             // 
             this.rbtnEditTrigger.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnEditTrigger.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnEditTrigger.Location = new System.Drawing.Point(9, 175);
+            this.rbtnEditTrigger.Location = new System.Drawing.Point(9, 245);
             this.rbtnEditTrigger.Name = "rbtnEditTrigger";
-            this.rbtnEditTrigger.Size = new System.Drawing.Size(103, 65);
+            this.rbtnEditTrigger.Size = new System.Drawing.Size(103, 46);
             this.rbtnEditTrigger.TabIndex = 2;
             this.rbtnEditTrigger.TabStop = true;
-            this.rbtnEditTrigger.Text = "Edit Last\r\nSelected\r\nTrigger";
+            this.rbtnEditTrigger.Text = "Edit Last\r\nTrigger";
             this.rbtnEditTrigger.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnEditTrigger.UseVisualStyleBackColor = true;
             this.rbtnEditTrigger.CheckedChanged += new System.EventHandler(this.rbtnEditTrigger_CheckedChanged);
@@ -512,9 +612,9 @@
             // 
             this.rbtnPaintTrigger.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnPaintTrigger.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnPaintTrigger.Location = new System.Drawing.Point(9, 106);
+            this.rbtnPaintTrigger.Location = new System.Drawing.Point(9, 196);
             this.rbtnPaintTrigger.Name = "rbtnPaintTrigger";
-            this.rbtnPaintTrigger.Size = new System.Drawing.Size(103, 61);
+            this.rbtnPaintTrigger.Size = new System.Drawing.Size(103, 46);
             this.rbtnPaintTrigger.TabIndex = 0;
             this.rbtnPaintTrigger.TabStop = true;
             this.rbtnPaintTrigger.Text = "New\r\nTrigger";
@@ -538,7 +638,7 @@
             this.chkGrid.Location = new System.Drawing.Point(21, 522);
             this.chkGrid.Margin = new System.Windows.Forms.Padding(0);
             this.chkGrid.Name = "chkGrid";
-            this.chkGrid.Size = new System.Drawing.Size(103, 28);
+            this.chkGrid.Size = new System.Drawing.Size(103, 32);
             this.chkGrid.TabIndex = 78;
             this.chkGrid.Text = "SHOW GRID";
             this.chkGrid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -881,6 +981,12 @@
         private System.Windows.Forms.CheckBox chkGrid;
         private System.Windows.Forms.RadioButton rbtnPaintTile;
         private System.Windows.Forms.RadioButton rbtnHeightLevel;
+        private System.Windows.Forms.RadioButton rbtnBridgeEW;
+        private System.Windows.Forms.RadioButton rbtnBridgeNS;
+        private System.Windows.Forms.RadioButton rbtnDownToN;
+        private System.Windows.Forms.RadioButton rbtnDownToE;
+        private System.Windows.Forms.RadioButton rbtnDownToS;
+        private System.Windows.Forms.RadioButton rbtnDownToW;
         private System.Windows.Forms.GroupBox gbMapSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

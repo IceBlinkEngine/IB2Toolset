@@ -60,6 +60,7 @@ namespace IB2Toolset
         public bool Walkable = true;
         public bool LoSBlocked = false;
         public bool Visible = false;
+
         public int heightLevel = 0;
         public bool isRamp = false;
         public bool isEWBridge = false;
@@ -84,6 +85,44 @@ namespace IB2Toolset
         public bool isInLongShadeSW = false;
         public bool isInLongShadeNW = false;
 
+        public bool hasHighlightN = false;
+        public int highlightStrengthN = 100;
+        public bool hasHighlightE = false;
+        public int highlightStrengthE = 100;
+        public bool hasHighlightS = false;
+        public int highlightStrengthS = 100;
+        public bool hasHighlightW = false;
+        public int highlightStrengthW = 100;
+
+        public bool hasDownStairShadowN = false;
+        public bool hasDownStairShadowE = false;
+        public bool hasDownStairShadowS = false;
+        public bool hasDownStairShadowW = false;
+
+        public int numberOfHeightLevelsThisTileisHigherThanNeighbourN = 0;
+        public int numberOfHeightLevelsThisTileisHigherThanNeighbourE = 0;
+        public int numberOfHeightLevelsThisTileisHigherThanNeighbourS = 0;
+        public int numberOfHeightLevelsThisTileisHigherThanNeighbourW = 0;
+
+        public bool inRampShadowWest1Short = false;
+        public bool inRampShadowWest1Long = false;
+        public bool inRampShadowWest2Short = false;
+        public bool inRampShadowWest2Long = false;
+
+        public bool inRampShadowEast3Short = false;
+        public bool inRampShadowEast3Long = false;
+        public bool inRampShadowEast4Short = false;
+        public bool inRampShadowEast4Long = false;
+
+        public bool inRampShadowNorth5Short = false;
+        public bool inRampShadowNorth5Long = false;
+        public bool inRampShadowNorth6Short = false;
+        public bool inRampShadowNorth6Long = false;
+
+        public bool inRampShadowSouth7Short = false;
+        public bool inRampShadowSouth7Long = false;
+        public bool inRampShadowSouth8Short = false;
+        public bool inRampShadowSouth8Long = false;
 
         [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tile is a ramp: you can leave this ramp towards one height level lower neighbouring tiles; note that the height level of the current tile is the top of the ramp, also ramps work from all directions")]
         public bool IsRamp
