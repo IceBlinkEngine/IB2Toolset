@@ -76,9 +76,36 @@ namespace IB2Toolset
         private float _minimumDarkness = 12;
         private float _maxLightMultiplier = 1;
 
+        public bool allowLevelDesignWithMoreThan2HeightLevelsDifference = false;
+        //public bool allowFreePlacementOfBridges = false;
+        //public bool allowFreePlacementOfRamps = false;
+
         #endregion
 
         #region Properties
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, you can build with more than 2 height levels difference which breaks the default height shadowing; best turn off isShadowCaster in the tile's properties and place custom shadow graphics as tiles in layer 5")]
+        public bool AllowLevelDesignWithMoreThan2HeightLevelsDifference
+        {
+            get { return allowLevelDesignWithMoreThan2HeightLevelsDifference; }
+            set { allowLevelDesignWithMoreThan2HeightLevelsDifference = value; }
+        }
+
+        /*
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("When set to true, you can build bridges anywhere you like (normaly they require height a on both their topsides as well as the bridge itslef. And height a - 1 on their flank sides. Ramps would allow top sides a height of a+1, too. Be careful with freely buidling bridges as this might not work out for pathfinding AI and player movement.")]
+        public bool AllowFreePlacementOfBridges
+        {
+            get { return allowFreePlacementOfBridges; }
+            set { allowFreePlacementOfBridges = value; }
+        }
+
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("When set to true, you can build ramps/downstairs anywhere you like (normaly they require height a on their upper side as well as the on the ramp square itself. And height a - 1 on their bottom side. Further Ramps would allow upper side of this ramp a height of a+1, too. Be careful with freely buidling ramps as this might not work out for pathfinding AI and player movement.")]
+        public bool AllowFreePlacementOfRamps
+        {
+            get { return allowFreePlacementOfRamps; }
+            set { allowFreePlacementOfRamps = value; }
+        }
+        */
+
         [CategoryAttribute("08 - Properties that are ony readable"), DescriptionAttribute("These properteis cannot be changed in toolset; you can read them in and use them via IBScript though"), ReadOnly(true)]
         public string Filename
         {

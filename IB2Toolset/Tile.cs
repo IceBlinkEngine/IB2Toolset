@@ -66,6 +66,7 @@ namespace IB2Toolset
         public bool isEWBridge = false;
         public bool isNSBridge = false;
         public bool isShadowCaster = true;
+        public bool drawDownStairShadows = true;
 
         public bool isInShortShadeN = false;
         public bool isInShortShadeE = false;
@@ -124,39 +125,51 @@ namespace IB2Toolset
         public bool inRampShadowSouth8Short = false;
         public bool inRampShadowSouth8Long = false;
 
+        /*
         [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tile is a ramp: you can leave this ramp towards one height level lower neighbouring tiles; note that the height level of the current tile is the top of the ramp, also ramps work from all directions")]
         public bool IsRamp
         {
             get { return isRamp; }
             set { isRamp = value; }
         }
-
+        */
+        /*
         [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tile is east-west bridge: it can be traversed east-west on same height level as the bridge itself (move on bridge) or north-south from one height level lower than bridge (under bridge); note the hight level of the current tile is the top of the bridge")]
         public bool IsEWBridge
         {
             get { return isEWBridge; }
             set { isEWBridge = value; }
         }
-
+        */
+        /*
         [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Tile is north-south bridge: it can be traversed north-south on same height level as the bridge itself (move on bridge) or east-west from one height level lower than bridge (under bridge); note the hight level of the current tile is the top of the bridge")]
         public bool IsNSBridge
         {
             get { return isNSBridge; }
             set { isNSBridge = value; }
         }
-
+        */
+        /*
         [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Height level of the currently selcted tile.")]
         public int HeightLevel
         {
             get { return heightLevel; }
             set { heightLevel = value; }
         }
+        */
 
-        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("Whne set to true, the tile casts autoshados on lower tiles.")]
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("When set to true, the tile casts autoshados on lower tiles.")]
         public bool IsShadowCaster
         {
             get { return isShadowCaster; }
             set { isShadowCaster = value; }
+        }
+
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("When set to true, the tile has an automatic downstairs shadow on top of it in correct direction. Turn off if you want to use custom stair prop or tile graphics for the stairs/ramp.")]
+        public bool DrawDownStairShadows
+        {
+            get { return drawDownStairShadows; }
+            set { drawDownStairShadows = value; }
         }
 
         public Tile()
