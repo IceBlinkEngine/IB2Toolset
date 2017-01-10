@@ -2047,6 +2047,23 @@ namespace IB2Toolset
             RenderTarget2D.DrawBitmap(bitmap, trg, 1.0f, BitmapInterpolationMode.Linear, src);
             RenderTarget2D.Transform = SharpDX.Matrix3x2.Identity;
         }
+        public void DrawD2DBitmap(SharpDX.Direct2D1.Bitmap bitmap, SharpDX.RectangleF source, SharpDX.RectangleF target, int angleInDegrees, bool mirror, int Xshift, int Yshift, int Xscale, int Yscale, float opac)
+        {
+            int mir = 1;
+            if (mirror) { mir = -1; }
+            //convert degrees to radians
+            float angle = (float)(Math.PI * 2 * (float)angleInDegrees / (float)360);
+            float xshf = (float)Xshift * (float)sqr / 50f;
+            float yshf = (float)Yshift * (float)sqr / 50f;
+            float xscl = 1f + (((float)Xscale * (float)sqr / 50f) / 50f);
+            float yscl = 1f + (((float)Yscale * (float)sqr / 50f) / 50f);
+            SharpDX.Vector2 center = new SharpDX.Vector2(target.Left + (target.Width / 2), target.Top + (target.Height / 2));
+            RenderTarget2D.Transform = SharpDX.Matrix.Transformation2D(center, 0, new SharpDX.Vector2(mir * xscl, yscl), center, angle, new SharpDX.Vector2(xshf, yshf));
+            SharpDX.RectangleF trg = new SharpDX.RectangleF(target.Left, target.Top, target.Width, target.Height);
+            SharpDX.RectangleF src = new SharpDX.RectangleF(source.Left, source.Top, source.Width, source.Height);
+            RenderTarget2D.DrawBitmap(bitmap, trg, opac, BitmapInterpolationMode.Linear, src);
+            RenderTarget2D.Transform = SharpDX.Matrix3x2.Identity;
+        }
         public void DrawRectangle(SharpDX.RectangleF rect, SharpDX.Color penColor, int penWidth)
         {
             using (SolidColorBrush scb = new SolidColorBrush(RenderTarget2D, penColor))
@@ -3116,29 +3133,31 @@ namespace IB2Toolset
                     Tile tile = area.Tiles[y * area.MapSizeX + x];
                     SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("longShadow").PixelSize.Width, GetFromBitmapList("longShadow").PixelSize.Height);
                     SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+                    SharpDX.RectangleF dst2 = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+
                     
-                    /*
                     //highlights
                     if (tile.hasHighlightS)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, 0);
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, 0, 1, 1, 0.5f);
+                        //DrawD2DBitmap
                     }
 
                     if (tile.hasHighlightN)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 0, 1, 1, 0.5f);
                     }
 
                     if (tile.hasHighlightW)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 0, 0, 1, 1, 0.5f);
                     }
 
                     if (tile.hasHighlightE)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, 0, 0, 1, 1, 0.5f);
                     }
-                    */
+                    
 
                     //stair shadows
                     if (tile.hasDownStairShadowN)
@@ -3148,14 +3167,16 @@ namespace IB2Toolset
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE == 0)
                             {
-                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst, 180, false, 0, 0);
+                                //dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr*0.5f, sqr);
+                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst2, 180, false, 0, 0);
+                                //dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr * 2f, sqr);
                             }
                         }
                         if (!tile.isInShortShadeW && !tile.isInLongShadeW)
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW == 0)
                             {
-                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 180, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 180, false, 0, 0);
                             }
                         }
                     }
@@ -3166,14 +3187,14 @@ namespace IB2Toolset
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS == 0)
                             {
-                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst, 270, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst2, 270, false, 0, 0);
                             }
                         }
                         if (!tile.isInShortShadeN && !tile.isInLongShadeN)
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN == 0)
                             {
-                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 270, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 270, false, 0, 0);
                             }
                         }
                     }
@@ -3184,14 +3205,14 @@ namespace IB2Toolset
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW == 0)
                             {
-                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst, 0, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst2, 0, false, 0, 0);
                             }
                         }
                         if (!tile.isInShortShadeE && !tile.isInLongShadeE)
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE == 0)
                             {
-                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 0, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 0, false, 0, 0);
                             }
                         }
                     }
@@ -3202,14 +3223,14 @@ namespace IB2Toolset
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN == 0)
                             {
-                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst, 90, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst2, 90, false, 0, 0);
                             }
                         }
                         if (!tile.isInShortShadeS && !tile.isInLongShadeS)
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS == 0)
                             {
-                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 90, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 90, false, 0, 0);
                             }
                         }
                     }
@@ -3220,7 +3241,7 @@ namespace IB2Toolset
                     }
                     if (tile.inRampShadowWest1Short)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 0, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 0, true, 0, 0);
                     }
 
                     if (tile.inRampShadowWest2Long)
@@ -3229,7 +3250,7 @@ namespace IB2Toolset
                     }
                     if (tile.inRampShadowWest2Short)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 180, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 180, false, 0, 0);
                     }
 
                     if (tile.inRampShadowEast3Long)
@@ -3238,7 +3259,7 @@ namespace IB2Toolset
                     }
                     if (tile.inRampShadowEast3Short)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst, 0, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst2, 0, true, 0, 0);
                     }
 
                     if (tile.inRampShadowEast4Long)
@@ -3247,7 +3268,7 @@ namespace IB2Toolset
                     }
                     if (tile.inRampShadowEast4Short)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 180, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 180, true, 0, 0);
                     }
 
                     if (tile.inRampShadowNorth5Long)
@@ -3256,7 +3277,7 @@ namespace IB2Toolset
                     }
                     if (tile.inRampShadowNorth5Short)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 90, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 90, true, 0, 0);
                     }
 
                     if (tile.inRampShadowNorth6Long)
@@ -3265,7 +3286,7 @@ namespace IB2Toolset
                     }
                     if (tile.inRampShadowNorth6Short)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst, 270, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst2, 270, true, 0, 0);
                     }
 
                     if (tile.inRampShadowSouth7Long)
@@ -3274,7 +3295,7 @@ namespace IB2Toolset
                     }
                     if (tile.inRampShadowSouth7Short)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst, 90, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowLeft"), src, dst2, 90, true, 0, 0);
                     }
 
                     if (tile.inRampShadowSouth8Long)
@@ -3283,7 +3304,7 @@ namespace IB2Toolset
                     }
                     if (tile.inRampShadowSouth8Short)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst, 270, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 270, true, 0, 0);
                     }
 
                     //height shadows
@@ -4323,7 +4344,7 @@ namespace IB2Toolset
             }
             #endregion
 
-            //reset the highlights on this map and neighbours
+            //reset the highlights on this map
             for (int y = 0; y < area.MapSizeY; y++)
             {
                 for (int x = 0; x < area.MapSizeX; x++)
@@ -4395,6 +4416,24 @@ namespace IB2Toolset
                     }
                 }
             }
+            /*
+            //calculate height level differences
+            for (int y = 0; y < area.MapSizeY; y++)
+            {
+                for (int x = 0; x < area.MapSizeX; x++)
+                {
+                    Tile tile = area.Tiles[y * area.MapSizeX + x];
+                    for (int yS = -1; yS < 2; yS++)
+                    {
+                        for (int xS = -1; xS < 2; xS++)
+                        {
+
+
+                        }
+                    }
+                }
+            }
+            */
 
             //go through tiles potentially in shade
             for (int y = 0; y < area.MapSizeY; y++)
@@ -4456,7 +4495,7 @@ namespace IB2Toolset
                                     int transformedX = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + x + xS;
                                     int transformedY = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeY + y + yS;
                                     tileCaster = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + transformedX];
-
+                                    
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -4620,7 +4659,7 @@ namespace IB2Toolset
                                     int transformedY = y + yS;
                                     tileCaster = mod.moduleAreasObjects[indexOfWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + transformedX];
 
-                                    tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tileCaster.heightLevel - tile.heightLevel;
+                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tileCaster.heightLevel - tile.heightLevel;
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -4747,7 +4786,7 @@ namespace IB2Toolset
                                     int transformedX = x + xS - area.MapSizeX;
                                     int transformedY = y + yS;
                                     tileCaster = mod.moduleAreasObjects[indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfEasternNeighbour].MapSizeX + transformedX];
-                                    tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tileCaster.heightLevel - tile.heightLevel;
+                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tileCaster.heightLevel - tile.heightLevel;
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -4865,7 +4904,7 @@ namespace IB2Toolset
                                     int transformedX = x + xS;
                                     int transformedY = y + yS - area.MapSizeY;
                                     tileCaster = mod.moduleAreasObjects[indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthernNeighbour].MapSizeX + transformedX];
-                                    tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tileCaster.heightLevel - tile.heightLevel;
+                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tileCaster.heightLevel - tile.heightLevel;
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -4984,7 +5023,7 @@ namespace IB2Toolset
                                     int transformedX = x + xS;
                                     int transformedY = mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeY + y + yS; ;
                                     tileCaster = mod.moduleAreasObjects[indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeX + transformedX];
-                                    tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tileCaster.heightLevel - tile.heightLevel;
+                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tileCaster.heightLevel - tile.heightLevel;
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -5109,6 +5148,31 @@ namespace IB2Toolset
                                 int transformedY = y + yS; ;
                                 tileCaster = area.Tiles[transformedY * area.MapSizeX + transformedX];
 
+                                //get height level difference
+                                if ((xS == 0) && (yS == -1))
+                                {
+                                    
+                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
+                                }
+                                
+                                if ((xS == 1) && (yS == 0))
+                                {
+                                  
+                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tile.heightLevel - tileCaster.heightLevel;
+                                }
+                                
+                                if ((xS == 0) && (yS == 1))
+                                {
+                                 
+                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tile.heightLevel - tileCaster.heightLevel;
+                                }
+                                
+                                if ((xS == -1) && (yS == 0))
+                                {
+                               
+                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tile.heightLevel - tileCaster.heightLevel;
+                                }
+
                                 //casts shadow and is no ramp
                                 if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                 {
@@ -5162,13 +5226,21 @@ namespace IB2Toolset
                                     {
                                         if ((xS == -1) && (yS == -1))
                                         {
-                                            tile.isInShortShadeNW = true;
+                                                tile.isInShortShadeNW = true;
                                         }
                                         if ((xS == 0) && (yS == -1))
                                         {
-                                            tile.isInShortShadeN = true;
-                                            tileCaster.hasHighlightS = true;
-                                            //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
+                                            if (tile.hasDownStairShadowN)
+                                            {
+                                                tile.isInLongShadeN = true;
+                                                tileCaster.hasHighlightS = true;
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                            else
+                                            {
+                                                tile.isInShortShadeN = true;
+                                                tileCaster.hasHighlightS = true;
+                                            }
                                         }
                                         if ((xS == 1) && (yS == -1))
                                         {
@@ -5176,8 +5248,17 @@ namespace IB2Toolset
                                         }
                                         if ((xS == 1) && (yS == 0))
                                         {
-                                            tile.isInShortShadeE = true;
-                                            tileCaster.hasHighlightW = true;
+                                            if (tile.hasDownStairShadowN)
+                                            {
+                                                tile.isInLongShadeE = true;
+                                                tileCaster.hasHighlightW = true;
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                            else
+                                            {
+                                                tile.isInShortShadeE = true;
+                                                tileCaster.hasHighlightW = true;
+                                            }
                                             //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tile.heightLevel - tileCaster.heightLevel;
                                         }
                                         if ((xS == 1) && (yS == 1))
@@ -5186,8 +5267,17 @@ namespace IB2Toolset
                                         }
                                         if ((xS == 0) && (yS == 1))
                                         {
-                                            tile.isInShortShadeS = true;
-                                            tileCaster.hasHighlightN = true;
+                                            if (tile.hasDownStairShadowN)
+                                            {
+                                                tile.isInLongShadeS = true;
+                                                tileCaster.hasHighlightN = true;
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                            else
+                                            {
+                                                tile.isInShortShadeS = true;
+                                                tileCaster.hasHighlightN = true;
+                                            }
                                             //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tile.heightLevel - tileCaster.heightLevel;
                                         }
                                         if ((xS == -1) && (yS == 1))
@@ -5196,12 +5286,81 @@ namespace IB2Toolset
                                         }
                                         if ((xS == -1) && (yS == 0))
                                         {
-                                            tile.isInShortShadeW = true;
-                                            tileCaster.hasHighlightE = true;
+                                            if (tile.hasDownStairShadowN)
+                                            {
+                                                tile.isInLongShadeW= true;
+                                                tileCaster.hasHighlightE = true;
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                            else
+                                            {
+                                                tile.isInShortShadeW = true;
+                                                tileCaster.hasHighlightE = true;
+                                            }
                                             //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tile.heightLevel - tileCaster.heightLevel;
                                         }
                                     }
-                                    
+
+                                    //check for shadows on low ramp parts of same height
+                                    else if (tileCaster.heightLevel == tile.heightLevel)
+                                    {
+                                        if ((xS == -1) && (yS == -1))
+                                        {
+                                            //tile.isInShortShadeNW = true;
+                                        }
+                                        if ((xS == 0) && (yS == -1))
+                                        {
+                                            if (tile.hasDownStairShadowN)
+                                            {
+                                                tile.isInShortShadeN = true;
+                                                tileCaster.hasHighlightS = true;
+                                            }
+                                            //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
+                                        }
+                                        if ((xS == 1) && (yS == -1))
+                                        {
+                                            //tile.isInShortShadeNE = true;
+                                        }
+                                        if ((xS == 1) && (yS == 0))
+                                        {
+                                            if (tile.hasDownStairShadowE)
+                                            {
+                                                tile.isInShortShadeE = true;
+                                                tileCaster.hasHighlightW = true;
+                                            }
+                                            //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tile.heightLevel - tileCaster.heightLevel;
+                                        }
+                                        if ((xS == 1) && (yS == 1))
+                                        {
+                                            //tile.isInShortShadeSE = true;
+                                        }
+                                        if ((xS == 0) && (yS == 1))
+                                        {
+                                            if (tile.hasDownStairShadowS)
+                                            {
+                                                tile.isInShortShadeS = true;
+                                                tileCaster.hasHighlightN = true;
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                        }
+                                        if ((xS == -1) && (yS == 1))
+                                        {
+                                            //tile.isInShortShadeSW = true;
+                                        }
+                                        if ((xS == -1) && (yS == 0))
+                                        {
+                                            if (tile.hasDownStairShadowW)
+                                            {
+                                                tile.isInShortShadeW = true;
+                                                tileCaster.hasHighlightE = true;
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                        }
+                                    }
+
+
+
+
                                     /*
                                     //check if caster tile is bottom of this ramp/tile
                                     else if ((tileCaster.heightLevel == tile.heightLevel - 1) && (tile.isRamp))
@@ -5233,7 +5392,14 @@ namespace IB2Toolset
                                     {
                                         if ((xS == -1) && (yS == -1))
                                         {
-                                            tile.isInShortShadeNW = true;
+                                            if (tileCaster.hasDownStairShadowN || tileCaster.hasDownStairShadowW)
+                                            {
+                                                tile.isInLongShadeNW = true;
+                                            }
+                                            else
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                            }
                                         }
                                         if ((xS == 0) && (yS == -1))
                                         {
@@ -5261,7 +5427,14 @@ namespace IB2Toolset
                                         }
                                         if ((xS == 1) && (yS == -1))
                                         {
-                                            tile.isInShortShadeNE = true;
+                                            if (tileCaster.hasDownStairShadowN || tileCaster.hasDownStairShadowE)
+                                            {
+                                                tile.isInLongShadeNE = true;
+                                            }
+                                            else
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                            }
                                         }
                                         if ((xS == 1) && (yS == 0))
                                         {
@@ -5288,7 +5461,14 @@ namespace IB2Toolset
                                         }
                                         if ((xS == 1) && (yS == 1))
                                         {
-                                            tile.isInShortShadeSE = true;
+                                            if (tileCaster.hasDownStairShadowS || tileCaster.hasDownStairShadowE)
+                                            {
+                                                tile.isInLongShadeSE = true;
+                                            }
+                                            else
+                                            {
+                                                tile.isInShortShadeSE = true;
+                                            }
                                         }
                                         if ((xS == 0) && (yS == 1))
                                         {
@@ -5315,7 +5495,14 @@ namespace IB2Toolset
                                         }
                                         if ((xS == -1) && (yS == 1))
                                         {
-                                            tile.isInShortShadeSW = true;
+                                            if (tileCaster.hasDownStairShadowS || tileCaster.hasDownStairShadowW)
+                                            {
+                                                tile.isInLongShadeSW = true;
+                                            }
+                                            else
+                                            {
+                                                tile.isInShortShadeSW = true;
+                                            }
                                         }
                                         if ((xS == -1) && (yS == 0))
                                         {
@@ -5346,12 +5533,15 @@ namespace IB2Toolset
                                     {
                                         if ((xS == -1) && (yS == -1))
                                         {
-                                            //tile.isInShortShadeNW = true;
+                                            if (tileCaster.hasDownStairShadowN || tileCaster.hasDownStairShadowW)
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                            }
                                         }
                                         if ((xS == 0) && (yS == -1))
                                         {
                                             //tile.isInShortShadeN = true;
-                                            tileCaster.hasHighlightS = true;
+                                            //tileCaster.hasHighlightS = true;
                                             tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tileCaster.heightLevel - tile.heightLevel;
                                             //enter southern map code from above here: 
                                             if (tileCaster.hasDownStairShadowE)
@@ -5362,37 +5552,92 @@ namespace IB2Toolset
                                             {
                                                 tile.inRampShadowNorth6Short = true;
                                             }
+                                            if (tileCaster.hasDownStairShadowN)
+                                            {
+                                                tile.isInShortShadeN = true;
+                                                tileCaster.hasHighlightS = true;
+                                            }
 
                                         }
                                         if ((xS == 1) && (yS == -1))
                                         {
-                                            //tile.isInShortShadeNE = true;
+                                            if (tileCaster.hasDownStairShadowN || tileCaster.hasDownStairShadowE)
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                            }
                                         }
                                         if ((xS == 1) && (yS == 0))
                                         {
                                             //tile.isInShortShadeE = true;
-                                            tileCaster.hasHighlightW = true;
+                                            //tileCaster.hasHighlightW = true;
                                             tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tileCaster.heightLevel - tile.heightLevel;
                                             //look for eastern map code above
-                                            if (tileCaster.hasDownStairShadowN)
-                                            {
-                                                tile.inRampShadowEast3Short = true;
+                                            
+                                                if (tileCaster.hasDownStairShadowN)
+                                                {
+                                                    if (tile.hasDownStairShadowE)
+                                                    {
+                                                        tile.inRampShadowEast3Long = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.inRampShadowEast3Short = true;
+                                                    }
+                                                }
+
+                                                if (tileCaster.hasDownStairShadowS)
+                                                {
+                                                    tile.inRampShadowEast4Short = true;
+                                                }
+                                                if (tileCaster.hasDownStairShadowE)
+                                                {
+                                                    tile.isInShortShadeE = true;
+                                                    tileCaster.hasHighlightW = true;
                                             }
-                                            if (tileCaster.hasDownStairShadowS)
+                                            
+                                                /*
+                                            //tile is ramp and 1 level higher
+                                            else
                                             {
-                                                tile.inRampShadowEast4Short = true;
+                                                if (tileCaster.hasDownStairShadowN)
+                                                {
+                                                    if (tile.hasDownStairShadowE)
+                                                    {
+                                                        tile.inRampShadowEast3Long = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        tile.inRampShadowEast3Short = true;
+                                                    }
+                                                }
+
+
+                                                if (tileCaster.hasDownStairShadowS)
+                                                {
+                                                    tile.inRampShadowEast4Short = true;
+                                                }
+                                                if (tileCaster.hasDownStairShadowE)
+                                                {
+                                                    tile.isInShortShadeE = true;
+                                                }
                                             }
+                                            //gtx1080 add tile is ramp sitauations here, smae likely for two height levels difference an same height, too
+                                            */
                                         }
                                         if ((xS == 1) && (yS == 1))
                                         {
-                                            //tile.isInShortShadeSE = true;
+                                            if (tileCaster.hasDownStairShadowS || tileCaster.hasDownStairShadowE)
+                                            {
+                                                tile.isInShortShadeSE = true;
+                                            }
                                         }
                                         if ((xS == 0) && (yS == 1))
                                         {
                                             //tile.isInShortShadeS = true;
-                                            tileCaster.hasHighlightN = true;
+                                            //tileCaster.hasHighlightN = true;
                                             tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tileCaster.heightLevel - tile.heightLevel;
                                             //add southern map code here
+                                            //azraeli
                                             if (tileCaster.hasDownStairShadowE)
                                             {
                                                 tile.inRampShadowSouth7Short = true;
@@ -5401,15 +5646,23 @@ namespace IB2Toolset
                                             {
                                                 tile.inRampShadowSouth8Short = true;
                                             }
+                                            if (tileCaster.hasDownStairShadowS)
+                                            {
+                                                tile.isInShortShadeS = true;
+                                                tileCaster.hasHighlightN = true;
+                                            }
                                         }
                                         if ((xS == -1) && (yS == 1))
                                         {
-                                            //tile.isInShortShadeSW = true;
+                                            if (tileCaster.hasDownStairShadowS || tileCaster.hasDownStairShadowW)
+                                            {
+                                                tile.isInShortShadeSW = true;
+                                            }
                                         }
                                         if ((xS == -1) && (yS == 0))
                                         {
                                             //tile.isInShortShadeW = true;
-                                            tileCaster.hasHighlightE = true;
+                                            //tileCaster.hasHighlightE = true;
                                             tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tileCaster.heightLevel - tile.heightLevel;
                                             //add western map code here
                                             if (tileCaster.hasDownStairShadowN)
@@ -5420,8 +5673,134 @@ namespace IB2Toolset
                                             {
                                                 tile.inRampShadowWest2Short = true;
                                             }
+                                            if (tileCaster.hasDownStairShadowW)
+                                            {
+                                                tile.isInShortShadeW = true;
+                                                tileCaster.hasHighlightE = true;
+                                            }
                                         }
                                     }
+                                    
+                                    //upper RAMP part of neighbouring square casting on same level lower RAMP part of this square
+                                    if (tileCaster.heightLevel == tile.heightLevel)
+                                    {
+                                        if (tile.isRamp)
+                                        {
+                                            //caster from the northwest
+                                            if ((xS == -1) && (yS == -1))
+                                            {
+                                                /*
+                                                if (tileCaster.hasDownStairShadowW || tileCaster.hasDownStairShadowN)
+                                                {
+                                                    if (tile.hasDownStairShadowN || tileCaster.hasDownStairShadowW)
+                                                    {
+                                                        tile.isInShortShadeNW = true;
+                                                    }
+                                                }
+                                                */
+                                            }
+                                            //north
+                                            if ((xS == 0) && (yS == -1))
+                                            {
+                                                //tile.isInShortShadeN = true;
+                                                //tileCaster.hasHighlightS = true;
+                                                tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tileCaster.heightLevel - tile.heightLevel + 1;
+                                                if (tileCaster.hasDownStairShadowN)
+                                                {
+                                                    if (tile.hasDownStairShadowN)
+                                                    {
+                                                        tile.isInShortShadeN = true;
+                                                        tileCaster.hasHighlightS = true;
+                                                    }
+                                                }
+
+                                            }
+
+                                            if ((xS == 1) && (yS == -1))
+                                            {
+                                                /*
+                                                if (tileCaster.hasDownStairShadowE || tileCaster.hasDownStairShadowN)
+                                                {
+                                                    if (tile.hasDownStairShadowN || tileCaster.hasDownStairShadowE)
+                                                    {
+                                                        tile.isInLongShadeNE = true;
+                                                    }
+                                                }
+                                                */
+                                              
+                                            }
+                                            if ((xS == 1) && (yS == 0))
+                                            {
+                                                //tile.isInShortShadeE = true;
+                                                //tileCaster.hasHighlightW = true;
+                                                tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tileCaster.heightLevel - tile.heightLevel + 1;
+                                                if (tileCaster.hasDownStairShadowE)
+                                                {
+                                                    if (tile.hasDownStairShadowE)
+                                                    {
+                                                        tile.isInShortShadeE = true;
+                                                        tileCaster.hasHighlightW = true;
+                                                    }
+                                                }
+                                            }
+                                            if ((xS == 1) && (yS == 1))
+                                            {
+                                                /*
+                                                if (tileCaster.hasDownStairShadowE || tileCaster.hasDownStairShadowS)
+                                                {
+                                                    if (tile.hasDownStairShadowS || tileCaster.hasDownStairShadowE)
+                                                    {
+                                                        tile.isInLongShadeNE = true;
+                                                    }
+                                                }
+                                                */
+                                                //tile.isInShortShadeSE = true;
+                                            }
+                                            if ((xS == 0) && (yS == 1))
+                                            {
+                                                //tile.isInShortShadeS = true;
+                                                //tileCaster.hasHighlightN = true;
+                                                tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tileCaster.heightLevel - tile.heightLevel+1;
+                                                if (tileCaster.hasDownStairShadowS)
+                                                {
+                                                    if (tile.hasDownStairShadowS)
+                                                    {
+                                                        tile.isInShortShadeS = true;
+                                                        tileCaster.hasHighlightN = true;
+                                                    }
+                                                }
+                                            }
+                                            if ((xS == -1) && (yS == 1))
+                                            {
+                                                /*
+                                                if (tileCaster.hasDownStairShadowW || tileCaster.hasDownStairShadowS)
+                                                {
+                                                    if (tile.hasDownStairShadowS || tileCaster.hasDownStairShadowW)
+                                                    {
+                                                        tile.isInLongShadeNE = true;
+                                                    }
+                                                }
+                                                */
+                                                //tile.isInShortShadeSW = true;
+                                            }
+                                            if ((xS == -1) && (yS == 0))
+                                            {
+                                                //tile.isInShortShadeW = true;
+                                                //tileCaster.hasHighlightE = true;
+                                                tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tileCaster.heightLevel - tile.heightLevel + 1;
+                                                if (tileCaster.hasDownStairShadowW)
+                                                {
+                                                    if (tile.hasDownStairShadowW)
+                                                    {
+                                                        tile.isInShortShadeW = true;
+                                                        tileCaster.hasHighlightE = true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                    }//end
+                                    
                                 }
                                 
                             }
