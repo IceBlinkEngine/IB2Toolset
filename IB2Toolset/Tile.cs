@@ -86,6 +86,15 @@ namespace IB2Toolset
         public bool isInLongShadeSW = false;
         public bool isInLongShadeNW = false;
 
+        public bool isInMaxShadeN = false;
+        public bool isInMaxShadeE = false;
+        public bool isInMaxShadeS = false;
+        public bool isInMaxShadeW = false;
+        public bool isInMaxShadeNE = false;
+        public bool isInMaxShadeSE = false;
+        public bool isInMaxShadeSW = false;
+        public bool isInMaxShadeNW = false;
+
         public bool hasHighlightN = false;
         public int highlightStrengthN = 100;
         public bool hasHighlightE = false;
