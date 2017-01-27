@@ -114,6 +114,15 @@ namespace IB2Toolset
         public int numberOfHeightLevelsThisTileisHigherThanNeighbourS = 0;
         public int numberOfHeightLevelsThisTileisHigherThanNeighbourW = 0;
 
+        public bool inSmallStairNEHorizontal = false;
+        public bool inSmallStairNEVertical = false;
+        public bool inSmallStairSEHorizontal = false;
+        public bool inSmallStairSEVertical = false;
+        public bool inSmallStairSWHorizontal = false;
+        public bool inSmallStairSWVertical = false;
+        public bool inSmallStairNWHorizontal = false;
+        public bool inSmallStairNWVertical = false;
+
         public bool inRampShadowWest1Short = false;
         public bool inRampShadowWest1Long = false;
         public bool inRampShadowWest2Short = false;

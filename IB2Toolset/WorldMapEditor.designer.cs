@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent(ParentForm p)
         {
             this.components = new System.ComponentModel.Container();
             this.btnFillWithSelected = new System.Windows.Forms.Button();
@@ -542,21 +542,46 @@
             // 
             this.rbtnDownToN.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnDownToN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnDownToN.Location = new System.Drawing.Point(62, 168);
+            this.rbtnDownToN.Location = new System.Drawing.Point(9, 106);
             this.rbtnDownToN.Name = "rbtnDownToN";
             this.rbtnDownToN.Size = new System.Drawing.Size(50, 27);
             this.rbtnDownToN.TabIndex = 6;
             this.rbtnDownToN.TabStop = true;
-            this.rbtnDownToN.Text = "StN";
-            this.rbtnDownToN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbtnDownToN.UseVisualStyleBackColor = true;
+
+            //string a = "";
+            //_mainDirectory = Directory.GetCurrentDirectory();
+            //a = p._mainDirectory;
+            //a = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + "downStairShadow" + ".png";
+            //a = "test";
+            ///pipetto
+            //
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(p._mainDirectory + "\\modules\\" + p.mod.moduleName + "\\graphics\\" + "downToN" + ".png");
+            this.rbtnDownToN.BackgroundImage = (System.Drawing.Image)bm;
+            
+            //this.rbtnDownToN.dr;
+            //this.rbtnDownToN.BackgroundImage.
+            //System.Drawing.Bitmap bm = null;
+            //try
+            //{
+            //if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\" + filename + ".png"))
+            //{
+            //bm = new System.Drawing.Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\" + filename + ".png");
+            //}
+            //LoadBitmapGDI(string filename)
+            //iconBitmap = (Bitmap)itemsList[frmBlueprints.GetItemIndex(_nodeTag)].itemIconBitmap.Clone();
+            //frmIconSprite.pbIcon.BackgroundImage = (Image)iconBitmap;
+            //this.rbtnDownToN.Text = "StN";
+            //this.rbtnDownToN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            //this.rbtnDownToN.UseVisualStyleBackColor = true;
             this.rbtnDownToN.CheckedChanged += new System.EventHandler(this.rbtnDownToN_CheckedChanged);
             // 
             // rbtnDownToE
             // 
             this.rbtnDownToE.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnDownToE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnDownToE.Location = new System.Drawing.Point(9, 106);
+            this.rbtnDownToE.Location = new System.Drawing.Point(62, 168);
+            //62,168
+            //9,106
             this.rbtnDownToE.Name = "rbtnDownToE";
             this.rbtnDownToE.Size = new System.Drawing.Size(50, 27);
             this.rbtnDownToE.TabIndex = 6;
