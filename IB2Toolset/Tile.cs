@@ -123,6 +123,11 @@ namespace IB2Toolset
         public bool inSmallStairNWHorizontal = false;
         public bool inSmallStairNWVertical = false;
 
+        public bool hasEntranceLightNorth = false;
+        public bool hasEntranceLightEast = false;
+        public bool hasEntranceLightSouth = false;
+        public bool hasEntranceLightWest = false;
+
         public bool inRampShadowWest1Short = false;
         public bool inRampShadowWest1Long = false;
         public bool inRampShadowWest2Short = false;

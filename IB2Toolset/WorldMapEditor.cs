@@ -100,6 +100,7 @@ namespace IB2Toolset
 
         public bool firstElementHasBeenPlaced = false;
         public int stairRotationCounter = 1; //1=N, 2=E, 3= S, 4 = W
+        public int bridgeRotationCounter = 1; //1=EW-Bridge, 2=NS-Bridge
 
         #endregion
 
@@ -1419,198 +1420,201 @@ namespace IB2Toolset
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        if (area.allowLevelDesignWithMoreThan2HeightLevelsDifference)
+                        if (!isOrthogonalNeighbourOfBridge(gridX, gridY) && !area.Tiles[gridY * area.MapSizeX + gridX].isEWBridge && !area.Tiles[gridY * area.MapSizeX + gridX].isNSBridge)
                         {
-                            area.Tiles[selectedTile.index].heightLevel += 1;
-                        }
-                        else
-                        {
-                            bool changeAllowed = true;
-                            try
-                            {
-                                for (int xCheck = gridX - 1; xCheck <= gridX + 1; xCheck++)
-                                {
-                                    for (int yCheck = gridY - 1; yCheck <= gridY + 1; yCheck++)
-                                    {
-                                        /*
-                                        //the checked tile is downstairs east ramp that...
-                                        if (area.Tiles[yCheck * area.MapSizeX + xCheck].hasDownStairShadowE)
-                                        {
-                                            //... is located north of current tile 
-                                            if (yCheck == gridY -1 && xCheck == gridX)
-                                            {//normal 2-level rule
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located south of current tile 
-                                            if (yCheck == gridY + 1 && xCheck == gridX)
-                                            {//normal 2-level rule
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located east of current tile 
-                                            if (yCheck == gridY && xCheck == gridX + 1)
-                                            {//current tile must be one level lower than checked tile, ie current tile is ramp bottom
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 2)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located west of current tile
-                                            if (yCheck == gridY && xCheck == gridX - 1)
-                                            {//current tile must be same level as checked tile, ie current tile is ramp top
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 1)
-                                                {
-                                                    if ((area.Tiles[selectedTile.index].hasDownStairShadowE) && (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel == area.Tiles[selectedTile.index].heightLevel))
-                                                    {
-                                                        ///allow connected ramps in same direction
-                                                    }
-                                                    else
-                                                    {
-                                                        changeAllowed = false;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        //the checked tile is downstairs south ramp that...
-                                        else if (area.Tiles[yCheck * area.MapSizeX + xCheck].hasDownStairShadowS)
-                                        {
-                                            //... is located west of current tile 
-                                            if (yCheck == gridY && xCheck == gridX - 1)
-                                            {//normal 2-level rule
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located east of current tile 
-                                            if (yCheck == gridY  && xCheck == gridX + 1)
-                                            {//normal 2-level rule
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located south of current tile 
-                                            if (yCheck == gridY + 1 && xCheck == gridX)
-                                            {//current tile must be one level lower than checked tile, ie current tile is ramp bottom
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 2)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located north of current tile
-                                            if (yCheck == gridY - 1 && xCheck == gridX)
-                                            {//current tile must be same level as checked tile, ie current tile is ramp top
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 1)
-                                                {
-                                                    if ((area.Tiles[selectedTile.index].hasDownStairShadowS) && (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel == area.Tiles[selectedTile.index].heightLevel))
-                                                    {
-                                                        ///allow connected ramps in same direction
-                                                    }
-                                                    else
-                                                    {
-                                                        changeAllowed = false;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        //the checked tile is downstairs north ramp that...
-                                        else if (area.Tiles[yCheck * area.MapSizeX + xCheck].hasDownStairShadowN)
-                                        {
-                                            //... is located west of current tile 
-                                            if (yCheck == gridY && xCheck == gridX - 1)
-                                            {//normal 2-level rule
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located east of current tile 
-                                            if (yCheck == gridY && xCheck == gridX + 1)
-                                            {//normal 2-level rule
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located south of current tile 
-                                            if (yCheck == gridY + 1 && xCheck == gridX)
-                                            {//current tile must be one level lower than checked tile, ie current tile is ramp bottom
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 2)
-                                                {
-                                                    changeAllowed = false;
-                                                    break;
-                                                }
-                                            }
-                                            //... is located north of current tile
-                                            if (yCheck == gridY - 1 && xCheck == gridX)
-                                            {//current tile must be same level as checked tile, ie current tile is ramp top
-
-                                                if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 1)
-                                                {
-                                                    if ((area.Tiles[selectedTile.index].hasDownStairShadowS) && (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel == area.Tiles[selectedTile.index].heightLevel))
-                                                    {
-                                                        ///allow connected ramps in same direction
-                                                    }
-                                                    else
-                                                    {
-                                                        changeAllowed = false;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        */
-
-                                        //the checked tile is a normal square
-                                        if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
-                                        {
-                                            //restriction does not apply to diagonal squares
-                                            if (((yCheck == gridY) && (xCheck != gridX)) || ((yCheck != gridY) && (xCheck == gridX)))
-                                            {
-                                                changeAllowed = false;
-                                                break;
-                                            }
-                                        }
-                                        
-                                    }
-                                }
-                            }
-                            catch
-                            {
-
-                            }
-                            if (changeAllowed)
+                            if (area.allowLevelDesignWithMoreThan2HeightLevelsDifference)
                             {
                                 area.Tiles[selectedTile.index].heightLevel += 1;
+                            }
+                            else
+                            {
+                                bool changeAllowed = true;
+                                try
+                                {
+                                    for (int xCheck = gridX - 1; xCheck <= gridX + 1; xCheck++)
+                                    {
+                                        for (int yCheck = gridY - 1; yCheck <= gridY + 1; yCheck++)
+                                        {
+                                            /*
+                                            //the checked tile is downstairs east ramp that...
+                                            if (area.Tiles[yCheck * area.MapSizeX + xCheck].hasDownStairShadowE)
+                                            {
+                                                //... is located north of current tile 
+                                                if (yCheck == gridY -1 && xCheck == gridX)
+                                                {//normal 2-level rule
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located south of current tile 
+                                                if (yCheck == gridY + 1 && xCheck == gridX)
+                                                {//normal 2-level rule
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located east of current tile 
+                                                if (yCheck == gridY && xCheck == gridX + 1)
+                                                {//current tile must be one level lower than checked tile, ie current tile is ramp bottom
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 2)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located west of current tile
+                                                if (yCheck == gridY && xCheck == gridX - 1)
+                                                {//current tile must be same level as checked tile, ie current tile is ramp top
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 1)
+                                                    {
+                                                        if ((area.Tiles[selectedTile.index].hasDownStairShadowE) && (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel == area.Tiles[selectedTile.index].heightLevel))
+                                                        {
+                                                            ///allow connected ramps in same direction
+                                                        }
+                                                        else
+                                                        {
+                                                            changeAllowed = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            //the checked tile is downstairs south ramp that...
+                                            else if (area.Tiles[yCheck * area.MapSizeX + xCheck].hasDownStairShadowS)
+                                            {
+                                                //... is located west of current tile 
+                                                if (yCheck == gridY && xCheck == gridX - 1)
+                                                {//normal 2-level rule
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located east of current tile 
+                                                if (yCheck == gridY  && xCheck == gridX + 1)
+                                                {//normal 2-level rule
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located south of current tile 
+                                                if (yCheck == gridY + 1 && xCheck == gridX)
+                                                {//current tile must be one level lower than checked tile, ie current tile is ramp bottom
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 2)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located north of current tile
+                                                if (yCheck == gridY - 1 && xCheck == gridX)
+                                                {//current tile must be same level as checked tile, ie current tile is ramp top
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 1)
+                                                    {
+                                                        if ((area.Tiles[selectedTile.index].hasDownStairShadowS) && (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel == area.Tiles[selectedTile.index].heightLevel))
+                                                        {
+                                                            ///allow connected ramps in same direction
+                                                        }
+                                                        else
+                                                        {
+                                                            changeAllowed = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            //the checked tile is downstairs north ramp that...
+                                            else if (area.Tiles[yCheck * area.MapSizeX + xCheck].hasDownStairShadowN)
+                                            {
+                                                //... is located west of current tile 
+                                                if (yCheck == gridY && xCheck == gridX - 1)
+                                                {//normal 2-level rule
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located east of current tile 
+                                                if (yCheck == gridY && xCheck == gridX + 1)
+                                                {//normal 2-level rule
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located south of current tile 
+                                                if (yCheck == gridY + 1 && xCheck == gridX)
+                                                {//current tile must be one level lower than checked tile, ie current tile is ramp bottom
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 2)
+                                                    {
+                                                        changeAllowed = false;
+                                                        break;
+                                                    }
+                                                }
+                                                //... is located north of current tile
+                                                if (yCheck == gridY - 1 && xCheck == gridX)
+                                                {//current tile must be same level as checked tile, ie current tile is ramp top
+
+                                                    if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel != area.Tiles[selectedTile.index].heightLevel + 1)
+                                                    {
+                                                        if ((area.Tiles[selectedTile.index].hasDownStairShadowS) && (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel == area.Tiles[selectedTile.index].heightLevel))
+                                                        {
+                                                            ///allow connected ramps in same direction
+                                                        }
+                                                        else
+                                                        {
+                                                            changeAllowed = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            */
+
+                                            //the checked tile is a normal square
+                                            if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
+                                            {
+                                                //restriction does not apply to diagonal squares
+                                                if (((yCheck == gridY) && (xCheck != gridX)) || ((yCheck != gridY) && (xCheck == gridX)))
+                                                {
+                                                    changeAllowed = false;
+                                                    break;
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+
+                                }
+                                if (changeAllowed)
+                                {
+                                    area.Tiles[selectedTile.index].heightLevel += 1;
+                                }
                             }
                         }
                         calculateHeightShadows();
@@ -1621,10 +1625,18 @@ namespace IB2Toolset
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        area.Tiles[selectedTile.index].isEWBridge = true;
+                        //area.Tiles[selectedTile.index].isEWBridge = true;
+                        if (!isOrthogonalNeighbourOfBridge(gridX, gridY) && !isDiagonalNeighbourOfBridge(gridX, gridY))
+                        {
+                            if ((gridY > 0) && (gridY < (area.MapSizeY - 1)) && (gridX > 0) && (gridY < (area.MapSizeX - 1)))
+                            {
+                                rotateBridge();
+                            }
+                        }
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    /*
                     else if (rbtnBridgeNS.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1634,14 +1646,18 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    */
                     else if (rbtnDownToN.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        area.Tiles[selectedTile.index].isRamp = true;
-                        //area.Tiles[selectedTile.index].hasDownStairShadowN = true;
-                        rotateStair();
+                        if (!isOrthogonalNeighbourOfBridge(gridX, gridY) && !area.Tiles[gridY * area.MapSizeX + gridX].isEWBridge && !area.Tiles[gridY * area.MapSizeX + gridX].isNSBridge)
+                        {
+                            area.Tiles[selectedTile.index].isRamp = true;
+                            //area.Tiles[selectedTile.index].hasDownStairShadowN = true;
+                            rotateStair();
+                        }
                         /*
                         if (!area.allowFreePlacementOfRamps)
                         {
@@ -1674,6 +1690,7 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    /*
                     else if (rbtnDownToE.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1714,7 +1731,7 @@ namespace IB2Toolset
                             area.Tiles[selectedTile.index].hasDownStairShadowW = false;
                             area.Tiles[selectedTile.index].hasDownStairShadowN = true;
                         }
-                       */
+                       
 
                             //area.Tiles[selectedTile.index].hasDownStairShadowE = true;
                             calculateHeightShadows();
@@ -1742,6 +1759,7 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    */
                     else if (rbtnWalkable.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1850,48 +1868,52 @@ namespace IB2Toolset
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
-                        if (area.allowLevelDesignWithMoreThan2HeightLevelsDifference)
+                        //check taht square is not a brdige right now, aDD, to do
+                        if (!isOrthogonalNeighbourOfBridge(gridX, gridY) && !area.Tiles[gridY * area.MapSizeX + gridX].isEWBridge && !area.Tiles[gridY * area.MapSizeX + gridX].isNSBridge)
                         {
-                            area.Tiles[selectedTile.index].heightLevel -= 1;
-                        }
-                        else
-                        {
-                            bool changeAllowed = true;
-                            try
+                            if (area.allowLevelDesignWithMoreThan2HeightLevelsDifference)
                             {
-                                for (int xCheck = gridX - 1; xCheck <= gridX + 1; xCheck++)
+                                area.Tiles[selectedTile.index].heightLevel -= 1;
+                            }
+                            else
+                            {
+                                bool changeAllowed = true;
+                                try
                                 {
-                                    for (int yCheck = gridY - 1; yCheck <= gridY + 1; yCheck++)
+                                    for (int xCheck = gridX - 1; xCheck <= gridX + 1; xCheck++)
                                     {
-
-                                        if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel > area.Tiles[selectedTile.index].heightLevel + 1)
+                                        for (int yCheck = gridY - 1; yCheck <= gridY + 1; yCheck++)
                                         {
-                                            if (((yCheck == gridY) && (xCheck != gridX)) || ((yCheck != gridY) && (xCheck == gridX)))
+
+                                            if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel > area.Tiles[selectedTile.index].heightLevel + 1)
+                                            {
+                                                if (((yCheck == gridY) && (xCheck != gridX)) || ((yCheck != gridY) && (xCheck == gridX)))
+                                                {
+                                                    changeAllowed = false;
+                                                    break;
+                                                }
+                                            }
+
+
+                                            /*
+                                            if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
                                             {
                                                 changeAllowed = false;
                                                 break;
                                             }
+                                            */
+
                                         }
-
-
-                                        /*
-                                        if (area.Tiles[yCheck * area.MapSizeX + xCheck].heightLevel < area.Tiles[selectedTile.index].heightLevel - 1)
-                                        {
-                                            changeAllowed = false;
-                                            break;
-                                        }
-                                        */
-
                                     }
                                 }
-                            }
-                            catch
-                            {
+                                catch
+                                {
 
-                            }
-                            if (changeAllowed)
-                            {
-                                area.Tiles[selectedTile.index].heightLevel -= 1;
+                                }
+                                if (changeAllowed)
+                                {
+                                    area.Tiles[selectedTile.index].heightLevel -= 1;
+                                }
                             }
                         }
                         calculateHeightShadows();
@@ -1930,18 +1952,24 @@ namespace IB2Toolset
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         area.Tiles[selectedTile.index].isEWBridge = false;
+                        area.Tiles[selectedTile.index].isNSBridge = false;
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    //REMOVE THESE
+                    //to do
+                    /*
                     else if (rbtnBridgeNS.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         area.Tiles[selectedTile.index].isNSBridge = false;
+                        area.Tiles[selectedTile.index].isEWBridge = false;
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    */
                     else if (rbtnDownToN.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1955,6 +1983,7 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    /*
                     else if (rbtnDownToE.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1968,6 +1997,8 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    */
+                    /*
                     else if (rbtnDownToS.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1981,6 +2012,8 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    */
+                    /*
                     else if (rbtnDownToW.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -1994,6 +2027,7 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
+                    */
                     #endregion
                     #region LoS mesh Toggle Selected (Make LoS Visible)
                     else if (rbtnLoS.Checked)
@@ -2075,6 +2109,136 @@ namespace IB2Toolset
                 stairRotationCounter = 1;
             }
         }
+
+        private void rotateBridge()
+        {
+            if (bridgeRotationCounter == 1)
+            {
+                area.Tiles[selectedTile.index].isEWBridge = true;
+                if ((selectedTile.index + 1) < (area.MapSizeX * area.MapSizeY))
+                {
+                    //east to same height
+                    area.Tiles[selectedTile.index + 1].heightLevel = area.Tiles[selectedTile.index].heightLevel;
+                    area.Tiles[selectedTile.index + 1].isRamp = false;
+                    area.Tiles[selectedTile.index + 1].hasDownStairShadowE = false;
+                    area.Tiles[selectedTile.index + 1].hasDownStairShadowW = false;
+                    area.Tiles[selectedTile.index + 1].hasDownStairShadowN = false;
+                    area.Tiles[selectedTile.index + 1].hasDownStairShadowS = false;
+                    area.Tiles[selectedTile.index + 1].isEWBridge = false;
+                    area.Tiles[selectedTile.index + 1].isNSBridge = false;
+
+                }
+
+                if ((selectedTile.index - 1) >= 0)
+                {
+                    //west to same height
+                    area.Tiles[selectedTile.index - 1].heightLevel = area.Tiles[selectedTile.index].heightLevel;
+                    area.Tiles[selectedTile.index - 1].isRamp = false;
+                    area.Tiles[selectedTile.index - 1].hasDownStairShadowE = false;
+                    area.Tiles[selectedTile.index - 1].hasDownStairShadowW = false;
+                    area.Tiles[selectedTile.index - 1].hasDownStairShadowN = false;
+                    area.Tiles[selectedTile.index - 1].hasDownStairShadowS = false;
+                    area.Tiles[selectedTile.index - 1].isEWBridge = false;
+                    area.Tiles[selectedTile.index - 1].isNSBridge = false;
+                }
+
+                if ((selectedTile.index + area.MapSizeX) < (area.MapSizeX * area.MapSizeY))
+                {
+                    //south to lower height
+                    area.Tiles[selectedTile.index + area.MapSizeX].heightLevel = area.Tiles[selectedTile.index].heightLevel - 1;
+                    area.Tiles[selectedTile.index + area.MapSizeX].isRamp = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].hasDownStairShadowE = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].hasDownStairShadowW = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].hasDownStairShadowN = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].hasDownStairShadowS = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].isEWBridge = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].isNSBridge = false;
+                }
+
+                if ((selectedTile.index - area.MapSizeX) >= 0)
+                {
+                    //north to lower height
+                    area.Tiles[selectedTile.index - area.MapSizeX].heightLevel = area.Tiles[selectedTile.index].heightLevel - 1;
+                    area.Tiles[selectedTile.index - area.MapSizeX].isRamp = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].hasDownStairShadowE = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].hasDownStairShadowW = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].hasDownStairShadowN = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].hasDownStairShadowS = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].isEWBridge = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].isNSBridge = false;
+                }
+
+                area.Tiles[selectedTile.index].isNSBridge = false;
+            }
+            else
+            if (bridgeRotationCounter == 2)
+            {
+                area.Tiles[selectedTile.index].isEWBridge = false;
+                area.Tiles[selectedTile.index].isNSBridge = true;
+
+                if ((selectedTile.index + 1) < (area.MapSizeX * area.MapSizeY))
+                {
+                    //east to lower height
+                    area.Tiles[selectedTile.index + 1].heightLevel = area.Tiles[selectedTile.index].heightLevel - 1;
+                    area.Tiles[selectedTile.index + 1].isRamp = false;
+                    area.Tiles[selectedTile.index + 1].hasDownStairShadowE = false;
+                    area.Tiles[selectedTile.index + 1].hasDownStairShadowW = false;
+                    area.Tiles[selectedTile.index + 1].hasDownStairShadowN = false;
+                    area.Tiles[selectedTile.index + 1].hasDownStairShadowS = false;
+                    area.Tiles[selectedTile.index + 1].isEWBridge = false;
+                    area.Tiles[selectedTile.index + 1].isNSBridge = false;
+                }
+
+                if ((selectedTile.index - 1) >= 0)
+                {
+                    //west to lower height
+                    area.Tiles[selectedTile.index - 1].heightLevel = area.Tiles[selectedTile.index].heightLevel - 1;
+                    area.Tiles[selectedTile.index - 1].isRamp = false;
+                    area.Tiles[selectedTile.index - 1].hasDownStairShadowE = false;
+                    area.Tiles[selectedTile.index - 1].hasDownStairShadowW = false;
+                    area.Tiles[selectedTile.index - 1].hasDownStairShadowN = false;
+                    area.Tiles[selectedTile.index - 1].hasDownStairShadowS = false;
+                    area.Tiles[selectedTile.index - 1].isEWBridge = false;
+                    area.Tiles[selectedTile.index - 1].isNSBridge = false;
+
+
+                }
+
+                if ((selectedTile.index + area.MapSizeX) < (area.MapSizeX * area.MapSizeY))
+                {
+                    //south to same height
+                    area.Tiles[selectedTile.index + area.MapSizeX].heightLevel = area.Tiles[selectedTile.index].heightLevel;
+                    area.Tiles[selectedTile.index + area.MapSizeX].isRamp = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].hasDownStairShadowE = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].hasDownStairShadowW = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].hasDownStairShadowN = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].hasDownStairShadowS = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].isEWBridge = false;
+                    area.Tiles[selectedTile.index + area.MapSizeX].isNSBridge = false;
+                }
+
+                if ((selectedTile.index - area.MapSizeX) >= 0)
+                {
+                    //north to same height
+                    area.Tiles[selectedTile.index - area.MapSizeX].heightLevel = area.Tiles[selectedTile.index].heightLevel;
+                    area.Tiles[selectedTile.index - area.MapSizeX].isRamp = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].hasDownStairShadowE = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].hasDownStairShadowW = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].hasDownStairShadowN = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].hasDownStairShadowS = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].isEWBridge = false;
+                    area.Tiles[selectedTile.index - area.MapSizeX].isNSBridge = false;
+                }
+            }
+           
+            bridgeRotationCounter++;
+
+            if (bridgeRotationCounter > 2)
+            {
+                bridgeRotationCounter = 1;
+            }
+        }
+
         private void btnFillWithSelected_Click(object sender, EventArgs e)
         {
             for (int x = 0; x < area.MapSizeX; x++)
@@ -2354,6 +2518,90 @@ namespace IB2Toolset
                 prntForm.errorLog(ex.ToString());
             }
         }
+
+        public bool isOrthogonalNeighbourOfBridge(int tileX, int tileY)
+        {
+            //check north
+            if (tileY - 1 >= 0)
+            {
+                if (area.Tiles[(tileY-1) * area.MapSizeX + tileX].isEWBridge || area.Tiles[(tileY - 1) * area.MapSizeX + tileX].isNSBridge)
+                {
+                    return true;
+                }
+            }
+
+            //check east
+            if (tileX + 1 < area.MapSizeX)
+            {
+                if (area.Tiles[(tileY) * area.MapSizeX + tileX + 1].isEWBridge || area.Tiles[(tileY) * area.MapSizeX + tileX + 1].isNSBridge)
+                {
+                    return true;
+                }
+            }
+
+            //check south
+            if (tileY + 1 < area.MapSizeY)
+            {
+                if (area.Tiles[(tileY+1) * area.MapSizeX + tileX].isEWBridge || area.Tiles[(tileY+1) * area.MapSizeX + tileX].isNSBridge)
+                {
+                    return true;
+                }
+            }
+
+            //check west
+            if (tileX - 1 >= 0)
+            {
+                if (area.Tiles[(tileY) * area.MapSizeX + tileX - 1].isEWBridge || area.Tiles[(tileY) * area.MapSizeX + tileX -1].isNSBridge)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+        public bool isDiagonalNeighbourOfBridge(int tileX, int tileY)
+        {
+            //check northeast
+            if ((tileY - 1 >= 0) && (tileX + 1 < area.MapSizeX))
+            {
+                if (area.Tiles[(tileY - 1) * area.MapSizeX + tileX + 1].isEWBridge || area.Tiles[(tileY - 1) * area.MapSizeX + tileX +1].isNSBridge)
+                {
+                    return true;
+                }
+            }
+
+            //check southeast
+            if ((tileY + 1 < area.MapSizeY) && (tileX + 1 < area.MapSizeX))
+            {
+                if (area.Tiles[(tileY+1) * area.MapSizeX + tileX + 1].isEWBridge || area.Tiles[(tileY+1) * area.MapSizeX + tileX + 1].isNSBridge)
+                {
+                    return true;
+                }
+            }
+
+            //check southwest
+            if ((tileY + 1 < area.MapSizeY) && (tileX - 1 >= 0))
+            {
+                if (area.Tiles[(tileY + 1) * area.MapSizeX + tileX - 1].isEWBridge || area.Tiles[(tileY + 1) * area.MapSizeX + tileX -1].isNSBridge)
+                {
+                    return true;
+                }
+            }
+
+            //check northwest
+            if ((tileY - 1 >= 0) && (tileX - 1 >= 0))
+            {
+                if (area.Tiles[(tileY-1) * area.MapSizeX + tileX - 1].isEWBridge || area.Tiles[(tileY-1) * area.MapSizeX + tileX - 1].isNSBridge)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void redrawMain()
         {
             if ((!area.ImageFileName.Equals("none")) && (gameMapBitmapD2D != null))
@@ -3070,6 +3318,7 @@ namespace IB2Toolset
                             SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer3Filename).PixelSize.Width, GetFromBitmapList(tile.Layer3Filename).PixelSize.Height);
                             SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
                             DrawD2DBitmap(GetFromBitmapList(tile.Layer3Filename), src, dst, tile.Layer3Rotate, tile.Layer3Mirror, tile.Layer3Xshift, tile.Layer3Yshift, tile.Layer3Xscale, tile.Layer3Yscale);
+
                         }
                     }
                 }
@@ -3094,6 +3343,35 @@ namespace IB2Toolset
                     }
                 }
             }
+            #endregion
+
+            #region Draw Entrance lights
+            for (int y = 0; y < area.MapSizeY; y++)
+            {
+                for (int x = 0; x < area.MapSizeX; x++)
+                {
+                    Tile tile = area.Tiles[y * area.MapSizeX + x];
+                    SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("longShadow").PixelSize.Width, GetFromBitmapList("longShadow").PixelSize.Height);
+                    SharpDX.RectangleF dstNorth = new SharpDX.RectangleF(x * sqr, (y - 1) * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstEast = new SharpDX.RectangleF((x + 1) * sqr, y * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstSouth = new SharpDX.RectangleF(x * sqr, (y + 1) * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstWest = new SharpDX.RectangleF((x - 1) * sqr, y * sqr, sqr, sqr);
+
+                    if (tile.isEWBridge)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstNorth, 0, false, 0, 0,1,1,0.25f);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstSouth, 180, false, 0, 0,1,1,0.25f);
+                        //DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0, 1, 1, 0.6f);
+                    }
+
+                    if (tile.isNSBridge)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstWest, 270, false, 0, 0,1,1,0.25f);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstEast, 90, false, 0, 0,1,1,0.25f);
+                    }
+                }
+            }
+
             #endregion
             #region Draw Layer 5
             if (checkBox5.Checked)
@@ -3260,30 +3538,64 @@ namespace IB2Toolset
                 {
                     Tile tile = area.Tiles[y * area.MapSizeX + x];
                     SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("longShadow").PixelSize.Width, GetFromBitmapList("longShadow").PixelSize.Height);
-                    SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
-                    SharpDX.RectangleF dst2 = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+                    SharpDX.RectangleF dst = new SharpDX.RectangleF(x * (sqr), y * sqr, (sqr), (sqr));
+                    SharpDX.RectangleF dst2 = new SharpDX.RectangleF(x * (sqr), y * sqr, (sqr), (sqr));
+                    SharpDX.RectangleF dst3 = new SharpDX.RectangleF(x * (sqr), y * sqr, sqr, sqr);
+                    SharpDX.RectangleF dst4 = new SharpDX.RectangleF(x * (sqr), y * (sqr), sqr, sqr);
+                    SharpDX.RectangleF dstNorth = new SharpDX.RectangleF(x * sqr, (y-1) * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstEast = new SharpDX.RectangleF((x+1) * sqr, y * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstSouth = new SharpDX.RectangleF(x * sqr, (y+1) * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstWest = new SharpDX.RectangleF((x-1) * sqr, y * sqr, sqr, sqr);
 
-                    
+
                     //highlights
                     if (tile.hasHighlightS)
                     {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, 0, 1, 1, 0.5f);
+                        if (tile.isEWBridge)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 0, false, 0, -1, 1, 1, 1f);
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, -1, 1, 1, 0.5f);
+                        }
                         //DrawD2DBitmap
                     }
 
                     if (tile.hasHighlightN)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 0, 1, 1, 0.5f);
+                        if (tile.isEWBridge)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, 0, 1, 1, 1f);
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 0, 1, 1, 0.5f);
+                        }
                     }
 
                     if (tile.hasHighlightW)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 0, 0, 1, 1, 0.5f);
+                        if (tile.isNSBridge)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 90, false, 0, 0, 1, 1, 1f);
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 0, 0, 1, 1, 0.5f);
+                        }
                     }
 
                     if (tile.hasHighlightE)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, 0, 0, 1, 1, 0.5f);
+                        if (tile.isNSBridge)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 270, false, -1, 0, 1, 1, 1f);
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, -1, 0, 1, 1, 0.5f);
+                        }
                     }
                     
                     //urfeld
@@ -3523,16 +3835,45 @@ namespace IB2Toolset
                     }
                     else if (tile.isInShortShadeN)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);
+                        if (y - 1 >= 0)
+                        {
+                            if (!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge)
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);
+                            }
+                            else
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("bridgeShadow"), src, dst, 180, false, 0, 0, 1, 1, 1f);
+                            }
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);
+                        } 
                     }
 
                     if (tile.isInLongShadeE)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("longShadow"), src, dst, 270, false, 0, 0);
+                            DrawD2DBitmap(GetFromBitmapList("longShadow"), src, dst, 270, false, 0, 0);
                     }
                     else if (tile.isInShortShadeE)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
+                        if (x + 1 <= area.MapSizeX - 1)
+                        {
+                            if (!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge)
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
+                            }
+                            else
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("bridgeShadow"), src, dst, 270, false, 0, 0, 1, 1, 1f);
+                            }
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
+                        }
+
                     }
 
                     if (tile.isInLongShadeS)
@@ -3541,7 +3882,21 @@ namespace IB2Toolset
                     }
                     else if (tile.isInShortShadeS)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
+                        if (y + 1 <= area.MapSizeY - 1)
+                        {
+                            if (!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge)
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
+                            }
+                            else
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("bridgeShadow"), src, dst, 0, false, 0, 0, 1, 1, 1f);
+                            }
+                        }
+                        else
+                        {
+
+                        }
                     }
 
                     if (tile.isInLongShadeW)
@@ -3550,7 +3905,21 @@ namespace IB2Toolset
                     }
                     else if (tile.isInShortShadeW)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
+                        if (x - 1 >= 0)
+                        {
+                            if (!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge)
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
+                            }
+                            else
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("bridgeShadow"), src, dst, 90, false, 0, 0, 1, 1, 1f);
+                            }
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
+                        }
                     }
 
                     //if (!tile.isRamp)
@@ -3566,9 +3935,12 @@ namespace IB2Toolset
                                 else
                                 if (tile.isInLongShadeNW)
                                 {
-                                    DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 180, false, 0, 0);
+                                    if ((!tile.inRampShadowNorth5Long) && (!tile.inRampShadowWest2Long))
+                                    {
+                                        DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 180, false, 0, 0);
+                                    }
                                 }
-                                else if (tile.isInShortShadeNW)
+                                else if ((tile.isInShortShadeNW) && (!tile.inRampShadowNorth5Short) && (!tile.inRampShadowWest2Short) && (!tile.inRampShadowNorth5Long) && (!tile.inRampShadowWest2Long))
                                 {
                                     DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 180, false, 0, 0);
                                 }
@@ -3584,7 +3956,10 @@ namespace IB2Toolset
                                 else
                                 if (tile.isInLongShadeNW)
                                 {
-                                    DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 180, false, 0, 0);
+                                    if ((!tile.inRampShadowNorth5Long) && (!tile.inRampShadowWest2Long))
+                                    {
+                                        DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 180, false, 0, 0);
+                                    }
                                 }
                             }
                         //}
@@ -3600,9 +3975,12 @@ namespace IB2Toolset
                                 else
                                 if (tile.isInLongShadeNE)
                                 {
-                                    DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 270, false, 0, 0);
+                                    if ((!tile.inRampShadowNorth6Long) && (!tile.inRampShadowEast4Long))
+                                    {
+                                        DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 270, false, 0, 0);
+                                    }
                                 }
-                                else if (tile.isInShortShadeNE)
+                                else if ((tile.isInShortShadeNE) && (!tile.inRampShadowEast4Short) && (!tile.inRampShadowNorth6Short) && (!tile.inRampShadowEast4Long) && (!tile.inRampShadowNorth6Long))
                                 {
                                     DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 270, false, 0, 0);
                                 }
@@ -3615,9 +3993,12 @@ namespace IB2Toolset
                                     DrawD2DBitmap(GetFromBitmapList("corner3"), src, dst, 270, false, 0, 0);
                                 }
                                 else
-                        if (tile.isInLongShadeNE)
+                                if (tile.isInLongShadeNE)
                                 {
-                                    DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 270, false, 0, 0);
+                                    if ((!tile.inRampShadowNorth6Long) && (!tile.inRampShadowEast4Long))
+                                    {
+                                        DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 270, false, 0, 0);
+                                    }
                                 }
                             }
                         //}
@@ -3633,9 +4014,12 @@ namespace IB2Toolset
                         else
                                 if (tile.isInLongShadeSE)
                                 {
-                                    DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 0, false, 0, 0);
+                                    if ((!tile.inRampShadowSouth8Long) && (!tile.inRampShadowEast3Long))
+                                    {
+                                        DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 0, false, 0, 0);
+                                    }
                                 }
-                                else if (tile.isInShortShadeSE)
+                                else if ((tile.isInShortShadeSE) && (!tile.inRampShadowEast3Short) && (!tile.inRampShadowSouth8Short) && (!tile.inRampShadowEast3Long) && (!tile.inRampShadowSouth8Long))
                                 {
                                     DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 0, false, 0, 0);
                                 }
@@ -3649,10 +4033,13 @@ namespace IB2Toolset
                         }
                         else
                         if(tile.isInLongShadeSE)
-                                {
-                                    DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 0, false, 0, 0);
-                                }
+                        {
+                            if ((!tile.inRampShadowSouth8Long) && (!tile.inRampShadowEast3Long))
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 0, false, 0, 0);
                             }
+                         }
+                     }
                         //}
 
                         //if (!tile.inRampShadowWest1Short && !tile.inRampShadowWest1Long && !tile.inRampShadowWest2Short && !tile.inRampShadowWest2Long && !tile.inRampShadowSouth7Long && !tile.inRampShadowSouth7Short && !tile.inRampShadowSouth8Long && !tile.inRampShadowSouth8Short)
@@ -3665,10 +4052,13 @@ namespace IB2Toolset
                         }
                         else
                         if (tile.isInLongShadeSW)
-                                {
-                                    DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 90, false, 0, 0);
+                        {
+                            if ((!tile.inRampShadowSouth7Long) && (!tile.inRampShadowWest1Long))
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 90, false, 0, 0);
+                            }
                                 }
-                                else if (tile.isInShortShadeSW)
+                                else if ((tile.isInShortShadeSW) && (!tile.inRampShadowWest1Short) && (!tile.inRampShadowSouth7Short) && (!tile.inRampShadowSouth7Long) && (!tile.inRampShadowWest1Long))
                                 {
                                     DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 90, false, 0, 0);
                                 }
@@ -3683,11 +4073,44 @@ namespace IB2Toolset
                         else
                         if (tile.isInLongShadeSW)
                                 {
-                                    DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 90, false, 0, 0);
+                            if ((!tile.inRampShadowSouth7Long) && (!tile.inRampShadowWest1Long))
+                            {
+                                DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 90, false, 0, 0);
+                            }
                                 }
                             }
-                        //}
-                    //}
+                    //entrance lights
+                    /*
+                    if (tile.hasEntranceLightNorth)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth"), src, dst, 0, false, 0, 0);
+                    }
+                    if (tile.hasEntranceLightEast)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth"), src, dst, 90, false, 0, 0);
+                    }
+                    if (tile.hasEntranceLightSouth)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth"), src, dst, 180, false, 0, 0);
+                    }
+                    if (tile.hasEntranceLightWest)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth"), src, dst, 270, false, 0, 0);
+                    }
+                    */
+                    /*
+                    if (tile.isEWBridge)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth"), src, dstNorth, 0, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth"), src, dstSouth, 180, false, 0, 0);
+                    }
+
+                    if (tile.isNSBridge)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth"), src, dstWest, 270, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth"), src, dstEast, 90, false, 0, 0);
+                    }
+                    */
                 }
             }
 
@@ -4699,7 +5122,6 @@ namespace IB2Toolset
                     tile.isInShortShadeSE = false;
                     tile.isInShortShadeSW = false;
                     tile.isInShortShadeNW = false;
-
                     tile.isInLongShadeN = false;
                     tile.isInLongShadeE = false;
                     tile.isInLongShadeS = false;
@@ -4708,6 +5130,13 @@ namespace IB2Toolset
                     tile.isInLongShadeSE = false;
                     tile.isInLongShadeSW = false;
                     tile.isInLongShadeNW = false;
+
+                    /*
+                    tile.hasEntranceLightNorth = false;
+                    tile.hasEntranceLightEast = false;
+                    tile.hasEntranceLightSouth = false;
+                    tile.hasEntranceLightWest = false;
+                    */
 
                     tile.isInMaxShadeN = false;
                     tile.isInMaxShadeE = false;
@@ -5441,6 +5870,39 @@ namespace IB2Toolset
                                     tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tile.heightLevel - tileCaster.heightLevel;
                                 }
 
+                                //entrancelights: bridges, same height indoors
+                                /*
+                                if (tile.isEWBridge)
+                                {
+                                    //north
+                                    if ((xS == 0) && (yS == -1))
+                                    {
+                                        tile.hasEntranceLightNorth = true;
+                                    }
+
+                                    //south
+                                    if ((xS == 0) && (yS == 1))
+                                    {
+                                        tile.hasEntranceLightSouth = true;
+                                    }
+                                }
+
+                                if (tile.isNSBridge)
+                                {
+                                    //west
+                                    if ((xS == -1) && (yS == 0))
+                                    {
+                                        tile.hasEntranceLightWest = true;
+                                    }
+
+                                    //east
+                                    if ((xS == 1) && (yS == 0))
+                                    {
+                                        tile.hasEntranceLightEast = true;
+                                    }
+                                }
+                                */
+
                                 //TODO: Add maxShade
                                 //check max shades for all
                                 if (tileCaster.heightLevel > tile.heightLevel + 2)
@@ -5549,7 +6011,10 @@ namespace IB2Toolset
                                             }
                                             else
                                             {
-                                                tile.isInShortShadeNW = true;
+                                                //if ((tile.hasDownStairShadowN) || (tile.hasDownStairShadowW))
+                                                //{
+                                                    tile.isInShortShadeNW = true;
+                                                //}
                                             }
                                         }
                                         if ((xS == 0) && (yS == -1))
@@ -6983,7 +7448,7 @@ namespace IB2Toolset
                 //UpdatePB();
             }
         }
-
+        /*
         private void rbtnBridgeNS_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnBridgeNS.Checked)
@@ -6999,6 +7464,7 @@ namespace IB2Toolset
                 //UpdatePB();
             }
         }
+        */
 
         private void rbtnDownToN_CheckedChanged(object sender, EventArgs e)
         {
@@ -7016,7 +7482,7 @@ namespace IB2Toolset
                 //UpdatePB();
             }
         }
-
+        /*
         private void rbtnDownToS_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnDownToS.Checked)
@@ -7033,7 +7499,9 @@ namespace IB2Toolset
                 //UpdatePB();
             }
         }
+        **/
 
+        /*
         private void rbtnDownToE_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnDownToE.Checked)
@@ -7050,9 +7518,12 @@ namespace IB2Toolset
                 //UpdatePB();
             }
         }
+        */
 
+        /*
         private void rbtnDownToW_CheckedChanged(object sender, EventArgs e)
         {
+            
             if (rbtnDownToW.Checked)
             {
                 prntForm.logText("setting downstairs to W");
@@ -7066,8 +7537,9 @@ namespace IB2Toolset
                 //refreshMap(true);
                 //UpdatePB();
             }
+            
         }
-
+        */
         private void rbtnLoS_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnLoS.Checked)

@@ -64,11 +64,11 @@
             this.rbtnHeightLevel = new System.Windows.Forms.RadioButton();
 
             this.rbtnBridgeEW = new System.Windows.Forms.RadioButton();
-            this.rbtnBridgeNS = new System.Windows.Forms.RadioButton();
+            //this.rbtnBridgeNS = new System.Windows.Forms.RadioButton();
             this.rbtnDownToN = new System.Windows.Forms.RadioButton();
-            this.rbtnDownToE = new System.Windows.Forms.RadioButton();
-            this.rbtnDownToS = new System.Windows.Forms.RadioButton();
-            this.rbtnDownToW = new System.Windows.Forms.RadioButton();
+            //this.rbtnDownToE = new System.Windows.Forms.RadioButton();
+            //this.rbtnDownToS = new System.Windows.Forms.RadioButton();
+            //this.rbtnDownToW = new System.Windows.Forms.RadioButton();
 
             this.rbtnEditTrigger = new System.Windows.Forms.RadioButton();
             this.rbtnPaintTrigger = new System.Windows.Forms.RadioButton();
@@ -464,11 +464,11 @@
             this.groupBox2.Controls.Add(this.rbtnHeightLevel);
 
             this.groupBox2.Controls.Add(this.rbtnBridgeEW);
-            this.groupBox2.Controls.Add(this.rbtnBridgeNS);
+            //this.groupBox2.Controls.Add(this.rbtnBridgeNS);
             this.groupBox2.Controls.Add(this.rbtnDownToN);
-            this.groupBox2.Controls.Add(this.rbtnDownToE);
-            this.groupBox2.Controls.Add(this.rbtnDownToS);
-            this.groupBox2.Controls.Add(this.rbtnDownToW);
+            //this.groupBox2.Controls.Add(this.rbtnDownToE);
+            //this.groupBox2.Controls.Add(this.rbtnDownToS);
+            //this.groupBox2.Controls.Add(this.rbtnDownToW);
 
             this.groupBox2.Controls.Add(this.rbtnInfo);
             this.groupBox2.Controls.Add(this.rbtnLoS);
@@ -516,16 +516,19 @@
             this.rbtnBridgeEW.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnBridgeEW.Location = new System.Drawing.Point(62, 106);
             this.rbtnBridgeEW.Name = "rbtnBridgeEW";
-            this.rbtnBridgeEW.Size = new System.Drawing.Size(50, 24);
+            this.rbtnBridgeEW.Size = new System.Drawing.Size(50, 27);
             this.rbtnBridgeEW.TabIndex = 6;
             this.rbtnBridgeEW.TabStop = true;
-            this.rbtnBridgeEW.Text = "BrEW";
-            this.rbtnBridgeEW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbtnBridgeEW.UseVisualStyleBackColor = true;
+            System.Drawing.Bitmap bm2 = new System.Drawing.Bitmap(p._mainDirectory + "\\modules\\" + p.mod.moduleName + "\\graphics\\" + "bridgeIcon" + ".png");
+            this.rbtnBridgeEW.BackgroundImage = (System.Drawing.Image)bm2;
+            //this.rbtnBridgeEW.Text = "BrEW";
+            //this.rbtnBridgeEW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            //this.rbtnBridgeEW.UseVisualStyleBackColor = true;
             this.rbtnBridgeEW.CheckedChanged += new System.EventHandler(this.rbtnBridgeEW_CheckedChanged);
             // 
             // rbtnBridgeNS
-            // 
+            //
+            /* 
             this.rbtnBridgeNS.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnBridgeNS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnBridgeNS.Location = new System.Drawing.Point(62, 137);
@@ -537,6 +540,7 @@
             this.rbtnBridgeNS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnBridgeNS.UseVisualStyleBackColor = true;
             this.rbtnBridgeNS.CheckedChanged += new System.EventHandler(this.rbtnBridgeNS_CheckedChanged);
+            */
             // 
             // rbtnDownToN
             // 
@@ -576,7 +580,8 @@
             this.rbtnDownToN.CheckedChanged += new System.EventHandler(this.rbtnDownToN_CheckedChanged);
             // 
             // rbtnDownToE
-            // 
+            //
+            /* 
             this.rbtnDownToE.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnDownToE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnDownToE.Location = new System.Drawing.Point(62, 168);
@@ -590,9 +595,11 @@
             this.rbtnDownToE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnDownToE.UseVisualStyleBackColor = true;
             this.rbtnDownToE.CheckedChanged += new System.EventHandler(this.rbtnDownToE_CheckedChanged);
-            // 
+            //
+            */ 
             // rbtnDownToS
-            // 
+            //
+            /* 
             this.rbtnDownToS.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnDownToS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnDownToS.Location = new System.Drawing.Point(9, 137);
@@ -618,7 +625,8 @@
             this.rbtnDownToW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnDownToW.UseVisualStyleBackColor = true;
             this.rbtnDownToW.CheckedChanged += new System.EventHandler(this.rbtnDownToW_CheckedChanged);
-            // 
+            //
+            */ 
             // rbtnEditTrigger
             // 
             this.rbtnEditTrigger.Appearance = System.Windows.Forms.Appearance.Button;
@@ -1007,11 +1015,11 @@
         private System.Windows.Forms.RadioButton rbtnPaintTile;
         private System.Windows.Forms.RadioButton rbtnHeightLevel;
         private System.Windows.Forms.RadioButton rbtnBridgeEW;
-        private System.Windows.Forms.RadioButton rbtnBridgeNS;
+        //private System.Windows.Forms.RadioButton rbtnBridgeNS;
         private System.Windows.Forms.RadioButton rbtnDownToN;
-        private System.Windows.Forms.RadioButton rbtnDownToE;
-        private System.Windows.Forms.RadioButton rbtnDownToS;
-        private System.Windows.Forms.RadioButton rbtnDownToW;
+        //private System.Windows.Forms.RadioButton rbtnDownToE;
+        //private System.Windows.Forms.RadioButton rbtnDownToS;
+        //private System.Windows.Forms.RadioButton rbtnDownToW;
         private System.Windows.Forms.GroupBox gbMapSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
