@@ -15,6 +15,7 @@ namespace IB2Toolset
     {
         #region Fields
         private string filename = "newArea";
+        public int averageHeightOnThisMap = 0;
         private int areaVisibleDistance = 2;
         private bool restingAllowed = false;
         private string imageFileName = "none";

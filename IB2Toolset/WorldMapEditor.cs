@@ -3547,6 +3547,16 @@ namespace IB2Toolset
                     SharpDX.RectangleF dstSouth = new SharpDX.RectangleF(x * sqr, (y+1) * sqr, sqr, sqr);
                     SharpDX.RectangleF dstWest = new SharpDX.RectangleF((x-1) * sqr, y * sqr, sqr, sqr);
 
+                    float relativeTileHeight = tile.heightLevel - area.averageHeightOnThisMap;
+                    if (relativeTileHeight > 4)
+                    {
+                        relativeTileHeight = 4;
+                    }
+                    if (relativeTileHeight < -4)
+                    {
+                        relativeTileHeight = -4;
+                    }
+                    relativeTileHeight = relativeTileHeight / 10;
 
                     //highlights
                     if (tile.hasHighlightS)
@@ -3557,7 +3567,7 @@ namespace IB2Toolset
                         }
                         else
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, -1, 1, 1, 0.5f);
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, -1, 1, 1, 0.5f + relativeTileHeight);
                         }
                         //DrawD2DBitmap
                     }
@@ -3570,7 +3580,7 @@ namespace IB2Toolset
                         }
                         else
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 0, 1, 1, 0.5f);
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 0, 1, 1, 0.5f + relativeTileHeight);
                         }
                     }
 
@@ -3582,7 +3592,7 @@ namespace IB2Toolset
                         }
                         else
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 0, 0, 1, 1, 0.5f);
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 0, 0, 1, 1, 0.5f+ relativeTileHeight);
                         }
                     }
 
@@ -3594,7 +3604,7 @@ namespace IB2Toolset
                         }
                         else
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, -1, 0, 1, 1, 0.5f);
+                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, -1, 0, 1, 1, 0.5f + relativeTileHeight);
                         }
                     }
                     
@@ -5107,13 +5117,15 @@ namespace IB2Toolset
                 }
             }
             */
-
+            int heightSum = 0;
             //go through tiles potentially in shade
             for (int y = 0; y < area.MapSizeY; y++)
             {
                 for (int x = 0; x < area.MapSizeX; x++)
                 {
                     Tile tile = area.Tiles[y * area.MapSizeX + x];
+
+                    heightSum += tile.heightLevel;
                     tile.isInShortShadeN = false;
                     tile.isInShortShadeE = false;
                     tile.isInShortShadeS = false;
@@ -6885,6 +6897,7 @@ namespace IB2Toolset
                 }
             }
             #endregion
+            area.averageHeightOnThisMap = heightSum / (area.Tiles.Count);
 
             mod.moduleAreasObjects.Clear();
         }
