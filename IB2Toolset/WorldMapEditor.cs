@@ -3905,7 +3905,7 @@ namespace IB2Toolset
                         }
                         else
                         {
-
+                            DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
                         }
                     }
 
@@ -5204,7 +5204,7 @@ namespace IB2Toolset
                                     int transformedX = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + x + xS;
                                     int transformedY = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeY + y + yS;
                                     tileCaster = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + transformedX];
-                                    
+                                    /*
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -5228,7 +5228,7 @@ namespace IB2Toolset
                                             tile.isInShortShadeNW = true;
                                         }
                                     }
-
+                                    */
                                 }
                             }
 
@@ -5240,7 +5240,7 @@ namespace IB2Toolset
                                     int transformedX = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + x + xS;
                                     int transformedY = y + yS - area.MapSizeY;
                                     tileCaster = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + transformedX];
-
+                                    /*
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -5296,7 +5296,7 @@ namespace IB2Toolset
                                     int transformedX = x + xS - area.MapSizeX;
                                     int transformedY = y + yS - area.MapSizeY;
                                     tileCaster = mod.moduleAreasObjects[indexOfSouthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthEasternNeighbour].MapSizeX + transformedX];
-
+                                    /*
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -5320,7 +5320,7 @@ namespace IB2Toolset
                                             tile.isInShortShadeSE = true;
                                         }
                                     }
-
+                                    */
                                 }
                             }
 
@@ -5332,7 +5332,7 @@ namespace IB2Toolset
                                     int transformedX = x + xS - area.MapSizeX;
                                     int transformedY = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeY + y + yS; ;
                                     tileCaster = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeX + transformedX];
-
+                                    /*
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -5356,6 +5356,7 @@ namespace IB2Toolset
                                             tile.isInShortShadeNE = true;
                                         }
                                     }
+                                    */
                                 }
                             }
 
@@ -5368,8 +5369,9 @@ namespace IB2Toolset
                                     int transformedY = y + yS;
                                     tileCaster = mod.moduleAreasObjects[indexOfWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + transformedX];
 
-                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tileCaster.heightLevel - tile.heightLevel;
+                                    //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tileCaster.heightLevel - tile.heightLevel;
                                     //casts shadow and is no ramp
+                                    /*
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
                                         //check for long shadows
@@ -5417,7 +5419,7 @@ namespace IB2Toolset
                                                 tile.hasDownStairShadowW = true;
                                             }
                                         }
-                                        */
+                                        
 
                                     }
                                     else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
@@ -5478,12 +5480,12 @@ namespace IB2Toolset
                                                     tile.isInShortShadeW = true;
                                                     tileCaster.hasHighlightE = true;
                                                 }
-                                                */
+                                                
 
                                             }
                                         }
                                     }
-
+                                    */
                                 }
                             }
 
@@ -5495,7 +5497,9 @@ namespace IB2Toolset
                                     int transformedX = x + xS - area.MapSizeX;
                                     int transformedY = y + yS;
                                     tileCaster = mod.moduleAreasObjects[indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfEasternNeighbour].MapSizeX + transformedX];
-                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tileCaster.heightLevel - tile.heightLevel;
+
+                                    //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tileCaster.heightLevel - tile.heightLevel;
+                                    /*
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -5544,7 +5548,7 @@ namespace IB2Toolset
                                                 tile.hasDownStairShadowE = true;
                                             }
                                         }
-                                        */
+                                        
 
                                     }
                                     else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
@@ -5602,6 +5606,7 @@ namespace IB2Toolset
                                             tileCaster.hasHighlightW = true;
                                         }
                                     }
+                                    */
                                 }
                             }
 
@@ -5613,7 +5618,9 @@ namespace IB2Toolset
                                     int transformedX = x + xS;
                                     int transformedY = y + yS - area.MapSizeY;
                                     tileCaster = mod.moduleAreasObjects[indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthernNeighbour].MapSizeX + transformedX];
-                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tileCaster.heightLevel - tile.heightLevel;
+                                    
+                                    /*
+                                    //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tileCaster.heightLevel - tile.heightLevel;
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -5662,7 +5669,7 @@ namespace IB2Toolset
                                                 tile.hasDownStairShadowS = true;
                                             }
                                         }
-                                        */
+                                        
 
                                     }
                                     else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
@@ -5720,7 +5727,7 @@ namespace IB2Toolset
                                         }
                                     }
 
-
+                                */
                                 }
                             }
 
@@ -5732,7 +5739,8 @@ namespace IB2Toolset
                                     int transformedX = x + xS;
                                     int transformedY = mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeY + y + yS; ;
                                     tileCaster = mod.moduleAreasObjects[indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeX + transformedX];
-                                    tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tileCaster.heightLevel - tile.heightLevel;
+                                    //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tileCaster.heightLevel - tile.heightLevel;
+                                    /*
                                     //casts shadow and is no ramp
                                     if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                     {
@@ -5787,7 +5795,7 @@ namespace IB2Toolset
                                                 tile.hasDownStairShadowN = true;
                                             }
                                         }
-                                        */
+                                        
 
                                     }
                                     else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
@@ -5847,15 +5855,26 @@ namespace IB2Toolset
                                             }
                                         }
                                     }
+                                    */
                                 }
                             }
 
                             //caster tile is on this map
+                            //godorf
+
                             if ((y + yS >= 0) && (y + yS < area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
                             {
                                 int transformedX = x + xS;
                                 int transformedY = y + yS; ;
                                 tileCaster = area.Tiles[transformedY * area.MapSizeX + transformedX];
+                            }
+
+                            int placebo = 0;
+                            if (placebo == 0)
+                            {
+                                //int transformedX = x + xS;
+                                //int transformedY = y + yS; ;
+                                //tileCaster = area.Tiles[transformedY * area.MapSizeX + transformedX];
 
                                 //get height level difference
                                 if ((xS == 0) && (yS == -1))
