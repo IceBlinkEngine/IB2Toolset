@@ -57,6 +57,11 @@ namespace IB2Toolset
         public int Layer3Yscale = 0;
         public int Layer4Yscale = 0;
         public int Layer5Yscale = 0;
+        public float Layer1Opacity = 1;
+        public float Layer2Opacity = 1;
+        public float Layer3Opacity = 1;
+        public float Layer4Opacity = 1;
+        public float Layer5Opacity = 1;
         public bool Walkable = true;
         public bool LoSBlocked = false;
         public bool Visible = false;

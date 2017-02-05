@@ -97,8 +97,6 @@
   "fontName": "Metamorphous",
   "fontD2DScaleMultiplier": 1.0,
   "logNumberOfLines": 20,
-  "spellLabelSingular": "Spell",
-  "spellLabelPlural": "Spells",
   "goldLabelSingular": "Gold",
   "goldLabelPlural": "Gold",
   "numberOfPlayerMadePcsAllowed": 1,
@@ -120,5 +118,6 @@
   "useManualCombatCam": true,
   "useCombatSmoothMovement": true,
   "useMathGridFade": false,
-  "durationInStepsOfPartyLightItems": 250
+  "durationInStepsOfPartyLightItems": 250,
+  "resistanceMaxValue": 85
 }
