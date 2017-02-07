@@ -5,6 +5,7 @@
   "diagonalMoveCost": 1.5,
   "useLuck": false,
   "use3d6": false,
+  "linkedAreasCounter": 14,
   "ArmorClassAscending": true,
   "moduleItemsList": [],
   "moduleEncountersList": [],
@@ -38,7 +39,8 @@
     "puzzle64",
     "heightTest",
     "height Test_1",
-    "Simple"
+    "Simple",
+    "Simple_14_"
   ],
   "moduleConvosList": [
     "aTestConvo",
@@ -168,7 +170,7 @@
   "MaxPartySize": 6,
   "moduleDescription": "Short module tutorial on how to make a simple module.",
   "moduleCredits": "<big><b>Unwanted Guests</b></big><BR>\r\n<BR>\r\n-visit the forums for more info:<BR>\r\nwww.iceblinkengine.com/forums",
-  "nextIdNumber": 10722,
+  "nextIdNumber": 10738,
   "realTimeTimerLengthInMilliSeconds": 7000,
   "borderAreaSize": 0,
   "WorldTime": 0,

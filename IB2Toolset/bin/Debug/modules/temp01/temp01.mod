@@ -5,6 +5,7 @@
   "diagonalMoveCost": 1.5,
   "useLuck": false,
   "use3d6": false,
+  "linkedAreasCounter": 0,
   "ArmorClassAscending": true,
   "moduleItemsList": [],
   "moduleEncountersList": [],

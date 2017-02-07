@@ -165,6 +165,63 @@ namespace IB2Toolset
                 }//GDI */
             }
         }
+        //LINKED
+        private void btnCreateLinkedArea_Click(object sender, EventArgs e)
+        {
+            if (area.masterOfThisArea == "none")
+            {
+                //if file exists, rename the file
+                string filePath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
+                //string filename = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+                string filename = area.Filename;
+                if (File.Exists(filePath + "\\" + filename + ".lvl"))
+                {
+                    try
+                    {
+                        prntForm.mod.linkedAreasCounter++;
+                        //rename file
+                        File.Copy(filePath + "\\" + filename + ".lvl", filePath + "\\" + filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_.lvl");
+                        try
+                        {
+                            //load area
+                            Area newArea = new Area();
+                            newArea = newArea.loadAreaFile(filePath + "\\" + filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_.lvl");
+                            if (newArea == null)
+                            {
+                                MessageBox.Show("returned a null area");
+                            }
+                            //change area file name in area file object properties
+                            newArea.Filename = filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_";
+                            //newArea.saveAreaFile(filePath + "\\" + filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_.lvl");
+                            foreach (Tile t in newArea.Tiles)
+                            {
+                                t.linkedToMasterMap = true;
+                            }
+                            newArea.masterOfThisArea = area.Filename;
+                            area.linkedAreas.Add(newArea.Filename);
+                            newArea.saveAreaFile(filePath + "\\" + filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_.lvl");
+                            prntForm.mod.moduleAreasList.Add(newArea.Filename);
+                            //refreshListBoxAreas();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("failed to open file: " + ex.ToString());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString()); // Write error
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("File: " + filename + ".lvl does not exist in the areas folder");
+                }
+                //refreshListBoxAreas();
+            }
+        }        
+
+
         private void WorldMapEditor_Load(object sender, EventArgs e)
         {
             //LoadEncounters();
@@ -4161,6 +4218,37 @@ namespace IB2Toolset
 
                         #endregion
 
+            #region Draw Linked state
+            for (int y = 0; y < area.MapSizeY; y++)
+            {
+                for (int x = 0; x < area.MapSizeX; x++)
+                {
+                    Tile tile = area.Tiles[y * area.MapSizeX + x];
+                    if (tile.linkedToMasterMap)
+                    {
+                        //LINKED
+                        //draw square walkmesh and LoS stuff
+                        //SharpDX.Direct2D1.Bitmap bm = GetFromBitmapList("walk_pass");
+                        //Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
+                        //Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                        SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("black_tile").PixelSize.Width, GetFromBitmapList("black_tile").PixelSize.Height);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+                                                  
+                        DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.75f);
+
+                        if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                        {
+                            float scaler = 1.0f;
+                            if (sqr == 50) { scaler = 15.0f; }
+                            else if (sqr == 25) { scaler = 7.5f; }
+                            else if (sqr == 10) { scaler = 3.0f; }
+                            DrawText("L", dst.X + (sqr / 4), dst.Y + (sqr / 4), scaler * 1.5f, SharpDX.Color.Red);
+                        }
+                    }
+                }
+            }
+            #endregion
+
                         /*
                         #region Draw Height Shadows
 
@@ -7009,10 +7097,40 @@ namespace IB2Toolset
             try
             {
                 area = area.loadAreaFile(g_dir + "\\" + g_fil + ".lvl");
+                Area areaOrg = new Area();
+
                 if (area == null)
                 {
                     MessageBox.Show("returned a null area");
                 }
+
+                if (area.masterOfThisArea != "none")
+                {
+                    /*
+                    int index = -1;
+                    for (int i = 0; i < mod.moduleAreasList.Count; i++)
+                    {
+                        if (area.masterOfThisArea ==  mod.moduleAreasList[i])
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                    */
+                    areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                    
+                    //if (index != -1)
+                    //{
+                        for (int j = 0; j < area.Tiles.Count; j++)
+                        {
+                                bool temp = area.Tiles[j].linkedToMasterMap;
+                                area.Tiles[j] = areaOrg.Tiles[j].ShallowCopy();
+                                //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
+                                area.Tiles[j].linkedToMasterMap = temp;
+                        }
+                    //}
+                }
+
                 loadAreaObjectBitmapLists();
             }
             catch (Exception ex)
@@ -7912,6 +8030,28 @@ namespace IB2Toolset
                     else
                     {
                         tileToBePlaced.angle -= 90;
+                    }
+                    if (tileToBePlaced.angle > 360)
+                    {
+                        tileToBePlaced.angle -= 360;
+                    }
+                    if (tileToBePlaced.angle < 0)
+                    {
+                        tileToBePlaced.angle += 360;
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.T)
+            {
+                if (rbtnPaintTile.Checked)
+                {
+                    if (Control.ModifierKeys == Keys.Shift)
+                    {
+                        tileToBePlaced.angle += 1;
+                    }
+                    else
+                    {
+                        tileToBePlaced.angle += 90;
                     }
                     if (tileToBePlaced.angle > 360)
                     {

@@ -1,5 +1,5 @@
 {
-  "masterOfThisArea": "none",
+  "masterOfThisArea": "Simple",
   "linkedAreas": [
     "Simple_2_",
     "Simple_3_",
@@ -10,8 +10,7 @@
     "Simple_10_",
     "Simple_11_",
     "Simple_12_",
-    "Simple_13_",
-    "Simple_14_"
+    "Simple_13_"
   ],
   "averageHeightOnThisMap": 0,
   "backgroundImageStartLocX": 0,
@@ -21,7 +20,7 @@
   "isPNGMap": false,
   "allowLevelDesignWithMoreThan2HeightLevelsDifference": false,
   "AllowLevelDesignWithMoreThan2HeightLevelsDifference": false,
-  "Filename": "Simple",
+  "Filename": "Simple_14_",
   "AreaVisibleDistance": 2,
   "RestingAllowed": false,
   "UseMiniMapFogOfWar": false,
@@ -49,7 +48,7 @@
   "MapSizeY": 16,
   "Tiles": [
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -172,7 +171,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -295,7 +294,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -418,7 +417,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -541,7 +540,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -664,7 +663,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -787,7 +786,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -910,7 +909,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -1033,7 +1032,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -1156,7 +1155,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -1279,7 +1278,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -1402,7 +1401,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -1525,7 +1524,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -1648,7 +1647,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_x_treeb2",
@@ -1771,7 +1770,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -1894,7 +1893,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -2017,7 +2016,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -2140,7 +2139,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -2263,7 +2262,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -2386,7 +2385,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -2509,7 +2508,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -2632,7 +2631,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -2755,7 +2754,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -2878,7 +2877,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3001,7 +3000,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3124,7 +3123,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3247,7 +3246,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3370,7 +3369,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3493,7 +3492,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3616,7 +3615,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3739,7 +3738,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3862,7 +3861,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -3985,7 +3984,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -4108,7 +4107,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -4231,7 +4230,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -4354,7 +4353,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_x_treeb2",
@@ -4477,7 +4476,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -4600,7 +4599,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
       "Layer2Filename": "t_blank",
@@ -4723,7 +4722,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -4846,7 +4845,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -4969,7 +4968,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -5092,7 +5091,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -5215,7 +5214,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -5338,7 +5337,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -5461,7 +5460,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -5584,7 +5583,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -5707,7 +5706,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -5830,7 +5829,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -5953,7 +5952,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -6076,7 +6075,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -6199,7 +6198,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -6322,7 +6321,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -6445,7 +6444,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -6568,7 +6567,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
       "Layer2Filename": "t_blank",
@@ -6691,7 +6690,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -6814,7 +6813,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -6937,7 +6936,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -7060,7 +7059,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -7183,7 +7182,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -7306,7 +7305,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_x_waste3",
@@ -7429,7 +7428,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -7552,7 +7551,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -7675,7 +7674,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -7798,7 +7797,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_x_treeb2",
@@ -7921,7 +7920,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_w_ccav4_U",
@@ -8044,7 +8043,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -8167,7 +8166,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_w_corlb4_U",
@@ -8290,7 +8289,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_w_corlb4_U",
@@ -8413,7 +8412,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -8536,7 +8535,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
       "Layer2Filename": "t_blank",
@@ -8659,7 +8658,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -8782,7 +8781,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -8905,7 +8904,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -9028,7 +9027,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_w_corlb4_U",
@@ -9151,7 +9150,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -9274,7 +9273,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -9397,7 +9396,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -9520,7 +9519,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -9643,7 +9642,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -9766,7 +9765,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -9889,7 +9888,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -10012,7 +10011,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -10135,7 +10134,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -10258,7 +10257,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -10381,7 +10380,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -10504,7 +10503,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
       "Layer2Filename": "t_blank",
@@ -10627,7 +10626,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -10750,7 +10749,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -10873,7 +10872,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -10996,7 +10995,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -11119,7 +11118,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -11242,7 +11241,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -11365,7 +11364,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -11488,7 +11487,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -11611,7 +11610,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone02",
       "Layer2Filename": "t_blank",
@@ -11734,7 +11733,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone02",
       "Layer2Filename": "t_blank",
@@ -11857,7 +11856,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -11980,7 +11979,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -12103,7 +12102,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -12226,7 +12225,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -12349,7 +12348,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -12472,7 +12471,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
       "Layer2Filename": "t_blank",
@@ -12595,7 +12594,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -12718,7 +12717,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -12841,7 +12840,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -12964,7 +12963,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -13087,7 +13086,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -13210,7 +13209,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone02",
       "Layer2Filename": "t_blank",
@@ -13333,7 +13332,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -13456,7 +13455,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_tree3",
@@ -13579,7 +13578,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -13702,7 +13701,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -13825,7 +13824,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -13948,7 +13947,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_x_treeb2",
@@ -14071,7 +14070,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -14194,7 +14193,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_w_corla1",
@@ -14317,7 +14316,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_w_nfora4_U",
@@ -14440,7 +14439,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_blank",
@@ -14563,7 +14562,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -14686,7 +14685,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_w_nforb1",
@@ -14809,7 +14808,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -14932,7 +14931,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -15055,7 +15054,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -15178,7 +15177,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -15301,7 +15300,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_rock02",
@@ -15424,7 +15423,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_tree3",
@@ -15547,7 +15546,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_rock03",
@@ -15670,7 +15669,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -15793,7 +15792,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -15916,7 +15915,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -16039,7 +16038,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_w_nfora4_U",
@@ -16162,7 +16161,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -16285,7 +16284,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -16408,7 +16407,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_blank",
@@ -16531,7 +16530,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -16654,7 +16653,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_w_corlb4_D",
@@ -16777,7 +16776,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -16900,7 +16899,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -17023,7 +17022,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_w_corlb3_U",
@@ -17146,7 +17145,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -17269,7 +17268,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_w_ccav4_U",
@@ -17392,7 +17391,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -17515,7 +17514,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -17638,7 +17637,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -17761,7 +17760,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -17884,7 +17883,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -18007,7 +18006,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_w_nfora2",
@@ -18130,7 +18129,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -18253,7 +18252,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_w_ccav4_U",
@@ -18376,7 +18375,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_blank",
@@ -18499,7 +18498,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -18622,7 +18621,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -18745,7 +18744,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -18868,7 +18867,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -18991,7 +18990,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_tree3",
@@ -19114,7 +19113,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_tree3",
@@ -19237,7 +19236,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_rock03",
@@ -19360,7 +19359,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_rock02",
@@ -19483,7 +19482,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_rock02",
@@ -19606,7 +19605,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -19729,7 +19728,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -19852,7 +19851,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -19975,7 +19974,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -20098,7 +20097,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_w_nfora3_D",
@@ -20221,7 +20220,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_blank",
@@ -20344,7 +20343,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -20467,7 +20466,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_w_nfora1",
@@ -20590,7 +20589,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_blank",
@@ -20713,7 +20712,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -20836,7 +20835,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -20959,7 +20958,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_tree3",
@@ -21082,7 +21081,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -21205,7 +21204,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -21328,7 +21327,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -21451,7 +21450,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -21574,7 +21573,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -21697,7 +21696,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -21820,7 +21819,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -21943,7 +21942,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -22066,7 +22065,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -22189,7 +22188,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -22312,7 +22311,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone03",
       "Layer2Filename": "t_blank",
@@ -22435,7 +22434,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -22558,7 +22557,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
       "Layer2Filename": "t_blank",
@@ -22681,7 +22680,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -22804,7 +22803,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -22927,7 +22926,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_tree3",
@@ -23050,7 +23049,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -23173,7 +23172,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -23296,7 +23295,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_rock01",
@@ -23419,7 +23418,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -23542,7 +23541,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -23665,7 +23664,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -23788,7 +23787,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -23911,7 +23910,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -24034,7 +24033,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -24157,7 +24156,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -24280,7 +24279,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -24403,7 +24402,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -24526,7 +24525,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_bed04",
       "Layer2Filename": "t_blank",
@@ -24649,7 +24648,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -24772,7 +24771,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -24895,7 +24894,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -25018,7 +25017,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -25141,7 +25140,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -25264,9 +25263,9 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_sand01",
+      "Layer1Filename": "t_water02",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -25387,9 +25386,9 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_sand01",
+      "Layer1Filename": "t_water02",
       "Layer2Filename": "t_rock01",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -25510,7 +25509,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -25633,7 +25632,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -25756,7 +25755,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -25879,7 +25878,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -26002,7 +26001,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -26125,7 +26124,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -26248,7 +26247,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -26371,7 +26370,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -26494,7 +26493,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -26617,7 +26616,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -26740,7 +26739,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -26863,7 +26862,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -26986,7 +26985,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -27109,7 +27108,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -27232,9 +27231,9 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_sand01",
+      "Layer1Filename": "t_water02",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -27355,9 +27354,9 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_sand01",
+      "Layer1Filename": "t_water02",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -27478,7 +27477,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -27601,7 +27600,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -27724,7 +27723,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -27847,7 +27846,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -27970,7 +27969,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -28093,7 +28092,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -28216,7 +28215,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -28339,7 +28338,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -28462,7 +28461,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
       "Layer2Filename": "t_blank",
@@ -28585,7 +28584,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -28708,7 +28707,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -28831,7 +28830,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -28954,7 +28953,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -29077,7 +29076,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -29200,7 +29199,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -29323,7 +29322,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -29446,7 +29445,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -29569,7 +29568,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -29692,7 +29691,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -29815,7 +29814,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -29938,7 +29937,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -30061,7 +30060,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -30184,7 +30183,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_stone03",
@@ -30307,7 +30306,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
       "Layer2Filename": "t_blank",
@@ -30430,7 +30429,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -30553,7 +30552,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
@@ -30676,7 +30675,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -30799,7 +30798,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -30922,7 +30921,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -31045,7 +31044,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -31168,7 +31167,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -31291,7 +31290,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -31414,7 +31413,7 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": false,
+      "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_tree3",
@@ -31645,7 +31644,7 @@
   "AreaSounds": "none",
   "AreaSoundsDelay": 0,
   "AreaSoundsDelayRandomAdder": 0,
-  "NextIdNumber": 134,
+  "NextIdNumber": 133,
   "OnHeartBeatIBScript": "none",
   "OnHeartBeatIBScriptParms": "",
   "AreaLocalInts": [],

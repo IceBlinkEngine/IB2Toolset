@@ -51,9 +51,11 @@
             this.rbtnZoom5x = new System.Windows.Forms.RadioButton();
             this.rbtnZoom2x = new System.Windows.Forms.RadioButton();
             this.rbtnZoom1x = new System.Windows.Forms.RadioButton();
+            this.rbtnCreateLinkedArea = new System.Windows.Forms.RadioButton();
             this.rbtnLoS = new System.Windows.Forms.RadioButton();
             this.rbtnInfo = new System.Windows.Forms.RadioButton();
             this.rbtnWalkable = new System.Windows.Forms.RadioButton();
+            //btnCreateLinkedArea_Click
             this.btnProperties = new System.Windows.Forms.Button();
             this.lblMouseInfo = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -475,6 +477,7 @@
             this.groupBox2.Controls.Add(this.rbtnEditTrigger);
             this.groupBox2.Controls.Add(this.rbtnWalkable);
             this.groupBox2.Controls.Add(this.rbtnPaintTrigger);
+            this.groupBox2.Controls.Add(this.rbtnCreateLinkedArea);
             this.groupBox2.Location = new System.Drawing.Point(12, 148);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(118, 364);
@@ -626,7 +629,25 @@
             this.rbtnDownToW.UseVisualStyleBackColor = true;
             this.rbtnDownToW.CheckedChanged += new System.EventHandler(this.rbtnDownToW_CheckedChanged);
             //
-            */ 
+            */
+
+
+            // rbtnCreateLinkedArea
+            // 
+            this.rbtnCreateLinkedArea.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnCreateLinkedArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnCreateLinkedArea.Location = new System.Drawing.Point(9, 167);
+            this.rbtnCreateLinkedArea.Name = "rbtnCreateLinkedArea";
+            this.rbtnCreateLinkedArea.Size = new System.Drawing.Size(100, 27);
+            this.rbtnCreateLinkedArea.TabIndex = 6;
+            this.rbtnCreateLinkedArea.TabStop = true;
+            this.rbtnCreateLinkedArea.Text = "Make Linked Area";
+            this.rbtnCreateLinkedArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnCreateLinkedArea.UseVisualStyleBackColor = true;
+            this.rbtnCreateLinkedArea.Click += new System.EventHandler(this.btnCreateLinkedArea_Click);
+            // 
+
+
             // rbtnEditTrigger
             // 
             this.rbtnEditTrigger.Appearance = System.Windows.Forms.Appearance.Button;
@@ -1037,6 +1058,7 @@
         private System.Windows.Forms.RadioButton rbtnZoom5x;
         private System.Windows.Forms.RadioButton rbtnZoom2x;
         private System.Windows.Forms.RadioButton rbtnZoom1x;
+        private System.Windows.Forms.RadioButton rbtnCreateLinkedArea;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;

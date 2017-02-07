@@ -21,6 +21,8 @@ namespace IB2Toolset
 {
     public class Tile
     {
+        public bool linkedToMasterMap = false;
+        
         public string Layer0Filename = "t_blank";
         public string Layer1Filename = "t_blank";
         public string Layer2Filename = "t_blank";
@@ -198,6 +200,11 @@ namespace IB2Toolset
         {
             get { return drawDownStairShadows; }
             set { drawDownStairShadows = value; }
+        }
+
+        public Tile ShallowCopy()
+        {
+            return (Tile)this.MemberwiseClone();
         }
 
         public Tile()
