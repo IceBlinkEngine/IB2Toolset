@@ -765,6 +765,36 @@ public void loadSpriteDropdownList()
         }
         private void saveFiles()
         {
+            /*
+            area = area.loadAreaFile(g_dir + "\\" + g_fil + ".lvl");
+            Area areaOrg = new Area();
+
+            if (area == null)
+            {
+                MessageBox.Show("returned a null area");
+            }
+
+            if (area.masterOfThisArea != "none")
+            {
+               
+                areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+            
+                //if (index != -1)
+                //{
+                for (int j = 0; j < area.Tiles.Count; j++)
+                {
+                    bool temp = area.Tiles[j].linkedToMasterMap;
+                    if (area.Tiles[j].linkedToMasterMap)
+                    {
+                        area.Tiles[j] = areaOrg.Tiles[j].ShallowCopy();
+                    }
+                    //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
+                    area.Tiles[j].linkedToMasterMap = temp;
+                }
+                //}
+            }
+            */
+
             if ((mod.startingArea == null) || (mod.startingArea == ""))
             {
                 MessageBox.Show("Starting area was not detected, please type in the starting area's name in module properties (Edit/Modules Properties). Your module will not work without a starting area defined.");
@@ -941,7 +971,346 @@ public void loadSpriteDropdownList()
                         MessageBox.Show("Error: Could not save area file to disk. Original error: " + ex.Message);
                     }
                 }
-            }
+
+                Area areaTempMaster = new Area();
+                Area areaTempLink = new Area();
+
+                foreach (String masterAreaString in mod.masterAreasList)
+                {
+                    bool areaMasterExists = false;
+                    foreach (String areaDoubleCheck in mod.moduleAreasList)
+                    {
+                        if (masterAreaString == areaDoubleCheck)
+                        {
+                            areaMasterExists = true;
+                            break;
+                        }
+                    }
+
+                    if (areaMasterExists)
+                    {
+                        areaTempMaster = areaTempMaster.loadAreaFile(_mainDirectory + "\\modules\\" + mod.moduleName + "\\areas" + "\\" + masterAreaString + ".lvl");
+
+                        foreach (String linkedAreaString in areaTempMaster.linkedAreas)
+                        {
+                            bool areaLinkExists = false;
+                            foreach (String areaDoubleCheck in mod.moduleAreasList)
+                            {
+                                if (linkedAreaString == areaDoubleCheck)
+                                {
+                                    areaLinkExists = true;
+                                    break;
+                                }
+                            }
+
+                            if (areaLinkExists)
+                            {
+                                areaTempLink = areaTempLink.loadAreaFile(_mainDirectory + "\\modules\\" + mod.moduleName + "\\areas" + "\\" + linkedAreaString + ".lvl");
+
+                                //finalBlow1
+                                //1. we need to synch tiles on this link with its master
+                                for (int j = 0; j < areaTempLink.Tiles.Count; j++)
+                                {
+                                    bool temp = areaTempLink.Tiles[j].linkedToMasterMap;
+                                    if (areaTempLink.Tiles[j].linkedToMasterMap)
+                                    {
+                                        areaTempLink.Tiles[j] = areaTempMaster.Tiles[j].ShallowCopy();
+                                    }
+                                    //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
+                                    areaTempLink.Tiles[j].linkedToMasterMap = temp;
+                                }
+
+                                //2. we need to remove transition triggers to this link from master if those do not exist on this link (check tagOfLink)
+                                for (int triggerIndexOnMaster = areaTempMaster.Triggers.Count -1; triggerIndexOnMaster >= 0; triggerIndexOnMaster--)
+                                {
+                                    bool deleteThisTrigger = false;
+                                    //link is a link from master to this linked area
+                                    if (areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLink == areaTempLink.Filename)
+                                    {
+                                        deleteThisTrigger = true;
+                                        foreach (Trigger triggerOnLink in areaTempLink.Triggers)
+                                        {
+                                            if ((triggerOnLink.TriggerTag + "_" + areaTempMaster.Filename) == areaTempMaster.Triggers[triggerIndexOnMaster].TriggerTag)
+                                            {
+                                                deleteThisTrigger = false;
+                                                //actually also rotation might have changed, so we better replace anyway
+                                                //areaTempMaster.Triggers[triggerIndexOnMaster] = triggerOnLink;
+                                                if(triggerOnLink.transitionToMasterRotationCounter == 1)
+                                                {
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].isLinkToMaster = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLink = areaTempLink.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLinkedMaster = areaTempMaster.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Enabled = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].EnabledEvent1 = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1Type = "transition";
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1FilenameOrTag = areaTempLink.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1TransPointX = triggerOnLink.TriggerSquaresList[0].X;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1TransPointY = triggerOnLink.TriggerSquaresList[0].Y + 1;
+                                                    Coordinate newCoor = new Coordinate();
+                                                    newCoor.X = triggerOnLink.TriggerSquaresList[0].X;
+                                                    newCoor.Y = triggerOnLink.TriggerSquaresList[0].Y + 1;
+                                                    if (areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Count <= 1)
+                                                    {
+                                                        if (areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Count == 1)
+                                                        {
+                                                            areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.RemoveAt(0);
+                                                        }
+                                                        areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Add(newCoor);
+                                                    }
+                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                }
+                                                if (triggerOnLink.transitionToMasterRotationCounter == 2)
+                                                {
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].isLinkToMaster = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLink = areaTempLink.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLinkedMaster = areaTempMaster.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Enabled = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].EnabledEvent1 = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1Type = "transition";
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1FilenameOrTag = areaTempLink.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1TransPointX = triggerOnLink.TriggerSquaresList[0].X - 1;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1TransPointY = triggerOnLink.TriggerSquaresList[0].Y;
+                                                    Coordinate newCoor = new Coordinate();
+                                                    newCoor.X = triggerOnLink.TriggerSquaresList[0].X - 1;
+                                                    newCoor.Y = triggerOnLink.TriggerSquaresList[0].Y;
+                                                    if (areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Count <= 1)
+                                                    {
+                                                        if (areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Count == 1)
+                                                        {
+                                                            areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.RemoveAt(0);
+                                                        }
+                                                        areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Add(newCoor);
+                                                    }
+                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                }
+                                                if (triggerOnLink.transitionToMasterRotationCounter == 3)
+                                                {
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].isLinkToMaster = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLink = areaTempLink.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLinkedMaster = areaTempMaster.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Enabled = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].EnabledEvent1 = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1Type = "transition";
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1FilenameOrTag = areaTempLink.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1TransPointX = triggerOnLink.TriggerSquaresList[0].X;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1TransPointY = triggerOnLink.TriggerSquaresList[0].Y - 1;
+                                                    Coordinate newCoor = new Coordinate();
+                                                    newCoor.X = triggerOnLink.TriggerSquaresList[0].X;
+                                                    newCoor.Y = triggerOnLink.TriggerSquaresList[0].Y - 1;
+                                                    if (areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Count <= 1)
+                                                    {
+                                                        if (areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Count == 1)
+                                                        {
+                                                            areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.RemoveAt(0);
+                                                        }
+                                                        areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Add(newCoor);
+                                                    }
+                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                }
+                                                if (triggerOnLink.transitionToMasterRotationCounter == 4)
+                                                {
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].isLinkToMaster = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLink = areaTempLink.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].tagOfLinkedMaster = areaTempMaster.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Enabled = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].EnabledEvent1 = true;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1Type = "transition";
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1FilenameOrTag = areaTempLink.Filename;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1TransPointX = triggerOnLink.TriggerSquaresList[0].X + 1;
+                                                    areaTempMaster.Triggers[triggerIndexOnMaster].Event1TransPointY = triggerOnLink.TriggerSquaresList[0].Y;
+                                                    Coordinate newCoor = new Coordinate();
+                                                    newCoor.X = triggerOnLink.TriggerSquaresList[0].X + 1;
+                                                    newCoor.Y = triggerOnLink.TriggerSquaresList[0].Y;
+                                                    if (areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Count <= 1)
+                                                    {
+                                                        if (areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Count == 1)
+                                                        {
+                                                            areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.RemoveAt(0);
+                                                        }
+                                                        areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Add(newCoor);
+                                                    }
+                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    if (deleteThisTrigger)
+                                    {
+                                        //kirche
+                                        areaTempMaster.Tiles[areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList[0].X].transitionToMasterDirection = "none";
+                                        areaTempMaster.Tiles[areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = -1;
+                                        areaTempMaster.Triggers.RemoveAt(triggerIndexOnMaster);
+                                    }
+                                }
+
+                                //3. we need to add transistion triggers from this link to master if those do not already exist on master
+                                foreach (Trigger triggerOnLink in areaTempLink.Triggers)
+                                {
+                                    if (triggerOnLink.isLinkToMaster)
+                                    {
+                                        bool addTransitionTrigger = true;
+                                        foreach (Trigger triggerOnMaster in areaTempMaster.Triggers)
+                                        {
+                                            if (triggerOnMaster.TriggerTag == triggerOnLink.TriggerTag + "_" + areaTempMaster.Filename)
+                                            {
+                                                addTransitionTrigger = false;
+                                                break;
+                                            }
+                                        }
+
+                                        if (addTransitionTrigger)
+                                        {
+                                            //not good, just references to the same thingie
+                                            /*
+                                            string placeholder = triggerOnLink.TriggerTag;
+                                            triggerOnLink.TriggerTag += "_" + areaTempMaster.Filename;
+                                            areaTempMaster.Triggers.Add(triggerOnLink);
+                                            triggerOnLink.TriggerTag = placeholder;
+                                            */
+
+                                            Trigger newTriggerForMaster = new Trigger();
+
+                                            if (triggerOnLink.transitionToMasterRotationCounter == 1)
+                                            {
+                                                newTriggerForMaster.isLinkToMaster = true;
+                                                newTriggerForMaster.tagOfLink = areaTempLink.Filename;
+                                                newTriggerForMaster.tagOfLinkedMaster = areaTempMaster.Filename;
+                                                newTriggerForMaster.Enabled = true;
+                                                newTriggerForMaster.EnabledEvent1 = true;
+                                                newTriggerForMaster.Event1Type = "transition";
+                                                newTriggerForMaster.Event1FilenameOrTag = areaTempLink.Filename;
+                                                newTriggerForMaster.Event1TransPointX = triggerOnLink.TriggerSquaresList[0].X;
+                                                newTriggerForMaster.Event1TransPointY = triggerOnLink.TriggerSquaresList[0].Y + 1;
+                                                Coordinate newCoor = new Coordinate();
+                                                newCoor.X = triggerOnLink.TriggerSquaresList[0].X;
+                                                newCoor.Y = triggerOnLink.TriggerSquaresList[0].Y + 1;
+                                                if (newTriggerForMaster.TriggerSquaresList.Count <= 1)
+                                                {
+                                                    if (newTriggerForMaster.TriggerSquaresList.Count == 1)
+                                                    {
+                                                        newTriggerForMaster.TriggerSquaresList.RemoveAt(0);
+                                                    }
+                                                    newTriggerForMaster.TriggerSquaresList.Add(newCoor);
+                                                }
+                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                            }
+                                            if (triggerOnLink.transitionToMasterRotationCounter == 2)
+                                            {
+                                                newTriggerForMaster.isLinkToMaster = true;
+                                                newTriggerForMaster.tagOfLink = areaTempLink.Filename;
+                                                newTriggerForMaster.tagOfLinkedMaster = areaTempMaster.Filename;
+                                                newTriggerForMaster.Enabled = true;
+                                                newTriggerForMaster.EnabledEvent1 = true;
+                                                newTriggerForMaster.Event1Type = "transition";
+                                                newTriggerForMaster.Event1FilenameOrTag = areaTempLink.Filename;
+                                                newTriggerForMaster.Event1TransPointX = triggerOnLink.TriggerSquaresList[0].X - 1;
+                                                newTriggerForMaster.Event1TransPointY = triggerOnLink.TriggerSquaresList[0].Y;
+                                                Coordinate newCoor = new Coordinate();
+                                                newCoor.X = triggerOnLink.TriggerSquaresList[0].X - 1;
+                                                newCoor.Y = triggerOnLink.TriggerSquaresList[0].Y;
+                                                if (newTriggerForMaster.TriggerSquaresList.Count <= 1)
+                                                {
+                                                    if (newTriggerForMaster.TriggerSquaresList.Count == 1)
+                                                    {
+                                                        newTriggerForMaster.TriggerSquaresList.RemoveAt(0);
+                                                    }
+                                                    newTriggerForMaster.TriggerSquaresList.Add(newCoor);
+                                                }
+                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                            }
+                                            if (triggerOnLink.transitionToMasterRotationCounter == 3)
+                                            {
+                                                newTriggerForMaster.isLinkToMaster = true;
+                                                newTriggerForMaster.tagOfLink = areaTempLink.Filename;
+                                                newTriggerForMaster.tagOfLinkedMaster = areaTempMaster.Filename;
+                                                newTriggerForMaster.Enabled = true;
+                                                newTriggerForMaster.EnabledEvent1 = true;
+                                                newTriggerForMaster.Event1Type = "transition";
+                                                newTriggerForMaster.Event1FilenameOrTag = areaTempLink.Filename;
+                                                newTriggerForMaster.Event1TransPointX = triggerOnLink.TriggerSquaresList[0].X;
+                                                newTriggerForMaster.Event1TransPointY = triggerOnLink.TriggerSquaresList[0].Y - 1;
+                                                Coordinate newCoor = new Coordinate();
+                                                newCoor.X = triggerOnLink.TriggerSquaresList[0].X;
+                                                newCoor.Y = triggerOnLink.TriggerSquaresList[0].Y - 1;
+                                                if (newTriggerForMaster.TriggerSquaresList.Count <= 1)
+                                                {
+                                                    if (newTriggerForMaster.TriggerSquaresList.Count == 1)
+                                                    {
+                                                        newTriggerForMaster.TriggerSquaresList.RemoveAt(0);
+                                                    }
+                                                    newTriggerForMaster.TriggerSquaresList.Add(newCoor);
+                                                }
+                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                            }
+                                            if (triggerOnLink.transitionToMasterRotationCounter == 4)
+                                            {
+                                                newTriggerForMaster.isLinkToMaster = true;
+                                                newTriggerForMaster.tagOfLink = areaTempLink.Filename;
+                                                newTriggerForMaster.tagOfLinkedMaster = areaTempMaster.Filename;
+                                                newTriggerForMaster.Enabled = true;
+                                                newTriggerForMaster.EnabledEvent1 = true;
+                                                newTriggerForMaster.Event1Type = "transition";
+                                                newTriggerForMaster.Event1FilenameOrTag = areaTempLink.Filename;
+                                                newTriggerForMaster.Event1TransPointX = triggerOnLink.TriggerSquaresList[0].X + 1;
+                                                newTriggerForMaster.Event1TransPointY = triggerOnLink.TriggerSquaresList[0].Y;
+                                                Coordinate newCoor = new Coordinate();
+                                                newCoor.X = triggerOnLink.TriggerSquaresList[0].X + 1;
+                                                newCoor.Y = triggerOnLink.TriggerSquaresList[0].Y;
+                                                if (newTriggerForMaster.TriggerSquaresList.Count <= 1)
+                                                {
+                                                    if (newTriggerForMaster.TriggerSquaresList.Count == 1)
+                                                    {
+                                                        newTriggerForMaster.TriggerSquaresList.RemoveAt(0);
+                                                    }
+                                                    newTriggerForMaster.TriggerSquaresList.Add(newCoor);
+                                                }
+                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                            }
+
+                                            //when it is set up, we add we finally name it
+                                            newTriggerForMaster.TriggerTag = triggerOnLink.TriggerTag + "_" + areaTempMaster.Filename;
+
+                                            //then add it
+                                            areaTempMaster.Triggers.Add(newTriggerForMaster);
+                                        }   
+                                    }
+                                }
+
+                                //we need to save the current link area to file here
+                                areaTempLink.saveAreaFile(this._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas\\" + areaTempLink.Filename + ".lvl");
+                            }//done with current link area (can be one of many for this master)
+
+                        }//end of the strings loop for linked areas
+
+                        // wee need to save the current master area to file here
+                        areaTempMaster.saveAreaFile(this._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas\\" + areaTempMaster.Filename + ".lvl");
+                    }//done with current master area
+
+                }//end of the strings loop for the master areas
+
+                    /*
+                    Area areaTemp = new Area();
+                    foreach (String areaString in mod.moduleAreasList)
+                    {
+                        areaTemp = areaTemp.loadAreaFile(_mainDirectory + "\\modules\\" + mod.moduleName + "\\areas" + "\\" + areaString + ".lvl");
+
+                        if (areaTemp.m)
+                    }
+                    */
+                    //areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                    //string filePath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
+                    //newAreaLink = newAreaLink.loadAreaFile(filePath + "\\" + prntForm.mod.moduleAreasList[selectedIndex] + ".lvl");
+                }
             catch { MessageBox.Show("failed to createFiles"); }
         }
         private void newModule()

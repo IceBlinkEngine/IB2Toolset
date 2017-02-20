@@ -51,10 +51,14 @@
             this.rbtnZoom5x = new System.Windows.Forms.RadioButton();
             this.rbtnZoom2x = new System.Windows.Forms.RadioButton();
             this.rbtnZoom1x = new System.Windows.Forms.RadioButton();
-            this.rbtnCreateLinkedArea = new System.Windows.Forms.RadioButton();
+            this.btnCreateLinkedArea = new System.Windows.Forms.Button();
+            this.btnSynchArea = new System.Windows.Forms.Button();
             this.rbtnLoS = new System.Windows.Forms.RadioButton();
             this.rbtnInfo = new System.Windows.Forms.RadioButton();
             this.rbtnWalkable = new System.Windows.Forms.RadioButton();
+            this.rbtnToMaster = new System.Windows.Forms.RadioButton();
+            //rbtnToMaster
+            this.rbtnChangeLinkState = new System.Windows.Forms.RadioButton();
             //btnCreateLinkedArea_Click
             this.btnProperties = new System.Windows.Forms.Button();
             this.lblMouseInfo = new System.Windows.Forms.Label();
@@ -410,7 +414,35 @@
             this.rbtnWalkable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnWalkable.UseVisualStyleBackColor = true;
             this.rbtnWalkable.CheckedChanged += new System.EventHandler(this.rbtnWalkable_CheckedChanged);
+            //
+            // rbtnToL
             // 
+            this.rbtnToMaster.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnToMaster.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnToMaster.Location = new System.Drawing.Point(64, 137);
+            this.rbtnToMaster.Name = "rbtnToMaster";
+            this.rbtnToMaster.Size = new System.Drawing.Size(50, 27);
+            this.rbtnToMaster.TabIndex = 3;
+            this.rbtnToMaster.TabStop = true;
+            this.rbtnToMaster.Text = "ToMaster";
+            this.rbtnToMaster.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnToMaster.UseVisualStyleBackColor = true;
+            this.rbtnToMaster.CheckedChanged += new System.EventHandler(this.rbtnToMaster_CheckedChanged);
+            // 
+
+            // rbtnChangeLinkState
+            // 
+            this.rbtnChangeLinkState.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnChangeLinkState.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnChangeLinkState.Location = new System.Drawing.Point(9, 137);
+            this.rbtnChangeLinkState.Name = "rbtnChangeLinkState";
+            this.rbtnChangeLinkState.Size = new System.Drawing.Size(50, 27);
+            this.rbtnChangeLinkState.TabIndex = 3;
+            this.rbtnChangeLinkState.TabStop = true;
+            this.rbtnChangeLinkState.Text = "Link?";
+            this.rbtnChangeLinkState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnChangeLinkState.UseVisualStyleBackColor = true;
+            this.rbtnChangeLinkState.CheckedChanged += new System.EventHandler(this.rbtnChangeLinkState_CheckedChanged);
             // btnProperties
             // 
             this.btnProperties.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -476,8 +508,11 @@
             this.groupBox2.Controls.Add(this.rbtnLoS);
             this.groupBox2.Controls.Add(this.rbtnEditTrigger);
             this.groupBox2.Controls.Add(this.rbtnWalkable);
+            this.groupBox2.Controls.Add(this.rbtnToMaster);
+            this.groupBox2.Controls.Add(this.rbtnChangeLinkState);
             this.groupBox2.Controls.Add(this.rbtnPaintTrigger);
-            this.groupBox2.Controls.Add(this.rbtnCreateLinkedArea);
+            this.groupBox2.Controls.Add(this.btnCreateLinkedArea);
+            this.groupBox2.Controls.Add(this.btnSynchArea);
             this.groupBox2.Location = new System.Drawing.Point(12, 148);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(118, 364);
@@ -632,19 +667,34 @@
             */
 
 
-            // rbtnCreateLinkedArea
+            // btnCreateLinkedArea
             // 
-            this.rbtnCreateLinkedArea.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnCreateLinkedArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnCreateLinkedArea.Location = new System.Drawing.Point(9, 167);
-            this.rbtnCreateLinkedArea.Name = "rbtnCreateLinkedArea";
-            this.rbtnCreateLinkedArea.Size = new System.Drawing.Size(100, 27);
-            this.rbtnCreateLinkedArea.TabIndex = 6;
-            this.rbtnCreateLinkedArea.TabStop = true;
-            this.rbtnCreateLinkedArea.Text = "Make Linked Area";
-            this.rbtnCreateLinkedArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbtnCreateLinkedArea.UseVisualStyleBackColor = true;
-            this.rbtnCreateLinkedArea.Click += new System.EventHandler(this.btnCreateLinkedArea_Click);
+            //this.btnCreateLinkedArea.Appearance = System.Windows.Forms.Appearance.Button;
+            this.btnCreateLinkedArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateLinkedArea.Location = new System.Drawing.Point(9, 167);
+            this.btnCreateLinkedArea.Name = "rbtnCreateLinkedArea";
+            this.btnCreateLinkedArea.Size = new System.Drawing.Size(48, 27);
+            this.btnCreateLinkedArea.TabIndex = 6;
+            this.btnCreateLinkedArea.TabStop = true;
+            this.btnCreateLinkedArea.Text = "Clone";
+            this.btnCreateLinkedArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCreateLinkedArea.UseVisualStyleBackColor = true;
+            this.btnCreateLinkedArea.Click += new System.EventHandler(this.btnCreateLinkedArea_Click);
+            // 
+
+            // btnSynchArea
+            // 
+            //this.btnCreateLinkedArea.Appearance = System.Windows.Forms.Appearance.Button;
+            this.btnSynchArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSynchArea.Location = new System.Drawing.Point(61, 167);
+            this.btnSynchArea.Name = "rbtnSynchArea";
+            this.btnSynchArea.Size = new System.Drawing.Size(48, 27);
+            this.btnSynchArea.TabIndex = 6;
+            this.btnSynchArea.TabStop = true;
+            this.btnSynchArea.Text = "Synch";
+            this.btnSynchArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSynchArea.UseVisualStyleBackColor = true;
+            this.btnSynchArea.Click += new System.EventHandler(this.btnSynchArea_Click);
             // 
 
 
@@ -1020,6 +1070,8 @@
         private System.Windows.Forms.RadioButton rbtnLoS;
         private System.Windows.Forms.RadioButton rbtnInfo;
         private System.Windows.Forms.RadioButton rbtnWalkable;
+        private System.Windows.Forms.RadioButton rbtnToMaster;
+        private System.Windows.Forms.RadioButton rbtnChangeLinkState;
         private System.Windows.Forms.Button btnProperties;
         private System.Windows.Forms.Label lblMouseInfo;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1058,7 +1110,8 @@
         private System.Windows.Forms.RadioButton rbtnZoom5x;
         private System.Windows.Forms.RadioButton rbtnZoom2x;
         private System.Windows.Forms.RadioButton rbtnZoom1x;
-        private System.Windows.Forms.RadioButton rbtnCreateLinkedArea;
+        private System.Windows.Forms.Button btnCreateLinkedArea;
+        private System.Windows.Forms.Button btnSynchArea;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;

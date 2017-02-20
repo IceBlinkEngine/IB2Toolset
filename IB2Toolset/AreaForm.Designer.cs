@@ -104,6 +104,7 @@
             this.lbxAreas.TabIndex = 79;
             this.lbxAreas.SelectedIndexChanged += new System.EventHandler(this.lbxAreas_SelectedIndexChanged_1);
             this.lbxAreas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbxAreas_MouseDoubleClick);
+            
             // 
             // btnRename
             // 

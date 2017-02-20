@@ -71,11 +71,13 @@ namespace IB2Toolset
         }
         private void btnAddArea_Click_1(object sender, EventArgs e)
         {
+            //thinktank1
             Area newArea = new Area();
             newArea.Filename = "new area";
             prntForm.mod.moduleAreasList.Add(newArea.Filename);
             refreshListBoxAreas();
             // should I create a new file at this point?
+            
         }
         private void btnRemoveArea_Click_1(object sender, EventArgs e)
         {
@@ -85,9 +87,66 @@ namespace IB2Toolset
                 {
                     // The Remove button was clicked.
                     int selectedIndex = lbxAreas.SelectedIndex;
+
+                    //remove linked areas from master area numbers and areas lists
+                    Area newAreaLink = new Area();
+                    Area newAreaMaster = new Area();
+                    string filePath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
+                    newAreaLink = newAreaLink.loadAreaFile(filePath + "\\" + prntForm.mod.moduleAreasList[selectedIndex] + ".lvl");
+                    foreach (string areaName in prntForm.mod.moduleAreasList)
+                    {
+                        if (areaName == newAreaLink.masterOfThisArea)
+                        {
+                            //find master area index
+                            int index = -1;
+                            for (int k = 0; k < prntForm.mod.moduleAreasList.Count; k++)
+                            {
+                                if (prntForm.mod.moduleAreasList[k] == newAreaLink.masterOfThisArea)
+                                {
+                                    index = k;
+                                    break;
+                                }
+                            }
+
+                            //get the master area
+                            newAreaMaster = newAreaMaster.loadAreaFile(filePath + "\\" + prntForm.mod.moduleAreasList[index] + ".lvl");
+
+                            //modify its link lists
+                            foreach (int linkNumber in newAreaMaster.linkNumbers)
+                            {
+                                if (linkNumber == newAreaLink.linkNumberOfThisArea)
+                                {
+                                    newAreaMaster.linkNumbers.Remove(linkNumber);
+                                }
+                            }  
+
+                            for (int l = newAreaMaster.linkedAreas.Count-1; l >= 0; l--)
+                            //foreach (string linkName in newAreaMaster.linkedAreas)
+                            {
+                                if (newAreaMaster.linkedAreas[l] == newAreaLink.Filename)
+                                {
+                                    newAreaMaster.linkedAreas.RemoveAt(l);
+                                }
+                            }
+                            break;
+                        }
+                    }
+
+                    for (int m = prntForm.mod.masterAreasList.Count -1; m >= 0; m--)
+                    {
+                        if (prntForm.mod.masterAreasList[m] == prntForm.mod.moduleAreasList[selectedIndex])
+                        {
+                            prntForm.mod.masterAreasList.RemoveAt(m);
+                            break;
+                        }
+                    }
+
                     prntForm.mod.moduleAreasList.RemoveAt(selectedIndex);
                 }
-                catch { }
+                catch
+                {
+                    int c = 1;
+                }
                 prntForm._selectedLbxAreaIndex = 0;
                 lbxAreas.SelectedIndex = 0;
                 refreshListBoxAreas();
@@ -256,7 +315,7 @@ namespace IB2Toolset
         }        
         #endregion
 
-        private void EditArea()
+        public void EditArea()
         {
             //if (prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex].StartsWith("wm_"))
             //{

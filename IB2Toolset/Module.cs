@@ -14,6 +14,7 @@ namespace IB2Toolset
     public class Module
     {
         #region Fields
+        public List<string> masterAreasList = new List<string>(); 
         //private string moduleFolderName = "";
         private string _moduleName = "";
         private string _moduleLabelName = "";
@@ -37,7 +38,7 @@ namespace IB2Toolset
         public float diagonalMoveCost = 1.5f;
         public bool useLuck = false;
         public bool use3d6 = false;
-        public int linkedAreasCounter = 0;
+        //public int linkedAreasCounter = 0;
         public bool ArmorClassAscending = true;
         public List<Item> moduleItemsList = new List<Item>();
         public List<Encounter> moduleEncountersList = new List<Encounter>();

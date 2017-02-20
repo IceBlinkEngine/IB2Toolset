@@ -1,17 +1,9 @@
 {
+  "linkedAreasCounter": 0,
   "masterOfThisArea": "Simple",
-  "linkedAreas": [
-    "Simple_2_",
-    "Simple_3_",
-    "Simple_4_",
-    "Simple_5_",
-    "Simple_8_",
-    "Simple_9_",
-    "Simple_10_",
-    "Simple_11_",
-    "Simple_12_",
-    "Simple_13_"
-  ],
+  "linkedAreas": [],
+  "linkNumbers": [],
+  "linkNumberOfThisArea": 1,
   "averageHeightOnThisMap": 0,
   "backgroundImageStartLocX": 0,
   "backgroundImageStartLocY": 0,
@@ -20,7 +12,7 @@
   "isPNGMap": false,
   "allowLevelDesignWithMoreThan2HeightLevelsDifference": false,
   "AllowLevelDesignWithMoreThan2HeightLevelsDifference": false,
-  "Filename": "Simple_14_",
+  "Filename": "Simple_1_",
   "AreaVisibleDistance": 2,
   "RestingAllowed": false,
   "UseMiniMapFogOfWar": false,
@@ -48,6 +40,9 @@
   "MapSizeY": 16,
   "Tiles": [
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -171,6 +166,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -294,6 +292,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -417,6 +418,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -540,6 +544,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -663,6 +670,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -786,6 +796,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -909,6 +922,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -1032,6 +1048,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -1155,6 +1174,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -1278,6 +1300,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -1401,6 +1426,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -1524,6 +1552,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -1647,6 +1678,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -1770,6 +1804,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -1893,6 +1930,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -2016,6 +2056,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -2139,6 +2182,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -2262,6 +2308,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -2385,6 +2434,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -2508,6 +2560,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -2631,6 +2686,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -2754,6 +2812,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -2877,6 +2938,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3000,6 +3064,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3123,6 +3190,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3246,6 +3316,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3369,6 +3442,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3492,6 +3568,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3615,6 +3694,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3738,6 +3820,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3861,6 +3946,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -3984,6 +4072,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -4107,6 +4198,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -4230,6 +4324,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -4353,6 +4450,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -4476,6 +4576,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -4599,6 +4702,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
@@ -4722,6 +4828,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -4845,6 +4954,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -4968,6 +5080,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -5091,6 +5206,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -5214,6 +5332,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -5337,6 +5458,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -5460,6 +5584,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -5583,6 +5710,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -5706,6 +5836,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -5829,6 +5962,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -5952,6 +6088,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -6075,6 +6214,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -6198,6 +6340,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -6321,6 +6466,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -6444,6 +6592,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -6567,6 +6718,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
@@ -6690,6 +6844,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -6813,6 +6970,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -6936,6 +7096,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -7059,6 +7222,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -7182,6 +7348,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -7305,6 +7474,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -7428,6 +7600,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -7551,6 +7726,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -7674,6 +7852,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -7797,6 +7978,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -7920,6 +8104,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -8043,6 +8230,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -8166,6 +8356,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -8289,6 +8482,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -8412,6 +8608,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -8535,6 +8734,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
@@ -8658,6 +8860,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -8781,6 +8986,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -8904,6 +9112,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -9027,6 +9238,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -9150,6 +9364,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -9273,6 +9490,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -9396,6 +9616,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -9519,6 +9742,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -9642,6 +9868,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -9765,6 +9994,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -9888,6 +10120,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -10011,6 +10246,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -10134,6 +10372,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -10257,6 +10498,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -10380,6 +10624,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -10503,6 +10750,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
@@ -10626,6 +10876,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -10749,6 +11002,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -10872,6 +11128,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -10995,6 +11254,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -11118,6 +11380,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -11241,6 +11506,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -11364,6 +11632,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -11487,6 +11758,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -11610,6 +11884,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone02",
@@ -11733,6 +12010,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone02",
@@ -11856,6 +12136,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -11979,6 +12262,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -12102,6 +12388,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -12225,6 +12514,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -12348,6 +12640,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -12471,6 +12766,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_orient0",
@@ -12594,6 +12892,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -12717,6 +13018,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -12840,6 +13144,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -12963,6 +13270,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -13086,6 +13396,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -13209,6 +13522,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone02",
@@ -13332,6 +13648,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -13455,6 +13774,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -13578,6 +13900,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -13701,6 +14026,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -13824,6 +14152,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -13947,6 +14278,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "E",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -14070,9 +14404,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_mud",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -14193,9 +14530,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_w_corla1",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -14282,7 +14622,7 @@
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
@@ -14316,9 +14656,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_w_nfora4_U",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -14405,7 +14748,7 @@
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
@@ -14439,12 +14782,15 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_blank",
-      "Layer3Filename": "t_blank",
-      "Layer4Filename": "t_blank",
+      "Layer3Filename": "t_rock",
+      "Layer4Filename": "t_rock",
       "Layer5Filename": "t_blank",
       "Layer1Rotate": 0,
       "Layer2Rotate": 0,
@@ -14518,7 +14864,7 @@
       "highlightStrengthN": 100,
       "hasHighlightE": true,
       "highlightStrengthE": 100,
-      "hasHighlightS": false,
+      "hasHighlightS": true,
       "highlightStrengthS": 100,
       "hasHighlightW": false,
       "highlightStrengthW": 100,
@@ -14528,7 +14874,7 @@
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
@@ -14562,6 +14908,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -14641,7 +14990,7 @@
       "highlightStrengthN": 100,
       "hasHighlightE": false,
       "highlightStrengthE": 100,
-      "hasHighlightS": true,
+      "hasHighlightS": false,
       "highlightStrengthS": 100,
       "hasHighlightW": false,
       "highlightStrengthW": 100,
@@ -14651,7 +15000,7 @@
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": -1,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
@@ -14685,6 +15034,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
@@ -14808,6 +15160,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -14931,6 +15286,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -15054,6 +15412,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -15177,6 +15538,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -15300,6 +15664,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -15423,6 +15790,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -15546,6 +15916,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -15669,6 +16042,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -15792,6 +16168,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -15871,7 +16250,7 @@
       "highlightStrengthN": 100,
       "hasHighlightE": false,
       "highlightStrengthE": 100,
-      "hasHighlightS": true,
+      "hasHighlightS": false,
       "highlightStrengthS": 100,
       "hasHighlightW": false,
       "highlightStrengthW": 100,
@@ -15881,7 +16260,7 @@
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 1,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
@@ -15915,7 +16294,10 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "N",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
       "Layer2Filename": "t_blank",
@@ -15960,20 +16342,20 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": 1,
+      "heightLevel": 0,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": false,
+      "isInShortShadeN": true,
       "isInShortShadeE": false,
-      "isInShortShadeS": false,
-      "isInShortShadeW": false,
-      "isInShortShadeNE": false,
-      "isInShortShadeSE": false,
-      "isInShortShadeSW": false,
-      "isInShortShadeNW": false,
+      "isInShortShadeS": true,
+      "isInShortShadeW": true,
+      "isInShortShadeNE": true,
+      "isInShortShadeSE": true,
+      "isInShortShadeSW": true,
+      "isInShortShadeNW": true,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
@@ -15992,9 +16374,9 @@
       "isInMaxShadeNW": false,
       "hasHighlightN": false,
       "highlightStrengthN": 100,
-      "hasHighlightE": true,
+      "hasHighlightE": false,
       "highlightStrengthE": 100,
-      "hasHighlightS": true,
+      "hasHighlightS": false,
       "highlightStrengthS": 100,
       "hasHighlightW": false,
       "highlightStrengthW": 100,
@@ -16002,10 +16384,10 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": -1,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -16038,9 +16420,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_asian0",
       "Layer2Filename": "t_w_nfora4_U",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -16091,11 +16476,11 @@
       "drawDownStairShadows": true,
       "isInShortShadeN": true,
       "isInShortShadeE": false,
-      "isInShortShadeS": false,
-      "isInShortShadeW": true,
+      "isInShortShadeS": true,
+      "isInShortShadeW": false,
       "isInShortShadeNE": true,
       "isInShortShadeSE": false,
-      "isInShortShadeSW": false,
+      "isInShortShadeSW": true,
       "isInShortShadeNW": true,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
@@ -16115,7 +16500,7 @@
       "isInMaxShadeNW": false,
       "hasHighlightN": false,
       "highlightStrengthN": 100,
-      "hasHighlightE": true,
+      "hasHighlightE": false,
       "highlightStrengthE": 100,
       "hasHighlightS": false,
       "highlightStrengthS": 100,
@@ -16126,132 +16511,9 @@
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": -1,
-      "inSmallStairNEHorizontal": false,
-      "inSmallStairNEVertical": false,
-      "inSmallStairSEHorizontal": false,
-      "inSmallStairSEVertical": false,
-      "inSmallStairSWHorizontal": false,
-      "inSmallStairSWVertical": false,
-      "inSmallStairNWHorizontal": false,
-      "inSmallStairNWVertical": false,
-      "hasEntranceLightNorth": false,
-      "hasEntranceLightEast": false,
-      "hasEntranceLightSouth": false,
-      "hasEntranceLightWest": false,
-      "inRampShadowWest1Short": false,
-      "inRampShadowWest1Long": false,
-      "inRampShadowWest2Short": false,
-      "inRampShadowWest2Long": false,
-      "inRampShadowEast3Short": false,
-      "inRampShadowEast3Long": false,
-      "inRampShadowEast4Short": false,
-      "inRampShadowEast4Long": false,
-      "inRampShadowNorth5Short": false,
-      "inRampShadowNorth5Long": false,
-      "inRampShadowNorth6Short": false,
-      "inRampShadowNorth6Long": false,
-      "inRampShadowSouth7Short": false,
-      "inRampShadowSouth7Long": false,
-      "inRampShadowSouth8Short": false,
-      "inRampShadowSouth8Long": false,
-      "IsShadowCaster": true,
-      "DrawDownStairShadows": true
-    },
-    {
-      "linkedToMasterMap": true,
-      "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_water01",
-      "Layer2Filename": "t_blank",
-      "Layer3Filename": "t_blank",
-      "Layer4Filename": "t_blank",
-      "Layer5Filename": "t_blank",
-      "Layer1Rotate": 0,
-      "Layer2Rotate": 0,
-      "Layer3Rotate": 0,
-      "Layer4Rotate": 0,
-      "Layer5Rotate": 0,
-      "Layer1Xshift": 0,
-      "Layer2Xshift": 0,
-      "Layer3Xshift": 0,
-      "Layer4Xshift": 0,
-      "Layer5Xshift": 0,
-      "Layer1Yshift": 0,
-      "Layer2Yshift": 0,
-      "Layer3Yshift": 0,
-      "Layer4Yshift": 0,
-      "Layer5Yshift": 0,
-      "Layer1Mirror": false,
-      "Layer2Mirror": false,
-      "Layer3Mirror": false,
-      "Layer4Mirror": false,
-      "Layer5Mirror": false,
-      "Layer1Xscale": 0,
-      "Layer2Xscale": 0,
-      "Layer3Xscale": 0,
-      "Layer4Xscale": 0,
-      "Layer5Xscale": 0,
-      "Layer1Yscale": 0,
-      "Layer2Yscale": 0,
-      "Layer3Yscale": 0,
-      "Layer4Yscale": 0,
-      "Layer5Yscale": 0,
-      "Layer1Opacity": 1.0,
-      "Layer2Opacity": 1.0,
-      "Layer3Opacity": 1.0,
-      "Layer4Opacity": 1.0,
-      "Layer5Opacity": 1.0,
-      "Walkable": true,
-      "LoSBlocked": false,
-      "Visible": false,
-      "heightLevel": -1,
-      "isRamp": false,
-      "isEWBridge": false,
-      "isNSBridge": false,
-      "isShadowCaster": true,
-      "drawDownStairShadows": true,
-      "isInShortShadeN": false,
-      "isInShortShadeE": false,
-      "isInShortShadeS": false,
-      "isInShortShadeW": true,
-      "isInShortShadeNE": false,
-      "isInShortShadeSE": false,
-      "isInShortShadeSW": true,
-      "isInShortShadeNW": false,
-      "isInLongShadeN": true,
-      "isInLongShadeE": false,
-      "isInLongShadeS": false,
-      "isInLongShadeW": false,
-      "isInLongShadeNE": true,
-      "isInLongShadeSE": false,
-      "isInLongShadeSW": false,
-      "isInLongShadeNW": true,
-      "isInMaxShadeN": false,
-      "isInMaxShadeE": false,
-      "isInMaxShadeS": false,
-      "isInMaxShadeW": false,
-      "isInMaxShadeNE": false,
-      "isInMaxShadeSE": false,
-      "isInMaxShadeSW": false,
-      "isInMaxShadeNW": false,
-      "hasHighlightN": false,
-      "highlightStrengthN": 100,
-      "hasHighlightE": false,
-      "highlightStrengthE": 100,
-      "hasHighlightS": false,
-      "highlightStrengthS": 100,
-      "hasHighlightW": false,
-      "highlightStrengthW": 100,
-      "hasDownStairShadowN": false,
-      "hasDownStairShadowE": false,
-      "hasDownStairShadowS": false,
-      "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -2,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -16284,9 +16546,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_water01",
+      "Layer1Filename": "t_asian0",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -16329,28 +16594,28 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": -1,
+      "heightLevel": 0,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": false,
+      "isInShortShadeN": true,
       "isInShortShadeE": false,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
-      "isInShortShadeNE": false,
-      "isInShortShadeSE": true,
-      "isInShortShadeSW": false,
-      "isInShortShadeNW": false,
-      "isInLongShadeN": true,
-      "isInLongShadeE": true,
+      "isInShortShadeNE": true,
+      "isInShortShadeSE": false,
+      "isInShortShadeSW": true,
+      "isInShortShadeNW": true,
+      "isInLongShadeN": false,
+      "isInLongShadeE": false,
       "isInLongShadeS": false,
       "isInLongShadeW": false,
-      "isInLongShadeNE": true,
+      "isInLongShadeNE": false,
       "isInLongShadeSE": false,
       "isInLongShadeSW": false,
-      "isInLongShadeNW": true,
+      "isInLongShadeNW": false,
       "isInMaxShadeN": false,
       "isInMaxShadeE": false,
       "isInMaxShadeS": false,
@@ -16371,8 +16636,8 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -2,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": -2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
@@ -16407,9 +16672,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_asian0",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -16452,20 +16720,20 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": 1,
+      "heightLevel": 0,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": false,
+      "isInShortShadeN": true,
       "isInShortShadeE": false,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
-      "isInShortShadeNE": false,
-      "isInShortShadeSE": false,
+      "isInShortShadeNE": true,
+      "isInShortShadeSE": true,
       "isInShortShadeSW": false,
-      "isInShortShadeNW": false,
+      "isInShortShadeNW": true,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
@@ -16484,20 +16752,20 @@
       "isInMaxShadeNW": false,
       "hasHighlightN": false,
       "highlightStrengthN": 100,
-      "hasHighlightE": true,
+      "hasHighlightE": false,
       "highlightStrengthE": 100,
-      "hasHighlightS": true,
+      "hasHighlightS": false,
       "highlightStrengthS": 100,
-      "hasHighlightW": true,
+      "hasHighlightW": false,
       "highlightStrengthW": 100,
       "hasDownStairShadowN": false,
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -16530,7 +16798,136 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
+      "Layer0Filename": "t_blank",
+      "Layer1Filename": "t_asian0",
+      "Layer2Filename": "t_blank",
+      "Layer3Filename": "t_blank",
+      "Layer4Filename": "t_blank",
+      "Layer5Filename": "t_blank",
+      "Layer1Rotate": 0,
+      "Layer2Rotate": 0,
+      "Layer3Rotate": 0,
+      "Layer4Rotate": 0,
+      "Layer5Rotate": 0,
+      "Layer1Xshift": 0,
+      "Layer2Xshift": 0,
+      "Layer3Xshift": 0,
+      "Layer4Xshift": 0,
+      "Layer5Xshift": 0,
+      "Layer1Yshift": 0,
+      "Layer2Yshift": 0,
+      "Layer3Yshift": 0,
+      "Layer4Yshift": 0,
+      "Layer5Yshift": 0,
+      "Layer1Mirror": false,
+      "Layer2Mirror": false,
+      "Layer3Mirror": false,
+      "Layer4Mirror": false,
+      "Layer5Mirror": false,
+      "Layer1Xscale": 0,
+      "Layer2Xscale": 0,
+      "Layer3Xscale": 0,
+      "Layer4Xscale": 0,
+      "Layer5Xscale": 0,
+      "Layer1Yscale": 0,
+      "Layer2Yscale": 0,
+      "Layer3Yscale": 0,
+      "Layer4Yscale": 0,
+      "Layer5Yscale": 0,
+      "Layer1Opacity": 1.0,
+      "Layer2Opacity": 1.0,
+      "Layer3Opacity": 1.0,
+      "Layer4Opacity": 1.0,
+      "Layer5Opacity": 1.0,
+      "Walkable": true,
+      "LoSBlocked": false,
+      "Visible": false,
+      "heightLevel": 0,
+      "isRamp": false,
+      "isEWBridge": false,
+      "isNSBridge": false,
+      "isShadowCaster": true,
+      "drawDownStairShadows": true,
+      "isInShortShadeN": true,
+      "isInShortShadeE": false,
+      "isInShortShadeS": true,
+      "isInShortShadeW": false,
+      "isInShortShadeNE": false,
+      "isInShortShadeSE": false,
+      "isInShortShadeSW": false,
+      "isInShortShadeNW": true,
+      "isInLongShadeN": false,
+      "isInLongShadeE": false,
+      "isInLongShadeS": false,
+      "isInLongShadeW": false,
+      "isInLongShadeNE": false,
+      "isInLongShadeSE": false,
+      "isInLongShadeSW": false,
+      "isInLongShadeNW": false,
+      "isInMaxShadeN": false,
+      "isInMaxShadeE": false,
+      "isInMaxShadeS": false,
+      "isInMaxShadeW": false,
+      "isInMaxShadeNE": false,
+      "isInMaxShadeSE": false,
+      "isInMaxShadeSW": false,
+      "isInMaxShadeNW": false,
+      "hasHighlightN": false,
+      "highlightStrengthN": 100,
+      "hasHighlightE": false,
+      "highlightStrengthE": 100,
+      "hasHighlightS": false,
+      "highlightStrengthS": 100,
+      "hasHighlightW": false,
+      "highlightStrengthW": 100,
+      "hasDownStairShadowN": false,
+      "hasDownStairShadowE": false,
+      "hasDownStairShadowS": false,
+      "hasDownStairShadowW": false,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
+      "inSmallStairNEHorizontal": false,
+      "inSmallStairNEVertical": false,
+      "inSmallStairSEHorizontal": false,
+      "inSmallStairSEVertical": false,
+      "inSmallStairSWHorizontal": false,
+      "inSmallStairSWVertical": false,
+      "inSmallStairNWHorizontal": false,
+      "inSmallStairNWVertical": false,
+      "hasEntranceLightNorth": false,
+      "hasEntranceLightEast": false,
+      "hasEntranceLightSouth": false,
+      "hasEntranceLightWest": false,
+      "inRampShadowWest1Short": false,
+      "inRampShadowWest1Long": false,
+      "inRampShadowWest2Short": false,
+      "inRampShadowWest2Long": false,
+      "inRampShadowEast3Short": false,
+      "inRampShadowEast3Long": false,
+      "inRampShadowEast4Short": false,
+      "inRampShadowEast4Long": false,
+      "inRampShadowNorth5Short": false,
+      "inRampShadowNorth5Long": false,
+      "inRampShadowNorth6Short": false,
+      "inRampShadowNorth6Long": false,
+      "inRampShadowSouth7Short": false,
+      "inRampShadowSouth7Long": false,
+      "inRampShadowSouth8Short": false,
+      "inRampShadowSouth8Long": false,
+      "IsShadowCaster": true,
+      "DrawDownStairShadows": true
+    },
+    {
+      "transitionToMasterDirection": "N",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
       "Layer2Filename": "t_blank",
@@ -16575,28 +16972,28 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": -1,
+      "heightLevel": 0,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": true,
+      "isInShortShadeN": false,
       "isInShortShadeE": false,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
-      "isInShortShadeNE": true,
+      "isInShortShadeNE": false,
       "isInShortShadeSE": false,
       "isInShortShadeSW": true,
-      "isInShortShadeNW": false,
+      "isInShortShadeNW": true,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
-      "isInLongShadeW": true,
+      "isInLongShadeW": false,
       "isInLongShadeNE": false,
       "isInLongShadeSE": false,
       "isInLongShadeSW": false,
-      "isInLongShadeNW": true,
+      "isInLongShadeNW": false,
       "isInMaxShadeN": false,
       "isInMaxShadeE": false,
       "isInMaxShadeS": false,
@@ -16607,9 +17004,9 @@
       "isInMaxShadeNW": false,
       "hasHighlightN": false,
       "highlightStrengthN": 100,
-      "hasHighlightE": false,
+      "hasHighlightE": true,
       "highlightStrengthE": 100,
-      "hasHighlightS": false,
+      "hasHighlightS": true,
       "highlightStrengthS": 100,
       "hasHighlightW": false,
       "highlightStrengthW": 100,
@@ -16617,10 +17014,10 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": -2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -16653,6 +17050,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -16707,7 +17107,7 @@
       "isInShortShadeN": true,
       "isInShortShadeE": false,
       "isInShortShadeS": false,
-      "isInShortShadeW": false,
+      "isInShortShadeW": true,
       "isInShortShadeNE": false,
       "isInShortShadeSE": false,
       "isInShortShadeSW": false,
@@ -16743,7 +17143,7 @@
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": -2,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": -1,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -16776,6 +17176,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -16899,6 +17302,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -17022,6 +17428,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -17145,6 +17554,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -17268,6 +17680,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -17391,6 +17806,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -17514,6 +17932,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -17637,6 +18058,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -17760,6 +18184,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -17805,17 +18232,17 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": 0,
+      "heightLevel": 1,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": true,
+      "isInShortShadeN": false,
       "isInShortShadeE": false,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
-      "isInShortShadeNE": true,
+      "isInShortShadeNE": false,
       "isInShortShadeSE": false,
       "isInShortShadeSW": false,
       "isInShortShadeNW": false,
@@ -17839,7 +18266,7 @@
       "highlightStrengthN": 100,
       "hasHighlightE": false,
       "highlightStrengthE": 100,
-      "hasHighlightS": false,
+      "hasHighlightS": true,
       "highlightStrengthS": 100,
       "hasHighlightW": false,
       "highlightStrengthW": 100,
@@ -17847,10 +18274,10 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 1,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -17883,6 +18310,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -17928,20 +18358,20 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": 0,
+      "heightLevel": 1,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": true,
+      "isInShortShadeN": false,
       "isInShortShadeE": false,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
       "isInShortShadeNE": false,
       "isInShortShadeSE": false,
       "isInShortShadeSW": false,
-      "isInShortShadeNW": true,
+      "isInShortShadeNW": false,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
@@ -17962,7 +18392,7 @@
       "highlightStrengthN": 100,
       "hasHighlightE": false,
       "highlightStrengthE": 100,
-      "hasHighlightS": false,
+      "hasHighlightS": true,
       "highlightStrengthS": 100,
       "hasHighlightW": false,
       "highlightStrengthW": 100,
@@ -17970,9 +18400,9 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
@@ -18006,9 +18436,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_w_nfora2",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -18051,7 +18484,7 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": 0,
+      "heightLevel": 1,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
@@ -18064,7 +18497,7 @@
       "isInShortShadeNE": false,
       "isInShortShadeSE": false,
       "isInShortShadeSW": false,
-      "isInShortShadeNW": true,
+      "isInShortShadeNW": false,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
@@ -18081,7 +18514,7 @@
       "isInMaxShadeSE": false,
       "isInMaxShadeSW": false,
       "isInMaxShadeNW": false,
-      "hasHighlightN": false,
+      "hasHighlightN": true,
       "highlightStrengthN": 100,
       "hasHighlightE": true,
       "highlightStrengthE": 100,
@@ -18093,7 +18526,7 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
@@ -18129,9 +18562,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_water01",
+      "Layer1Filename": "t_asian0",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -18174,7 +18610,7 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": -1,
+      "heightLevel": 0,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
@@ -18187,7 +18623,7 @@
       "isInShortShadeNE": false,
       "isInShortShadeSE": true,
       "isInShortShadeSW": true,
-      "isInShortShadeNW": true,
+      "isInShortShadeNW": false,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
@@ -18252,9 +18688,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_water01",
+      "Layer1Filename": "t_asian0",
       "Layer2Filename": "t_w_ccav4_U",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -18297,26 +18736,26 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": -1,
+      "heightLevel": 0,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
       "isInShortShadeN": false,
-      "isInShortShadeE": false,
+      "isInShortShadeE": true,
       "isInShortShadeS": true,
       "isInShortShadeW": false,
       "isInShortShadeNE": false,
-      "isInShortShadeSE": false,
+      "isInShortShadeSE": true,
       "isInShortShadeSW": true,
       "isInShortShadeNW": false,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
       "isInLongShadeW": false,
-      "isInLongShadeNE": true,
-      "isInLongShadeSE": true,
+      "isInLongShadeNE": false,
+      "isInLongShadeSE": false,
       "isInLongShadeSW": false,
       "isInLongShadeNW": false,
       "isInMaxShadeN": false,
@@ -18340,7 +18779,7 @@
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": -2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
@@ -18360,7 +18799,7 @@
       "inRampShadowWest2Short": false,
       "inRampShadowWest2Long": false,
       "inRampShadowEast3Short": false,
-      "inRampShadowEast3Long": true,
+      "inRampShadowEast3Long": false,
       "inRampShadowEast4Short": false,
       "inRampShadowEast4Long": false,
       "inRampShadowNorth5Short": false,
@@ -18375,9 +18814,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -18421,19 +18863,19 @@
       "LoSBlocked": false,
       "Visible": false,
       "heightLevel": 1,
-      "isRamp": true,
+      "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": true,
+      "isInShortShadeN": false,
       "isInShortShadeE": false,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
       "isInShortShadeNE": false,
       "isInShortShadeSE": false,
       "isInShortShadeSW": false,
-      "isInShortShadeNW": true,
+      "isInShortShadeNW": false,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
@@ -18450,7 +18892,7 @@
       "isInMaxShadeSE": false,
       "isInMaxShadeSW": false,
       "isInMaxShadeNW": false,
-      "hasHighlightN": false,
+      "hasHighlightN": true,
       "highlightStrengthN": 100,
       "hasHighlightE": true,
       "highlightStrengthE": 100,
@@ -18458,14 +18900,14 @@
       "highlightStrengthS": 100,
       "hasHighlightW": true,
       "highlightStrengthW": 100,
-      "hasDownStairShadowN": true,
+      "hasDownStairShadowN": false,
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 2,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 1,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -18498,6 +18940,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -18549,7 +18994,7 @@
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": false,
+      "isInShortShadeN": true,
       "isInShortShadeE": false,
       "isInShortShadeS": true,
       "isInShortShadeW": false,
@@ -18560,7 +19005,7 @@
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
-      "isInLongShadeW": false,
+      "isInLongShadeW": true,
       "isInLongShadeNE": false,
       "isInLongShadeSE": false,
       "isInLongShadeSW": true,
@@ -18585,7 +19030,7 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": -2,
@@ -18602,7 +19047,7 @@
       "hasEntranceLightSouth": false,
       "hasEntranceLightWest": false,
       "inRampShadowWest1Short": false,
-      "inRampShadowWest1Long": true,
+      "inRampShadowWest1Long": false,
       "inRampShadowWest2Short": false,
       "inRampShadowWest2Long": false,
       "inRampShadowEast3Short": false,
@@ -18621,6 +19066,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_water01",
@@ -18679,7 +19127,7 @@
       "isInShortShadeNE": false,
       "isInShortShadeSE": false,
       "isInShortShadeSW": true,
-      "isInShortShadeNW": false,
+      "isInShortShadeNW": true,
       "isInLongShadeN": false,
       "isInLongShadeE": true,
       "isInLongShadeS": false,
@@ -18744,6 +19192,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -18867,6 +19318,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -18990,6 +19444,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -19113,6 +19570,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -19236,6 +19696,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -19359,6 +19822,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -19482,6 +19948,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -19605,6 +20074,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -19728,6 +20200,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -19779,11 +20254,11 @@
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": false,
+      "isInShortShadeN": true,
       "isInShortShadeE": false,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
-      "isInShortShadeNE": false,
+      "isInShortShadeNE": true,
       "isInShortShadeSE": false,
       "isInShortShadeSW": false,
       "isInShortShadeNW": false,
@@ -19815,7 +20290,7 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
@@ -19851,6 +20326,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -19902,14 +20380,14 @@
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
-      "isInShortShadeN": false,
-      "isInShortShadeE": false,
+      "isInShortShadeN": true,
+      "isInShortShadeE": true,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
-      "isInShortShadeNE": false,
+      "isInShortShadeNE": true,
       "isInShortShadeSE": false,
       "isInShortShadeSW": false,
-      "isInShortShadeNW": false,
+      "isInShortShadeNW": true,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
       "isInLongShadeS": false,
@@ -19938,8 +20416,8 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
@@ -19974,11 +20452,14 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_sand01",
-      "Layer2Filename": "t_blank",
-      "Layer3Filename": "t_grass",
+      "Layer1Filename": "t_rock",
+      "Layer2Filename": "t_rock",
+      "Layer3Filename": "t_rock",
       "Layer4Filename": "t_blank",
       "Layer5Filename": "t_blank",
       "Layer1Rotate": 0,
@@ -20013,13 +20494,13 @@
       "Layer5Yscale": 0,
       "Layer1Opacity": 1.0,
       "Layer2Opacity": 1.0,
-      "Layer3Opacity": 0.5000005,
+      "Layer3Opacity": 1.0,
       "Layer4Opacity": 1.0,
       "Layer5Opacity": 1.0,
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": 0,
+      "heightLevel": 1,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
@@ -20027,18 +20508,18 @@
       "drawDownStairShadows": true,
       "isInShortShadeN": false,
       "isInShortShadeE": false,
-      "isInShortShadeS": false,
+      "isInShortShadeS": true,
       "isInShortShadeW": false,
       "isInShortShadeNE": false,
-      "isInShortShadeSE": false,
+      "isInShortShadeSE": true,
       "isInShortShadeSW": false,
       "isInShortShadeNW": false,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
-      "isInLongShadeS": true,
+      "isInLongShadeS": false,
       "isInLongShadeW": false,
       "isInLongShadeNE": false,
-      "isInLongShadeSE": true,
+      "isInLongShadeSE": false,
       "isInLongShadeSW": false,
       "isInLongShadeNW": false,
       "isInMaxShadeN": false,
@@ -20055,7 +20536,7 @@
       "highlightStrengthE": 100,
       "hasHighlightS": false,
       "highlightStrengthS": 100,
-      "hasHighlightW": false,
+      "hasHighlightW": true,
       "highlightStrengthW": 100,
       "hasDownStairShadowN": false,
       "hasDownStairShadowE": false,
@@ -20063,8 +20544,8 @@
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -2,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 1,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -20097,9 +20578,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_w_nfora3_D",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -20142,7 +20626,7 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": 0,
+      "heightLevel": 1,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
@@ -20150,19 +20634,19 @@
       "drawDownStairShadows": true,
       "isInShortShadeN": false,
       "isInShortShadeE": false,
-      "isInShortShadeS": false,
+      "isInShortShadeS": true,
       "isInShortShadeW": false,
       "isInShortShadeNE": false,
-      "isInShortShadeSE": false,
-      "isInShortShadeSW": false,
+      "isInShortShadeSE": true,
+      "isInShortShadeSW": true,
       "isInShortShadeNW": false,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
-      "isInLongShadeS": true,
+      "isInLongShadeS": false,
       "isInLongShadeW": false,
       "isInLongShadeNE": false,
-      "isInLongShadeSE": true,
-      "isInLongShadeSW": true,
+      "isInLongShadeSE": false,
+      "isInLongShadeSW": false,
       "isInLongShadeNW": false,
       "isInMaxShadeN": false,
       "isInMaxShadeE": false,
@@ -20186,7 +20670,7 @@
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
@@ -20220,9 +20704,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_grass",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -20265,27 +20752,27 @@
       "Walkable": true,
       "LoSBlocked": false,
       "Visible": false,
-      "heightLevel": 0,
+      "heightLevel": 1,
       "isRamp": false,
       "isEWBridge": false,
       "isNSBridge": false,
       "isShadowCaster": true,
       "drawDownStairShadows": true,
       "isInShortShadeN": false,
-      "isInShortShadeE": true,
-      "isInShortShadeS": false,
+      "isInShortShadeE": false,
+      "isInShortShadeS": true,
       "isInShortShadeW": false,
-      "isInShortShadeNE": true,
-      "isInShortShadeSE": false,
-      "isInShortShadeSW": false,
+      "isInShortShadeNE": false,
+      "isInShortShadeSE": true,
+      "isInShortShadeSW": true,
       "isInShortShadeNW": false,
       "isInLongShadeN": false,
       "isInLongShadeE": false,
-      "isInLongShadeS": true,
+      "isInLongShadeS": false,
       "isInLongShadeW": false,
       "isInLongShadeNE": false,
-      "isInLongShadeSE": true,
-      "isInLongShadeSW": true,
+      "isInLongShadeSE": false,
+      "isInLongShadeSW": false,
       "isInLongShadeNW": false,
       "isInMaxShadeN": false,
       "isInMaxShadeE": false,
@@ -20308,8 +20795,8 @@
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": -1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
@@ -20343,9 +20830,12 @@
       "DrawDownStairShadows": true
     },
     {
-      "linkedToMasterMap": true,
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
+      "linkedToMasterMap": false,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_sand01",
+      "Layer1Filename": "t_rock",
       "Layer2Filename": "t_stone03",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -20424,7 +20914,7 @@
       "highlightStrengthE": 100,
       "hasHighlightS": false,
       "highlightStrengthS": 100,
-      "hasHighlightW": true,
+      "hasHighlightW": false,
       "highlightStrengthW": 100,
       "hasDownStairShadowN": false,
       "hasDownStairShadowE": false,
@@ -20433,7 +20923,7 @@
       "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": -1,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 1,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
       "inSmallStairNEHorizontal": false,
       "inSmallStairNEVertical": false,
       "inSmallStairSEHorizontal": false,
@@ -20466,6 +20956,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
@@ -20589,6 +21082,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
@@ -20712,6 +21208,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -20835,6 +21334,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -20958,6 +21460,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -21081,6 +21586,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -21204,6 +21712,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -21327,6 +21838,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -21450,6 +21964,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -21573,6 +22090,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -21696,6 +22216,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -21819,6 +22342,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -21874,7 +22400,7 @@
       "isInShortShadeE": false,
       "isInShortShadeS": false,
       "isInShortShadeW": false,
-      "isInShortShadeNE": false,
+      "isInShortShadeNE": true,
       "isInShortShadeSE": false,
       "isInShortShadeSW": false,
       "isInShortShadeNW": false,
@@ -21942,6 +22468,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -22029,7 +22558,7 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 2,
@@ -22065,6 +22594,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -22152,7 +22684,7 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 2,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
@@ -22188,6 +22720,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -22275,7 +22810,7 @@
       "hasDownStairShadowE": false,
       "hasDownStairShadowS": false,
       "hasDownStairShadowW": false,
-      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 2,
+      "numberOfHeightLevelsThisTileisHigherThanNeighbourN": 1,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourE": 0,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourS": 2,
       "numberOfHeightLevelsThisTileisHigherThanNeighbourW": 0,
@@ -22311,6 +22846,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone03",
@@ -22434,6 +22972,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -22557,6 +23098,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_grass",
@@ -22680,6 +23224,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -22803,6 +23350,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -22926,6 +23476,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_mud",
@@ -23049,6 +23602,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -23172,6 +23728,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -23295,6 +23854,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -23418,6 +23980,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -23541,6 +24106,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -23664,6 +24232,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -23787,6 +24358,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -23910,6 +24484,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -24033,6 +24610,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -24156,6 +24736,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -24279,6 +24862,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -24402,6 +24988,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -24525,6 +25114,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_bed04",
@@ -24648,6 +25240,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -24771,6 +25366,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -24894,6 +25492,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -25017,6 +25618,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -25140,6 +25744,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -25263,9 +25870,12 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_water02",
+      "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -25386,9 +25996,12 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_water02",
+      "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_rock01",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -25509,6 +26122,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -25632,6 +26248,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -25755,6 +26374,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -25878,6 +26500,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -26001,6 +26626,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -26124,6 +26752,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -26247,6 +26878,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -26370,6 +27004,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -26493,6 +27130,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -26616,6 +27256,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -26739,6 +27382,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -26862,6 +27508,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -26985,6 +27634,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -27108,6 +27760,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -27231,9 +27886,12 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_water02",
+      "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -27354,9 +28012,12 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
-      "Layer1Filename": "t_water02",
+      "Layer1Filename": "t_sand01",
       "Layer2Filename": "t_blank",
       "Layer3Filename": "t_blank",
       "Layer4Filename": "t_blank",
@@ -27477,6 +28138,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -27600,6 +28264,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -27723,6 +28390,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -27846,6 +28516,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -27969,6 +28642,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -28092,6 +28768,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -28215,6 +28894,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -28338,6 +29020,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -28461,6 +29146,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone01",
@@ -28584,6 +29272,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -28707,6 +29398,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -28830,6 +29524,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -28953,6 +29650,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -29076,6 +29776,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -29199,6 +29902,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -29322,6 +30028,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -29445,6 +30154,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -29568,6 +30280,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -29691,6 +30406,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -29814,6 +30532,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -29937,6 +30658,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -30060,6 +30784,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -30183,6 +30910,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -30306,6 +31036,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_stone_wall",
@@ -30429,6 +31162,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -30552,6 +31288,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -30675,6 +31414,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -30798,6 +31540,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -30921,6 +31666,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -31044,6 +31792,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -31167,6 +31918,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -31290,6 +32044,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -31413,6 +32170,9 @@
       "DrawDownStairShadows": true
     },
     {
+      "transitionToMasterDirection": "none",
+      "sideOfEntranceToLink": "none",
+      "numberOfLinkedAreaToTransitionTo": -1,
       "linkedToMasterMap": true,
       "Layer0Filename": "t_blank",
       "Layer1Filename": "t_sand01",
@@ -31644,7 +32404,7 @@
   "AreaSounds": "none",
   "AreaSoundsDelay": 0,
   "AreaSoundsDelayRandomAdder": 0,
-  "NextIdNumber": 133,
+  "NextIdNumber": 155,
   "OnHeartBeatIBScript": "none",
   "OnHeartBeatIBScriptParms": "",
   "AreaLocalInts": [],

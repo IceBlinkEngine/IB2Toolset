@@ -102,7 +102,7 @@ namespace IB2Toolset
         public bool firstElementHasBeenPlaced = false;
         public int stairRotationCounter = 1; //1=N, 2=E, 3= S, 4 = W
         public int bridgeRotationCounter = 1; //1=EW-Bridge, 2=NS-Bridge
-
+        public int transitionToMasterRotationCounter = 1; //1=N, 2=E, 3= S, 4 = W
         #endregion
 
         public WorldMapEditor(Module m, ParentForm p)
@@ -165,43 +165,85 @@ namespace IB2Toolset
                 }//GDI */
             }
         }
+
+        //Synch
+        private void btnSynchArea_Click(object sender, EventArgs e)
+        {
+            synchLevel();
+        }
+
+
         //LINKED
         private void btnCreateLinkedArea_Click(object sender, EventArgs e)
         {
+            //works only on non-link areas, ie areas without master
             if (area.masterOfThisArea == "none")
             {
-                //if file exists, rename the file
+
+                //check if linked area with to-be-raised-counter already exists 
+                bool alreadyExists = true;
                 string filePath = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
-                //string filename = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
                 string filename = area.Filename;
-                if (File.Exists(filePath + "\\" + filename + ".lvl"))
+                //filename + "_" + area.linkedAreasCounter.ToString() + "_.lvl");
+
+                while (alreadyExists)
+                {
+                    if ((File.Exists(filePath + "\\" + filename + "_" + area.linkedAreasCounter.ToString() + "_.lvl")))
+                    {
+                        //alreadyExists = true;
+                        area.linkedAreasCounter++;
+                    }
+                    else
+                    {
+                        alreadyExists = false;
+                    }
+                }
+                //area.linkedAreasCounter++;
+
+                //if file exists, rename the file
+                //string filename = area.Filename;
+                if ((File.Exists(filePath + "\\" + filename + ".lvl")) && (!alreadyExists))
                 {
                     try
                     {
-                        prntForm.mod.linkedAreasCounter++;
+                        //if (area.linkedAreasCounter == 0)
+                        //{
+                            //area.linkedAreasCounter = 1;
+                        //}
+                        area.linkNumbers.Add(area.linkedAreasCounter);
+                        mod.masterAreasList.Add(area.Filename);
+                        //prntForm.mod.linkedAreasCounter++;
                         //rename file
-                        File.Copy(filePath + "\\" + filename + ".lvl", filePath + "\\" + filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_.lvl");
+                        File.Copy(filePath + "\\" + filename + ".lvl", filePath + "\\" + filename + "_" + area.linkedAreasCounter.ToString() + "_.lvl");
                         try
                         {
                             //load area
                             Area newArea = new Area();
-                            newArea = newArea.loadAreaFile(filePath + "\\" + filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_.lvl");
+                            newArea = newArea.loadAreaFile(filePath + "\\" + filename + "_" + area.linkedAreasCounter.ToString() + "_.lvl");
                             if (newArea == null)
                             {
                                 MessageBox.Show("returned a null area");
                             }
                             //change area file name in area file object properties
-                            newArea.Filename = filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_";
+                            newArea.Filename = filename + "_" + area.linkedAreasCounter.ToString() + "_";
                             //newArea.saveAreaFile(filePath + "\\" + filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_.lvl");
                             foreach (Tile t in newArea.Tiles)
                             {
                                 t.linkedToMasterMap = true;
                             }
                             newArea.masterOfThisArea = area.Filename;
+                            newArea.linkNumberOfThisArea = area.linkedAreasCounter;
                             area.linkedAreas.Add(newArea.Filename);
-                            newArea.saveAreaFile(filePath + "\\" + filename + "_" + prntForm.mod.linkedAreasCounter.ToString() + "_.lvl");
+                            newArea.saveAreaFile(filePath + "\\" + filename + "_" + area.linkedAreasCounter.ToString() + "_.lvl");
                             prntForm.mod.moduleAreasList.Add(newArea.Filename);
-                            //refreshListBoxAreas();
+                            prntForm.frmAreas.refreshListBoxAreas();
+                            
+                            /*
+                            Area newArea = new Area();
+                            newArea.Filename = "new area";
+                            prntForm.mod.moduleAreasList.Add(newArea.Filename);
+                            refreshListBoxAreas();
+                            */
                         }
                         catch (Exception ex)
                         {
@@ -218,7 +260,11 @@ namespace IB2Toolset
                     MessageBox.Show("File: " + filename + ".lvl does not exist in the areas folder");
                 }
                 //refreshListBoxAreas();
+                
             }
+
+            prntForm.frmAreas.refreshListBoxAreas();
+            //refreshLeftPanelInfo();
         }        
 
 
@@ -1010,7 +1056,7 @@ namespace IB2Toolset
                 if (e.Button == MouseButtons.Left)
                 {
                     //if painting tiles or walkable or Line-of-sight squares, allow multiple square painting if LEFT mouse button down and move
-                    if ((rbtnPaintTile.Checked) || (rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                    if ((rbtnPaintTile.Checked) || (rbtnWalkable.Checked) || (rbtnLoS.Checked) || (rbtnChangeLinkState.Checked))
                     {
                         clickDrawArea(e);
                     }
@@ -1018,7 +1064,7 @@ namespace IB2Toolset
                 else if (e.Button == MouseButtons.Right)
                 {
                     //if painting walkable or Line-of-sight squares, allow multiple square painting if RIGHT mouse button down and move
-                    if ((rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                    if ((rbtnWalkable.Checked) || (rbtnLoS.Checked) || (rbtnChangeLinkState.Checked))
                     {
                         clickDrawArea(e);
                     }
@@ -1108,254 +1154,254 @@ namespace IB2Toolset
                         }
 
                         else
-                        { 
-                        //gridX = e.X / sqr;
-                        //gridY = e.Y / sqr;
-                        selectedTile.index = gridY * area.MapSizeX + gridX;
-                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        #region Layer 1
-                        if (radioButton1.Checked)
                         {
-                            area.Tiles[selectedTile.index].Layer1Filename = currentTileFilename;
-                            area.Tiles[selectedTile.index].Layer1Rotate = tileToBePlaced.angle;
-                            area.Tiles[selectedTile.index].Layer1Mirror = tileToBePlaced.mirror;
-                            area.Tiles[selectedTile.index].Layer1Xshift = tileToBePlaced.xshift;
-                            area.Tiles[selectedTile.index].Layer1Yshift = tileToBePlaced.yshift;
-                            area.Tiles[selectedTile.index].Layer1Xscale = tileToBePlaced.xscale;
-                            area.Tiles[selectedTile.index].Layer1Yscale = tileToBePlaced.yscale;
-                            area.Tiles[selectedTile.index].Layer1Opacity = tileToBePlaced.opacity;
-                            //if shift key is down, draw all between here and lastclickedsquare
-                            if (Control.ModifierKeys == Keys.Shift)
+                            //gridX = e.X / sqr;
+                            //gridY = e.Y / sqr;
+                            selectedTile.index = gridY * area.MapSizeX + gridX;
+                            prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                            prntForm.logText(Environment.NewLine);
+                            #region Layer 1
+                            if (radioButton1.Checked)
                             {
-                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
-                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                area.Tiles[selectedTile.index].Layer1Filename = currentTileFilename;
+                                area.Tiles[selectedTile.index].Layer1Rotate = tileToBePlaced.angle;
+                                area.Tiles[selectedTile.index].Layer1Mirror = tileToBePlaced.mirror;
+                                area.Tiles[selectedTile.index].Layer1Xshift = tileToBePlaced.xshift;
+                                area.Tiles[selectedTile.index].Layer1Yshift = tileToBePlaced.yshift;
+                                area.Tiles[selectedTile.index].Layer1Xscale = tileToBePlaced.xscale;
+                                area.Tiles[selectedTile.index].Layer1Yscale = tileToBePlaced.yscale;
+                                area.Tiles[selectedTile.index].Layer1Opacity = tileToBePlaced.opacity;
+                                //if shift key is down, draw all between here and lastclickedsquare
+                                if (Control.ModifierKeys == Keys.Shift)
+                                {
+                                    Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                    Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
 
-                                int startX = lSqr.X;
-                                int startY = lSqr.Y;
-                                int endX = cSqr.X;
-                                int endY = cSqr.Y;
-                                if (lSqr.X >= cSqr.X)
-                                {
-                                    startX = cSqr.X;
-                                    endX = lSqr.X;
-                                }
-                                if (lSqr.Y >= cSqr.Y)
-                                {
-                                    startY = cSqr.Y;
-                                    endY = lSqr.Y;
-                                }
-                                for (int x = startX; x <= endX; x++)
-                                {
-                                    for (int y = startY; y <= endY; y++)
+                                    int startX = lSqr.X;
+                                    int startY = lSqr.Y;
+                                    int endX = cSqr.X;
+                                    int endY = cSqr.Y;
+                                    if (lSqr.X >= cSqr.X)
                                     {
-                                        area.Tiles[y * area.MapSizeX + x].Layer1Filename = currentTileFilename;
-                                        area.Tiles[y * area.MapSizeX + x].Layer1Rotate = tileToBePlaced.angle;
-                                        area.Tiles[y * area.MapSizeX + x].Layer1Mirror = tileToBePlaced.mirror;
-                                        area.Tiles[y * area.MapSizeX + x].Layer1Xshift = tileToBePlaced.xshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer1Yshift = tileToBePlaced.yshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer1Xscale = tileToBePlaced.xscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer1Yscale = tileToBePlaced.yscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer1Opacity = tileToBePlaced.opacity;
-                                        currentSquareClicked = new Point(x, y);
-                                        //GDI refreshMap(false);
+                                        startX = cSqr.X;
+                                        endX = lSqr.X;
+                                    }
+                                    if (lSqr.Y >= cSqr.Y)
+                                    {
+                                        startY = cSqr.Y;
+                                        endY = lSqr.Y;
+                                    }
+                                    for (int x = startX; x <= endX; x++)
+                                    {
+                                        for (int y = startY; y <= endY; y++)
+                                        {
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Filename = currentTileFilename;
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Rotate = tileToBePlaced.angle;
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Mirror = tileToBePlaced.mirror;
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Xshift = tileToBePlaced.xshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Yshift = tileToBePlaced.yshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Xscale = tileToBePlaced.xscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Yscale = tileToBePlaced.yscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer1Opacity = tileToBePlaced.opacity;
+                                            currentSquareClicked = new Point(x, y);
+                                            //GDI refreshMap(false);
+                                        }
                                     }
                                 }
                             }
-                        }
-                        #endregion
-                        #region Layer 2
-                        else if (radioButton2.Checked)
-                        {
-                            area.Tiles[selectedTile.index].Layer2Filename = currentTileFilename;
-                            area.Tiles[selectedTile.index].Layer2Rotate = tileToBePlaced.angle;
-                            area.Tiles[selectedTile.index].Layer2Mirror = tileToBePlaced.mirror;
-                            area.Tiles[selectedTile.index].Layer2Xshift = tileToBePlaced.xshift;
-                            area.Tiles[selectedTile.index].Layer2Yshift = tileToBePlaced.yshift;
-                            area.Tiles[selectedTile.index].Layer2Xscale = tileToBePlaced.xscale;
-                            area.Tiles[selectedTile.index].Layer2Yscale = tileToBePlaced.yscale;
-                            area.Tiles[selectedTile.index].Layer2Opacity = tileToBePlaced.opacity;
-                            if (Control.ModifierKeys == Keys.Shift)
+                            #endregion
+                            #region Layer 2
+                            else if (radioButton2.Checked)
                             {
-                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
-                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
-                                int startX = lSqr.X;
-                                int startY = lSqr.Y;
-                                int endX = cSqr.X;
-                                int endY = cSqr.Y;
-                                if (lSqr.X >= cSqr.X)
+                                area.Tiles[selectedTile.index].Layer2Filename = currentTileFilename;
+                                area.Tiles[selectedTile.index].Layer2Rotate = tileToBePlaced.angle;
+                                area.Tiles[selectedTile.index].Layer2Mirror = tileToBePlaced.mirror;
+                                area.Tiles[selectedTile.index].Layer2Xshift = tileToBePlaced.xshift;
+                                area.Tiles[selectedTile.index].Layer2Yshift = tileToBePlaced.yshift;
+                                area.Tiles[selectedTile.index].Layer2Xscale = tileToBePlaced.xscale;
+                                area.Tiles[selectedTile.index].Layer2Yscale = tileToBePlaced.yscale;
+                                area.Tiles[selectedTile.index].Layer2Opacity = tileToBePlaced.opacity;
+                                if (Control.ModifierKeys == Keys.Shift)
                                 {
-                                    startX = cSqr.X;
-                                    endX = lSqr.X;
-                                }
-                                if (lSqr.Y >= cSqr.Y)
-                                {
-                                    startY = cSqr.Y;
-                                    endY = lSqr.Y;
-                                }
-                                for (int x = startX; x <= endX; x++)
-                                {
-                                    for (int y = startY; y <= endY; y++)
+                                    Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                    Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                    int startX = lSqr.X;
+                                    int startY = lSqr.Y;
+                                    int endX = cSqr.X;
+                                    int endY = cSqr.Y;
+                                    if (lSqr.X >= cSqr.X)
                                     {
-                                        area.Tiles[y * area.MapSizeX + x].Layer2Filename = currentTileFilename;
-                                        area.Tiles[y * area.MapSizeX + x].Layer2Rotate = tileToBePlaced.angle;
-                                        area.Tiles[y * area.MapSizeX + x].Layer2Mirror = tileToBePlaced.mirror;
-                                        area.Tiles[y * area.MapSizeX + x].Layer2Xshift = tileToBePlaced.xshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer2Yshift = tileToBePlaced.yshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer2Xscale = tileToBePlaced.xscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer2Yscale = tileToBePlaced.yscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer2Opacity = tileToBePlaced.opacity;
-                                        currentSquareClicked = new Point(x, y);
-                                        //GDI refreshMap(false);
+                                        startX = cSqr.X;
+                                        endX = lSqr.X;
+                                    }
+                                    if (lSqr.Y >= cSqr.Y)
+                                    {
+                                        startY = cSqr.Y;
+                                        endY = lSqr.Y;
+                                    }
+                                    for (int x = startX; x <= endX; x++)
+                                    {
+                                        for (int y = startY; y <= endY; y++)
+                                        {
+                                            area.Tiles[y * area.MapSizeX + x].Layer2Filename = currentTileFilename;
+                                            area.Tiles[y * area.MapSizeX + x].Layer2Rotate = tileToBePlaced.angle;
+                                            area.Tiles[y * area.MapSizeX + x].Layer2Mirror = tileToBePlaced.mirror;
+                                            area.Tiles[y * area.MapSizeX + x].Layer2Xshift = tileToBePlaced.xshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer2Yshift = tileToBePlaced.yshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer2Xscale = tileToBePlaced.xscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer2Yscale = tileToBePlaced.yscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer2Opacity = tileToBePlaced.opacity;
+                                            currentSquareClicked = new Point(x, y);
+                                            //GDI refreshMap(false);
+                                        }
                                     }
                                 }
                             }
-                        }
-                        #endregion
-                        #region Layer 3
-                        else if (radioButton3.Checked)
-                        {
-                            area.Tiles[selectedTile.index].Layer3Filename = currentTileFilename;
-                            area.Tiles[selectedTile.index].Layer3Rotate = tileToBePlaced.angle;
-                            area.Tiles[selectedTile.index].Layer3Mirror = tileToBePlaced.mirror;
-                            area.Tiles[selectedTile.index].Layer3Xshift = tileToBePlaced.xshift;
-                            area.Tiles[selectedTile.index].Layer3Yshift = tileToBePlaced.yshift;
-                            area.Tiles[selectedTile.index].Layer3Xscale = tileToBePlaced.xscale;
-                            area.Tiles[selectedTile.index].Layer3Yscale = tileToBePlaced.yscale;
-                            area.Tiles[selectedTile.index].Layer3Opacity = tileToBePlaced.opacity;
-                            if (Control.ModifierKeys == Keys.Shift)
+                            #endregion
+                            #region Layer 3
+                            else if (radioButton3.Checked)
                             {
-                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
-                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
-                                int startX = lSqr.X;
-                                int startY = lSqr.Y;
-                                int endX = cSqr.X;
-                                int endY = cSqr.Y;
-                                if (lSqr.X >= cSqr.X)
+                                area.Tiles[selectedTile.index].Layer3Filename = currentTileFilename;
+                                area.Tiles[selectedTile.index].Layer3Rotate = tileToBePlaced.angle;
+                                area.Tiles[selectedTile.index].Layer3Mirror = tileToBePlaced.mirror;
+                                area.Tiles[selectedTile.index].Layer3Xshift = tileToBePlaced.xshift;
+                                area.Tiles[selectedTile.index].Layer3Yshift = tileToBePlaced.yshift;
+                                area.Tiles[selectedTile.index].Layer3Xscale = tileToBePlaced.xscale;
+                                area.Tiles[selectedTile.index].Layer3Yscale = tileToBePlaced.yscale;
+                                area.Tiles[selectedTile.index].Layer3Opacity = tileToBePlaced.opacity;
+                                if (Control.ModifierKeys == Keys.Shift)
                                 {
-                                    startX = cSqr.X;
-                                    endX = lSqr.X;
-                                }
-                                if (lSqr.Y >= cSqr.Y)
-                                {
-                                    startY = cSqr.Y;
-                                    endY = lSqr.Y;
-                                }
-                                for (int x = startX; x <= endX; x++)
-                                {
-                                    for (int y = startY; y <= endY; y++)
+                                    Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                    Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                    int startX = lSqr.X;
+                                    int startY = lSqr.Y;
+                                    int endX = cSqr.X;
+                                    int endY = cSqr.Y;
+                                    if (lSqr.X >= cSqr.X)
                                     {
-                                        area.Tiles[y * area.MapSizeX + x].Layer3Filename = currentTileFilename;
-                                        area.Tiles[y * area.MapSizeX + x].Layer3Rotate = tileToBePlaced.angle;
-                                        area.Tiles[y * area.MapSizeX + x].Layer3Mirror = tileToBePlaced.mirror;
-                                        area.Tiles[y * area.MapSizeX + x].Layer3Xshift = tileToBePlaced.xshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer3Yshift = tileToBePlaced.yshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer3Xscale = tileToBePlaced.xscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer3Yscale = tileToBePlaced.yscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer3Opacity = tileToBePlaced.opacity;
-                                        currentSquareClicked = new Point(x, y);
-                                        //GDI refreshMap(false);
+                                        startX = cSqr.X;
+                                        endX = lSqr.X;
+                                    }
+                                    if (lSqr.Y >= cSqr.Y)
+                                    {
+                                        startY = cSqr.Y;
+                                        endY = lSqr.Y;
+                                    }
+                                    for (int x = startX; x <= endX; x++)
+                                    {
+                                        for (int y = startY; y <= endY; y++)
+                                        {
+                                            area.Tiles[y * area.MapSizeX + x].Layer3Filename = currentTileFilename;
+                                            area.Tiles[y * area.MapSizeX + x].Layer3Rotate = tileToBePlaced.angle;
+                                            area.Tiles[y * area.MapSizeX + x].Layer3Mirror = tileToBePlaced.mirror;
+                                            area.Tiles[y * area.MapSizeX + x].Layer3Xshift = tileToBePlaced.xshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer3Yshift = tileToBePlaced.yshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer3Xscale = tileToBePlaced.xscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer3Yscale = tileToBePlaced.yscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer3Opacity = tileToBePlaced.opacity;
+                                            currentSquareClicked = new Point(x, y);
+                                            //GDI refreshMap(false);
+                                        }
                                     }
                                 }
                             }
-                        }
-                        #endregion
-                        #region Layer 4
-                        else if (radioButton4.Checked)
-                        {
-                            area.Tiles[selectedTile.index].Layer4Filename = currentTileFilename;
-                            area.Tiles[selectedTile.index].Layer4Rotate = tileToBePlaced.angle;
-                            area.Tiles[selectedTile.index].Layer4Mirror = tileToBePlaced.mirror;
-                            area.Tiles[selectedTile.index].Layer4Xshift = tileToBePlaced.xshift;
-                            area.Tiles[selectedTile.index].Layer4Yshift = tileToBePlaced.yshift;
-                            area.Tiles[selectedTile.index].Layer4Xscale = tileToBePlaced.xscale;
-                            area.Tiles[selectedTile.index].Layer4Yscale = tileToBePlaced.yscale;
-                            area.Tiles[selectedTile.index].Layer4Opacity = tileToBePlaced.opacity;
-                            if (Control.ModifierKeys == Keys.Shift)
+                            #endregion
+                            #region Layer 4
+                            else if (radioButton4.Checked)
                             {
-                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
-                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
-                                int startX = lSqr.X;
-                                int startY = lSqr.Y;
-                                int endX = cSqr.X;
-                                int endY = cSqr.Y;
-                                if (lSqr.X >= cSqr.X)
+                                area.Tiles[selectedTile.index].Layer4Filename = currentTileFilename;
+                                area.Tiles[selectedTile.index].Layer4Rotate = tileToBePlaced.angle;
+                                area.Tiles[selectedTile.index].Layer4Mirror = tileToBePlaced.mirror;
+                                area.Tiles[selectedTile.index].Layer4Xshift = tileToBePlaced.xshift;
+                                area.Tiles[selectedTile.index].Layer4Yshift = tileToBePlaced.yshift;
+                                area.Tiles[selectedTile.index].Layer4Xscale = tileToBePlaced.xscale;
+                                area.Tiles[selectedTile.index].Layer4Yscale = tileToBePlaced.yscale;
+                                area.Tiles[selectedTile.index].Layer4Opacity = tileToBePlaced.opacity;
+                                if (Control.ModifierKeys == Keys.Shift)
                                 {
-                                    startX = cSqr.X;
-                                    endX = lSqr.X;
-                                }
-                                if (lSqr.Y >= cSqr.Y)
-                                {
-                                    startY = cSqr.Y;
-                                    endY = lSqr.Y;
-                                }
-                                for (int x = startX; x <= endX; x++)
-                                {
-                                    for (int y = startY; y <= endY; y++)
+                                    Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                    Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                    int startX = lSqr.X;
+                                    int startY = lSqr.Y;
+                                    int endX = cSqr.X;
+                                    int endY = cSqr.Y;
+                                    if (lSqr.X >= cSqr.X)
                                     {
-                                        area.Tiles[y * area.MapSizeX + x].Layer4Filename = currentTileFilename;
-                                        area.Tiles[y * area.MapSizeX + x].Layer4Rotate = tileToBePlaced.angle;
-                                        area.Tiles[y * area.MapSizeX + x].Layer4Mirror = tileToBePlaced.mirror;
-                                        area.Tiles[y * area.MapSizeX + x].Layer4Xshift = tileToBePlaced.xshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer4Yshift = tileToBePlaced.yshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer4Xscale = tileToBePlaced.xscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer4Yscale = tileToBePlaced.yscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer4Opacity = tileToBePlaced.opacity;
-                                        currentSquareClicked = new Point(x, y);
-                                        //GDI refreshMap(false);
+                                        startX = cSqr.X;
+                                        endX = lSqr.X;
+                                    }
+                                    if (lSqr.Y >= cSqr.Y)
+                                    {
+                                        startY = cSqr.Y;
+                                        endY = lSqr.Y;
+                                    }
+                                    for (int x = startX; x <= endX; x++)
+                                    {
+                                        for (int y = startY; y <= endY; y++)
+                                        {
+                                            area.Tiles[y * area.MapSizeX + x].Layer4Filename = currentTileFilename;
+                                            area.Tiles[y * area.MapSizeX + x].Layer4Rotate = tileToBePlaced.angle;
+                                            area.Tiles[y * area.MapSizeX + x].Layer4Mirror = tileToBePlaced.mirror;
+                                            area.Tiles[y * area.MapSizeX + x].Layer4Xshift = tileToBePlaced.xshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer4Yshift = tileToBePlaced.yshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer4Xscale = tileToBePlaced.xscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer4Yscale = tileToBePlaced.yscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer4Opacity = tileToBePlaced.opacity;
+                                            currentSquareClicked = new Point(x, y);
+                                            //GDI refreshMap(false);
+                                        }
                                     }
                                 }
                             }
-                        }
-                        #endregion
-                        #region Layer 5
-                        else if (radioButton5.Checked)
-                        {
-                            area.Tiles[selectedTile.index].Layer5Filename = currentTileFilename;
-                            area.Tiles[selectedTile.index].Layer5Rotate = tileToBePlaced.angle;
-                            area.Tiles[selectedTile.index].Layer5Mirror = tileToBePlaced.mirror;
-                            area.Tiles[selectedTile.index].Layer5Xshift = tileToBePlaced.xshift;
-                            area.Tiles[selectedTile.index].Layer5Yshift = tileToBePlaced.yshift;
-                            area.Tiles[selectedTile.index].Layer5Xscale = tileToBePlaced.xscale;
-                            area.Tiles[selectedTile.index].Layer5Yscale = tileToBePlaced.yscale;
-                            area.Tiles[selectedTile.index].Layer5Opacity = tileToBePlaced.opacity;
-                            if (Control.ModifierKeys == Keys.Shift)
+                            #endregion
+                            #region Layer 5
+                            else if (radioButton5.Checked)
                             {
-                                Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
-                                Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
-                                int startX = lSqr.X;
-                                int startY = lSqr.Y;
-                                int endX = cSqr.X;
-                                int endY = cSqr.Y;
-                                if (lSqr.X >= cSqr.X)
+                                area.Tiles[selectedTile.index].Layer5Filename = currentTileFilename;
+                                area.Tiles[selectedTile.index].Layer5Rotate = tileToBePlaced.angle;
+                                area.Tiles[selectedTile.index].Layer5Mirror = tileToBePlaced.mirror;
+                                area.Tiles[selectedTile.index].Layer5Xshift = tileToBePlaced.xshift;
+                                area.Tiles[selectedTile.index].Layer5Yshift = tileToBePlaced.yshift;
+                                area.Tiles[selectedTile.index].Layer5Xscale = tileToBePlaced.xscale;
+                                area.Tiles[selectedTile.index].Layer5Yscale = tileToBePlaced.yscale;
+                                area.Tiles[selectedTile.index].Layer5Opacity = tileToBePlaced.opacity;
+                                if (Control.ModifierKeys == Keys.Shift)
                                 {
-                                    startX = cSqr.X;
-                                    endX = lSqr.X;
-                                }
-                                if (lSqr.Y >= cSqr.Y)
-                                {
-                                    startY = cSqr.Y;
-                                    endY = lSqr.Y;
-                                }
-                                for (int x = startX; x <= endX; x++)
-                                {
-                                    for (int y = startY; y <= endY; y++)
+                                    Point cSqr = new Point(currentSquareClicked.X, currentSquareClicked.Y);
+                                    Point lSqr = new Point(lastSquareClicked.X, lastSquareClicked.Y);
+                                    int startX = lSqr.X;
+                                    int startY = lSqr.Y;
+                                    int endX = cSqr.X;
+                                    int endY = cSqr.Y;
+                                    if (lSqr.X >= cSqr.X)
                                     {
-                                        area.Tiles[y * area.MapSizeX + x].Layer5Filename = currentTileFilename;
-                                        area.Tiles[y * area.MapSizeX + x].Layer5Rotate = tileToBePlaced.angle;
-                                        area.Tiles[y * area.MapSizeX + x].Layer5Mirror = tileToBePlaced.mirror;
-                                        area.Tiles[y * area.MapSizeX + x].Layer5Xshift = tileToBePlaced.xshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer5Yshift = tileToBePlaced.yshift;
-                                        area.Tiles[y * area.MapSizeX + x].Layer5Xscale = tileToBePlaced.xscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer5Yscale = tileToBePlaced.yscale;
-                                        area.Tiles[y * area.MapSizeX + x].Layer5Opacity = tileToBePlaced.opacity;
-                                        currentSquareClicked = new Point(x, y);
-                                        //GDI refreshMap(false);
+                                        startX = cSqr.X;
+                                        endX = lSqr.X;
+                                    }
+                                    if (lSqr.Y >= cSqr.Y)
+                                    {
+                                        startY = cSqr.Y;
+                                        endY = lSqr.Y;
+                                    }
+                                    for (int x = startX; x <= endX; x++)
+                                    {
+                                        for (int y = startY; y <= endY; y++)
+                                        {
+                                            area.Tiles[y * area.MapSizeX + x].Layer5Filename = currentTileFilename;
+                                            area.Tiles[y * area.MapSizeX + x].Layer5Rotate = tileToBePlaced.angle;
+                                            area.Tiles[y * area.MapSizeX + x].Layer5Mirror = tileToBePlaced.mirror;
+                                            area.Tiles[y * area.MapSizeX + x].Layer5Xshift = tileToBePlaced.xshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer5Yshift = tileToBePlaced.yshift;
+                                            area.Tiles[y * area.MapSizeX + x].Layer5Xscale = tileToBePlaced.xscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer5Yscale = tileToBePlaced.yscale;
+                                            area.Tiles[y * area.MapSizeX + x].Layer5Opacity = tileToBePlaced.opacity;
+                                            currentSquareClicked = new Point(x, y);
+                                            //GDI refreshMap(false);
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
                         #endregion
                         //GDI refreshMap(false);
                     }
@@ -1381,7 +1427,7 @@ namespace IB2Toolset
                         newProp.LocationX = gridX;
                         newProp.LocationY = gridY;
                         area.Props.Add(newProp);
-                       
+
                     }
                     #endregion
                     #region Paint New Trigger Selected
@@ -1413,6 +1459,7 @@ namespace IB2Toolset
                                     break;
                                 }
                             }
+                            //patrick4
                             if (!exists) //doesn't exist so is a new point, add to list
                             {
                                 Coordinate newCoor = new Coordinate();
@@ -1838,6 +1885,325 @@ namespace IB2Toolset
                         area.Tiles[selectedTile.index].Walkable = false;
                         //GDI refreshMap(false);
                     }
+
+                    else if (rbtnToMaster.Checked)
+                    {
+                        if (area.masterOfThisArea != "none")
+                        {
+                            /*
+                             else if (rbtnPaintTrigger.Checked)
+                        {
+                            string selectedTrigger = prntForm.selectedLevelMapTriggerTag;
+                            prntForm.logText(selectedTrigger);
+                            prntForm.logText(Environment.NewLine);
+
+                            //gridX = e.X / sqr;
+                            //gridY = e.Y / sqr;
+
+                            prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                            prntForm.logText(Environment.NewLine);
+                            Point newPoint = new Point(gridX, gridY);
+                            //add the selected square to the squareList if doesn't already exist
+                            try
+                            {
+                                //check: if click square already exists, then erase from list                            
+                                Trigger newTrigger = area.getTriggerByTag(selectedTrigger);
+                                bool exists = false;
+                                foreach (Coordinate p in newTrigger.TriggerSquaresList)
+                                {
+                                    if ((p.X == newPoint.X) && (p.Y == newPoint.Y))
+                                    {
+                                        //already exists, erase
+                                        newTrigger.TriggerSquaresList.Remove(p);
+                                        exists = true;
+                                        break;
+                                    }
+                                }
+                                if (!exists) //doesn't exist so is a new point, add to list
+                                {
+                                    Coordinate newCoor = new Coordinate();
+                                    newCoor.X = newPoint.X;
+                                    newCoor.Y = newPoint.Y;
+                                    newTrigger.TriggerSquaresList.Add(newCoor);
+                                }
+                                prntForm.currentSelectedTrigger = newTrigger;
+                                prntForm.frmTriggerEvents.refreshTriggers();
+                            }
+                            catch
+                            {
+                                MessageBox.Show("The tag of the selected Trigger was not found in the area's trigger list");
+                            }
+                            //update the map to show colored squares    
+                            //GDI refreshMap(false);
+                        }
+                            */
+                            selectedTile.index = gridY * area.MapSizeX + gridX;
+
+                            //if selected square already contains a link to master, then switch prntForm.selectedLevelMapTriggerTag) to that one
+                            /*
+                            //bool blockCreation
+                            foreach (Trigger newTrigger in area.Triggers)
+                            {
+
+                                foreach (Trigger newTrigger in area.Triggers)
+                                {
+                                    if (newTrigger.TriggerTag == prntForm.selectedLevelMapTriggerTag)
+                                    {
+
+                                        rotateTransitionToMaster();
+                                        */
+                            foreach (Trigger existingTrigger in area.Triggers)
+                            {
+                                if (existingTrigger.TriggerSquaresList.Count > 0)
+                                {
+                                    if (existingTrigger.TriggerSquaresList[0].X == gridX && existingTrigger.TriggerSquaresList[0].Y == gridY)
+                                    {
+                                        if (existingTrigger.isLinkToMaster)
+                                        {
+                                            prntForm.selectedLevelMapTriggerTag = existingTrigger.TriggerTag;
+                                        }
+                                    }
+                                }
+                            }
+
+                            rotateTransitionToMaster();
+
+                            prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                            prntForm.logText(Environment.NewLine);
+
+                            //rotation satet will do belwo 2-steps in 4 variants
+                            //patrick3
+                            //create a new trigger object on linked map (ie current map)
+                            //Trigger newTrigger = new Trigger();
+                            //newTrigger.TriggerTag = "newTrigger_" + prntForm.mod.nextIdNumber;
+                            //areaOrg.Triggers.Add(newTriggerMaster);
+                            //prntForm.selectedLevelMapTriggerTag = newTrigger.TriggerTag;
+                            
+
+                            foreach (Trigger newTrigger in area.Triggers)
+                            {
+                                if (newTrigger.TriggerTag == prntForm.selectedLevelMapTriggerTag)
+                                {
+                                    newTrigger.transitionToMasterRotationCounter = transitionToMasterRotationCounter;
+                                    newTrigger.isLinkToMaster = true;
+                                    newTrigger.tagOfLink = area.Filename;
+                                    newTrigger.tagOfLinkedMaster = area.masterOfThisArea;
+                                    newTrigger.Enabled = true;
+                                    newTrigger.EnabledEvent1 = true;
+                                    newTrigger.Event1Type = "transition";
+                                    newTrigger.Event1FilenameOrTag = area.masterOfThisArea;
+                                    newTrigger.Event1TransPointX = gridX;
+                                    newTrigger.Event1TransPointY = gridY;
+                                    Coordinate newCoor = new Coordinate();
+                                    newCoor.X = gridX;
+                                    newCoor.Y = gridY;
+                                    if (newTrigger.TriggerSquaresList.Count <= 1)
+                                    {
+                                        if (newTrigger.TriggerSquaresList.Count == 1)
+                                        {
+                                            newTrigger.TriggerSquaresList.RemoveAt(0);
+                                        }
+                                        newTrigger.TriggerSquaresList.Add(newCoor);
+                                    }
+                                }
+                            }
+
+                            Area areaOrg = new Area();
+                            bool orgIsStillOpen = false;
+                            for (int a = 0; a < prntForm.openAreasList.Count; a++)
+                            {
+                                if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
+                                {
+                                    areaOrg = prntForm.openAreasList[a];
+                                    orgIsStillOpen = true;
+                                    break;
+                                }
+                            }
+
+                            if (orgIsStillOpen)
+                            {
+
+                                //string g_dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+                                //if (area.masterOfThisArea != "none")
+                                //{
+                                //areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                                //}
+
+                                //example for entrance ligths on link pointing towards east (placed on west side of their square): 
+                                //Link:    A(x-1,y), DE(x,y)
+                                //Master:  D(x-1,y), AE(x,y)
+
+                                //example for entrance ligths on link pointing towards south (placed on north side of their square): 
+                                //Link:    A(x,y-1), DE(x,y)
+                                //Master:  D(x,y-1), AE(x,y)
+
+                                //example for entrance ligths on link pointing towards west (placed on east side of their square): 
+                                //Link:    A(x+1,y), DE(x,y)
+                                //Master:  D(x+1,y), AE(x,y)
+
+                                //example for entrance ligths on link pointing towards north (placed on south side of their square): 
+                                //Link:    A(x,y+1), DE(x,y)
+                                //Master:  D(x,y+1), AE(x,y)
+
+                                //pointing towars north
+                                if (transitionToMasterRotationCounter == 1)
+                                {
+                                    foreach (Trigger newTrigger in areaOrg.Triggers)
+                                    {
+                                        if (newTrigger.TriggerTag == (prntForm.selectedLevelMapTriggerTag + "_" + area.masterOfThisArea))
+                                        {
+                                            //patrick100
+                                            newTrigger.isLinkToMaster = true;
+                                            newTrigger.tagOfLink = area.Filename;
+                                            newTrigger.tagOfLinkedMaster = area.masterOfThisArea;
+                                            newTrigger.Enabled = true;
+                                            newTrigger.EnabledEvent1 = true;
+                                            newTrigger.Event1Type = "transition";
+                                            newTrigger.Event1FilenameOrTag = area.Filename;
+                                            newTrigger.Event1TransPointX = gridX;
+                                            newTrigger.Event1TransPointY = gridY + 1;
+                                            Coordinate newCoor = new Coordinate();
+                                            newCoor.X = gridX;
+                                            newCoor.Y = gridY + 1;
+                                            if (newTrigger.TriggerSquaresList.Count <= 1)
+                                            {
+                                                if (newTrigger.TriggerSquaresList.Count == 1)
+                                                {
+                                                    newTrigger.TriggerSquaresList.RemoveAt(0);
+                                                }
+                                                newTrigger.TriggerSquaresList.Add(newCoor);
+                                            }
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                                        }
+                                    }
+                                }
+
+                                //pointing towards east
+                                if (transitionToMasterRotationCounter == 2)
+                                {
+                                    foreach (Trigger newTrigger in areaOrg.Triggers)
+                                    {
+                                        if (newTrigger.TriggerTag == (prntForm.selectedLevelMapTriggerTag + "_" + area.masterOfThisArea))
+                                        {
+                                            newTrigger.isLinkToMaster = true;
+                                            newTrigger.tagOfLink = area.Filename;
+                                            newTrigger.tagOfLinkedMaster = area.masterOfThisArea;
+                                            newTrigger.Enabled = true;
+                                            newTrigger.EnabledEvent1 = true;
+                                            newTrigger.Event1Type = "transition";
+                                            newTrigger.Event1FilenameOrTag = area.Filename;
+                                            newTrigger.Event1TransPointX = gridX - 1;
+                                            newTrigger.Event1TransPointY = gridY;
+                                            Coordinate newCoor = new Coordinate();
+                                            newCoor.X = gridX - 1;
+                                            newCoor.Y = gridY;
+                                            if (newTrigger.TriggerSquaresList.Count <= 1)
+                                            {
+                                                if (newTrigger.TriggerSquaresList.Count == 1)
+                                                {
+                                                    newTrigger.TriggerSquaresList.RemoveAt(0);
+                                                }
+                                                newTrigger.TriggerSquaresList.Add(newCoor);
+                                            }
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                                        }
+                                    }
+                                }
+
+                                //pointing towards south
+                                if (transitionToMasterRotationCounter == 3)
+                                {
+                                    foreach (Trigger newTrigger in areaOrg.Triggers)
+                                    {
+                                        if (newTrigger.TriggerTag == (prntForm.selectedLevelMapTriggerTag + "_" + area.masterOfThisArea))
+                                        {
+                                            newTrigger.isLinkToMaster = true;
+                                            newTrigger.tagOfLink = area.Filename;
+                                            newTrigger.tagOfLinkedMaster = area.masterOfThisArea;
+                                            newTrigger.Enabled = true;
+                                            newTrigger.EnabledEvent1 = true;
+                                            newTrigger.Event1Type = "transition";
+                                            newTrigger.Event1FilenameOrTag = area.Filename;
+                                            newTrigger.Event1TransPointX = gridX;
+                                            newTrigger.Event1TransPointY = gridY - 1;
+                                            Coordinate newCoor = new Coordinate();
+                                            newCoor.X = gridX;
+                                            newCoor.Y = gridY - 1;
+                                            if (newTrigger.TriggerSquaresList.Count <= 1)
+                                            {
+                                                if (newTrigger.TriggerSquaresList.Count == 1)
+                                                {
+                                                    newTrigger.TriggerSquaresList.RemoveAt(0);
+                                                }
+                                                newTrigger.TriggerSquaresList.Add(newCoor);
+                                            }
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                                        }
+                                    }
+                                }
+
+                                //pointing towards west
+                                if (transitionToMasterRotationCounter == 4)
+                                {
+                                    foreach (Trigger newTrigger in areaOrg.Triggers)
+                                    {
+                                        if (newTrigger.TriggerTag == (prntForm.selectedLevelMapTriggerTag + "_" + area.masterOfThisArea))
+                                        {
+                                            newTrigger.isLinkToMaster = true;
+                                            newTrigger.tagOfLink = area.Filename;
+                                            newTrigger.tagOfLinkedMaster = area.masterOfThisArea;
+                                            newTrigger.Enabled = true;
+                                            newTrigger.EnabledEvent1 = true;
+                                            newTrigger.Event1Type = "transition";
+                                            newTrigger.Event1FilenameOrTag = area.Filename;
+                                            newTrigger.Event1TransPointX = gridX + 1;
+                                            newTrigger.Event1TransPointY = gridY;
+                                            Coordinate newCoor = new Coordinate();
+                                            newCoor.X = gridX + 1;
+                                            newCoor.Y = gridY;
+                                            if (newTrigger.TriggerSquaresList.Count <= 1)
+                                            {
+                                                if (newTrigger.TriggerSquaresList.Count == 1)
+                                                {
+                                                    newTrigger.TriggerSquaresList.RemoveAt(0);
+                                                }
+                                                newTrigger.TriggerSquaresList.Add(newCoor);
+                                            }
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                                        }
+                                    }
+                                }
+                            }
+
+                            //set propertygrid to the new object
+                            //hopefully not neeeded
+                            //prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = newTrigger;
+
+                            //area.Tiles[selectedTile.index].transitionToMasterDirection = "none";
+                            //area.Tiles[selectedTile.index].numberOfLinkedAreaToTransitionTo = -1;
+
+                            //GDI refreshMap(false);
+                        }
+                    }
+
+                    else if (rbtnChangeLinkState.Checked)
+                    {
+                        selectedTile.index = gridY * area.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        area.Tiles[selectedTile.index].linkedToMasterMap = true;
+                        //GDI refreshMap(false);
+                    }
+
+
                     #endregion
                     #region LoS mesh Toggle Selected (Make LoS Blocked)
                     else if (rbtnLoS.Checked)
@@ -1904,11 +2270,11 @@ namespace IB2Toolset
                             tileCounter++;
                             if ((locationX == newPoint.X) && (locationY == newPoint.Y))
                             {
-                                    txtSelectedIconInfo.Text = "Tile (x" + locationX.ToString() + " / y" + locationY.ToString() + ")" + Environment.NewLine;
-                                    lastSelectedObjectTag = tileCounter.ToString();
-                                    //lastSelectedObjectTag = "Tile (x" + locationX.ToString() + "/ y" + locationY.ToString() + ")";
-                                    //panelView.ContextMenuStrip.Items.Add(lastSelectedObjectTag, null, handler); //string, image, handler
-                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                                txtSelectedIconInfo.Text = "Tile (x" + locationX.ToString() + " / y" + locationY.ToString() + ")" + Environment.NewLine;
+                                lastSelectedObjectTag = tileCounter.ToString();
+                                //lastSelectedObjectTag = "Tile (x" + locationX.ToString() + "/ y" + locationY.ToString() + ")";
+                                //panelView.ContextMenuStrip.Items.Add(lastSelectedObjectTag, null, handler); //string, image, handler
+                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
                             }
                         }
 
@@ -1931,6 +2297,151 @@ namespace IB2Toolset
                         prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
                         prntForm.logText(Environment.NewLine);
                         area.Tiles[selectedTile.index].Walkable = true;
+                        //GDI refreshMap(false);
+                    }
+                    else if (rbtnToMaster.Checked)
+                    {
+                        selectedTile.index = gridY * area.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        string tagOfRemovedTrigger = "void";
+
+                        if (area.Triggers.Count >= 1)
+                        {
+                            for (int i = area.Triggers.Count - 1; i >= 0; i--)
+                            {
+                                if (area.Triggers[i].isLinkToMaster)
+                                {
+                                    if (area.Triggers[i].TriggerSquaresList.Count >= 1)
+                                    {
+                                        if (area.Triggers[i].TriggerSquaresList[0].X == gridX && area.Triggers[i].TriggerSquaresList[0].Y == gridY)
+                                        {
+                                            area.Tiles[gridY * area.MapSizeX + gridX].transitionToMasterDirection = "none";
+                                            area.Tiles[gridY * area.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = -1;
+                                            tagOfRemovedTrigger = area.Triggers[i].TriggerTag;
+                                            area.Triggers.RemoveAt(i);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        Area areaOrg = new Area();
+                        bool orgIsStillOpen = false;
+                        for (int a = 0; a < prntForm.openAreasList.Count; a++)
+                        {
+                            if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
+                            {
+                                areaOrg = prntForm.openAreasList[a];
+                                orgIsStillOpen = true;
+                                break;
+                            }
+                        }
+
+                        if (orgIsStillOpen)
+                        {
+
+                            //now the same plus special tile attributes for the master
+                            //Area areaOrg = new Area();
+                            //string g_dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+                            //if (area.masterOfThisArea != "none")
+                            //{
+                            //areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                            //}
+
+                            if (areaOrg.Triggers.Count >= 1)
+                            {
+                                for (int i = areaOrg.Triggers.Count - 1; i >= 0; i--)
+                                {
+                                    if (areaOrg.Triggers[i].isLinkToMaster)
+                                    {
+                                        if ((tagOfRemovedTrigger + "_" + areaOrg.Filename) == (areaOrg.Triggers[i].TriggerTag))
+                                        {
+                                            //tagchange1
+                                            //newTriggerMaster.TriggerTag = "TransitionOn_" + area.Filename + "_" + (prntForm.mod.nextIdNumber - 1) + "_" + area.masterOfThisArea;
+
+                                            //if (areaOrg.Triggers[i].TriggerSquaresList[0].X == gridX && areaOrg.Triggers[i].TriggerSquaresList[0].Y == gridY)
+                                            //{
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = "none";
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = -1;
+                                            areaOrg.Triggers.RemoveAt(i);
+                                            break;
+                                            //}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+
+                        //patrick5
+                        /*
+                        selectedTile.index = gridY * area.MapSizeX + gridX;
+                        rotateTransitionToMaster();
+
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+
+                        //rotation satet will do belwo 2-steps in 4 variants
+                        //patrick3
+                        //create a new trigger object on linked map (ie current map)
+                        //Trigger newTrigger = new Trigger();
+                        //newTrigger.TriggerTag = "newTrigger_" + prntForm.mod.nextIdNumber;
+                        //areaOrg.Triggers.Add(newTriggerMaster);
+                        //prntForm.selectedLevelMapTriggerTag = newTrigger.TriggerTag;
+
+                        foreach (Trigger newTrigger in area.Triggers)
+                        {
+                            if (newTrigger.TriggerTag == prntForm.selectedLevelMapTriggerTag)
+                            {
+                                newTrigger.Enabled = true;
+                                newTrigger.EnabledEvent1 = true;
+                                newTrigger.Event1Type = "transition";
+                                newTrigger.Event1FilenameOrTag = area.masterOfThisArea;
+                                newTrigger.Event1TransPointX = gridX;
+                                newTrigger.Event1TransPointY = gridY;
+                                Coordinate newCoor = new Coordinate();
+                                newCoor.X = gridX;
+                                newCoor.Y = gridY;
+                                newTrigger.TriggerSquaresList.Add(newCoor);
+                            }
+                        }
+
+                        Area areaOrg = new Area();
+                        string g_dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+                        if (area.masterOfThisArea != "none")
+                        {
+                            areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                        }
+
+                        //patrick4
+                        foreach (Trigger newTrigger in areaOrg.Triggers)
+                        {
+                            if (newTrigger.TriggerTag == (prntForm.selectedLevelMapTriggerTag + "_" + area.masterOfThisArea))
+                            {
+                                newTrigger.Enabled = true;
+                                newTrigger.EnabledEvent1 = true;
+                                newTrigger.Event1Type = "transition";
+                                newTrigger.Event1FilenameOrTag = area.Filename;
+                                newTrigger.Event1TransPointX = gridX;
+                                newTrigger.Event1TransPointY = gridY;
+                                Coordinate newCoor = new Coordinate();
+                                newCoor.X = gridX;
+                                newCoor.Y = gridY;
+                                newTrigger.TriggerSquaresList.Add(newCoor);
+                                areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection];
+                                areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                            }
+                        }
+                        */
+                    }
+                    else if (rbtnChangeLinkState.Checked)
+                    {
+                        selectedTile.index = gridY * area.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        area.Tiles[selectedTile.index].linkedToMasterMap = false;
                         //GDI refreshMap(false);
                     }
                     else if (rbtnHeightLevel.Checked)
@@ -2177,6 +2688,37 @@ namespace IB2Toolset
             if(stairRotationCounter > 4)
             {
                 stairRotationCounter = 1;
+            }
+        }
+
+        private void rotateTransitionToMaster()
+        {
+            //transitionToMasterRotationCounter
+            if (transitionToMasterRotationCounter == 1)
+            {
+                area.Tiles[selectedTile.index].transitionToMasterDirection = "N";
+            }
+            else
+            if (transitionToMasterRotationCounter == 2)
+            {
+                area.Tiles[selectedTile.index].transitionToMasterDirection = "E";
+            }
+            else
+               if (transitionToMasterRotationCounter == 3)
+            {
+                area.Tiles[selectedTile.index].transitionToMasterDirection = "S";
+            }
+            else
+               if (transitionToMasterRotationCounter == 4)
+            {
+                area.Tiles[selectedTile.index].transitionToMasterDirection = "W";
+            }
+
+            transitionToMasterRotationCounter++;
+
+            if (transitionToMasterRotationCounter > 4)
+            {
+                transitionToMasterRotationCounter = 1;
             }
         }
 
@@ -2602,6 +3144,7 @@ namespace IB2Toolset
                 RenderTarget2D.BeginDraw();
                 RenderTarget2D.Clear(SharpDX.Color.Black);
                 redrawMain();
+                drawLinkedShade();
                 RenderTarget2D.EndDraw();
             }
             catch (Exception ex)
@@ -2610,6 +3153,39 @@ namespace IB2Toolset
             }
         }
 
+        public void drawLinkedShade()
+        {
+            #region Draw Linked state
+            for (int y = 0; y < area.MapSizeY; y++)
+            {
+                for (int x = 0; x < area.MapSizeX; x++)
+                {
+                    Tile tile = area.Tiles[y * area.MapSizeX + x];
+                    if (tile.linkedToMasterMap)
+                    {
+                        //LINKED
+                        //draw square walkmesh and LoS stuff
+                        //SharpDX.Direct2D1.Bitmap bm = GetFromBitmapList("walk_pass");
+                        //Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
+                        //Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                        SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("black_tile").PixelSize.Width, GetFromBitmapList("black_tile").PixelSize.Height);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+
+                        DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.75f);
+                        //bear
+                        if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                        {
+                            float scaler = 1.0f;
+                            if (sqr == 50) { scaler = 15.0f; }
+                            else if (sqr == 25) { scaler = 7.5f; }
+                            else if (sqr == 10) { scaler = 3.0f; }
+                            DrawText("L", dst.X + (sqr / 4), dst.Y + (sqr / 4), scaler * 1.5f, SharpDX.Color.Red);
+                        }
+                    }
+                }
+            }
+            #endregion
+        }
         public bool isOrthogonalNeighbourOfBridge(int tileX, int tileY)
         {
             //check north
@@ -3447,6 +4023,73 @@ namespace IB2Toolset
                     SharpDX.RectangleF dstEast = new SharpDX.RectangleF((x + 1) * sqr, y * sqr, sqr, sqr);
                     SharpDX.RectangleF dstSouth = new SharpDX.RectangleF(x * sqr, (y + 1) * sqr, sqr, sqr);
                     SharpDX.RectangleF dstWest = new SharpDX.RectangleF((x - 1) * sqr, y * sqr, sqr, sqr);
+                    SharpDX.RectangleF dst = new SharpDX.RectangleF((x) * sqr, y * sqr, sqr, sqr);
+
+                    //areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection
+
+                    //our entrance light is an exit light and is painted right n top of trigger
+                    //if (area.masterOfThisArea != "none")
+                    //{
+                        if (tile.transitionToMasterDirection == "N")
+                        {
+                            if (area.masterOfThisArea != "none")
+                            {
+                            //krah
+                            DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
+                            }
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 90, false, 0, 0, 1, 1, 0.5f);
+                        }
+                        if (tile.transitionToMasterDirection == "S")
+                        {
+                        if (area.masterOfThisArea != "none")
+                        {
+                            //krah
+                            DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
+                        }
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 270, false, 0, 0, 1, 1, 0.5f);
+                        }
+                        if (tile.transitionToMasterDirection == "W")
+                        {
+                        if (area.masterOfThisArea != "none")
+                        {
+                            //krah
+                            DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
+                        }
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 0, false, 0, 0, 1, 1, 0.5f);
+                        }
+                        if (tile.transitionToMasterDirection == "E")
+                        {
+                        if (area.masterOfThisArea != "none")
+                        {
+                            //krah
+                            DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
+                        }
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 180, false, 0, 0, 1, 1, 0.5f);
+                        }
+                    //}
+
+                    /*
+                    //our entrance light is an really an entrance light and is painted on neighbouring square of trigger
+                    if (area.masterOfThisArea == "none")
+                    {
+                        if (tile.transitionToMasterDirection == "N")
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstNorth, 0, false, 0, 0, 1, 1, 0.25f);
+                        }
+                        if (tile.transitionToMasterDirection == "S")
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstSouth, 180, false, 0, 0, 1, 1, 0.25f);
+                        }
+                        if (tile.transitionToMasterDirection == "W")
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstWest, 270, false, 0, 0, 1, 1, 0.25f);
+                        }
+                        if (tile.transitionToMasterDirection == "E")
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstEast, 90, false, 0, 0, 1, 1, 0.25f);
+                        }
+                    }
+                    */
 
                     if (tile.isEWBridge)
                     {
@@ -3649,56 +4292,160 @@ namespace IB2Toolset
                     }
                     relativeTileHeight = relativeTileHeight / 10;
 
+                    //bool allowHighLight = true;
                     //highlights
-                    if (tile.hasHighlightS)
+                    //tile.allowOppositeHighlight = true;
+                    /*
+                    if (area.masterOfThisArea == "none")
                     {
-                        if (tile.isEWBridge)
+                        if (tile.transitionToMasterDirection  == "N")
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 0, false, 0, -1, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, -1, 1, 1, 1f);
+                            //allowHighLight = false;
                         }
-                        else
+                        if (tile.transitionToMasterDirection == "E")
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, -1, 1, 1, 0.5f + relativeTileHeight);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, -1, 1, 1, 1f);
+                            //allowHighLight = false;
                         }
-                        //DrawD2DBitmap
+                        if (tile.transitionToMasterDirection == "S")
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, -1, 1, 1, 1f);
+                            //allowHighLight = false;
+                        }
+                        if (tile.transitionToMasterDirection == "W")
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, -1, 1, 1, 1f);
+                            //allowHighLight = false;
+                        }
                     }
+                    */
 
-                    if (tile.hasHighlightN)
+                    //if (area.masterOfThisArea == "none")
+                    //{
+                        int xAdder = 1;
+                        int yAdder = 1;
+                        int xSubstractor = 1;
+                        int ySubstractor = 1;
+
+                        if (x == 0)
+                        {
+                            xSubstractor = 0;
+                        }
+                        if (y == 0)
+                        {
+                            ySubstractor = 0;
+                        }
+
+                        if (x == area.MapSizeX-1)
+                        {
+                            xAdder = 0;
+                        }
+
+                        if (y == area.MapSizeY - 1)
+                        {
+                            yAdder = 0;
+                        }
+
+                        if (area.Tiles[(y+yAdder) * area.MapSizeX + x].transitionToMasterDirection != "E")
+                        {
+                            if (tile.hasHighlightS)
+                            {
+                                if (tile.isEWBridge)
+                                {
+                                    DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 0, false, 0, -1, 1, 1, 1f);
+                                }
+                                else
+                                {
+                                DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, 0, 1, 1, 0.5f + relativeTileHeight);
+                                //DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, 1, 1, 1, 0.5f + relativeTileHeight);
+
+                            }
+                            //DrawD2DBitmap
+                        }
+                        }
+
+                        if (area.Tiles[(y - ySubstractor) * area.MapSizeX + x].transitionToMasterDirection != "W")
+                        {
+                            if (tile.hasHighlightN)
+                            {
+                                if (tile.isEWBridge)
+                                {
+                                    DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, 0, 1, 1, 1f);
+                                }
+                                else
+                                {
+                                    DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 1, 1, 1, 0.5f + relativeTileHeight);
+                                }
+                            }
+                        }
+
+                        if (area.Tiles[(y) * area.MapSizeX + x-xSubstractor].transitionToMasterDirection != "S")
+                        {
+                            if (tile.hasHighlightW)
+                            {
+                                if (tile.isNSBridge)
+                                {
+                                    DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 90, false, 0, 0, 1, 1, 1f);
+                                }
+                                else
+                                {
+                                    DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 1, 0, 1, 1, 0.5f + relativeTileHeight);
+                                }
+                            }
+                        }
+
+                        if (area.Tiles[(y) * area.MapSizeX + x + xAdder].transitionToMasterDirection != "N")
+                        {
+                            if (tile.hasHighlightE)
+                            {
+                                if (tile.isNSBridge)
+                                {
+                                    DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 270, false, -1, 0, 1, 1, 1f);
+                                }
+                                else
+                                {
+                                DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, 0, 0, 1, 1, 0.5f + relativeTileHeight);
+                                //DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, 1, 0, 1, 1, 0.5f + relativeTileHeight);
+
+                            }
+                        }
+                        }
+                    //}
+
+                    if (area.masterOfThisArea == "none")
                     {
-                        if (tile.isEWBridge)
+                        if (tile.transitionToMasterDirection == "N")
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, 0, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, 1, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, -1, 1, 1, 1f);
+                            //allowHighLight = false;
+                        }
+                        if (tile.transitionToMasterDirection == "E")
                         {
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, 0, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, 1, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, -1, 1, 1, 1f);
+                            //allowHighLight = false;
                         }
-                        else
+                        if (tile.transitionToMasterDirection == "S")
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 0, 1, 1, 0.5f + relativeTileHeight);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, 0, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, 1, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, -1, 1, 1, 1f);
+
+                            //allowHighLight = false;0
+                        }
+                        if (tile.transitionToMasterDirection == "W")
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, 0, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, 0, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, 0, -1, 1, 1f);
+                            //allowHighLight = false;
                         }
                     }
 
-                    if (tile.hasHighlightW)
-                    {
-                        if (tile.isNSBridge)
-                        {
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 90, false, 0, 0, 1, 1, 1f);
-                        }
-                        else
-                        {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 0, 0, 1, 1, 0.5f+ relativeTileHeight);
-                        }
-                    }
-
-                    if (tile.hasHighlightE)
-                    {
-                        if (tile.isNSBridge)
-                        {
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 270, false, -1, 0, 1, 1, 1f);
-                        }
-                        else
-                        {
-                            DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, -1, 0, 1, 1, 0.5f + relativeTileHeight);
-                        }
-                    }
-                    
                     //urfeld
                     //stair shadows
                     if (tile.hasDownStairShadowN)
@@ -3938,7 +4685,7 @@ namespace IB2Toolset
                     {
                         if (y - 1 >= 0)
                         {
-                            if (!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge)
+                            if (!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "E")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);
                             }
@@ -3961,7 +4708,7 @@ namespace IB2Toolset
                     {
                         if (x + 1 <= area.MapSizeX - 1)
                         {
-                            if (!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge)
+                            if (!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "S")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
                             }
@@ -3985,7 +4732,7 @@ namespace IB2Toolset
                     {
                         if (y + 1 <= area.MapSizeY - 1)
                         {
-                            if (!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge)
+                            if (!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge && area.Tiles[(y ) * area.MapSizeX + x].transitionToMasterDirection != "W")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
                             }
@@ -4008,7 +4755,7 @@ namespace IB2Toolset
                     {
                         if (x - 1 >= 0)
                         {
-                            if (!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge)
+                            if (!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "N")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
                             }
@@ -4217,7 +4964,7 @@ namespace IB2Toolset
 
 
                         #endregion
-
+            /*
             #region Draw Linked state
             for (int y = 0; y < area.MapSizeY; y++)
             {
@@ -4248,7 +4995,7 @@ namespace IB2Toolset
                 }
             }
             #endregion
-
+            */
                         /*
                         #region Draw Height Shadows
 
@@ -5248,6 +5995,8 @@ namespace IB2Toolset
                     Tile tile = area.Tiles[y * area.MapSizeX + x];
 
                     heightSum += tile.heightLevel;
+                    if (!tile.linkedToMasterMap || tile.linkedToMasterMap)
+                    { 
                     tile.isInShortShadeN = false;
                     tile.isInShortShadeE = false;
                     tile.isInShortShadeS = false;
@@ -5740,7 +6489,7 @@ namespace IB2Toolset
                                     int transformedX = x + xS;
                                     int transformedY = y + yS - area.MapSizeY;
                                     tileCaster = mod.moduleAreasObjects[indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthernNeighbour].MapSizeX + transformedX];
-                                    
+
                                     /*
                                     //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tileCaster.heightLevel - tile.heightLevel;
                                     //casts shadow and is no ramp
@@ -6001,25 +6750,25 @@ namespace IB2Toolset
                                 //get height level difference
                                 if ((xS == 0) && (yS == -1))
                                 {
-                                    
+
                                     tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
                                 }
-                                
+
                                 if ((xS == 1) && (yS == 0))
                                 {
-                                  
+
                                     tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tile.heightLevel - tileCaster.heightLevel;
                                 }
-                                
+
                                 if ((xS == 0) && (yS == 1))
                                 {
-                                 
+
                                     tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tile.heightLevel - tileCaster.heightLevel;
                                 }
-                                
+
                                 if ((xS == -1) && (yS == 0))
                                 {
-                               
+
                                     tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tile.heightLevel - tileCaster.heightLevel;
                                 }
 
@@ -6166,7 +6915,7 @@ namespace IB2Toolset
                                             {
                                                 //if ((tile.hasDownStairShadowN) || (tile.hasDownStairShadowW))
                                                 //{
-                                                    tile.isInShortShadeNW = true;
+                                                tile.isInShortShadeNW = true;
                                                 //}
                                             }
                                         }
@@ -6257,7 +7006,7 @@ namespace IB2Toolset
                                         {
                                             if (tile.hasDownStairShadowW)
                                             {
-                                                tile.isInLongShadeW= true;
+                                                tile.isInLongShadeW = true;
                                                 tileCaster.hasHighlightE = true;
                                                 //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
                                             }
@@ -6594,28 +7343,28 @@ namespace IB2Toolset
                                             //tileCaster.hasHighlightW = true;
                                             tileCaster.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tileCaster.heightLevel - tile.heightLevel;
                                             //look for eastern map code above
-                                            
-                                                if (tileCaster.hasDownStairShadowN)
-                                                {
-                                                    if (tile.hasDownStairShadowE)
-                                                    {
-                                                        tile.inRampShadowEast3Long = true;
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.inRampShadowEast3Short = true;
-                                                    }
-                                                }
 
-                                                if (tileCaster.hasDownStairShadowS)
+                                            if (tileCaster.hasDownStairShadowN)
+                                            {
+                                                if (tile.hasDownStairShadowE)
                                                 {
-                                                    tile.inRampShadowEast4Short = true;
+                                                    tile.inRampShadowEast3Long = true;
                                                 }
-                                                if (tileCaster.hasDownStairShadowE)
+                                                else
                                                 {
-                                                    tile.isInShortShadeE = true;
-                                                    tileCaster.hasHighlightW = true;
+                                                    tile.inRampShadowEast3Short = true;
                                                 }
+                                            }
+
+                                            if (tileCaster.hasDownStairShadowS)
+                                            {
+                                                tile.inRampShadowEast4Short = true;
+                                            }
+                                            if (tileCaster.hasDownStairShadowE)
+                                            {
+                                                tile.isInShortShadeE = true;
+                                                tileCaster.hasHighlightW = true;
+                                            }
 
                                             if (tileCaster.hasDownStairShadowW)
                                             {
@@ -6748,7 +7497,7 @@ namespace IB2Toolset
                                             }
                                         }
                                     }
-                                    
+
                                     //upper RAMP part of neighbouring square casting on same level lower RAMP part of this square
                                     //adding also other ramp to ramp shadows now
                                     if (tileCaster.heightLevel == tile.heightLevel)
@@ -6758,14 +7507,14 @@ namespace IB2Toolset
                                             //caster from the northwest
                                             if ((xS == -1) && (yS == -1))
                                             {
-                                                
+
                                                 if (tileCaster.hasDownStairShadowN || tileCaster.hasDownStairShadowW)
                                                 {
                                                     if (tile.hasDownStairShadowN || tile.hasDownStairShadowW)
                                                     {
                                                         tile.isInShortShadeNW = true;
                                                     }
-                                                }                                                
+                                                }
                                             }
                                             //north
                                             if ((xS == 0) && (yS == -1))
@@ -6808,11 +7557,11 @@ namespace IB2Toolset
                                                         tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = -3;
                                                     }
 
-                                                        if (tile.hasDownStairShadowE)
-                                                        {
-                                                            tile.inSmallStairNEHorizontal = true;
-                                                        }
+                                                    if (tile.hasDownStairShadowE)
+                                                    {
+                                                        tile.inSmallStairNEHorizontal = true;
                                                     }
+                                                }
 
                                             }
 
@@ -6827,7 +7576,7 @@ namespace IB2Toolset
                                                     }
                                                 }
 
-                                              
+
 
                                                 /*
                                                 if (tileCaster.hasDownStairShadowE || tileCaster.hasDownStairShadowN)
@@ -6870,9 +7619,9 @@ namespace IB2Toolset
 
                                                     if (tile.hasDownStairShadowS)
                                                     {
-                                                            tile.inSmallStairSEVertical = true;
+                                                        tile.inSmallStairSEVertical = true;
                                                     }
-                                                  }
+                                                }
 
                                                 if (tileCaster.hasDownStairShadowS)
                                                 {
@@ -6881,12 +7630,12 @@ namespace IB2Toolset
                                                         tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = -3;
                                                     }
 
-                                                        if (tile.hasDownStairShadowN)
-                                                        {
-                                                            tile.inSmallStairNEVertical = true;
-                                                        }
-
+                                                    if (tile.hasDownStairShadowN)
+                                                    {
+                                                        tile.inSmallStairNEVertical = true;
                                                     }
+
+                                                }
                                             }
                                             //SE
                                             if ((xS == 1) && (yS == 1))
@@ -6898,7 +7647,7 @@ namespace IB2Toolset
                                                         tile.isInShortShadeSE = true;
                                                     }
                                                 }
-                                               
+
                                                 /*
                                                 if (tileCaster.hasDownStairShadowE || tileCaster.hasDownStairShadowS)
                                                 {
@@ -6936,11 +7685,11 @@ namespace IB2Toolset
                                                     {
                                                         tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = -2;
                                                     }
-                                                        if (tile.hasDownStairShadowW)
-                                                        {
-                                                            tile.inSmallStairSWHorizontal = true;
-                                                        }
+                                                    if (tile.hasDownStairShadowW)
+                                                    {
+                                                        tile.inSmallStairSWHorizontal = true;
                                                     }
+                                                }
 
                                                 if (tileCaster.hasDownStairShadowW)
                                                 {
@@ -6948,11 +7697,11 @@ namespace IB2Toolset
                                                     {
                                                         tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = -3;
                                                     }
-                                                        if (tile.hasDownStairShadowE)
-                                                        {
-                                                            tile.inSmallStairSEHorizontal = true;
-                                                        }
+                                                    if (tile.hasDownStairShadowE)
+                                                    {
+                                                        tile.inSmallStairSEHorizontal = true;
                                                     }
+                                                }
                                             }
 
                                             //SW
@@ -6965,7 +7714,7 @@ namespace IB2Toolset
                                                         tile.isInShortShadeSW = true;
                                                     }
                                                 }
-                                               
+
                                                 /*
                                                 if (tileCaster.hasDownStairShadowW || tileCaster.hasDownStairShadowS)
                                                 {
@@ -7005,11 +7754,11 @@ namespace IB2Toolset
                                                         tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = -2;
                                                     }
 
-                                                        if (tile.hasDownStairShadowS)
-                                                        {
-                                                            tile.inSmallStairSWVertical = true;
-                                                        }
+                                                    if (tile.hasDownStairShadowS)
+                                                    {
+                                                        tile.inSmallStairSWVertical = true;
                                                     }
+                                                }
 
                                                 if (tileCaster.hasDownStairShadowS)
                                                 {
@@ -7018,22 +7767,22 @@ namespace IB2Toolset
                                                         tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = -3;
                                                     }
 
-                                                        if (tile.hasDownStairShadowN)
-                                                        {
-                                                            tile.inSmallStairNWVertical = true;
-                                                        }
+                                                    if (tile.hasDownStairShadowN)
+                                                    {
+                                                        tile.inSmallStairNWVertical = true;
                                                     }
+                                                }
                                             }
                                         }
-                                        
+
                                     }//end
-                                    
+
                                 }
-                                
+
                             }
-                           
+
                         }
-                        
+                    }//try  
                     }
                 }
             }
@@ -7093,44 +7842,164 @@ namespace IB2Toolset
         private void openLevel(string g_dir, string g_fil, string g_filNoEx)
         {
             //this.Cursor = Cursors.WaitCursor;
+            /*
+             Area areaOrg = new Area();
+                        bool orgIsStillOpen = false;
+                        for (int a = 0; a < prntForm.openAreasList.Count; a++)
+                        {
+                            if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
+                            {
+                                areaOrg = prntForm.openAreasList[a];
+                                orgIsStillOpen = true;
+                                break;
+                            }
+                        }
+
+                        if (orgIsStillOpen)
+                        {
+
+            */
+            //looks like 4 constellations to consider
+            //1. what is currently being opened - master or link?
+            //2. is link(s) or master of this to be opened area already open?
+
 
             try
             {
                 area = area.loadAreaFile(g_dir + "\\" + g_fil + ".lvl");
-                Area areaOrg = new Area();
+                //Area areaOrg = new Area();
 
                 if (area == null)
                 {
                     MessageBox.Show("returned a null area");
                 }
 
+
+
                 if (area.masterOfThisArea != "none")
                 {
-                    /*
-                    int index = -1;
-                    for (int i = 0; i < mod.moduleAreasList.Count; i++)
+                    Area areaOrg = new Area();
+                    //1. link to be opened, master is open
+                    bool orgIsStillOpen = false;
+                    for (int a = 0; a < prntForm.openAreasList.Count; a++)
                     {
-                        if (area.masterOfThisArea ==  mod.moduleAreasList[i])
+                        if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
                         {
-                            index = i;
+                            areaOrg = prntForm.openAreasList[a];
+                            orgIsStillOpen = true;
                             break;
                         }
                     }
-                    */
-                    areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
-                    
-                    //if (index != -1)
-                    //{
-                        for (int j = 0; j < area.Tiles.Count; j++)
+                    //2. link to be opened, master not open
+                    if (!orgIsStillOpen)
+                    {
+                        areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                    }
+                    for (int j = 0; j < area.Tiles.Count; j++)
+                    {
+                        bool temp = area.Tiles[j].linkedToMasterMap;
+                        if (area.Tiles[j].linkedToMasterMap)
                         {
-                                bool temp = area.Tiles[j].linkedToMasterMap;
-                                area.Tiles[j] = areaOrg.Tiles[j].ShallowCopy();
-                                //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
-                                area.Tiles[j].linkedToMasterMap = temp;
+                            area.Tiles[j] = areaOrg.Tiles[j].ShallowCopy();
                         }
-                    //}
+                        //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
+                        area.Tiles[j].linkedToMasterMap = temp;
+                    }
                 }
 
+
+                /*
+                int index = -1;
+                for (int i = 0; i < mod.moduleAreasList.Count; i++)
+                {
+                    if (area.masterOfThisArea ==  mod.moduleAreasList[i])
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                */
+
+                
+                //patrick1000
+                //3. master to be opened
+                else
+                {
+                    Area areaLink = new Area();
+                    //go through all links and check for each whwter open or not
+                    for (int l = 0; l < area.linkedAreas.Count; l++)
+                   {
+                        bool linkIsStillOpen = false;
+                        for (int a = 0; a < prntForm.openAreasList.Count; a++)
+                        {
+                            if (prntForm.openAreasList[a].Filename == area.linkedAreas[l])
+                            {
+                                areaLink = prntForm.openAreasList[a];
+                                linkIsStillOpen = true;
+                                break;
+                            }
+                        }
+
+                        if(!linkIsStillOpen)
+                        {
+                            areaLink = areaLink.loadAreaFile(g_dir + "\\" + area.linkedAreas[l] + ".lvl");
+                        }
+
+                        //now the code for adding triggers
+                        foreach (Trigger t in areaLink.Triggers)
+                        {
+                            if (t.isLinkToMaster)
+                            {
+                                //need a tag or position comparison in roder to preevnt adding triggers double time
+                                bool triggerDoesNotExistAlready = true;
+                                foreach (Trigger t2 in area.Triggers)
+                                {
+                                    //if ((t2.TriggerSquaresList[0].X == t.TriggerSquaresList[0].X) && (t2.TriggerSquaresList[0].Y == t.TriggerSquaresList[0].Y))
+                                    if (t2.TriggerTag == (t.TriggerTag + "_" + area.Filename))
+                                    {
+                                        triggerDoesNotExistAlready = false;
+                                        break;
+                                    }
+                                }
+                                if (triggerDoesNotExistAlready)
+                                {
+                                    area.Triggers.Add(t);
+                                }
+                            }
+                        }
+
+                        //need code for removing deleted triggers
+                        //foreach (Trigger t in area.Triggers)
+                        //need to check that we only remove triggrs tat have a dead connection to the linked area currently checked
+                        for (int tIndex = area.Triggers.Count -1; tIndex >= 0; tIndex--)
+                        {
+                            if ((area.Triggers[tIndex].isLinkToMaster) && (area.Triggers[tIndex].tagOfLink == areaLink.Filename))
+                            {
+                                //need a tag or position comparison in roder to preevnt adding triggers double time
+                                bool triggerHasDeadEnd = true;
+                                foreach (Trigger t2 in areaLink.Triggers)
+                                {
+                                    if (area.Triggers[tIndex].TriggerTag == (t2.TriggerTag + "_" + area.Filename))
+                                    {
+                                        //if (t2.TriggerSquaresList.Count > 0 && area.Triggers[tIndex].TriggerSquaresList.Count > 0)
+                                        //{
+                                        //if ((t2.TriggerSquaresList[0].X == area.Triggers[tIndex].TriggerSquaresList[0].X) && (t2.TriggerSquaresList[0].Y == area.Triggers[tIndex].TriggerSquaresList[0].Y))
+                                        //{
+                                        triggerHasDeadEnd = false;
+                                        break;
+                                        //}
+                                        //}
+                                    }
+                                }
+                                if (triggerHasDeadEnd)
+                                {
+                                    area.Triggers.RemoveAt(tIndex);
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 loadAreaObjectBitmapLists();
             }
             catch (Exception ex)
@@ -7187,6 +8056,333 @@ namespace IB2Toolset
             //GDI refreshMap(true);
             //this.Cursor = Cursors.Arrow;
         }
+
+        private void synchLevel()
+        {
+
+            int backupIndex = 0;
+
+            for (int i = 0; i < prntForm.mod.moduleAreasList.Count; i++)
+            {
+                if (prntForm.mod.moduleAreasList[i] == area.Filename)
+                {
+                    backupIndex = i;
+                }
+            }
+
+            //this.Cursor = Cursors.WaitCursor;
+
+            //try simpler
+            //area.saveAreaFile(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas\\" + area.Filename + ".lvl");
+            //this.Close();
+            
+            //area.saveAreaFile();
+            string g_dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+            string g_fil = mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+            try
+            {
+                //try simpler
+                //area = area.loadAreaFile(g_dir + "\\" + g_fil + ".lvl");
+
+                //prntForm.mod.moduleAreasList;
+                //prntForm.frmAreas.lbxAreas.Items.
+                //lbxAreas.Items.Count
+
+                /*
+                lbxAreas.Items.Count
+                 if (lbxAreas.SelectedIndex >= 0)
+            {
+                prntForm._selectedLbxAreaIndex = lbxAreas.SelectedIndex;
+                txtAreaName.Text = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+                lbxAreas.SelectedIndex = prntForm._selectedLbxAreaIndex;                
+            }
+                */
+                Area areaOrg = new Area();
+
+                if (area == null)
+                {
+                    MessageBox.Show("returned a null area");
+                }
+
+                //current area is a linked area, so we pull data for it from the master
+                if (area.masterOfThisArea != "none")
+                {
+                    /*
+                    int index = -1;
+                    for (int i = 0; i < mod.moduleAreasList.Count; i++)
+                    {
+                        if (area.masterOfThisArea ==  mod.moduleAreasList[i])
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                    */
+
+                    //prntForm.openAreasList.Remove(area);
+                    bool orgIsStillOpen = false;
+                    for (int a = 0; a < prntForm.openAreasList.Count; a++)
+                    {
+                        if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
+                        {
+                            areaOrg = prntForm.openAreasList[a];
+                            orgIsStillOpen = true;
+                            break;
+                        }
+                    }
+
+                    if (!orgIsStillOpen)
+                    {
+
+                        areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                    }
+                    //patrick10
+                    //if (index != -1)
+                    //{
+                    for (int j = 0; j < area.Tiles.Count; j++)
+                    {
+                        bool temp = area.Tiles[j].linkedToMasterMap;
+                        if (area.Tiles[j].linkedToMasterMap)
+                        {
+                            area.Tiles[j] = areaOrg.Tiles[j].ShallowCopy();
+                        }
+                        //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
+                        area.Tiles[j].linkedToMasterMap = temp;
+                    }
+                    //}
+                }
+
+                //current area is a master, we need to force a fresh somehow, it alreday has all the dat stored, but nor drawn
+                //patrick20
+                else if (area.linkedAreas.Count > 0)
+                {
+
+                }
+                //try simpler
+                //prntForm._selectedLbxAreaIndex = backupIndex;
+                //prntForm.frmAreas.lbxAreas.SelectedIndex = backupIndex;
+                //prntForm.frmAreas.EditArea();
+                loadAreaObjectBitmapLists();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed to open file: " + ex.ToString());
+            }
+            // load JPG Map first
+            /*//GDI try
+            {
+                if (!area.ImageFileName.Equals("none"))
+                {
+                    if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".jpg"))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".jpg");
+                    }
+                    else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName);
+                    }
+                    else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".png"))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".png");
+                    }
+                    else
+                    {
+                        gameMapBitmap = null;
+                    }
+                }
+            }
+            catch
+            {
+                gameMapBitmap = null;
+            }*/
+
+
+            if (useDirect2D)
+            {
+                //TODO add D2D stuff
+                //InitDirect2DAndDirectWrite();
+            }
+            /*//GDI else
+            {
+                panelView.Width = area.MapSizeX * sqr;
+                panelView.Height = area.MapSizeY * sqr;
+                panelView.BackgroundImage = (Image)surface;
+                device = Graphics.FromImage(surface);
+                if (surface == null)
+                {
+                    MessageBox.Show("returned a null Map bitmap");
+                    return;
+                }
+            }*/
+            refreshLeftPanelInfo();
+            calculateHeightShadows();
+            //GDI refreshMap(true);
+            //this.Cursor = Cursors.Arrow;
+        }
+
+        private void synchAllLevels()
+        {
+            //we will need to call areas taht a re master or a link
+            int backupIndex = 0;
+
+            for (int i = 0; i < prntForm.mod.moduleAreasList.Count; i++)
+            {
+                if (prntForm.mod.moduleAreasList[i] == area.Filename)
+                {
+                    backupIndex = i;
+                }
+            }
+
+            //this.Cursor = Cursors.WaitCursor;
+
+            //try simpler
+            //area.saveAreaFile(prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas\\" + area.Filename + ".lvl");
+            //this.Close();
+
+            //area.saveAreaFile();
+            string g_dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+            string g_fil = mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+            try
+            {
+                //try simpler
+                //area = area.loadAreaFile(g_dir + "\\" + g_fil + ".lvl");
+
+                //prntForm.mod.moduleAreasList;
+                //prntForm.frmAreas.lbxAreas.Items.
+                //lbxAreas.Items.Count
+
+                /*
+                lbxAreas.Items.Count
+                 if (lbxAreas.SelectedIndex >= 0)
+            {
+                prntForm._selectedLbxAreaIndex = lbxAreas.SelectedIndex;
+                txtAreaName.Text = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+                lbxAreas.SelectedIndex = prntForm._selectedLbxAreaIndex;                
+            }
+                */
+                Area areaOrg = new Area();
+
+                if (area == null)
+                {
+                    MessageBox.Show("returned a null area");
+                }
+
+                //current area is a linked area, so we pull data for it from the master
+                if (area.masterOfThisArea != "none")
+                {
+                    /*
+                    int index = -1;
+                    for (int i = 0; i < mod.moduleAreasList.Count; i++)
+                    {
+                        if (area.masterOfThisArea ==  mod.moduleAreasList[i])
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                    */
+
+                    //prntForm.openAreasList.Remove(area);
+                    bool orgIsStillOpen = false;
+                    for (int a = 0; a < prntForm.openAreasList.Count; a++)
+                    {
+                        if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
+                        {
+                            areaOrg = prntForm.openAreasList[a];
+                            orgIsStillOpen = true;
+                            break;
+                        }
+                    }
+
+                    if (!orgIsStillOpen)
+                    {
+
+                        areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                    }
+                    //patrick10
+                    //if (index != -1)
+                    //{
+                    for (int j = 0; j < area.Tiles.Count; j++)
+                    {
+                        bool temp = area.Tiles[j].linkedToMasterMap;
+                        if (area.Tiles[j].linkedToMasterMap)
+                        {
+                            area.Tiles[j] = areaOrg.Tiles[j].ShallowCopy();
+                        }
+                        //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
+                        area.Tiles[j].linkedToMasterMap = temp;
+                    }
+                    //}
+                }
+
+                //current area is a master, we need to force a fresh somehow, it alreday has all the dat stored, but nor drawn
+                //patrick20
+                else if (area.linkedAreas.Count > 0)
+                {
+
+                }
+                //try simpler
+                //prntForm._selectedLbxAreaIndex = backupIndex;
+                //prntForm.frmAreas.lbxAreas.SelectedIndex = backupIndex;
+                //prntForm.frmAreas.EditArea();
+                loadAreaObjectBitmapLists();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed to open file: " + ex.ToString());
+            }
+            // load JPG Map first
+            /*//GDI try
+            {
+                if (!area.ImageFileName.Equals("none"))
+                {
+                    if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".jpg"))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".jpg");
+                    }
+                    else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName);
+                    }
+                    else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".png"))
+                    {
+                        gameMapBitmap = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.ImageFileName + ".png");
+                    }
+                    else
+                    {
+                        gameMapBitmap = null;
+                    }
+                }
+            }
+            catch
+            {
+                gameMapBitmap = null;
+            }*/
+
+
+            if (useDirect2D)
+            {
+                //TODO add D2D stuff
+                //InitDirect2DAndDirectWrite();
+            }
+            /*//GDI else
+            {
+                panelView.Width = area.MapSizeX * sqr;
+                panelView.Height = area.MapSizeY * sqr;
+                panelView.BackgroundImage = (Image)surface;
+                device = Graphics.FromImage(surface);
+                if (surface == null)
+                {
+                    MessageBox.Show("returned a null Map bitmap");
+                    return;
+                }
+            }*/
+            refreshLeftPanelInfo();
+            calculateHeightShadows();
+            //GDI refreshMap(true);
+            //this.Cursor = Cursors.Arrow;
+        }
+
         private void saveTilemapFileAs()
         {
             //display the open file dialog
@@ -7577,6 +8773,22 @@ namespace IB2Toolset
                 currentTileFilename = "";
             }
         }
+        private void rbtnChangeLinkState_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnChangeLinkState.Checked)
+            {
+                prntForm.logText("editing link to master state");
+                prntForm.logText(Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                //refreshMap(true);
+                //UpdatePB();
+            }
+        }
+
         private void rbtnWalkable_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnWalkable.Checked)
@@ -7592,6 +8804,72 @@ namespace IB2Toolset
                 //UpdatePB();
             }
         }
+
+        private void rbtnToMaster_CheckedChanged(object sender, EventArgs e)
+        {
+            //patrick
+            if (rbtnToMaster.Checked)
+            {
+                //patrick2
+
+                //reset rotation counter
+                transitionToMasterRotationCounter = 1;
+
+                //create a new trigger object for current area (linked area)
+                Trigger newTrigger = new Trigger();
+                //increment the tag to something unique
+                newTrigger.TriggerTag = "TransitionOn_" + area.Filename + "_" + prntForm.mod.nextIdNumber;
+                prntForm.selectedLevelMapTriggerTag = newTrigger.TriggerTag;
+                area.Triggers.Add(newTrigger);
+
+                //create a new trigger object for master area
+                Area areaOrg = new Area();
+                
+                bool orgIsStillOpen = false;
+                    for (int a = 0; a < prntForm.openAreasList.Count; a++)
+                    {
+                        if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
+                        {
+                            areaOrg = prntForm.openAreasList[a];
+                            orgIsStillOpen = true;
+                            break;
+                        }
+                    }
+
+                if (orgIsStillOpen)
+                {
+
+                    //get and load master area
+
+                    //string g_dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+                    //if (area.masterOfThisArea != "none")
+                    //{
+                        //areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                    //}
+                    Trigger newTriggerMaster = new Trigger();
+                    //increment the tag to something unique
+                    newTriggerMaster.TriggerTag = "TransitionOn_" + area.Filename + "_" + (prntForm.mod.nextIdNumber - 1) + "_" + area.masterOfThisArea;
+                    //hopefully not need for teh paralley placed trigger on master
+                    //prntForm.selectedLevelMapTriggerTag = newTrigger.TriggerTag;
+                    areaOrg.Triggers.Add(newTriggerMaster);
+                    //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                }
+                //set propertygrid to the new object
+                //trying to disable the properties as they are not needed
+                //prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = newTrigger;
+
+                prntForm.logText("painting a new trigger");
+                prntForm.logText(Environment.NewLine);
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                //refreshMap(true);
+                //UpdatePB();
+
+            }
+        }
+
         private void rbtnHeightLevel_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtnHeightLevel.Checked)

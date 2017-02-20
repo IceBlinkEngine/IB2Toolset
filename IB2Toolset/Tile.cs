@@ -21,8 +21,54 @@ namespace IB2Toolset
 {
     public class Tile
     {
+        //written form from perspective of move from link to master, with x,y being departure square coordinates on linked area
+        //D: departure square (contains the transition event), A: Arrival square , DE: D with entrance lights, AE: A with entrance lights 
+        //note: while being the exactly same graphic with same orientation, "entrance lights" are actually exit ligths (when going from link to maser, ie steppign outdoors)
+        // and true entrance lights (when going from master to link, ie stetting indoors) at the same time
+
+        //example for entrance ligths on link pointing towards east (placed on west side of their square): 
+        //Link:    A(x-1,y), DE(x,y)
+        //Master:  D(x-1,y), AE(x,y)
+
+        //example for entrance ligths on link pointing towards south (placed on north side of their square): 
+        //Link:    A(x,y-1), DE(x,y)
+        //Master:  D(x,y-1), AE(x,y)
+
+        //example for entrance ligths on link pointing towards west (placed on east side of their square): 
+        //Link:    A(x+1,y), DE(x,y)
+        //Master:  D(x+1,y), AE(x,y)
+
+        //example for entrance ligths on link pointing towards north (placed on south side of their square): 
+        //Link:    A(x,y+1), DE(x,y)
+        //Master:  D(x,y+1), AE(x,y)
+
+        //on master the entrance light square is just optics
+        // on linked area the entrance light square is also the departure square with transition event
+
+        //can be N, E, S, W or none
+        //if N, the coordinates of the transistion to link square on master are x, y+1
+        //if E, the coordinates of the transistion to link square on master are x-1, y
+        //if S, the coordinates of the transistion to link square on master are x, y-1
+        //if W, the coordinates of the transistion to link square on master are x+1, y
+        public string transitionToMasterDirection = "none";
+
+        //Note: might be redundant as exit and entrance lights are oriented the same way
+        //is opposite of transitionToMasterDirection (N,E,S,W) or none
+        //is created on same square x,y as the transisitionToMaster (but on master map)
+        //just a graphic effect 
+        //is not defined, but determined from transitionToMasterDirection 
+        public string sideOfEntranceToLink = "none";
+
+        //this contains the number of the link map that the transistion from master leads to
+        public int numberOfLinkedAreaToTransitionTo = -1; 
+
+        //link state of a tile
         public bool linkedToMasterMap = false;
-        
+        public bool allowOppositeHighlightN = true;
+        public bool allowOppositeHighlightE = true;
+        public bool allowOppositeHighlightS = true;
+        public bool allowOppositeHighlightW = true;
+
         public string Layer0Filename = "t_blank";
         public string Layer1Filename = "t_blank";
         public string Layer2Filename = "t_blank";

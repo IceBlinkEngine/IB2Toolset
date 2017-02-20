@@ -15,8 +15,11 @@ namespace IB2Toolset
     {
         #region Fields
 
+        public int linkedAreasCounter = 0;
         public string masterOfThisArea = "none";
         public List<string> linkedAreas = new List<string>();
+        public List<int> linkNumbers = new List<int>();
+        public int linkNumberOfThisArea = -1;
         private string filename = "newArea";
         public int averageHeightOnThisMap = 0;
         private int areaVisibleDistance = 2;
