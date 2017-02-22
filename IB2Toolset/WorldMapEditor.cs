@@ -2693,25 +2693,26 @@ namespace IB2Toolset
 
         private void rotateTransitionToMaster()
         {
+            //changela1
             //transitionToMasterRotationCounter
             if (transitionToMasterRotationCounter == 1)
-            {
-                area.Tiles[selectedTile.index].transitionToMasterDirection = "N";
-            }
-            else
-            if (transitionToMasterRotationCounter == 2)
             {
                 area.Tiles[selectedTile.index].transitionToMasterDirection = "E";
             }
             else
-               if (transitionToMasterRotationCounter == 3)
+            if (transitionToMasterRotationCounter == 2)
             {
                 area.Tiles[selectedTile.index].transitionToMasterDirection = "S";
             }
             else
-               if (transitionToMasterRotationCounter == 4)
+               if (transitionToMasterRotationCounter == 3)
             {
                 area.Tiles[selectedTile.index].transitionToMasterDirection = "W";
+            }
+            else
+               if (transitionToMasterRotationCounter == 4)
+            {
+                area.Tiles[selectedTile.index].transitionToMasterDirection = "N";
             }
 
             transitionToMasterRotationCounter++;
@@ -3180,6 +3181,40 @@ namespace IB2Toolset
                             else if (sqr == 25) { scaler = 7.5f; }
                             else if (sqr == 10) { scaler = 3.0f; }
                             DrawText("L", dst.X + (sqr / 4), dst.Y + (sqr / 4), scaler * 1.5f, SharpDX.Color.Red);
+                        }
+                    }
+
+                    if ((tile.transitionToMasterDirection != "none") && (area.masterOfThisArea != "none"))
+                    {
+                        SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("black_tile").PixelSize.Width, GetFromBitmapList("black_tile").PixelSize.Height);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+
+                        //DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.75f);
+                        //bear
+                        if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                        {
+                            float scaler = 1.0f;
+                            if (sqr == 50) { scaler = 15.0f; }
+                            else if (sqr == 25) { scaler = 7.5f; }
+                            else if (sqr == 10) { scaler = 3.0f; }
+                            DrawText(tile.transitionToMasterDirection, dst.X + (sqr / 4), dst.Y + (sqr / 4), scaler * 1.5f, SharpDX.Color.LimeGreen);
+                        }
+                    }
+
+                    if ((tile.numberOfLinkedAreaToTransitionTo != -1) && (area.masterOfThisArea == "none"))
+                    {
+                        SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("black_tile").PixelSize.Width, GetFromBitmapList("black_tile").PixelSize.Height);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+
+                        //DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.75f);
+                        //bear
+                        if (chkGrid.Checked) //if show grid is turned on, draw grid squares
+                        {
+                            float scaler = 1.0f;
+                            if (sqr == 50) { scaler = 15.0f; }
+                            else if (sqr == 25) { scaler = 7.5f; }
+                            else if (sqr == 10) { scaler = 3.0f; }
+                            DrawText(tile.numberOfLinkedAreaToTransitionTo.ToString(), dst.X + (sqr / 4), dst.Y + (sqr / 4), scaler * 1.5f, SharpDX.Color.LimeGreen);
                         }
                     }
                 }
@@ -4030,23 +4065,16 @@ namespace IB2Toolset
                     //our entrance light is an exit light and is painted right n top of trigger
                     //if (area.masterOfThisArea != "none")
                     //{
-                        if (tile.transitionToMasterDirection == "N")
+
+                    //changela2
+                        if (tile.transitionToMasterDirection == "E")
                         {
                             if (area.masterOfThisArea != "none")
                             {
                             //krah
                             DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
                             }
-                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 90, false, 0, 0, 1, 1, 0.5f);
-                        }
-                        if (tile.transitionToMasterDirection == "S")
-                        {
-                        if (area.masterOfThisArea != "none")
-                        {
-                            //krah
-                            DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
-                        }
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 270, false, 0, 0, 1, 1, 0.5f);
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 90, false, 0, 0, 1, 1, 0.3f);
                         }
                         if (tile.transitionToMasterDirection == "W")
                         {
@@ -4055,16 +4083,25 @@ namespace IB2Toolset
                             //krah
                             DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
                         }
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 0, false, 0, 0, 1, 1, 0.5f);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 270, false, 0, 0, 1, 1, 0.3f);
                         }
-                        if (tile.transitionToMasterDirection == "E")
+                        if (tile.transitionToMasterDirection == "N")
                         {
                         if (area.masterOfThisArea != "none")
                         {
                             //krah
                             DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
                         }
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 180, false, 0, 0, 1, 1, 0.5f);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 0, false, 0, 0, 1, 1, 0.3f);
+                        }
+                        if (tile.transitionToMasterDirection == "S")
+                        {
+                        if (area.masterOfThisArea != "none")
+                        {
+                            //krah
+                            DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
+                        }
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 180, false, 0, 0, 1, 1, 0.3f);
                         }
                     //}
 
@@ -4093,15 +4130,15 @@ namespace IB2Toolset
 
                     if (tile.isEWBridge)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstNorth, 0, false, 0, 0,1,1,0.25f);
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstSouth, 180, false, 0, 0,1,1,0.25f);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstNorth, 0, false, 0, 0,1,1,0.3f);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstSouth, 180, false, 0, 0,1,1,0.3f);
                         //DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0, 1, 1, 0.6f);
                     }
 
                     if (tile.isNSBridge)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstWest, 270, false, 0, 0,1,1,0.25f);
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstEast, 90, false, 0, 0,1,1,0.25f);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstWest, 270, false, 0, 0,1,1,0.3f);
+                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstEast, 90, false, 0, 0,1,1,0.3f);
                     }
                 }
             }
@@ -4323,6 +4360,7 @@ namespace IB2Toolset
 
                     //if (area.masterOfThisArea == "none")
                     //{
+                    //changela
                         int xAdder = 1;
                         int yAdder = 1;
                         int xSubstractor = 1;
@@ -4347,7 +4385,7 @@ namespace IB2Toolset
                             yAdder = 0;
                         }
 
-                        if (area.Tiles[(y+yAdder) * area.MapSizeX + x].transitionToMasterDirection != "E")
+                        if (area.Tiles[(y+yAdder) * area.MapSizeX + x].transitionToMasterDirection != "S")
                         {
                             if (tile.hasHighlightS)
                             {
@@ -4365,7 +4403,7 @@ namespace IB2Toolset
                         }
                         }
 
-                        if (area.Tiles[(y - ySubstractor) * area.MapSizeX + x].transitionToMasterDirection != "W")
+                        if (area.Tiles[(y - ySubstractor) * area.MapSizeX + x].transitionToMasterDirection != "N")
                         {
                             if (tile.hasHighlightN)
                             {
@@ -4380,7 +4418,7 @@ namespace IB2Toolset
                             }
                         }
 
-                        if (area.Tiles[(y) * area.MapSizeX + x-xSubstractor].transitionToMasterDirection != "S")
+                        if (area.Tiles[(y) * area.MapSizeX + x-xSubstractor].transitionToMasterDirection != "W")
                         {
                             if (tile.hasHighlightW)
                             {
@@ -4395,7 +4433,7 @@ namespace IB2Toolset
                             }
                         }
 
-                        if (area.Tiles[(y) * area.MapSizeX + x + xAdder].transitionToMasterDirection != "N")
+                        if (area.Tiles[(y) * area.MapSizeX + x + xAdder].transitionToMasterDirection != "E")
                         {
                             if (tile.hasHighlightE)
                             {
@@ -4415,21 +4453,22 @@ namespace IB2Toolset
 
                     if (area.masterOfThisArea == "none")
                     {
-                        if (tile.transitionToMasterDirection == "N")
+                        //changela
+                        if (tile.transitionToMasterDirection == "E")
                         {
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, 0, 1, 1, 1f);
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, 1, 1, 1, 1f);
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, -1, 1, 1, 1f);
                             //allowHighLight = false;
                         }
-                        if (tile.transitionToMasterDirection == "E")
+                        if (tile.transitionToMasterDirection == "S")
                         {
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, 0, 1, 1, 1f);
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, 1, 1, 1, 1f);
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, -1, 1, 1, 1f);
                             //allowHighLight = false;
                         }
-                        if (tile.transitionToMasterDirection == "S")
+                        if (tile.transitionToMasterDirection == "W")
                         {
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, 0, 1, 1, 1f);
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, 1, 1, 1, 1f);
@@ -4437,7 +4476,7 @@ namespace IB2Toolset
 
                             //allowHighLight = false;0
                         }
-                        if (tile.transitionToMasterDirection == "W")
+                        if (tile.transitionToMasterDirection == "N")
                         {
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, 0, 1, 1, 1f);
                             DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, 0, 1, 1, 1f);
@@ -4685,7 +4724,8 @@ namespace IB2Toolset
                     {
                         if (y - 1 >= 0)
                         {
-                            if (!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "E")
+                            //changela
+                            if (!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "S")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);
                             }
@@ -4708,7 +4748,7 @@ namespace IB2Toolset
                     {
                         if (x + 1 <= area.MapSizeX - 1)
                         {
-                            if (!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "S")
+                            if (!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "W")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
                             }
@@ -4732,7 +4772,7 @@ namespace IB2Toolset
                     {
                         if (y + 1 <= area.MapSizeY - 1)
                         {
-                            if (!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge && area.Tiles[(y ) * area.MapSizeX + x].transitionToMasterDirection != "W")
+                            if (!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge && area.Tiles[(y ) * area.MapSizeX + x].transitionToMasterDirection != "N")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
                             }
@@ -4755,7 +4795,7 @@ namespace IB2Toolset
                     {
                         if (x - 1 >= 0)
                         {
-                            if (!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "N")
+                            if (!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "E")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
                             }
@@ -6855,8 +6895,16 @@ namespace IB2Toolset
                                 //casts shadow and is no ramp
                                 if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
                                 {
-                                    //check for long shadows
-                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        //check for linked map and allow deep shadows even if height level difference is greater than 2
+                                        bool linkedMapException = false;
+
+                                        if ((tileCaster.heightLevel >= tile.heightLevel + 2) && area.masterOfThisArea != "none")
+                                        {
+                                            linkedMapException = true;
+                                        }
+                                        
+                                        //check for long shadows
+                                    if (tileCaster.heightLevel == tile.heightLevel + 2 || linkedMapException)
                                     {
                                         if ((xS == -1) && (yS == -1))
                                         {
@@ -7145,7 +7193,16 @@ namespace IB2Toolset
                                 //harmonie
                                 else if ((tileCaster.isShadowCaster) && (tileCaster.isRamp))
                                 {
-                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
+
+                                        //check for linked map and allow deep shadows even if height level difference is greater than 2
+                                        bool linkedMapException = false;
+
+                                        if ((tileCaster.heightLevel >= tile.heightLevel + 2) && area.masterOfThisArea != "none")
+                                        {
+                                            linkedMapException = true;
+                                        }
+
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2 || linkedMapException)
                                     {
                                         if ((xS == -1) && (yS == -1))
                                         {
@@ -7874,6 +7931,8 @@ namespace IB2Toolset
                     MessageBox.Show("returned a null area");
                 }
 
+                //get shadows right while opening already
+                //calculateHeightShadows();
 
 
                 if (area.masterOfThisArea != "none")
@@ -7904,6 +7963,10 @@ namespace IB2Toolset
                         }
                         //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
                         area.Tiles[j].linkedToMasterMap = temp;
+                        if (area.Tiles[j].linkedToMasterMap)
+                        {
+                            area.Tiles[j].LoSBlocked = true;
+                        }
                     }
                 }
 
@@ -7999,7 +8062,10 @@ namespace IB2Toolset
                         }
                     }
                 }
-                
+
+                //get shadows right while opening already
+                calculateHeightShadows();
+
                 loadAreaObjectBitmapLists();
             }
             catch (Exception ex)
@@ -8148,6 +8214,10 @@ namespace IB2Toolset
                         }
                         //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
                         area.Tiles[j].linkedToMasterMap = temp;
+                        if (area.Tiles[j].linkedToMasterMap)
+                        {
+                            area.Tiles[j].LoSBlocked = true;
+                        }
                     }
                     //}
                 }
@@ -8311,6 +8381,10 @@ namespace IB2Toolset
                         }
                         //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
                         area.Tiles[j].linkedToMasterMap = temp;
+                        if (area.Tiles[j].linkedToMasterMap)
+                        {
+                            area.Tiles[j].LoSBlocked = true;
+                        }
                     }
                     //}
                 }
