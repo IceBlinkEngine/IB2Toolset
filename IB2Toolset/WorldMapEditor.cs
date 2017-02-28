@@ -236,6 +236,7 @@ namespace IB2Toolset
                             area.linkedAreas.Add(newArea.Filename);
                             newArea.saveAreaFile(filePath + "\\" + filename + "_" + area.linkedAreasCounter.ToString() + "_.lvl");
                             prntForm.mod.moduleAreasList.Add(newArea.Filename);
+                            prntForm.mod.moduleAreasList.Sort();
                             prntForm.frmAreas.refreshListBoxAreas();
                             
                             /*
@@ -2073,8 +2074,14 @@ namespace IB2Toolset
                                                 }
                                                 newTrigger.TriggerSquaresList.Add(newCoor);
                                             }
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            areaOrg.Tiles[(gridY+1) * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                            areaOrg.Tiles[(gridY+1) * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            //if (mod.formerDirection == "E")
+                                                //areaOrg.Tiles[(gridY + 1) * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                                //areaOrg.Tiles[(gridY + 1) * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            //{
+
+                                            //}
                                             //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
                                         }
                                     }
@@ -2107,8 +2114,8 @@ namespace IB2Toolset
                                                 }
                                                 newTrigger.TriggerSquaresList.Add(newCoor);
                                             }
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX-1].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX-1].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
                                             //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
                                         }
                                     }
@@ -2141,8 +2148,8 @@ namespace IB2Toolset
                                                 }
                                                 newTrigger.TriggerSquaresList.Add(newCoor);
                                             }
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            areaOrg.Tiles[(gridY-1) * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                            areaOrg.Tiles[(gridY-1) * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
                                             //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
                                         }
                                     }
@@ -2175,10 +2182,37 @@ namespace IB2Toolset
                                                 }
                                                 newTrigger.TriggerSquaresList.Add(newCoor);
                                             }
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX+1].transitionToMasterDirection = area.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection;
+                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX+1].numberOfLinkedAreaToTransitionTo = area.linkNumberOfThisArea;
                                             //areaOrg.saveAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
                                         }
+                                    }
+                                }
+                                //clean up: remove all tile info for link to master without correpsonding trigger in that square
+                                //will be neededfor openLevel and createFiels , too
+
+                                for (int i = 0; i < areaOrg.Tiles.Count(); i++)
+                                {
+                                    bool resetTile = true;
+                                    int TileLocX = i % areaOrg.MapSizeY;
+                                    int TileLocY = i / areaOrg.MapSizeX;
+
+                                    foreach (Trigger trig in areaOrg.Triggers)
+                                    {
+                                        if (trig.isLinkToMaster)
+                                        {
+                                            if (trig.TriggerSquaresList[0].X == TileLocX && trig.TriggerSquaresList[0].Y == TileLocY)
+                                            {
+                                                resetTile = false;
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    if (resetTile)
+                                    {
+                                        areaOrg.Tiles[i].transitionToMasterDirection = "none";
+                                        areaOrg.Tiles[i].numberOfLinkedAreaToTransitionTo = -1;
                                     }
                                 }
                             }
@@ -2196,11 +2230,15 @@ namespace IB2Toolset
 
                     else if (rbtnChangeLinkState.Checked)
                     {
-                        selectedTile.index = gridY * area.MapSizeX + gridX;
-                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        area.Tiles[selectedTile.index].linkedToMasterMap = true;
-                        //GDI refreshMap(false);
+                        if (area.masterOfThisArea != "none")
+                        {
+                            selectedTile.index = gridY * area.MapSizeX + gridX;
+                            prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                            prntForm.logText(Environment.NewLine);
+                            area.Tiles[selectedTile.index].linkedToMasterMap = true;
+                            area.Tiles[selectedTile.index].LoSBlocked = true;
+                            //GDI refreshMap(false);
+                        }
                     }
 
 
@@ -2306,74 +2344,78 @@ namespace IB2Toolset
                         prntForm.logText(Environment.NewLine);
                         string tagOfRemovedTrigger = "void";
 
-                        if (area.Triggers.Count >= 1)
+                        //allow removing only from links
+                        if (area.masterOfThisArea != "none")
                         {
-                            for (int i = area.Triggers.Count - 1; i >= 0; i--)
+                            if (area.Triggers.Count >= 1)
                             {
-                                if (area.Triggers[i].isLinkToMaster)
+                                for (int i = area.Triggers.Count - 1; i >= 0; i--)
                                 {
-                                    if (area.Triggers[i].TriggerSquaresList.Count >= 1)
+                                    if (area.Triggers[i].isLinkToMaster)
                                     {
-                                        if (area.Triggers[i].TriggerSquaresList[0].X == gridX && area.Triggers[i].TriggerSquaresList[0].Y == gridY)
+                                        if (area.Triggers[i].TriggerSquaresList.Count >= 1)
                                         {
-                                            area.Tiles[gridY * area.MapSizeX + gridX].transitionToMasterDirection = "none";
-                                            area.Tiles[gridY * area.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = -1;
-                                            tagOfRemovedTrigger = area.Triggers[i].TriggerTag;
-                                            area.Triggers.RemoveAt(i);
-                                            break;
+                                            if (area.Triggers[i].TriggerSquaresList[0].X == gridX && area.Triggers[i].TriggerSquaresList[0].Y == gridY)
+                                            {
+                                                area.Tiles[gridY * area.MapSizeX + gridX].transitionToMasterDirection = "none";
+                                                area.Tiles[gridY * area.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = -1;
+                                                tagOfRemovedTrigger = area.Triggers[i].TriggerTag;
+                                                area.Triggers.RemoveAt(i);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            Area areaOrg = new Area();
+                            bool orgIsStillOpen = false;
+                            for (int a = 0; a < prntForm.openAreasList.Count; a++)
+                            {
+                                if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
+                                {
+                                    areaOrg = prntForm.openAreasList[a];
+                                    orgIsStillOpen = true;
+                                    break;
+                                }
+                            }
+
+                            if (orgIsStillOpen)
+                            {
+
+                                //now the same plus special tile attributes for the master
+                                //Area areaOrg = new Area();
+                                //string g_dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+                                //if (area.masterOfThisArea != "none")
+                                //{
+                                //areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
+                                //}
+
+                                if (areaOrg.Triggers.Count >= 1)
+                                {
+                                    for (int i = areaOrg.Triggers.Count - 1; i >= 0; i--)
+                                    {
+                                        if (areaOrg.Triggers[i].isLinkToMaster)
+                                        {
+                                            if ((tagOfRemovedTrigger + "_" + areaOrg.Filename) == (areaOrg.Triggers[i].TriggerTag))
+                                            {
+                                                //tagchange1
+                                                //newTriggerMaster.TriggerTag = "TransitionOn_" + area.Filename + "_" + (prntForm.mod.nextIdNumber - 1) + "_" + area.masterOfThisArea;
+
+                                                //if (areaOrg.Triggers[i].TriggerSquaresList[0].X == gridX && areaOrg.Triggers[i].TriggerSquaresList[0].Y == gridY)
+                                                //{
+                                                areaOrg.Tiles[areaOrg.Triggers[i].TriggerSquaresList[0].Y * areaOrg.MapSizeX + areaOrg.Triggers[i].TriggerSquaresList[0].X].transitionToMasterDirection = "none";
+                                                areaOrg.Tiles[areaOrg.Triggers[i].TriggerSquaresList[0].Y * areaOrg.MapSizeX + areaOrg.Triggers[i].TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = -1;
+                                                areaOrg.Triggers.RemoveAt(i);
+                                                break;
+                                                //}
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-
-                        Area areaOrg = new Area();
-                        bool orgIsStillOpen = false;
-                        for (int a = 0; a < prntForm.openAreasList.Count; a++)
-                        {
-                            if (prntForm.openAreasList[a].Filename == area.masterOfThisArea)
-                            {
-                                areaOrg = prntForm.openAreasList[a];
-                                orgIsStillOpen = true;
-                                break;
-                            }
-                        }
-
-                        if (orgIsStillOpen)
-                        {
-
-                            //now the same plus special tile attributes for the master
-                            //Area areaOrg = new Area();
-                            //string g_dir = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
-                            //if (area.masterOfThisArea != "none")
-                            //{
-                            //areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
-                            //}
-
-                            if (areaOrg.Triggers.Count >= 1)
-                            {
-                                for (int i = areaOrg.Triggers.Count - 1; i >= 0; i--)
-                                {
-                                    if (areaOrg.Triggers[i].isLinkToMaster)
-                                    {
-                                        if ((tagOfRemovedTrigger + "_" + areaOrg.Filename) == (areaOrg.Triggers[i].TriggerTag))
-                                        {
-                                            //tagchange1
-                                            //newTriggerMaster.TriggerTag = "TransitionOn_" + area.Filename + "_" + (prntForm.mod.nextIdNumber - 1) + "_" + area.masterOfThisArea;
-
-                                            //if (areaOrg.Triggers[i].TriggerSquaresList[0].X == gridX && areaOrg.Triggers[i].TriggerSquaresList[0].Y == gridY)
-                                            //{
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].transitionToMasterDirection = "none";
-                                            areaOrg.Tiles[gridY * areaOrg.MapSizeX + gridX].numberOfLinkedAreaToTransitionTo = -1;
-                                            areaOrg.Triggers.RemoveAt(i);
-                                            break;
-                                            //}
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
 
                         //patrick5
                         /*
@@ -2438,11 +2480,15 @@ namespace IB2Toolset
                     }
                     else if (rbtnChangeLinkState.Checked)
                     {
-                        selectedTile.index = gridY * area.MapSizeX + gridX;
-                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        area.Tiles[selectedTile.index].linkedToMasterMap = false;
-                        //GDI refreshMap(false);
+                        if (area.masterOfThisArea != "none")
+                        {
+                            selectedTile.index = gridY * area.MapSizeX + gridX;
+                            prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                            prntForm.logText(Environment.NewLine);
+                            area.Tiles[selectedTile.index].linkedToMasterMap = false;
+                            area.Tiles[selectedTile.index].LoSBlocked = false;
+                            //GDI refreshMap(false);
+                        }
                     }
                     else if (rbtnHeightLevel.Checked)
                     {
@@ -2698,21 +2744,25 @@ namespace IB2Toolset
             if (transitionToMasterRotationCounter == 1)
             {
                 area.Tiles[selectedTile.index].transitionToMasterDirection = "E";
+                mod.formerDirection = "N";
             }
             else
             if (transitionToMasterRotationCounter == 2)
             {
                 area.Tiles[selectedTile.index].transitionToMasterDirection = "S";
+                mod.formerDirection = "E";
             }
             else
                if (transitionToMasterRotationCounter == 3)
             {
                 area.Tiles[selectedTile.index].transitionToMasterDirection = "W";
+                mod.formerDirection = "S";
             }
             else
                if (transitionToMasterRotationCounter == 4)
             {
                 area.Tiles[selectedTile.index].transitionToMasterDirection = "N";
+                mod.formerDirection = "W";
             }
 
             transitionToMasterRotationCounter++;
@@ -4069,12 +4119,18 @@ namespace IB2Toolset
                     //changela2
                         if (tile.transitionToMasterDirection == "E")
                         {
-                            if (area.masterOfThisArea != "none")
-                            {
+                        if (area.masterOfThisArea != "none")
+                        {
                             //krah
                             DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
-                            }
+
                             DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 90, false, 0, 0, 1, 1, 0.3f);
+                        }
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstEast, 90, false, 0, 0, 1, 1, 0.3f);
+                        }
+
                         }
                         if (tile.transitionToMasterDirection == "W")
                         {
@@ -4082,8 +4138,13 @@ namespace IB2Toolset
                         {
                             //krah
                             DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
+
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 270, false, 0, 0, 1, 1, 0.3f);
                         }
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 270, false, 0, 0, 1, 1, 0.3f);
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstWest, 270, false, 0, 0, 1, 1, 0.3f);
+                        }
                         }
                         if (tile.transitionToMasterDirection == "N")
                         {
@@ -4091,8 +4152,13 @@ namespace IB2Toolset
                         {
                             //krah
                             DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
+
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 0, false, 0, 0, 1, 1, 0.3f);
                         }
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 0, false, 0, 0, 1, 1, 0.3f);
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstNorth, 0, false, 0, 0, 1, 1, 0.3f);
+                        }
                         }
                         if (tile.transitionToMasterDirection == "S")
                         {
@@ -4100,8 +4166,13 @@ namespace IB2Toolset
                         {
                             //krah
                             DrawD2DBitmap(GetFromBitmapList("black_tile"), src, dst, 0, false, 0, 0, 0, 0, 0.5f);
+
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 180, false, 0, 0, 1, 1, 0.3f);
                         }
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dst, 180, false, 0, 0, 1, 1, 0.3f);
+                        else
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstSouth, 180, false, 0, 0, 1, 1, 0.3f);
+                        }
                         }
                     //}
 
@@ -4456,31 +4527,31 @@ namespace IB2Toolset
                         //changela
                         if (tile.transitionToMasterDirection == "E")
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, 0, 1, 1, 1f);
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, 1, 1, 1, 1f);
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst4, 90, false, 0, -1, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstEast, 90, false, 0, 0, 1, 1, 1f);
+                            //DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstEast, 90, false, 0, 1, 1, 1, 1f);
+                            //DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstEast, 90, false, 0, -1, 1, 1, 1f);
                             //allowHighLight = false;
                         }
                         if (tile.transitionToMasterDirection == "S")
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, 0, 1, 1, 1f);
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, 1, 1, 1, 1f);
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 180, false, 0, -1, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstSouth, 180, false, 0, 0, 1, 1, 1f);
+                            //DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstSouth, 180, false, 0, 1, 1, 1, 1f);
+                            //DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstSouth, 180, false, 0, -1, 1, 1, 1f);
                             //allowHighLight = false;
                         }
                         if (tile.transitionToMasterDirection == "W")
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, 0, 1, 1, 1f);
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, 1, 1, 1, 1f);
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst, 270, false, 0, -1, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstWest, 270, false, 0, 0, 1, 1, 1f);
+                            //DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstWest, 270, false, 0, 1, 1, 1, 1f);
+                            //DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstWest, 270, false, 0, -1, 1, 1, 1f);
 
                             //allowHighLight = false;0
                         }
                         if (tile.transitionToMasterDirection == "N")
                         {
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, 0, 1, 1, 1f);
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, 0, 1, 1, 1f);
-                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dst3, 0, false, 0, 0, -1, 1, 1f);
+                            //DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstNorth, 0, false, 0, 0, 1, 1, 1f);
+                            DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstNorth, 0, false, 0, 0, 1, 1, 1f);
+                            //DrawD2DBitmap(GetFromBitmapList("highLightGreen"), src, dstNorth, 0, false, 0, 0, -1, 1, 1f);
                             //allowHighLight = false;
                         }
                     }
@@ -4725,7 +4796,7 @@ namespace IB2Toolset
                         if (y - 1 >= 0)
                         {
                             //changela
-                            if (!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "S")
+                            if (!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge && area.Tiles[(y-1) * area.MapSizeX + x].transitionToMasterDirection != "S")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);
                             }
@@ -4748,7 +4819,7 @@ namespace IB2Toolset
                     {
                         if (x + 1 <= area.MapSizeX - 1)
                         {
-                            if (!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "W")
+                            if (!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x+1].transitionToMasterDirection != "W")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
                             }
@@ -4772,7 +4843,7 @@ namespace IB2Toolset
                     {
                         if (y + 1 <= area.MapSizeY - 1)
                         {
-                            if (!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge && area.Tiles[(y ) * area.MapSizeX + x].transitionToMasterDirection != "N")
+                            if (!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge && area.Tiles[(y + 1) * area.MapSizeX + x].transitionToMasterDirection != "N")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
                             }
@@ -4786,7 +4857,7 @@ namespace IB2Toolset
                             DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
                         }
                     }
-
+                    
                     if (tile.isInLongShadeW)
                     {
                         DrawD2DBitmap(GetFromBitmapList("longShadow"), src, dst, 90, false, 0, 0);
@@ -4795,7 +4866,7 @@ namespace IB2Toolset
                     {
                         if (x - 1 >= 0)
                         {
-                            if (!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x].transitionToMasterDirection != "E")
+                            if (!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x-1].transitionToMasterDirection != "E")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
                             }
@@ -7954,18 +8025,90 @@ namespace IB2Toolset
                     {
                         areaOrg = areaOrg.loadAreaFile(g_dir + "\\" + area.masterOfThisArea + ".lvl");
                     }
+
+                    //roterZwerg
+                    for (int i = 0; i < areaOrg.Tiles.Count(); i++)
+                    {
+                        bool resetTile = true;
+                        int TileLocX = i % areaOrg.MapSizeY;
+                        int TileLocY = i / areaOrg.MapSizeX;
+
+                        foreach (Trigger trig in areaOrg.Triggers)
+                        {
+                            if (trig.isLinkToMaster)
+                            {
+                                if (trig.TriggerSquaresList[0].X == TileLocX && trig.TriggerSquaresList[0].Y == TileLocY)
+                                {
+                                    resetTile = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (resetTile)
+                        {
+                            areaOrg.Tiles[i].transitionToMasterDirection = "none";
+                            areaOrg.Tiles[i].numberOfLinkedAreaToTransitionTo = -1;
+                        }
+                    }
+
                     for (int j = 0; j < area.Tiles.Count; j++)
                     {
                         bool temp = area.Tiles[j].linkedToMasterMap;
+                        string temp2 = area.Tiles[j].transitionToMasterDirection;
+                        int temp3 = area.Tiles[j].numberOfLinkedAreaToTransitionTo;
                         if (area.Tiles[j].linkedToMasterMap)
                         {
                             area.Tiles[j] = areaOrg.Tiles[j].ShallowCopy();
                         }
                         //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
                         area.Tiles[j].linkedToMasterMap = temp;
+                        area.Tiles[j].transitionToMasterDirection = temp2;
+                        area.Tiles[j].numberOfLinkedAreaToTransitionTo = temp3;
                         if (area.Tiles[j].linkedToMasterMap)
                         {
                             area.Tiles[j].LoSBlocked = true;
+                        }
+                    }
+
+                    //add new props (placed after creation of clone)
+                    for (int j = 0; j < areaOrg.Props.Count; j++)
+                    {
+                        bool allowAdding = false;
+                        if (!areaOrg.Props[j].isMover)
+                        {
+                            allowAdding = true;
+                            for (int k = 0; k < area.Props.Count; k++)
+                            {
+                                if (areaOrg.Props[j].PropTag == area.Props[k].PropTag)
+                                {
+                                    allowAdding = false;
+                                    break;
+                                }
+                            }
+                            if (allowAdding)
+                            {
+                                area.Props.Add(areaOrg.Props[j]);
+                            }
+                        }
+                    }
+
+                    //remove props that dont exist on master any more
+                    for (int i = area.Props.Count - 1; i >= 0; i--)
+                    {
+                        bool removeThisProp = true;
+                        foreach (Prop p in areaOrg.Props)
+                        {
+                            if (p.PropTag == area.Props[i].PropTag)
+                            {
+                                removeThisProp = false;
+                                break;
+                            }
+                        }
+
+                        if (removeThisProp)
+                        {
+                            area.Props.Remove(area.Props[i]);
                         }
                     }
                 }
@@ -8208,26 +8351,72 @@ namespace IB2Toolset
                     for (int j = 0; j < area.Tiles.Count; j++)
                     {
                         bool temp = area.Tiles[j].linkedToMasterMap;
+                        string temp2 = area.Tiles[j].transitionToMasterDirection;
+                        int temp3 = area.Tiles[j].numberOfLinkedAreaToTransitionTo ;
                         if (area.Tiles[j].linkedToMasterMap)
                         {
                             area.Tiles[j] = areaOrg.Tiles[j].ShallowCopy();
                         }
                         //newArea = newArea.loadAreaFile(path + areaName + ".lvl");
                         area.Tiles[j].linkedToMasterMap = temp;
+                        area.Tiles[j].transitionToMasterDirection = temp2;
+                        area.Tiles[j].numberOfLinkedAreaToTransitionTo = temp3;
                         if (area.Tiles[j].linkedToMasterMap)
                         {
                             area.Tiles[j].LoSBlocked = true;
                         }
                     }
-                    //}
-                }
+
+                    //add new props (placed after creation of clone)
+                    for (int j = 0; j < areaOrg.Props.Count; j++)
+                    {
+                        bool allowAdding = false;
+                        if (!areaOrg.Props[j].isMover)
+                        {
+                            allowAdding = true;
+                            for (int k = 0; k < area.Props.Count; k++)
+                            {
+                                if (areaOrg.Props[j].PropTag == area.Props[k].PropTag)
+                                {
+                                    allowAdding = false;
+                                    break;
+                                }
+                            }
+                            if (allowAdding)
+                            {
+                                area.Props.Add(areaOrg.Props[j]);
+                            }
+                        }
+                    }
+
+                    //remove props that dont exist on master any more
+                for (int i = area.Props.Count - 1; i >= 0; i--)
+                {
+                        bool removeThisProp = true;
+                        foreach ( Prop p in areaOrg.Props)
+                        {
+                            if (p.PropTag == area.Props[i].PropTag)
+                            {
+                                removeThisProp = false;
+                                break;
+                            }
+                        }
+
+                        if (removeThisProp)
+                        {
+                            area.Props.Remove(area.Props[i]);
+                        }
+                }    
+
+
+             }
 
                 //current area is a master, we need to force a fresh somehow, it alreday has all the dat stored, but nor drawn
                 //patrick20
-                else if (area.linkedAreas.Count > 0)
-                {
+                //else if (area.linkedAreas.Count > 0)
+                //{
 
-                }
+                //}
                 //try simpler
                 //prntForm._selectedLbxAreaIndex = backupIndex;
                 //prntForm.frmAreas.lbxAreas.SelectedIndex = backupIndex;

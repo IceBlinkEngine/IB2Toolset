@@ -1,6 +1,8 @@
 {
+  "formerDirection": "N",
   "masterAreasList": [
-    "desert"
+    "desert",
+    "linktest"
   ],
   "saveName": "empty",
   "TimePerRound": 6,
@@ -35,6 +37,8 @@
     "homeus",
     "homeus_1_",
     "iceland",
+    "linktest",
+    "linktest_0_",
     "moverTest",
     "puzzle64",
     "puzzlemap",
@@ -178,11 +182,11 @@
   "MaxPartySize": 6,
   "moduleDescription": "Short module tutorial on how to make a simple module.",
   "moduleCredits": "<big><b>Unwanted Guests</b></big><BR>\r\n<BR>\r\n-visit the forums for more info:<BR>\r\nwww.iceblinkengine.com/forums",
-  "nextIdNumber": 10856,
+  "nextIdNumber": 10873,
   "realTimeTimerLengthInMilliSeconds": 7000,
   "borderAreaSize": 0,
   "WorldTime": 0,
-  "startingArea": "Simple",
+  "startingArea": "linktest",
   "startingPlayerPositionX": 5,
   "startingPlayerPositionY": 0,
   "partyGold": 100,

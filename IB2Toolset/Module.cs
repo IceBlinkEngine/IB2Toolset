@@ -14,6 +14,7 @@ namespace IB2Toolset
     public class Module
     {
         #region Fields
+        public string formerDirection = "none"; 
         public List<string> masterAreasList = new List<string>(); 
         //private string moduleFolderName = "";
         private string _moduleName = "";

@@ -3064,6 +3064,32 @@ public void loadSpriteDropdownList()
                     {
                         areaTempMaster = areaTempMaster.loadAreaFile(_mainDirectory + "\\modules\\" + mod.moduleName + "\\areas" + "\\" + masterAreaString + ".lvl");
 
+                        for (int i = 0; i < areaTempMaster.Tiles.Count(); i++)
+                        {
+                            bool resetTile = true;
+                            int TileLocX = i % areaTempMaster.MapSizeY;
+                            int TileLocY = i / areaTempMaster.MapSizeX;
+
+                            foreach (Trigger trig in areaTempMaster.Triggers)
+                            {
+                                if (trig.isLinkToMaster)
+                                {
+                                    if (trig.TriggerSquaresList[0].X == TileLocX && trig.TriggerSquaresList[0].Y == TileLocY)
+                                    {
+                                        resetTile = false;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (resetTile)
+                            {
+                                areaTempMaster.Tiles[i].transitionToMasterDirection = "none";
+                                areaTempMaster.Tiles[i].numberOfLinkedAreaToTransitionTo = -1;
+                            }
+                        }
+
+
                         foreach (String linkedAreaString in areaTempMaster.linkedAreas)
                         {
                             bool areaLinkExists = false;
@@ -3100,7 +3126,50 @@ public void loadSpriteDropdownList()
 
                                 //TODO: calculate height shadows here
                                 calculateHeightShadows(areaTempLink);
-                                
+
+
+                                //1b. let us synch the props of this link with its master
+                                //add new props (placed after creation of clone)
+                                for (int j = 0; j < areaTempMaster.Props.Count; j++)
+                                {
+                                    bool allowAdding = false;
+                                    if (!areaTempMaster.Props[j].isMover)
+                                    {
+                                        allowAdding = true;
+                                        for (int k = 0; k < areaTempLink.Props.Count; k++)
+                                        {
+                                            if (areaTempMaster.Props[j].PropTag == areaTempLink.Props[k].PropTag)
+                                            {
+                                                allowAdding = false;
+                                                break;
+                                            }
+                                        }
+                                        if (allowAdding)
+                                        {
+                                            areaTempLink.Props.Add(areaTempMaster.Props[j]);
+                                        }
+                                    }
+                                }
+
+                                //remove props that dont exist on master any more
+                                for (int i = areaTempLink.Props.Count - 1; i >= 0; i--)
+                                {
+                                    bool removeThisProp = true;
+                                    foreach (Prop p in areaTempMaster.Props)
+                                    {
+                                        if (p.PropTag == areaTempLink.Props[i].PropTag)
+                                        {
+                                            removeThisProp = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (removeThisProp)
+                                    {
+                                        areaTempLink.Props.Remove(areaTempLink.Props[i]);
+                                    }
+                                }
+
 
                                 //2. we need to remove transition triggers to this link from master if those do not exist on this link (check tagOfLink)
                                 for (int triggerIndexOnMaster = areaTempMaster.Triggers.Count -1; triggerIndexOnMaster >= 0; triggerIndexOnMaster--)
@@ -3139,8 +3208,8 @@ public void loadSpriteDropdownList()
                                                         }
                                                         areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Add(newCoor);
                                                     }
-                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
-                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                    areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                    areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
                                                 }
                                                 if (triggerOnLink.transitionToMasterRotationCounter == 2)
                                                 {
@@ -3164,8 +3233,8 @@ public void loadSpriteDropdownList()
                                                         }
                                                         areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Add(newCoor);
                                                     }
-                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
-                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                    areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                    areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
                                                 }
                                                 if (triggerOnLink.transitionToMasterRotationCounter == 3)
                                                 {
@@ -3189,8 +3258,8 @@ public void loadSpriteDropdownList()
                                                         }
                                                         areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Add(newCoor);
                                                     }
-                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
-                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                    areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                    areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
                                                 }
                                                 if (triggerOnLink.transitionToMasterRotationCounter == 4)
                                                 {
@@ -3214,8 +3283,8 @@ public void loadSpriteDropdownList()
                                                         }
                                                         areaTempMaster.Triggers[triggerIndexOnMaster].TriggerSquaresList.Add(newCoor);
                                                     }
-                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
-                                                    areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                    areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                    areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
                                                 }
                                                 break;
                                             }
@@ -3280,8 +3349,8 @@ public void loadSpriteDropdownList()
                                                     }
                                                     newTriggerForMaster.TriggerSquaresList.Add(newCoor);
                                                 }
-                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
-                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
                                             }
                                             if (triggerOnLink.transitionToMasterRotationCounter == 2)
                                             {
@@ -3305,8 +3374,8 @@ public void loadSpriteDropdownList()
                                                     }
                                                     newTriggerForMaster.TriggerSquaresList.Add(newCoor);
                                                 }
-                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
-                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
                                             }
                                             if (triggerOnLink.transitionToMasterRotationCounter == 3)
                                             {
@@ -3330,8 +3399,8 @@ public void loadSpriteDropdownList()
                                                     }
                                                     newTriggerForMaster.TriggerSquaresList.Add(newCoor);
                                                 }
-                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
-                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
                                             }
                                             if (triggerOnLink.transitionToMasterRotationCounter == 4)
                                             {
@@ -3355,8 +3424,8 @@ public void loadSpriteDropdownList()
                                                     }
                                                     newTriggerForMaster.TriggerSquaresList.Add(newCoor);
                                                 }
-                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
-                                                areaTempMaster.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
+                                                areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].transitionToMasterDirection = areaTempLink.Tiles[triggerOnLink.TriggerSquaresList[0].Y * areaTempMaster.MapSizeX + triggerOnLink.TriggerSquaresList[0].X].transitionToMasterDirection;
+                                                areaTempMaster.Tiles[newCoor.Y * areaTempMaster.MapSizeX + newCoor.X].numberOfLinkedAreaToTransitionTo = areaTempLink.linkNumberOfThisArea;
                                             }
 
                                             //when it is set up, we add we finally name it
