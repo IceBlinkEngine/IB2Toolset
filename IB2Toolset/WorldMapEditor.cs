@@ -8384,7 +8384,10 @@ namespace IB2Toolset
                             }
                             if (allowAdding)
                             {
-                                area.Props.Add(areaOrg.Props[j]);
+                                if (area.Tiles[areaOrg.Props[j].LocationY * area.MapSizeX + areaOrg.Props[j].LocationX].linkedToMasterMap)
+                                {
+                                    area.Props.Add(areaOrg.Props[j]);
+                                }
                             }
                         }
                     }
