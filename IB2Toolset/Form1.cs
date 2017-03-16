@@ -4504,6 +4504,9 @@ public void loadSpriteDropdownList()
         private void tsBtnResetDropDowns_Click(object sender, EventArgs e)
         {
             refreshDropDownLists();
+            //note: this does nothing right now, must check later
+            //migth be pure conversion routines?
+            addPrefix();
         }
 
         private void tsBtnDataCheck_Click(object sender, EventArgs e)
@@ -4512,6 +4515,95 @@ public void loadSpriteDropdownList()
             dc.CheckAllData();
             dc = null;
         }
+
+        //***********************************
+        //note: this does nothing right now, must check later
+
+        public void addPrefixToConvoNodeImage(ContentNode node)
+        {  
+             if ((node.NodePortraitBitmap != "") && (!node.NodePortraitBitmap.StartsWith("ptr_")))  
+             {                  
+                 string summaryReportPath = _mainDirectory + "\\modules\\" + mod.moduleName + "_convos.txt";  
+                 File.AppendAllText(summaryReportPath, node.NodePortraitBitmap + Environment.NewLine);  
+                 node.NodePortraitBitmap = "ptr_" + node.NodePortraitBitmap;  
+             }  
+            /*if (node.NodePortraitBitmap.StartsWith("ptr_"))  
+ 1900 +            {  
+ 1901 +                foundLinkedNodesIdList.Add(node.idNum);  
+ 1902 +            }*/  
+             foreach (ContentNode subNode in node.subNodes)  
+             {  
+                 addPrefixToConvoNodeImage(subNode);  
+             }  
+               
+         }  
+
+         public void addPrefix()
+         {  
+             /*foreach (Convo c in mod.moduleConvoList)  
+ 1912 +            {  
+ 1913 +                if ((c.NpcPortraitBitmap != "") && (!c.NpcPortraitBitmap.StartsWith("ptr_")))  
+ 1914 +                {  
+ 1915 +                    string summaryReportPath = _mainDirectory + "\\modules\\" + mod.moduleName + "_convos.txt";  
+ 1916 +                    File.AppendAllText(summaryReportPath, c.NpcPortraitBitmap + Environment.NewLine);  
+ 1917 +                    c.NpcPortraitBitmap = "ptr_" + c.NpcPortraitBitmap;  
+ 1918 +                }  
+ 1919 +                addPrefixToConvoNodeImage(c.subNodes[0]);  
+ 1920 +            }*/  
+               
+             /*foreach (Area ar in mod.moduleAreasObjects)  
+ 1923 +            {  
+ 1924 +                for (int i = 0; i < ar.Layer1Filename.Count; i++)  
+ 1925 +                {  
+ 1926 +                    if (!ar.Layer1Filename[i].StartsWith("t_"))  
+ 1927 +                    {  
+ 1928 +                        ar.Layer1Filename[i] = "t_es_" + ar.Layer1Filename[i];  
+ 1929 +                    }  
+ 1930 +                }  
+ 1931 +                for (int i = 0; i < ar.Layer2Filename.Count; i++)  
+ 1932 +                {  
+ 1933 +                    if (!ar.Layer2Filename[i].StartsWith("t_"))  
+ 1934 +                    {  
+ 1935 +                        ar.Layer2Filename[i] = "t_es_" + ar.Layer2Filename[i];  
+ 1936 +                    }  
+ 1937 +                }  
+ 1938 +                for (int i = 0; i < ar.Layer3Filename.Count; i++)  
+ 1939 +                {  
+ 1940 +                    if (!ar.Layer3Filename[i].StartsWith("t_"))  
+ 1941 +                    {  
+ 1942 +                        ar.Layer3Filename[i] = "t_es_" + ar.Layer3Filename[i];  
+ 1943 +                    }  
+ 1944 +                }  
+ 1945 +            }  
+ 1946 +              
+ 1947 +            foreach (Encounter enc in mod.moduleEncountersList)  
+ 1948 +            {  
+ 1949 +                for (int i = 0; i < enc.Layer1Filename.Count; i++)  
+ 1950 +                {  
+ 1951 +                    if (!enc.Layer1Filename[i].StartsWith("t_"))  
+ 1952 +                    {  
+ 1953 +                        enc.Layer1Filename[i] = "t_es_" + enc.Layer1Filename[i];  
+ 1954 +                    }  
+ 1955 +                }  
+ 1956 +                for (int i = 0; i < enc.Layer2Filename.Count; i++)  
+ 1957 +                {  
+ 1958 +                    if (!enc.Layer2Filename[i].StartsWith("t_"))  
+ 1959 +                    {  
+ 1960 +                        enc.Layer2Filename[i] = "t_es_" + enc.Layer2Filename[i];  
+ 1961 +                    }  
+ 1962 +                }  
+ 1963 +                for (int i = 0; i < enc.Layer3Filename.Count; i++)  
+ 1964 +                {  
+ 1965 +                    if (!enc.Layer3Filename[i].StartsWith("t_"))  
+ 1966 +                    {  
+ 1967 +                        enc.Layer3Filename[i] = "t_es_" + enc.Layer3Filename[i];  
+ 1968 +                    }  
+ 1969 +                }  
+ 1970 +            }*/  
+         }  
+
+
+        //***************************************
 
         private void mergerEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {

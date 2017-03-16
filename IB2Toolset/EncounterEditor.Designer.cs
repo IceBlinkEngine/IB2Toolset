@@ -94,6 +94,11 @@
             this.chkUseMapImage = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timerRenderLoop = new System.Windows.Forms.Timer(this.components);
+
+            //this.flTileFilters = new System.Windows.Forms.FlowLayoutPanel();
+            //this.pnlFilters = new System.Windows.Forms.Panel();
+
+
             this.panel3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();

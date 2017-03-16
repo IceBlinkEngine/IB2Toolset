@@ -69,15 +69,29 @@ namespace IB2Toolset
         private string _skillModifierAttribute = "str";
         //private UsableInSituation useableInSituation = UsableInSituation.Always;
         private string _useableInSituation = "Always";
-        private string _spriteFilename = "none";
-        private string _spriteEndingFilename = "none";
-        private int _costSP = 0;
-        private string _traitTargetType = "Enemy";
+
+        //using associated spell for this
+        //private string _spriteFilename = "none";
+        //using associated spell for this
+        //private string _spriteEndingFilename = "none";
+
+        //using associated spell for this
+        //private int _costSP = 0;
+        //using associated spell for this 
+        //private string _traitTargetType = "Enemy";
+
         //private TargetType spellTargetType = TargetType.Enemy;
-        private string _traitEffectType = "Damage";
+
+        //using associated spell for this
+        //private string _traitEffectType = "Damage";
+
         //private EffectType spellEffectType = EffectType.Damage;
-        private int _aoeRadius = 0;
-        private int _range = 0;
+
+        //using associated spell for this
+        //private int _aoeRadius = 0;
+        //using associated spell for this
+        //private int _range = 0;
+
         //private ScriptSelectEditorReturnObject spellScript = new ScriptSelectEditorReturnObject();
         private string _traitScript = "none";
         private string _associatedSpellTag = "none";
@@ -201,6 +215,7 @@ namespace IB2Toolset
             set { _useableInSituation = value; }
         }
         //[Browsable(true), TypeConverter(typeof(SpriteConverter))]
+        /*
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the effect (Sprite Filename with extension)")]
         public string spriteFilename
         {
@@ -213,6 +228,8 @@ namespace IB2Toolset
                 _spriteFilename = value;
             }
         }
+        */
+        /*
         //[Browsable(true), TypeConverter(typeof(SpriteConverter))]
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the ending effect (Sprite Filename with extension)")]
         public string spriteEndingFilename
@@ -226,6 +243,8 @@ namespace IB2Toolset
                 _spriteEndingFilename = value;
             }
         }
+        */
+        /*
         [CategoryAttribute("01 - Main"), DescriptionAttribute("How much SP this Trait costs")]
         public int costSP
         {
@@ -238,6 +257,8 @@ namespace IB2Toolset
                 _costSP = value;
             }
         }
+        */
+
         /*[CategoryAttribute("02 - Target"), DescriptionAttribute("The type of target for this spell")]
         public TargetType SpellTargetType
         {
@@ -250,6 +271,8 @@ namespace IB2Toolset
                 spellTargetType = value;
             }
         }*/
+
+        /*
         [CategoryAttribute("02 - Target"), DescriptionAttribute("The type of target for this trait")]
         public string traitTargetType
         {
@@ -262,6 +285,8 @@ namespace IB2Toolset
                 _traitTargetType = value;
             }
         }
+        */
+
         /*[CategoryAttribute("03 - Effect"), DescriptionAttribute("damage = persistent, negative; heal = persistent, positive; buff = temporary, positive; debuff = temporary, negative")]
         public EffectType SpellEffectType
         {
@@ -274,6 +299,8 @@ namespace IB2Toolset
                 spellEffectType = value;
             }
         }*/
+
+        /*
         [CategoryAttribute("03 - Effect"), DescriptionAttribute("damage = persistent, negative; heal = persistent, positive; buff = temporary, positive; debuff = temporary, negative")]
         public string traitEffectType
         {
@@ -286,6 +313,9 @@ namespace IB2Toolset
                 _traitEffectType = value;
             }
         }
+        */
+
+        /*
         [CategoryAttribute("02 - Target"), DescriptionAttribute("the radius of the AoE")]
         public int aoeRadius
         {
@@ -298,6 +328,8 @@ namespace IB2Toolset
                 _aoeRadius = value;
             }
         }
+        */
+        /*
         [CategoryAttribute("02 - Target"), DescriptionAttribute("the range allowed to the center or beginning of the AoE")]
         public int range
         {
@@ -310,6 +342,8 @@ namespace IB2Toolset
                 _range = value;
             }
         }
+        */
+
         /*[CategoryAttribute("01 - Main"), DescriptionAttribute("the script to use for this Spell")]
         [Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public ScriptSelectEditorReturnObject SpellScript

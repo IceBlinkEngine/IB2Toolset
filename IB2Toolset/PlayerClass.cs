@@ -80,6 +80,9 @@ namespace IB2Toolset
         //sort later which type of spell labeling to use
         private string _spellLabelSingular = "Spell";  
         private string _spellLabelPlural = "Spells";
+        private int[] _traitsToLearnAtLevelTable = new int[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };  
+        private int[] _spellsToLearnAtLevelTable = new int[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
 
         #endregion
 
@@ -303,7 +306,35 @@ namespace IB2Toolset
             {
                 _xpTable = value;
             }
-        }        
+        }
+
+        [CategoryAttribute("02 - Stat Development"), DescriptionAttribute("define how many spells can be learned at each level...depends on if there are any available to learn.")]  
+        public int[] spellsToLearnAtLevelTable  
+        {  
+             get  
+             {  
+                 return _spellsToLearnAtLevelTable;  
+             }  
+             set  
+             {  
+                 _spellsToLearnAtLevelTable = value;  
+             }  
+         }  
+   
+         [CategoryAttribute("02 - Stat Development"), DescriptionAttribute("define how many traits can be learned at each level...depends on if there are any available to learn.")]  
+         public int[] traitsToLearnAtLevelTable
+         {  
+             get  
+             {  
+                 return _traitsToLearnAtLevelTable;  
+             }  
+             set  
+             {  
+                 _traitsToLearnAtLevelTable = value;  
+             }  
+         }  
+
+             
         [CategoryAttribute("03 - Allowed"), DescriptionAttribute("A list of items that the class can use"), Browsable(false), ReadOnly(true)]
         public List<ItemRefs> itemsAllowed
         {

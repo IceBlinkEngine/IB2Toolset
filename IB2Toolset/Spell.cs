@@ -68,7 +68,8 @@ namespace IB2Toolset
             Debuff = 3  //usually temporary and negative for effect target
         }
 
-        #region Fields        
+        #region Fields      
+        private bool _usesTurnToActivate = true; //some spells, especially called via active traits, are meant to be used in the same turn such as Power Attack and Set Trap    
         private string _name = "newSpell"; //item name
         private string _tag = "newSpellTag"; //item unique tag name
         private string _spellImage = "sp_magebolt";
@@ -101,6 +102,14 @@ namespace IB2Toolset
         #endregion
 
         #region Properties
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("if true, the use of this trait in combat will consume that player's turn. If false, the player will get to use this trait and continue their turn. Some traits are meant to be used in the same turn such as Power Attack and Set Trap.")]  
+        public bool usesTurnToActivate  
+        {  
+             get { return _usesTurnToActivate; }  
+             set { _usesTurnToActivate = value; }  
+        }  
+
         [CategoryAttribute("02 - Target"), DescriptionAttribute("Does this spell apply effects to combat squares?")]  
          public bool isUsedForCombatSquareEffect
         {  

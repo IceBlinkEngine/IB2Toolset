@@ -25,6 +25,11 @@ namespace IB2Toolset
         private int _currentDurationInUnits = 0;
         private int _startingTimeInUnits = 0;
         private int _babModifier = 0;
+
+        private int _babModifierForRangedAttack = 0;  
+        private int _damageModifierForMeleeAttack = 0;  
+        private int _damageModifierForRangedAttack = 0;
+
         private int _acModifier = 0;
         private bool _isStackableEffect = false;
         private bool _isStackableDuration = false;
@@ -58,6 +63,7 @@ namespace IB2Toolset
 
         //HEAL (hp)
         private bool _doHeal = false;
+        private bool _healHP = true; //if true, heals HP. If false, heals SP 
         private string _healType = "Organic"; //Organic (living things), NonOrganic (robots, constructs)
         //(for reference) HealActions: AdB+C for every D levels after level E up to F levels total
         private int _healNumOfDice = 0; //(A)how many dice to roll
@@ -87,6 +93,10 @@ namespace IB2Toolset
         private int _modifyHpMax = 0;
         private int _modifySpMax = 0;
         private int _modifySp = 0;
+
+        private int _modifyHpInCombat = 0;  
+        private int _modifySpInCombat = 0;
+
         private int _modifyDamageTypeResistanceAcid = 0;
         private int _modifyDamageTypeResistanceCold = 0;
         private int _modifyDamageTypeResistanceNormal = 0;
@@ -96,6 +106,14 @@ namespace IB2Toolset
         private int _modifyDamageTypeResistancePoison = 0;
         private int _modifyNumberOfMeleeAttacks = 0;
         private int _modifyNumberOfRangedAttacks = 0;
+
+        private int _modifyNumberOfEnemiesAttackedOnCleave = 0; //(melee only) cleave attacks are only made if previous attacked enemy goes down.  
+        private int _modifyNumberOfEnemiesAttackedOnSweepAttack = 0; //(melee only) sweep attack simultaneously attacks multiple enemies in range  
+        private bool _useDexterityForMeleeAttackModifierIfGreaterThanStrength = false;  
+        private bool _useDexterityForMeleeDamageModifierIfGreaterThanStrength = false;  
+        private bool _negateAttackPenaltyForAdjacentEnemyWithRangedAttack = false;  
+        private bool _useEvasion = false; //if true, do half damage on failed DC check and no damage with successful DC check against spells/traits   
+
         public List<LocalImmunityString> traitWorksOnlyWhen = new List<LocalImmunityString>();
         public List<LocalImmunityString> traitWorksNeverWhen = new List<LocalImmunityString>();
         #endregion
@@ -226,12 +244,33 @@ namespace IB2Toolset
                 _startingTimeInUnits = value;
             }
         }
-        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from BAB")]
+        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from BAB for melee attacks")]
         public int babModifier
         {
             get { return _babModifier; }
             set { _babModifier = value; }
         }
+
+        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from BAB for ranged attacks")]  
+        public int babModifierForRangedAttack  
+        {  
+             get { return _babModifierForRangedAttack; }  
+             set { _babModifierForRangedAttack = value; }  
+        }  
+        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from damage for melee attacks")]  
+        public int damageModifierForMeleeAttack
+        {  
+             get { return _damageModifierForMeleeAttack; }  
+             set { _damageModifierForMeleeAttack = value; }  
+        }  
+        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from damage for ranged attacks")]  
+        public int damageModifierForRangedAttack
+        {  
+             get { return _damageModifierForRangedAttack; }  
+             set { _damageModifierForRangedAttack = value; }  
+         }  
+
+
         [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from Armor Class")]
         public int acModifier
         {
@@ -430,6 +469,13 @@ namespace IB2Toolset
             get { return _doHeal; }
             set { _doHeal = value; }
         }
+        [CategoryAttribute("02 - Heal"), DescriptionAttribute("set to true if this Effect will heal HPs, set to fasle to 'heal' SP instead (think rejuvenation type spells to recoupe SP).")]  
+        public bool healHP  
+        {  
+            get { return _healHP; }  
+            set { _healHP = value; }  
+        }  
+
         [CategoryAttribute("02 - Heal"), DescriptionAttribute("Organic (living things), NonOrganic (robots, constructs)")]
         public string healType
         {
@@ -574,6 +620,20 @@ namespace IB2Toolset
             get { return _modifySp; }
             set { _modifySp = value; }
         }
+
+        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount. Is used for combat hp regeneration type trait effects on each round. For Passive type traits only.")]  
+        public int modifyHpInCombat  
+        {  
+             get { return _modifyHpInCombat; }  
+             set { _modifyHpInCombat = value; }  
+        }  
+         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount. Is used for combat sp regeneration type trait effects on each round. For Passive type traits only.")]  
+         public int modifySpInCombat
+         {  
+             get { return _modifySpInCombat; }  
+             set { _modifySpInCombat = value; }  
+         }  
+
         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyDamageTypeResistanceAcid
         {
@@ -628,6 +688,44 @@ namespace IB2Toolset
             get { return _modifyNumberOfRangedAttacks; }
             set { _modifyNumberOfRangedAttacks = value; }
         }
+
+        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("number of enemies that can be targeted in one round upon succesive cleave atacks (melee only). Cleave attacks are only made if previous attacked enemy goes down")]  
+        public int modifyNumberOfEnemiesAttackedOnCleave
+        {  
+             get { return _modifyNumberOfEnemiesAttackedOnCleave; }  
+             set { _modifyNumberOfEnemiesAttackedOnCleave = value; }  
+        }  
+        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("number of adjacent enemies that will be attacked in one round. This will not make multiple attacks on one target (like two attack trait), only one attack per target.")]  
+        public int modifyNumberOfEnemiesAttackedOnSweepAttack
+        {  
+             get { return _modifyNumberOfEnemiesAttackedOnSweepAttack; }  
+             set { _modifyNumberOfEnemiesAttackedOnSweepAttack = value; }  
+        }  
+        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("if true, will use dexterity for melee attack modifier instead of strength if dexterity is greater than strength.")]  
+        public bool useDexterityForMeleeAttackModifierIfGreaterThanStrength
+        {  
+             get { return _useDexterityForMeleeAttackModifierIfGreaterThanStrength; }  
+             set { _useDexterityForMeleeAttackModifierIfGreaterThanStrength = value; }  
+         }  
+         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("if true, will use dexterity for melee damage modifier instead of strength if dexterity is greater than strength.")]  
+         public bool useDexterityForMeleeDamageModifierIfGreaterThanStrength
+         {  
+             get { return _useDexterityForMeleeDamageModifierIfGreaterThanStrength; }  
+             set { _useDexterityForMeleeDamageModifierIfGreaterThanStrength = value; }  
+         }  
+         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("if true, will ignore any attack penalty for using ranged attack with an enemy in an adjacent square (think point blank shot trait).")]  
+         public bool negateAttackPenaltyForAdjacentEnemyWithRangedAttack
+         {  
+             get { return _negateAttackPenaltyForAdjacentEnemyWithRangedAttack; }  
+             set { _negateAttackPenaltyForAdjacentEnemyWithRangedAttack = value; }  
+         }  
+         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("if true, will do half damage for failed DC checks against damage effects and no damage for successful DC checks (think evasion trait).")]  
+         public bool useEvasion
+         {  
+             get { return _useEvasion; }  
+             set { _useEvasion = value; }  
+         }  
+
         #endregion
 
         public Effect()

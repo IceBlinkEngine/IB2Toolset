@@ -603,50 +603,59 @@ namespace IB2Toolset
             if (!mouseInMapArea(gridX, gridY)) { return; }
             lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
             panelView.Focus();
-            /*//GDI if (prntForm.PropSelected)
+            if (prntForm.PropSelected)
             {
-                refreshMap(true);
-                try
-                {
-                    if (selectedBitmap != null)
-                    {
-                        //source image size
-                        Rectangle frame = new Rectangle(0, 0, selectedBitmap.Width, selectedBitmap.Height);
-                        //target location
-                        Rectangle target = new Rectangle(gridX * sqr, gridY * sqr, sqr, sqr);
-                        //draw sprite
-                        device.DrawImage((Image)selectedBitmap, target, frame, GraphicsUnit.Pixel);
-                    }
-                }
-                catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
-                //save changes
-                UpdatePB();
+
             }
             else if (currentPoint != new Point(gridX, gridY))
             {
-                //if painting tiles or walkable or Line-of-sight squares, allow multiple square painting if left mouse button down and move
-                if (prntForm.CreatureSelected)
+                clickDrawArea(e);
+            } 
+
+                /*//GDI if (prntForm.PropSelected)
                 {
-                    return; //don't allow painting multiple creatures by mouse down and move
-                }
-                if (e.Button == MouseButtons.Left)
-                {
-                    //if painting tiles or walkable or Line-of-sight squares, allow multiple square painting if LEFT mouse button down and move
-                    if ((rbtnPaintTile.Checked) || (rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                    refreshMap(true);
+                    try
                     {
-                        clickDrawArea(e);
+                        if (selectedBitmap != null)
+                        {
+                            //source image size
+                            Rectangle frame = new Rectangle(0, 0, selectedBitmap.Width, selectedBitmap.Height);
+                            //target location
+                            Rectangle target = new Rectangle(gridX * sqr, gridY * sqr, sqr, sqr);
+                            //draw sprite
+                            device.DrawImage((Image)selectedBitmap, target, frame, GraphicsUnit.Pixel);
+                        }
                     }
+                    catch (Exception ex) { MessageBox.Show("failed mouse move: " + ex.ToString()); }
+                    //save changes
+                    UpdatePB();
                 }
-                else if (e.Button == MouseButtons.Right)
+                else if (currentPoint != new Point(gridX, gridY))
                 {
-                    //if painting walkable or Line-of-sight squares, allow multiple square painting if RIGHT mouse button down and move
-                    if ((rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                    //if painting tiles or walkable or Line-of-sight squares, allow multiple square painting if left mouse button down and move
+                    if (prntForm.CreatureSelected)
                     {
-                        clickDrawArea(e);
+                        return; //don't allow painting multiple creatures by mouse down and move
                     }
-                }
-            }*/
-        }
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        //if painting tiles or walkable or Line-of-sight squares, allow multiple square painting if LEFT mouse button down and move
+                        if ((rbtnPaintTile.Checked) || (rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                        {
+                            clickDrawArea(e);
+                        }
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                        //if painting walkable or Line-of-sight squares, allow multiple square painting if RIGHT mouse button down and move
+                        if ((rbtnWalkable.Checked) || (rbtnLoS.Checked))
+                        {
+                            clickDrawArea(e);
+                        }
+                    }
+                }*/
+            }
         private void panelView_MouseDown(object sender, MouseEventArgs e)
         {
             /*

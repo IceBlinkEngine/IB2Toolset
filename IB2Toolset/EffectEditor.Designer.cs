@@ -144,7 +144,8 @@
             this.groupBox4.Size = new System.Drawing.Size(329, 141);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Heal Action";
+            //this.groupBox4.Text = "Heal Action";
+            this.groupBox4.Text = "Heal Action (\"heals\" either HP or SP, see \"healHP\" setting)";
             // 
             // label2
             // 
