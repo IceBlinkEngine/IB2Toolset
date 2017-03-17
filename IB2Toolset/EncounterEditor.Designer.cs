@@ -95,11 +95,12 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timerRenderLoop = new System.Windows.Forms.Timer(this.components);
 
-            //this.flTileFilters = new System.Windows.Forms.FlowLayoutPanel();
-            //this.pnlFilters = new System.Windows.Forms.Panel();
+            this.flTileFilters = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlFilters = new System.Windows.Forms.Panel();
 
 
             this.panel3.SuspendLayout();
+            this.pnlFilters.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -112,6 +113,7 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numGold)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.pnlFilters.SuspendLayout();
             this.panelNoScrollOnFocus1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,9 +133,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.AutoScroll = true;
             this.panel3.Controls.Add(this.flPanelTab1);
-            this.panel3.Location = new System.Drawing.Point(1028, 12);
+            //this.panel3.Location = new System.Drawing.Point(1028, 12);
+            this.panel3.Location = new System.Drawing.Point(1028, 178);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(140, 644);
+            //this.panel3.Size = new System.Drawing.Size(140, 644);
+            this.panel3.Size = new System.Drawing.Size(140, 554);
             this.panel3.TabIndex = 68;
             // 
             // flPanelTab1
@@ -826,15 +830,35 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // timerRenderLoop
-            // 
+            //
             this.timerRenderLoop.Interval = 16;
             this.timerRenderLoop.Tick += new System.EventHandler(this.timerRenderLoop_Tick);
-            // 
+            //
+            // flTileFilters  
+            //   
+            this.flTileFilters.Location = new System.Drawing.Point(3, 5);
+            this.flTileFilters.Name = "flTileFilters";
+            this.flTileFilters.Size = new System.Drawing.Size(118, 300);
+            this.flTileFilters.TabIndex = 0;
+            //   
+            // pnlFilters  
+            //   
+            this.pnlFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlFilters.AutoScroll = true;
+            this.pnlFilters.Controls.Add(this.flTileFilters);
+            this.pnlFilters.Location = new System.Drawing.Point(1028, 12);
+            this.pnlFilters.MaximumSize = new System.Drawing.Size(140, 160);
+            this.pnlFilters.MinimumSize = new System.Drawing.Size(140, 160);
+            this.pnlFilters.Name = "pnlFilters";
+            this.pnlFilters.Size = new System.Drawing.Size(140, 160);
+            this.pnlFilters.TabIndex = 69;
+            //    
             // EncounterEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6f, 14f);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 668);
+            this.Controls.Add(this.pnlFilters);
             this.Controls.Add(this.chkUseMapImage);
             this.Controls.Add(this.btnLoadMap);
             this.Controls.Add(this.groupBox4);
@@ -872,6 +896,7 @@
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numGold)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            this.pnlFilters.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.panelNoScrollOnFocus1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -941,6 +966,8 @@
         private System.Windows.Forms.Button btnRemoveItems;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.FlowLayoutPanel flTileFilters;  
+        private System.Windows.Forms.Panel pnlFilters;
         private System.Windows.Forms.Button btnLoadMap;
         private System.Windows.Forms.CheckBox chkUseMapImage;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;

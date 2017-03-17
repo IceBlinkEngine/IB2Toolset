@@ -111,9 +111,10 @@ namespace IB2Toolset
             
             mod = m;
             prntForm = p;
-            resetTileToBePlacedSettings();            
-            createTileImageButtons();
-            
+            resetTileToBePlacedSettings();
+            //createTileImageButtons();
+            createTileImageButtons("t_");
+
             //prntForm._mainDirectory = Directory.GetCurrentDirectory();
             if (useDirect2D)
             {
@@ -170,6 +171,106 @@ namespace IB2Toolset
         private void btnSynchArea_Click(object sender, EventArgs e)
         {
             synchLevel();
+        }
+
+
+        private void btnTileFilter_Click(object sender, EventArgs e)
+        {  
+             Button selectBtn = (Button)sender;  
+             createTileImageButtons(selectBtn.Text);  
+        }
+
+
+    private void createTileImageButtons(string filter)
+        {
+            try
+            {
+
+                //create list of tile prefixes  
+                //loop through list and create buttons using name of prefix for btn.Text  
+                this.flTileFilters.Controls.Clear();
+                foreach (string f in prntForm.tilePrefixFilterList)
+                {
+                    Button btnTileFilter = new Button();
+                    btnTileFilter.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+                    btnTileFilter.FlatAppearance.BorderSize = 2;
+                    btnTileFilter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+                    btnTileFilter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
+                    btnTileFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                    btnTileFilter.Size = new System.Drawing.Size(52, 25);
+                    btnTileFilter.Text = f;
+                    btnTileFilter.UseVisualStyleBackColor = true;
+                    btnTileFilter.Click += new System.EventHandler(this.btnTileFilter_Click);
+                    this.flTileFilters.Controls.Add(btnTileFilter);
+                }
+
+                this.flPanelTab1.Controls.Clear();
+                tileList.Clear();
+                foreach (string f in Directory.GetFiles(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\tiles\\", "*.png"))
+                {
+                    if (!Path.GetFileName(f).StartsWith(filter))
+                    {
+                        continue;
+                    }
+                    string filename = Path.GetFullPath(f);
+                    using (Bitmap bit = new Bitmap(filename))
+                    {
+                        //bit = ResizeBitmap(bit, 50, 50);
+                        Button btnNew = new Button();
+                        btnNew.BackgroundImage = (Image)bit.Clone();
+                        btnNew.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+                        btnNew.FlatAppearance.BorderSize = 2;
+                        btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+                        btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
+                        btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                        btnNew.Size = new System.Drawing.Size(50 + 2, 50 + 2);
+                        btnNew.BackgroundImageLayout = ImageLayout.Zoom;
+                        btnNew.Text = Path.GetFileNameWithoutExtension(f);
+                        btnNew.UseVisualStyleBackColor = true;
+                        btnNew.Click += new System.EventHandler(this.btnSelectedTerrain_Click);
+                        this.flPanelTab1.Controls.Add(btnNew);
+
+                        //fill tileList as well
+                        TileBitmapNamePair t = new TileBitmapNamePair((Bitmap)bit.Clone(), Path.GetFileNameWithoutExtension(f));
+                        tileList.Add(t);
+                    }
+                }
+
+                foreach (string f in Directory.GetFiles(prntForm._mainDirectory + "\\default\\" + "NewModule" + "\\tiles\\", "*.png"))
+                {
+                    if (!Path.GetFileName(f).StartsWith(filter))
+                    {
+                        continue;
+                    }
+                    string filename = Path.GetFullPath(f);
+                    using (Bitmap bit = new Bitmap(filename))
+                    {
+                        //bit = ResizeBitmap(bit, 50, 50);
+                        Button btnNew = new Button();
+                        btnNew.BackgroundImage = (Image)bit.Clone();
+                        btnNew.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+                        btnNew.FlatAppearance.BorderSize = 2;
+                        btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+                        btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
+                        btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                        btnNew.Size = new System.Drawing.Size(50 + 2, 50 + 2);
+                        btnNew.BackgroundImageLayout = ImageLayout.Zoom;
+                        btnNew.Text = Path.GetFileNameWithoutExtension(f);
+                        btnNew.UseVisualStyleBackColor = true;
+                        btnNew.Click += new System.EventHandler(this.btnSelectedTerrain_Click);
+                        this.flPanelTab1.Controls.Add(btnNew);
+
+                        //fill tileList as well
+                        TileBitmapNamePair t = new TileBitmapNamePair((Bitmap)bit.Clone(), Path.GetFileNameWithoutExtension(f));
+                        tileList.Add(t);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error: " + ex.ToString());
+            }
         }
 
 

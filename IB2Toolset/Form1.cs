@@ -42,6 +42,7 @@ namespace IB2Toolset
         public List<string> scriptList = new List<string>();
         public List<Condition> copiedConditionalsList = new List<Condition>();
         public List<Action> copiedActionsList = new List<Action>();
+        public List<string> tilePrefixFilterList = new List<string>();
         public string selectedEncounterCreatureTag = "";
         public string selectedEncounterPropTag = "";
         public string selectedEncounterTriggerTag = "";
@@ -480,8 +481,81 @@ namespace IB2Toolset
                 openEffects(directory + "\\data\\effects.json");
                 refreshDropDownLists();
                 this.Text = "IceBlink 2 Toolset - " + mod.moduleLabelName;
+                createTilePrefixFilterList();
             }
         }
+
+        public void createTilePrefixFilterList()
+         {
+            //t_f_ for floors, t_n_ for nature, t_m_ for manmade and t_w_ for walls
+        
+             tilePrefixFilterList.Clear();  
+             tilePrefixFilterList.Add("t_");  
+             try  
+             {
+
+                /*
+                foreach (ImageData imd in mod.moduleImageDataList)  
+                 {  
+                     if (!imd.name.StartsWith("t_"))  
+                     {  
+                         continue;  
+                     }  
+                     string[] split = imd.name.Split('_');  
+                     if (split.Length > 2)  
+                     {  
+                         string s = "t_" + split[1];  
+                         if (!tilePrefixFilterList.Contains(s))  
+                         {  
+                             tilePrefixFilterList.Add(s);  
+                         }                          
+                     }  
+                 }
+                 */
+                   
+                 foreach (string f in Directory.GetFiles(_mainDirectory + "\\default\\NewModule\\tiles\\", "*.png"))  
+                 {  
+                     if (!Path.GetFileName(f).StartsWith("t_"))  
+                     {  
+                         continue;  
+                     }  
+                     string filename = Path.GetFileNameWithoutExtension(f);  
+                     string[] split = filename.Split('_');  
+                     if (split.Length > 2)  
+                     {  
+                         string s = "t_" + split[1];  
+                         if (!tilePrefixFilterList.Contains(s))  
+                         {  
+                             tilePrefixFilterList.Add(s);  
+                         }  
+                     }  
+                 }
+
+                foreach (string f in Directory.GetFiles(_mainDirectory + "\\modules\\" + mod.moduleName +"\\tiles\\", "*.png"))
+                {
+                    if (!Path.GetFileName(f).StartsWith("t_"))
+                    {
+                        continue;
+                    }
+                    string filename = Path.GetFileNameWithoutExtension(f);
+                    string[] split = filename.Split('_');
+                    if (split.Length > 2)
+                    {
+                        string s = "t_" + split[1];
+                        if (!tilePrefixFilterList.Contains(s))
+                        {
+                            tilePrefixFilterList.Add(s);
+                        }
+                    }
+                }
+
+            }  
+             catch (Exception ex)  
+             {  
+                 MessageBox.Show("error: " + ex.ToString());
+            }  
+     }  
+
         public void refreshDropDownLists()
         {
             fillScriptList();
