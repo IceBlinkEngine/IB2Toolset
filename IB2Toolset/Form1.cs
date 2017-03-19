@@ -137,6 +137,10 @@ namespace IB2Toolset
             //game.errorLog("Starting IceBlink Toolset");
             saveAsTemp();
 
+            //hope this fits for IB2, too
+            Text = "IceBlink 2 Toolset - " + mod.moduleLabelName;
+            createTilePrefixFilterList();
+
             //fill all lists
             DropdownStringLists.aiTypeStringList = new List<string> { "BasicAttacker", "GeneralCaster" };
             DropdownStringLists.damageTypeStringList = new List<string> { "Normal", "Acid", "Cold", "Electricity", "Fire", "Magic", "Poison" };
@@ -158,6 +162,158 @@ namespace IB2Toolset
             else if (File.Exists(configFile))
                 File.Delete(configFile);
         }
+
+        //******************************************************************
+          
+         private void tsBtnChangePrefix_Click(object sender, EventArgs e)
+         {  
+             readPrefixChangeFile();
+            MessageBox.Show("Finished swapping names.");
+        }  
+   
+         public void readPrefixChangeFile()
+         {  
+             string[] lines = File.ReadAllLines(_mainDirectory + "\\prefix_change.txt");  
+             foreach (string line in lines)  
+             {  
+                 if (line.Trim(' ').StartsWith("//"))  
+                 {  
+                     continue;  
+                 }  
+                 string[] name = line.Split(',');  
+                 if (name.Length > 1)  
+                 {  
+                     switchGraphicsFilenames(name[0].Trim(' '), name[1].Trim(' '));  
+                 }                  
+             }  
+        }
+
+        public void switchGraphicsFilenames(string oldname, string newname)
+         {  
+             //iterate through each line and get old name and new name  
+             foreach (Creature crt in mod.moduleCreaturesList)  
+             {  
+                 if (crt.cr_projSpriteFilename.Equals(oldname)) { crt.cr_projSpriteFilename = newname; }  
+                 if (crt.cr_spriteEndingFilename.Equals(oldname)) { crt.cr_spriteEndingFilename = newname; }  
+                 if (crt.cr_tokenFilename.Equals(oldname)) { crt.cr_tokenFilename = newname; }  
+             }  
+             foreach (Item it in mod.moduleItemsList)  
+             {  
+                 if (it.projectileSpriteFilename.Equals(oldname)) { it.projectileSpriteFilename = newname; }  
+                 if (it.spriteEndingFilename.Equals(oldname)) { it.spriteEndingFilename = newname; }  
+                 if (it.itemImage.Equals(oldname)) { it.itemImage = newname; }  
+             }
+
+            //add prop images to the graphics needed list  
+            foreach (Area ar in mod.moduleAreasObjects)
+            {
+                foreach (Prop prp in ar.Props)
+                {
+                    if (prp.ImageFileName.Equals(oldname)) { prp.ImageFileName = newname; }
+                }
+            }
+
+            //tiles world map
+            foreach (Area ar in mod.moduleAreasObjects)
+            {
+                foreach (Tile t in ar.Tiles)
+                {
+                    if (t.Layer1Filename.Equals(oldname))
+                    {
+                        t.Layer1Filename = newname;
+                    }
+                    if (t.Layer2Filename.Equals(oldname))
+                    {
+                        t.Layer2Filename = newname;
+                    }
+                    if (t.Layer3Filename.Equals(oldname))
+                    {
+                        t.Layer3Filename = newname;
+                    }
+                    if (t.Layer4Filename.Equals(oldname))
+                    {
+                        t.Layer4Filename = newname;
+                    }
+                    if (t.Layer5Filename.Equals(oldname))
+                    {
+                        t.Layer5Filename = newname;
+                    }
+                }
+            }
+                        
+             foreach (Encounter enc in mod.moduleEncountersList)  
+             {
+                foreach (TileEnc enct in enc.encounterTiles)
+                {
+                    if (enct.Layer1Filename.Equals(oldname))
+                    {
+                        enct.Layer1Filename = newname;
+                    }
+                    if (enct.Layer2Filename.Equals(oldname))
+                    {
+                        enct.Layer2Filename = newname;
+                    }
+                    if (enct.Layer3Filename.Equals(oldname))
+                    {
+                        enct.Layer3Filename = newname;
+                    }
+                }
+                /*
+                for (int i = 0; i<enc.Layer1Filename.Count; i++)  
+                 {  
+                     if (enc.Layer1Filename[i].Equals(oldname)) { enc.Layer1Filename[i] = newname; }  
+                 }  
+                 for (int i = 0; i<enc.Layer2Filename.Count; i++)  
+                 {  
+                     if (enc.Layer2Filename[i].Equals(oldname)) { enc.Layer2Filename[i] = newname; }  
+                 }  
+                 for (int i = 0; i<enc.Layer3Filename.Count; i++)  
+                 {  
+                     if (enc.Layer3Filename[i].Equals(oldname)) { enc.Layer3Filename[i] = newname; }  
+                 }  
+                 foreach (Prop prp in enc.propsList)  
+                 {  
+                     if (prp.ImageFileName.Equals(oldname)) { prp.ImageFileName = newname; }  
+                 }
+                 */
+            }  
+
+             //skipping adjustng convo graphics for now a sthe cnovo are not listed (?)
+             /*
+             foreach (String convoname in mod.conv)  
+             {
+                //getCreature("a");
+                if (cnv.NpcPortraitBitmap.Equals(oldname)) { cnv.NpcPortraitBitmap = newname; }  
+                 foreach (ContentNode subNode in cnv.subNodes)  
+                 {  
+                     switchAllNodePortraits(subNode, oldname, newname);  
+                     if (subNode.NodePortraitBitmap.Equals(oldname)) { subNode.NodePortraitBitmap = newname; }  
+                 }  
+             } 
+             */ 
+             //go through convos, items, area tiles, encounter tiles,   
+         }
+          
+        //not used so far in IB2(?)
+         public ContentNode switchAllNodePortraits(ContentNode node, string oldname, string newname)
+         {  
+             ContentNode tempNode = null;  
+             if (node != null)  
+             {  
+                 if (node.NodePortraitBitmap.Equals(oldname)) { node.NodePortraitBitmap = newname; }  
+             }  
+             foreach (ContentNode subNode in node.subNodes)  
+             {  
+                 tempNode = switchAllNodePortraits(subNode, oldname, newname);  
+                 if (tempNode != null)  
+                 {  
+                     return tempNode;  
+                 }  
+             }  
+             return tempNode;  
+         }  
+
+        //********************************************************************
         private IDockContent GetContentFromPersistString(string persistString)
         {
             if (persistString == typeof(IceBlinkProperties).ToString())
@@ -523,8 +679,8 @@ namespace IB2Toolset
                      string[] split = filename.Split('_');  
                      if (split.Length > 2)  
                      {  
-                         string s = "t_" + split[1];  
-                         if (!tilePrefixFilterList.Contains(s))  
+                         string s = "t_" + split[1] + "_";
+                        if (!tilePrefixFilterList.Contains(s))  
                          {  
                              tilePrefixFilterList.Add(s);  
                          }  
@@ -541,7 +697,7 @@ namespace IB2Toolset
                     string[] split = filename.Split('_');
                     if (split.Length > 2)
                     {
-                        string s = "t_" + split[1];
+                        string s = "t_" + split[1] + "_";
                         if (!tilePrefixFilterList.Contains(s))
                         {
                             tilePrefixFilterList.Add(s);

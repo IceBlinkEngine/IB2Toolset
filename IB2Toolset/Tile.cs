@@ -69,12 +69,12 @@ namespace IB2Toolset
         public bool allowOppositeHighlightS = true;
         public bool allowOppositeHighlightW = true;
 
-        public string Layer0Filename = "t_blank";
-        public string Layer1Filename = "t_blank";
-        public string Layer2Filename = "t_blank";
-        public string Layer3Filename = "t_blank";
-        public string Layer4Filename = "t_blank";
-        public string Layer5Filename = "t_blank";
+        public string Layer0Filename = "t_a_blank";
+        public string Layer1Filename = "t_a_blank";
+        public string Layer2Filename = "t_a_blank";
+        public string Layer3Filename = "t_a_blank";
+        public string Layer4Filename = "t_a_blank";
+        public string Layer5Filename = "t_a_blank";
         public int Layer1Rotate = 0;
         public int Layer2Rotate = 0;
         public int Layer3Rotate = 0;

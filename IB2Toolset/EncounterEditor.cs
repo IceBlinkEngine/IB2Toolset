@@ -1555,7 +1555,7 @@ namespace IB2Toolset
                     for (int x = 0; x < thisEnc.MapSizeX; x++)
                     {
                         TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
-                        if (!tile.Layer1Filename.Equals("t_blank"))
+                        if (!tile.Layer1Filename.Equals("t_a_blank"))
                         {
                             float scalerX = GetFromBitmapList(tile.Layer1Filename).PixelSize.Width / 100;
                             float scalerY = GetFromBitmapList(tile.Layer1Filename).PixelSize.Height / 100;
@@ -1575,7 +1575,7 @@ namespace IB2Toolset
                     for (int x = 0; x < thisEnc.MapSizeX; x++)
                     {
                         TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
-                        if (!tile.Layer2Filename.Equals("t_blank"))
+                        if (!tile.Layer2Filename.Equals("t_a_blank"))
                         {
                             float scalerX = GetFromBitmapList(tile.Layer2Filename).PixelSize.Width / 100;
                             float scalerY = GetFromBitmapList(tile.Layer2Filename).PixelSize.Height / 100;
@@ -1595,7 +1595,7 @@ namespace IB2Toolset
                     for (int x = 0; x < thisEnc.MapSizeX; x++)
                     {
                         TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
-                        if (!tile.Layer3Filename.Equals("t_blank"))
+                        if (!tile.Layer3Filename.Equals("t_a_blank"))
                         {
                             float scalerX = GetFromBitmapList(tile.Layer3Filename).PixelSize.Width / 100;
                             float scalerY = GetFromBitmapList(tile.Layer3Filename).PixelSize.Height / 100;

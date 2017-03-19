@@ -111,6 +111,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tilesUsedInModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
+            this.tsBtnChangePrefix = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,7 +130,8 @@
             this.tsbSaveIncremental,
             this.toolStripSeparator4,
             this.tsBtnResetDropDowns,
-            this.tsBtnDataCheck});
+            this.tsBtnDataCheck,
+            this.tsBtnChangePrefix});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(817, 27);
@@ -144,6 +146,18 @@
             this.newToolStripButton.Size = new System.Drawing.Size(23, 24);
             this.newToolStripButton.Text = "&New";
             this.newToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
+            //
+            // tsBtnChangePrefix  
+            //  
+            this.tsBtnChangePrefix.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.tsBtnChangePrefix.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnChangePrefix.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnChangePrefix.Name = "tsBtnChangePrefix";
+            this.tsBtnChangePrefix.Size = new System.Drawing.Size(138, 24);
+            this.tsBtnChangePrefix.Text = "Update Graphics Names";
+            this.tsBtnChangePrefix.ToolTipText = "Runs the name changes from the \'prefix_change.txt\' file swapping any image name. " +
+            "See the \'prefix_change.txt\' file for more info.";
+            this.tsBtnChangePrefix.Click += new System.EventHandler(this.tsBtnChangePrefix_Click);
             // 
             // openToolStripButton
             // 
@@ -793,6 +807,7 @@
         private System.Windows.Forms.ToolStripMenuItem iBScriptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rulesEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tilesUsedInModuleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tsBtnChangePrefix;
     }
 }
 

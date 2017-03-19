@@ -113,6 +113,9 @@ namespace IB2Toolset
         private bool _useDexterityForMeleeDamageModifierIfGreaterThanStrength = false;  
         private bool _negateAttackPenaltyForAdjacentEnemyWithRangedAttack = false;  
         private bool _useEvasion = false; //if true, do half damage on failed DC check and no damage with successful DC check against spells/traits   
+        private int _modifyShopBuyBackPrice = 0;  
+        private int _modifyShopSellPrice = 0;
+
 
         public List<LocalImmunityString> traitWorksOnlyWhen = new List<LocalImmunityString>();
         public List<LocalImmunityString> traitWorksNeverWhen = new List<LocalImmunityString>();
@@ -131,6 +134,20 @@ namespace IB2Toolset
                 _name = value;
             }
         }
+
+
+        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative change in percent represented as integer. (example: to increase by 10%, enter 10. to decrease by 20%, enter -20)")]  
+         public int modifyShopBuyBackPrice  
+        {  
+             get { return _modifyShopBuyBackPrice; }  
+             set { _modifyShopBuyBackPrice = value; }  
+         }  
+         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative change in percent represented as integer. (example: to increase by 10%, enter 10. to decrease by 20%, enter -20)")]  
+         public int modifyShopSellPrice
+         {  
+             get { return _modifyShopSellPrice; }  
+             set { _modifyShopSellPrice = value; }  
+         }  
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Entries added here mark pc (trait tags) and creatures (local string values) that are immune to this effect.")]
         public List<LocalImmunityString> affectNeverList

@@ -56,7 +56,10 @@ namespace IB2Toolset
             {
                 selectedGlobalLbxIndex = lbxGlobals.SelectedIndex;
                 lbxGlobals.SelectedIndex = selectedGlobalLbxIndex;
-                txtGlobalNotes.Text = mod.ModuleGlobalListItems[lbxGlobals.SelectedIndex].GlobalNotes;
+                if (lbxGlobals.SelectedIndex >= 0)
+                {
+                    txtGlobalNotes.Text = mod.ModuleGlobalListItems[lbxGlobals.SelectedIndex].GlobalNotes;
+                }
             }
         }
         private void btnGlobalClipboard_Click(object sender, EventArgs e)
