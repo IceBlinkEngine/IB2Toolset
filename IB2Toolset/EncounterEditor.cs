@@ -305,6 +305,22 @@ namespace IB2Toolset
                     {
                         continue;
                     }
+
+                    bool skip = false;
+                    foreach (TileBitmapNamePair t in tileList)
+                    {
+                        if (Path.GetFileNameWithoutExtension(f) == t.filename)
+                        {
+                            skip = true;
+                            break;
+                        }
+                    }
+
+                    if (skip)
+                    {
+                        continue;
+                    }
+
                     string filename = Path.GetFullPath(f);
                     using (Bitmap bit = new Bitmap(filename))
                     {
