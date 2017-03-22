@@ -14,7 +14,8 @@ namespace IB2Toolset
     public class Module
     {
         #region Fields
-        public string formerDirection = "none"; 
+        public string formerDirection = "none";
+        public bool _usePredefinedTileCategories = true; 
         public List<string> masterAreasList = new List<string>(); 
         //private string moduleFolderName = "";
         private string _moduleName = "";
@@ -202,6 +203,13 @@ namespace IB2Toolset
         {
             get { return _useSmoothMovement; }
             set { _useSmoothMovement = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates using smooth movements of props (gliding).")]
+        public bool usePredefinedTileCategories
+        {
+            get { return _usePredefinedTileCategories; }
+            set { _usePredefinedTileCategories = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag determines if the builder is using the new all tile system. If true, all single image background maps for areas will be converted into a folder of sliced tiles after loading (or reloading) an image for the area.")]

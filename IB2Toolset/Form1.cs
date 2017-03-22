@@ -645,72 +645,67 @@ namespace IB2Toolset
          {
             //t_f_ for floors, t_n_ for nature, t_m_ for manmade and t_w_ for walls
         
-             tilePrefixFilterList.Clear();  
-             tilePrefixFilterList.Add("t_");  
-             try  
-             {
+            tilePrefixFilterList.Clear();
+            //tilePrefixFilterList.Add("t_");
+            if (mod.usePredefinedTileCategories)
+            {
+                tilePrefixFilterList.Add("All");
+                tilePrefixFilterList.Add("OnMap");
+                tilePrefixFilterList.Add("t_m_");
+                tilePrefixFilterList.Add("t_n_");
+                tilePrefixFilterList.Add("t_f_");
+                tilePrefixFilterList.Add("t_w_");
+                tilePrefixFilterList.Add("Rest");
+            }
+            else if (!mod.usePredefinedTileCategories)
+            {
+                tilePrefixFilterList.Add("t_");
+                try  
+                 {
 
-                /*
-                foreach (ImageData imd in mod.moduleImageDataList)  
-                 {  
-                     if (!imd.name.StartsWith("t_"))  
+                     foreach (string f in Directory.GetFiles(_mainDirectory + "\\default\\NewModule\\tiles\\", "*.png"))  
                      {  
-                         continue;  
-                     }  
-                     string[] split = imd.name.Split('_');  
-                     if (split.Length > 2)  
-                     {  
-                         string s = "t_" + split[1];  
-                         if (!tilePrefixFilterList.Contains(s))  
+                         if (!Path.GetFileName(f).StartsWith("t_"))  
                          {  
-                             tilePrefixFilterList.Add(s);  
-                         }                          
-                     }  
-                 }
-                 */
-                   
-                 foreach (string f in Directory.GetFiles(_mainDirectory + "\\default\\NewModule\\tiles\\", "*.png"))  
-                 {  
-                     if (!Path.GetFileName(f).StartsWith("t_"))  
-                     {  
-                         continue;  
-                     }  
-                     string filename = Path.GetFileNameWithoutExtension(f);  
-                     string[] split = filename.Split('_');  
-                     if (split.Length > 2)  
-                     {  
-                         string s = "t_" + split[1] + "_";
-                        if (!tilePrefixFilterList.Contains(s))  
-                         {  
-                             tilePrefixFilterList.Add(s);  
+                             continue;  
                          }  
-                     }  
-                 }
+                         string filename = Path.GetFileNameWithoutExtension(f);  
+                         string[] split = filename.Split('_');  
+                         if (split.Length > 2)  
+                         {  
+                             string s = "t_" + split[1] + "_";
+                            if (!tilePrefixFilterList.Contains(s))  
+                             {  
+                                 tilePrefixFilterList.Add(s);  
+                             }  
+                         }  
+                     }
 
-                foreach (string f in Directory.GetFiles(_mainDirectory + "\\modules\\" + mod.moduleName +"\\tiles\\", "*.png"))
-                {
-                    if (!Path.GetFileName(f).StartsWith("t_"))
+                    foreach (string f in Directory.GetFiles(_mainDirectory + "\\modules\\" + mod.moduleName +"\\tiles\\", "*.png"))
                     {
-                        continue;
-                    }
-                    string filename = Path.GetFileNameWithoutExtension(f);
-                    string[] split = filename.Split('_');
-                    if (split.Length > 2)
-                    {
-                        string s = "t_" + split[1] + "_";
-                        if (!tilePrefixFilterList.Contains(s))
+                        if (!Path.GetFileName(f).StartsWith("t_"))
                         {
-                            tilePrefixFilterList.Add(s);
+                            continue;
+                        }
+                        string filename = Path.GetFileNameWithoutExtension(f);
+                        string[] split = filename.Split('_');
+                        if (split.Length > 2)
+                        {
+                            string s = "t_" + split[1] + "_";
+                            if (!tilePrefixFilterList.Contains(s))
+                            {
+                                tilePrefixFilterList.Add(s);
+                            }
                         }
                     }
-                }
 
-            }  
-             catch (Exception ex)  
-             {  
-                 MessageBox.Show("error: " + ex.ToString());
-            }  
-     }  
+                }  
+                 catch (Exception ex)  
+                 {  
+                     MessageBox.Show("error: " + ex.ToString());
+                } 
+            }
+        }
 
         public void refreshDropDownLists()
         {
