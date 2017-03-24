@@ -1,0 +1,27 @@
+//first entry is the existing name used and the second (after the ',') is the new name you want to change to  
+//add as many more entries as you need  
+//this is run when the "update graphics names" button is clicked  
+//the toolset will go through all creatures, items, props, areas and encounters (but not convos in IB2).  
+//t_black_tile,t_a_black_tile  
+//t_blackshadow, t_n_blackshadow  
+//t_blank,t_a_blank  
+//t_floor01,t_es_floor01  
+//t_floor01both,t_es_floor01both  
+//t_floor01corner,t_es_floor01corner  
+//t_floor01edge,t_es_floor01edge  
+//t_floor01end,t_es_floor01end  
+//t_floor01wall,t_es_floor01wall  
+//t_floor01wallcorner,t_es_floor01wallcorner  
+//t_floor01walledge,t_es_floor01walledge  
+//t_L7floor01,t_es_L7floor01  
+//t_L7floor01corner,t_es_L7floor01corner  
+//t_L7floor01end,t_es_L7floor01end  
+//t_L7floor01side,t_es_L7floor01side  
+//t_L7floor01stright,t_es_L7floor01stright  
+//t_rock01,t_n_rock01  
+//t_rock03,t_n_rock03  
+t_sign,t_m_sign01  
+t_crate,t_es_crate  
+t_cobweb_crate,t_es_cobweb_crate  
+t_caveentrance01, t_n_cave01  
+t_campfire_off,t_m_campfire01

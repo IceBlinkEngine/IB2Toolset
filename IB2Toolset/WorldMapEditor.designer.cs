@@ -567,7 +567,7 @@
             this.rbtnBridgeEW.Size = new System.Drawing.Size(50, 27);
             this.rbtnBridgeEW.TabIndex = 6;
             this.rbtnBridgeEW.TabStop = true;
-            System.Drawing.Bitmap bm2 = new System.Drawing.Bitmap(p._mainDirectory + "\\modules\\" + p.mod.moduleName + "\\graphics\\" + "bridgeIcon" + ".png");
+            System.Drawing.Bitmap bm2 = new System.Drawing.Bitmap(p._mainDirectory + "\\default\\" + "NewModule" + "\\graphics\\" + "bridgeIcon" + ".png");
             this.rbtnBridgeEW.BackgroundImage = (System.Drawing.Image)bm2;
             //this.rbtnBridgeEW.Text = "BrEW";
             //this.rbtnBridgeEW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -607,7 +607,8 @@
             //a = "test";
             ///pipetto
             //
-            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(p._mainDirectory + "\\modules\\" + p.mod.moduleName + "\\graphics\\" + "downToN" + ".png");
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(p._mainDirectory + "\\default\\" + "NewModule" + "\\graphics\\" + "downToN" + ".png");
+            //System.Drawing.Bitmap bm = new System.Drawing.Bitmap(p._mainDirectory + "\\modules\\" + p.mod.moduleName + "\\graphics\\" + "downToN" + ".png");
             this.rbtnDownToN.BackgroundImage = (System.Drawing.Image)bm;
             
             //this.rbtnDownToN.dr;
