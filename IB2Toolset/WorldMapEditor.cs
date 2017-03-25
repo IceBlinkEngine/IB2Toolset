@@ -3643,6 +3643,54 @@ namespace IB2Toolset
                 {
                     bm = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\" + area.sourceBitmapName + "\\" + filename);
                 }
+                //*******************************
+
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\tiles\\" + filename + ".png"))
+                {
+                    bm = new System.Drawing.Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\tiles\\" + filename + ".png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\tiles\\" + filename))
+                {
+                    bm = new System.Drawing.Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\tiles\\" + filename);
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + filename + ".png"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + filename + ".png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + filename + ".jpg"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + filename + ".jpg");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + filename))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + filename);
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\ui\\" + filename + ".png"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\ui\\" + filename + ".png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\ui\\" + filename + ".jpg"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\ui\\" + filename + ".jpg");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\ui\\" + filename))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\ui\\" + filename);
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + area.sourceBitmapName + "\\" + filename + ".png"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + area.sourceBitmapName + "\\" + filename + ".png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + area.sourceBitmapName + "\\" + filename + ".jpg"))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + area.sourceBitmapName + "\\" + filename + ".jpg");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + area.sourceBitmapName + "\\" + filename))
+                {
+                    bm = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule" + "\\graphics\\" + area.sourceBitmapName + "\\" + filename);
+                }
+
+                //*******************************
                 else
                 {
                     bm = new System.Drawing.Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\graphics\\missingtexture.png");

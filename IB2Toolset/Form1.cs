@@ -4286,6 +4286,34 @@ public void loadSpriteDropdownList()
                 JsonSerializer serializer = new JsonSerializer();
                 toReturn = (List<Item>)serializer.Deserialize(file, typeof(List<Item>));
             }
+
+            //try to also add all props from NewModule, but only if their tags are not already existing
+            //openProps(_mainDirectory + "\\default\\NewModule\\data\\props.json");
+
+            List<Item> fromNewModule = null;
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(_mainDirectory + "\\default\\NewModule\\data\\items.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                fromNewModule = (List<Item>)serializer.Deserialize(file, typeof(List<Item>));
+            }
+
+            foreach (Item iFNM in fromNewModule)
+            {
+                bool doAdd = true;
+                foreach (Item iCurrent in toReturn)
+                {
+                    if (iFNM.resref == iCurrent.resref)
+                    {
+                        doAdd = false;
+                        break;
+                    }
+                }
+                if (doAdd)
+                {
+                    toReturn.Add(iFNM);
+                }
+            }
             return toReturn;
         }
         public Item getItem(string name)
@@ -4413,6 +4441,35 @@ public void loadSpriteDropdownList()
                 JsonSerializer serializer = new JsonSerializer();
                 toReturn = (List<Prop>)serializer.Deserialize(file, typeof(List<Prop>));
             }
+
+            //try to also add all props from NewModule, but only if their tags are not already existing
+            //openProps(_mainDirectory + "\\default\\NewModule\\data\\props.json");
+
+            List<Prop> fromNewModule = null;
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(_mainDirectory + "\\default\\NewModule\\data\\props.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                fromNewModule = (List<Prop>)serializer.Deserialize(file, typeof(List<Prop>));
+            }
+
+            foreach (Prop pFNM in fromNewModule)
+            {
+                bool doAdd = true;
+                foreach (Prop pCurrent in toReturn)
+                {
+                    if (pFNM.PropTag == pCurrent.PropTag)
+                    {
+                        doAdd = false;
+                        break;
+                    }
+                }
+                if(doAdd)
+                {
+                    toReturn.Add(pFNM);
+                }
+            }
+
             return toReturn;
         }
         public Prop getPropByTag(string tag)
