@@ -47,6 +47,7 @@
             this.btnAddProp = new System.Windows.Forms.Button();
             this.btnSortCreatures = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1.AutoPopDelay = 20000;
             this.btnSortItems = new System.Windows.Forms.Button();
             this.btnSortProps = new System.Windows.Forms.Button();
             this.tabCreatureItem.SuspendLayout();

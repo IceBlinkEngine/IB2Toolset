@@ -138,6 +138,7 @@
             this.tsMoveUp = new System.Windows.Forms.ToolStripButton();
             this.tsMoveDown = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1.AutoPopDelay = 20000;
             this.conditionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.conditionBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnCondCopySelected = new System.Windows.Forms.Button();

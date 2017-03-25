@@ -40,6 +40,7 @@
             this.btnGlobalAdd = new System.Windows.Forms.Button();
             this.txtGlobalAdd = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1.AutoPopDelay = 20000;
             this.btnLocalClipboard = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSortLocals = new System.Windows.Forms.Button();

@@ -107,6 +107,7 @@
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1.AutoPopDelay = 20000;
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tilesUsedInModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
