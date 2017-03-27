@@ -2,6 +2,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Flame Fingers",
     "tag": "flameFingers",
@@ -28,6 +29,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Mage Bolt",
     "tag": "mageBolt",
@@ -54,6 +56,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Mage Armor",
     "tag": "mageArmor",
@@ -80,6 +83,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Sleep",
     "tag": "sleep",
@@ -106,6 +110,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Web",
     "tag": "web",
@@ -132,6 +137,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Minor Regeneration",
     "tag": "minorRegen",
@@ -158,6 +164,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Ice Storm",
     "tag": "iceStorm",
@@ -184,6 +191,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Fireball",
     "tag": "fireball",
@@ -210,6 +218,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Lightning",
     "tag": "lightning",
@@ -236,6 +245,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Minor Healing",
     "tag": "minorHealing",
@@ -262,6 +272,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Bless",
     "tag": "bless",
@@ -288,6 +299,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Magic Stone",
     "tag": "magicStone",
@@ -314,6 +326,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Moderate Healing",
     "tag": "moderateHealing",
@@ -340,6 +353,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Blast of Light",
     "tag": "blastOfLight",
@@ -366,6 +380,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Hold",
     "tag": "hold",
@@ -392,6 +407,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Mass Minor Healing",
     "tag": "massMinorHealing",
@@ -418,6 +434,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Spider Bite Poison Minor",
     "tag": "spiderPoisonMinor",
@@ -444,6 +461,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Remove Poison",
     "tag": "removePoison",
@@ -480,6 +498,7 @@
   {
     "traitWorksOnlyWhen": [],
     "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
     "isUsedForCombatSquareEffect": false,
     "name": "Bloody Whirlwind",
     "tag": "newSpellTag_10498",

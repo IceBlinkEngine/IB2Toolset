@@ -255,7 +255,9 @@
         "isRation": false,
         "quantity": 20
       }
-    ]
+    ],
+    "buybackPercent": 70,
+    "sellPercent": 100
   },
   {
     "shopTag": "rationShop",
@@ -405,6 +407,8 @@
         "isRation": true,
         "quantity": 1
       }
-    ]
+    ],
+    "buybackPercent": 70,
+    "sellPercent": 100
   }
 ]

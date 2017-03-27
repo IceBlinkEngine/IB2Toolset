@@ -1,5 +1,6 @@
 {
   "formerDirection": "N",
+  "_usePredefinedTileCategories": true,
   "masterAreasList": [
     "desert",
     "linktest"
@@ -48,6 +49,7 @@
     "summer",
     "swamp",
     "swamp_1_",
+    "tilesOnly",
     "winter",
     "winter_2_",
     "wm_debug",
@@ -147,6 +149,7 @@
   "mustUsePreMadePC": false,
   "useRealTimeTimer": true,
   "useSmoothMovement": true,
+  "usePredefinedTileCategories": true,
   "useAllTileSystem": true,
   "useRationSystem": true,
   "nameOfFirstDayOfTheWeek": "Monday",
@@ -182,12 +185,12 @@
   "MaxPartySize": 6,
   "moduleDescription": "Short module tutorial on how to make a simple module.",
   "moduleCredits": "<big><b>Unwanted Guests</b></big><BR>\r\n<BR>\r\n-visit the forums for more info:<BR>\r\nwww.iceblinkengine.com/forums",
-  "nextIdNumber": 10873,
+  "nextIdNumber": 10898,
   "realTimeTimerLengthInMilliSeconds": 7000,
   "borderAreaSize": 0,
   "WorldTime": 0,
-  "startingArea": "linktest",
-  "startingPlayerPositionX": 5,
+  "startingArea": "tilesOnly",
+  "startingPlayerPositionX": 4,
   "startingPlayerPositionY": 0,
   "partyGold": 100,
   "partyTokenFilename": "prp_party",
