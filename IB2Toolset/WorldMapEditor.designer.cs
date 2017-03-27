@@ -428,7 +428,7 @@
             // rbtnToL
             // 
             this.rbtnToMaster.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnToMaster.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnToMaster.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnToMaster.Location = new System.Drawing.Point(64, 137);
             this.rbtnToMaster.Name = "rbtnToMaster";
             this.rbtnToMaster.Size = new System.Drawing.Size(50, 27);
@@ -443,13 +443,13 @@
             // rbtnChangeLinkState
             // 
             this.rbtnChangeLinkState.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnChangeLinkState.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnChangeLinkState.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnChangeLinkState.Location = new System.Drawing.Point(9, 137);
             this.rbtnChangeLinkState.Name = "rbtnChangeLinkState";
             this.rbtnChangeLinkState.Size = new System.Drawing.Size(50, 27);
             this.rbtnChangeLinkState.TabIndex = 3;
             this.rbtnChangeLinkState.TabStop = true;
-            this.rbtnChangeLinkState.Text = "Link?";
+            this.rbtnChangeLinkState.Text = "Linked?";
             this.rbtnChangeLinkState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnChangeLinkState.UseVisualStyleBackColor = true;
             this.rbtnChangeLinkState.CheckedChanged += new System.EventHandler(this.rbtnChangeLinkState_CheckedChanged);
@@ -561,17 +561,17 @@
             // rbtnBridgeEW
             // 
             this.rbtnBridgeEW.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnBridgeEW.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnBridgeEW.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnBridgeEW.Location = new System.Drawing.Point(62, 106);
             this.rbtnBridgeEW.Name = "rbtnBridgeEW";
             this.rbtnBridgeEW.Size = new System.Drawing.Size(50, 27);
             this.rbtnBridgeEW.TabIndex = 6;
             this.rbtnBridgeEW.TabStop = true;
-            System.Drawing.Bitmap bm2 = new System.Drawing.Bitmap(p._mainDirectory + "\\default\\" + "NewModule" + "\\graphics\\" + "bridgeIcon1" + ".png");
-            this.rbtnBridgeEW.BackgroundImage = (System.Drawing.Image)bm2;
-            //this.rbtnBridgeEW.Text = "BrEW";
-            //this.rbtnBridgeEW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //this.rbtnBridgeEW.UseVisualStyleBackColor = true;
+            //System.Drawing.Bitmap bm2 = new System.Drawing.Bitmap(p._mainDirectory + "\\default\\" + "NewModule" + "\\graphics\\" + "bridgeIcon1" + ".png");
+            //this.rbtnBridgeEW.BackgroundImage = (System.Drawing.Image)bm2;
+            this.rbtnBridgeEW.Text = "Bridge";
+            this.rbtnBridgeEW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnBridgeEW.UseVisualStyleBackColor = true;
             this.rbtnBridgeEW.CheckedChanged += new System.EventHandler(this.rbtnBridgeEW_CheckedChanged);
             // 
             // rbtnBridgeNS
@@ -593,7 +593,7 @@
             // rbtnDownToN
             // 
             this.rbtnDownToN.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbtnDownToN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnDownToN.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnDownToN.Location = new System.Drawing.Point(9, 106);
             this.rbtnDownToN.Name = "rbtnDownToN";
             this.rbtnDownToN.Size = new System.Drawing.Size(50, 27);
@@ -607,9 +607,9 @@
             //a = "test";
             ///pipetto
             //
-            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(p._mainDirectory + "\\default\\" + "NewModule" + "\\graphics\\" + "downToN1" + ".png");
+            //System.Drawing.Bitmap bm = new System.Drawing.Bitmap(p._mainDirectory + "\\default\\" + "NewModule" + "\\graphics\\" + "downToN1" + ".png");
             //System.Drawing.Bitmap bm = new System.Drawing.Bitmap(p._mainDirectory + "\\modules\\" + p.mod.moduleName + "\\graphics\\" + "downToN" + ".png");
-            this.rbtnDownToN.BackgroundImage = (System.Drawing.Image)bm;
+            //this.rbtnDownToN.BackgroundImage = (System.Drawing.Image)bm;
             
             //this.rbtnDownToN.dr;
             //this.rbtnDownToN.BackgroundImage.
@@ -623,9 +623,9 @@
             //LoadBitmapGDI(string filename)
             //iconBitmap = (Bitmap)itemsList[frmBlueprints.GetItemIndex(_nodeTag)].itemIconBitmap.Clone();
             //frmIconSprite.pbIcon.BackgroundImage = (Image)iconBitmap;
-            //this.rbtnDownToN.Text = "StN";
-            //this.rbtnDownToN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //this.rbtnDownToN.UseVisualStyleBackColor = true;
+            this.rbtnDownToN.Text = "Stair";
+            this.rbtnDownToN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnDownToN.UseVisualStyleBackColor = true;
             this.rbtnDownToN.CheckedChanged += new System.EventHandler(this.rbtnDownToN_CheckedChanged);
             // 
             // rbtnDownToE
