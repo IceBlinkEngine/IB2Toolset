@@ -483,5 +483,43 @@
     "skillModifierAttribute": "str",
     "useableInSituation": "InCombat",
     "traitScript": "none"
+  },
+  {
+    "name": "Sweep",
+    "traitEffectTagList": [
+      {
+        "tag": "newEffectTag_10899"
+      }
+    ],
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
+    "tag": "newTraitTag_10900",
+    "associatedSpellTag": "none",
+    "traitImage": "sp_magebolt",
+    "description": "",
+    "prerequisiteTrait": "none",
+    "skillModifier": 0,
+    "skillModifierAttribute": "str",
+    "useableInSituation": "Passive",
+    "traitScript": "none"
+  },
+  {
+    "name": "LightningWielder",
+    "traitEffectTagList": [],
+    "traitWorksOnlyWhen": [
+      {
+        "Value": "axe"
+      }
+    ],
+    "traitWorksNeverWhen": [],
+    "tag": "newTraitTag_10950",
+    "associatedSpellTag": "newSpellTag_10948",
+    "traitImage": "sp_magebolt",
+    "description": "",
+    "prerequisiteTrait": "none",
+    "skillModifier": 0,
+    "skillModifierAttribute": "str",
+    "useableInSituation": "InCombat",
+    "traitScript": "none"
   }
 ]

@@ -525,5 +525,36 @@
         "tag": "newEffectTag_10494"
       }
     ]
+  },
+  {
+    "traitWorksOnlyWhen": [],
+    "traitWorksNeverWhen": [],
+    "usesTurnToActivate": true,
+    "isUsedForCombatSquareEffect": false,
+    "name": "wieldLightning",
+    "tag": "newSpellTag_10948",
+    "spellImage": "sp_magebolt",
+    "description": "",
+    "useableInSituation": "Always",
+    "spriteFilename": "none",
+    "spriteEndingFilename": "none",
+    "spellStartSound": "fireballend",
+    "spellEndSound": "fireballstart",
+    "costSP": 1,
+    "costHP": 1,
+    "spellTargetType": "Enemy",
+    "spellEffectType": "Damage",
+    "aoeShape": "Line",
+    "aoeRadius": 3,
+    "range": 4,
+    "spellScript": "none",
+    "additionalCustomLogTextOnCast": "none",
+    "spellEffectTag": "none",
+    "removeEffectTagList": [],
+    "spellEffectTagList": [
+      {
+        "tag": "newEffectTag_10946"
+      }
+    ]
   }
 ]
