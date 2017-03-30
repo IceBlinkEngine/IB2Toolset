@@ -778,6 +778,17 @@ namespace IB2Toolset
                             {
                                 t.linkedToMasterMap = true;
                             }
+
+                            //remove all movers props at creation stage
+                            for (int i = newArea.Props.Count-1; i >= 0; i--)
+                            {
+                                if (newArea.Props[i].isMover)
+                                {
+                                    newArea.Props.RemoveAt(i);
+                                }
+                            }
+
+                            newArea.areaWeatherName = "";
                             newArea.masterOfThisArea = area.Filename;
                             newArea.linkNumberOfThisArea = area.linkedAreasCounter;
                             area.linkedAreas.Add(newArea.Filename);
