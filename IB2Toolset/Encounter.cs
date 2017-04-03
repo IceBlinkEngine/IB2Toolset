@@ -221,6 +221,18 @@ namespace IB2Toolset
                 copy.encounterCreatureList.Add(s);
             }
 
+            copy.Triggers = new List<Trigger>();
+            foreach (Trigger t in this.Triggers)
+            {
+                copy.Triggers.Add(t);
+            }
+
+            copy.propsList = new List<Prop>();
+            foreach (Prop p in this.propsList)
+            {
+                copy.propsList.Add(p);
+            }
+
             copy.encounterInventoryRefsList = new List<ItemRefs>();
             foreach (ItemRefs s in this.encounterInventoryRefsList)
             {
@@ -240,6 +252,8 @@ namespace IB2Toolset
 
             return copy;
         }
+
+
         public void SetAllToGrass()
         {
             for (int x = 0; x < this.MapSizeX; x++)
