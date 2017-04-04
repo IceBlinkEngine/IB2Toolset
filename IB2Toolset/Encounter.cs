@@ -19,6 +19,7 @@ namespace IB2Toolset
         private string mapImage = "none";
         private bool useMapImage = false;
         private bool useDayNightCycle = false;
+        private bool isRepeatable = true;
         public int MapSizeX = 7;
         public int MapSizeY = 7;
         public List<TileEnc> encounterTiles = new List<TileEnc>();
@@ -70,6 +71,12 @@ namespace IB2Toolset
         {
             get { return useDayNightCycle; }
             set { useDayNightCycle = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Set to true if this encounter can be redone despite killing all its creatures beforehand")]
+        public bool IsRepeatable
+        {
+            get { return isRepeatable; }
+            set { isRepeatable = value; }
         }
         [Browsable(true), TypeConverter(typeof(MusicConverter))]
         [CategoryAttribute("02 - Music"), DescriptionAttribute("Filename of music for the area (no extension)")]
