@@ -157,6 +157,9 @@ namespace IB2Toolset
 
         private bool _useRationSystem = true;
 
+        private float _fogOfWarOpacity = 0.9525f;
+        private bool _spritesUnderOverlays = true;
+
         #endregion
 
         #region Properties
@@ -217,6 +220,22 @@ namespace IB2Toolset
         {
             get { return _useAllTileSystem; }
             set { _useAllTileSystem = value; }
+
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Defines how transparent fog of war and darkness are, ranges from 0 to 1. When you set anything less than 1, lights will not dance/shift position anymore due to technical restrtaints.")]
+        public float fogOfWarOpacity
+        {
+            get { return _fogOfWarOpacity; }
+            set { _fogOfWarOpacity = value; }
+
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag determines whether sprites, espeically weather, are drawn underneath overlays as fog of war, tint of daytime or darkness. ")]
+        public bool spritesUnderOverlays
+        {
+            get { return _spritesUnderOverlays; }
+            set { _spritesUnderOverlays = value; }
 
         }
 
