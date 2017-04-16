@@ -70,6 +70,13 @@ namespace IB2Toolset
         //private UsableInSituation useableInSituation = UsableInSituation.Always;
         private string _useableInSituation = "Always";
 
+        private int _requiredStrength = 0;
+        private int _requiredDexterity = 0;
+        private int _requiredConstitution = 0;
+        private int _requiredIntelligence = 0;
+        private int _requiredWisdom = 0;
+        private int _requiredCharisma = 0;
+
         //using associated spell for this
         //private string _spriteFilename = "none";
         //using associated spell for this
@@ -195,6 +202,42 @@ namespace IB2Toolset
         {
             get { return _skillModifier; }
             set { _skillModifier = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The required minimum attribute value for a trait to become electable for learning; does not apply to automatically learned traits")]
+        public int requiredStrength
+        {
+            get { return _requiredStrength; }
+            set { _requiredStrength = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The required minimum attribute value for a trait to become electable for learning; does not apply to automatically learned traits")]
+        public int requiredDexterity
+        {
+            get { return _requiredDexterity; }
+            set { _requiredDexterity = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The required minimum attribute value for a trait to become electable for learning; does not apply to automatically learned traits")]
+        public int requiredConstitution
+        {
+            get { return _requiredConstitution; }
+            set { _requiredConstitution = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The required minimum attribute value for a trait to become electable for learning; does not apply to automatically learned traits")]
+        public int requiredIntelligence
+        {
+            get { return _requiredIntelligence; }
+            set { _requiredIntelligence = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The required minimum attribute value for a trait to become electable for learning; does not apply to automatically learned traits")]
+        public int requiredWisdom
+        {
+            get { return _requiredWisdom; }
+            set { _requiredWisdom = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The required minimum attribute value for a trait to become electable for learning; does not apply to automatically learned traits")]
+        public int requiredCharisma
+        {
+            get { return _requiredCharisma; }
+            set { _requiredCharisma = value; }
         }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("If the trait is a skill type trait, this is the attribute that is used for additional modifiers to skill check (str, dex, int, cha)")]
         public string skillModifierAttribute
