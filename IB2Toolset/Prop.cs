@@ -86,6 +86,8 @@ namespace IB2Toolset
         private bool _canBeTriggeredByPc = true;  
         private bool _canBeTriggeredByCreature = true;
 
+        private bool _randomAnimationDirectionEachCall = false;
+
         #endregion
 
         #region Properties
@@ -225,6 +227,13 @@ namespace IB2Toolset
         {
             get { return _doOnce; }
             set { _doOnce = value; }
+        }
+
+        [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("When set to true this will make an animation play reverse with a 50% chance on each call (after all cycles have been played).")]
+        public bool randomAnimationDirectionEachCall
+        {
+            get { return _randomAnimationDirectionEachCall; }
+            set { _randomAnimationDirectionEachCall = value; }
         }
 
         [CategoryAttribute("06 - Prop Animation"), DescriptionAttribute("Setting this to false turns teh animation off. Can be de/activated via script.")]
