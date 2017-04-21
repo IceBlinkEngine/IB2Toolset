@@ -72,14 +72,16 @@ namespace IB2Toolset
         //private SortableBindingList<SpellAllowed> _spellsAllowed = new SortableBindingList<SpellAllowed>();
         private SortableBindingList<TraitAllowed> _traitsAllowed = new SortableBindingList<TraitAllowed>();
         private SortableBindingList<SpellAllowed> _spellsAllowed = new SortableBindingList<SpellAllowed>();
-        private string _labelForCastAction = "CAST";
-        private string _labelForTheSpellsButtonInCombat = "SPELL";
-        private string _labelForUseTraitAction = "USE";
-        private string _labelForTheUseTraitButtonInCombat = "TRAIT";
+        private string _labelForCastAction = "casts";
+        //private string _labelForTheSpellsButtonInCombat = "SPELL";
+        private string _labelForUseTraitAction = "uses";
+        //private string _labelForTheUseTraitButtonInCombat = "TRAIT";
         private string _modifierFromSPRelevantAttribute = "intelligence";
         //sort later which type of spell labeling to use
         private string _spellLabelSingular = "Spell";  
         private string _spellLabelPlural = "Spells";
+        private string _traitLabelSingular = "Trait";
+        private string _traitLabelPlural = "Traits";
         private int[] _traitsToLearnAtLevelTable = new int[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };  
         private int[] _spellsToLearnAtLevelTable = new int[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
@@ -99,30 +101,34 @@ namespace IB2Toolset
                 _name = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the cast action in log")]
+        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label for the cast action in log, third person singular")]
         public string labelForCastAction
         {
             get { return _labelForCastAction; }
             set { _labelForCastAction = value; }
         }
+        /*
         [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the cast button in combat")]
         public string labelForTheSpellsButtonInCombat
         {
             get { return _labelForTheSpellsButtonInCombat; }
             set { _labelForTheSpellsButtonInCombat = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the use trait action in log")]
+        */
+        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label for the use trait action in log, third person singular")]
         public string labelForUseTraitAction
         {
             get { return _labelForUseTraitAction; }
             set { _labelForUseTraitAction = value; }
         }
+        /*
         [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the use trait button in combat")]
         public string labelForTheUseTraitButtonInCombat
         {
             get { return _labelForTheUseTraitButtonInCombat; }
             set { _labelForTheUseTraitButtonInCombat = value; }
         }
+        */
         [CategoryAttribute("01 - Main"), DescriptionAttribute("name of attribute taht is used for sp calculation for this class, eg intelligence or wisdom")]
         public string modifierFromSPRelevantAttribute
         {
@@ -130,19 +136,33 @@ namespace IB2Toolset
             set { _modifierFromSPRelevantAttribute = value; }
         }
 
-        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label used for Spell singular form on cast screens (ex. Spell, Trait, Power, etc.)")]  
+        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label used for Spell singular form on cast screens (ex. Spell, Power, etc.)")]  
         public string spellLabelSingular  
         {  
              get { return _spellLabelSingular; }  
              set { _spellLabelSingular = value; }  
         }
           
-        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label used for Spell plural form on cast screens (ex. Spells, Traits, Powers, etc.)")]  
+        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label used for Spell plural form on cast screens (ex. Spells, Powers, etc.)")]  
         public string spellLabelPlural
         {  
             get { return _spellLabelPlural; }
             set { _spellLabelPlural = value; }  
-        }  
+        }
+
+        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label used for Trait singular form on use trait screens")]
+        public string traitLabelSingular
+        {
+            get { return _traitLabelSingular; }
+            set { _traitLabelSingular = value; }
+        }
+
+        [CategoryAttribute("04 - Labels"), DescriptionAttribute("Label used for Trait plural form on use trait screens")]
+        public string traitLabelPlural
+        {
+            get { return _traitLabelPlural; }
+            set { _traitLabelPlural = value; }
+        }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the PlayerClass (Must be unique)")]
         public string tag

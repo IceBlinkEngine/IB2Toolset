@@ -116,9 +116,11 @@ namespace IB2Toolset
         private int _logNumberOfLines = 20;
         //the spell labels might still be needed ocassionally, check later
         //private string _spellLabelSingular = "Spell";
-        //private string _spellLabelPlural = "Spells";
+        private string _spellLabelPlural = "Spells";
+        private string _traitsLabelPlural = "Traits";
         private string _goldLabelSingular = "Gold";
         private string _goldLabelPlural = "Gold";
+        private string _raceLabel = "Race";
         private int _borderAreaSize = 0;
         private bool _useAllTileSystem = true;
         private bool _useMinimalisticUI = true;
@@ -421,13 +423,27 @@ namespace IB2Toolset
             get { return _spellLabelSingular; }
             set { _spellLabelSingular = value; }
         }
+        */
         [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for Spell plural form (ex. Spells, Powers, etc.)")]
         public string spellLabelPlural
         {
             get { return _spellLabelPlural; }
             set { _spellLabelPlural = value; }
         }
-        */
+
+        [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for Trait plural form")]
+        public string traitsLabelPlural
+        {
+            get { return _traitsLabelPlural; }
+            set { _traitsLabelPlural = value; }
+        }
+
+        [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for Race")]
+        public string raceLabel
+        {
+            get { return _raceLabel; }
+            set { _raceLabel = value; }
+        }
 
         [CategoryAttribute("05 - Labels"), DescriptionAttribute("Label used for Gold singular form (ex. Gold, Credit, etc.)")]
         public string goldLabelSingular

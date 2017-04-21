@@ -1,13 +1,13 @@
 [
   {
     "name": "Fighter",
-    "labelForCastAction": "CAST",
-    "labelForTheSpellsButtonInCombat": "SPELL",
-    "labelForUseTraitAction": "USE",
-    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "labelForCastAction": "casts",
+    "labelForUseTraitAction": "uses",
     "modifierFromSPRelevantAttribute": "intelligence",
     "spellLabelSingular": "Spell",
     "spellLabelPlural": "Spells",
+    "traitLabelSingular": "Trait",
+    "traitLabelPlural": "Traits",
     "tag": "fighter",
     "UsableByPlayer": true,
     "description": "Skilled warrior. Gains the Cleave trait at level 2 and two attacks per round at level 4.",
@@ -73,6 +73,30 @@
       12500,
       25000,
       50000
+    ],
+    "spellsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "traitsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     "itemsAllowed": [
       {
@@ -406,13 +430,13 @@
   },
   {
     "name": "Cleric",
-    "labelForCastAction": "CAST",
-    "labelForTheSpellsButtonInCombat": "SPELL",
-    "labelForUseTraitAction": "USE",
-    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "labelForCastAction": "casts",
+    "labelForUseTraitAction": "uses",
     "modifierFromSPRelevantAttribute": "intelligence",
     "spellLabelSingular": "Spell",
     "spellLabelPlural": "Spells",
+    "traitLabelSingular": "Trait",
+    "traitLabelPlural": "Traits",
     "tag": "cleric",
     "UsableByPlayer": true,
     "description": "A capable combatant with divine magic as well.",
@@ -478,6 +502,30 @@
       11000,
       22500,
       45000
+    ],
+    "spellsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "traitsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     "itemsAllowed": [
       {
@@ -744,13 +792,13 @@
   },
   {
     "name": "Ranger",
-    "labelForCastAction": "CAST",
-    "labelForTheSpellsButtonInCombat": "SPELL",
-    "labelForUseTraitAction": "USE",
-    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "labelForCastAction": "casts",
+    "labelForUseTraitAction": "uses",
     "modifierFromSPRelevantAttribute": "intelligence",
     "spellLabelSingular": "Spell",
     "spellLabelPlural": "Spells",
+    "traitLabelSingular": "Trait",
+    "traitLabelPlural": "Traits",
     "tag": "ranger",
     "UsableByPlayer": true,
     "description": "Adept for survival in the wild, skilled with a bow, and learns a few spells at later levels. Gains Point Blank Shot trait at level 2.",
@@ -816,6 +864,30 @@
       15000,
       30000,
       45000
+    ],
+    "spellsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "traitsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     "itemsAllowed": [
       {
@@ -1162,13 +1234,13 @@
   },
   {
     "name": "Wizard",
-    "labelForCastAction": "CAST",
-    "labelForTheSpellsButtonInCombat": "SPELL",
-    "labelForUseTraitAction": "USE",
-    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "labelForCastAction": "casts",
+    "labelForUseTraitAction": "uses",
     "modifierFromSPRelevantAttribute": "intelligence",
     "spellLabelSingular": "Spell",
     "spellLabelPlural": "Spells",
+    "traitLabelSingular": "Trait",
+    "traitLabelPlural": "Traits",
     "tag": "wizard",
     "UsableByPlayer": true,
     "description": "The Wizard class is capable of casting powerful arcane spells.",
@@ -1234,6 +1306,30 @@
       9000,
       13500,
       20000
+    ],
+    "spellsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "traitsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     "itemsAllowed": [
       {
@@ -1491,13 +1587,13 @@
   },
   {
     "name": "Thief",
-    "labelForCastAction": "CAST",
-    "labelForTheSpellsButtonInCombat": "SPELL",
-    "labelForUseTraitAction": "USE",
-    "labelForTheUseTraitButtonInCombat": "TRAIT",
+    "labelForCastAction": "casts",
+    "labelForUseTraitAction": "uses",
     "modifierFromSPRelevantAttribute": "intelligence",
     "spellLabelSingular": "Spell",
     "spellLabelPlural": "Spells",
+    "traitLabelSingular": "Trait",
+    "traitLabelPlural": "Traits",
     "tag": "thief",
     "UsableByPlayer": true,
     "description": "The thief uses agility and stealth to manage a battle field and is useful in finding and disarming traps.",
@@ -1563,6 +1659,30 @@
       7000,
       11000,
       16000
+    ],
+    "spellsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "traitsToLearnAtLevelTable": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     "itemsAllowed": [
       {
