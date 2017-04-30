@@ -33,6 +33,7 @@ namespace IB2Toolset
         public Bitmap creatureIconBitmap;
 
         private string _tokenFilename = "blank";
+        private int _creatureSize = 1;
         public bool combatFacingLeft = true;
         public int combatLocX = 0;
         public int combatLocY = 0;
@@ -158,6 +159,12 @@ namespace IB2Toolset
         {
             get { return _level; }
             set { _level = value; }
+        }
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Number for size of the creature (1 = normal,1x1, 2 = wide,2x1, 3 = tall,1x2 and 4 = large,2x2)")]
+        public int creatureSize
+        {
+            get { return _creatureSize; }
+            set { _creatureSize = value; }
         }
         [CategoryAttribute("00 - Main"), DescriptionAttribute("Creature's starting hp")]
         public int hp

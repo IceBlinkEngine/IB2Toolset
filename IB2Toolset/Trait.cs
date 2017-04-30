@@ -239,7 +239,7 @@ namespace IB2Toolset
             get { return _requiredCharisma; }
             set { _requiredCharisma = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("If the trait is a skill type trait, this is the attribute that is used for additional modifiers to skill check (str, dex, int, cha)")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("If the trait is a skill type trait, this is the attribute that is used for additional modifiers to skill check (str, dex, con, int, wis, cha)")]
         public string skillModifierAttribute
         {
             get { return _skillModifierAttribute; }
