@@ -116,6 +116,8 @@ namespace IB2Toolset
         private int _modifyShopBuyBackPrice = 0;  
         private int _modifyShopSellPrice = 0;
 
+        private bool _allowCastingWithoutTriggeringAoO = false;
+        private bool _allowCastingWithoutRiskOfInterruption = false;
 
         public List<LocalImmunityString> traitWorksOnlyWhen = new List<LocalImmunityString>();
         public List<LocalImmunityString> traitWorksNeverWhen = new List<LocalImmunityString>();
@@ -147,8 +149,26 @@ namespace IB2Toolset
          {  
              get { return _modifyShopSellPrice; }  
              set { _modifyShopSellPrice = value; }  
-         }  
+         }
+        /*
+        private bool _allowCastingWithoutTriggeringAoO = false;
+        private bool _allowCastingWithoutRiskOfInterruption = false;
+        */
 
+        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("Allows casting without triggering attacks of opportunity when set to true.")]
+        public bool allowCastingWithoutTriggeringAoO
+        {
+            get { return _allowCastingWithoutTriggeringAoO; }
+            set { _allowCastingWithoutTriggeringAoO = value; }
+        }
+
+        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("Allow casting without risk (will save) of interruption due to damage taken in the meantime when set to true.")]
+        public bool allowCastingWithoutRiskOfInterruption
+        {
+            get { return _allowCastingWithoutRiskOfInterruption; }
+            set { _allowCastingWithoutRiskOfInterruption = value; }
+        }
+        
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Entries added here mark pc (trait tags) and creatures (local string values) that are immune to this effect.")]
         public List<LocalImmunityString> affectNeverList
         {
