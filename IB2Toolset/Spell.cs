@@ -98,6 +98,9 @@ namespace IB2Toolset
         public List<LocalImmunityString> traitWorksOnlyWhen = new List<LocalImmunityString>();
         public List<LocalImmunityString> traitWorksNeverWhen = new List<LocalImmunityString>();
         private bool _isUsedForCombatSquareEffect = false;
+        private int _castTimeInTurns = 0;
+        private bool _canBeInterrupted = true;
+        private bool _triggersAoO = true;
 
         #endregion
 
@@ -246,6 +249,49 @@ namespace IB2Toolset
             set
             {
                 _costHP = value;
+            }
+        }
+        /*
+        private int _castTimeInTurns = 0;
+        private bool _canBeInterrupted = true;
+        private bool _triggersAoO = true;
+        */
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("How many extra turns to spend casting; 0 is spell that is cast the same turn as it is selected")]
+        public int castTimeInTurns
+        {
+            get
+            {
+                return _castTimeInTurns;
+            }
+            set
+            {
+                _castTimeInTurns = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, this spell can be interrupted by damage taken while casting (a will save is allowed against the interruption, getting more difficult, the more damage has been taken)")]
+        public bool canBeInterrupted
+        {
+            get
+            {
+                return _canBeInterrupted;
+            }
+            set
+            {
+                _canBeInterrupted = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, enemies in melee range get free attacks on the caster during the casting procress.")]
+        public bool triggersAoO
+        {
+            get
+            {
+                return _triggersAoO;
+            }
+            set
+            {
+                _triggersAoO = value;
             }
         }
         /*[CategoryAttribute("02 - Target"), DescriptionAttribute("The type of target for this spell")]
