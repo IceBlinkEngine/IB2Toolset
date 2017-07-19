@@ -106,6 +106,8 @@ namespace IB2Toolset
         private List<LocalImmunityString> _traitWorksOnlyWhen = new List<LocalImmunityString>();
         private List<LocalImmunityString> _traitWorksNeverWhen = new List<LocalImmunityString>();
 
+        private string _traitToReplaceByTag = "none";
+
         #endregion
 
         #region Properties  
@@ -245,6 +247,15 @@ namespace IB2Toolset
             get { return _skillModifierAttribute; }
             set { _skillModifierAttribute = value; }
         }
+
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the trait that will be removed once this trait is acquired")]
+        public string traitToReplaceByTag
+        {
+            get { return _traitToReplaceByTag; }
+            set { _traitToReplaceByTag = value; }
+        }
+
         /*[CategoryAttribute("01 - Main"), DescriptionAttribute("When can this be used: Always means that it can be used in combat and on the main maps, Passive means that it is always on and doesn't need to be activated.")]
         public UsableInSituation UseableInSituation
         {

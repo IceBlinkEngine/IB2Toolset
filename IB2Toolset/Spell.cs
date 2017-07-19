@@ -91,6 +91,8 @@ namespace IB2Toolset
         private int _range = 0;
         //private ScriptSelectEditorReturnObject spellScript = new ScriptSelectEditorReturnObject();
         private string _spellScript = "none";
+        private string _spellScriptParm1 = "none";
+        private string _spellScriptParm2 = "none";
         private string _additionalCustomLogTextOnCast = "none";
         private string _spellEffectTag = "none";
         private List<EffectTagForDropDownList> _removeEffectTagList = new List<EffectTagForDropDownList>();
@@ -101,6 +103,7 @@ namespace IB2Toolset
         private int _castTimeInTurns = 0;
         private bool _canBeInterrupted = true;
         private bool _triggersAoO = true;
+        private string _spellToReplaceByTag = "none";
 
         #endregion
 
@@ -187,6 +190,14 @@ namespace IB2Toolset
             get { return _useableInSituation; }
             set { _useableInSituation = value; }
         }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the spell that will be removed once this spell is acquired")]
+        public string spellToReplaceByTag
+        {
+            get { return _spellToReplaceByTag; }
+            set { _spellToReplaceByTag = value; }
+        }
+
         [Browsable(true), TypeConverter(typeof(SpriteConverter))]
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the effect (Sprite Filename with no extension)")]
         public string spriteFilename
@@ -393,6 +404,25 @@ namespace IB2Toolset
             get { return _spellScript; }
             set { _spellScript = value; }
         }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("For summon spell cast by pc enter name of the pc to summon here (without .json, eg Drin); for summon spell cast by creature enter the resref of the creature to summon here")]
+        //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        public string spellScriptParm1
+        {
+            get { return _spellScriptParm1; }
+            set { _spellScriptParm1 = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("For summon spell enter the duration in combat rounds as number here (eg 10)")]
+        //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        public string spellScriptParm2
+        {
+            get { return _spellScriptParm2; }
+            set { _spellScriptParm2 = value; }
+        }
+
+        //_spellScriptParm1
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("this text appears additionally in log when the spell is cast")]
         //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string additionalCustomLogTextOnCast

@@ -74,6 +74,8 @@ namespace IB2Toolset
         private int _damageTypeResistanceValueFire = 0;
         private int _damageTypeResistanceValueMagic = 0;
         private int _damageTypeResistanceValuePoison = 0;
+        private int _spRegenerationPerRound = 0;
+        private int _hpRegenerationPerRound = 0;
         private string _typeOfDamage = "Normal"; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison
         //private DamageType typeOfDamage = DamageType.Slashing;
         private string _onScoringHit = "none";
@@ -195,6 +197,19 @@ namespace IB2Toolset
         {
             get { return _knownSpellsTags; }
             set { _knownSpellsTags = value; }
+        }
+
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("HP regeneration per combat round; does not work for creatures of zero or below hp.")]
+        public int hpRegenerationPerRound
+        {
+            get { return _hpRegenerationPerRound; }
+            set { _hpRegenerationPerRound = value; }
+        }
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("SP regeneration per combat round; does not work for creatures of zero or below hp.")]
+        public int spRegenerationPerRound
+        {
+            get { return _spRegenerationPerRound; }
+            set { _spRegenerationPerRound = value; }
         }
         [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValuePoison

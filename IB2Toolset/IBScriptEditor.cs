@@ -141,6 +141,21 @@ namespace IB2Toolset
                 MessageBox.Show("Error: Could not load IBScript file " + filename + " from disk. Error: " + ex.Message);
             }
         }
+
+        public void LoadScriptDefault()
+        {
+            try
+            {
+                string path = prntForm._mainDirectory + "\\default\\" + "NewModule" + "\\ibscript";
+                string text = File.ReadAllText(path + "\\" + filename);
+                scintilla1.AppendText(text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: Could not load IBScript file " + filename + " from disk. Error: " + ex.Message);
+            }
+        }
+
         private void tsSaveScript_Click(object sender, EventArgs e)
         {
             SaveScript();

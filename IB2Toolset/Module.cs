@@ -23,6 +23,7 @@ namespace IB2Toolset
         private int _moduleVersion = 1;
         public string saveName = "empty";
         private string _defaultPlayerFilename = "drin.json";
+        private bool _hideRoster = false;
         private bool _mustUsePreMadePC = false;
         private int _numberOfPlayerMadePcsAllowed = 1;
         private int maxPartySize = 6;
@@ -188,6 +189,12 @@ namespace IB2Toolset
         {
             get { return _defaultPlayerFilename; }
             set { _defaultPlayerFilename = value; }
+        }
+        [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("Hide roster form party screen; call it via script instead on fitting occassions.")]
+        public bool hideRoster
+        {
+            get { return _hideRoster; }
+            set { _hideRoster = value; }
         }
         [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("Set this flag to true if you only want the player to use the pre-made PC identified in defaultPlayerFilename property. The player will not be given an option to create a character.")]
         public bool mustUsePreMadePC

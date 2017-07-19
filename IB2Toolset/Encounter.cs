@@ -47,6 +47,7 @@ namespace IB2Toolset
         private string onEndCombatIBScriptParms = "";
         public List<Trigger> Triggers = new List<Trigger>();
         public List<Prop> propsList = new List<Prop>();
+        private bool isFriendlyContest = false; 
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of Encounter, must be unique")]
         public string encounterName
@@ -77,6 +78,12 @@ namespace IB2Toolset
         {
             get { return isRepeatable; }
             set { isRepeatable = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Set to true if this encounter is just a friendly contest; characters will be revived at the end and have at least 1 hp; game continues even if losing the contest")]
+        public bool IsFriendlyContest
+        {
+            get { return isFriendlyContest; }
+            set {isFriendlyContest = value; }
         }
         [Browsable(true), TypeConverter(typeof(MusicConverter))]
         [CategoryAttribute("02 - Music"), DescriptionAttribute("Filename of music for the area (no extension)")]

@@ -27,8 +27,36 @@ namespace IB2Toolset
         {
             lbxIBScripts.BeginUpdate();
             lbxIBScripts.DataSource = null;
-            lbxIBScripts.DataSource = prntForm.mod.moduleIBScriptsList;
+            //try drawing from default module here already
+            //caesar
+            //************************************************
+            try
+            {
+                List<string> tempList = new List<string>();
+
+                string jobDir = prntForm._mainDirectory + "\\default\\" + "NewModule" + "\\ibscript";
+
+                foreach (string f in Directory.GetFiles(jobDir, "*.ibs"))
+                {
+                    string filename = Path.GetFileNameWithoutExtension(f);
+                    tempList.Add(filename);
+                }
+
+                foreach (string sTemp in tempList)
+                {
+                    if (!prntForm.mod.moduleIBScriptsList.Contains(sTemp))
+                    {
+                        prntForm.mod.moduleIBScriptsList.Add(sTemp);
+                    }
+                }
+            }
+            catch
+            { }
+
+                        //************************************************
+                        lbxIBScripts.DataSource = prntForm.mod.moduleIBScriptsList;
             lbxIBScripts.EndUpdate();            
+
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -240,6 +268,47 @@ namespace IB2Toolset
                     string filename = Path.GetFileNameWithoutExtension(f);
                     prntForm.mod.moduleIBScriptsList.Add(filename);
                 }
+
+                //second routine for retrieving ibscripts from default folder and adding hem, too, if they do not alreday exist
+                //Note: load and save actions for ibscripts will need to be reworked the same way
+                try
+                {
+                    List<string> tempList = new List<string>();
+
+                    jobDir = prntForm._mainDirectory + "\\default\\" + "NewModule" + "\\ibscript";
+
+                    foreach (string f in Directory.GetFiles(jobDir, "*.ibs"))
+                    {
+                        string filename = Path.GetFileNameWithoutExtension(f);
+                        tempList.Add(filename);
+                    }
+
+                    foreach (string sTemp in tempList)
+                    {
+                        if (!prntForm.mod.moduleIBScriptsList.Contains(sTemp))
+                        {
+                            prntForm.mod.moduleIBScriptsList.Add(sTemp);
+                            //***************************************************
+                            IBScriptEditor newChild = new IBScriptEditor(prntForm.mod, prntForm); //add new child
+                            newChild.Text = prntForm.mod.moduleIBScriptsList[prntForm._selectedLbxIBScriptIndex];
+                            newChild.Show(prntForm.dockPanel1);  //as new form created so that corresponding tab and child form is active
+                            refreshListBoxIBScripts();
+                            newChild.filename = prntForm.mod.moduleIBScriptsList[prntForm._selectedLbxIBScriptIndex] + ".ibs";
+                            if (!File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ibscript\\" + newChild.filename))
+                            {
+                                newChild.SaveScript();
+                            }
+
+
+                            //***************************************************
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+
                 refreshListBoxIBScripts();
             }
             catch (Exception ex)
@@ -256,16 +325,26 @@ namespace IB2Toolset
             newChild.Show(prntForm.dockPanel1);  //as new form created so that corresponding tab and child form is active
             refreshListBoxIBScripts();
             newChild.filename = prntForm.mod.moduleIBScriptsList[prntForm._selectedLbxIBScriptIndex] + ".ibs";
+            //try loading from default
+            try
+            {
+                if (!File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ibscript\\" + newChild.filename))
+                {
+                    newChild.LoadScriptDefault();
+                }
+                else
+                {
+                    newChild.LoadScript();
+                }
+            }
+            catch
+            { }
+
             if (!File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ibscript\\" + newChild.filename))
             {
                 newChild.SaveScript();
             }
-            try
-            {
-                newChild.LoadScript();
-            }
-            catch { }
-            //newChild.SaveScript();
+
         }
     }
 }

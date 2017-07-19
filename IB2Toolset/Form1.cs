@@ -129,11 +129,11 @@ namespace IB2Toolset
             openPlayerClasses(_mainDirectory + "\\default\\NewModule\\data\\playerClasses.json");
             openRaces(_mainDirectory + "\\default\\NewModule\\data\\races.json");
             //openSkills(_mainDirectory + "\\data\\NewModule\\data\\" + mod.SkillsFileName);
-            openSpells(_mainDirectory + "\\default\\NewModule\\data\\spells.json");
-            openTraits(_mainDirectory + "\\default\\NewModule\\data\\traits.json");
+            openSpellsDefault();
+            openTraitsDefault();
             openWeatherEffects(_mainDirectory + "\\default\\NewModule\\data\\weatherEffects.json");
             openWeathers(_mainDirectory + "\\default\\NewModule\\data\\weathers.json");
-            openEffects(_mainDirectory + "\\default\\NewModule\\data\\effects.json");
+            openEffectsDefault();
             //game.errorLog("Starting IceBlink Toolset");
             saveAsTemp();
 
@@ -512,6 +512,7 @@ namespace IB2Toolset
                 MessageBox.Show("Couldn't find journal.json file. Will create a new one upon saving module.");
             }
         }
+
         private void openEffects(string filename)
         {
             if (File.Exists(filename))
@@ -522,7 +523,44 @@ namespace IB2Toolset
             else
             {
                 MessageBox.Show("Couldn't find effects.json file. Will create a new one upon saving module.");
-            }            
+            }
+
+            List<Effect> effectsListDefault = new List<Effect>();
+            effectsListDefault = loadEffectsFile(_mainDirectory + "\\default\\NewModule\\data\\effects.json");
+
+            foreach (Effect eD in effectsListDefault)
+            {
+                bool allowAdding = true;
+                foreach (Effect eM in effectsList)
+                {
+                    if (eM.name == eD.name)
+                    {
+                        allowAdding = false;
+                        break;
+                    }
+                }
+
+                if (allowAdding)
+                {
+                    effectsList.Add(eD);
+                }
+            }
+            effectsListDefault.Clear();
+        }
+
+        private void openEffectsDefault()
+        {
+            string filename = _mainDirectory + "\\default\\NewModule\\data\\effects.json";
+
+            if (File.Exists(filename))
+            {
+                effectsList.Clear();
+                effectsList = loadEffectsFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find effects.json file. Will create a new one upon saving module.");
+            }
         }
         private void openPlayerClasses(string filename)
         {
@@ -558,7 +596,43 @@ namespace IB2Toolset
             else
             {
                 MessageBox.Show("Couldn't find spells.json file. Will create a new one upon saving module.");
-            }            
+            }
+
+            List<Spell> spellsListDefault = new List<Spell>();
+            spellsListDefault = loadSpellsFile(_mainDirectory + "\\default\\NewModule\\data\\spells.json");
+            
+            foreach (Spell sD in spellsListDefault)
+            {
+                bool allowAdding = true;
+                foreach (Spell sM in spellsList)
+                {
+                    if (sM.name == sD.name)
+                    {
+                        allowAdding = false;
+                        break;
+                    }
+                }
+
+                if (allowAdding)
+                {
+                    spellsList.Add(sD);
+                }
+            }
+
+            spellsListDefault.Clear();            
+        }
+        private void openSpellsDefault()
+        {
+            string filename = _mainDirectory + "\\default\\NewModule\\data\\spells.json";
+            if (File.Exists(filename))
+            {
+                spellsList.Clear();
+                spellsList = loadSpellsFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find spells.json file. Will create a new one upon saving module.");
+            }
         }
         private void openTraits(string filename)
         {
@@ -570,7 +644,45 @@ namespace IB2Toolset
             else
             {
                 MessageBox.Show("Couldn't find traits.json file. Will create a new one upon saving module.");
-            }            
+            }
+
+            List<Trait> TraitsListDefault = new List<Trait>();
+            TraitsListDefault = loadTraitsFile(_mainDirectory + "\\default\\NewModule\\data\\Traits.json");
+
+            foreach (Trait tD in TraitsListDefault)
+            {
+                bool allowAdding = true;
+                foreach (Trait tM in traitsList)
+                {
+                    if (tM.name == tD.name)
+                    {
+                        allowAdding = false;
+                        break;
+                    }
+                }
+
+                if (allowAdding)
+                {
+                    traitsList.Add(tD);
+                }
+            }
+
+            TraitsListDefault.Clear();
+        }
+
+        private void openTraitsDefault()
+        {
+            string filename = _mainDirectory + "\\default\\NewModule\\data\\traits.json";
+
+            if (File.Exists(filename))
+            {
+                traitsList.Clear();
+                traitsList = loadTraitsFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find traits.json file. Will create a new one upon saving module.");
+            }
         }
 
         private void openWeatherEffects(string filename)

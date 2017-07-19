@@ -26,7 +26,8 @@ namespace IB2Toolset
         private int _startingTimeInUnits = 0;
         private int _babModifier = 0;
 
-        private int _babModifierForRangedAttack = 0;  
+        private int _babModifierForRangedAttack = 0;
+        private int _babModifierForMeleeAttack = 0;
         private int _damageModifierForMeleeAttack = 0;  
         private int _damageModifierForRangedAttack = 0;
 
@@ -124,7 +125,7 @@ namespace IB2Toolset
         #endregion
 
         #region Properties
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of the Effect")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Name of the Effect")]
         public string name
         {
             get
@@ -138,52 +139,48 @@ namespace IB2Toolset
         }
 
 
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative change in percent represented as integer. (example: to increase by 10%, enter 10. to decrease by 20%, enter -20)")]  
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("can be a positive or negative change in percent represented as integer. (example: to increase by 10%, enter 10. to decrease by 20%, enter -20)")]  
          public int modifyShopBuyBackPrice  
         {  
              get { return _modifyShopBuyBackPrice; }  
              set { _modifyShopBuyBackPrice = value; }  
          }  
-         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative change in percent represented as integer. (example: to increase by 10%, enter 10. to decrease by 20%, enter -20)")]  
+         [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("can be a positive or negative change in percent represented as integer. (example: to increase by 10%, enter 10. to decrease by 20%, enter -20)")]  
          public int modifyShopSellPrice
          {  
              get { return _modifyShopSellPrice; }  
              set { _modifyShopSellPrice = value; }  
          }
-        /*
-        private bool _allowCastingWithoutTriggeringAoO = false;
-        private bool _allowCastingWithoutRiskOfInterruption = false;
-        */
-
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("Allows casting without triggering attacks of opportunity when set to true.")]
+       
+        [CategoryAttribute("06 - Special effects (pc only)"), DescriptionAttribute("Allows casting without triggering attacks of opportunity when set to true.")]
         public bool allowCastingWithoutTriggeringAoO
         {
             get { return _allowCastingWithoutTriggeringAoO; }
             set { _allowCastingWithoutTriggeringAoO = value; }
         }
 
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("Allow casting without risk (will save) of interruption due to damage taken in the meantime when set to true.")]
+        [CategoryAttribute("06 - Special effects (pc only)"), DescriptionAttribute("Allow casting without risk (will save) of interruption due to damage taken in the meantime when set to true.")]
         public bool allowCastingWithoutRiskOfInterruption
         {
             get { return _allowCastingWithoutRiskOfInterruption; }
             set { _allowCastingWithoutRiskOfInterruption = value; }
         }
         
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Entries added here mark pc (trait tags) and creatures (local string values) that are immune to this effect.")]
+        [CategoryAttribute("01 - Applicability"), DescriptionAttribute("Entries added here mark pc (trait tags) and creatures (local string values) that are immune to this effect.")]
         public List<LocalImmunityString> affectNeverList
         {
             get { return _affectNeverList; }
             set { _affectNeverList = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Entries added here mark the ONLY pc(trait tags) and creatures(local string values) that can be affected by this effect.")]
+        [CategoryAttribute("01 - Applicability"), DescriptionAttribute("Entries added here mark the ONLY pc(trait tags) and creatures(local string values) that can be affected by this effect.")]
         public List<LocalImmunityString> affectOnlyList
         {
             get { return _affectOnlyList; }
             set { _affectOnlyList = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the Effect (Must be unique)")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Tag of the Effect (Must be unique)")]
         public string tag
         {
             get
@@ -195,7 +192,7 @@ namespace IB2Toolset
                 _tag = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the Effect sender, the one who created the effect (Must be unique)"), ReadOnly(true)]
+        [CategoryAttribute("08 - Read only"), DescriptionAttribute("Tag of the Effect sender, the one who created the effect (Must be unique)"), ReadOnly(true)]
         public string tagOfSender
         {
             get
@@ -207,7 +204,7 @@ namespace IB2Toolset
                 _tagOfSender = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Level of Effect sender, the one (Creature, Player, Item, etc.) who created the effect"), ReadOnly(true)]
+        [CategoryAttribute("08 - Read only"), DescriptionAttribute("Level of Effect sender, the one (Creature, Player, Item, etc.) who created the effect"), ReadOnly(true)]
         public int classLevelOfSender
         {
             get
@@ -220,7 +217,7 @@ namespace IB2Toolset
             }
         }
         [Editor(typeof(MultilineStringEditor), typeof(System.Drawing.Design.UITypeEditor))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Detailed description of effect with some stats")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Detailed description of effect with some stats")]
         public string description
         {
             get
@@ -233,7 +230,7 @@ namespace IB2Toolset
             }
         }
         //[Browsable(true), TypeConverter(typeof(SpriteConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the effect (Sprite Filename with extension)")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Sprite to use for the effect (Sprite Filename with extension)")]
         public string spriteFilename
         {
             get
@@ -245,7 +242,7 @@ namespace IB2Toolset
                 _spriteFilename = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("How long the Effect lasts in units of time. For instantaneous effects like fireball or mage bolt, set this to = 0")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("How long the effect lasts in seconds (usally a combat round has 6 seconds, step on main map 300 seconds). For instantaneous effects like fireball or mage bolt, set this to = 0")]
         public int durationInUnits
         {
             get
@@ -257,7 +254,7 @@ namespace IB2Toolset
                 _durationInUnits = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("(no longer used)How long the Effect has been going on so far in units of time"), ReadOnly(true)]
+        [CategoryAttribute("08 - Read only"), DescriptionAttribute("(no longer used)How long the Effect has been going on so far in units of time"), ReadOnly(true)]
         public int currentDurationInUnits
         {
             get
@@ -269,7 +266,7 @@ namespace IB2Toolset
                 _currentDurationInUnits = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("(no longer used)At what time did the Effect begin, in units of time"), ReadOnly(true)]
+        [CategoryAttribute("08 - Read only"), DescriptionAttribute("(no longer used)At what time did the Effect begin, in units of time"), ReadOnly(true)]
         public int startingTimeInUnits
         {
             get
@@ -281,26 +278,32 @@ namespace IB2Toolset
                 _startingTimeInUnits = value;
             }
         }
-        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from BAB for melee attacks")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from BAB for all attacks (ranged and melee)")]
         public int babModifier
         {
             get { return _babModifier; }
             set { _babModifier = value; }
         }
 
-        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from BAB for ranged attacks")]  
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from BAB for ranged attacks only")]  
         public int babModifierForRangedAttack  
         {  
              get { return _babModifierForRangedAttack; }  
              set { _babModifierForRangedAttack = value; }  
-        }  
-        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from damage for melee attacks")]  
+        }
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from BAB for melee attacks only")]
+        public int babModifierForMeleeAttack
+        {
+            get { return _babModifierForMeleeAttack; }
+            set { _babModifierForMeleeAttack = value; }
+        }
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from damage for melee attacks")]  
         public int damageModifierForMeleeAttack
         {  
              get { return _damageModifierForMeleeAttack; }  
              set { _damageModifierForMeleeAttack = value; }  
         }  
-        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from damage for ranged attacks")]  
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from damage for ranged attacks")]  
         public int damageModifierForRangedAttack
         {  
              get { return _damageModifierForRangedAttack; }  
@@ -308,13 +311,13 @@ namespace IB2Toolset
          }  
 
 
-        [CategoryAttribute("03 - Effect"), DescriptionAttribute("adds or subtracts from Armor Class")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from Armor Class")]
         public int acModifier
         {
             get { return _acModifier; }
             set { _acModifier = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Should the effect be stackable, true = stackable")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Should the effect be stackable, true = stackable")]
         public bool isStackableEffect
         {
             get
@@ -326,7 +329,7 @@ namespace IB2Toolset
                 _isStackableEffect = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Should the effect duration be stackable, true = stackable")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Should the effect duration be stackable, true = stackable")]
         public bool isStackableDuration
         {
             get
@@ -338,7 +341,7 @@ namespace IB2Toolset
                 _isStackableDuration = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Determines if this effect is used specifically for modifying PC stats only")]
+        [CategoryAttribute("07 - Outdated properties"), DescriptionAttribute("Determines if this effect is used specifically for modifying PC stats only")]
         public bool usedForUpdateStats
         {
             get
@@ -351,7 +354,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("The saving throw is peated each roud - one success terminates the effect")]
+        [CategoryAttribute("01 - Applicability"), DescriptionAttribute("The saving throw is peated each roud - one success terminates the effect")]
         public bool repeatTerminalSaveEachRound
         {
             get
@@ -364,7 +367,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This effect is used by a passive trait, it is permannetly added to the player charcter on acquisition of the trait (that in turn contains this effect's tag in its effects list)")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("This effect is used by a passive trait, it is permannetly added to the player charcter on acquisition of the trait (that in turn contains this effect's tag in its effects list)")]
         public bool isPermanent
         {
             get
@@ -377,7 +380,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Determines whether the effect is removed once the cretaure or pc that has the effect takes damage")]
+        [CategoryAttribute("01 - Applicability"), DescriptionAttribute("Determines whether the effect is removed once the cretaure or pc that has the effect takes damage")]
         public bool endEffectWhenCarrierTakesDamage
         {
             get
@@ -390,7 +393,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Determines whether the effect is removed once the cretaure or pc that has the effect takes damage")]
+        [CategoryAttribute("01 - Applicability"), DescriptionAttribute("Determines whether the effect is removed once the cretaure or pc that has the effect takes damage")]
         public bool saveOnlyHalvesDamage
         {
             get
@@ -411,18 +414,19 @@ namespace IB2Toolset
             get { return effectScript; }
             set { effectScript = value; }
         }*/
+        [CategoryAttribute("07 - Outdated properties"), DescriptionAttribute("Script assoiated with this effect (optional)")]
         public string effectScript
         {
             get { return _effectScript; }
             set { _effectScript = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Type of saving throw check made (none, reflex, will, fortitude)")]
+        [CategoryAttribute("01 - Applicability"), DescriptionAttribute("Type of saving throw check made (none, reflex, will, fortitude)")]
         public string saveCheckType
         {
             get { return _saveCheckType; }
             set { _saveCheckType = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Difficulty Class for saving throw check (pass if 1d20 + reflex/will/fortitude >= DC)")]
+        [CategoryAttribute("01 - Applicability"), DescriptionAttribute("Difficulty Class for saving throw check (pass if 1d20 + reflex/will/fortitude >= DC)")]
         public int saveCheckDC
         {
             get { return _saveCheckDC; }
@@ -500,263 +504,263 @@ namespace IB2Toolset
             get { return _damNumberOfAttacksUpToNAttacksTotal; }
             set { _damNumberOfAttacksUpToNAttacksTotal = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("set to true if this Effect uses a Heal type Effect")]
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("set to true if this Effect uses a Heal type Effect")]
         public bool doHeal
         {
             get { return _doHeal; }
             set { _doHeal = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("set to true if this Effect will heal HPs, set to fasle to 'heal' SP instead (think rejuvenation type spells to recoupe SP).")]  
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("set to true if this Effect will heal HPs, set to fasle to 'heal' SP instead (think rejuvenation type spells to recoupe SP).")]  
         public bool healHP  
         {  
             get { return _healHP; }  
             set { _healHP = value; }  
         }  
 
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("Organic (living things), NonOrganic (robots, constructs)")]
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("Organic (living things), NonOrganic (robots, constructs)")]
         public string healType
         {
             get { return _healType; }
             set { _healType = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(A) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("(A) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healNumOfDice
         {
             get { return _healNumOfDice; }
             set { _healNumOfDice = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(B) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("(B) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healDie
         {
             get { return _healDie; }
             set { _healDie = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(C) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("(C) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healAdder
         {
             get { return _healAdder; }
             set { _healAdder = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(D) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("(D) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healActionsEveryNLevels
         {
             get { return _healActionsEveryNLevels; }
             set { _healActionsEveryNLevels = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(E) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("(E) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healActionsAfterLevelN
         {
             get { return _healActionsAfterLevelN; }
             set { _healActionsAfterLevelN = value; }
         }
-        [CategoryAttribute("02 - Heal"), DescriptionAttribute("(F) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        [CategoryAttribute("03 - Heal"), DescriptionAttribute("(F) [HealActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
         public int healActionsUpToNLevelsTotal
         {
             get { return _healActionsUpToNLevelsTotal; }
             set { _healActionsUpToNLevelsTotal = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("set to true if this Effect uses a Buff type Effect")]
+        [CategoryAttribute("07 - Outdated properties"), DescriptionAttribute("set to true if this Effect uses a Buff type Effect")]
         public bool doBuff
         {
             get { return _doBuff; }
             set { _doBuff = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("set to true if this Effect uses a DeBuff type Effect")]
+        [CategoryAttribute("07 - Outdated properties"), DescriptionAttribute("set to true if this Effect uses a DeBuff type Effect")]
         public bool doDeBuff
         {
             get { return _doDeBuff; }
             set { _doDeBuff = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("none, Held, Immobile, Invisible, Silenced")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("none, Held (for creature and player), Immobile (for creature and player), Invisible (for player only), Silenced(not implemented)")]
         public string statusType
         {
             get { return _statusType; }
             set { _statusType = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyFortitude
         {
             get { return _modifyFortitude; }
             set { _modifyFortitude = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyWill
         {
             get { return _modifyWill; }
             set { _modifyWill = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyReflex
         {
             get { return _modifyReflex; }
             set { _modifyReflex = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
         public int modifyStr
         {
             get { return _modifyStr; }
             set { _modifyStr = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
         public int modifyDex
         {
             get { return _modifyDex; }
             set { _modifyDex = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
         public int modifyInt
         {
             get { return _modifyInt; }
             set { _modifyInt = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
         public int modifyCha
         {
             get { return _modifyCha; }
             set { _modifyCha = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
         public int modifyCon
         {
             get { return _modifyCon; }
             set { _modifyCon = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
         public int modifyWis
         {
             get { return _modifyWis; }
             set { _modifyWis = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("[applies to PCs Only] can be a positive or negative amount")]
         public int modifyLuk
         {
             get { return _modifyLuk; }
             set { _modifyLuk = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyMoveDistance
         {
             get { return _modifyMoveDistance; }
             set { _modifyMoveDistance = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyHpMax
         {
             get { return _modifyHpMax; }
             set { _modifyHpMax = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifySpMax
         {
             get { return _modifySpMax; }
             set { _modifySpMax = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifySp
         {
             get { return _modifySp; }
             set { _modifySp = value; }
         }
 
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount. Is used for combat hp regeneration type trait effects on each round. For Passive type traits only.")]  
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount. Is used for combat hp regeneration type trait effects on each round. For Passive type traits only.")]  
         public int modifyHpInCombat  
         {  
              get { return _modifyHpInCombat; }  
              set { _modifyHpInCombat = value; }  
         }  
-         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount. Is used for combat sp regeneration type trait effects on each round. For Passive type traits only.")]  
+         [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount. Is used for combat sp regeneration type trait effects on each round. For Passive type traits only.")]  
          public int modifySpInCombat
          {  
              get { return _modifySpInCombat; }  
              set { _modifySpInCombat = value; }  
          }  
 
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyDamageTypeResistanceAcid
         {
             get { return _modifyDamageTypeResistanceAcid; }
             set { _modifyDamageTypeResistanceAcid = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyDamageTypeResistanceCold
         {
             get { return _modifyDamageTypeResistanceCold; }
             set { _modifyDamageTypeResistanceCold = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyDamageTypeResistanceNormal
         {
             get { return _modifyDamageTypeResistanceNormal; }
             set { _modifyDamageTypeResistanceNormal = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyDamageTypeResistanceElectricity
         {
             get { return _modifyDamageTypeResistanceElectricity; }
             set { _modifyDamageTypeResistanceElectricity = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyDamageTypeResistanceFire
         {
             get { return _modifyDamageTypeResistanceFire; }
             set { _modifyDamageTypeResistanceFire = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyDamageTypeResistanceMagic
         {
             get { return _modifyDamageTypeResistanceMagic; }
             set { _modifyDamageTypeResistanceMagic = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyDamageTypeResistancePoison
         {
             get { return _modifyDamageTypeResistancePoison; }
             set { _modifyDamageTypeResistancePoison = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyNumberOfMeleeAttacks
         {
             get { return _modifyNumberOfMeleeAttacks; }
             set { _modifyNumberOfMeleeAttacks = value; }
         }
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("can be a positive or negative amount")]
+        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("can be a positive or negative amount")]
         public int modifyNumberOfRangedAttacks
         {
             get { return _modifyNumberOfRangedAttacks; }
             set { _modifyNumberOfRangedAttacks = value; }
         }
 
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("number of enemies that can be targeted in one round upon succesive cleave atacks (melee only). Cleave attacks are only made if previous attacked enemy goes down")]  
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("number of enemies that can be targeted in one round upon succesive cleave atacks (melee only). Cleave attacks are only made if previous attacked enemy goes down")]  
         public int modifyNumberOfEnemiesAttackedOnCleave
         {  
              get { return _modifyNumberOfEnemiesAttackedOnCleave; }  
              set { _modifyNumberOfEnemiesAttackedOnCleave = value; }  
         }  
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("number of adjacent enemies that will be attacked in one round. This will not make multiple attacks on one target (like two attack trait), only one attack per target.")]  
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("number of adjacent enemies that will be attacked in one round. This will not make multiple attacks on one target (like two attack trait), only one attack per target.")]  
         public int modifyNumberOfEnemiesAttackedOnSweepAttack
         {  
              get { return _modifyNumberOfEnemiesAttackedOnSweepAttack; }  
              set { _modifyNumberOfEnemiesAttackedOnSweepAttack = value; }  
         }  
-        [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("if true, will use dexterity for melee attack modifier instead of strength if dexterity is greater than strength.")]  
+        [CategoryAttribute("06 - Special effects (pc only)"), DescriptionAttribute("if true, will use dexterity for melee attack modifier instead of strength if dexterity is greater than strength.")]  
         public bool useDexterityForMeleeAttackModifierIfGreaterThanStrength
         {  
              get { return _useDexterityForMeleeAttackModifierIfGreaterThanStrength; }  
              set { _useDexterityForMeleeAttackModifierIfGreaterThanStrength = value; }  
          }  
-         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("if true, will use dexterity for melee damage modifier instead of strength if dexterity is greater than strength.")]  
+         [CategoryAttribute("06 - Special effects (pc only)"), DescriptionAttribute("if true, will use dexterity for melee damage modifier instead of strength if dexterity is greater than strength.")]  
          public bool useDexterityForMeleeDamageModifierIfGreaterThanStrength
          {  
              get { return _useDexterityForMeleeDamageModifierIfGreaterThanStrength; }  
              set { _useDexterityForMeleeDamageModifierIfGreaterThanStrength = value; }  
          }  
-         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("if true, will ignore any attack penalty for using ranged attack with an enemy in an adjacent square (think point blank shot trait).")]  
+         [CategoryAttribute("06 - Special effects (pc only)"), DescriptionAttribute("if true, will ignore any attack penalty for using ranged attack with an enemy in an adjacent square (think point blank shot trait).")]  
          public bool negateAttackPenaltyForAdjacentEnemyWithRangedAttack
          {  
              get { return _negateAttackPenaltyForAdjacentEnemyWithRangedAttack; }  
              set { _negateAttackPenaltyForAdjacentEnemyWithRangedAttack = value; }  
          }  
-         [CategoryAttribute("03 - Buff/DeBuff"), DescriptionAttribute("if true, will do half damage for failed DC checks against damage effects and no damage for successful DC checks (think evasion trait).")]  
+         [CategoryAttribute("07 - Outdated properties"), DescriptionAttribute("if true, will do half damage for failed DC checks against damage effects and no damage for successful DC checks (think evasion trait).")]  
          public bool useEvasion
          {  
              get { return _useEvasion; }  

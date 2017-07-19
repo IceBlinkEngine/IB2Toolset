@@ -28,7 +28,10 @@
     "Marissa"
   ],
   "moduleLogicTreesList": [],
-  "moduleIBScriptsList": [],
+  "moduleIBScriptsList": [
+    "doPartyLight",
+    "floatytext2"
+  ],
   "moduleAreasObjects": [],
   "moduleGlobalInts": [],
   "moduleGlobalStrings": [],
@@ -68,6 +71,7 @@
   "moduleLabelName": "NewModule",
   "moduleVersion": 1,
   "defaultPlayerFilename": "drin.json",
+  "hideRoster": false,
   "mustUsePreMadePC": false,
   "useRealTimeTimer": false,
   "useSmoothMovement": true,
