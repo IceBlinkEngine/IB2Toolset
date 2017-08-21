@@ -18,8 +18,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "int",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Bluff (L2)",
@@ -40,8 +39,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "int",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Cleave",
@@ -62,8 +60,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Critical Strike",
@@ -84,8 +81,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Diplomacy (L1)",
@@ -106,8 +102,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "cha",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Diplomacy (L2)",
@@ -128,8 +123,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "cha",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Disable Device (L1)",
@@ -150,8 +144,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Disable Device (L2)",
@@ -172,8 +165,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Evasion",
@@ -194,8 +186,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Intimidate (L1)",
@@ -216,8 +207,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Intimidate (L2)",
@@ -238,8 +228,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Pick Pocket (L1)",
@@ -260,8 +249,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Pick Pocket (L2)",
@@ -282,8 +270,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Point Blank Shot",
@@ -304,8 +291,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Sneak Attack",
@@ -326,8 +312,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Spot (L1)",
@@ -348,8 +333,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Spot (L2)",
@@ -370,8 +354,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Stealth (L1)",
@@ -392,8 +375,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Stealth (L2)",
@@ -414,8 +396,7 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   },
   {
     "name": "Two Attacks",
@@ -436,7 +417,6 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always",
-    "traitScript": "none"
+    "useableInSituation": "Always"
   }
 ]

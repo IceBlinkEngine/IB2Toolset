@@ -100,7 +100,7 @@ namespace IB2Toolset
         //private int _range = 0;
 
         //private ScriptSelectEditorReturnObject spellScript = new ScriptSelectEditorReturnObject();
-        private string _traitScript = "none";
+        private string _traitScript = "none";//not used
         private string _associatedSpellTag = "none";
         private List<EffectTagForDropDownList> _traitEffectTagList = new List<EffectTagForDropDownList>();
         private List<LocalImmunityString> _traitWorksOnlyWhen = new List<LocalImmunityString>();
@@ -262,12 +262,14 @@ namespace IB2Toolset
             get { return useableInSituation; }
             set { useableInSituation = value; }
         }*/
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When can this be used: Always means that it can be used in combat and on the main maps, Passive means that it is always on and doesn't need to be activated.")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When can this be used: Always, OutOfCombat, InCombat. Non-usable traits are identified by not containing an assoicated spell tag.")]
         public string useableInSituation
         {
             get { return _useableInSituation; }
             set { _useableInSituation = value; }
         }
+
+
         //[Browsable(true), TypeConverter(typeof(SpriteConverter))]
         /*
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the effect (Sprite Filename with extension)")]
@@ -405,13 +407,16 @@ namespace IB2Toolset
             get { return spellScript; }
             set { spellScript = value; }
         }*/
+        /*
         [CategoryAttribute("01 - Main"), DescriptionAttribute("the script to use for this Spell")]
         //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        
         public string traitScript
         {
             get { return _traitScript; }
             set { _traitScript = value; }
         }
+        */
         #endregion
 
         public Trait()

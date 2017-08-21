@@ -459,7 +459,7 @@ namespace IB2Toolset
         private string _tag = "";
         private int _atWhatLevelIsAvailable = 0;
         private bool _automaticallyLearned = false;
-        //private bool _needsSpecificTrainingToLearn = false;
+        private bool _needsSpecificTrainingToLearn = false;
         private bool _allow = false;
         
         //InCombat, OutOfCombat, Always, Passive
@@ -532,7 +532,7 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("automaticallyLearned");
             }
         }
-        /*public bool needsSpecificTrainingToLearn
+        public bool needsSpecificTrainingToLearn
         {
             get { return _needsSpecificTrainingToLearn; }
             set
@@ -540,7 +540,7 @@ namespace IB2Toolset
                 _needsSpecificTrainingToLearn = value;
                 this.NotifyPropertyChanged("needsSpecificTrainingToLearn");
             }
-        }*/
+        }
         public bool allow
         {
             get { return _allow; }
@@ -623,6 +623,7 @@ namespace IB2Toolset
         private int _atWhatLevelIsAvailable = 0;
         private bool _automaticallyLearned = false;
         private bool _allow = false;
+        private bool _needsSpecificTrainingToLearn = false;
 
         public string name
         {
@@ -644,6 +645,17 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("name");
             }
         }
+
+        public bool needsSpecificTrainingToLearn
+        {
+            get { return _needsSpecificTrainingToLearn; }
+            set
+            {
+                _needsSpecificTrainingToLearn = value;
+                this.NotifyPropertyChanged("needsSpecificTrainingToLearn");
+            }
+        }
+
         public string tag
         {
             get { return _tag; }

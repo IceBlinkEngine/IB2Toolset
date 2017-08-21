@@ -75,7 +75,7 @@ namespace IB2Toolset
         private string _spellImage = "sp_magebolt";
         private string _description = "";
         //private UsableInSituation useableInSituation = UsableInSituation.Always;
-        private string _useableInSituation = "Always";        
+        private string _useableInSituation = "Always";//InCombat, OutOfCombat, Always    
         private string _spriteFilename = "none";
         private string _spriteEndingFilename = "none";
         private string _spellStartSound = "none";
@@ -109,14 +109,14 @@ namespace IB2Toolset
 
         #region Properties
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("if true, the use of this trait in combat will consume that player's turn. If false, the player will get to use this trait and continue their turn. Some traits are meant to be used in the same turn such as Power Attack and Set Trap.")]  
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("if true, the use of this trait in combat will consume that player's turn. If false, the player will get to use this trait and continue their turn. Some traits are meant to be used in the same turn such as Power Attack and Set Trap.")]  
         public bool usesTurnToActivate  
         {  
              get { return _usesTurnToActivate; }  
              set { _usesTurnToActivate = value; }  
         }  
 
-        [CategoryAttribute("02 - Target"), DescriptionAttribute("Does this spell apply effects to combat squares?")]  
+        [CategoryAttribute("03 - Target"), DescriptionAttribute("Does this spell apply effects to combat squares?")]  
          public bool isUsedForCombatSquareEffect
         {  
             get  
@@ -153,7 +153,7 @@ namespace IB2Toolset
                 _tag = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Image icon of the Spell")]
+        [CategoryAttribute("05 - Graphic and sound"), DescriptionAttribute("Image icon of the Spell")]
         public string spellImage
         {
             get
@@ -184,7 +184,7 @@ namespace IB2Toolset
             get { return useableInSituation; }
             set { useableInSituation = value; }
         }*/
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When can this be used: Always means that it can be used in combat and on the main maps, Passive means that it is always on and doesn't need to be activated.")]
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("When can this be used: InCombat, OutOfCombat, Always")]
         public string useableInSituation
         {
             get { return _useableInSituation; }
@@ -199,7 +199,7 @@ namespace IB2Toolset
         }
 
         [Browsable(true), TypeConverter(typeof(SpriteConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the effect (Sprite Filename with no extension)")]
+        [CategoryAttribute("05 - Graphic and sound"), DescriptionAttribute("Sprite to use for the effect (Sprite Filename with no extension)")]
         public string spriteFilename
         {
             get
@@ -212,7 +212,7 @@ namespace IB2Toolset
             }
         }
         [Browsable(true), TypeConverter(typeof(SpriteConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the ending effect (Sprite Filename with no extension)")]
+        [CategoryAttribute("05 - Graphic and sound"), DescriptionAttribute("Sprite to use for the ending effect (Sprite Filename with no extension)")]
         public string spriteEndingFilename
         {
             get
@@ -225,14 +225,15 @@ namespace IB2Toolset
             }
         }
         [Browsable(true), TypeConverter(typeof(SoundConverter))]
-        [CategoryAttribute("01- Main"), DescriptionAttribute("Filename of sound to play when the spell starts (no extension)")]
+        [CategoryAttribute("05 - Graphic and sound"), DescriptionAttribute("Filename of sound to play when the spell starts (no extension)")]
         public string spellStartSound
         {
             get { return _spellStartSound; }
             set { _spellStartSound = value; }
         }
+
         [Browsable(true), TypeConverter(typeof(SoundConverter))]
-        [CategoryAttribute("01- Main"), DescriptionAttribute("Filename of sound to play when the spell ends (no extension)")]
+        [CategoryAttribute("05 - Graphic and sound"), DescriptionAttribute("Filename of sound to play when the spell ends (no extension)")]
         public string spellEndSound
         {
             get { return _spellEndSound; }
@@ -267,7 +268,7 @@ namespace IB2Toolset
         private bool _canBeInterrupted = true;
         private bool _triggersAoO = true;
         */
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("How many extra turns to spend casting; 0 is spell that is cast the same turn as it is selected")]
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("How many extra turns to spend casting; 0 is spell that is cast the same turn as it is selected")]
         public int castTimeInTurns
         {
             get
@@ -280,7 +281,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, this spell can be interrupted by damage taken while casting (a will save is allowed against the interruption, getting more difficult, the more damage has been taken)")]
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("When set to true, this spell can be interrupted by damage taken while casting (a will save is allowed against the interruption, getting more difficult, the more damage has been taken)")]
         public bool canBeInterrupted
         {
             get
@@ -293,7 +294,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, enemies in melee range get free attacks on the caster during the casting procress.")]
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("When set to true, enemies in melee range get free attacks on the caster during the casting procress.")]
         public bool triggersAoO
         {
             get
@@ -317,7 +318,7 @@ namespace IB2Toolset
                 spellTargetType = value;
             }
         }*/
-        [CategoryAttribute("02 - Target"), DescriptionAttribute("The type of target for this spell")]
+        [CategoryAttribute("03 - Target"), DescriptionAttribute("The type of target for this spell")]
         public string spellTargetType
         {
             get
@@ -341,7 +342,7 @@ namespace IB2Toolset
                 spellEffectType = value;
             }
         }*/
-        [CategoryAttribute("03 - Effect"), DescriptionAttribute("damage = persistent, negative; heal = persistent, positive; buff = temporary, positive; debuff = temporary, negative")]
+        [CategoryAttribute("07 - Outdated"), DescriptionAttribute("damage = persistent, negative; heal = persistent, positive; buff = temporary, positive; debuff = temporary, negative")]
         public string spellEffectType
         {
             get
@@ -353,7 +354,7 @@ namespace IB2Toolset
                 _spellEffectType = value;
             }
         }
-        [CategoryAttribute("02 - Target"), DescriptionAttribute("the shape of the AoE")]
+        [CategoryAttribute("03 - Target"), DescriptionAttribute("the shape of the AoE")]
         [JsonConverter(typeof(StringEnumConverter))]
         public AreaOfEffectShape aoeShape
         {
@@ -366,7 +367,7 @@ namespace IB2Toolset
                 _aoeShape = value;
             }
         }
-        [CategoryAttribute("02 - Target"), DescriptionAttribute("the radius of the AoE")]
+        [CategoryAttribute("03 - Target"), DescriptionAttribute("the radius of the AoE")]
         public int aoeRadius
         {
             get
@@ -378,7 +379,7 @@ namespace IB2Toolset
                 _aoeRadius = value;
             }
         }
-        [CategoryAttribute("02 - Target"), DescriptionAttribute("the range allowed to the center or beginning of the AoE")]
+        [CategoryAttribute("03 - Target"), DescriptionAttribute("the range allowed to the center or beginning of the AoE")]
         public int range
         {
             get
@@ -397,7 +398,7 @@ namespace IB2Toolset
             get { return spellScript; }
             set { spellScript = value; }
         }*/
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("the script to use for this Spell (leave as 'none' to use spellEffectTag instead)")]
+        [CategoryAttribute("02 - Effect related"), DescriptionAttribute("the script to use for rare special spells (no entries in spellEffectTagList, spellEffectTag set to none): spDimensionDoor, spSummonAlly, trRemoveTrap")]
         //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string spellScript
         {
@@ -405,7 +406,7 @@ namespace IB2Toolset
             set { _spellScript = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("For summon spell cast by pc enter name of the pc to summon here (without .json, eg Drin); for summon spell cast by creature enter the resref of the creature to summon here")]
+        [CategoryAttribute("02 - Effect related"), DescriptionAttribute("For summon spell cast by pc enter name of the pc to summon here (without .json, eg Drin); for summon spell cast by creature enter the resref of the creature to summon here")]
         //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string spellScriptParm1
         {
@@ -413,7 +414,7 @@ namespace IB2Toolset
             set { _spellScriptParm1 = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("For summon spell enter the duration in combat rounds as number here (eg 10)")]
+        [CategoryAttribute("02 - Effect related"), DescriptionAttribute("For summon spell enter the duration in combat rounds as number here (eg 10)")]
         //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string spellScriptParm2
         {
@@ -423,7 +424,7 @@ namespace IB2Toolset
 
         //_spellScriptParm1
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("this text appears additionally in log when the spell is cast")]
+        [CategoryAttribute("06 - Not implemented yet"), DescriptionAttribute("this text appears additionally in log when the spell is cast")]
         //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string additionalCustomLogTextOnCast
         {
@@ -431,21 +432,21 @@ namespace IB2Toolset
             set { _additionalCustomLogTextOnCast = value; }
         }
         [Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("the effect to use for this Spell")]
+        [CategoryAttribute("07 - Outdated"), DescriptionAttribute("the effect to use for this Spell")]
         public string spellEffectTag
         {
             get { return _spellEffectTag; }
             set { _spellEffectTag = value; }
         }
         //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("List of EffectTags that will be removed from the target when this spell is used (used for dispell magic, free action, neutralize poison, etc.)")]
+        [CategoryAttribute("02 - Effect related"), DescriptionAttribute("List of EffectTags that will be removed from the target when this spell is used (used for dispell magic, free action, neutralize poison, etc.)")]
         public List<EffectTagForDropDownList> removeEffectTagList
         {
             get { return _removeEffectTagList; }
             set { _removeEffectTagList = value; }
         }
         //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("List of EffectTags of this spell")]
+        [CategoryAttribute("02 - Effect related"), DescriptionAttribute("List of EffectTags of this spell")]
         public List<EffectTagForDropDownList> spellEffectTagList
         {
             get { return _spellEffectTagList; }

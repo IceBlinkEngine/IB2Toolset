@@ -396,6 +396,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -405,6 +406,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -414,6 +416,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -423,6 +426,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       }
     ],
@@ -726,6 +730,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -735,12 +740,14 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       }
     ],
     "spellsAllowed": [
       {
         "name": "Minor Healing",
+        "needsSpecificTrainingToLearn": false,
         "tag": "minorHealing",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -748,6 +755,7 @@
       },
       {
         "name": "Bless",
+        "needsSpecificTrainingToLearn": false,
         "tag": "bless",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -755,6 +763,7 @@
       },
       {
         "name": "Magic Stone",
+        "needsSpecificTrainingToLearn": false,
         "tag": "magicStone",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -762,6 +771,7 @@
       },
       {
         "name": "Moderate Healing",
+        "needsSpecificTrainingToLearn": false,
         "tag": "moderateHealing",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -769,6 +779,7 @@
       },
       {
         "name": "Blast of Light",
+        "needsSpecificTrainingToLearn": false,
         "tag": "blastOfLight",
         "atWhatLevelIsAvailable": 5,
         "automaticallyLearned": false,
@@ -776,6 +787,7 @@
       },
       {
         "name": "Hold",
+        "needsSpecificTrainingToLearn": false,
         "tag": "hold",
         "atWhatLevelIsAvailable": 5,
         "automaticallyLearned": false,
@@ -783,6 +795,7 @@
       },
       {
         "name": "Mass Minor Healing",
+        "needsSpecificTrainingToLearn": false,
         "tag": "massMinorHealing",
         "atWhatLevelIsAvailable": 5,
         "automaticallyLearned": false,
@@ -1169,6 +1182,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": true,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1178,6 +1192,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1187,6 +1202,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1196,6 +1212,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1205,12 +1222,14 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       }
     ],
     "spellsAllowed": [
       {
         "name": "Minor Healing",
+        "needsSpecificTrainingToLearn": false,
         "tag": "minorHealing",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -1218,6 +1237,7 @@
       },
       {
         "name": "Mage Bolt",
+        "needsSpecificTrainingToLearn": false,
         "tag": "mageBolt",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -1225,6 +1245,7 @@
       },
       {
         "name": "Blast of Light",
+        "needsSpecificTrainingToLearn": false,
         "tag": "blastOfLight",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -1503,6 +1524,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1512,6 +1534,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1521,6 +1544,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1530,12 +1554,14 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       }
     ],
     "spellsAllowed": [
       {
         "name": "Mage Bolt",
+        "needsSpecificTrainingToLearn": false,
         "tag": "mageBolt",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -1543,6 +1569,7 @@
       },
       {
         "name": "Mage Armor",
+        "needsSpecificTrainingToLearn": false,
         "tag": "mageArmor",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -1550,6 +1577,7 @@
       },
       {
         "name": "Sleep",
+        "needsSpecificTrainingToLearn": false,
         "tag": "sleep",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -1557,6 +1585,7 @@
       },
       {
         "name": "Web",
+        "needsSpecificTrainingToLearn": false,
         "tag": "web",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -1564,6 +1593,7 @@
       },
       {
         "name": "Ice Storm",
+        "needsSpecificTrainingToLearn": false,
         "tag": "iceStorm",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -1571,6 +1601,7 @@
       },
       {
         "name": "Minor Regeneration",
+        "needsSpecificTrainingToLearn": false,
         "tag": "minorRegen",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -1578,6 +1609,7 @@
       },
       {
         "name": "Fireball",
+        "needsSpecificTrainingToLearn": false,
         "tag": "fireball",
         "atWhatLevelIsAvailable": 5,
         "automaticallyLearned": false,
@@ -1919,6 +1951,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1928,6 +1961,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1937,6 +1971,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1946,6 +1981,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1955,6 +1991,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1964,6 +2001,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1973,6 +2011,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1982,6 +2021,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -1991,6 +2031,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -2000,6 +2041,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -2009,6 +2051,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -2018,6 +2061,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -2027,6 +2071,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -2036,6 +2081,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       },
       {
@@ -2045,6 +2091,7 @@
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
+        "needsSpecificTrainingToLearn": false,
         "allow": true
       }
     ],
