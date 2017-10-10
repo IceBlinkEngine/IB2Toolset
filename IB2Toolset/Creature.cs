@@ -88,10 +88,14 @@ namespace IB2Toolset
         private string _labelForCastAction = "casts";
         //private ScriptSelectEditorReturnObject onScoringHit = new ScriptSelectEditorReturnObject();  
         private List<string> _knownSpellsTags = new List<string>();
-	    public List<Effect> cr_effectsList = new List<Effect>();
+        private List<LocalInt> _castChances = new List<LocalInt>();
+        public List<Effect> cr_effectsList = new List<Effect>();
         private List<LocalInt> creatureLocalInts = new List<LocalInt>();
         private List<LocalString> creatureLocalStrings = new List<LocalString>();
-        
+        private int _percentChanceToCastSpell = 100;
+        private int _percentRequirementOfTargetInjuryForHealSpells = 50;
+        private int _percentRequirementOfTargetSPLossForRestoreSPSpells = 50;
+
         #endregion
 
         #region Properties
@@ -186,7 +190,7 @@ namespace IB2Toolset
             get { return _sp; }
             set { _sp = value; }
         }
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("total AC for creature")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("total AC for creature")]
         public int AC
         {
             get { return _ac; }
@@ -198,6 +202,34 @@ namespace IB2Toolset
             get { return _knownSpellsTags; }
             set { _knownSpellsTags = value; }
         }
+        [CategoryAttribute("01 - AI"), DescriptionAttribute("Cast Chances per Spell")]
+        public List<LocalInt> castChances
+        {
+            get { return _castChances; }
+            set { _castChances = value; }
+        }
+        [CategoryAttribute("01 - AI"), DescriptionAttribute("Chance to try spell casting this round")]
+        public int percentChanceToCastSpell
+        {
+            get { return _percentChanceToCastSpell; }
+            set { _percentChanceToCastSpell = value; }
+        }
+        [CategoryAttribute("01 - AI"), DescriptionAttribute("from 0 to 100, defaults at 50; a value of 75 eg means that a target must have at least lost 75% of it hp before coming an eglible heal target of this caster")]
+        public int percentRequirementOfTargetInjuryForHealSpells
+        {
+            get { return _percentRequirementOfTargetInjuryForHealSpells; }
+            set { _percentRequirementOfTargetInjuryForHealSpells = value; }
+        }
+        [CategoryAttribute("01 - AI"), DescriptionAttribute("from 0 to 100, defaults at 50; a value of 75 eg means that a target must have at least lost 75% of it sp before coming an eglible restore sp target of this caster")]
+        public int percentRequirementOfTargetSPLossForRestoreSPSpells
+        {
+            get { return _percentRequirementOfTargetSPLossForRestoreSPSpells; }
+            set { _percentRequirementOfTargetSPLossForRestoreSPSpells = value; }
+        }
+
+
+        //private int _percentRequirementOfTargetInjuryForHealSpells = 50;
+        //private int _percentRequirementOfTargetSPLossForRestoreSPSpells = 50;
 
         [CategoryAttribute("00 - Main"), DescriptionAttribute("HP regeneration per combat round; does not work for creatures of zero or below hp.")]
         public int hpRegenerationPerRound
@@ -211,56 +243,56 @@ namespace IB2Toolset
             get { return _spRegenerationPerRound; }
             set { _spRegenerationPerRound = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("03 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValuePoison
         {
             get { return _damageTypeResistanceValuePoison; }
             set { _damageTypeResistanceValuePoison = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("03 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueMagic
         {
             get { return _damageTypeResistanceValueMagic; }
             set { _damageTypeResistanceValueMagic = value; }
         }        
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("03 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueNormal
         {
             get { return _damageTypeResistanceValueNormal; }
             set { _damageTypeResistanceValueNormal = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("03 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueAcid
         {
             get { return _damageTypeResistanceValueAcid; }
             set { _damageTypeResistanceValueAcid = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("03 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueCold
         {
             get { return _damageTypeResistanceValueCold; }
             set { _damageTypeResistanceValueCold = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("03 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueElectricity
         {
             get { return _damageTypeResistanceValueElectricity; }
             set { _damageTypeResistanceValueElectricity = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("03 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueFire
         {
             get { return _damageTypeResistanceValueFire; }
             set { _damageTypeResistanceValueFire = value; }
         }
         [Browsable(true), TypeConverter(typeof(DamageTypeConverter))]
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("The Type of Damage (useful with immunity checks)")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("The Type of Damage (useful with immunity checks)")]
         public string cr_typeOfDamage
         {
             get { return _typeOfDamage; }
             set { _typeOfDamage = value; }
         }
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Number of attacks per round on same target")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Number of attacks per round on same target")]
         public int cr_numberOfAttacks
         {
             get { return this._numberOfAttacks; }
@@ -273,7 +305,7 @@ namespace IB2Toolset
         //    get { return onScoringHit; }
         //    set { onScoringHit = value; }
         //}
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("fires when the creature makes a successful hit on a target")]
+        [CategoryAttribute("04 - Scripts"), DescriptionAttribute("fires when the creature makes a successful hit on a target")]
         public string onScoringHit
         {
             get { return _onScoringHit; }
@@ -285,44 +317,44 @@ namespace IB2Toolset
             get { return _labelForCastAction; }
             set { _labelForCastAction = value; }
         }
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("(not used yet)optional input parameters if using a LogicTree...comma separated parameters")]
+        [CategoryAttribute("04 - Scripts"), DescriptionAttribute("(not used yet)optional input parameters if using a LogicTree...comma separated parameters")]
         public string onScoringHitParms
         {
             get { return _onScoringHitParms; }
             set { _onScoringHitParms = value; }
         }
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("fires when the creature dies")]
+        [CategoryAttribute("04 - Scripts"), DescriptionAttribute("fires when the creature dies")]
         public string onDeathLogicTree
         {
             get { return _onDeathLogicTree; }
             set { _onDeathLogicTree = value; }
         }
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("optional input parameters for the LogicTree...comma separated parameters")]
+        [CategoryAttribute("04 - Scripts"), DescriptionAttribute("optional input parameters for the LogicTree...comma separated parameters")]
         public string onDeathParms
         {
             get { return _onDeathParms; }
             set { _onDeathParms = value; }
         }
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("IBScript that fires when the creature dies")]
+        [CategoryAttribute("04 - Scripts"), DescriptionAttribute("IBScript that fires when the creature dies")]
         public string onDeathIBScript
         {
             get { return _onDeathIBScript; }
             set { _onDeathIBScript = value; }
         }
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("optional input parameters for the IBScript...comma separated parameters")]
+        [CategoryAttribute("04 - Scripts"), DescriptionAttribute("optional input parameters for the IBScript...comma separated parameters")]
         public string onDeathIBScriptParms
         {
             get { return _onDeathIBScriptParms; }
             set { _onDeathIBScriptParms = value; }
         }
         [Browsable(true), TypeConverter(typeof(SpellTagTypeConverter))]
-        [CategoryAttribute("04 - Spell/Effect System"), DescriptionAttribute("Cast this spell (special ability) upon the target after making a successful attack (melee/ranged) hit on the target")]
+        [CategoryAttribute("06 - Spell/Effect System"), DescriptionAttribute("Cast this spell (special ability) upon the target after making a successful attack (melee/ranged) hit on the target")]
         public string onScoringHitCastSpellTag
         {
             get { return _onScoringHitCastSpellTag; }
             set { _onScoringHitCastSpellTag = value; }
         }
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("damage adder")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("damage adder")]
         public int damageAdder
         {
             get { return this._damageAdder; }
@@ -341,14 +373,14 @@ namespace IB2Toolset
             set { this.cr_ai = value; }
         }*/
         [Browsable(true), TypeConverter(typeof(AiTypeConverter))]
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Generic AI for the creature to use")]
+        [CategoryAttribute("01 - AI"), DescriptionAttribute("Generic AI for the creature to use")]
         public string cr_ai
         {
             get { return this._ai; }
             set { this._ai = value; }
         }              
         [Browsable(true), TypeConverter(typeof(SpriteConverter))]
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Filename of the Sprite to use for the creature's projectiles")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Filename of the Sprite to use for the creature's projectiles")]
         public string cr_projSpriteFilename
         {
             get
@@ -361,7 +393,7 @@ namespace IB2Toolset
             }
         }
         [Browsable(true), TypeConverter(typeof(SpriteConverter))]
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("sprite to use for end effect of projectiles")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("sprite to use for end effect of projectiles")]
         public string cr_spriteEndingFilename
         {
             get
@@ -374,7 +406,7 @@ namespace IB2Toolset
             }
         }
         [Browsable(true), TypeConverter(typeof(SoundConverter))]
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Filename of sound to play when the creature makes an attack (no extension)")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Filename of sound to play when the creature makes an attack (no extension)")]
         public string cr_attackSound
         {
             get { return _attackSound; }
@@ -413,7 +445,7 @@ namespace IB2Toolset
             get { return _reflex; }
             set { _reflex = value; }
         }
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Attack of the creature")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Attack of the creature")]
         public int cr_att
         {
             get
@@ -425,7 +457,7 @@ namespace IB2Toolset
                 _att = value;
             }
         }
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Attack range of the creature measured in squares")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Attack range of the creature measured in squares")]
         public int cr_attRange
         {
             get
@@ -437,7 +469,7 @@ namespace IB2Toolset
                 _attRange = value;
             }
         }
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Number of dice to roll for damage")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Number of dice to roll for damage")]
         public int cr_damageNumDice
         {
             get
@@ -449,7 +481,7 @@ namespace IB2Toolset
                 _damageNumDice = value;
             }
         }
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Die to roll for damage")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Die to roll for damage")]
         public int cr_damageDie
         {
             get
@@ -462,7 +494,7 @@ namespace IB2Toolset
             }
         }
         [Browsable(true), TypeConverter(typeof(WeaponTypeConverter))]
-        [CategoryAttribute("01 - Attack/Defend"), DescriptionAttribute("Is weapon a melee or ranged weapon")]
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Is weapon a melee or ranged weapon")]
         public string cr_category
         {
             get
@@ -474,13 +506,13 @@ namespace IB2Toolset
                 _category = value;
             }
         }
-        [CategoryAttribute("04 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
+        [CategoryAttribute("05 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
         public List<LocalInt> CreatureLocalInts
         {
             get { return creatureLocalInts; }
             set { creatureLocalInts = value; }
         }
-        [CategoryAttribute("04 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
+        [CategoryAttribute("05 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
         public List<LocalString> CreatureLocalStrings
         {
             get { return creatureLocalStrings; }
@@ -519,6 +551,15 @@ namespace IB2Toolset
             {
                 other.knownSpellsTags.Add(s);
             }
+            other.castChances = new List<LocalInt>();
+            foreach (LocalInt l in this.castChances)
+            {
+                LocalInt Lint = new LocalInt();
+                Lint.Key = l.Key;
+                Lint.Value = l.Value;
+                other.castChances.Add(Lint);
+            }
+
             other.CreatureLocalInts = new List<LocalInt>();
             foreach (LocalInt l in this.CreatureLocalInts)
             {

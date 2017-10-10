@@ -66,6 +66,44 @@ namespace IB2Toolset
                         {
                             Spell chkdSpell = (Spell)itemChecked;
                             crt.knownSpellsTags.Add(chkdSpell.tag);
+
+                            //set up castChances (list of LoacalInt)
+                            //TODO handle situation if spells are removed
+                            bool foundSpellAlready = false;
+                            foreach (LocalInt lint in crt.castChances)
+                            {
+                             
+                                if (lint.Key == chkdSpell.tag)
+                                {
+                                    foundSpellAlready = true;
+                                    break;
+                                } 
+                            }
+
+                            if (!foundSpellAlready)
+                            {
+                                LocalInt castChanceItem = new LocalInt();
+                                castChanceItem.Key = chkdSpell.tag;
+                                castChanceItem.Value = 0;
+                                crt.castChances.Add(castChanceItem);
+                            }
+                        }
+                        //remove cast canches from list if their key is not contained in list with knwon spell tags
+                        for (int i = crt.castChances.Count - 1; i >= 0; i--)
+                        {
+                            bool spellIsKnown = false;
+                            foreach (string s in crt.knownSpellsTags)
+                            {
+                                if (crt.castChances[i].Key == s)
+                                {
+                                    spellIsKnown = true;
+                                    break;
+                                }
+                            }
+                            if (!spellIsKnown)
+                            {
+                                crt.castChances.RemoveAt(i);
+                            }
                         }
                     }
                 }
