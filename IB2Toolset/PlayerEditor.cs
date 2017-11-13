@@ -139,10 +139,31 @@ namespace IB2Toolset
                 if (!refreshingList)
                 {
                     pc.knownTraitsTags.Clear();
+                    pc.knownUsableTraitsTags.Clear();
+                    pc.knownOutsideCombatUsableTraitsTags.Clear();
+                    pc.knownInCombatUsableTraitsTags.Clear();
+
                     foreach (object itemChecked in cbxKnownTraits.CheckedItems)
                     {
                         Trait chkdTrait = (Trait)itemChecked;
                         pc.knownTraitsTags.Add(chkdTrait.tag);
+                        if (chkdTrait.associatedSpellTag != "none" && chkdTrait.associatedSpellTag != "")
+                        {
+                            pc.knownUsableTraitsTags.Add(chkdTrait.associatedSpellTag);
+                            if (chkdTrait.useableInSituation == "InCombat")
+                            {
+                                pc.knownInCombatUsableTraitsTags.Add(chkdTrait.associatedSpellTag);
+                            }
+                            if (chkdTrait.useableInSituation == "OutOfCombat")
+                            {
+                                pc.knownOutsideCombatUsableTraitsTags.Add(chkdTrait.associatedSpellTag);
+                            }
+                            if (chkdTrait.useableInSituation == "Always")
+                            {
+                                pc.knownInCombatUsableTraitsTags.Add(chkdTrait.associatedSpellTag);
+                                pc.knownOutsideCombatUsableTraitsTags.Add(chkdTrait.associatedSpellTag);
+                            }
+                        }
                     }
 
                 }

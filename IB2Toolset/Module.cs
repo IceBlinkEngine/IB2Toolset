@@ -14,6 +14,7 @@ namespace IB2Toolset
     public class Module
     {
         #region Fields
+        public bool _encounterSingleImageAutoScale = true;
         public string formerDirection = "none";
         public bool _usePredefinedTileCategories = true; 
         public List<string> masterAreasList = new List<string>(); 
@@ -172,6 +173,14 @@ namespace IB2Toolset
             get { return _moduleName; }
             set { _moduleName = value; }
         }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, the single image map for encounters is automatically scaled to the size of the encounter map; assumes a square shaped map and square shaped image")]
+        public bool encounterSingleImageAutoScale
+        {
+            get { return _encounterSingleImageAutoScale; }
+            set { _encounterSingleImageAutoScale = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of the Module displayed to the player")]
         public string moduleLabelName
         {

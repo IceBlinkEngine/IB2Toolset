@@ -1,4 +1,5 @@
 {
+  "_encounterSingleImageAutoScale": true,
   "formerDirection": "none",
   "_usePredefinedTileCategories": true,
   "masterAreasList": [],
@@ -68,6 +69,7 @@
   "attackFromBehindToHitModifier": 2,
   "attackFromBehindDamageModifier": 0,
   "moduleName": "temp01",
+  "encounterSingleImageAutoScale": true,
   "moduleLabelName": "NewModule",
   "moduleVersion": 1,
   "defaultPlayerFilename": "drin.json",

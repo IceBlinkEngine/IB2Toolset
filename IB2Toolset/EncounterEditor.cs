@@ -1857,8 +1857,9 @@ namespace IB2Toolset
             if (thisEnc == null) { return; }
             if ((thisEnc.UseMapImage) && (!thisEnc.MapImage.Equals("none")) && (mapBitmapD2D != null))
             {
+                //float proxy = 50f / (float)thisEnc.SingleImageMapTileSize;
                 SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, mapBitmapD2D.PixelSize.Width, mapBitmapD2D.PixelSize.Height);
-                SharpDX.RectangleF dst = new SharpDX.RectangleF(0, 0, thisEnc.MapSizeX * sqr, thisEnc.MapSizeY * sqr);
+                SharpDX.RectangleF dst = new SharpDX.RectangleF(0, 0, (float)(thisEnc.MapSizeX * sqr), (float)(thisEnc.MapSizeY * sqr));
                 DrawD2DBitmap(mapBitmapD2D, src, dst, 0, false, 0, 0);
             }
             #region Draw Layer 1

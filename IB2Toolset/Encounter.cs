@@ -15,6 +15,7 @@ namespace IB2Toolset
     public class Encounter
     {
         private string encName = "newEncounter";
+        public int singleImageMapTileSize = 50;
         public char[,] encounterMapLayout = new char[7, 7];
         private string mapImage = "none";
         private bool useMapImage = false;
@@ -61,12 +62,22 @@ namespace IB2Toolset
             get { return mapImage; }
             set { mapImage = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("if True, the encounter will use the single image from the MapImage filename instead of using the tiles.")]
+        
+        [CategoryAttribute("03 - Not used anymore"), DescriptionAttribute("When using a premade area graphic, this how large in px one tile is supposed to be; defaults to 50.")]
+        public int SingleImageMapTileSize
+        {
+            get { return singleImageMapTileSize; }
+            set { singleImageMapTileSize = value; }
+        }
+        
+        
+        [CategoryAttribute("03 - Not used anymore"), DescriptionAttribute("if True, the encounter will use the single image from the MapImage filename instead of using the tiles.")]
         public bool UseMapImage
         {
             get { return useMapImage; }
             set { useMapImage = value; }
         }
+        
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Set to true if this encounter will use the day/night cycle tinting.")]
         public bool UseDayNightCycle
         {
@@ -105,39 +116,39 @@ namespace IB2Toolset
             set { areaMusicDelayRandomAdder = value; }
         }
         [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the start of each combat round")]
+        [CategoryAttribute("03 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the start of each combat round")]
         public string OnStartCombatRoundLogicTree
         {
             get { return onStartCombatRoundLogicTree; }
             set { onStartCombatRoundLogicTree = value; }
         }
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("03 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string OnStartCombatRoundParms
         {
             get { return onStartCombatRoundParms; }
             set { onStartCombatRoundParms = value; }
         }
         [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the start of each PC and Enemy turn in combat")]
+        [CategoryAttribute("03 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the start of each PC and Enemy turn in combat")]
         public string OnStartCombatTurnLogicTree
         {
             get { return onStartCombatTurnLogicTree; }
             set { onStartCombatTurnLogicTree = value; }
         }
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("03 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string OnStartCombatTurnParms
         {
             get { return onStartCombatTurnParms; }
             set { onStartCombatTurnParms = value; }
         }
         [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run at the end of combat")]
+        [CategoryAttribute("03 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the end of combat")]
         public string OnEndCombatLogicTree
         {
             get { return onEndCombatLogicTree; }
             set { onEndCombatLogicTree = value; }
         }
-        [CategoryAttribute("02 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("03 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string OnEndCombatParms
         {
             get { return onEndCombatParms; }
