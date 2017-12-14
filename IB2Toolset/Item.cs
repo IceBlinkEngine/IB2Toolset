@@ -44,6 +44,7 @@ namespace IB2Toolset
         private string _itemOnUseSound = "none";
         private string _category = "Armor"; //catergory type (Armor, Ranged, Melee, General, Ring, Shield, Ammo)
         private bool _plotItem = false;
+        private bool _canNotBeChangedInCombat = false;
         private int _value = 0; //cost in credits
         private int _quantity = 1; //useful for stacking and ammo
         private int _groupSizeForSellingStackableItems = 1;
@@ -51,6 +52,8 @@ namespace IB2Toolset
         private string _ammoType = "none";
         private bool _twoHanded = false; //requires the use of two hands
         private bool _canNotBeUnequipped = false; //set to true for cursed items or summon creature items
+        private bool _onlyUseableWhenEquipped = false;
+        private bool _endTurnAfterEquipping = true;
         private bool _isStackable = false;
         private bool _automaticallyHitsTarget = false; //does not require a successful to hit roll, always hits target (ex. mage bolt wand)
         private int _attackBonus = 0; //attack bonus
@@ -302,6 +305,21 @@ namespace IB2Toolset
                 _plotItem = value;
             }
         }
+
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, this item can neithwr be equipped or unequipped during battle.")]
+        public bool canNotBeChangedInCombat
+        {
+            get
+            {
+                return _canNotBeChangedInCombat;
+            }
+            set
+            {
+                _canNotBeChangedInCombat = value;
+            }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Cost of the Item or Item group (see groupSizeForSellingStackableItems) in Gold Pieces")]
         public int value
         {
@@ -315,7 +333,7 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("value");
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Number quantity of this item (useful for stacking items and ammo.")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Number quantity of this item (useful for stacking items and ammo). Note: when more than 1 (default) this represents the charges of the item (used when castign spellswithe fefcts from item). Please make sure that charged items are  not of ammunition type.")]
         public int quantity
         {
             get { return _quantity; }
@@ -327,7 +345,7 @@ namespace IB2Toolset
             get { return _groupSizeForSellingStackableItems; }
             set { _groupSizeForSellingStackableItems = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Number of charges the item has (useful for items like wands.")]
+        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("Number of charges the item has (useful for items like wands.")]
         public int charges
         {
             get { return _charges; }
@@ -351,6 +369,33 @@ namespace IB2Toolset
                 _twoHanded = value;
             }
         }
+        
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, equipping such item in combat immediately ends the current player character's turn.")]
+        public bool endTurnAfterEquipping
+        {
+            get
+            {
+                return _endTurnAfterEquipping;
+            }
+            set
+            {
+                _endTurnAfterEquipping = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, the item can only be used while equipped.")]
+        public bool onlyUseableWhenEquipped
+        {
+            get
+            {
+                return _onlyUseableWhenEquipped;
+            }
+            set
+            {
+                _onlyUseableWhenEquipped = value;
+            }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Set True if item can NOT be unequipped. Useful for temporary companion's specific items and cursed items.")]
         public bool canNotBeUnequipped
         {
@@ -440,7 +485,7 @@ namespace IB2Toolset
                 _attackRange = value;
             }
         }
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("Item's Area of Effect radius measured in squares for Spell/Effect properties of item if this item uses the Spell/Effect system (0 = 1 square, 1 = 9 squares, etc.)")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Item's Area of Effect radius measured in squares for Spell/Effect properties of item when attacking with the item (for weapons, 0 = 1 square, 1 = 9 squares, etc.)")]
         public int AreaOfEffect
         {
             get
@@ -452,7 +497,7 @@ namespace IB2Toolset
                 _AreaOfEffect = value;
             }
         }
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("the shape of the AoE for the Effect/Spell system if used for this item.")]
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("the shape of the AoE when attacking with this item (for weapons).")]
         [JsonConverter(typeof(StringEnumConverter))]
         public AreaOfEffectShape aoeShape
         {
@@ -774,7 +819,7 @@ namespace IB2Toolset
             get { return _levelOfItemForCastSpell; }
             set { _levelOfItemForCastSpell = value; }
         }
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("If set to true, the item will use the Player's class level instead of the item's effective level used in Effect calculations that are based on level adjustments.")]
+        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("If set to true, the item will use the Player's class level instead of the item's effective level used in Effect calculations that are based on level adjustments.")]
         public bool usePlayerClassLevelForOnUseItemCastSpell
         {
             get { return _usePlayerClassLevelForOnUseItemCastSpell; }
