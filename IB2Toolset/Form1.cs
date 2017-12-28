@@ -832,6 +832,7 @@ namespace IB2Toolset
             loadPlayerClassesTagsList();
             loadRacesTagsList();
             loadSpellTagsList();
+            loadTraitTagsList();
             loadEffectTagsList();
             loadWeatherEffectsTagsList();
             loadWeatherEffectsNamesList();
@@ -951,6 +952,16 @@ public void loadSpriteDropdownList()
             foreach (Spell sp in this.spellsList)
             {
                 DropdownStringLists.spellTagsTypeStringList.Add(sp.tag);
+            }
+        }
+
+        public void loadTraitTagsList()
+        {
+            DropdownStringLists.traitsTagsTypeStringList = new List<string>();
+            DropdownStringLists.traitsTagsTypeStringList.Add("none");
+            foreach (Trait t in this.traitsList)
+            {
+                DropdownStringLists.traitsTagsTypeStringList.Add(t.tag);
             }
         }
         public void loadEffectTagsList()

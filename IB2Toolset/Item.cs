@@ -71,6 +71,10 @@ namespace IB2Toolset
         private int _attributeBonusModifierCha = 0;
         private int _attributeBonusModifierCon = 0;
         private int _attributeBonusModifierWis = 0;
+        private int _additionalAttacks = 0;
+        private int _requiredLevel = 0;
+        private int _modifierMaxHP = 0;
+        private int _modifierMaxSP = 0;
         private int _savingThrowModifierReflex = 0;
         private int _savingThrowModifierFortitude = 0;
         private int _savingThrowModifierWill = 0;
@@ -102,6 +106,18 @@ namespace IB2Toolset
         private int _damageTypeResistanceValueMagic = 0;
         private int _damageTypeResistanceValuePoison = 0;
         private string _typeOfDamage = "Normal"; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison  
+
+        private int _requiredSTR = 0;
+        private int _requiredDEX = 0;
+        private int _requiredCON = 0;
+        private int _requiredINT = 0;
+        private int _requiredWIS = 0;
+        private int _requiredCHA = 0;
+
+        private string _requiredRace = "none";
+        private string _restrictedRace = "none";
+        private string _requiredTrait = "none";
+
 
         private bool _isRation = false;
         private bool _isLightSource = false;
@@ -625,6 +641,73 @@ namespace IB2Toolset
             get { return _typeOfDamage; }
             set { _typeOfDamage = value; }
         }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Tag of Race required to equip/use")]
+        [Browsable(true), TypeConverter(typeof(RaceTagTypeConverter))]
+        public string requiredRace
+        {
+            get { return _requiredRace; }
+            set { _requiredRace = value; }
+        }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Tag of Trait required to equip/use")]
+        [Browsable(true), TypeConverter(typeof(TraitTagTypeConverter))]
+        public string requiredTrait
+        {
+            get { return _requiredTrait; }
+            set { _requiredTrait = value; }
+        }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Tag of Race restricted from equipping/using")]
+        [Browsable(true), TypeConverter(typeof(RaceTagTypeConverter))]
+        public string restrictedRace
+        {
+            get { return _restrictedRace; }
+            set { _restrictedRace = value; }
+        }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("STR required to equip/use")]
+        public int requiredSTR
+        {
+            get { return _requiredSTR; }
+            set { _requiredSTR = value; }
+        }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("DEX required to equip/use")]
+        public int requiredDEX
+        {
+            get { return _requiredDEX; }
+            set { _requiredDEX = value; }
+        }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("CON required to equip/use")]
+        public int requiredCON
+        {
+            get { return _requiredCON; }
+            set { _requiredCON = value; }
+        }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("INT required to equip/use")]
+        public int requiredINT
+        {
+            get { return _requiredINT; }
+            set { _requiredINT = value; }
+        }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("WIS required to equip/use")]
+        public int requiredWIS
+        {
+            get { return _requiredWIS; }
+            set { _requiredWIS = value; }
+        }
+
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("CHA required to equip/use")]
+        public int requiredCHA
+        {
+            get { return _requiredCHA; }
+            set { _requiredCHA = value; }
+        }
+
         [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
         public int attributeBonusModifierStr
         {
@@ -660,6 +743,30 @@ namespace IB2Toolset
         {
             get { return _attributeBonusModifierWis; }
             set { _attributeBonusModifierWis = value; }
+        }
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Number of additional attacks granted")]
+        public int additionalAttacks
+        {
+            get { return _additionalAttacks; }
+            set { _additionalAttacks = value; }
+        }
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier for maximum HP")]
+        public int requiredLevel
+        {
+            get { return _requiredLevel; }
+            set { _requiredLevel = value; }
+        }
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier for maximum HP")]
+        public int modifierMaxHP
+        {
+            get { return _modifierMaxHP; }
+            set { _modifierMaxHP = value; }
+        }
+        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier for maximum SP")]
+        public int modifierMaxSP
+        {
+            get { return _modifierMaxSP; }
+            set { _modifierMaxSP = value; }
         }
         [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Reflex Saving Throw")]
         public int savingThrowModifierReflex

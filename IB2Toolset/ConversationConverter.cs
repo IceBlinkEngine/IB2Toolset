@@ -305,6 +305,25 @@ namespace IB2Toolset
             return new StandardValuesCollection(DropdownStringLists.spellTagsTypeStringList);
         }
     }
+
+    public class TraitTagTypeConverter : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            //true means show a combobox
+            return true;
+        }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            //true will limit to list. false will show the list, but allow free-form entry
+            return true;
+        }
+        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(DropdownStringLists.traitsTagsTypeStringList);
+        }
+    }
+
     public class EffectTagTypeConverter : StringConverter
     {
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
@@ -394,6 +413,7 @@ namespace IB2Toolset
         public static List<string> playerClassTagsTypeStringList; //all tags in module's Player Classes list
         public static List<string> raceTagsTypeStringList; //all tags in module's races list
         public static List<string> spellTagsTypeStringList; //all tags in module's spells list
+        public static List<string> traitsTagsTypeStringList; //all tags in module's traits list
         public static List<string> effectTagsTypeStringList; //all tags in module's effects list
         public static List<string> weatherEffectsTagsTypeStringList; //all tags in module's weather effects list
         public static List<string> weatherEffectsNamesTypeStringList; //all names in module's weather effects list
