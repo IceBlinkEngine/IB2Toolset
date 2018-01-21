@@ -4,8 +4,8 @@
 //parm2 = (string) trait tag to check for passing skill check (see standard list below)
 //parm3 = (int) difficulty class (DC) the value to check against (can be a 
 //            variable, rand(minInt-maxInt), or just type in an integer).
-//parm4 = none
-//
+//parm4 = (bool) use static roll of 10, enter true and instead of rolling d20 the fixed value 10 is used 
+//               
 //Calculation: check if (1d20 + intelligence modifier + disarm device trait skill modifier) > DC
 //
 //Standard Trait tags that are skill type traits:

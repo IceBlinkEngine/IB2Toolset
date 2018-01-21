@@ -80,9 +80,10 @@ namespace IB2Toolset
         private int _savingThrowModifierWill = 0;
         private int movementPointModifier = 0;
         private int _spRegenPerRoundInCombat = 0;
-        private int _roundsPerSpRegenOutsideCombat = 0;
+        private int _minutesPerSpRegenOutsideCombat = 0;
+        //minutesPerSpRegenOutsideCombat
         private int _hpRegenPerRoundInCombat = 0;
-        private int _roundsPerHpRegenOutsideCombat = 0;
+        private int _minutesPerHpRegenOutsideCombat = 0;
         private string _onScoringHit = "none";
         private string _onScoringHitParms = "none";
         private string _onUseItem = "none";
@@ -105,7 +106,11 @@ namespace IB2Toolset
         private int _damageTypeResistanceValueFire = 0;
         private int _damageTypeResistanceValueMagic = 0;
         private int _damageTypeResistanceValuePoison = 0;
-        private string _typeOfDamage = "Normal"; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison  
+        private string _typeOfDamage = "Normal"; //Normal,Acid,Cold,Electricity,Fire,Magic,Poison
+
+        private int _maxStrengthBonusAllowedForWeapon = 100;
+        private int _spCostPerAttack = 0;
+        private int _hpCostPerAttack = 0;
 
         private int _requiredSTR = 0;
         private int _requiredDEX = 0;
@@ -124,10 +129,46 @@ namespace IB2Toolset
 
         private List<LocalImmunityString> _entriesForPcTags = new List<LocalImmunityString>();
 
+        private bool _onScoringHitCastOnSelf = false;
+        //copy.onScoringHitCastOnSelf = this.onScoringHitCastOnSelf;
+
+        private string _tagOfTraitInfluenced = "none";
+        private int _traitSkillRollModifier = 0;
+
         #endregion
 
+        /*
+        categories:
+        x01 - Requirements and Costs
+        x02 - Resistances and Saves 
+        x03 - Attributes
+        x04 - Attack and Damage
+        x05 - Protection and Regeneration
+        x06 - Graphics and Sounds
+        x07 - Handling and Moves
+        x08 - Basics
+        09 - Spells
+        10 - Premade Scripts
+        11 - IB Scripts
+        12 - Not used anymore
+
+       Sorting:
+       01 - Basics
+       02 - Graphics and Sounds
+       03 - Requirements and Costs
+       04 - Handling and Moves
+       05 - Attack and Damage
+       06 - Protection and Regeneration
+       07 - Resistances and Saves
+       08 - Attributes
+       09 - Hooks: Spells
+       10 - Hooks: Premade Scripts
+       11 - Hooks: IB Scripts
+       12 - Not used anymore
+
+        */
         #region Properties        
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of the Item")]
+        [CategoryAttribute("01 - Names and Descriptions"), DescriptionAttribute("Name of the Item")]
         public string name
         {
             get
@@ -141,13 +182,13 @@ namespace IB2Toolset
             }
         }
         //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("List of tags added to pc's pcTags list upon equipping this item; when unequiping this item, the entry is removed again from pc's pcTags list.")]
+        [CategoryAttribute("02 - Essentials and Perks"), DescriptionAttribute("List of tags added to pc's pcTags list upon equipping this item; when unequiping this item, the entry is removed again from pc's pcTags list.")]
         public List<LocalImmunityString> entriesForPcTags
         {
             get { return _entriesForPcTags; }
             set { _entriesForPcTags = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("label for the cast action when using this item in log")]
+        [CategoryAttribute("01 - Names and Descriptions"), DescriptionAttribute("label for the cast action when using this item in log")]
         public string labelForTheCastAction
         {
             get
@@ -160,7 +201,7 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("labelForTheCastAction");
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Tag of the Item (will be given an unique tag for each placed instance of an item)")]
+        [CategoryAttribute("02 - Essentials and Perks"), DescriptionAttribute("Tag of the Item (will be given an unique tag for each placed instance of an item)")]
         public string tag
         {
             get
@@ -173,7 +214,7 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("tag");
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Resref of the Item (Must be unique from other item blueprints). All placed items will be linked to this blueprint via this resref tag so that updates here will be reflected on all placed items (unless a specific item property uses the saved game data like item charges.")]
+        [CategoryAttribute("02 - Essentials and Perks"), DescriptionAttribute("Resref of the Item (Must be unique from other item blueprints). All placed items will be linked to this blueprint via this resref tag so that updates here will be reflected on all placed items (unless a specific item property uses the saved game data like item charges.")]
         public string resref
         {
             get
@@ -186,7 +227,7 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("resref");
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Armor Weight Type (used when the item is an armor)")]
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("ARMOR only: Armor Weight Type (used when the item is an armor)")]
         public string ArmorWeightType
         {
             get
@@ -199,7 +240,7 @@ namespace IB2Toolset
             }
 
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("grouping purposes in toolset")]
+        [CategoryAttribute("01 - Names and Descriptions"), DescriptionAttribute("grouping purposes in toolset")]
         public string ItemCategoryName
         {
             get
@@ -212,8 +253,40 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("ItemCategoryName");
             }
         }
+
+        //private string _tagOfTraitInfluenced = "none";
+        //private int _traitSkillRollModifier = 0;
+        [Browsable(true), TypeConverter(typeof(TraitTagTypeConverter))]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("Tag of the skill to influence")]
+        public string tagOfTraitInfluenced
+        {
+            get
+            {
+                return _tagOfTraitInfluenced;
+            }
+            set
+            {
+                _tagOfTraitInfluenced = value;
+                //this.NotifyPropertyChanged("category");
+            }
+        }
+
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("Skill roll modifier for the associated trait")]
+        public int traitSkillRollModifier
+        {
+            get
+            {
+                return _traitSkillRollModifier;
+            }
+            set
+            {
+                _traitSkillRollModifier = value;
+                //this.NotifyPropertyChanged("category");
+            }
+        }
+
         [Browsable(true), TypeConverter(typeof(ItemTypeConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Category that this Item belongs to")]
+        [CategoryAttribute("02 - Essentials and Perks"), DescriptionAttribute("Category that this Item belongs to")]
         public string category
         {
             get
@@ -227,7 +300,7 @@ namespace IB2Toolset
             }
         }
         [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Description of the Item")]
+        [CategoryAttribute("01 - Names and Descriptions"), DescriptionAttribute("Description of the Item")]
         public string desc
         {
             get
@@ -247,14 +320,14 @@ namespace IB2Toolset
             set { useableInSituation = value; }
         }*/
         [Browsable(true), TypeConverter(typeof(UseableWhenConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When can this be used: Always means that it can be used in combat and on the main maps, Passive means that it is always on and doesn't need to be activated.")]
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("When can this be used: Always means that it can be used in combat and on the main maps, Passive means that it is always on and doesn't need to be activated.")]
         public string useableInSituation
         {
             get { return _useableInSituation; }
             set { _useableInSituation = value; }
         }
         [Browsable(true), TypeConverter(typeof(SpriteConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the projectile (Sprite Filename with extension)")]
+        [CategoryAttribute("05 - Graphics and Sounds"), DescriptionAttribute("AMMO only: Sprite to use for the projectile (Sprite Filename with extension)")]
         public string projectileSpriteFilename
         {
             get
@@ -267,7 +340,7 @@ namespace IB2Toolset
             }
         }        
         [Browsable(true), TypeConverter(typeof(SpriteConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the projectile ending effect (Sprite Filename with extension)")]
+        [CategoryAttribute("15 - Not used anymore"), DescriptionAttribute("Sprite to use for the projectile ending effect (Sprite Filename with extension)")]
         public string spriteEndingFilename
         {
             get
@@ -280,13 +353,13 @@ namespace IB2Toolset
             }
         }
         [Browsable(true), TypeConverter(typeof(SoundConverter))]
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Filename of sound to play when the item is used (no extension)")]
+        [CategoryAttribute("05 - Graphics and Sounds"), DescriptionAttribute("MELEE/RANGED only: Filename of sound to play when the item is used (no extension)")]
         public string itemOnUseSound
         {
             get { return _itemOnUseSound; }
             set { _itemOnUseSound = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Icon Filename of the Item"), ReadOnly(true)]
+        [CategoryAttribute("05 - Graphics and Sounds"), DescriptionAttribute("Icon Filename of the Item"), ReadOnly(true)]
         public string itemImage
         {
             get
@@ -310,6 +383,7 @@ namespace IB2Toolset
                 p_category = value;
             }
         }*/
+        [CategoryAttribute("04 - Utility and Plot"), DescriptionAttribute("Plot items cannot be dropped or sold.")]
         public bool plotItem
         {
             get
@@ -323,7 +397,7 @@ namespace IB2Toolset
         }
 
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, this item can neithwr be equipped or unequipped during battle.")]
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("When set to true, this item can neither be equipped or unequipped during battle.")]
         public bool canNotBeChangedInCombat
         {
             get
@@ -336,7 +410,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Cost of the Item or Item group (see groupSizeForSellingStackableItems) in Gold Pieces")]
+        [CategoryAttribute("03 - Quantity and Price"), DescriptionAttribute("Cost of the Item or Item group (see groupSizeForSellingStackableItems) in Gold Pieces")]
         public int value
         {
             get
@@ -349,31 +423,41 @@ namespace IB2Toolset
                 this.NotifyPropertyChanged("value");
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Number quantity of this item (useful for stacking items and ammo). Note: when more than 1 (default) this represents the charges of the item (used when castign spellswithe fefcts from item). Please make sure that charged items are  not of ammunition type.")]
+
+        /*
+        1. The Charges property is not used anymore, use Quantity instead to define the number of charges
+        2. Quantity 1 indicates an item that does not contain any on use charges (spell/script/ibscript), it's the default setting
+        3. When assiging a spell/script/ib script to one of the on use hooks and setting quantity to higher 1, the item will consume charges on use
+        4. Please make the Quantity one number higher than the intended number of charges (eg for a five charges item set Quantity to 6, please)
+        5. Ammunition type itmes will not work correctly as useableitems (please assign no scripts/spells/ibscripts their on use hooks)
+        6. Plese make sure that useable items are non-stackable (must double check if this is really neccessary, but for starter lets keep to this rule) 
+        */
+
+        [CategoryAttribute("03 - Quantity and Price"), DescriptionAttribute("If on-use-hooks not utilized: number is quantity; If on-use-hook utilized, entry is charges: 1 means no charges consumed, otherwise charges are entered number - 1. Note: AMMO is not allowed to have on-use-hooks utilized.")]
         public int quantity
         {
             get { return _quantity; }
             set { _quantity = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When selling items that are stackable, this number represents the quantity of this item that will be sold in one transactionn and the value in the 'value' property represents the cost for this group size.")]
+        [CategoryAttribute("03 - Quantity and Price"), DescriptionAttribute("When selling items that are stackable, this number represents the quantity of this item that will be sold in one transactionn and the value in the 'value' property represents the cost for this group size.")]
         public int groupSizeForSellingStackableItems
         {
             get { return _groupSizeForSellingStackableItems; }
             set { _groupSizeForSellingStackableItems = value; }
         }
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("Number of charges the item has (useful for items like wands.")]
+        [CategoryAttribute("15 - Not used anymore"), DescriptionAttribute("Number of charges the item has (useful for items like wands.")]
         public int charges
         {
             get { return _charges; }
             set { _charges = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("tag of ammo type that links ranged weapon launchers with ammo (the ammoType tag for the launcher and ammo must match exactly).")]
+        [CategoryAttribute("02 - Essentials and Perks"), DescriptionAttribute("RANGED and AMMO only: tag of ammo type that links ranged weapon launchers with ammo (the ammoType tag for RANGED and its AMMO must match exactly).")]
         public string ammoType
         {
             get { return _ammoType; }
             set { _ammoType = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("True if item requires the use of two hands.")]
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("MELEE, RANGED: True if item requires the use of two hands.")]
         public bool twoHanded
         {
             get
@@ -386,7 +470,7 @@ namespace IB2Toolset
             }
         }
         
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, equipping such item in combat immediately ends the current player character's turn.")]
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("When true, equipping such item in combat immediately ends the current player character's turn.")]
         public bool endTurnAfterEquipping
         {
             get
@@ -399,7 +483,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, the item can only be used while equipped.")]
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("When true, the item can only be used while equipped.")]
         public bool onlyUseableWhenEquipped
         {
             get
@@ -412,7 +496,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Set True if item can NOT be unequipped. Useful for temporary companion's specific items and cursed items.")]
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("Set True if item can NOT be unequipped. Useful for temporary companion's specific items and cursed items.")]
         public bool canNotBeUnequipped
         {
             get
@@ -424,7 +508,7 @@ namespace IB2Toolset
                 _canNotBeUnequipped = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Set True if item can be stacked, false for non stackable items.")]
+        [CategoryAttribute("03 - Quantity and Price"), DescriptionAttribute("Set True if item can be stacked, false for non stackable items. Set to false for charged items.")]
         public bool isStackable
         {
             get
@@ -436,7 +520,7 @@ namespace IB2Toolset
                 _isStackable = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This item will add to ration counter in the clock line and be consumed as ration each 24h or on rest.")]
+        [CategoryAttribute("04 - Utility and Plot"), DescriptionAttribute("GENERAL: This item will add to ration counter in the clock line and be consumed as ration each 24h or on rest.")]
         public bool isRation
         {
             get
@@ -449,7 +533,20 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("This item is a ligth source - you must also correctly set up IBScript on useItemIBScriptHook adn its paarmerts (see torch example item).")]
+        [CategoryAttribute("12 - Hooks: Spells"), DescriptionAttribute("MELEE, RANGED: the spell on this weapon will center the weapon wielder on a successful hit.")]
+        public bool onScoringHitCastOnSelf
+        {
+            get
+            {
+                return _onScoringHitCastOnSelf;
+            }
+            set
+            {
+                _onScoringHitCastOnSelf = value;
+            }
+        }
+
+        [CategoryAttribute("04 - Utility and Plot"), DescriptionAttribute("GENERAL: This item is a light source - you must also correctly set up IBScript on useItemIBScriptHook adn its paarmerts (see torch example item).")]
         public bool isLightSource 
         {
             get
@@ -462,7 +559,7 @@ namespace IB2Toolset
             }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Does not require a successful 'to hit' roll, always hits target (ex. mage bolt wand).")]
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("MELEE, RANGED: Does not require a successful 'to hit' roll, always hits target.")]
         public bool automaticallyHitsTarget
         {
             get
@@ -475,9 +572,7 @@ namespace IB2Toolset
             }
         }
 
-        //private bool isRation = false;
-        //private bool isLightSource = false;
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Item Attack Bonus...Can be used to account for enchantments as well.")]
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("MELEE, RANGED, AMMO: Item Attack Bonus... Can be used to account for enchantments as well.")]
         public int attackBonus
         {
             get
@@ -489,7 +584,7 @@ namespace IB2Toolset
                 _attackBonus = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Item Attack Range measured in squares (ex 5 = 5 squares)")]
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("MELEE, RANGED: Item Attack Range measured in squares (ex 5 = 5 squares)")]
         public int attackRange
         {
             get
@@ -501,7 +596,7 @@ namespace IB2Toolset
                 _attackRange = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Item's Area of Effect radius measured in squares for Spell/Effect properties of item when attacking with the item (for weapons, 0 = 1 square, 1 = 9 squares, etc.)")]
+        [CategoryAttribute("15 - Not used anymore"), DescriptionAttribute("Item's Area of Effect radius measured in squares for Spell/Effect properties of item when attacking with the item (for weapons, 0 = 1 square, 1 = 9 squares, etc.)")]
         public int AreaOfEffect
         {
             get
@@ -513,7 +608,7 @@ namespace IB2Toolset
                 _AreaOfEffect = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("the shape of the AoE when attacking with this item (for weapons).")]
+        [CategoryAttribute("15 - Not used anymore"), DescriptionAttribute("the shape of the AoE when attacking with this item (for weapons).")]
         [JsonConverter(typeof(StringEnumConverter))]
         public AreaOfEffectShape aoeShape
         {
@@ -526,7 +621,7 @@ namespace IB2Toolset
                 _aoeShape = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("number of dice to roll for damage")]
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("MELEE, RANGED: number of dice to roll for damage")]
         public int damageNumDice
         {
             get
@@ -538,7 +633,7 @@ namespace IB2Toolset
                 _damageNumDice = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("number of sided die to roll for damage")]
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("MELEE, RANGED: number of sided die to roll for damage")]
         public int damageDie
         {
             get
@@ -550,7 +645,7 @@ namespace IB2Toolset
                 _damageDie = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("The damage adder...for example with 2d4+1, the '1' is the adder. Can be used to account for enchantments as well.")]
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("MELEE, RANGED, AMMO: The damage adder...for example with 2d4+1, the '1' is the adder. Can be used to account for enchantments as well.")]
         public int damageAdder
         {
             get
@@ -562,7 +657,7 @@ namespace IB2Toolset
                 _damageAdder = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Item's armor bonus")]
+        [CategoryAttribute("09 - Protection and Regeneration"), DescriptionAttribute("Item's armor bonus")]
         public int armorBonus
         {
             get
@@ -574,7 +669,7 @@ namespace IB2Toolset
                 _armorBonus = value;
             }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("Maximum Dexterity Bonus allowed with this Item")]
+        [CategoryAttribute("09 - Protection and Regeneration"), DescriptionAttribute("Maximum Dexterity Bonus allowed with this Item")]
         public int maxDexBonus
         {
             get
@@ -586,43 +681,43 @@ namespace IB2Toolset
                 _maxDexBonus = value;
             }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValuePoison
         {
             get { return _damageTypeResistanceValuePoison; }
             set { _damageTypeResistanceValuePoison = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueMagic
         {
             get { return _damageTypeResistanceValueMagic; }
             set { _damageTypeResistanceValueMagic = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueNormal
         {
             get { return _damageTypeResistanceValueNormal; }
             set { _damageTypeResistanceValueNormal = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueAcid
         {
             get { return _damageTypeResistanceValueAcid; }
             set { _damageTypeResistanceValueAcid = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueCold
         {
             get { return _damageTypeResistanceValueCold; }
             set { _damageTypeResistanceValueCold = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueElectricity
         {
             get { return _damageTypeResistanceValueElectricity; }
             set { _damageTypeResistanceValueElectricity = value; }
         }
-        [CategoryAttribute("02 - Resistance Modifiers"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("Damage resistance value (default is to use -100 to 100 as a percentage of immunity, damage multiplied by percentage so 0 = full damage, 100 = no damage, -100 = double damage)")]
         public int damageTypeResistanceValueFire
         {
             get { return _damageTypeResistanceValueFire; }
@@ -634,7 +729,7 @@ namespace IB2Toolset
             get { return _typeOfDamage; }
             set { _typeOfDamage = value; }
         }*/
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The Type of Damage (useful with immunity checks)")]
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("MELEE, RANGED, AMMO: The Type of Damage (useful with immunity checks)")]
         [Browsable(true), TypeConverter(typeof(DamageTypeConverter))]
         public string typeOfDamage
         {
@@ -642,7 +737,7 @@ namespace IB2Toolset
             set { _typeOfDamage = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Tag of Race required to equip/use")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("Tag of Race required to equip/use")]
         [Browsable(true), TypeConverter(typeof(RaceTagTypeConverter))]
         public string requiredRace
         {
@@ -650,7 +745,7 @@ namespace IB2Toolset
             set { _requiredRace = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Tag of Trait required to equip/use")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("Tag of Trait required to equip/use")]
         [Browsable(true), TypeConverter(typeof(TraitTagTypeConverter))]
         public string requiredTrait
         {
@@ -658,7 +753,7 @@ namespace IB2Toolset
             set { _requiredTrait = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Tag of Race restricted from equipping/using")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("Tag of Race restricted from equipping/using")]
         [Browsable(true), TypeConverter(typeof(RaceTagTypeConverter))]
         public string restrictedRace
         {
@@ -666,155 +761,180 @@ namespace IB2Toolset
             set { _restrictedRace = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("STR required to equip/use")]
+        //private int _maxStrengthBonusAllowedForWeapon = 100;
+        //private int _spCostPerAttack = 0;
+        //private int _hpCostPerAttack = 0;
+
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("MELEE: The max damage bonus this weapon can receive from strength attribute, to hit bonus is unaffected")]
+        public int maxStrengthBonusAllowedForWeapon
+        {
+            get { return _maxStrengthBonusAllowedForWeapon; }
+            set { _maxStrengthBonusAllowedForWeapon = value; }
+        }
+
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("MELEE, RANGED: The cost in hp for each attack; if it cannot be paid anymore, a -10 to hit penalty is applied; cannot kill the user")]
+        public int hpCostPerAttack
+        {
+            get { return _hpCostPerAttack; }
+            set { _hpCostPerAttack = value; }
+        }
+
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("MELEE, RANGED: The cost in sp for each attack; if it cannot be paid anymore, a -10 to hit penalty is applied")]
+        public int spCostPerAttack
+        {
+            get { return _spCostPerAttack; }
+            set { _spCostPerAttack = value; }
+        }
+
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("STR required to equip/use")]
         public int requiredSTR
         {
             get { return _requiredSTR; }
             set { _requiredSTR = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("DEX required to equip/use")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("DEX required to equip/use")]
         public int requiredDEX
         {
             get { return _requiredDEX; }
             set { _requiredDEX = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("CON required to equip/use")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("CON required to equip/use")]
         public int requiredCON
         {
             get { return _requiredCON; }
             set { _requiredCON = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("INT required to equip/use")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("INT required to equip/use")]
         public int requiredINT
         {
             get { return _requiredINT; }
             set { _requiredINT = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("WIS required to equip/use")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("WIS required to equip/use")]
         public int requiredWIS
         {
             get { return _requiredWIS; }
             set { _requiredWIS = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("CHA required to equip/use")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("CHA required to equip/use")]
         public int requiredCHA
         {
             get { return _requiredCHA; }
             set { _requiredCHA = value; }
         }
 
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("The modifier amount for the Attribute")]
         public int attributeBonusModifierStr
         {
             get { return _attributeBonusModifierStr; }
             set { _attributeBonusModifierStr = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("The modifier amount for the Attribute")]
         public int attributeBonusModifierDex
         {
             get { return _attributeBonusModifierDex; }
             set { _attributeBonusModifierDex = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("The modifier amount for the Attribute")]
         public int attributeBonusModifierInt
         {
             get { return _attributeBonusModifierInt; }
             set { _attributeBonusModifierInt = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("The modifier amount for the Attribute")]
         public int attributeBonusModifierCha
         {
             get { return _attributeBonusModifierCha; }
             set { _attributeBonusModifierCha = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("The modifier amount for the Attribute")]
         public int attributeBonusModifierCon
         {
             get { return _attributeBonusModifierCon; }
             set { _attributeBonusModifierCon = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Attribute")]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("The modifier amount for the Attribute")]
         public int attributeBonusModifierWis
         {
             get { return _attributeBonusModifierWis; }
             set { _attributeBonusModifierWis = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Number of additional attacks granted")]
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("Number of additional attacks granted")]
         public int additionalAttacks
         {
             get { return _additionalAttacks; }
             set { _additionalAttacks = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier for maximum HP")]
+        [CategoryAttribute("06 - Requirements and Costs"), DescriptionAttribute("The modifier for maximum HP")]
         public int requiredLevel
         {
             get { return _requiredLevel; }
             set { _requiredLevel = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier for maximum HP")]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("The modifier for maximum HP")]
         public int modifierMaxHP
         {
             get { return _modifierMaxHP; }
             set { _modifierMaxHP = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier for maximum SP")]
+        [CategoryAttribute("11 - Attributes and Skills"), DescriptionAttribute("The modifier for maximum SP")]
         public int modifierMaxSP
         {
             get { return _modifierMaxSP; }
             set { _modifierMaxSP = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Reflex Saving Throw")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("The modifier amount for the Reflex Saving Throw")]
         public int savingThrowModifierReflex
         {
             get { return _savingThrowModifierReflex; }
             set { _savingThrowModifierReflex = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Will Saving Throw")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("The modifier amount for the Will Saving Throw")]
         public int savingThrowModifierWill
         {
             get { return _savingThrowModifierWill; }
             set { _savingThrowModifierWill = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The modifier amount for the Fortitude Saving Throw")]
+        [CategoryAttribute("10 - Resistances and Saves"), DescriptionAttribute("The modifier amount for the Fortitude Saving Throw")]
         public int savingThrowModifierFortitude
         {
             get { return _savingThrowModifierFortitude; }
             set { _savingThrowModifierFortitude = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("Modifier to movement")]
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("Modifier to movement")]
         public int MovementPointModifier
         {
             get { return movementPointModifier; }
             set { movementPointModifier = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The number of SP to regenerate per round of combat (regen happens at start of new combat round)")]
+        [CategoryAttribute("09 - Protection and Regeneration"), DescriptionAttribute("The number of SP to regenerate per round of combat (regen happens at start of new combat round)")]
         public int spRegenPerRoundInCombat
         {
             get { return _spRegenPerRoundInCombat; }
             set { _spRegenPerRoundInCombat = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The number of HP to regenerate per round of combat (regen happens at start of new combat round)")]
+        [CategoryAttribute("09 - Protection and Regeneration"), DescriptionAttribute("The number of HP to regenerate per round of combat (regen happens at start of new combat round)")]
         public int hpRegenPerRoundInCombat
         {
             get { return _hpRegenPerRoundInCombat; }
             set { _hpRegenPerRoundInCombat = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The number of rounds that need to pass in order for 1 SP to regenerate when outside of combat.")]
-        public int roundsPerSpRegenOutsideCombat
+        [CategoryAttribute("09 - Protection and Regeneration"), DescriptionAttribute("The number of minutes that need to pass in order for 1 SP to regenerate when outside of combat.")]
+        public int minutesPerSpRegenOutsideCombat
         {
-            get { return _roundsPerSpRegenOutsideCombat; }
-            set { _roundsPerSpRegenOutsideCombat = value; }
+            get { return _minutesPerSpRegenOutsideCombat; }
+            set { _minutesPerSpRegenOutsideCombat = value; }
         }
-        [CategoryAttribute("02 - Modifiers"), DescriptionAttribute("The number of rounds that need to pass in order for 1 HP to regenerate when outside of combat.")]
-        public int roundsPerHpRegenOutsideCombat
+        [CategoryAttribute("09 - Protection and Regeneration"), DescriptionAttribute("The number of minutes that need to pass in order for 1 HP to regenerate when outside of combat.")]
+        public int minutesPerHpRegenOutsideCombat
         {
-            get { return _roundsPerHpRegenOutsideCombat; }
-            set { _roundsPerHpRegenOutsideCombat = value; }
+            get { return _minutesPerHpRegenOutsideCombat; }
+            set { _minutesPerHpRegenOutsideCombat = value; }
         }
         /*[CategoryAttribute("03 - Scripts"), DescriptionAttribute("fires when the item makes a successful hit on a target")]
         [Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
@@ -823,32 +943,32 @@ namespace IB2Toolset
             get { return onScoringHit; }
             set { onScoringHit = value; }
         }*/
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("fires when the item makes a successful hit on a target")]
+        [CategoryAttribute("13 - Hooks: Premade Scripts"), DescriptionAttribute("fires when the item makes a successful hit on a target")]
         public string onScoringHit
         {
             get { return _onScoringHit; }
             set { _onScoringHit = value; }
         }
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("(not used yet)optional input parameters if using a LogicTree...comma separated parameters")]
+        [CategoryAttribute("13 - Hooks: Premade Scripts"), DescriptionAttribute("(not used yet)optional input parameters if using a LogicTree...comma separated parameters")]
         public string onScoringHitParms
         {
             get { return _onScoringHitParms; }
             set { _onScoringHitParms = value; }
         }
         [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("04 - LogicTree Hooks"), DescriptionAttribute("LogicTree name to be run upon using an item (onUseItem must be set to 'none' for this to work properly)")]
+        [CategoryAttribute("15 - Not used anymore"), DescriptionAttribute("LogicTree name to be run upon using an item (onUseItem must be set to 'none' for this to work properly)")]
         public string onUseItemLogicTree
         {
             get { return _onUseItemLogicTree; }
             set { _onUseItemLogicTree = value; }
         }
-        [CategoryAttribute("04 - LogicTree Hooks"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("15 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string onUseItemLogicTreeParms
         {
             get { return _onUseItemLogicTreeParms; }
             set { _onUseItemLogicTreeParms = value; }
         }
-        [CategoryAttribute("04 - LogicTree Hooks"), DescriptionAttribute("If set to true, the item will be destroyed (or decremented by one if stacked) after the Logic Tree is completed.")]
+        [CategoryAttribute("15 - Not used anymore"), DescriptionAttribute("If set to true, the item will be destroyed (or decremented by one if stacked) after the Logic Tree is completed.")]
         public bool destroyItemAfterOnUseItemLogicTree
         {
             get { return _destroyItemAfterOnUseItemLogicTree; }
@@ -856,19 +976,19 @@ namespace IB2Toolset
         }
 
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]
-        [CategoryAttribute("04 - IBScript Hooks"), DescriptionAttribute("IBScript name to be run upon using an item (onUseItem must be set to 'none' for this to work properly)")]
+        [CategoryAttribute("14 - Hooks: IB Scripts"), DescriptionAttribute("IBScript name to be run upon using an item (onUseItem must be set to 'none' for this to work properly)")]
         public string onUseItemIBScript
         {
             get { return _onUseItemIBScript; }
             set { _onUseItemIBScript = value; }
         }
-        [CategoryAttribute("04 - IBScript Hooks"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("14 - Hooks: IB Scripts"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string onUseItemIBScriptParms
         {
             get { return _onUseItemIBScriptParms; }
             set { _onUseItemIBScriptParms = value; }
         }
-        [CategoryAttribute("04 - IBScript Hooks"), DescriptionAttribute("If set to true, the item will be destroyed (or decremented by one if stacked) after the IBScript is completed.")]
+        [CategoryAttribute("14 - Hooks: IB Scripts"), DescriptionAttribute("If set to true, the item will be destroyed (or decremented by one if stacked) after the IBScript is completed.")]
         public bool destroyItemAfterOnUseItemIBScript
         {
             get { return _destroyItemAfterOnUseItemIBScript; }
@@ -881,7 +1001,7 @@ namespace IB2Toolset
             get { return onUseItem; }
             set { onUseItem = value; }
         }*/
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("fires when the item is used (onUseItemLogicTree must be set to 'none' for this to work properly)")]
+        [CategoryAttribute("13 - Hooks: Premade Scripts"), DescriptionAttribute("fires when the item is used (onUseItemLogicTree must be set to 'none' for this to work properly)")]
         public string onUseItem
         {
             get { return _onUseItem; }
@@ -894,39 +1014,39 @@ namespace IB2Toolset
             get { return onWhileEquipped; }
             set { onWhileEquipped = value; }
         }*/
-        [CategoryAttribute("03 - Scripts"), DescriptionAttribute("fires every time the UpdateStats() function is called. Useful for modifying PC's stats.")]
+        [CategoryAttribute("13 - Hooks: Premade Scripts"), DescriptionAttribute("fires every time the UpdateStats() function is called. Useful for modifying PC's stats.")]
         public string onWhileEquipped
         {
             get { return _onWhileEquipped; }
             set { _onWhileEquipped = value; }
         }
         [Browsable(true), TypeConverter(typeof(SpellTagTypeConverter))]
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("Cast this spell upon the target after making a successful attack (melee/ranged) hit on the target")]
+        [CategoryAttribute("12 - Hooks: Spells"), DescriptionAttribute("MELEE, RANGED, AMMO: Cast this spell upon the target after making a successful attack (melee/ranged) hit on the target")]
         public string onScoringHitCastSpellTag
         {
             get { return _onScoringHitCastSpellTag; }
             set { _onScoringHitCastSpellTag = value; }
         }
         [Browsable(true), TypeConverter(typeof(SpellTagTypeConverter))]
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("Cast this spell upon using the item")]
+        [CategoryAttribute("12 - Hooks: Spells"), DescriptionAttribute("Cast this spell upon using the item")]
         public string onUseItemCastSpellTag
         {
             get { return _onUseItemCastSpellTag; }
             set { _onUseItemCastSpellTag = value; }
         }
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("If set to true, the item will be destroyed (or decremented by one if stacked) after the Spell is completed.")]
+        [CategoryAttribute("12 - Hooks: Spells"), DescriptionAttribute("If set to true, the item will be destroyed (or decremented by one if stacked/charged) after the spell on th on-use hook is completed.")]
         public bool destroyItemAfterOnUseItemCastSpell
         {
             get { return _destroyItemAfterOnUseItemCastSpell; }
             set { _destroyItemAfterOnUseItemCastSpell = value; }
         }
-        [CategoryAttribute("05 - Spell/Effect System"), DescriptionAttribute("Effective level of item used in Effect calculations that are based on level adjustments.")]
+        [CategoryAttribute("12 - Hooks: Spells"), DescriptionAttribute("Effective level of item used in Effect calculations that are based on level adjustments.")]
         public int levelOfItemForCastSpell
         {
             get { return _levelOfItemForCastSpell; }
             set { _levelOfItemForCastSpell = value; }
         }
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("If set to true, the item will use the Player's class level instead of the item's effective level used in Effect calculations that are based on level adjustments.")]
+        [CategoryAttribute("12 - Hooks: Spells"), DescriptionAttribute("If set to true, the item will use the Player's class level instead of the item's effective level used in Effect calculations that are based on level adjustments.")]
         public bool usePlayerClassLevelForOnUseItemCastSpell
         {
             get { return _usePlayerClassLevelForOnUseItemCastSpell; }
