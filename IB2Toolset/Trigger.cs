@@ -19,8 +19,9 @@ namespace IB2Toolset
     }
 
     public class Trigger
-    {        
+    {
         #region Fields
+        private bool requiresActiveSearch = false;
         private string triggerTag = "newTrigger"; //must be unique
         private bool enabled = true;
         private bool doOnceOnly = false;
@@ -28,6 +29,7 @@ namespace IB2Toolset
 
         private bool enabledEvent1 = true;
         private bool doOnceOnlyEvent1 = false;
+        private bool event2RequiresTrueReturnCheck = false;
         private string event1Type = "none";
         //private TriggerType event1TypeEnum = TriggerType.None;
         //private EventObjEditorReturnObject parameters1 = new EventObjEditorReturnObject();
@@ -41,6 +43,7 @@ namespace IB2Toolset
 
         private bool enabledEvent2 = true;
         private bool doOnceOnlyEvent2 = false;
+        private bool event3RequiresFalseReturnCheck = false;
         private string event2Type = "none";
         //private TriggerType event2TypeEnum = TriggerType.None;
         //private EventObjEditorReturnObject parameters2 = new EventObjEditorReturnObject();
@@ -102,6 +105,15 @@ namespace IB2Toolset
             get { return doOnceOnly; }
             set { doOnceOnly = value; }
         }
+
+        //requiresActiveSearch
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("If true, this trigger will only work if an active search action (space key) is performed on its square(s).")]
+        public bool RequiresActiveSearch
+        {
+            get { return requiresActiveSearch; }
+            set { requiresActiveSearch = value; }
+        }
+
         [CategoryAttribute("0 - Main"), DescriptionAttribute("List of all the squares that this Trigger covers"), ReadOnly(true)]
         public List<Coordinate> TriggerSquaresList
         {
@@ -193,6 +205,14 @@ namespace IB2Toolset
             get { return doOnceOnlyEvent2; }
             set { doOnceOnlyEvent2 = value; }
         }
+
+        [CategoryAttribute("2 - Event"), DescriptionAttribute("Will only work if a gc script check on event1 resulted in true (like skill check passed)")]
+        public bool Event2RequiresTrueReturnCheck
+        {
+            get { return event2RequiresTrueReturnCheck; }
+            set { event2RequiresTrueReturnCheck = value; }
+        }
+
         [CategoryAttribute("2 - Event"), DescriptionAttribute("Used to Enable or Disable the Event")]
         public bool EnabledEvent2
         {
@@ -267,6 +287,12 @@ namespace IB2Toolset
         {
             get { return doOnceOnlyEvent3; }
             set { doOnceOnlyEvent3 = value; }
+        }
+        [CategoryAttribute("3 - Event"), DescriptionAttribute("Will only work if a gc script check on event2 resulted in true (like skill check passed)")]
+        public bool Event3RequiresFalseReturnCheck
+        {
+            get { return event3RequiresFalseReturnCheck; }
+            set { event3RequiresFalseReturnCheck = value; }
         }
         [CategoryAttribute("3 - Event"), DescriptionAttribute("Used to Enable or Disable the Event")]
         public bool EnabledEvent3

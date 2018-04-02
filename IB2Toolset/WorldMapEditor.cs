@@ -3757,6 +3757,8 @@ namespace IB2Toolset
         }
         public SharpDX.Direct2D1.Bitmap GetFromBitmapList(string fileNameWithOutExt)
         {
+            
+            //suits
             //check to see if in list already and return bitmap if it is found
             if (commonBitmapList.ContainsKey(fileNameWithOutExt))
             {
@@ -4996,6 +4998,51 @@ namespace IB2Toolset
                     SharpDX.RectangleF dstWest = new SharpDX.RectangleF((x-1) * sqr, y * sqr, sqr, sqr);
 
                     float relativeTileHeight = tile.heightLevel - area.averageHeightOnThisMap;
+
+                    if (tile.isInMaxShadeE)
+                    {
+                        tile.isInLongShadeE = true;
+                    }
+                    if (tile.isInMaxShadeW)
+                    {
+                        tile.isInLongShadeW = true;
+                    }
+                    if (tile.isInMaxShadeS)
+                    {
+                        tile.isInLongShadeS = true;
+                    }
+                    if (tile.isInMaxShadeN)
+                    {
+                        tile.isInLongShadeN = true;
+                    }
+
+                    if (tile.isInMaxShadeNE)
+                    {
+                        tile.isInLongShadeNE = true;
+                    }
+                    if (tile.isInMaxShadeNW)
+                    {
+                        tile.isInLongShadeNW = true;
+                    }
+                    if (tile.isInMaxShadeSE)
+                    {
+                        tile.isInLongShadeSE = true;
+                    }
+                    if (tile.isInMaxShadeSW)
+                    {
+                        tile.isInLongShadeSW = true;
+                    }
+
+                    //suits
+                    tile.isInMaxShadeE = false;
+                    tile.isInMaxShadeW = false;
+                    tile.isInMaxShadeN = false;
+                    tile.isInMaxShadeS = false;
+                    tile.isInMaxShadeNE = false;
+                    tile.isInMaxShadeNW = false;
+                    tile.isInMaxShadeSE = false;
+                    tile.isInMaxShadeSW = false;
+
                     if (relativeTileHeight > 4)
                     {
                         relativeTileHeight = 4;
@@ -5005,6 +5052,11 @@ namespace IB2Toolset
                         relativeTileHeight = -4;
                     }
                     relativeTileHeight = relativeTileHeight / 10;
+
+                    if (mod.noRimLights)
+                    {
+                        relativeTileHeight = -0.5f;
+                    }
 
                     //bool allowHighLight = true;
                     //highlights

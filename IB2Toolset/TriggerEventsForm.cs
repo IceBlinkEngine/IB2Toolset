@@ -47,6 +47,13 @@ namespace IB2Toolset
                 prntForm.currentSelectedTrigger.DoOnceOnly = chkTrigOnce.Checked;
             }
         }
+        private void chkTrigActiveSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.RequiresActiveSearch = chkTrigActiveSearch.Checked;
+            }
+        }
         private void txtTrigTag_TextChanged(object sender, EventArgs e)
         {
             if (prntForm.currentSelectedTrigger != null)
@@ -199,6 +206,17 @@ namespace IB2Toolset
                 prntForm.currentSelectedTrigger.EnabledEvent2 = chkE2enabled.Checked;
             }
         }
+
+        private void e2GcTrue_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.Event2RequiresTrueReturnCheck = e2GcTrue.Checked;
+            }
+        }
+
+        //e2GcTrue
+
         private void chkE2once_CheckedChanged(object sender, EventArgs e)
         {
             if (prntForm.currentSelectedTrigger != null)
@@ -320,6 +338,15 @@ namespace IB2Toolset
                 prntForm.currentSelectedTrigger.DoOnceOnlyEvent3 = chkE3once.Checked;
             }
         }
+
+        private void e3GcTrue_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.Event3RequiresFalseReturnCheck = e3GcTrue.Checked;
+            }
+        }
+
         private void cmbE3type_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((prntForm.currentSelectedTrigger != null) && (cmbE3type.SelectedItem != null))
@@ -458,6 +485,7 @@ namespace IB2Toolset
                 Trigger trg = prntForm.currentSelectedTrigger;
                 chkTrigEnabled.Checked = trg.Enabled;
                 chkTrigOnce.Checked = trg.DoOnceOnly;
+                chkTrigActiveSearch.Checked = trg.RequiresActiveSearch;
                 txtTrigTag.Text = trg.TriggerTag;
                 chkTriggeredByPc.Checked = trg.canBeTriggeredByPc;
                 chkTriggeredByCreatures.Checked = trg.canBeTriggeredByCreature;
@@ -475,6 +503,8 @@ namespace IB2Toolset
                 numE1y.Value = trg.Event1TransPointY;
 
                 chkE2enabled.Checked = trg.EnabledEvent2;
+                e2GcTrue.Checked = trg.Event2RequiresTrueReturnCheck;
+                e3GcTrue.Checked = trg.Event3RequiresFalseReturnCheck;
                 chkE2once.Checked = trg.DoOnceOnlyEvent2;
                 cmbE2type.SelectedItem = trg.Event2Type;
                 cmbE2tag.SelectedItem = trg.Event2FilenameOrTag;

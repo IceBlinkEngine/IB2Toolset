@@ -69,7 +69,10 @@ namespace IB2Toolset
         }
 
         #region Fields      
-        private bool _usesTurnToActivate = true; //some spells, especially called via active traits, are meant to be used in the same turn such as Power Attack and Set Trap    
+        private bool _usesTurnToActivate = true; //some spells, especially called via active traits, are meant to be used in the same turn such as Power Attack and Set Trap
+        private bool _onlyOncePerTurn = true;
+        private bool _isSwiftAction = false;
+        private int _coolDownTime = 0;
         private string _name = "newSpell"; //item name
         private string _tag = "newSpellTag"; //item unique tag name
         private string _spellImage = "sp_magebolt";
@@ -109,12 +112,33 @@ namespace IB2Toolset
 
         #region Properties
 
-        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("if true, the use of this trait in combat will consume that player's turn. If false, the player will get to use this trait and continue their turn. Some traits are meant to be used in the same turn such as Power Attack and Set Trap.")]  
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("if true, the use of this spell/trait in combat will consume that player's turn. If false (free or swift action), the player will get to use this trait/spell and continue their turn. Some traits/spells are meant to be used in the same turn such as Power Attack and Set Trap.")]  
         public bool usesTurnToActivate  
         {  
              get { return _usesTurnToActivate; }  
              set { _usesTurnToActivate = value; }  
-        }  
+        }
+
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("if true, this spell/trait can be recast/reused unlimitedly in the same turn (free action, repeatable). Make sure that usesTurnToActivate and isSwiftAction are set to false.")]
+        public bool onlyOncePerTurn
+        {
+            get { return _onlyOncePerTurn; }
+            set { _onlyOncePerTurn = value; }
+        }
+
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("if true, this spell/useable trait can only be reused after x turns have passed without using it.")]
+        public int coolDownTime
+        {
+            get { return _coolDownTime; }
+            set { _coolDownTime = value; }
+        }
+
+        [CategoryAttribute("04 - Casting process"), DescriptionAttribute("if true, the action is classified as (additional) swift action. Only one swift action can be used per turn. Make sure that usesTurnToActivate and useOnlyOncePerTurn are set to false.")]
+        public bool isSwiftAction
+        {
+            get { return _isSwiftAction; }
+            set { _isSwiftAction = value; }
+        }
 
         [CategoryAttribute("03 - Target"), DescriptionAttribute("Does this spell apply effects to combat squares?")]  
          public bool isUsedForCombatSquareEffect

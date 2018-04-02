@@ -14,9 +14,17 @@ namespace IB2Toolset
     public class Module
     {
         #region Fields
-        public bool _encounterSingleImageAutoScale = true;
+
+        private bool _noRimLights = false;
+        private bool _blendOutTooHighAndTooDeepTiles = false;
+
+        private bool _activeSearchDoneThisMove = false;
+        private bool _activeSearchSPCostPaidByByLeaderOnly = true;
+        private int _activeSearchSPCost = 1;
+
+        private bool _encounterSingleImageAutoScale = true;
         public string formerDirection = "none";
-        public bool _usePredefinedTileCategories = true; 
+        private bool _usePredefinedTileCategories = true; 
         public List<string> masterAreasList = new List<string>(); 
         //private string moduleFolderName = "";
         private string _moduleName = "";
@@ -27,6 +35,7 @@ namespace IB2Toolset
         private bool _hideRoster = false;
         private bool _mustUsePreMadePC = false;
         private int _numberOfPlayerMadePcsAllowed = 1;
+        private int _numberOfPlayerMadePcsRequired = 1;
         private int maxPartySize = 6;
         private string _moduleDescription = "";
         private string _moduleCredits = "<big><b>Lanterna - The Exile</b></big><BR><BR>"
@@ -164,6 +173,15 @@ namespace IB2Toolset
         private float _fogOfWarOpacity = 0.9525f;
         private bool _spritesUnderOverlays = true;
 
+        private bool _hungerIsLethal = true;
+        private float _maxHPandSPPercentageLostOnHunger = 20;
+        private bool _showRestMessagesInLog = true;
+        private bool _showRestMessagesInBox = true;
+        private string _messageOnRest = "Party safely rests until completely healed.";
+        private string _messageOnRestAndRaise = "Party safely rests until completely healed (bringing back the - at least presumedly - dead as well).";
+
+        private bool _hideZeroPowerTraits = false;
+
         #endregion
 
         #region Properties
@@ -179,6 +197,29 @@ namespace IB2Toolset
         {
             get { return _encounterSingleImageAutoScale; }
             set { _encounterSingleImageAutoScale = value; }
+        }
+
+        //public bool noRimLights = false;
+        //public bool blendOutTooHighAndTooDeepTiles = false;
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, the rim lights (highlighted lines at edges of tiles with height differences) are not drawn.")]
+        public bool noRimLights
+        {
+            get { return _noRimLights; }
+            set { _noRimLights = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, tiles with more than two levels higher or more than two levels lower than the party are blended out and covered with tooHigh.png and tooDeep.png. Turn rim ligths off to use this correctly.")]
+        public bool blendOutTooHighAndTooDeepTiles
+        {
+            get { return _blendOutTooHighAndTooDeepTiles; }
+            set { _blendOutTooHighAndTooDeepTiles = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, those traits that are set to be shown in corner of main map are blended out if their power is zero or less.")]
+        public bool hideZeroPowerTraits
+        {
+            get { return _hideZeroPowerTraits; }
+            set { _hideZeroPowerTraits = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of the Module displayed to the player")]
@@ -238,6 +279,22 @@ namespace IB2Toolset
         {
             get { return _useAllTileSystem; }
             set { _useAllTileSystem = value; }
+
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag determines whether each party member or only the leader shall pay the sp cost of an active search (space key).")]
+        public bool activeSearchSPCostPaidByByLeaderOnly
+        {
+            get { return _activeSearchSPCostPaidByByLeaderOnly; }
+            set { _activeSearchSPCostPaidByByLeaderOnly = value; }
+
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The number of SP consumed (and required) by an active search action (space key).")]
+        public int activeSearchSPCost
+        {
+            get { return _activeSearchSPCost; }
+            set { _activeSearchSPCost = value; }
 
         }
 
@@ -388,6 +445,48 @@ namespace IB2Toolset
             set { _maxNumberOfRationsAllowed = value; }
         }
 
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("When false, hunger cannot reduce hp below 1.")]
+        public bool hungerIsLethal
+        {
+            get { return _hungerIsLethal; }
+            set { _hungerIsLethal = value; }
+        }
+
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("The hpMAx and spMAx percentage lost every 24h without rations.")]
+        public float maxHPandSPPercentageLostOnHunger
+        {
+            get { return _maxHPandSPPercentageLostOnHunger; }
+            set { _maxHPandSPPercentageLostOnHunger = value; }
+        }
+
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("When false, rest messages in log are not shown.")]
+        public bool showRestMessagesInLog
+        {
+            get { return _showRestMessagesInLog; }
+            set { _showRestMessagesInLog = value; }
+        }
+
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("When false, rest messages in extra message box are not shown.")]
+        public bool showRestMessagesInBox
+        {
+            get { return _showRestMessagesInBox; }
+            set { _showRestMessagesInBox = value; }
+        }
+
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("You can enter a customized message shown on normal resting here (in log and/or message box).")]
+        public string messageOnRest
+        {
+            get { return _messageOnRest; }
+            set { _messageOnRest = value; }
+        }
+
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("You can enter a customized message shown on rest & raise here (in log and/or message box).")]
+        public string messageOnRestAndRaise
+        {
+            get { return _messageOnRestAndRaise; }
+            set { _messageOnRestAndRaise = value; }
+        }
+
         [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("Max number of light source items allowed in party inventory")]
         public int maxNumberOfLightSourcesAllowed
         {
@@ -494,6 +593,28 @@ namespace IB2Toolset
                 }
             }
         }
+
+        [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("The total number of player made characters required in the party (default is 1, max PCs in a party is 6)")]
+        public int numberOfPlayerMadePcsRequired
+        {
+            get { return _numberOfPlayerMadePcsRequired; }
+            set
+            {
+                if (value > 6)
+                {
+                    _numberOfPlayerMadePcsRequired = 6;
+                }
+                else if (value < 1)
+                {
+                    _numberOfPlayerMadePcsRequired = 1;
+                }
+                else
+                {
+                    _numberOfPlayerMadePcsRequired = value;
+                }
+            }
+        }
+
         [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("The maximum total number of players that can be in the party (only values of 1-6 accepted)")]
         public int MaxPartySize
         {

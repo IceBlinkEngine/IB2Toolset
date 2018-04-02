@@ -58,8 +58,11 @@ namespace IB2Toolset
     }*/
 
     public class Trait
-    {        
+    {
         #region Fields        
+
+        private bool _showOnMainMap = false;
+        private string _methodOfChecking = "leader";
         private string _name = "newTrait"; //item name
         private string _tag = "newTraitTag"; //item unique tag name
         private string _traitImage = "sp_magebolt";
@@ -111,6 +114,35 @@ namespace IB2Toolset
         #endregion
 
         #region Properties  
+        //private bool _showOnMainMap = false;
+        //private string _methodOfChecking = "leader";
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("How is this trait typically checked for and displayed on mainmap (if at all): leader/Leader/-1 or highest/Highest/-2 or lowest/Lowest/-3 or average/Average/-4) or allMustSucceed/AllMustSucceed/-5 or oneMustSucceed/oneMustSucceed/-6")]
+        public string methodOfChecking
+        {
+            get
+            {
+                return _methodOfChecking;
+            }
+            set
+            {
+                _methodOfChecking = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Is this trait (and its power) displayed on right top corner of mainmap?")]
+        public bool showOnMainMap
+        {
+            get
+            {
+                return _showOnMainMap;
+            }
+            set
+            {
+                _showOnMainMap = value;
+            }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of the Trait")]
         public string name
         {

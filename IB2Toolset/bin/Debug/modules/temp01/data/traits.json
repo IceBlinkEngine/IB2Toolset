@@ -1,5 +1,7 @@
 [
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Bluff (L1)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -21,6 +23,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Bluff (L2)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -42,6 +46,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Cleave",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -63,6 +69,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Critical Strike",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -84,6 +92,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Diplomacy (L1)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -105,6 +115,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Diplomacy (L2)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -126,6 +138,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Disable Device (L1)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -147,6 +161,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Disable Device (L2)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -168,6 +184,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Evasion",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -189,6 +207,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Intimidate (L1)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -210,6 +230,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Intimidate (L2)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -231,6 +253,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Pick Pocket (L1)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -252,6 +276,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Pick Pocket (L2)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -273,6 +299,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Point Blank Shot",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -294,6 +322,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Sneak Attack",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -315,6 +345,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Spot (L1)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -336,6 +368,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Spot (L2)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -357,6 +391,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Stealth (L1)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -378,6 +414,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Stealth (L2)",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
@@ -399,6 +437,8 @@
     "useableInSituation": "Always"
   },
   {
+    "methodOfChecking": "leader",
+    "showOnMainMap": false,
     "name": "Two Attacks",
     "traitEffectTagList": [],
     "traitWorksOnlyWhen": [],
