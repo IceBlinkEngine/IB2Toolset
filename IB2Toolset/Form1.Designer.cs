@@ -94,6 +94,7 @@
             this.playerClassEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.raceEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.traitEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.factionEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.weatherEffectsEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.weatherEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spellEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -515,6 +516,7 @@
             this.playerClassEditorToolStripMenuItem,
             this.raceEditorToolStripMenuItem,
             this.traitEditorToolStripMenuItem,
+            this.factionEditorToolStripMenuItem,
             this.weatherEffectsEditorToolStripMenuItem,
             this.weatherEditorToolStripMenuItem,
             this.spellEditorToolStripMenuItem,
@@ -573,6 +575,13 @@
             this.traitEditorToolStripMenuItem.Text = "Trait Editor";
             this.traitEditorToolStripMenuItem.Click += new System.EventHandler(this.traitEditorToolStripMenuItem_Click);
             // 
+            // factionEditorToolStripMenuItem
+            // 
+            this.factionEditorToolStripMenuItem.Name = "factionEditorToolStripMenuItem";
+            this.factionEditorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.factionEditorToolStripMenuItem.Text = "Faction Editor";
+            this.factionEditorToolStripMenuItem.Click += new System.EventHandler(this.factionEditorToolStripMenuItem_Click);
+            //
             // weatherEffectsEditorToolStripMenuItem
             // 
             this.weatherEffectsEditorToolStripMenuItem.Name = "weatherEffectsEditorToolStripMenuItem";
@@ -792,6 +801,7 @@
         private System.Windows.Forms.ToolStripMenuItem raceEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spellEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem traitEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem factionEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem weatherEffectsEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem weatherEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem journalEditorToolStripMenuItem;

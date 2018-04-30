@@ -192,6 +192,13 @@
     <Compile Include="Schedules.cs" />
     <Compile Include="TileBitmapNamePair.cs" />
     <Compile Include="TileEnc.cs" />
+    <Compile Include="Faction.cs" />
+    <Compile Include="FactionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FactionEditor.Designer.cs">
+      <DependentUpon>FactionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Weather.cs" />
     <Compile Include="WeatherEditor.cs">
       <SubType>Form</SubType>
@@ -376,6 +383,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RulesEditor.resx">
       <DependentUpon>RulesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FactionEditor.resx">
+      <DependentUpon>FactionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WeatherEditor.resx">
       <DependentUpon>WeatherEditor.cs</DependentUpon>

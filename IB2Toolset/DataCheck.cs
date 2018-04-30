@@ -166,6 +166,17 @@ namespace IB2Toolset
                     }
                 }
             }
+            foreach (Faction it in frm.factionsList)
+            {
+                foreach (Faction itck in frm.factionsList)
+                {
+                    if ((it != itck) && (it.tag.Equals(itck.tag)))
+                    {
+                        frm.logText("FACTIONS ERROR: " + it.name + " has the same tag as " + itck.name + Environment.NewLine);
+                    }
+                }
+            }
+
             foreach (WeatherEffect it in frm.weatherEffectsList)
             {
                 foreach (WeatherEffect itck in frm.weatherEffectsList)

@@ -32,6 +32,8 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap creatureIconBitmap;
 
+        private string _factionTag = "none";
+
         private string _tokenFilename = "blank";
         private int _creatureSize = 1;
         public bool combatFacingLeft = true;
@@ -105,6 +107,14 @@ namespace IB2Toolset
             get { return _tokenFilename; }
             set { _tokenFilename = value; }
         }
+
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Assign the tag of the creature's faction here (or leave at none). Faction can grant a faction buff in combat to AC/toHit/Saves.")]
+        public string factionTag
+        {
+            get { return _factionTag; }
+            set { _factionTag = value; }
+        }
+
         [CategoryAttribute("00 - Main"), DescriptionAttribute("Name of the creature that shows up in the game engine")]
         public string cr_name
         {

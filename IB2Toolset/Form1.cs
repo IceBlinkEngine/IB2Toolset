@@ -31,6 +31,7 @@ namespace IB2Toolset
         public List<Race> racesList = new List<Race>();
         public List<Spell> spellsList = new List<Spell>();
         public List<Trait> traitsList = new List<Trait>();
+        public List<Faction> factionsList = new List<Faction>();
         public List<WeatherEffect> weatherEffectsList = new List<WeatherEffect>();
         public List<Weather> weathersList = new List<Weather>();
         public List<Effect> effectsList = new List<Effect>();
@@ -131,6 +132,7 @@ namespace IB2Toolset
             //openSkills(_mainDirectory + "\\data\\NewModule\\data\\" + mod.SkillsFileName);
             openSpellsDefault();
             openTraitsDefault();
+            openFactionsDefault();
             openWeatherEffects(_mainDirectory + "\\default\\NewModule\\data\\weatherEffects.json");
             openWeathers(_mainDirectory + "\\default\\NewModule\\data\\weathers.json");
             openEffectsDefault();
@@ -670,6 +672,42 @@ namespace IB2Toolset
             TraitsListDefault.Clear();
         }
 
+        private void openFactions(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                factionsList.Clear();
+                factionsList = loadFactionsFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find factions.json file. Will create a new one upon saving module.");
+            }
+
+            List<Faction> FactionsListDefault = new List<Faction>();
+            FactionsListDefault = loadFactionsFile(_mainDirectory + "\\default\\NewModule\\data\\Factions.json");
+
+            foreach (Faction tD in FactionsListDefault)
+            {
+                bool allowAdding = true;
+                foreach (Faction tM in factionsList)
+                {
+                    if (tM.name == tD.name)
+                    {
+                        allowAdding = false;
+                        break;
+                    }
+                }
+
+                if (allowAdding)
+                {
+                    factionsList.Add(tD);
+                }
+            }
+
+            FactionsListDefault.Clear();
+        }
+
         private void openTraitsDefault()
         {
             string filename = _mainDirectory + "\\default\\NewModule\\data\\traits.json";
@@ -682,6 +720,21 @@ namespace IB2Toolset
             else
             {
                 MessageBox.Show("Couldn't find traits.json file. Will create a new one upon saving module.");
+            }
+        }
+
+        private void openFactionsDefault()
+        {
+            string filename = _mainDirectory + "\\default\\NewModule\\data\\factions.json";
+
+            if (File.Exists(filename))
+            {
+                factionsList.Clear();
+                factionsList = loadFactionsFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find factions.json file. Will create a new one upon saving module.");
             }
         }
 
@@ -744,6 +797,7 @@ namespace IB2Toolset
                 openRaces(directory + "\\data\\races.json");
                 openSpells(directory + "\\data\\spells.json");
                 openTraits(directory + "\\data\\traits.json");
+                openFactions(directory + "\\data\\factions.json");
                 openWeatherEffects(directory + "\\data\\weatherEffects.json");
                 openWeathers(directory + "\\data\\weathers.json");
                 openEffects(directory + "\\data\\effects.json");
@@ -962,6 +1016,15 @@ public void loadSpriteDropdownList()
             foreach (Trait t in this.traitsList)
             {
                 DropdownStringLists.traitsTagsTypeStringList.Add(t.tag);
+            }
+        }
+        public void loadFactionTagsList()
+        {
+            DropdownStringLists.factionsTagsTypeStringList = new List<string>();
+            DropdownStringLists.factionsTagsTypeStringList.Add("none");
+            foreach (Faction t in this.factionsList)
+            {
+                DropdownStringLists.factionsTagsTypeStringList.Add(t.tag);
             }
         }
         public void loadEffectTagsList()
@@ -3353,6 +3416,7 @@ public void loadSpriteDropdownList()
                 saveRacesFile(fullPathDirectory + "\\data\\races.json");
                 saveSpellsFile(fullPathDirectory + "\\data\\spells.json");
                 saveTraitsFile(fullPathDirectory + "\\data\\traits.json");
+                saveFactionsFile(fullPathDirectory + "\\data\\factions.json");
                 saveWeatherEffectsFile(fullPathDirectory + "\\data\\weatherEffects.json");
                 saveWeathersFile(fullPathDirectory + "\\data\\weathers.json");
                 saveEffectsFile(fullPathDirectory + "\\data\\effects.json");
@@ -3383,6 +3447,15 @@ public void loadSpriteDropdownList()
                 // save areas that are open
                 foreach (Area a in openAreasList)
                 {
+                    foreach (Prop p in a.Props)
+                    {
+                        int test = 1;
+                        p.spawnArea = a.Filename;
+                        p.spawnLocationX = p.LocationX;
+                        p.spawnLocationY = p.LocationY;
+                        p.spawnLocationZ = p.LocationZ;
+                    }
+
                     try
                     {
                         a.saveAreaFile(this._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas\\" + a.Filename + ".lvl");
@@ -4008,6 +4081,11 @@ public void loadSpriteDropdownList()
         private void traitEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TraitEditor tEdit = new TraitEditor(mod, this);
+            tEdit.ShowDialog();
+        }
+        private void factionEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FactionEditor tEdit = new FactionEditor(mod, this);
             tEdit.ShowDialog();
         }
         private void weatherEffectsEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4744,6 +4822,16 @@ public void loadSpriteDropdownList()
                 sw.Write(json.ToString());
             }
         }
+
+        public void saveFactionsFile(string filename)
+        {
+            string json = JsonConvert.SerializeObject(factionsList, Newtonsoft.Json.Formatting.Indented);
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.Write(json.ToString());
+            }
+        }
+
         public List<Trait> loadTraitsFile(string filename)
         {
             List<Trait> toReturn = null;
@@ -4756,6 +4844,20 @@ public void loadSpriteDropdownList()
             }
             return toReturn;
         }
+
+        public List<Faction> loadFactionsFile(string filename)
+        {
+            List<Faction> toReturn = null;
+
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(filename))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (List<Faction>)serializer.Deserialize(file, typeof(List<Faction>));
+            }
+            return toReturn;
+        }
+
         public Trait getTraitByTag(string tag)
         {
             foreach (Trait ts in traitsList)
@@ -4767,6 +4869,23 @@ public void loadSpriteDropdownList()
         public Trait getTraitByName(string name)
         {
             foreach (Trait ts in traitsList)
+            {
+                if (ts.name == name) return ts;
+            }
+            return null;
+        }
+
+        public Faction getFactionByTag(string tag)
+        {
+            foreach (Faction ts in factionsList)
+            {
+                if (ts.tag == tag) return ts;
+            }
+            return null;
+        }
+        public Faction getFactionByName(string name)
+        {
+            foreach (Faction ts in factionsList)
             {
                 if (ts.name == name) return ts;
             }

@@ -19,6 +19,61 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        //respawn:
+        private int _respawnTimeInHours = -1; //-1 meaning false, respawn time is in hours
+        private int _maxNumberOfRespawns = -1;//-1 meaning no limit to the number of respawns
+        private int _respawnTimeInMinutesPassedAlready = 0; //internal property, not for toolset XXX
+        private int _numberOfRespawnsThatHappenedAlready = 0;//internal property, not for toolset XXX
+        private string _nameAsMaster = "none";// blank meaning this prop is master of none
+        private string _thisPropsMaster = "none"; //blank means this prop has no master; refers to nameAsMaster of another prop
+        private bool _instantDeathOnMasterDeath = false; //if true,the propsis immediately placed on List<Prop> propsWaitingForRespawn of this module on its master's death
+        private string _keyOfGlobalVarToSetTo1OnDeathOrInactivity = "none";//set to zero again on respawn
+        public string spawnArea = ""; //Set automatically here in toolset
+        public int spawnLocationX = 0; //Set automatically here in toolset
+        public int spawnLocationY = 0; //Set automatically here in toolset
+        public int spawnLocationZ = 0; //Set automatically here in toolset
+
+        //faction:
+        private string _factionTag = "none";
+        private int _requiredFactionStrength = 0;
+        private int _maxFactionStrength = -1;
+        private int _worthForOwnFaction = 0;
+        private string _otherFactionAffectedOnDeath1 = "none";
+        private int _effectOnOtherFactionOnDeath1 = 0;
+        private string _otherFactionAffectedOnDeath2 = "none";
+        private int _effectOnOtherFactionOnDeath2 = 0;
+        private string _otherFactionAffectedOnDeath3 = "none";
+        private int _effectOnOtherFactionOnDeath3 = 0;
+        private string _otherFactionAffectedOnDeath4 = "none";
+        private int _effectOnOtherFactionOnDeath4 = 0;
+        private bool _pendingFactionStrengthEffectReversal = false; //XXX
+
+        //gcCheck
+        private string _firstGcScriptName = "none";
+        private string _firstGcParm1 = "none";
+        private string _firstGcParm2 = "none";
+        private string _firstGcParm3 = "none";
+        private string _firstGcParm4 = "none";
+        private bool _firstCheckForConditionFail = false;
+
+        private string _secondGcScriptName = "none";
+        private string _secondGcParm1 = "none";
+        private string _secondGcParm2 = "none";
+        private string _secondGcParm3 = "none";
+        private string _secondGcParm4 = "none";
+        private bool _secondCheckForConditionFail = false;
+
+        private string _thirdGcScriptName = "none";
+        private string _thirdGcParm1 = "none";
+        private string _thirdGcParm2 = "none";
+        private string _thirdGcParm3 = "none";
+        private string _thirdGcParm4 = "none";
+        private bool _thirdCheckForConditionFail = false;
+
+        private bool _allConditionsMustBeTrue = true;
+
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        //do three new sections for properties: faction(7), activity conditions(8), respawn(9)  
         private bool _isTrap = false;  
         private int _trapDCforDisableCheck = 10;
 
@@ -92,6 +147,278 @@ namespace IB2Toolset
 
         #region Properties
 
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("Enter anything else than one here to assign this prop to a faction.")]
+        public string factionTag
+        {
+            get { return _factionTag; }
+            set { _factionTag = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("When the prop's faction's strength (not rank) falls below this value, the prop is set to inactive and hidden.")]
+        public int requiredFactionStrength
+        {
+            get { return _requiredFactionStrength; }
+            set { _requiredFactionStrength = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("When the prop'S faction'S strength (not rank) rises above this value, the prop is set to inactive and hidden.")]
+        public int maxFactionStrength
+        {
+            get { return _maxFactionStrength; }
+            set { _maxFactionStrength = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("When this prop is removed (slain), because the party won the encounter on its encounter slot, this prop'S faction's strength is reduced by this value. The prop's faction has been weakend.")]
+        public int worthForOwnFaction
+        {
+            get { return _worthForOwnFaction; }
+            set { _worthForOwnFaction = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("Enter the tag of anonther faction whose strength shall be changed on this prop's death (encounter on its encounter slot has been won by the party).")]
+        public string otherFactionAffectedOnDeath1
+        {
+            get { return _otherFactionAffectedOnDeath1; }
+            set { _otherFactionAffectedOnDeath1 = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("The amount of change to apply to the other faction (can be positive or negative).")]
+        public int effectOnOtherFactionOnDeath1
+        {
+            get { return _effectOnOtherFactionOnDeath1; }
+            set { _effectOnOtherFactionOnDeath1 = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("Enter the tag of anonther faction whose strength shall be changed on this prop's death (encounter on its encounter slot has been won by the party).")]
+        public string otherFactionAffectedOnDeath2
+        {
+            get { return _otherFactionAffectedOnDeath2; }
+            set { _otherFactionAffectedOnDeath2 = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("The amount of change to apply to the other faction (can be positive or negative).")]
+        public int effectOnOtherFactionOnDeath2
+        {
+            get { return _effectOnOtherFactionOnDeath2; }
+            set { _effectOnOtherFactionOnDeath2 = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("Enter the tag of anonther faction whose strength shall be changed on this prop's death (encounter on its encounter slot has been won by the party).")]
+        public string otherFactionAffectedOnDeath3
+        
+        {
+            get { return _otherFactionAffectedOnDeath3; }
+            set { _otherFactionAffectedOnDeath3 = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("The amount of change to apply to the other faction (can be positive or negative).")]
+        public int effectOnOtherFactionOnDeath3
+        {
+            get { return _effectOnOtherFactionOnDeath3; }
+            set { _effectOnOtherFactionOnDeath3 = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("Enter the tag of anonther faction whose strength shall be changed on this prop's death (encounter on its encounter slot has been won by the party).")]
+        public string otherFactionAffectedOnDeath4
+        {
+            get { return _otherFactionAffectedOnDeath4; }
+            set { _otherFactionAffectedOnDeath4 = value; }
+        }
+
+        [CategoryAttribute("07 - Faction"), DescriptionAttribute("The amount of change to apply to the other faction (can be positive or negative).")]
+        public int effectOnOtherFactionOnDeath4
+        {
+            get { return _effectOnOtherFactionOnDeath4; }
+            set { _effectOnOtherFactionOnDeath4 = value; }
+        }
+       
+        [Browsable(true), TypeConverter(typeof(ScriptConverter))]
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Only gc type scripts are viable here. Depending on the setting for allConditionsMustBeTrue, all hooked gc scripts here must retrun true OR only one of them. When the (combined) gc check(s) fails, the prop is set to inactive and hidden. Will only affect props within their min max faction strength window (if such is set up for the prop).")]
+        public string firstGcScriptName
+        {
+            get { return _firstGcScriptName; }
+            set { _firstGcScriptName = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 1 to be used for this Script hook (leave as 'none' if not used)")]
+        public string firstGcParm1
+        {
+            get { return _firstGcParm1; }
+            set { _firstGcParm1 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 2 to be used for this Script hook (leave as 'none' if not used)")]
+        public string firstGcParm2
+        {
+            get { return _firstGcParm2; }
+            set { _firstGcParm2 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 3 to be used for this Script hook (leave as 'none' if not used)")]
+        public string firstGcParm3
+        {
+            get { return _firstGcParm3; }
+            set { _firstGcParm3 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 4 to be used for this Script hook (leave as 'none' if not used)")]
+        public string firstGcParm4
+        {
+            get { return _firstGcParm4; }
+            set { _firstGcParm4 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("When set to true, the gc script checks for a false outsomce of the check. Handy for NOT logic.")]
+        public bool firstCheckForConditionFail
+        {
+            get { return _firstCheckForConditionFail; }
+            set { _firstCheckForConditionFail = value; }
+        }
+
+        [Browsable(true), TypeConverter(typeof(ScriptConverter))]
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Only gc type scripts are viable here. Depending on the setting for allConditionsMustBeTrue, all hooked gc scripts here must retrun true OR only one of them. When the (combined) gc check(s) fails, the prop is set to inactive and hidden. Will only affect props within their min max faction strength window (if such is set up for the prop).")]
+        public string secondGcScriptName
+        {
+            get { return _secondGcScriptName; }
+            set { _secondGcScriptName = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 1 to be used for this Script hook (leave as 'none' if not used)")]
+        public string secondGcParm1
+        {
+            get { return _secondGcParm1; }
+            set { _secondGcParm1 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 2 to be used for this Script hook (leave as 'none' if not used)")]
+        public string secondGcParm2
+        {
+            get { return _secondGcParm2; }
+            set { _secondGcParm2 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 3 to be used for this Script hook (leave as 'none' if not used)")]
+        public string secondGcParm3
+        {
+            get { return _secondGcParm3; }
+            set { _secondGcParm3 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 4 to be used for this Script hook (leave as 'none' if not used)")]
+        public string secondGcParm4
+        {
+            get { return _secondGcParm4; }
+            set { _secondGcParm4 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("When set to true, the gc script checks for a false outsomce of the check. Handy for NOT logic.")]
+        public bool secondCheckForConditionFail
+        {
+            get { return _secondCheckForConditionFail; }
+            set { _secondCheckForConditionFail = value; }
+        }
+
+        [Browsable(true), TypeConverter(typeof(ScriptConverter))]
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Only gc type scripts are viable here. Depending on the setting for allConditionsMustBeTrue, all hooked gc scripts here must retrun true OR only one of them. When the (combined) gc check(s) fails, the prop is set to inactive and hidden. Will only affect props within their min max faction strength window (if such is set up for the prop).")]
+        public string thirdGcScriptName
+        {
+            get { return _thirdGcScriptName; }
+            set { _thirdGcScriptName = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 1 to be used for this Script hook (leave as 'none' if not used)")]
+        public string thirdGcParm1
+        {
+            get { return _thirdGcParm1; }
+            set { _thirdGcParm1 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 2 to be used for this Script hook (leave as 'none' if not used)")]
+        public string thirdGcParm2
+        {
+            get { return _thirdGcParm2; }
+            set { _thirdGcParm2 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 3 to be used for this Script hook (leave as 'none' if not used)")]
+        public string thirdGcParm3
+        {
+            get { return _thirdGcParm3; }
+            set { _thirdGcParm3 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("Parameter 4 to be used for this Script hook (leave as 'none' if not used)")]
+        public string thirdGcParm4
+        {
+            get { return _thirdGcParm4; }
+            set { _thirdGcParm4 = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("When set to true, the gc script checks for a false outsomce of the check. Handy for NOT logic.")]
+        public bool thirdCheckForConditionFail
+        {
+            get { return _thirdCheckForConditionFail; }
+            set { _thirdCheckForConditionFail = value; }
+        }
+
+        [CategoryAttribute("08 - Existence Conditions"), DescriptionAttribute("When set to false, it is enough when one of the conditions is fullfilled (OR logic). Default (true) is AND logic.")]
+        public bool allConditionsMustBeTrue
+        {
+            get { return _allConditionsMustBeTrue; }
+            set { _allConditionsMustBeTrue = value; }
+        }
+
+        /*
+        //respawn:
+        private int _respawnTimeInHours = -1; //-1 meaning false, respawn time is in hours
+        private int _maxNumberOfRespawns = -1;//-1 meaning no limit to the number of respawns
+        private int _respawnTimeInMinutesPassedAlready = 0; //internal property, not for toolset XXX
+        private int _numberOfRespawnsThatHappenedAlready = 0;//internal property, not for toolset XXX
+        private string _nameAsMaster = "none";// blank meaning this prop is master of none
+        private string _thisPropsMaster = "none"; //blank means this prop has no master; refers to nameAsMaster of another prop
+        private bool _instantDeathOnMasterDeath = false; //if true,the propsis immediately placed on List<Prop> propsWaitingForRespawn of this module on its master's death
+        private string _keyOfGlobalVarToSetTo1OnDeathOrInactivity = "none";//set to zero again on respawn
+        private string _spawnArea = ""; //Set automatically here in toolset
+        private int _spawnLocationX = 0; //Set automatically here in toolset
+        private int _spawnLocationY = 0; //Set automatically here in toolset
+        private int _spawnLocationZ = 0; //Set automatically here in toolset
+        */
+        [CategoryAttribute("09 - Respawn System"), DescriptionAttribute("Number of hours before the checking for respawn starts. Set to -1 for a prop that is not meant to respawn (default).")]
+        public int respawnTimeInHours
+        {
+            get { return _respawnTimeInHours; }
+            set { _respawnTimeInHours = value; }
+        }
+        [CategoryAttribute("09 - Respawn System"), DescriptionAttribute("Max. number of respawns before respawning is not possible anymore. Set to -1 for unlimited respawns.")]
+        public int maxNumberOfRespawns
+        {
+            get { return _maxNumberOfRespawns; }
+            set { _maxNumberOfRespawns = value; }
+        }
+        [CategoryAttribute("09 - Respawn System"), DescriptionAttribute("This prop is (also) a master -enter teh anem with which its followers identify it here. Note: Several prosp can have teh same nameAsMAster, which is important when you upgrade (exchange) a master with a superior version (eg within the faction min max window system).")]
+        public string nameAsMaster
+        {
+            get { return _nameAsMaster; }
+            set { _nameAsMaster = value; }
+        }
+        [CategoryAttribute("09 - Respawn System"), DescriptionAttribute("The name (enter nameAsMaster here) of this prop's master. Note: also masters can have masters, creating hierarchies.")]
+        public string thisPropsMaster
+        {
+            get { return _thisPropsMaster; }
+            set { _thisPropsMaster = value; }
+        }
+        [CategoryAttribute("09 - Respawn System"), DescriptionAttribute("If true, this prop is slain once its master dies. If false, a master's death will only prevent a respawn, but does not kill immediately.")]
+        public bool instantDeathOnMasterDeath
+        {
+            get { return _instantDeathOnMasterDeath; }
+            set { _instantDeathOnMasterDeath = value; }
+        }
+        [CategoryAttribute("09 - Respawn System"), DescriptionAttribute("Key of the global variable to set to 1 once this prop is lsain or set inactive. If such gloabl does not exist, it is created.")]
+        public string keyOfGlobalVarToSetTo1OnDeathOrInactivity
+        {
+            get { return _keyOfGlobalVarToSetTo1OnDeathOrInactivity; }
+            set { _keyOfGlobalVarToSetTo1OnDeathOrInactivity = value; }
+        }
 
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]  
         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("IBScript name to be run for this Prop when a Player or Creature stands on this Prop")]  

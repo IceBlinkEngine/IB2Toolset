@@ -19,6 +19,7 @@ namespace IB2Toolset
         private List<Race> raceListImport = new List<Race>();
         private List<Spell> spellListImport = new List<Spell>();
         private List<Trait> traitListImport = new List<Trait>();
+        private List<Faction> factionListImport = new List<Faction>();
         private List<Effect> effectListImport = new List<Effect>();
         private List<Creature> creatureListImport = new List<Creature>();
         private List<Item> itemListImport = new List<Item>();
@@ -99,6 +100,15 @@ namespace IB2Toolset
                         refreshMainListBox();
                     }
                 }
+                else if (cmbDataType.SelectedIndex == 7) //Faction
+                {
+                    if (!factionExists(factionListImport[lbxImport.SelectedIndex]))
+                    {
+                        prntForm.factionsList.Add(factionListImport[lbxImport.SelectedIndex].DeepCopy());
+                        refreshImportListBox();
+                        refreshMainListBox();
+                    }
+                }
                 /*else if (cmbDataType.SelectedIndex == 7) //Prop
                 {
                     if (!propExists(propListImport.propsList[lbxImport.SelectedIndex]))
@@ -107,7 +117,7 @@ namespace IB2Toolset
                         refreshImportListBox();
                         refreshMainListBox();
                     }
-                }*/                
+                }*/
             }
         }
         private void btnFolderImport_Click(object sender, EventArgs e)
@@ -157,6 +167,14 @@ namespace IB2Toolset
             catch (Exception ex)
             {
                 MessageBox.Show("failed to open import traits file: " + ex.ToString());
+            }
+            try
+            {
+                factionListImport = prntForm.loadFactionsFile(folderpath + "\\factions.json");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed to open import factions file: " + ex.ToString());
             }
             try
             {
@@ -238,10 +256,14 @@ namespace IB2Toolset
                 {
                     pgMain.SelectedObject = prntForm.itemsList[lbxMain.SelectedIndex];
                 }
+                else if (cmbDataType.SelectedIndex == 7) //Faction
+                {
+                    pgMain.SelectedObject = prntForm.factionsList[lbxMain.SelectedIndex];
+                }
                 /*else if (cmbDataType.SelectedIndex == 7) //Prop
                 {
                     pgMain.SelectedObject = prntForm.propsList[lbxMain.SelectedIndex];
-                }*/   
+                }*/
             }
         }
         private void lbxImport_SelectedIndexChanged(object sender, EventArgs e)
@@ -276,10 +298,14 @@ namespace IB2Toolset
                 {
                     pgImport.SelectedObject = itemListImport[lbxImport.SelectedIndex];
                 }
+                else if (cmbDataType.SelectedIndex == 7) //faction
+                {
+                    pgImport.SelectedObject = factionListImport[lbxImport.SelectedIndex];
+                }
                 /*else if (cmbDataType.SelectedIndex == 7) //Prop
                 {
                     pgImport.SelectedObject = propListImport.propsList[lbxImport.SelectedIndex];
-                }*/ 
+                }*/
             }
         }
         #endregion
@@ -343,6 +369,14 @@ namespace IB2Toolset
                 lbxMain.DisplayMember = "name";
                 lbxMain.EndUpdate();
             }
+            else if (cmbDataType.SelectedIndex == 7) //Faction
+            {
+                lbxMain.BeginUpdate();
+                lbxMain.DataSource = null;
+                lbxMain.DataSource = prntForm.factionsList;
+                lbxMain.DisplayMember = "name";
+                lbxMain.EndUpdate();
+            }
             /*else if (cmbDataType.SelectedIndex == 7) //Prop
             {
                 lbxMain.BeginUpdate();
@@ -350,7 +384,7 @@ namespace IB2Toolset
                 lbxMain.DataSource = prntForm.propsList.propsList;
                 lbxMain.DisplayMember = "PropNameWithNotes";
                 lbxMain.EndUpdate();
-            }*/   
+            }*/
         }
         private void refreshImportListBox()
         {
@@ -410,6 +444,14 @@ namespace IB2Toolset
                 lbxImport.DisplayMember = "name";
                 lbxImport.EndUpdate();
             }
+            else if (cmbDataType.SelectedIndex == 7) //Faction
+            {
+                lbxImport.BeginUpdate();
+                lbxImport.DataSource = null;
+                lbxImport.DataSource = factionListImport;
+                lbxImport.DisplayMember = "name";
+                lbxImport.EndUpdate();
+            }
             /*else if (cmbDataType.SelectedIndex == 8) //Prop
             {
                 lbxImport.BeginUpdate();
@@ -417,7 +459,7 @@ namespace IB2Toolset
                 lbxImport.DataSource = propListImport.propsList;
                 lbxImport.DisplayMember = "PropNameWithNotes";
                 lbxImport.EndUpdate();
-            }*/   
+            }*/
         }        
         private bool classExists(PlayerClass itImp)
         {
@@ -455,6 +497,17 @@ namespace IB2Toolset
         private bool traitExists(Trait itImp)
         {
             foreach (Trait it in prntForm.traitsList)
+            {
+                if (it.tag == itImp.tag)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private bool factionExists(Faction itImp)
+        {
+            foreach (Faction it in prntForm.factionsList)
             {
                 if (it.tag == itImp.tag)
                 {
