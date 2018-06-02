@@ -15,6 +15,9 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private int _nightFightModifier = -4;
+        private int _darkFightModifier = -8;
+
         private bool _noRimLights = false;
         private bool _blendOutTooHighAndTooDeepTiles = false;
 
@@ -221,6 +224,21 @@ namespace IB2Toolset
             get { return _hideZeroPowerTraits; }
             set { _hideZeroPowerTraits = value; }
         }
+
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("The debuff to AC, to hit and saves for night fighting without light source. Set to 0 to deactivate.")]
+        public int nightFightModifier
+        {
+            get { return _nightFightModifier; }
+            set { _nightFightModifier = value; }
+        }
+
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("The debuff to AC, to hit and saves for fighting in utter blakckness (dungeon) without light source. Set to 0 to deactivate.")]
+        public int darkFightModifier
+        {
+            get { return _darkFightModifier; }
+            set { _darkFightModifier = value; }
+        }
+
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of the Module displayed to the player")]
         public string moduleLabelName

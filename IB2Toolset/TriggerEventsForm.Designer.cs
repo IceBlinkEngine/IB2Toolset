@@ -38,6 +38,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.numTriggerCallsAllowed = new System.Windows.Forms.NumericUpDown();
             this.chkTriggeredByCreatures = new System.Windows.Forms.CheckBox();
+            this.chkEncounterTriggerOnEveryStep = new System.Windows.Forms.CheckBox();
             this.chkTriggeredByPc = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbE1 = new System.Windows.Forms.GroupBox();
@@ -196,6 +197,7 @@
             this.gbCombatOnly.Controls.Add(this.label26);
             this.gbCombatOnly.Controls.Add(this.numTriggerCallsAllowed);
             this.gbCombatOnly.Controls.Add(this.chkTriggeredByCreatures);
+            this.gbCombatOnly.Controls.Add(this.chkEncounterTriggerOnEveryStep);
             this.gbCombatOnly.Controls.Add(this.chkTriggeredByPc);
             this.gbCombatOnly.Location = new System.Drawing.Point(6, 65);
             this.gbCombatOnly.Name = "gbCombatOnly";
@@ -249,18 +251,29 @@
             this.chkTriggeredByCreatures.Name = "chkTriggeredByCreatures";
             this.chkTriggeredByCreatures.Size = new System.Drawing.Size(172, 17);
             this.chkTriggeredByCreatures.TabIndex = 7;
-            this.chkTriggeredByCreatures.Text = "Can Be Triggered By Creatures";
+            this.chkTriggeredByCreatures.Text = "By Creatures";
             this.chkTriggeredByCreatures.UseVisualStyleBackColor = true;
             this.chkTriggeredByCreatures.CheckedChanged += new System.EventHandler(this.chkTriggeredByCreatures_CheckedChanged);
-                        //   
-                        // chkTriggeredByPc  
-                        //   
+            //
+            //chkEncounterTriggerOnEveryStep
+            //   
+            this.chkEncounterTriggerOnEveryStep.AutoSize = true;
+            this.chkEncounterTriggerOnEveryStep.Location = new System.Drawing.Point(70, 13);
+            this.chkEncounterTriggerOnEveryStep.Name = "chkEncounterTriggerOnEveryStep";
+            this.chkEncounterTriggerOnEveryStep.Size = new System.Drawing.Size(172, 17);
+            this.chkEncounterTriggerOnEveryStep.TabIndex = 7;
+            this.chkEncounterTriggerOnEveryStep.Text = "Every step";
+            this.chkEncounterTriggerOnEveryStep.UseVisualStyleBackColor = true;
+            this.chkEncounterTriggerOnEveryStep.CheckedChanged += new System.EventHandler(this.chkEncounterTriggerOnEveryStep_CheckedChanged);
+            //    
+            // chkTriggeredByPc  
+            //   
             this.chkTriggeredByPc.AutoSize = true;
             this.chkTriggeredByPc.Location = new System.Drawing.Point(6, 13);
             this.chkTriggeredByPc.Name = "chkTriggeredByPc";
             this.chkTriggeredByPc.Size = new System.Drawing.Size(146, 17);
             this.chkTriggeredByPc.TabIndex = 6;
-            this.chkTriggeredByPc.Text = "Can Be Triggered By PCs";
+            this.chkTriggeredByPc.Text = "By PCs";
             this.chkTriggeredByPc.UseVisualStyleBackColor = true;
             this.chkTriggeredByPc.CheckedChanged += new System.EventHandler(this.chkTriggeredByPc_CheckedChanged);
                        // 
@@ -1208,7 +1221,8 @@
         private System.Windows.Forms.CheckBox chkTriggeredByPc;  
         private System.Windows.Forms.Label label26;  
         private System.Windows.Forms.NumericUpDown numTriggerCallsAllowed;  
-        private System.Windows.Forms.CheckBox chkTriggeredByCreatures;  
+        private System.Windows.Forms.CheckBox chkTriggeredByCreatures;
+        private System.Windows.Forms.CheckBox chkEncounterTriggerOnEveryStep;
         private System.Windows.Forms.Label label27;
 
     }

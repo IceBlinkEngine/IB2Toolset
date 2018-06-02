@@ -103,6 +103,7 @@ namespace IB2Toolset
         public List<LocalImmunityString> traitWorksOnlyWhen = new List<LocalImmunityString>();
         public List<LocalImmunityString> traitWorksNeverWhen = new List<LocalImmunityString>();
         private bool _isUsedForCombatSquareEffect = false;
+        private bool _triggeredEachStepToo = false;
         private int _castTimeInTurns = 0;
         private bool _canBeInterrupted = true;
         private bool _triggersAoO = true;
@@ -151,7 +152,20 @@ namespace IB2Toolset
             {  
                 _isUsedForCombatSquareEffect = value;  
             }  
-        }  
+        }
+
+        [CategoryAttribute("03 - Target"), DescriptionAttribute("Each step on a square with an effect applied by this spell in combat does trigger the effect (eg for flame walls). Only works when isUsedForCombatSquareEffect is set to true.")]
+        public bool triggeredEachStepToo
+        {
+            get
+            {
+                return _triggeredEachStepToo;
+            }
+            set
+            {
+                _triggeredEachStepToo = value;
+            }
+        }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Name of the Spell")]
         public string name
@@ -342,7 +356,7 @@ namespace IB2Toolset
                 spellTargetType = value;
             }
         }*/
-        [CategoryAttribute("03 - Target"), DescriptionAttribute("The type of target for this spell")]
+        [CategoryAttribute("03 - Target"), DescriptionAttribute("The type of target for this spell: Self, Friend, Enemy or PointLocation.")]
         public string spellTargetType
         {
             get

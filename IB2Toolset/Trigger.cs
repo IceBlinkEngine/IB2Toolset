@@ -78,6 +78,8 @@ namespace IB2Toolset
         public string tagOfLink = "none";
         public int transitionToMasterRotationCounter = 1;
 
+        public bool encounterTriggerOnEveryStep = true;
+
         #endregion
 
         #region Properties

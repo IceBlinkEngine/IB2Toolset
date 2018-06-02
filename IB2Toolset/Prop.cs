@@ -140,6 +140,7 @@ namespace IB2Toolset
         private int _numberOfScriptCallsRemaining = 999;  
         private bool _canBeTriggeredByPc = true;  
         private bool _canBeTriggeredByCreature = true;
+        public bool _encounterPropTriggerOnEveryStep = true;
 
         private bool _randomAnimationDirectionEachCall = false;
 
@@ -485,8 +486,15 @@ namespace IB2Toolset
          {  
              get { return _canBeTriggeredByCreature; }  
              set { _canBeTriggeredByCreature = value; }  
-         }  
-         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("The number of times that the OnEnterSquare script or IBScript can be triggered. Each time the script is triggered, this number will be decremented by one. Once this number reaches zero, the Prop will be removed from the encounter map.")]  
+         }
+
+        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("if true, this prop can be triggered multiple times during the turn of a creature or pc, ie on every step; if false, a creature/pc can trigger it (and all of its squares) only once in a turn.")]
+        public bool encounterPropTriggerOnEveryStep
+        {
+            get { return _encounterPropTriggerOnEveryStep; }
+            set { _encounterPropTriggerOnEveryStep = value; }
+        }
+        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("The number of times that the OnEnterSquare script or IBScript can be triggered. Each time the script is triggered, this number will be decremented by one. Once this number reaches zero, the Prop will be removed from the encounter map.")]  
          public int numberOfScriptCallsRemaining
          {  
              get { return _numberOfScriptCallsRemaining; }  

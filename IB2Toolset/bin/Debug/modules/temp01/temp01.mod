@@ -71,6 +71,8 @@
   "noRimLights": false,
   "blendOutTooHighAndTooDeepTiles": false,
   "hideZeroPowerTraits": false,
+  "nightFightModifier": -4,
+  "darkFightModifier": -8,
   "moduleLabelName": "NewModule",
   "moduleVersion": 1,
   "defaultPlayerFilename": "drin.json",

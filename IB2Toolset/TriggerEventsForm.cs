@@ -75,8 +75,15 @@ namespace IB2Toolset
              {  
                  prntForm.currentSelectedTrigger.canBeTriggeredByCreature = chkTriggeredByCreatures.Checked;  
              }  
-         }  
-         private void numTriggerCallsAllowed_ValueChanged(object sender, EventArgs e)
+         }
+        private void chkEncounterTriggerOnEveryStep_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.encounterTriggerOnEveryStep = chkEncounterTriggerOnEveryStep.Checked;
+            }
+        }
+        private void numTriggerCallsAllowed_ValueChanged(object sender, EventArgs e)
          {  
              if (prntForm.currentSelectedTrigger != null)  
              {  
@@ -490,6 +497,7 @@ namespace IB2Toolset
                 chkTriggeredByPc.Checked = trg.canBeTriggeredByPc;
                 chkTriggeredByCreatures.Checked = trg.canBeTriggeredByCreature;
                 numTriggerCallsAllowed.Value = trg.numberOfScriptCallsRemaining;
+                chkEncounterTriggerOnEveryStep.Checked = trg.encounterTriggerOnEveryStep;
 
                 chkE1enabled.Checked = trg.EnabledEvent1;
                 chkE1once.Checked = trg.DoOnceOnlyEvent1;

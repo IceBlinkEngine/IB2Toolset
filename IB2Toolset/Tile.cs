@@ -119,7 +119,11 @@ namespace IB2Toolset
         public bool isEWBridge = false;
         public bool isNSBridge = false;
         public bool isShadowCaster = true;
+        public bool drawEntranceLights = true;
+        public bool alwaysNormalShadow = false;
         public bool drawDownStairShadows = true;
+
+        public bool isSecretPassage = false;
 
         public bool isInShortShadeN = false;
         public bool isInShortShadeE = false;
@@ -239,6 +243,27 @@ namespace IB2Toolset
         {
             get { return isShadowCaster; }
             set { isShadowCaster = value; }
+        }
+
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("When set to true, light cones are seen on both sides of a bridge or of an entrance to a linked map.")]
+        public bool DrawEntranceLights
+        {
+            get { return drawEntranceLights; }
+            set { drawEntranceLights = value; }
+        }
+
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("When set to true, the engine will always use straight normal shadows instead of curved bridge shadows.")]
+        public bool AlwaysNormalShadow
+        {
+            get { return alwaysNormalShadow; }
+            set { alwaysNormalShadow = value; }
+        }
+
+        [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("When set to true, the party can pass through this tile despite any height difference between the tile it came from and this tile.")]
+        public bool IsSecretPassage
+        {
+            get { return isSecretPassage; }
+            set { isSecretPassage = value; }
         }
 
         [CategoryAttribute("01 - Height Level System"), DescriptionAttribute("When set to true, the tile has an automatic downstairs shadow on top of it in correct direction. Turn off if you want to use custom stair prop or tile graphics for the stairs/ramp.")]

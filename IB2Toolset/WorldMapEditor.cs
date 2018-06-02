@@ -4809,15 +4809,21 @@ namespace IB2Toolset
 
                     if (tile.isEWBridge)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstNorth, 0, false, 0, 0,1,1,0.3f);
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstSouth, 180, false, 0, 0,1,1,0.3f);
+                        if (tile.drawEntranceLights)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstNorth, 0, false, 0, 0, 1, 1, 0.3f);
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstSouth, 180, false, 0, 0, 1, 1, 0.3f);
+                        }
                         //DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0, 1, 1, 0.6f);
                     }
 
                     if (tile.isNSBridge)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstWest, 270, false, 0, 0,1,1,0.3f);
-                        DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstEast, 90, false, 0, 0,1,1,0.3f);
+                        if (tile.drawEntranceLights)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstWest, 270, false, 0, 0, 1, 1, 0.3f);
+                            DrawD2DBitmap(GetFromBitmapList("entranceLightNorth2"), src, dstEast, 90, false, 0, 0, 1, 1, 0.3f);
+                        }
                     }
                 }
             }
@@ -5454,7 +5460,7 @@ namespace IB2Toolset
                         if (y - 1 >= 0)
                         {
                             //changela
-                            if (!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge && area.Tiles[(y-1) * area.MapSizeX + x].transitionToMasterDirection != "S")
+                            if ((!area.Tiles[(y - 1) * area.MapSizeX + x].isEWBridge || area.Tiles[(y - 1) * area.MapSizeX + x].alwaysNormalShadow) && area.Tiles[(y-1) * area.MapSizeX + x].transitionToMasterDirection != "S")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);
                             }
@@ -5477,7 +5483,7 @@ namespace IB2Toolset
                     {
                         if (x + 1 <= area.MapSizeX - 1)
                         {
-                            if (!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x+1].transitionToMasterDirection != "W")
+                            if ((!area.Tiles[(y) * area.MapSizeX + (x + 1)].isNSBridge || area.Tiles[(y) * area.MapSizeX + (x + 1)].alwaysNormalShadow) && area.Tiles[(y) * area.MapSizeX + x+1].transitionToMasterDirection != "W")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
                             }
@@ -5501,7 +5507,7 @@ namespace IB2Toolset
                     {
                         if (y + 1 <= area.MapSizeY - 1)
                         {
-                            if (!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge && area.Tiles[(y + 1) * area.MapSizeX + x].transitionToMasterDirection != "N")
+                            if ((!area.Tiles[(y + 1) * area.MapSizeX + (x)].isEWBridge || area.Tiles[(y + 1) * area.MapSizeX + x].alwaysNormalShadow) && area.Tiles[(y + 1) * area.MapSizeX + x].transitionToMasterDirection != "N")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
                             }
@@ -5524,7 +5530,7 @@ namespace IB2Toolset
                     {
                         if (x - 1 >= 0)
                         {
-                            if (!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge && area.Tiles[(y) * area.MapSizeX + x-1].transitionToMasterDirection != "E")
+                            if ((!area.Tiles[(y) * area.MapSizeX + (x - 1)].isNSBridge || area.Tiles[(y) * area.MapSizeX + (x - 1)].alwaysNormalShadow) && area.Tiles[(y) * area.MapSizeX + x-1].transitionToMasterDirection != "E")
                             {
                                 DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
                             }

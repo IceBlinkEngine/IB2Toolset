@@ -1176,7 +1176,7 @@ namespace IB2Toolset
                     }
                     #endregion
                     #region Creature Selected
-                    else if (prntForm.CreatureSelected)
+                    else if (prntForm.CreatureSelected && prntForm.frmBlueprints.tvCreatures.SelectedNode != null)
                     {
                         CreatureRefs crtRef = new CreatureRefs();
                         string _nodeTag = prntForm.frmBlueprints.tvCreatures.SelectedNode.Name;
