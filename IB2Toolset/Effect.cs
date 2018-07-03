@@ -13,8 +13,11 @@ using Newtonsoft.Json;
 namespace IB2Toolset
 {
     public class Effect
-    {        
-        #region Fields        
+    {
+        #region Fields
+
+        private string _squareIndicatorFilename = "fx_webbed";
+        private int _durationOnSquareInUnits = 0;
         private string _name = "newEffect";
         private string _tag = "newEffectTag";
         private string _tagOfSender = "senderTag";
@@ -138,6 +141,31 @@ namespace IB2Toolset
             }
         }
 
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Name of the effect graphic shown on the square (without .png)")]
+        public string squareIndicatorFilename
+        {
+            get
+            {
+                return _squareIndicatorFilename;
+            }
+            set
+            {
+                _squareIndicatorFilename = value;
+            }
+        }
+
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Duration in seconds (usally a combat round has 6 seconds) indicating how long the effect lingers on a square. Current round is always added, so a duration 0 effect will stay till end of current round.")]
+        public int durationOnSquareInUnits
+        {
+            get
+            {
+                return _durationOnSquareInUnits;
+            }
+            set
+            {
+                _durationOnSquareInUnits = value;
+            }
+        }
 
         [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("can be a positive or negative change in percent represented as integer. (example: to increase by 10%, enter 10. to decrease by 20%, enter -20)")]  
          public int modifyShopBuyBackPrice  
@@ -285,13 +313,13 @@ namespace IB2Toolset
             set { _babModifier = value; }
         }
 
-        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from BAB for ranged attacks only")]  
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("adds or subtracts from BAB for ranged attacks only")]  
         public int babModifierForRangedAttack  
         {  
              get { return _babModifierForRangedAttack; }  
              set { _babModifierForRangedAttack = value; }  
         }
-        [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from BAB for melee attacks only")]
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("adds or subtracts from BAB for melee attacks only")]
         public int babModifierForMeleeAttack
         {
             get { return _babModifierForMeleeAttack; }
@@ -559,13 +587,13 @@ namespace IB2Toolset
             get { return _healActionsUpToNLevelsTotal; }
             set { _healActionsUpToNLevelsTotal = value; }
         }
-        [CategoryAttribute("07 - Outdated properties"), DescriptionAttribute("set to true if this Effect uses a Buff type Effect")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("set to true if this Effect uses a Buff (excluding heal) type Effect. Note: with duration 0 a buff lasts til start of next turn of the recipient")]
         public bool doBuff
         {
             get { return _doBuff; }
             set { _doBuff = value; }
         }
-        [CategoryAttribute("07 - Outdated properties"), DescriptionAttribute("set to true if this Effect uses a DeBuff type Effect")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("set to true if this Effect uses a DeBuff (excluding damage) type Effect, including Held or Immobile type; Note: with duration 0 a buff lasts til start of next turn of the recipient")]
         public bool doDeBuff
         {
             get { return _doDeBuff; }
