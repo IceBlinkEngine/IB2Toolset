@@ -19,6 +19,8 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        private bool _alwaysDrawNormalSize = false;
+
         //respawn:
         private int _respawnTimeInHours = -1; //-1 meaning false, respawn time is in hours
         private int _maxNumberOfRespawns = -1;//-1 meaning no limit to the number of respawns
@@ -617,6 +619,14 @@ namespace IB2Toolset
             get { return _ImageFileName; }
             set { _ImageFileName = value; }
         }
+       
+        [CategoryAttribute("02 - Sprite"), DescriptionAttribute("When true, this sprite is drawn full size even when the area is set up to use tiny or mini props (zoomed out).")]
+        public bool alwaysDrawNormalSize
+        {
+            get { return _alwaysDrawNormalSize; }
+            set { _alwaysDrawNormalSize = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("if true, the prop has collision; if false, is walkable.")]
         public bool HasCollision
         {

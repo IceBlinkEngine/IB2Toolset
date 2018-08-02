@@ -15,6 +15,15 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private string _zoneMotherAreaName = "none";
+        private int _zoneMotherAreaX = 0;
+        private int _zoneMotherAreaY = 0;
+
+        private string _zoneName = "none";
+        private int _zoneX = 0;
+        private int _zoneY = 0;
+        private int _zoneFloorLevel = 0;
+
         public int linkedAreasCounter = 0;
         public string masterOfThisArea = "none";
         public List<string> linkedAreas = new List<string>();
@@ -158,6 +167,56 @@ namespace IB2Toolset
             set { _areaWeatherScript = value; }
         }
         */
+
+        [CategoryAttribute("03 - Scale and neighbouring areas"), DescriptionAttribute("The filename (NOT ingame name) of the more zoomed out area where the entrance to the zone of this area is located in; also called mother area")]
+        public string zoneMotherAreaName
+        {
+            get { return _zoneMotherAreaName; }
+            set { _zoneMotherAreaName = value; }
+        }
+
+        [CategoryAttribute("03 - Scale and neighbouring areas"), DescriptionAttribute("The x coordinate where the entrance to this area's zone can be found on the more zoomed out mother area.")]
+        public int zoneMotherAreaX
+        {
+            get { return _zoneMotherAreaX; }
+            set { _zoneMotherAreaX = value; }
+        }
+
+
+        [CategoryAttribute("03 - Scale and neighbouring areas"), DescriptionAttribute("The y coordinate where the entrance to this area's zone can be found on the more zoomed out mother area.")]
+        public int zoneMotherAreaY
+        {
+            get { return _zoneMotherAreaY; }
+            set { _zoneMotherAreaY = value; }
+        }
+
+        [CategoryAttribute("03 - Scale and neighbouring areas"), DescriptionAttribute("The ingame name of this area's zone: a zone typically consists of all horizontally or vertically connected areas of the same zoome level, you can freely define this as you like though")]
+        public string zoneName
+        {
+            get { return _zoneName; }
+            set { _zoneName = value; }
+        }
+
+        [CategoryAttribute("03 - Scale and neighbouring areas"), DescriptionAttribute("The x coordinate that this area has within its zone (of areas stitched together).")]
+        public int zoneX
+        {
+            get { return _zoneX; }
+             set { _zoneX = value; }
+        }
+
+        [CategoryAttribute("03 - Scale and neighbouring areas"), DescriptionAttribute("The floor level - as positive or negative number, with 0 being ground floor - that this area has within its zone (of areas stitched together).")]
+        public int zoneFloorLevel
+        {
+            get { return _zoneFloorLevel; }
+            set { _zoneFloorLevel = value; }
+        }
+
+        [CategoryAttribute("03 - Scale and neighbouring areas"), DescriptionAttribute("The y coordinate that this area has within its zone (of areas stitched together).")]
+        public int zoneY
+        {
+            get { return _zoneY; }
+            set { _zoneY = value; }
+        }
 
         [CategoryAttribute("03 - Scale and neighbouring areas")]
         public string easternNeighbourArea

@@ -15,8 +15,12 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private bool _useLightSystem = false;
+        private bool _useComplexCoordinateSystem = false;
+        
         private int _nightFightModifier = -4;
         private int _darkFightModifier = -8;
+        private bool _useAlternativeSpeechBubbleSystem = true;
 
         private bool _noRimLights = false;
         private bool _blendOutTooHighAndTooDeepTiles = false;
@@ -195,6 +199,13 @@ namespace IB2Toolset
             set { _moduleName = value; }
         }
 
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Set to false to use the old way of showing speech bubbles (relative only to curently selected speaker). When true, different answer options on PCs are indicated by differnt bubble positions, indedendent from currently selected speaker.")]
+        public bool useAlternativeSpeechBubbleSystem
+        {
+            get { return _useAlternativeSpeechBubbleSystem; }
+            set { _useAlternativeSpeechBubbleSystem = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, the single image map for encounters is automatically scaled to the size of the encounter map; assumes a square shaped map and square shaped image")]
         public bool encounterSingleImageAutoScale
         {
@@ -223,6 +234,13 @@ namespace IB2Toolset
         {
             get { return _hideZeroPowerTraits; }
             set { _hideZeroPowerTraits = value; }
+        }
+
+        [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("When set to off, the troch icon in top left corner is not shown (even when using the complex coordinates system and its interface changes)")]
+        public bool useLightSystem
+        {
+            get { return _useLightSystem; }
+            set { _useLightSystem = value; }
         }
 
         [CategoryAttribute("07 - Survival: Light and Rations"), DescriptionAttribute("The debuff to AC, to hit and saves for night fighting without light source. Set to 0 to deactivate.")]
@@ -510,6 +528,13 @@ namespace IB2Toolset
         {
             get { return _maxNumberOfLightSourcesAllowed; }
             set { _maxNumberOfLightSourcesAllowed = value; }
+        }
+
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("when true the whoel hierachy of zones and mother areas is diplayed for an area in the clock info text. Also, remaining rations, torches and the current zoom level (with steps per minute) are shown as icons in the top left corner of the ui.")]
+        public bool useComplexCoordinateSystem
+        {
+            get { return _useComplexCoordinateSystem; }
+            set { _useComplexCoordinateSystem = value; }
         }
 
         [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This flag activates using the scifi Orbitron font (light).")]
