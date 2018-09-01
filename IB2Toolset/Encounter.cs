@@ -33,6 +33,9 @@ namespace IB2Toolset
         private bool assassinationVictory = false;
         private string assassinationTargetTag = "none";
 
+        private bool standGroundVictory = false;
+        private int standGroundTimer = 10;
+
         private bool timeLimitVictory = false;
         private int timeLimitVictoryRoundGoal = 0;
 
@@ -178,6 +181,20 @@ namespace IB2Toolset
         {
             get { return assassinationTargetTag; }
             set { assassinationTargetTag = value; }
+        }
+
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("When true, this battle is instantly once the party has survived the defined number of rounds")]
+        public bool StandGroundVictory
+        {
+            get { return standGroundVictory; }
+            set { standGroundVictory = value; }
+        }
+
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("Number of rounds to survive for fullfilling the stand ground victory condition")]
+        public int StandGroundTimer
+        {
+            get { return standGroundTimer; }
+            set { standGroundTimer = value; }
         }
 
         [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("if True, the encounter will use the single image from the MapImage filename instead of using the tiles.")]

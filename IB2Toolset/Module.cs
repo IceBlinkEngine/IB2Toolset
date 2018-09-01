@@ -58,6 +58,7 @@ namespace IB2Toolset
         public float diagonalMoveCost = 1.5f;
         public bool useLuck = false;
         public bool use3d6 = false;
+        private bool _allowIntraPartyConvos = false;
         //public int linkedAreasCounter = 0;
         public bool ArmorClassAscending = true;
         public List<Item> moduleItemsList = new List<Item>();
@@ -636,6 +637,15 @@ namespace IB2Toolset
                 }
             }
         }
+
+        [CategoryAttribute("03 - Player and Party"), DescriptionAttribute(" Set to true to enable intra party convos. These are started by clicking the chat button in party screen. Characters with bubble icons on their portraits have been flagged for new chat entires available via script. You can set them up via a convo named chat in your module's dialogue folder.")]
+        public bool allowIntraPartyConvos
+        {
+            get { return _allowIntraPartyConvos; }
+            set { _allowIntraPartyConvos = value;}
+        }
+
+        //public bool allowIntraPartyConvos = false;
 
         [CategoryAttribute("03 - Player and Party"), DescriptionAttribute("The total number of player made characters required in the party (default is 1, max PCs in a party is 6)")]
         public int numberOfPlayerMadePcsRequired

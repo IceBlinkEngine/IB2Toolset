@@ -129,6 +129,7 @@
   "goldLabelSingular": "Gold",
   "goldLabelPlural": "Gold",
   "numberOfPlayerMadePcsAllowed": 1,
+  "allowIntraPartyConvos": false,
   "numberOfPlayerMadePcsRequired": 1,
   "MaxPartySize": 6,
   "moduleDescription": "This is a starting NewModule for your use.",
