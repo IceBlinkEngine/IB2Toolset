@@ -36,8 +36,28 @@ namespace IB2Toolset
         private bool standGroundVictory = false;
         private int standGroundTimer = 10;
 
-        private bool timeLimitVictory = false;
-        private int timeLimitVictoryRoundGoal = 0;
+        private bool conquerVictory = false;
+        private bool conquerTargetsCumulative = true;
+        private int conquerTarget1X = -1;
+        private int conquerTarget1Y = -1;
+        private int conquerTarget2X = -1;
+        private int conquerTarget2Y = -1;
+        private int conquerTarget3X = -1;
+        private  int conquerTarget3Y = -1;
+
+        private bool noSpellCastModifier = false;
+        private bool noTraitUseModifier = false;
+        private bool noItemUseModifier = false;
+        private bool onlyOneMoveModifier = false;
+
+        //private bool timeLimitVictory = false;
+        //private int timeLimitVictoryRoundGoal = 0;
+
+        private bool timeLimitDefeat = false;
+        private int timeLimitTimer = 10;
+
+        private bool protectionDefeat = false;
+        private string protectionTargetName = "none";
 
         private string encName = "newEncounter";
         public int singleImageMapTileSize = 50;
@@ -159,7 +179,7 @@ namespace IB2Toolset
             set { mapImage = value; }
         }
         
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("When using a premade area graphic, this how large in px one tile is supposed to be; defaults to 50.")]
+        [CategoryAttribute("07 - Not used anymore"), DescriptionAttribute("When using a premade area graphic, this how large in px one tile is supposed to be; defaults to 50.")]
         public int SingleImageMapTileSize
         {
             get { return singleImageMapTileSize; }
@@ -183,7 +203,7 @@ namespace IB2Toolset
             set { assassinationTargetTag = value; }
         }
 
-        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("When true, this battle is instantly once the party has survived the defined number of rounds")]
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("When true, this battle is instantly won once the party has survived the defined number of rounds")]
         public bool StandGroundVictory
         {
             get { return standGroundVictory; }
@@ -196,8 +216,129 @@ namespace IB2Toolset
             get { return standGroundTimer; }
             set { standGroundTimer = value; }
         }
+        /*
+        private bool conquerVictory = true;
+        private bool conquerTargetsCumulative = true;
+        private int conquerTarget1X = 8;
+        private int conquerTarget1Y = 8;
+        private int conquerTarget2X = -1;
+        private int conquerTarget2Y = -1;
+        private int conquerTarget3X = -1;
+        private int conquerTarget3Y = -1;
+        */
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("When true, this battle is instantly once the party has occupied all required conquer locations with a living pc at the start of a round.")]
+        public bool ConquerVictory
+        {
+            get { return conquerVictory; }
+            set { conquerVictory = value; }
+        }
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("When true, all of the required conquer locations must be occupied at the same time. When false, it is sufficient if only one of the (alternatively) required conquer locations is occupied.")]
+         public bool ConquerTargetsCumulative
+        {
+            get { return conquerTargetsCumulative; }
+            set { conquerTargetsCumulative = value; }
+        }
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("X coordinate for first conquer location, use -1 for x and y to disable")]
+        public int ConquerTarget1X
+        {
+            get { return conquerTarget1X; }
+            set { conquerTarget1X = value; }
+        }
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("X coordinate for second conquer location, use -1 for x and y to disable")]
+        public int ConquerTarget2X
+        {
+            get { return conquerTarget2X; }
+            set { conquerTarget2X = value; }
+        }
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("X coordinate for third conquer location, use -1 for x and y to disable")]
+        public int ConquerTarget3X
+        {
+            get { return conquerTarget3X; }
+            set { conquerTarget3X = value; }
+        }
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("Y coordinate for first conquer location, use -1 for x and y to disable")]
+        public int ConquerTarget1Y
+        {
+            get { return conquerTarget1Y; }
+            set { conquerTarget1Y = value; }
+        }
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("Y coordinate for second conquer location, use -1 for x and y to disable")]
+        public int ConquerTarget2Y
+        {
+            get { return conquerTarget2Y; }
+            set { conquerTarget2Y = value; }
+        }
+        [CategoryAttribute("04 - Victory conditions"), DescriptionAttribute("Y coordinate for third conquer location, use -1 for x and y to disable")]
+        public int ConquerTarget3Y
+        {
+            get { return conquerTarget3Y; }
+            set { conquerTarget3Y = value; }
+        }
 
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("if True, the encounter will use the single image from the MapImage filename instead of using the tiles.")]
+        //private bool timeLimitDefeat = false;
+        //private int timeLimitTimer = 10;
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("When true, this battle is instantly lost after x rounds.")]
+        public bool TimeLimitDefeat
+        {
+            get { return timeLimitDefeat; }
+            set { timeLimitDefeat = value; }
+        }
+
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("Number of rounds after a battle is lost under the time limit defeat condition.")]
+        public int TimeLimitTimer
+        {
+            get { return timeLimitTimer; }
+            set { timeLimitTimer = value; }
+        }
+        //private bool protectionDefeat = false;
+        //private string protectionTargetName = "none";
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("When true, this battle is lost if an (allied) player character with name x drops to 0 or less hp. Note: enter the name below, not tag or filename")]
+        public bool ProtectionDefeat
+        {
+            get { return protectionDefeat; }
+            set { protectionDefeat = value; }
+        }
+
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("Name of the (allied) pc to protect (use pc.name property, not pc.tag or filename).")]
+        public string ProtectionTargetName
+        {
+            get { return protectionTargetName; }
+            set { protectionTargetName = value; }
+        }
+        //public bool noSpellCastModifier = false;
+        //public bool noTraitUseModifier = false;
+        //public bool noItemUseModifier = false;
+        //public bool onlyOneMoveModifier = false;
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, no spell casting is possible for the party in this encounter.")]
+        public bool NoSpellCastModifier
+        {
+            get { return noSpellCastModifier; }
+            set { noSpellCastModifier = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, no trait using is possible for the party in this encounter.")]
+        public bool NoTraitUseModifier
+        {
+            get { return noTraitUseModifier; }
+            set { noTraitUseModifier = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, no item using is possible for the party in this encounter.")]
+        public bool NoItemUseModifier
+        {
+            get { return noItemUseModifier; }
+            set { noItemUseModifier = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, the player characters can only move one step each turn in this encounter.")]
+        public bool OnlyOneMoveModifier
+        {
+            get { return onlyOneMoveModifier; }
+            set { onlyOneMoveModifier = value; }
+        }
+
+        [CategoryAttribute("07 - Not used anymore"), DescriptionAttribute("if True, the encounter will use the single image from the MapImage filename instead of using the tiles.")]
         public bool UseMapImage
         {
             get { return useMapImage; }
@@ -242,39 +383,39 @@ namespace IB2Toolset
             set { areaMusicDelayRandomAdder = value; }
         }
         [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the start of each combat round")]
+        [CategoryAttribute("07 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the start of each combat round")]
         public string OnStartCombatRoundLogicTree
         {
             get { return onStartCombatRoundLogicTree; }
             set { onStartCombatRoundLogicTree = value; }
         }
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("07 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string OnStartCombatRoundParms
         {
             get { return onStartCombatRoundParms; }
             set { onStartCombatRoundParms = value; }
         }
         [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the start of each PC and Enemy turn in combat")]
+        [CategoryAttribute("07 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the start of each PC and Enemy turn in combat")]
         public string OnStartCombatTurnLogicTree
         {
             get { return onStartCombatTurnLogicTree; }
             set { onStartCombatTurnLogicTree = value; }
         }
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("07 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string OnStartCombatTurnParms
         {
             get { return onStartCombatTurnParms; }
             set { onStartCombatTurnParms = value; }
         }
         [Browsable(true), TypeConverter(typeof(LogicTreeConverter))]
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the end of combat")]
+        [CategoryAttribute("07 - Not used anymore"), DescriptionAttribute("LogicTree name to be run at the end of combat")]
         public string OnEndCombatLogicTree
         {
             get { return onEndCombatLogicTree; }
             set { onEndCombatLogicTree = value; }
         }
-        [CategoryAttribute("06 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
+        [CategoryAttribute("07 - Not used anymore"), DescriptionAttribute("Parameters to be used for this LogicTree hook (as many parameters as needed, comma deliminated with no spaces)")]
         public string OnEndCombatParms
         {
             get { return onEndCombatParms; }

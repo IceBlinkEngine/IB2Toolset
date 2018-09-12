@@ -17,7 +17,7 @@ namespace IB2Toolset
         public enum crCategory
         {
             Ranged = 0,
-            Melee = 1
+            Melee = 1 
         }
         public enum crProjectileImage
         {
@@ -598,6 +598,8 @@ namespace IB2Toolset
         private string _creatureTag = "";
         private int _creatureStartLocationX = 0;
         private int _creatureStartLocationY = 0;
+        private int _spawnAtStartOfRoundX = 1;
+        private int _spawnAnotherEveryXRoundsAfterFirstSpawn = 0;
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("ResRef of the creature reference (must be left the same as the blueprint creature's resref)")]
         public string creatureResRef
@@ -623,7 +625,19 @@ namespace IB2Toolset
             get { return _creatureStartLocationY; }
             set { _creatureStartLocationY = value; }
         }
-        
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Enter anything greater 1 here and the creature will only start to appear in that combat round")]
+        public int  spawnAtStartOfRoundX
+        {
+            get { return _spawnAtStartOfRoundX; }
+            set { _spawnAtStartOfRoundX = value; }
+        }
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Enter anything greater 0 here and another type of this creature will appear every x rounds after spawn of the original creature, at the same the location the original appeared (think reinforcements).")]
+        public int spawnAnotherEveryXRoundsAfterFirstSpawn
+        {
+            get { return _spawnAnotherEveryXRoundsAfterFirstSpawn; }
+            set { _spawnAnotherEveryXRoundsAfterFirstSpawn = value; }
+        }
+
         public CreatureRefs()
         {
         }
