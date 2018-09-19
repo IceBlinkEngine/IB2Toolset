@@ -45,10 +45,27 @@ namespace IB2Toolset
         private int conquerTarget3X = -1;
         private  int conquerTarget3Y = -1;
 
+        private bool holdDefeat = false;
+        private bool holdTargetsCumulative = true;
+        private int holdTarget1X = -1;
+        private int holdTarget1Y = -1;
+        private int holdTarget2X = -1;
+        private int holdTarget2Y = -1;
+        private int holdTarget3X = -1;
+        private int holdTarget3Y = -1;
+
         private bool noSpellCastModifier = false;
         private bool noTraitUseModifier = false;
         private bool noItemUseModifier = false;
         private bool onlyOneMoveModifier = false;
+
+        private bool reducedDamageofPcMeleeAttack = false;
+        private bool reducedDamageofPcRangedAttack = false;
+        private bool allSpellsWithoutAoE = false;
+        private bool allSpellsSPCostDoubled = false;
+        private bool noHealingAllowed = false;
+        private int hpDamageEachRound = 0;
+        private int spDamageEachRound = 0;
 
         //private bool timeLimitVictory = false;
         //private int timeLimitVictoryRoundGoal = 0;
@@ -275,6 +292,55 @@ namespace IB2Toolset
             set { conquerTarget3Y = value; }
         }
 
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("When true, this battle is instantly lost if the party fails to occupy all required Hold locations with a living pc at the start of a round.")]
+        public bool HoldDefeat
+        {
+            get { return holdDefeat; }
+            set { holdDefeat = value; }
+        }
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("When true, ALL of the required Hold locations must be occupied at the same time or the party is defeated. When false, it is sufficient to avoid defeat, if at least ONE of the (alternatively) required Hold locations is occupied.")]
+        public bool HoldTargetsCumulative
+        {
+            get { return holdTargetsCumulative; }
+            set { holdTargetsCumulative = value; }
+        }
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("X coordinate for first Hold location, use -1 for x and y to disable")]
+        public int HoldTarget1X
+        {
+            get { return holdTarget1X; }
+            set { holdTarget1X = value; }
+        }
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("X coordinate for second Hold location, use -1 for x and y to disable")]
+        public int HoldTarget2X
+        {
+            get { return holdTarget2X; }
+            set { holdTarget2X = value; }
+        }
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("X coordinate for third Hold location, use -1 for x and y to disable")]
+        public int HoldTarget3X
+        {
+            get { return holdTarget3X; }
+            set { holdTarget3X = value; }
+        }
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("Y coordinate for first Hold location, use -1 for x and y to disable")]
+        public int HoldTarget1Y
+        {
+            get { return holdTarget1Y; }
+            set { holdTarget1Y = value; }
+        }
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("Y coordinate for second Hold location, use -1 for x and y to disable")]
+        public int HoldTarget2Y
+        {
+            get { return holdTarget2Y; }
+            set { holdTarget2Y = value; }
+        }
+        [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("Y coordinate for third Hold location, use -1 for x and y to disable")]
+        public int HoldTarget3Y
+        {
+            get { return holdTarget3Y; }
+            set { holdTarget3Y = value; }
+        }
+
         //private bool timeLimitDefeat = false;
         //private int timeLimitTimer = 10;
         [CategoryAttribute("05 - Defeat conditions"), DescriptionAttribute("When true, this battle is instantly lost after x rounds.")]
@@ -310,11 +376,63 @@ namespace IB2Toolset
         //public bool noItemUseModifier = false;
         //public bool onlyOneMoveModifier = false;
 
-        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, no spell casting is possible for the party in this encounter.")]
-        public bool NoSpellCastModifier
+        /*
+        private bool reducedDamageofPcMeleeAttack = false;
+        private bool reducedDamageofPcRangedAttack = false;
+        private bool allSpellsWithoutAoE = false;
+        private bool allSpellsSPCostDoubled = false;
+        private bool noHealingAllowed = false;
+        private int hpDamageEachRound = 0;
+        private int spDamageEachRound = 0;
+        */
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, player characters do only 1/3 of their usual damage with melee weapons.")]
+        public bool ReducedDamageofPcMeleeAttack
         {
-            get { return noSpellCastModifier; }
-            set { noSpellCastModifier = value; }
+            get { return reducedDamageofPcMeleeAttack; }
+            set { reducedDamageofPcMeleeAttack = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, player characters do only 1/3 of their usual damage with ranged weapons.")]
+        public bool ReducedDamageofPcRangedAttack
+        {
+            get { return reducedDamageofPcRangedAttack; }
+            set { reducedDamageofPcRangedAttack = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, all spells and traits affect only a single square. Restricts creature casters, too.")]
+        public bool AllSpellsWithoutAoE
+        {
+            get { return allSpellsWithoutAoE; }
+            set { allSpellsWithoutAoE = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, all spells and traits cost twice their usual sp cost. Restricts creature casters, too.")]
+        public bool AllSpellsSPCostDoubled
+        {
+            get { return allSpellsSPCostDoubled; }
+            set { allSpellsSPCostDoubled = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, no healing (by spell, trait or item) is possible in this encounter. Restricts creature healing, too.")]
+        public bool NoHealingAllowed
+        {
+            get { return noHealingAllowed; }
+            set { noHealingAllowed = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("The amount of hp each player character loses each round (only values above zero accepted).")]
+        public int HpDamageEachRound
+        {
+            get { return hpDamageEachRound; }
+            set { hpDamageEachRound = value; }
+        }
+
+        [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("The amount of sp each player character loses each round (only values above zero accepted).")]
+        public int SpDamageEachRound
+        {
+            get { return spDamageEachRound; }
+            set { spDamageEachRound = value; }
         }
 
         [CategoryAttribute("06 - Battle modifiers"), DescriptionAttribute("If true, no trait using is possible for the party in this encounter.")]
