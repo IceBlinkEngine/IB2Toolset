@@ -50,6 +50,7 @@
             this.rbtnLoS = new System.Windows.Forms.RadioButton();
             this.rbtnInfo = new System.Windows.Forms.RadioButton();
             this.rbtnWalkable = new System.Windows.Forms.RadioButton();
+            this.rbtnHeightLevel = new System.Windows.Forms.RadioButton();
             this.btnProperties = new System.Windows.Forms.Button();
             this.lblMouseInfo = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -327,12 +328,12 @@
             // 
             this.rbtnLoS.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbtnLoS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnLoS.Location = new System.Drawing.Point(9, 303);
+            this.rbtnLoS.Location = new System.Drawing.Point(9, 289);
             this.rbtnLoS.Name = "rbtnLoS";
-            this.rbtnLoS.Size = new System.Drawing.Size(103, 45);
+            this.rbtnLoS.Size = new System.Drawing.Size(103, 31);
             this.rbtnLoS.TabIndex = 5;
             this.rbtnLoS.TabStop = true;
-            this.rbtnLoS.Text = "Toggle\r\nLine-of-Sight";
+            this.rbtnLoS.Text = "Toggle LoS";
             this.rbtnLoS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnLoS.UseVisualStyleBackColor = true;
             this.rbtnLoS.CheckedChanged += new System.EventHandler(this.rbtnLoS_CheckedChanged);
@@ -357,13 +358,27 @@
             this.rbtnWalkable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnWalkable.Location = new System.Drawing.Point(9, 250);
             this.rbtnWalkable.Name = "rbtnWalkable";
-            this.rbtnWalkable.Size = new System.Drawing.Size(103, 45);
+            this.rbtnWalkable.Size = new System.Drawing.Size(103, 31);
             this.rbtnWalkable.TabIndex = 3;
             this.rbtnWalkable.TabStop = true;
-            this.rbtnWalkable.Text = "Toggle\r\nWalkable";
+            this.rbtnWalkable.Text = "Toggle Walk";
             this.rbtnWalkable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rbtnWalkable.UseVisualStyleBackColor = true;
             this.rbtnWalkable.CheckedChanged += new System.EventHandler(this.rbtnWalkable_CheckedChanged);
+            // 
+            // rbtnHeightLevel
+            // 
+            this.rbtnHeightLevel.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnHeightLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnHeightLevel.Location = new System.Drawing.Point(9, 328);
+            this.rbtnHeightLevel.Name = "rbtnHeightLevel";
+            this.rbtnHeightLevel.Size = new System.Drawing.Size(103, 31);
+            this.rbtnHeightLevel.TabIndex = 6;
+            this.rbtnHeightLevel.TabStop = true;
+            this.rbtnHeightLevel.Text = "Tog. Height";
+            this.rbtnHeightLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnHeightLevel.UseVisualStyleBackColor = true;
+            this.rbtnHeightLevel.CheckedChanged += new System.EventHandler(this.rbtnHeightLevel_CheckedChanged);
             // 
             // btnProperties
             // 
@@ -421,6 +436,7 @@
             this.groupBox2.Controls.Add(this.rbtnLoS);
             this.groupBox2.Controls.Add(this.rbtnEditTrigger);
             this.groupBox2.Controls.Add(this.rbtnWalkable);
+            this.groupBox2.Controls.Add(this.rbtnHeightLevel);
             this.groupBox2.Controls.Add(this.rbtnPaintTrigger);
             this.groupBox2.Location = new System.Drawing.Point(12, 59);
             this.groupBox2.Name = "groupBox2";
@@ -921,6 +937,7 @@
         private System.Windows.Forms.RadioButton rbtnLoS;
         private System.Windows.Forms.RadioButton rbtnInfo;
         private System.Windows.Forms.RadioButton rbtnWalkable;
+        private System.Windows.Forms.RadioButton rbtnHeightLevel;
         private System.Windows.Forms.Button btnProperties;
         private System.Windows.Forms.Label lblMouseInfo;
         private System.Windows.Forms.GroupBox groupBox1;

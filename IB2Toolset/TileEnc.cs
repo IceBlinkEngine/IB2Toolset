@@ -7,6 +7,17 @@ namespace IB2Toolset
 {
     public class TileEnc
     {
+        public int heightLevel = 0;
+
+        public bool isInShortShadeN = false;
+        public bool isInShortShadeE = false;
+        public bool isInShortShadeS = false;
+        public bool isInShortShadeW = false;
+        public bool isInShortShadeNE = false;
+        public bool isInShortShadeSE = false;
+        public bool isInShortShadeSW = false;
+        public bool isInShortShadeNW = false;
+
         public string Layer1Filename = "t_a_blank";
         public string Layer2Filename = "t_a_blank";
         public string Layer3Filename = "t_a_blank";

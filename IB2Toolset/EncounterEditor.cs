@@ -1188,6 +1188,34 @@ namespace IB2Toolset
                         //GDI refreshMap(true);
                     }
                     #endregion
+                    #region height 
+                    else if (rbtnHeightLevel.Checked)
+                    {
+                        selectedTile.index = gridY * thisEnc.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        if (thisEnc.encounterTiles[selectedTile.index].heightLevel < 1)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].heightLevel += 1;
+                        }
+                        calculateHeightShadows();
+                        if (thisEnc.encounterTiles[selectedTile.index].heightLevel == 1)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Walkable = false;
+                            thisEnc.encounterTiles[selectedTile.index].LoSBlocked = true;
+                        }
+                        if (thisEnc.encounterTiles[selectedTile.index].heightLevel == 0)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Walkable = true;
+                            thisEnc.encounterTiles[selectedTile.index].LoSBlocked = false;
+                        }
+                        if (thisEnc.encounterTiles[selectedTile.index].heightLevel == -1)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Walkable = false;
+                            thisEnc.encounterTiles[selectedTile.index].LoSBlocked = false;
+                        }
+                    }
+                    #endregion
                     #region Tile Selected
                     else if (rbtnPaintTile.Checked)
                     {
@@ -1560,6 +1588,37 @@ namespace IB2Toolset
                         //GDI refreshMap(false);
                     }
                     #endregion
+                    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                    #region height 
+                    else if (rbtnHeightLevel.Checked)
+                    {
+                        selectedTile.index = gridY * thisEnc.MapSizeX + gridX;
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        if (thisEnc.encounterTiles[selectedTile.index].heightLevel > -1)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].heightLevel -= 1;
+                        }
+                        calculateHeightShadows();
+                        if (thisEnc.encounterTiles[selectedTile.index].heightLevel == 1)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Walkable = false;
+                            thisEnc.encounterTiles[selectedTile.index].LoSBlocked = true;
+                        }
+                        if (thisEnc.encounterTiles[selectedTile.index].heightLevel == 0)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Walkable = true;
+                            thisEnc.encounterTiles[selectedTile.index].LoSBlocked = false;
+                        }
+                        if (thisEnc.encounterTiles[selectedTile.index].heightLevel == -1)
+                        {
+                            thisEnc.encounterTiles[selectedTile.index].Walkable = false;
+                            thisEnc.encounterTiles[selectedTile.index].LoSBlocked = false;
+                        }
+
+                    }
+                    #endregion
+                    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                     #region LoS mesh Toggle Selected (Make LoS Visible)
                     else if (rbtnLoS.Checked)
                     {
@@ -1589,6 +1648,105 @@ namespace IB2Toolset
                 #endregion
             }
         }
+
+        public void calculateHeightShadows()
+        {
+            #region Calculate Height Shadows
+            //go through tiles potentially in shade
+            for (int y = 0; y < thisEnc.MapSizeY; y++)
+            {
+                for (int x = 0; x < thisEnc.MapSizeX; x++)
+                {
+                    TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                    
+                        tile.isInShortShadeN = false;
+                        tile.isInShortShadeE = false;
+                        tile.isInShortShadeS = false;
+                        tile.isInShortShadeW = false;
+                        tile.isInShortShadeNE = false;
+                        tile.isInShortShadeSE = false;
+                        tile.isInShortShadeSW = false;
+                        tile.isInShortShadeNW = false;
+
+                        //go through each potential shadow caster tile surrounding the potentially shaded tile
+                        for (int yS = -1; yS < 2; yS++)
+                        {
+                            for (int xS = -1; xS < 2; xS++)
+                            {
+                                //**********************************************************************************
+                                TileEnc tileCaster = new TileEnc();
+                             
+                                //caster tile is on this map
+                                if ((y + yS >= 0) && (y + yS < thisEnc.MapSizeY) && (x + xS >= 0) && (x + xS < thisEnc.MapSizeX))
+                                {
+                                    int transformedX = x + xS;
+                                    int transformedY = y + yS; ;
+                                    tileCaster = thisEnc.encounterTiles[transformedY * thisEnc.MapSizeX + transformedX];
+                                }
+                                        //check for short shadows
+                                        if (tileCaster.heightLevel >= tile.heightLevel + 1)
+                                        {
+                                            if ((xS == -1) && (yS == -1))
+                                            {
+                                                
+                                                    tile.isInShortShadeNW = true;
+                                                   
+                                            }
+                                            if ((xS == 0) && (yS == -1))
+                                            {
+                                                
+                                                    tile.isInShortShadeN = true;
+                                                  
+                                            }
+                                            if ((xS == 1) && (yS == -1))
+                                            {
+                                                
+                                                    tile.isInShortShadeNE = true;
+                                                
+                                            }
+                                            if ((xS == 1) && (yS == 0))
+                                            {
+                                                
+                                                    tile.isInShortShadeE = true;
+                                                    
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                            if ((xS == 1) && (yS == 1))
+                                            {
+                                                
+                                                    tile.isInShortShadeSE = true;
+                                                
+                                            }
+                                            if ((xS == 0) && (yS == 1))
+                                            {
+                                               
+                                                    tile.isInShortShadeS = true;
+                                                   
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                            if ((xS == -1) && (yS == 1))
+                                            {
+                                                
+                                                    tile.isInShortShadeSW = true;
+                                                
+                                            }
+                                            if ((xS == -1) && (yS == 0))
+                                            {
+                                                
+                                                    tile.isInShortShadeW = true;
+                                                  
+                                                //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW = tile.heightLevel - tileCaster.heightLevel;
+                                            }
+                                        }
+                            }
+                        }//try  
+                    //}
+                }
+            }
+            #endregion
+        }
+
+
         private void btnFillWithSelected_Click(object sender, EventArgs e)
         {
             for (int x = 0; x < thisEnc.MapSizeX; x++)
@@ -2028,6 +2186,71 @@ namespace IB2Toolset
             }
 
             #endregion
+
+            #region draw Height Shadows
+
+            for (int y = 0; y < thisEnc.MapSizeY; y++)
+            {
+                for (int x = 0; x < thisEnc.MapSizeX; x++)
+                {
+                    TileEnc tile = thisEnc.encounterTiles[y * thisEnc.MapSizeX + x];
+                    SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("longShadow").PixelSize.Width, GetFromBitmapList("longShadow").PixelSize.Height);
+                    SharpDX.RectangleF dst = new SharpDX.RectangleF(x * (sqr), y * sqr, (sqr), (sqr));
+                    /*
+                    SharpDX.RectangleF dst2 = new SharpDX.RectangleF(x * (sqr), y * sqr, (sqr), (sqr));
+                    SharpDX.RectangleF dst3 = new SharpDX.RectangleF(x * (sqr), y * sqr, sqr, sqr);
+                    SharpDX.RectangleF dst4 = new SharpDX.RectangleF(x * (sqr), y * (sqr), sqr, sqr);
+                    SharpDX.RectangleF dstNorth = new SharpDX.RectangleF(x * sqr, (y - 1) * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstEast = new SharpDX.RectangleF((x + 1) * sqr, y * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstSouth = new SharpDX.RectangleF(x * sqr, (y + 1) * sqr, sqr, sqr);
+                    SharpDX.RectangleF dstWest = new SharpDX.RectangleF((x - 1) * sqr, y * sqr, sqr, sqr);
+                    */
+
+                    if (tile.isInShortShadeN)
+                    {                       
+                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 180, false, 0, 0);   
+                    }
+
+                    if (tile.isInShortShadeE)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 270, false, 0, 0);
+                    }
+
+                    if (tile.isInShortShadeS)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 0, false, 0, 0);
+                    }
+
+                    if (tile.isInShortShadeW)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadow"), src, dst, 90, false, 0, 0);
+                    }
+
+                    if (tile.isInShortShadeNW && !tile.isInShortShadeN && !tile.isInShortShadeW)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 180, false, 0, 0);
+                    }
+
+                    if (tile.isInShortShadeNE && !tile.isInShortShadeN && !tile.isInShortShadeE)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 270, false, 0, 0);
+                    }
+
+                    if (tile.isInShortShadeSW && !tile.isInShortShadeS && !tile.isInShortShadeW)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 90, false, 0, 0);
+                    }
+
+                    if (tile.isInShortShadeSE && !tile.isInShortShadeS && !tile.isInShortShadeE)
+                    {
+                        DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 0, false, 0, 0);
+                    }
+                }
+            }
+
+
+            #endregion
+
             #region Draw Triggers
             foreach (Trigger t in thisEnc.Triggers)
             {
@@ -2314,6 +2537,15 @@ namespace IB2Toolset
             if (rbtnWalkable.Checked)
             {
                 prntForm.logText("editing walkmesh");
+                prntForm.logText(Environment.NewLine);
+                ResetAllToFalse();
+            }
+        }
+        private void rbtnHeightLevel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnHeightLevel.Checked)
+            {
+                prntForm.logText("editing height");
                 prntForm.logText(Environment.NewLine);
                 ResetAllToFalse();
             }

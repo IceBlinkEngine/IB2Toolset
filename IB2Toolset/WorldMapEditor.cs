@@ -2912,7 +2912,7 @@ namespace IB2Toolset
                                     if (area.Triggers[i].isLinkToMaster)
                                     {
                                         if (area.Triggers[i].TriggerSquaresList.Count >= 1)
-                                        {
+                                         {
                                             if (area.Triggers[i].TriggerSquaresList[0].X == gridX && area.Triggers[i].TriggerSquaresList[0].Y == gridY)
                                             {
                                                 area.Tiles[gridY * area.MapSizeX + gridX].transitionToMasterDirection = "none";
