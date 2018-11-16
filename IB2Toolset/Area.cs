@@ -15,6 +15,33 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private bool _isOverViewMap = false;
+
+        private bool _overviewOwnZoneMapExists = false;
+        private bool _overviewMotherZoneMapExists = false;
+        private bool _overviewGrandMotherZoneMapExists = false;
+
+        private bool _showOverviewButtonOwnZoneMap = false;
+        private bool _showOverviewButtonMotherZoneMap = false;
+        private bool _showOverviewButtonGrandMotherZoneMap = false;
+
+        private string _filenameOfOwnZoneMap = "none";
+        private string _filenameOfMotherZoneMap = "none";
+        private string _filenameOfGrandMotherZoneMap = "none";
+
+        /*
+        private string _ingameNameOfOwnZoneMap = "none";
+        private string _ingameNameOfMotherZoneMap = "none";
+        private string _ingameNameOfGrandMotherZoneMap = "none";
+        */
+
+        private int _partyPositionMarkerOnOwnZoneMapX = -1;
+        private int _partyPositionMarkerOnOwnZoneMapY = -1;
+        private int _partyPositionMarkerOnMotherZoneMapX = -1;
+        private int _partyPositionMarkerOnMotherZoneMapY = -1;
+        private int _partyPositionMarkerOnGrandMotherZoneMapX = -1;
+        private int _partyPositionMarkerOnGrandMotherZoneMapY = -1;
+
         private string _zoneMotherAreaName = "none";
         private int _zoneMotherAreaX = 0;
         private int _zoneMotherAreaY = 0;
@@ -99,7 +126,7 @@ namespace IB2Toolset
         #endregion
 
         #region Properties
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, you can build with more than 2 height levels difference which breaks the default height shadowing; best turn off isShadowCaster in the tile's properties and place custom shadow graphics as tiles in layer 5")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("When set to true, you can build with more than 2 height levels difference which breaks the default height shadowing; best turn off isShadowCaster in the tile's properties and place custom shadow graphics as tiles in layer 5")]
         public bool AllowLevelDesignWithMoreThan2HeightLevelsDifference
         {
             get { return allowLevelDesignWithMoreThan2HeightLevelsDifference; }
@@ -107,9 +134,145 @@ namespace IB2Toolset
         }
 
         /*
+        private bool _isOverViewMap = false;
+
+        private bool _overviewOwnZoneMapExists = false;
+        private bool _overviewMotherZoneMapExists = false;
+        private bool _overviewGrandMotherZoneMapExists = false;
+
+        private bool _showOverviewButtonOwnZoneMap = false;
+        private bool _showOverviewButtonMotherZoneMap = false;
+        private bool _showOverviewButtonGrandMotherZoneMap = false;
+
+        private string _filenameOfOwnZoneMap = "none";
+        private string _filenameOfMotherZoneMap = "none";
+        private string _filenameOfGrandMotherZoneMap = "none";
+
+        private int _partyPositionMarkerOnOwnZoneMapX = -1;
+        private int _partyPositionMarkerOnOwnZoneMapY = -1;
+        private int _partyPositionMarkerOnMotherZoneMapX = -1;
+        private int _partyPositionMarkerOnMotherZoneMapY = -1;
+        private int _partyPositionMarkerOnGrandMotherZoneMapX = -1;
+        private int _partyPositionMarkerOnGrandMotherZoneMapY = -1;
+        */
+
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("When set to true, this area itself is considered an overview map (no walking around on this one, but scrolling instead for orientation).")]
+        public bool isOverViewMap
+        {
+            get { return _isOverViewMap; }
+            set { _isOverViewMap = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("When set to true, this - walkable - area lies within a zone of same zoom level that has a specifc overview map (think: town quarter area shown on town zone map or section of dungeon area shown on whole dungeon zone map).")]
+        public bool overviewOwnZoneMapExists
+        {
+            get { return _overviewOwnZoneMapExists; }
+            set { _overviewOwnZoneMapExists = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("When set to true, this - walkable - area lies (also or only) within a zone of ONE zoom level less, ie more zoomed out (that has a specific overview map; think town quarter on world zone map or section of dungeon area on town zone map).")]
+        public bool overviewMotherZoneMapExists
+        {
+            get { return _overviewMotherZoneMapExists; }
+            set { _overviewMotherZoneMapExists = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("When set to true, this - walkable - area lies (also or only) within a zone of TWO zoom levels less, ie way more zoomed out (that has a specific overview map; section of a dungeon area on world zone map).")]
+        public bool overviewGrandMotherZoneMapExists
+        {
+            get { return _overviewGrandMotherZoneMapExists; }
+            set { _overviewGrandMotherZoneMapExists = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("When set to true, the overview button for the area's own zone is shown (zone for SAME zoom level).")]
+        public bool showOverviewButtonOwnZoneMap
+        {
+            get { return _showOverviewButtonOwnZoneMap; }
+            set { _showOverviewButtonOwnZoneMap = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("When set to true, the overview button for the area's mother zone is shown (zone for ONE zoom level less).")]
+        public bool showOverviewButtonMotherZoneMap
+        {
+            get { return _showOverviewButtonMotherZoneMap; }
+            set { _showOverviewButtonMotherZoneMap = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("When set to true, the overview button for the area's mother zone is shown (zone for TWO zoom levels less).")]
+        public bool showOverviewButtonGrandMotherZoneMap
+        {
+            get { return _showOverviewButtonGrandMotherZoneMap; }
+            set { _showOverviewButtonGrandMotherZoneMap = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("Filename (not ingame name) of zone map of same zoom level.")]
+        public string filenameOfOwnZoneMap
+        {
+            get { return _filenameOfOwnZoneMap; }
+            set { _filenameOfOwnZoneMap = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("Filename (not ingame name) of zone map of ONE zoom level less.")]
+        public string filenameOfMotherZoneMap
+        {
+            get { return _filenameOfMotherZoneMap; }
+            set { _filenameOfMotherZoneMap = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("Filename (not ingame name) of zone map of TWO zoom levels lesss.")]
+        public string filenameOfGrandmotherZoneMap
+        {
+            get { return _filenameOfGrandMotherZoneMap; }
+            set { _filenameOfGrandMotherZoneMap = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("X location for this area's marker in zone map of OWN/SAME zoom level (connected with the party being in this area.")]
+        public int partyPositionMarkerOnOwnZoneMapX
+        {
+            get { return _partyPositionMarkerOnOwnZoneMapX; }
+            set { _partyPositionMarkerOnOwnZoneMapX = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("Y location for this area's marker in zone map of OWN/SAME zoom level (connected with the party being in this area.")]
+        public int partyPositionMarkerOnOwnZoneMapY
+        {
+            get { return _partyPositionMarkerOnOwnZoneMapY; }
+            set { _partyPositionMarkerOnOwnZoneMapY = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("X location for this area's marker in zone map of ONE zoom level less (connected with the party being in this area.")]
+        public int partyPositionMarkerOnMotherZoneMapX
+        {
+            get { return _partyPositionMarkerOnMotherZoneMapX; }
+            set { _partyPositionMarkerOnMotherZoneMapX = value; }
+        }
+        
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("Y location for this area's marker in zone map of ONE zoom level less (connected with the party being in this area.")]
+        public int partyPositionMarkerOnMotherZoneMapY
+        {
+            get { return _partyPositionMarkerOnMotherZoneMapY; }
+            set { _partyPositionMarkerOnMotherZoneMapY = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("X location for this area's marker in zone map of TWO zoom levels less (connected with the party being in this area.")]
+        public int partyPositionMarkerOnGrandMotherZoneMapX
+        {
+            get { return _partyPositionMarkerOnGrandMotherZoneMapX; }
+            set { _partyPositionMarkerOnGrandMotherZoneMapX = value; }
+        }
+
+        [CategoryAttribute("02 - Overview maps"), DescriptionAttribute("Y location for this area's marker in zone map of TWO zoom levels less" +
+            " (connected with the party being in this area.")]
+        public int partyPositionMarkerOnGrandMotherZoneMapY
+        {
+            get { return _partyPositionMarkerOnGrandMotherZoneMapY; }
+            set { _partyPositionMarkerOnGrandMotherZoneMapY = value; }
+        }
+
+        /*
         [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("When set to true, you can build bridges anywhere you like (normaly they require height a on both their topsides as well as the bridge itslef. And height a - 1 on their flank sides. Ramps would allow top sides a height of a+1, too. Be careful with freely buidling bridges as this might not work out for pathfinding AI and player movement.")]
         public bool AllowFreePlacementOfBridges
-        {
+        { 
             get { return allowFreePlacementOfBridges; }
             set { allowFreePlacementOfBridges = value; }
         }
@@ -134,7 +297,7 @@ namespace IB2Toolset
             get { return areaVisibleDistance; }
             set { areaVisibleDistance = value; }
         }
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("true = Can rest anywhere in this area, false = Can only rest in designated squares if they exist")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("true = Can rest anywhere in this area, false = Can only rest in designated squares if they exist")]
         public bool RestingAllowed
         {
             get { return restingAllowed; }
@@ -146,13 +309,13 @@ namespace IB2Toolset
             get { return isWorldMap; }
             set { isWorldMap = value; }
         }*/
-        [CategoryAttribute("01 - Main")]
+        [CategoryAttribute("00 - Main")]
         public bool UseMiniMapFogOfWar
         {
             get { return useMiniMapFogOfWar; }
             set { useMiniMapFogOfWar = value; }
         }
-        [CategoryAttribute("01 - Main")]
+        [CategoryAttribute("00 - Main")]
         public string inGameAreaName
         {
             get { return _inGameAreaName; }
@@ -282,14 +445,14 @@ namespace IB2Toolset
             set { _useSuperTinyProps = value; }
         }
 
-        [CategoryAttribute("01 - Main")]
+        [CategoryAttribute("00 - Main")]
         public bool drawWithLessVisibleSeamsButMorePixelated
         {
             get { return _drawWithLessVisibleSeamsButMorePixelated; }
             set { _drawWithLessVisibleSeamsButMorePixelated = value; }
         }
 
-        [CategoryAttribute("01 - Main")]
+        [CategoryAttribute("00 - Main")]
         public bool use100pixSquares
         {
             get { return _use100pixSquares; }
@@ -401,38 +564,38 @@ namespace IB2Toolset
             set { triggers = value; }
         }
         [Browsable(true), TypeConverter(typeof(MusicConverter))]
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Filename of music for the area (include extension)")]
+        [CategoryAttribute("01 - Music/Sounds"), DescriptionAttribute("Filename of music for the area (include extension)")]
         public string AreaMusic
         {
             get { return areaMusic; }
             set { areaMusic = value; }
         }
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Delay between replaying music (in milliseconds)")]
+        [CategoryAttribute("01 - Music/Sounds"), DescriptionAttribute("Delay between replaying music (in milliseconds)")]
         public int AreaMusicDelay
         {
             get { return areaMusicDelay; }
             set { areaMusicDelay = value; }
         }
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Add a random amount of delay (between 0 and this value) to the AreaMusicDelay value (in milliseconds)")]
+        [CategoryAttribute("01 - Music/Sounds"), DescriptionAttribute("Add a random amount of delay (between 0 and this value) to the AreaMusicDelay value (in milliseconds)")]
         public int AreaMusicDelayRandomAdder
         {
             get { return areaMusicDelayRandomAdder; }
             set { areaMusicDelayRandomAdder = value; }
         }
         [Browsable(true), TypeConverter(typeof(MusicConverter))]
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Filename of sounds for the area (include extension)")]
+        [CategoryAttribute("01 - Music/Sounds"), DescriptionAttribute("Filename of sounds for the area (include extension)")]
         public string AreaSounds
         {
             get { return areaSounds; }
             set { areaSounds = value; }
         }
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Delay between replaying area sounds (in milliseconds)")]
+        [CategoryAttribute("01 - Music/Sounds"), DescriptionAttribute("Delay between replaying area sounds (in milliseconds)")]
         public int AreaSoundsDelay
         {
             get { return areaSoundsDelay; }
             set { areaSoundsDelay = value; }
         }
-        [CategoryAttribute("02 - Music/Sounds"), DescriptionAttribute("Add a random amount of delay (between 0 and this value) to the AreaSoundsDelay value (in milliseconds)")]
+        [CategoryAttribute("01 - Music/Sounds"), DescriptionAttribute("Add a random amount of delay (between 0 and this value) to the AreaSoundsDelay value (in milliseconds)")]
         public int AreaSoundsDelayRandomAdder
         {
             get { return areaSoundsDelayRandomAdder; }
@@ -491,14 +654,14 @@ namespace IB2Toolset
             set { areaLocalStrings = value; }
         }
         //add converter and cmb functionality later
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("tag of weather object for this area"), Browsable(false)]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("tag of weather object for this area"), Browsable(false)]
         public string areaWeatherTag
         {
             get { return _areaWeatherTag; }
             set { _areaWeatherTag = value; }
         }
 
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("name of weather object for this area")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("name of weather object for this area")]
         public string areaWeatherName
         {
             get { return _areaWeatherName; }

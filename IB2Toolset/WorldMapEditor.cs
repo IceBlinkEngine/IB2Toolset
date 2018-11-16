@@ -5224,7 +5224,10 @@ namespace IB2Toolset
                     //stair shadows
                     if (tile.hasDownStairShadowN)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairShadow"), src, dst, 180, false, 0, 0);
+                        if (tile.drawDownStairShadows)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("downStairShadow"), src, dst, 180, false, 0, 0);
+                        }
                         if (!tile.isInShortShadeE && !tile.isInLongShadeE && !tile.isInMaxShadeE)
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourE == 0)
@@ -5257,7 +5260,10 @@ namespace IB2Toolset
                     }
                     if (tile.hasDownStairShadowE)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairShadow"), src, dst, 270, false, 0, 0);
+                        if (tile.drawDownStairShadows)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("downStairShadow"), src, dst, 270, false, 0, 0);
+                        }
                         if (!tile.isInShortShadeS && !tile.isInLongShadeS && !tile.isInMaxShadeS)
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourS == 0)
@@ -5287,7 +5293,10 @@ namespace IB2Toolset
                     }
                     if (tile.hasDownStairShadowS)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairShadow"), src, dst, 0, false, 0, 0);
+                        if (tile.drawDownStairShadows)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("downStairShadow"), src, dst, 0, false, 0, 0);
+                        }
                         if (!tile.isInShortShadeW && !tile.isInLongShadeW && !tile.isInMaxShadeW)
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourW == 0)
@@ -5316,7 +5325,10 @@ namespace IB2Toolset
                     }
                     if (tile.hasDownStairShadowW)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("downStairShadow"), src, dst, 90, false, 0, 0);
+                        if (tile.drawDownStairShadows)
+                        {
+                            DrawD2DBitmap(GetFromBitmapList("downStairShadow"), src, dst, 90, false, 0, 0);
+                        }
                         if (!tile.isInShortShadeN && !tile.isInLongShadeN && !tile.isInMaxShadeN)
                         {
                             if (tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN == 0)

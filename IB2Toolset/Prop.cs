@@ -19,7 +19,19 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        private bool _isSecretDoor = false;
+        private int _secretDoorDC = 10;
+
+
         private bool _alwaysDrawNormalSize = false;
+
+        private string _permanentText = "none";
+
+        //to do!
+        private int _movementSpeed = -1; //-1 flags a mvoer not affect by relative party speed
+        private int _spotEnemy = -1;
+        private int _stealth = -1;
+        private bool _stealthSkipsPropTriggers = false;
 
         //respawn:
         private int _respawnTimeInHours = -1; //-1 meaning false, respawn time is in hours
@@ -594,6 +606,24 @@ namespace IB2Toolset
             set { _hiddenWhenNotActive = value; }
         }
 
+        //private bool _isSecretDoor = false;
+        //private int _secretDoorDC = 10;
+        //private bool _secretDoorDirectionEW = true;
+
+        [CategoryAttribute("01a - Secret Door"), DescriptionAttribute("If true, the prop acts as secret door. Place it on a tile with elevated height. Do not place on teeh outer squares (border) of a map.")]
+        public bool isSecretDoor
+        {
+            get { return _isSecretDoor; }
+            set { _isSecretDoor = value; }
+        }
+
+        [CategoryAttribute("01a - Secret Door"), DescriptionAttribute("TheDC to match to open this door. Keep in mind that the roll is static 10 + skill (so you will usually add 10 to the DC to offset the roll).")]
+        public int secretDoorDC
+        {
+            get { return _secretDoorDC; }
+            set { _secretDoorDC = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Current X location on map.")]
         public int LocationX
         {
@@ -674,13 +704,22 @@ namespace IB2Toolset
             {
                 _PropCategoryName = value;
             }
-        }        
+        }
+        //public string permanentText = "none";
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The text to display permanently on top of the prop. Does not work for neighbouring maps. Prop must be shown and text must be anything else than none. Good for overview maps.")]
+        public string permanentText
+        {
+            get { return _permanentText; }
+            set { _permanentText = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("The text to display when player mouses over the Prop on the adventure maps.")]
         public string MouseOverText
         {
             get { return _mouseOverText; }
             set { _mouseOverText = value; }
         }
+
         [Browsable(true), TypeConverter(typeof(ConversationTypeConverter))]
         [CategoryAttribute("03 - Triggers"), DescriptionAttribute("The conversation to launch when the party is on the same square as this prop.")]
         public string ConversationWhenOnPartySquare
@@ -751,24 +790,67 @@ namespace IB2Toolset
             get { return _MoverType; }
             set { _MoverType = value; }
         }
+
+        //private int _spotEnemy = -1;
+        //private int _stealth = -1;
+        //private bool _stealthSkipsPropTriggers = false;
+        
+        //spot Enemy
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("The party rolls its stealth skill against spot enemy value of a prop (acting as dc, os use at least 10 for an easy roll). A failed roll of spot enemy makes chaser props not iniate a chase (though once they chase there is no more hiding). Also/but, if a prop has stealthSkipPropTriggers a failed roll means the party can just pass through the prop.")]
+        public int spotEnemy
+        {
+            get { return _spotEnemy; }
+            set { _spotEnemy = value; }
+        }
+
+        //stealth
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("The party rolls its spot enemy skill against stealth value of a prop (acting as dc, so use at least 10 for an easy roll). A successful roll makes props invisible for one step/time per step interval, so the prop can sneak up on the party.")]
+        public int stealth
+        {
+            get { return _stealth; }
+            set { _stealth = value; }
+        }
+
+        //_stealthSkipsPropTriggers
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("A successfully stealthing party can move through a prop with this set to true, bypassing convo or encounter on this prop.")]
+        public bool stealthSkipsPropTriggers
+        {
+            get { return _stealthSkipsPropTriggers; }
+            set { _stealthSkipsPropTriggers = value; }
+        }
+
+        //movementSpeed
+        [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("Movement speed of the prop on the adventure map. If set to default -1, the prop has a fixed 40% chance to skip its move in a turn, allowing the party to catch up with it easily. If 0 or more, this value is compared to party speed and defines chances for double move and skip move. Eg 10 is moderately fast, 20 fast and 30 very fast.")]
+        public int movementSpeed
+        {
+            get { return _movementSpeed; }
+            set { _movementSpeed = value; }
+        }
+
+        /*
         [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("The percent chance to move two squares in one turn.")]
         public int ChanceToMove2Squares
         {
             get { return _ChanceToMove2Squares; }
             set { _ChanceToMove2Squares = value; }
         }
+        
         [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("The percent chance to move zero squares in one turn.")]
         public int ChanceToMove0Squares
         {
             get { return _ChanceToMove0Squares; }
             set { _ChanceToMove0Squares = value; }
         }
+        */
+
         [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("True = will chase the party if they come into detection range; False = will not chase the party.")]
         public bool isChaser
         {
             get { return _isChaser; }
             set { _isChaser = value; }
         }
+        
+
         [CategoryAttribute("05 - Project Living World"), DescriptionAttribute("True = conversation on this prop cannot be avoided; False = conversation on this prop is not displayed when avoidconversations toggle is pressed.")]
         public bool unavoidableConversation
         {

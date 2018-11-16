@@ -16,7 +16,7 @@ namespace IB2Toolset
         #region Fields
 
         private bool _useLightSystem = false;
-        private bool _useComplexCoordinateSystem = false;
+        private bool _useComplexCoordinateSystem = true;
         
         private int _nightFightModifier = -4;
         private int _darkFightModifier = -8;

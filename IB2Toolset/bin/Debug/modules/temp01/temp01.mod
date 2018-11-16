@@ -116,7 +116,7 @@
   "messageOnRest": "Party safely rests until completely healed.",
   "messageOnRestAndRaise": "Party safely rests until completely healed (bringing back the - at least presumedly - dead as well).",
   "maxNumberOfLightSourcesAllowed": 7,
-  "useComplexCoordinateSystem": false,
+  "useComplexCoordinateSystem": true,
   "useOrbitronFont": false,
   "useUIBackground": false,
   "fontFilename": "Metamorphous-Regular.ttf",

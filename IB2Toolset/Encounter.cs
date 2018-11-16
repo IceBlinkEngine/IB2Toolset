@@ -15,8 +15,6 @@ namespace IB2Toolset
     public class Encounter
     {
 
-
-
         private int challengeLevel = 1;
         private bool challengeHidden = false;
 
