@@ -21,8 +21,23 @@ namespace IB2Toolset
 
         private bool _isSecretDoor = false;
         private int _secretDoorDC = 10;
+        
+        //new ones
+        private string _secretDoorTraitTag = "mechanics";
 
+        private bool _isTrapMain = false;
+        private int _trapDC = 10;
+        private string _trapTraitTag = "mechanics";
 
+        private string _scriptFilename = "none";
+        private string _parm1 = "none";
+        private string _parm2 = "none";
+        private string _parm3 = "none";
+        private string _parm4 = "none";
+        private bool _onlyOnce = false;
+        private string _scriptActivationFloaty = "none";
+        private string _scriptActivationLogEntry = "none";
+        
         private bool _alwaysDrawNormalSize = false;
 
         private string _permanentText = "none";
@@ -436,7 +451,7 @@ namespace IB2Toolset
         }
 
         [Browsable(true), TypeConverter(typeof(IBScriptConverter))]  
-        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("IBScript name to be run for this Prop when a Player or Creature stands on this Prop")]  
+        [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("IBScript name to be run for this Prop when a Player or Creature stands on this Prop")]  
         public string OnEnterSquareIBScript  
         {  
             get { return _OnEnterSquareIBScript; }  
@@ -444,78 +459,78 @@ namespace IB2Toolset
         }
 
         [Browsable(true), TypeConverter(typeof(ScriptConverter))]  
-         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Script name to be run for this Prop when a Player or Creature stands on this Prop")]  
+         [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("Script name to be run for this Prop when a Player or Creature stands on this Prop")]  
          public string OnEnterSquareScript  
          {  
              get { return _OnEnterSquareScript; }  
              set { _OnEnterSquareScript = value; }  
          }  
-         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 1 to be used for this Script hook (leave as 'none' if not used)")]  
+         [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("Parameter 1 to be used for this Script hook (leave as 'none' if not used)")]  
          public string OnEnterSquareScriptParm1
          {  
              get { return _OnEnterSquareScriptParm1; }  
              set { _OnEnterSquareScriptParm1 = value; }  
          }  
-         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 2 to be used for this Script hook (leave as 'none' if not used)")]  
+         [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("Parameter 2 to be used for this Script hook (leave as 'none' if not used)")]  
          public string OnEnterSquareScriptParm2
          {  
              get { return _OnEnterSquareScriptParm2; }  
              set { _OnEnterSquareScriptParm2 = value; }  
          }  
-         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 3 to be used for this Script hook (leave as 'none' if not used)")]  
+         [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("Parameter 3 to be used for this Script hook (leave as 'none' if not used)")]  
          public string OnEnterSquareScriptParm3
          {  
              get { return _OnEnterSquareScriptParm3; }  
              set { _OnEnterSquareScriptParm3 = value; }  
          }
 
-        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("if true, the prop is used as a trap and can be disabled by a thief (pass/fail check made) or other selected classes.")]  
+        [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("if true, the prop is used as a trap and can be disabled by a thief (pass/fail check made) or other selected classes.")]  
         public bool isTrap  
         {  
              get { return _isTrap; }  
              set { _isTrap = value; }  
         }
           
-        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("the Difficulty Check value used when a Player tries to disable this trap.")]  
+        [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("the Difficulty Check value used when a Player tries to disable this trap.")]  
         public int trapDCforDisableCheck
         {  
              get { return _trapDCforDisableCheck; }  
              set { _trapDCforDisableCheck = value; }  
         }  
           
-         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameter 4 to be used for this Script hook (leave as 'none' if not used)")]  
+         [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("Parameter 4 to be used for this Script hook (leave as 'none' if not used)")]  
          public string OnEnterSquareScriptParm4
          {  
              get { return _OnEnterSquareScriptParm4; }  
              set { _OnEnterSquareScriptParm4 = value; }  
          }  
-         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("if true, the prop OnEnterSquareIBScript can be triggered by Players; if false, Players will not trigger the ibscript.")]  
+         [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("if true, the prop OnEnterSquareIBScript can be triggered by Players; if false, Players will not trigger the ibscript.")]  
          public bool canBeTriggeredByPc
          {  
              get { return _canBeTriggeredByPc; }  
              set { _canBeTriggeredByPc = value; }  
          }  
-         [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("if true, the prop OnEnterSquareIBScript can be triggered by Creatures; if false, Creatures will not trigger the ibscript.")]  
+         [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("if true, the prop OnEnterSquareIBScript can be triggered by Creatures; if false, Creatures will not trigger the ibscript.")]  
          public bool canBeTriggeredByCreature
          {  
              get { return _canBeTriggeredByCreature; }  
              set { _canBeTriggeredByCreature = value; }  
          }
 
-        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("if true, this prop can be triggered multiple times during the turn of a creature or pc, ie on every step; if false, a creature/pc can trigger it (and all of its squares) only once in a turn.")]
+        [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("if true, this prop can be triggered multiple times during the turn of a creature or pc, ie on every step; if false, a creature/pc can trigger it (and all of its squares) only once in a turn.")]
         public bool encounterPropTriggerOnEveryStep
         {
             get { return _encounterPropTriggerOnEveryStep; }
             set { _encounterPropTriggerOnEveryStep = value; }
         }
-        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("The number of times that the OnEnterSquare script or IBScript can be triggered. Each time the script is triggered, this number will be decremented by one. Once this number reaches zero, the Prop will be removed from the encounter map.")]  
+        [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("The number of times that the OnEnterSquare script or IBScript can be triggered. Each time the script is triggered, this number will be decremented by one. Once this number reaches zero, the Prop will be removed from the encounter map.")]  
          public int numberOfScriptCallsRemaining
          {  
              get { return _numberOfScriptCallsRemaining; }  
              set { _numberOfScriptCallsRemaining = value; }  
          }  
       
-        [CategoryAttribute("03 - Triggers (combat)"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]  
+        [CategoryAttribute("03b - Triggers (combat)"), DescriptionAttribute("Parameters to be used for this IBScript hook (as many parameters as needed, comma deliminated with no spaces)")]  
         public string OnEnterSquareIBScriptParms
         {  
             get { return _OnEnterSquareIBScriptParms; }  
@@ -610,18 +625,51 @@ namespace IB2Toolset
         //private int _secretDoorDC = 10;
         //private bool _secretDoorDirectionEW = true;
 
-        [CategoryAttribute("01a - Secret Door"), DescriptionAttribute("If true, the prop acts as secret door. Place it on a tile with elevated height. Do not place on teeh outer squares (border) of a map.")]
+        [CategoryAttribute("01a - Secret Door"), DescriptionAttribute("If true, the prop acts as secret door. Place it on a tile with elevated height (wall section, adhere to rules for bridges/tunnels basically). Do not place on the outer squares (border) of a map.")]
         public bool isSecretDoor
         {
             get { return _isSecretDoor; }
             set { _isSecretDoor = value; }
         }
 
-        [CategoryAttribute("01a - Secret Door"), DescriptionAttribute("TheDC to match to open this door. Keep in mind that the roll is static 10 + skill (so you will usually add 10 to the DC to offset the roll).")]
+        [CategoryAttribute("01a - Secret Door"), DescriptionAttribute("The DC to match to open this door. Keep in mind that the roll is static 10 + skill (so you will usually add 10 to the DC to offset the roll).")]
         public int secretDoorDC
         {
             get { return _secretDoorDC; }
             set { _secretDoorDC = value; }
+        }
+
+        [CategoryAttribute("01a - Secret Door"), DescriptionAttribute("The tag of the trait that is used for opening secret doors of this type in your campaign, e.g. mechanics")]
+        public string secretDoorTraitTag
+        {
+            get { return _secretDoorTraitTag; }
+            set { _secretDoorTraitTag = value; }
+        }
+
+        /*
+        private bool _isTrapMain = false;
+        private int _trapDC = 10;
+        private string _trapTraitTag = "mechanics";
+        */
+        [CategoryAttribute("01b - Trap"), DescriptionAttribute("If true, the prop acts as a trap. fires its script (See script section on contatct) and can disarmed via search (space key) action using triat and dc defined here. Note the one time/every time setting for scripts for traps that shall fire only once/on every contact.")]
+        public bool isTrapMain 
+        {
+            get { return _isTrapMain; }
+            set { _isTrapMain = value; }
+        }
+
+        [CategoryAttribute("01b - Trap"), DescriptionAttribute("The DC to match to disarm this trap. Keep in mind that the roll is static 10 + skill (so you will usually add 10 to the DC to offset the roll).")]
+        public int trapDC
+        {
+            get { return _trapDC; }
+            set { _trapDC = value; }
+        }
+
+        [CategoryAttribute("01b - Trap"), DescriptionAttribute("The tag of the trait that is used for disarming traps of this type in your campaign, e.g. mechanics")]
+        public string trapTraitTag
+        {
+            get { return _trapTraitTag; }
+            set { _trapTraitTag = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Current X location on map.")]
@@ -740,6 +788,56 @@ namespace IB2Toolset
             get { return _DeletePropWhenThisEncounterIsWon; }
             set { _DeletePropWhenThisEncounterIsWon = value; }
         }
+
+        [CategoryAttribute("03a - Triggers (Main map script)"), DescriptionAttribute("Name of the script to fire when stepping onto or bumping into this prop. Use the full file name, including .cs extension, like gaCastSpell.cs")]
+        public string scriptFilename
+        {
+            get { return _scriptFilename; }
+            set { _scriptFilename  = value; }
+        }
+
+        [CategoryAttribute("03a - Triggers (Main map script)"), DescriptionAttribute("First parameter for the script.")]
+        public string parm1
+        {
+            get { return _parm1; }
+            set { _parm1 = value; }
+        }
+
+        [CategoryAttribute("03a - Triggers (Main map script)"), DescriptionAttribute("Second parameter for the script.")]
+        public string parm2
+        {
+            get { return _parm2; }
+            set { _parm2 = value; }
+        }
+
+        [CategoryAttribute("03a - Triggers (Main map script)"), DescriptionAttribute("Third parameter for the script.")]
+        public string parm3
+        {
+            get { return _parm3; }
+            set { _parm3 = value; }
+        }
+
+        [CategoryAttribute("03a - Triggers (Main map script)"), DescriptionAttribute("Fourth parameter for the script.")]
+        public string parm4
+        {
+            get { return _parm4; }
+            set { _parm4 = value; }
+        }
+
+        [CategoryAttribute("03a - Triggers (Main map script)"), DescriptionAttribute("Floaty that appears upon activation of the script. Leave at none for no floaty.")]
+        public string scriptActivationFloaty
+        {
+            get { return _scriptActivationFloaty; }
+            set { _scriptActivationFloaty = value; }
+        }
+
+        [CategoryAttribute("03a - Triggers (Main map script)"), DescriptionAttribute("Log entry that appears upon activation of the script. LEave at none for no log entry.")]
+        public string scriptActivationLogEntry
+        {
+            get { return _scriptActivationLogEntry; }
+            set { _scriptActivationLogEntry = value; }
+        }
+
         [CategoryAttribute("04 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual props act unique.")]
         public List<LocalInt> PropLocalInts
         {
