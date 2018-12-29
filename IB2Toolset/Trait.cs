@@ -61,6 +61,7 @@ namespace IB2Toolset
     {
         #region Fields        
 
+        private string _nameOfTraitGroup = "none";
         private bool _showOnMainMap = false;
         private string _methodOfChecking = "leader";
         private string _name = "newTrait"; //item name
@@ -127,6 +128,19 @@ namespace IB2Toolset
             set
             {
                 _methodOfChecking = value;
+            }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The ingame name ofvtriats from this group, like Stealth, Mechanics, etc.")]
+        public string nameOfTraitGroup
+        {
+            get
+            {
+                return _nameOfTraitGroup;
+            }
+            set
+            {
+                _nameOfTraitGroup = value;
             }
         }
 

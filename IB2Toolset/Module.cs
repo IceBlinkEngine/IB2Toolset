@@ -15,6 +15,14 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private string _tagOfStealthMainTrait = "shadow";
+        private string _tagOfMovementSpeedTrait = "traveller";
+        private string _tagOfSpotEnemyTrait = "lookout";
+        private string _tagOfStealthCombatTrait = "stealth";
+        private string _tagOfDisarmTrapCombatTrait = "disabledevice";
+
+        private bool _useFlatFootedSystem = true;
+
         private bool _useLightSystem = false;
         private bool _useComplexCoordinateSystem = true;
         
@@ -198,6 +206,54 @@ namespace IB2Toolset
         {
             get { return _moduleName; }
             set { _moduleName = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, the engine allows for chance that the party or the enemy in an encounter starts flat-footed in the first round of combat, skipping that round. The chances are based on stealth and spotEnemy trait tag rolls using the corresponding DC values of props (or encounters themselves if a an encounter is not carried by a prop with own values).")]
+        public bool useFlatFootedSystem
+        {
+            get { return _useFlatFootedSystem; }
+            set { _useFlatFootedSystem = value; }
+        }
+
+        //private string _tagOfStealthMainTrait = "shadow";
+        //private string _tagOfMovementSpeedTrait = "traveller";
+        //private string _tagOfSpotEnemyTrait = "lookout";
+        //private string _tagOfStealthCombatTrait = "stealth";
+        //private string _tagOfDisarmTrapCombatTrait = "disabledevice";
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The module is using the trait with this tag, eg shadow, for all stralth related skill checks on the main map (avoid being detected by chasing creatures, catch the enemy/be yourself flat-footed in the first round of an encounter).")]
+        public string tagOfStealthMainTrait
+        {
+            get { return _tagOfStealthMainTrait; }
+            set { _tagOfStealthMainTrait = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The module is using the trait with this tag, eg traveller, to determine how much times passes per step on main map. This is also used to modify the chances for double or zero moves of cretaures (props) on main map, granting the party more relative speed.")]
+        public string tagOfMovementSpeedTrait
+        {
+            get { return _tagOfMovementSpeedTrait; }
+            set { _tagOfMovementSpeedTrait = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The module is using the trait with this tag, eg lookout, to determine whether the party can see a stealthy enemy (prop) on main map. Furthermore, this also influences the chances of the enemy/the party to be caught flat-footed in the first round of an encounter.)")]
+        public string tagOfSpotEnemyTrait
+        {
+            get { return _tagOfSpotEnemyTrait; }
+            set { _tagOfSpotEnemyTrait = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The module is using the trait with this tag, eg stealth, to handle chances of hiding in shadows during combat.")]
+        public string tagOfStealthCombatTrait 
+        {
+            get { return _tagOfStealthCombatTrait; }
+            set { _tagOfStealthCombatTrait = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The module is using the trait with this tag, eg disabledevice, to disarm trap props on comabt maps via a usebale trait.")]
+        public string tagOfDisarmTrapCombatTrait
+        {
+            get { return _tagOfDisarmTrapCombatTrait; }
+            set { _tagOfDisarmTrapCombatTrait = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Set to false to use the old way of showing speech bubbles (relative only to curently selected speaker). When true, different answer options on PCs are indicated by differnt bubble positions, indedendent from currently selected speaker.")]

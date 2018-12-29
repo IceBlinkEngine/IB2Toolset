@@ -4643,6 +4643,7 @@ public void loadSpriteDropdownList()
                 toReturn = (List<Prop>)serializer.Deserialize(file, typeof(List<Prop>));
             }
 
+            //glockensocken
             //try to also add all props from NewModule, but only if their tags are not already existing
             //openProps(_mainDirectory + "\\default\\NewModule\\data\\props.json");
 

@@ -15,6 +15,9 @@ namespace IB2Toolset
     public class Encounter
     {
 
+        private int encSpotEnemy = 0;// is not used if prop with encounter has spot != -1
+        private int encStealth = 0;// is not used if prop with encounter has stealth != -1
+
         private int challengeLevel = 1;
         private bool challengeHidden = false;
 
@@ -122,6 +125,20 @@ namespace IB2Toolset
         {
             get { return challengeLevel; }
             set { challengeLevel = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This is usually used as DC (so you will want to make this 10 higher than the party's skill level you aim for) for stealth roll of the party when determining who is caught flatfooted in an encounter. This value is not used if a prop with an encounter on it has a stealth value different than -1, ie normally the prop's stealth value takes precedence unless it is -1.")]
+        public int EncSpotEnemy
+        {
+            get { return encSpotEnemy; }
+            set { encSpotEnemy = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This is usually used as DC (so you will want to make this 10 higher than the party's skill level you aim for) for spot enemy roll of the party when determining who is caught flatfooted in an encounter. This value is not used if a prop with an encounter on it has a stealth value different than -1, ie normally the prop's stealth value takes precedence unless it is -1.")]
+        public int EncStealth
+        {
+            get { return encStealth; }
+            set { encStealth = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("When true, a single challengeHidden.png is shown instaed of the challenge rating (number of challengeSkull.png).")]
