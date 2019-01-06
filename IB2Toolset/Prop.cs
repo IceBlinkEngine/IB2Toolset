@@ -19,6 +19,8 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        //private bool _unavoidableConversation = false;
+        private string _ingameShownEncName = "none";
         private bool _isContainer = false;
         private string _containerTag = "none";
 
@@ -882,6 +884,16 @@ namespace IB2Toolset
             get { return _ConversationWhenOnPartySquare; }
             set { _ConversationWhenOnPartySquare = value; }
         }
+
+        
+        [CategoryAttribute("04d - STEP: conversation"), DescriptionAttribute("True = conversation on this prop cannot be avoided; False = conversation on this prop is not displayed when avoid conversations toggle is pressed.")]
+        public bool unavoidableConversation
+        {
+            get { return _unavoidableConversation; }
+            set { _unavoidableConversation = value; }
+        }
+
+
         [Browsable(true), TypeConverter(typeof(EncounterTypeConverter))]
         [CategoryAttribute("04c - STEP: encounter"), DescriptionAttribute("The encounter to launch when the party is on the same square as this prop (conversations, if any, are run first then encounters).")]
         public string EncounterWhenOnPartySquare
@@ -895,7 +907,12 @@ namespace IB2Toolset
             get { return _DeletePropWhenThisEncounterIsWon; }
             set { _DeletePropWhenThisEncounterIsWon = value; }
         }
-
+        [CategoryAttribute("04c - STEP: encounter"), DescriptionAttribute("The name of the encounter ingame that is shown to the player when hovering the mouse over the prop that carries the encounter. Set to none, if no name shall be shown.")]
+        public string ingameShownEncName
+        {
+            get { return _ingameShownEncName; }
+            set { _ingameShownEncName = value; }
+        }
         [CategoryAttribute("04a - STEP: script"), DescriptionAttribute("Name of the script to fire when stepping onto or bumping into this prop. Use the full file name, including .cs extension, like gaCastSpell.cs")]
         public string scriptFilename
         {
@@ -1055,13 +1072,15 @@ namespace IB2Toolset
             set { _isChaser = value; }
         }
         
-
+        /*
         [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("True = conversation on this prop cannot be avoided; False = conversation on this prop is not displayed when avoidconversations toggle is pressed.")]
         public bool unavoidableConversation
         {
             get { return _unavoidableConversation; }
             set { _unavoidableConversation = value; }
         }
+        */
+
         [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("Light related - true = is 2 square radius light of yellowish color, flickering and position shifting, ie think torch like")]
         public bool isLight
         {
