@@ -19,6 +19,8 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        public int _challengeLevelAssignedForEncounterInConvo = 0;
+        public bool _alwaysFlagAsEncounter = false;
         //private bool _unavoidableConversation = false;
         private string _ingameShownEncName = "none";
         private bool _isContainer = false;
@@ -885,7 +887,20 @@ namespace IB2Toolset
             set { _ConversationWhenOnPartySquare = value; }
         }
 
-        
+        [CategoryAttribute("04d - STEP: conversation"), DescriptionAttribute("For props with convos that call for an encounter within. You can set the define the shwon challenge level with this property (also set alwaysFlagAsEncounter to true).")]
+        public int challengeLevelAssignedForEncounterInConvo
+        {
+            get { return _challengeLevelAssignedForEncounterInConvo; }
+            set { _challengeLevelAssignedForEncounterInConvo = value; }
+        }
+
+        [CategoryAttribute("04d - STEP: conversation"), DescriptionAttribute("Set to true to show enounter challenge level instead of info on optional/mandatory conversation state. In case the encounter is not directly attached to the prop, but called from within convo, also use challengeLevelAssignedForEncounterInConvo.")]
+        public bool alwaysFlagAsEncounter
+        {
+            get { return _alwaysFlagAsEncounter; }
+            set { _alwaysFlagAsEncounter = value; }
+        }
+
         [CategoryAttribute("04d - STEP: conversation"), DescriptionAttribute("True = conversation on this prop cannot be avoided; False = conversation on this prop is not displayed when avoid conversations toggle is pressed.")]
         public bool unavoidableConversation
         {
