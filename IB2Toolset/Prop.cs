@@ -1033,7 +1033,7 @@ namespace IB2Toolset
         //private bool _stealthSkipsPropTriggers = false;
         
         //spot Enemy
-        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("The party rolls its stealth skill against spot enemy value of a prop (acting as dc, os use at least 10 for an easy roll). A failed roll of spot enemy makes chaser props not iniate a chase (though once they chase there is no more hiding). Also/but, if a prop has stealthSkipPropTriggers a failed roll means the party can just pass through the prop.")]
+        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("The party rolls its stealth skill against spot enemy value of a prop + 1 (acting as dc, so use at least 10 for an easy roll). On a successful roll the party's stealth skill makes chaser props not initiate or stop a running a chase. At two squres distance between party and prop, the rll is at its default difficulty. If the party gets closer the diffulty increases by 2, if further away it gets easier by 2. It also gets easier during the night (by 4) or in complete darkness (by 12). Also, if a prop has stealthSkipPropTriggers, a succesful roll means the party can just pass through the prop.")]
         public int spotEnemy
         {
             get { return _spotEnemy; }
@@ -1041,7 +1041,7 @@ namespace IB2Toolset
         }
 
         //stealth
-        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("The party rolls its spot enemy skill against stealth value of a prop (acting as dc, so use at least 10 for an easy roll). A successful roll makes props invisible for one step/time per step interval, so the prop can sneak up on the party.")]
+        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("The party rolls its spot enemy skill against stealth value of a prop, must match (acting as dc, so use at least 10 for an easy roll).The roll difficulty increases by 2 for each square of distance between party and prop and alos gets more diffcult with less light (by 4 during night, by 12 in complete darkness).  A failed roll makes props invisible for one step/time per step interval, so the prop can sneak up on the party.")]
         public int stealth
         {
             get { return _stealth; }
@@ -1049,7 +1049,7 @@ namespace IB2Toolset
         }
 
         //_stealthSkipsPropTriggers
-        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("A successfully stealthing party can move through a prop with this set to true, bypassing convo or encounter on this prop.")]
+        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("A successfully stealthing party - using spot enemy + 5 as DC - can move through a prop with this set to true, bypassing convo or encounter on this prop.")]
         public bool stealthSkipsPropTriggers
         {
             get { return _stealthSkipsPropTriggers; }
