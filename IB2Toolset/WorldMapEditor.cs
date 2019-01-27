@@ -5130,7 +5130,7 @@ namespace IB2Toolset
                                 }
                                 else
                                 {
-                                DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, 0, 1, 1, 0.5f + relativeTileHeight);
+                                DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, 0, 1, 1, (0.5f + relativeTileHeight)*0.2f);
                                 //DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 0, false, 0, 1, 1, 1, 0.5f + relativeTileHeight);
 
                             }
@@ -5148,7 +5148,7 @@ namespace IB2Toolset
                                 }
                                 else
                                 {
-                                    DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 1, 1, 1, 0.5f + relativeTileHeight);
+                                    DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 180, false, 0, 1, 1, 1, (0.5f + relativeTileHeight) * 0.2f);
                                 }
                             }
                         }
@@ -5163,7 +5163,7 @@ namespace IB2Toolset
                                 }
                                 else
                                 {
-                                    DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 1, 0, 1, 1, 0.5f + relativeTileHeight);
+                                    DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 90, false, 1, 0, 1, 1, (0.5f + relativeTileHeight) * 0.2f);
                                 }
                             }
                         }
@@ -5178,7 +5178,7 @@ namespace IB2Toolset
                                 }
                                 else
                                 {
-                                DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, 0, 0, 1, 1, 0.5f + relativeTileHeight);
+                                DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, 0, 0, 1, 1, (0.5f + relativeTileHeight) * 0.2f);
                                 //DrawD2DBitmap(GetFromBitmapList("highlight90"), src, dst, 270, false, 1, 0, 1, 1, 0.5f + relativeTileHeight);
 
                             }
@@ -5359,7 +5359,7 @@ namespace IB2Toolset
 
                     if (tile.inRampShadowWest1Long)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 180, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 180, true, 0, 0,0,0,0.8f);
                     }
                     if (tile.inRampShadowWest1Short)
                     {
@@ -5368,16 +5368,16 @@ namespace IB2Toolset
 
                     if (tile.inRampShadowWest2Long)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 0, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 0, false, 0, 0, 0, 0, 0.8f);
                     }
                     if (tile.inRampShadowWest2Short)
                     {
                         DrawD2DBitmap(GetFromBitmapList("downStairFlankShadowRight"), src, dst2, 180, false, 0, 0);
                     }
 
-                    if (tile.inRampShadowEast3Long)
+                   if (tile.inRampShadowEast3Long)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("leftCurtain"), src, dst, 180, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("leftCurtain"), src, dst, 180, false, 0, 0,0,0,0.8f);
                     }
                     if (tile.inRampShadowEast3Short)
                     {
@@ -5386,7 +5386,7 @@ namespace IB2Toolset
 
                     if (tile.inRampShadowEast4Long)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 0, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 0, true, 0, 0, 0, 0, 0.8f);
                     }
                     if (tile.inRampShadowEast4Short)
                     {
@@ -5395,7 +5395,7 @@ namespace IB2Toolset
 
                     if (tile.inRampShadowNorth5Long)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 270, true, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 270, true, 0, 0, 0, 0, 0.8f);
                     }
                     if (tile.inRampShadowNorth5Short)
                     {
@@ -5404,7 +5404,7 @@ namespace IB2Toolset
 
                     if (tile.inRampShadowNorth6Long)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("leftCurtain"), src, dst, 90, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("leftCurtain"), src, dst, 90, false, 0, 0,0,0,0.8f);
                     }
                     if (tile.inRampShadowNorth6Short)
                     {
@@ -5413,7 +5413,7 @@ namespace IB2Toolset
 
                     if (tile.inRampShadowSouth7Long)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("leftCurtain"), src, dst, 270, false, 0, 0);
+                        DrawD2DBitmap(GetFromBitmapList("leftCurtain"), src, dst, 270, false, 0, 0, 0, 0, 0.8f);
                     }
                     if (tile.inRampShadowSouth7Short)
                     {
@@ -5422,7 +5422,8 @@ namespace IB2Toolset
 
                     if (tile.inRampShadowSouth8Long)
                     {
-                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 90, true, 0, 0);
+                        //postmortem 2
+                        DrawD2DBitmap(GetFromBitmapList("rightCurtain"), src, dst, 90, true, 0, 0, 0,0,0.8f);
                     }
                     if (tile.inRampShadowSouth8Short)
                     {
@@ -5575,12 +5576,14 @@ namespace IB2Toolset
                                         DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 180, false, 0, 0);
                                     }
                                 }
-                                else if ((tile.isInShortShadeNW) && (!tile.inRampShadowNorth5Short) && (!tile.inRampShadowWest2Short) && (!tile.inRampShadowNorth5Long) && (!tile.inRampShadowWest2Long))
+                        //inRampShadowWest1Long killer postmortem
+                                else if ((tile.isInShortShadeNW) && (!tile.inRampShadowNorth5Short) && (!tile.inRampShadowWest2Short) && !tile.inRampShadowNorth6Short && !tile.inRampShadowWest1Short && (!tile.inRampShadowNorth5Long) && (!tile.inRampShadowWest2Long) && !tile.inRampShadowWest1Long && !tile.inRampShadowNorth6Long)
                                 {
                                     DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 180, false, 0, 0);
                                 }
                             }
 
+                            
                             else if (!tile.isInLongShadeN && !tile.isInLongShadeW)
                             {
 
@@ -5593,10 +5596,11 @@ namespace IB2Toolset
                                 {
                                     if ((!tile.inRampShadowNorth5Long) && (!tile.inRampShadowWest2Long))
                                     {
-                                        DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 180, false, 0, 0);
+                                        DrawD2DBitmap(GetFromBitmapList("longShadowCornerHalf"), src, dst, 180, false, 0, 0);
                                     }
                                 }
                             }
+                            
                         //}
 
                         //if (!tile.inRampShadowEast3Long && !tile.inRampShadowEast3Short && !tile.inRampShadowEast4Short && !tile.inRampShadowEast4Long && !tile.inRampShadowNorth5Long && !tile.inRampShadowNorth5Short && !tile.inRampShadowNorth6Long && !tile.inRampShadowNorth6Short)
@@ -5615,27 +5619,31 @@ namespace IB2Toolset
                                         DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 270, false, 0, 0);
                                     }
                                 }
-                                else if ((tile.isInShortShadeNE) && (!tile.inRampShadowEast4Short) && (!tile.inRampShadowNorth6Short) && (!tile.inRampShadowEast4Long) && (!tile.inRampShadowNorth6Long))
+                                else if ((tile.isInShortShadeNE) && (!tile.inRampShadowEast4Short) && (!tile.inRampShadowNorth6Short) && !tile.inRampShadowEast3Short && !tile.inRampShadowNorth5Short && (!tile.inRampShadowEast4Long) && (!tile.inRampShadowNorth6Long) && !tile.inRampShadowEast3Long && !tile.inRampShadowNorth5Long)
                                 {
                                     DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 270, false, 0, 0);
                                 }
                             }
 
+                            
                             else if (!tile.isInLongShadeN && !tile.isInLongShadeE)
                             {
                                 if (tile.isInMaxShadeNE)
                                 {
                                     DrawD2DBitmap(GetFromBitmapList("corner3"), src, dst, 270, false, 0, 0);
-                                }
+                                    //DrawD2DBitmap(GetFromBitmapList("corner3Half"), src, dst, 0, false, 0, 0);
+                        }
                                 else
                                 if (tile.isInLongShadeNE)
                                 {
                                     if ((!tile.inRampShadowNorth6Long) && (!tile.inRampShadowEast4Long))
                                     {
-                                        DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 270, false, 0, 0);
-                                    }
+                                        DrawD2DBitmap(GetFromBitmapList("longShadowCornerHalf"), src, dst, 270, false, 0, 0);
+                                        //DrawD2DBitmap(GetFromBitmapList("longShadowCornerHalf"), src, dst, 0, false, 0, 0);
+                            }
                                 }
                             }
+                            
                         //}
 
                         //if (!tile.inRampShadowEast3Short && !tile.inRampShadowEast3Long && !tile.inRampShadowEast4Short && !tile.inRampShadowEast4Long && !tile.inRampShadowSouth7Long && !tile.inRampShadowSouth7Short && !tile.inRampShadowSouth8Long && !tile.inRampShadowSouth8Short)
@@ -5654,12 +5662,15 @@ namespace IB2Toolset
                                         DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 0, false, 0, 0);
                                     }
                                 }
-                                else if ((tile.isInShortShadeSE) && (!tile.inRampShadowEast3Short) && (!tile.inRampShadowSouth8Short) && (!tile.inRampShadowEast3Long) && (!tile.inRampShadowSouth8Long))
+                                else if ((tile.isInShortShadeSE) && (!tile.inRampShadowEast3Short) && (!tile.inRampShadowSouth8Short) && !tile.inRampShadowEast4Short && !tile.inRampShadowSouth7Short && (!tile.inRampShadowEast3Long) && (!tile.inRampShadowSouth8Long) && !tile.inRampShadowEast4Long && !tile.inRampShadowSouth7Long)
                                 {
+
+                                    //if (!tile.isInShortShadeE) && (!tile.isInShortShadeS) && (tile.in)
+                                    
                                     DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 0, false, 0, 0);
                                 }
                             }
-
+                            
                             else if (!tile.isInLongShadeS && !tile.isInLongShadeE)
                             {
                         if (tile.isInMaxShadeSE)
@@ -5671,10 +5682,11 @@ namespace IB2Toolset
                         {
                             if ((!tile.inRampShadowSouth8Long) && (!tile.inRampShadowEast3Long))
                             {
-                                DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 0, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("longShadowCornerHalfMirror"), src, dst, 0, false, 0, 0);
                             }
                          }
                      }
+                     
                         //}
 
                         //if (!tile.inRampShadowWest1Short && !tile.inRampShadowWest1Long && !tile.inRampShadowWest2Short && !tile.inRampShadowWest2Long && !tile.inRampShadowSouth7Long && !tile.inRampShadowSouth7Short && !tile.inRampShadowSouth8Long && !tile.inRampShadowSouth8Short)
@@ -5693,27 +5705,30 @@ namespace IB2Toolset
                                 DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 90, false, 0, 0);
                             }
                                 }
-                                else if ((tile.isInShortShadeSW) && (!tile.inRampShadowWest1Short) && (!tile.inRampShadowSouth7Short) && (!tile.inRampShadowSouth7Long) && (!tile.inRampShadowWest1Long))
+                                else if ((tile.isInShortShadeSW) && (!tile.inRampShadowWest1Short) && (!tile.inRampShadowSouth7Short) && !tile.inRampShadowWest2Short && !tile.inRampShadowSouth8Short && (!tile.inRampShadowSouth7Long) && (!tile.inRampShadowWest1Long) && !tile.inRampShadowSouth8Long && !tile.inRampShadowWest2Long)
                                 {
                                     DrawD2DBitmap(GetFromBitmapList("shortShadowCorner"), src, dst, 90, false, 0, 0);
                                 }
                             }
-
+                            
                             else if (!tile.isInLongShadeS && !tile.isInLongShadeW)
                             {
                         if (tile.isInMaxShadeSW)
                         {
                             DrawD2DBitmap(GetFromBitmapList("corner3"), src, dst, 90, false, 0, 0);
+                            //DrawD2DBitmap(GetFromBitmapList("corner3Half"), src, dst, 180, false, 0, 0);
                         }
                         else
                         if (tile.isInLongShadeSW)
                                 {
                             if ((!tile.inRampShadowSouth7Long) && (!tile.inRampShadowWest1Long))
                             {
-                                DrawD2DBitmap(GetFromBitmapList("longShadowCorner"), src, dst, 90, false, 0, 0);
+                                DrawD2DBitmap(GetFromBitmapList("longShadowCornerHalfMirror"), src, dst, 90, false, 0, 0);
+                                //DrawD2DBitmap(GetFromBitmapList("longShadowCornerHalf"), src, dst, 180, false, 0, 0);
                             }
                                 }
                             }
+                            
                     //entrance lights
                     /*
                     if (tile.hasEntranceLightNorth)
@@ -7274,6 +7289,7 @@ namespace IB2Toolset
                                 if (indexOfSouthernNeighbour != -1)
                                 {
                                     int transformedX = x + xS;
+                                        //buggy
                                     int transformedY = y + yS - area.MapSizeY;
                                     tileCaster = mod.moduleAreasObjects[indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthernNeighbour].MapSizeX + transformedX];
 
@@ -7819,6 +7835,7 @@ namespace IB2Toolset
                                     {
                                         if ((xS == -1) && (yS == -1))
                                         {
+
                                             //tile.isInShortShadeNW = true;
                                             //AddingNewEventArgs HERE
                                             //breslauer
@@ -7826,7 +7843,8 @@ namespace IB2Toolset
                                             {
                                                 if (tile.hasDownStairShadowN || tile.hasDownStairShadowW)
                                                 {
-                                                    tile.isInShortShadeNW = true;
+                                                    //postmortem 3
+                                                        //tile.isInShortShadeNW = true;
                                                 }
                                             }
                                         }
@@ -7842,7 +7860,7 @@ namespace IB2Toolset
                                             {
                                                 if (tile.hasDownStairShadowN || tile.hasDownStairShadowW)
                                                 {
-                                                    tile.isInShortShadeNW = true;
+                                                    //tile.isInShortShadeNW = true;
                                                 }
                                             }
                                             //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
@@ -7853,7 +7871,7 @@ namespace IB2Toolset
                                             {
                                                 if (tile.hasDownStairShadowN || tile.hasDownStairShadowE)
                                                 {
-                                                    tile.isInShortShadeNE = true;
+                                                    //tile.isInShortShadeNE = true;
                                                 }
                                             }
                                             //tile.isInShortShadeNE = true;
@@ -7874,7 +7892,7 @@ namespace IB2Toolset
                                             {
                                                 if (tile.hasDownStairShadowS || tile.hasDownStairShadowE)
                                                 {
-                                                    tile.isInShortShadeSE = true;
+                                                    //tile.isInShortShadeSE = true;
                                                 }
                                             }
                                         }
@@ -7894,7 +7912,7 @@ namespace IB2Toolset
                                             {
                                                 if (tile.hasDownStairShadowS || tile.hasDownStairShadowW)
                                                 {
-                                                    tile.isInShortShadeSW = true;
+                                                    //tile.isInShortShadeSW = true;
                                                 }
                                             }
                                         }

@@ -15,6 +15,7 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private float _nightTimeDarkness = 0.65f;
         private string _tagOfStealthMainTrait = "shadow";
         private string _tagOfMovementSpeedTrait = "traveller";
         private string _tagOfSpotEnemyTrait = "lookout";
@@ -206,6 +207,14 @@ namespace IB2Toolset
         {
             get { return _moduleName; }
             set { _moduleName = value; }
+        }
+
+        //public float nightTimeDarkness = 0.65f;
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The darkness of the night time. 1.00f is the old default. Changed to 0.65f.")]
+        public float nightTimeDarkness
+        {
+            get { return _nightTimeDarkness; }
+            set { _nightTimeDarkness = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, the engine allows for chance that the party or the enemy in an encounter starts flat-footed in the first round of combat, skipping that round. The chances are based on stealth and spotEnemy trait tag rolls using the corresponding DC values of props (or encounters themselves if a an encounter is not carried by a prop with own values).")]

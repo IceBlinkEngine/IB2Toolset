@@ -1550,7 +1550,7 @@ public void loadSpriteDropdownList()
 
 
                         }
-                    }
+                    } 
                 }
             }
             */
@@ -2607,7 +2607,8 @@ public void loadSpriteDropdownList()
                                                 {
                                                     if (tile.hasDownStairShadowN || tile.hasDownStairShadowW)
                                                     {
-                                                        tile.isInShortShadeNW = true;
+                                                        //postmortem 3
+                                                        //tile.isInShortShadeNW = true;
                                                     }
                                                 }
                                             }
@@ -2623,7 +2624,7 @@ public void loadSpriteDropdownList()
                                                 {
                                                     if (tile.hasDownStairShadowN || tile.hasDownStairShadowW)
                                                     {
-                                                        tile.isInShortShadeNW = true;
+                                                        //tile.isInShortShadeNW = true;
                                                     }
                                                 }
                                                 //tile.numberOfHeightLevelsThisTileisHigherThanNeighbourN = tile.heightLevel - tileCaster.heightLevel;
@@ -2634,7 +2635,7 @@ public void loadSpriteDropdownList()
                                                 {
                                                     if (tile.hasDownStairShadowN || tile.hasDownStairShadowE)
                                                     {
-                                                        tile.isInShortShadeNE = true;
+                                                        //tile.isInShortShadeNE = true;
                                                     }
                                                 }
                                                 //tile.isInShortShadeNE = true;
@@ -2655,7 +2656,7 @@ public void loadSpriteDropdownList()
                                                 {
                                                     if (tile.hasDownStairShadowS || tile.hasDownStairShadowE)
                                                     {
-                                                        tile.isInShortShadeSE = true;
+                                                        //tile.isInShortShadeSE = true;
                                                     }
                                                 }
                                             }
@@ -2675,7 +2676,7 @@ public void loadSpriteDropdownList()
                                                 {
                                                     if (tile.hasDownStairShadowS || tile.hasDownStairShadowW)
                                                     {
-                                                        tile.isInShortShadeSW = true;
+                                                        //tile.isInShortShadeSW = true;
                                                     }
                                                 }
                                             }

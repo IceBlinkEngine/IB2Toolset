@@ -67,6 +67,7 @@
   "attackFromBehindToHitModifier": 2,
   "attackFromBehindDamageModifier": 0,
   "moduleName": "temp01",
+  "nightTimeDarkness": 0.65,
   "useFlatFootedSystem": true,
   "tagOfStealthMainTrait": "shadow",
   "tagOfMovementSpeedTrait": "traveller",
