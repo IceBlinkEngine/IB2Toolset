@@ -71,7 +71,7 @@ namespace IB2Toolset
         private string _prerequisiteTrait = "none";
         private int _skillModifier = 0;
         private string _skillModifierAttribute = "str";
-        //private UsableInSituation useableInSituation = UsableInSituation.Always;
+        //private useableinsituation useableInSituation = useableinsituation.Always;
         private string _useableInSituation = "Always";
 
         private int _requiredStrength = 0;
@@ -303,7 +303,7 @@ namespace IB2Toolset
         }
 
         /*[CategoryAttribute("01 - Main"), DescriptionAttribute("When can this be used: Always means that it can be used in combat and on the main maps, Passive means that it is always on and doesn't need to be activated.")]
-        public UsableInSituation UseableInSituation
+        public useableinsituation UseableInSituation
         {
             get { return useableInSituation; }
             set { useableInSituation = value; }

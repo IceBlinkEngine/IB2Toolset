@@ -24,7 +24,7 @@ namespace IB2Toolset
         #region Fields
         [JsonIgnore]
         public Bitmap itemIconBitmap;
-        //private UsableInSituation useableInSituation = UsableInSituation.Always;
+        //private useableinsituation useableInSituation = useableinsituation.Always;
         //private category p_category = category.Armor; //catergory type (armor, weapon, ammo, etc.)
         private string _armorWeightType = "Light"; //Light, Medium, Heavy           
         //private ScriptSelectEditorReturnObject onScoringHit = new ScriptSelectEditorReturnObject();
@@ -314,7 +314,7 @@ namespace IB2Toolset
             }
         }
         /*[CategoryAttribute("99 - Not Implemented Yet"), DescriptionAttribute("When can this be used: Always means that it can be used in combat and on the main maps, Passive means that it is always on and doesn't need to be activated.")]
-        public UsableInSituation UseableInSituation
+        public useableinsituation UseableInSituation
         {
             get { return useableInSituation; }
             set { useableInSituation = value; }

@@ -100,7 +100,7 @@ namespace IB2Toolset
                         TraitAllowed newTA = new TraitAllowed();
                         newTA.name = tr.name;
                         newTA.tag = tr.tag;
-                        newTA.usableInSituation = tr.useableInSituation;
+                        newTA.useableinsituation = tr.useableInSituation;
                         newTA.associatedSpellTag = tr.associatedSpellTag;
                         cl.traitsAllowed.Add(newTA);
                     }

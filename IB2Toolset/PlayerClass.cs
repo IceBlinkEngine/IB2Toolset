@@ -494,13 +494,13 @@ namespace IB2Toolset
             }
         }
 
-        public string usableInSituation
+        public string useableinsituation
         {
             get { return _useableInSituation; }
             set
             {
                 _useableInSituation = value;
-                this.NotifyPropertyChanged("usableInSituation");
+                this.NotifyPropertyChanged("useableinsituation");
             }
         }
 

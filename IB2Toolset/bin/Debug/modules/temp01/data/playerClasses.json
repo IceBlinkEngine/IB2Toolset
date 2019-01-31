@@ -392,7 +392,7 @@
       {
         "name": "Cleave",
         "tag": "cleave",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
@@ -402,7 +402,7 @@
       {
         "name": "Two Attacks",
         "tag": "twoAttack",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -412,7 +412,7 @@
       {
         "name": "Intimidate (L2)",
         "tag": "intimidate2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -422,7 +422,7 @@
       {
         "name": "Intimidate (L1)",
         "tag": "intimidate",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -726,7 +726,7 @@
       {
         "name": "Diplomacy (L2)",
         "tag": "diplomacy2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -736,7 +736,7 @@
       {
         "name": "Diplomacy (L1)",
         "tag": "diplomacy",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -1178,7 +1178,7 @@
       {
         "name": "Point Blank Shot",
         "tag": "pointblankshot",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": true,
@@ -1188,7 +1188,7 @@
       {
         "name": "Spot",
         "tag": "spot",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
@@ -1198,7 +1198,7 @@
       {
         "name": "Intimidate (L1)",
         "tag": "intimidate",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -1208,7 +1208,7 @@
       {
         "name": "Intimidate (L2)",
         "tag": "intimidate2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -1218,7 +1218,7 @@
       {
         "name": "Spot (L2)",
         "tag": "spot2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -1520,7 +1520,7 @@
       {
         "name": "Bluff (L1)",
         "tag": "bluff",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -1530,7 +1530,7 @@
       {
         "name": "Bluff (L2)",
         "tag": "bluff2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -1540,7 +1540,7 @@
       {
         "name": "Diplomacy (L1)",
         "tag": "diplomacy",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -1550,7 +1550,7 @@
       {
         "name": "Diplomacy (L2)",
         "tag": "diplomacy2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -1947,7 +1947,7 @@
       {
         "name": "Sneak Attack",
         "tag": "sneakattack",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
@@ -1957,7 +1957,7 @@
       {
         "name": "Critical Strike",
         "tag": "criticalstrike",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -1967,7 +1967,7 @@
       {
         "name": "Evasion",
         "tag": "evasion",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 2,
         "automaticallyLearned": false,
@@ -1977,7 +1977,7 @@
       {
         "name": "Bluff (L1)",
         "tag": "bluff",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -1987,7 +1987,7 @@
       {
         "name": "Bluff (L2)",
         "tag": "bluff2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -1997,7 +1997,7 @@
       {
         "name": "Diplomacy (L1)",
         "tag": "diplomacy",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": false,
@@ -2007,7 +2007,7 @@
       {
         "name": "Diplomacy (L2)",
         "tag": "diplomacy2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 4,
         "automaticallyLearned": false,
@@ -2017,7 +2017,7 @@
       {
         "name": "Pick Pocket (L1)",
         "tag": "pickpocket",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
@@ -2027,7 +2027,7 @@
       {
         "name": "Pick Pocket (L2)",
         "tag": "pickpocket2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -2037,7 +2037,7 @@
       {
         "name": "Spot (L1)",
         "tag": "spot",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
@@ -2047,7 +2047,7 @@
       {
         "name": "Spot (L2)",
         "tag": "spot2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -2057,7 +2057,7 @@
       {
         "name": "Stealth (L1)",
         "tag": "stealth",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
@@ -2067,7 +2067,7 @@
       {
         "name": "Stealth (L2)",
         "tag": "stealth2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,
@@ -2077,7 +2077,7 @@
       {
         "name": "Disable Device (L1)",
         "tag": "disabledevice",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 1,
         "automaticallyLearned": true,
@@ -2087,7 +2087,7 @@
       {
         "name": "Disable Device (L2)",
         "tag": "disabledevice2",
-        "usableInSituation": "Passive",
+        "useableinsituation": "Passive",
         "associatedSpellTag": "none",
         "atWhatLevelIsAvailable": 3,
         "automaticallyLearned": false,

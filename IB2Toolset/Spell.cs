@@ -77,7 +77,7 @@ namespace IB2Toolset
         private string _tag = "newSpellTag"; //item unique tag name
         private string _spellImage = "sp_magebolt";
         private string _description = "";
-        //private UsableInSituation useableInSituation = UsableInSituation.Always;
+        //private useableinsituation useableInSituation = useableinsituation.Always;
         private string _useableInSituation = "Always";//InCombat, OutOfCombat, Always    
         private string _spriteFilename = "none";
         private string _spriteEndingFilename = "none";
@@ -217,7 +217,7 @@ namespace IB2Toolset
             }
         }
         /*[CategoryAttribute("01 - Main"), DescriptionAttribute("When can this be used: Always means that it can be used in combat and on the main maps, Passive means that it is always on and doesn't need to be activated.")]
-        public UsableInSituation UseableInSituation
+        public useableinsituation UseableInSituation
         {
             get { return useableInSituation; }
             set { useableInSituation = value; }
