@@ -31,6 +31,7 @@
             this.chkTrigEnabled = new System.Windows.Forms.CheckBox();
             this.chkTrigOnce = new System.Windows.Forms.CheckBox();
             this.chkTrigActiveSearch = new System.Windows.Forms.CheckBox();
+            this.chkTrigConnectedDiscovery = new System.Windows.Forms.CheckBox();
             this.txtTrigTag = new System.Windows.Forms.TextBox();
             this.gbTrigger = new System.Windows.Forms.GroupBox();
             this.gbCombatOnly = new System.Windows.Forms.GroupBox();
@@ -148,22 +149,33 @@
             this.chkTrigOnce.AutoSize = true;
             this.chkTrigOnce.Location = new System.Drawing.Point(69, 19);
             this.chkTrigOnce.Name = "chkTrigOnce";
-            this.chkTrigOnce.Size = new System.Drawing.Size(75, 17);
+            this.chkTrigOnce.Size = new System.Drawing.Size(50, 17);
             this.chkTrigOnce.TabIndex = 1;
-            this.chkTrigOnce.Text = "Do Once";
+            this.chkTrigOnce.Text = "Once";
             this.chkTrigOnce.UseVisualStyleBackColor = true;
             this.chkTrigOnce.CheckedChanged += new System.EventHandler(this.chkTrigOnce_CheckedChanged);
             // 
             // chkTrigOnce
             // 
             this.chkTrigActiveSearch.AutoSize = true;
-            this.chkTrigActiveSearch.Location = new System.Drawing.Point(147, 19);
+            this.chkTrigActiveSearch.Location = new System.Drawing.Point(121, 19);
             this.chkTrigActiveSearch.Name = "chkTrigActiveSearch";
-            this.chkTrigActiveSearch.Size = new System.Drawing.Size(93, 17);
+            this.chkTrigActiveSearch.Size = new System.Drawing.Size(55, 17);
             this.chkTrigActiveSearch.TabIndex = 2;
             this.chkTrigActiveSearch.Text = "Search";
             this.chkTrigActiveSearch.UseVisualStyleBackColor = true;
             this.chkTrigActiveSearch.CheckedChanged += new System.EventHandler(this.chkTrigActiveSearch_CheckedChanged);
+            // 
+            // chkTrigOnce
+            // 
+            this.chkTrigConnectedDiscovery.AutoSize = true;
+            this.chkTrigConnectedDiscovery.Location = new System.Drawing.Point(182, 19);
+            this.chkTrigConnectedDiscovery.Name = "chkTrigConnectedDiscovery";
+            this.chkTrigConnectedDiscovery.Size = new System.Drawing.Size(50, 17);
+            this.chkTrigConnectedDiscovery.TabIndex = 2;
+            this.chkTrigConnectedDiscovery.Text = "cD";
+            this.chkTrigConnectedDiscovery.UseVisualStyleBackColor = true;
+            this.chkTrigConnectedDiscovery.CheckedChanged += new System.EventHandler(this.chkTrigConnectedDiscovery_CheckedChanged);
             // 
             // txtTrigTag
             // 
@@ -182,6 +194,7 @@
             this.gbTrigger.Controls.Add(this.txtTrigTag);
             this.gbTrigger.Controls.Add(this.chkTrigOnce);
             this.gbTrigger.Controls.Add(this.chkTrigActiveSearch);
+            this.gbTrigger.Controls.Add(this.chkTrigConnectedDiscovery);
             this.gbTrigger.Controls.Add(this.chkTrigEnabled);
             this.gbTrigger.Location = new System.Drawing.Point(3, 3);
             this.gbTrigger.Name = "gbTrigger";
@@ -1144,6 +1157,7 @@
         private System.Windows.Forms.CheckBox chkTrigEnabled;
         private System.Windows.Forms.CheckBox chkTrigOnce;
         private System.Windows.Forms.CheckBox chkTrigActiveSearch;
+        private System.Windows.Forms.CheckBox chkTrigConnectedDiscovery;
         private System.Windows.Forms.TextBox txtTrigTag;
         private System.Windows.Forms.GroupBox gbTrigger;
         private System.Windows.Forms.Label label1;

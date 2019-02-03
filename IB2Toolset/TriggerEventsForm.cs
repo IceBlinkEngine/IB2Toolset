@@ -54,6 +54,15 @@ namespace IB2Toolset
                 prntForm.currentSelectedTrigger.RequiresActiveSearch = chkTrigActiveSearch.Checked;
             }
         }
+
+        private void chkTrigConnectedDiscovery_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.ConnectedDiscovery = chkTrigConnectedDiscovery.Checked;
+            }
+        }
+
         private void txtTrigTag_TextChanged(object sender, EventArgs e)
         {
             if (prntForm.currentSelectedTrigger != null)
@@ -493,6 +502,7 @@ namespace IB2Toolset
                 chkTrigEnabled.Checked = trg.Enabled;
                 chkTrigOnce.Checked = trg.DoOnceOnly;
                 chkTrigActiveSearch.Checked = trg.RequiresActiveSearch;
+                chkTrigConnectedDiscovery.Checked = trg.ConnectedDiscovery;
                 txtTrigTag.Text = trg.TriggerTag;
                 chkTriggeredByPc.Checked = trg.canBeTriggeredByPc;
                 chkTriggeredByCreatures.Checked = trg.canBeTriggeredByCreature;

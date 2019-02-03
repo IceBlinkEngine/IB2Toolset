@@ -21,6 +21,7 @@ namespace IB2Toolset
     public class Trigger
     {
         #region Fields
+        private bool connectedDiscovery = false;
         private bool requiresActiveSearch = false;
         private string triggerTag = "newTrigger"; //must be unique
         private bool enabled = true;
@@ -114,6 +115,13 @@ namespace IB2Toolset
         {
             get { return requiresActiveSearch; }
             set { requiresActiveSearch = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("If true, all squares in this trigger's square liste become visible if one of them is discovered.")]
+        public bool ConnectedDiscovery
+        {
+            get { return connectedDiscovery; }
+            set { connectedDiscovery = value; }
         }
 
         [CategoryAttribute("0 - Main"), DescriptionAttribute("List of all the squares that this Trigger covers"), ReadOnly(true)]
