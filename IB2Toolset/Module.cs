@@ -15,6 +15,18 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private bool _useManualPointDistribution = true;
+        private int _attributeBaseValue = 10;
+        private int _attributeMinValue = 6;
+        private int _attributeMaxValue = 18;
+        private int _pointPoolSize = 15;
+        private int _twoPointThreshold = 14;
+        private int _threePointThreshold = 16;
+        private int _fourPointThreshold = 18;
+        private int _numberOfMentalAtttributesBelowBaseAllowed = 2;
+        private int _numberOfPhysicalAtttributesBelowBaseAllowed = 2;
+
+        private bool _playFootstepSound = true;
         private float _nightTimeDarkness = 0.65f;
         private string _tagOfStealthMainTrait = "shadow";
         private string _tagOfMovementSpeedTrait = "traveller";
@@ -217,6 +229,13 @@ namespace IB2Toolset
             set { _nightTimeDarkness = value; }
         }
 
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("If true, the party makes a little walk sound on each step.")]
+        public bool playFootstepSound
+        {
+            get { return _playFootstepSound; }
+            set { _playFootstepSound = value; }
+        }
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, the engine allows for chance that the party or the enemy in an encounter starts flat-footed in the first round of combat, skipping that round. The chances are based on stealth and spotEnemy trait tag rolls using the corresponding DC values of props (or encounters themselves if a an encounter is not carried by a prop with own values).")]
         public bool useFlatFootedSystem
         {
@@ -353,6 +372,90 @@ namespace IB2Toolset
         {
             get { return _mustUsePreMadePC; }
             set { _mustUsePreMadePC = value; }
+        }
+
+
+        /*
+        private bool _useManualPointDistribution = true;
+        private int _attributeBaseValue = 10;
+        private int _attributeMinValue = 6;
+        private int _attributeMaxValue = 18;
+        private int _pointPoolSize = 15;
+        private int _twoPointThreshold = 14;
+        private int _threePointThreshold = 16;
+        private int _fourPointThreshold = 18;
+        private int _numberOfMentalAtttributesBelowBaseAllowed = 2;
+        private int _numberOfPhysicalAtttributesBelowBaseAllowed = 2;
+        */
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("System for manually setting attribute values at pc creation instead of rolling")]
+        public bool useManualPointDistribution
+        {
+            get { return _useManualPointDistribution; }
+            set { _useManualPointDistribution = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int attributeBaseValue
+        {
+            get { return _attributeBaseValue; }
+            set { _attributeBaseValue = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int attributeMinValue
+        {
+            get { return _attributeMinValue; }
+            set { _attributeMinValue = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int attributeMaxValue
+        {
+            get { return _attributeMaxValue; }
+            set { _attributeMaxValue = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int pointPoolSize
+        {
+            get { return _pointPoolSize; }
+            set { _pointPoolSize = value; }
+        }
+
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int twoPointThreshold
+        {
+            get { return _twoPointThreshold; }
+            set { _twoPointThreshold = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int threePointThreshold
+        {
+            get { return _threePointThreshold; }
+            set { _threePointThreshold = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int fourPointThreshold
+        {
+            get { return _fourPointThreshold; }
+            set { _fourPointThreshold = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int numberOfMentalAtttributesBelowBaseAllowed
+        {
+            get { return _numberOfMentalAtttributesBelowBaseAllowed; }
+            set { _numberOfMentalAtttributesBelowBaseAllowed = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("Hopefully self explanatory")]
+        public int numberOfPhysicalAtttributesBelowBaseAllowed
+        {
+            get { return _numberOfPhysicalAtttributesBelowBaseAllowed; }
+            set { _numberOfPhysicalAtttributesBelowBaseAllowed = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag activates the realTime timer. It will make a new turn on main map happen after a number of realtime milliseconds defined in realTimeTimerLengthInMilliSecond. Its main purpose is to have moving NPC and creatures who even move when the party just stands idly. It does not affect combat which never has a real time component")]
