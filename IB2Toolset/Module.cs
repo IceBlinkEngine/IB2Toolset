@@ -15,6 +15,7 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private bool _useHybridRollPointDistribution = false;
         private bool _useManualPointDistribution = true;
         private int _attributeBaseValue = 10;
         private int _attributeMinValue = 6;
@@ -387,7 +388,16 @@ namespace IB2Toolset
         private int _numberOfMentalAtttributesBelowBaseAllowed = 2;
         private int _numberOfPhysicalAtttributesBelowBaseAllowed = 2;
         */
-        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("System for manually setting attribute values at pc creation instead of rolling")]
+        //private bool _useHybridRollPointDistribution = false;
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("System for manually setting attribute values at pc creation AFTER rolling: min and max values are used, below mental and physical limits are not used, inital poolsize is always zero; set roll method in the rules editor.")]
+        public bool useHybridRollPointDistribution
+        {
+            get { return _useHybridRollPointDistribution; }
+            set { _useHybridRollPointDistribution = value; }
+        }
+
+        [CategoryAttribute("03a - Manual Attribute Point Distribution"), DescriptionAttribute("System for manually setting attribute values at pc creation INSTEAD of rolling")]
         public bool useManualPointDistribution
         {
             get { return _useManualPointDistribution; }

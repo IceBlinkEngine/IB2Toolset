@@ -80,6 +80,23 @@ namespace IB2Toolset
         {
             refreshListBox();
         }
+        private void checkForChangedSpells()
+        {
+            foreach (PlayerClass cl in prntForm.playerClassesList)
+            {
+                foreach (Spell sp in prntForm.spellsList)
+                {
+                    foreach (SpellAllowed sa in cl.spellsAllowed)
+                    {
+                        if (sa.tag == sp.tag)
+                        {
+                            sa.name = sp.name;
+                            sa.needsSpecificTrainingToLearn = sa.needsSpecificTrainingToLearn;
+                        }
+                    }
+                }
+            }
+        }
         private void checkForNewSpells()
         {
             bool foundOne = false;
@@ -138,6 +155,7 @@ namespace IB2Toolset
         private void SpellEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             checkForNewSpells();
+            checkForChangedSpells();
             checkForDeletedSpells();
         }
 

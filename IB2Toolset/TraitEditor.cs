@@ -80,6 +80,24 @@ namespace IB2Toolset
         {
             refreshListBox();
         }
+        private void checkForChangedTraits()
+        {
+            foreach (PlayerClass cl in prntForm.playerClassesList)
+            {
+                foreach (Trait tr in prntForm.traitsList)
+                {
+                    foreach (TraitAllowed ta in cl.traitsAllowed)
+                    {
+                        if (ta.tag == tr.tag)
+                        {
+                            ta.name = tr.name;
+                            ta.useableinsituation = tr.useableInSituation;
+                            ta.associatedSpellTag = tr.associatedSpellTag;
+                        }
+                    }
+                }
+            }
+        }
         private void checkForNewTraits()
         {
             bool foundOne = false;
@@ -140,6 +158,7 @@ namespace IB2Toolset
         private void TraitEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             checkForNewTraits();
+            checkForChangedTraits();
             checkForDeletedTraits();
         }
 

@@ -88,6 +88,7 @@
   "defaultPlayerFilename": "drin.json",
   "hideRoster": false,
   "mustUsePreMadePC": false,
+  "useHybridRollPointDistribution": false,
   "useManualPointDistribution": true,
   "attributeBaseValue": 10,
   "attributeMinValue": 6,
