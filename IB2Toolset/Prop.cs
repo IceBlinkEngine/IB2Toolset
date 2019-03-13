@@ -19,6 +19,45 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        //04e - STEP: Climb
+        private bool _isClimbable = false;
+        private string _climbDirection = "north"; //north, east, south, west 
+        private int _climbDC = 0;
+        private string _climbTrait = "athlete";
+
+        //1.pushable grid properties (04f - STEP: Pushable grid)
+        private bool _isGridForPushableObject = false;
+        private bool _pushableGridCanBeResetViaHotkey = true;
+        private bool _pushableGridCanBeResetEvenAfterCompletion = false;
+        private int _partyDefaultPushableGridPositionX = 0;
+        private int _partyDefaultPushableGridPositionY = 0;
+        private bool _allPushableGridTargetPositionsAreShared = true;
+
+        private string _keyOfGlobalIntToChangeUponPushableGridCompletion = "none";
+        private int _valueOfGlobalIntToChangeUponPushableGridCompletion = 0;
+        private bool _lockGridOnCompletion = false;
+        private bool _removeGridOnCompletion = false;
+        private string _messageOnCompletion = "none";
+
+        private string _keyOfGlobalIntToChangeUponPushableGridFailure = "none";
+        private int _valueOfGlobalIntToChangeUponPushableGridFailure = 0;
+        private bool _lockGridOnFailure = false;
+        private bool _removeGridOnFailure = false;
+        private string _messageOnFailure = "none";
+        private bool _pushableGridIsResetOnEachFailure = false;
+
+        //to do: all the property fields
+
+        //2.pushable object properties (04f - STEP: Pushable object)
+        private bool _isPushable = false;
+        private string _pushableGridTriggerTag = "none";
+        private int _pushableStartPositionX = 0;
+        private int _pushableStartPositionY = 0;
+        private int _pushableTargetPositionX = 0;
+        private int _pushableTargetPositionY = 0;
+        private string _pushableTraitTag = "strongman";
+        private int _pushableDC = 10;
+
         public int _challengeLevelAssignedForEncounterInConvo = 0;
         public bool _alwaysFlagAsEncounter = false;
         //private bool _unavoidableConversation = false;
@@ -877,6 +916,239 @@ namespace IB2Toolset
         {
             get { return _mouseOverText; }
             set { _mouseOverText = value; }
+        }
+
+        /*
+         //1.pushable grid properties (04f - STEP: Pushable grid)
+        private bool _pushableGridCanBeResetViaHotkey = true;
+        private bool _pushableGridCanBeResetEvenAfterCompletion = false;
+        private int _partyDefaultPushableGridPositionX = 0;
+        private int _partyDefaultPushableGridPositionY = 0;
+        private bool _allPushableGridTargetPositionsAreShared = true;
+
+        private string _keyOfGlobalIntToChangeUponPushableGridCompletion = "none";
+        private int _valueOfGlobalIntToChangeUponPushableGridCompletion = 0;
+        private bool _lockGridOnCompletion = false;
+        private bool _removeGridOnCompletion = false;
+        private string _messageOnCompletion = "none";
+
+        private string _keyOfGlobalIntToChangeUponPushableGridFailure = "none";
+        private int _valueOfGlobalIntToChangeUponPushableGridFailure = 0;
+        private bool _lockGridOnFailure = false;
+       
+        private bool _pushableGridIsResetOnEachFailure = false;
+
+        //to do: all the property fields
+
+        //2.pushable object properties (04f - STEP: Pushable object)
+        private bool _isPushable = false;
+        private string _pushableGridTriggerTag = "none";
+        private int _pushableStartPositionX = 0;
+        private int _pushableStartPositionY = 0;
+        private int _pushableTargetPositionX = 0;
+        private int _pushableTargetPositionY = 0;
+        private string _pushableTraitTag = "strongman";
+        private int _pushableDC = 10;
+        */
+        
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("This pushable grid can be reset via G hotkey while standing on it.")]
+        public bool pushableGridCanBeResetViaHotkey
+        {
+            get { return _pushableGridCanBeResetViaHotkey; }
+            set { _pushableGridCanBeResetViaHotkey = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("Even after auccessfully completing it, this pushable grid can be reset via G hotkey while standing on it (reset has no effect on the global int chnaged upon completion.)")]
+        public bool pushableGridCanBeResetEvenAfterCompletion
+        {
+            get { return _pushableGridCanBeResetViaHotkey; }
+            set { _pushableGridCanBeResetViaHotkey = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The X-component of the default position that the party is teleported to on reset of the grid via G hotkey.")]
+        public int partyDefaultPushableGridPositionX
+        {
+            get { return _partyDefaultPushableGridPositionX; }
+            set { _partyDefaultPushableGridPositionX = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The Y-component of the default position that the party is teleported to on reset of the grid via G hotkey.")]
+        public int partyDefaultPushableGridPositionY
+        {
+            get { return _partyDefaultPushableGridPositionY; }
+            set { _partyDefaultPushableGridPositionY = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("When true, each pushable object can use the target square of any other object of this grid for successful completion (think Sokoban). When false, each object must end on its very own target square for completion.")]
+        public bool allPushableGridTargetPositionsAreShared
+        {
+            get { return _allPushableGridTargetPositionsAreShared; }
+            set { _allPushableGridTargetPositionsAreShared = value; }
+        }
+        
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The key of the global int to change upon completion of the grid.")]
+        public string keyOfGlobalIntToChangeUponPushableGridCompletion
+        {
+            get { return _keyOfGlobalIntToChangeUponPushableGridCompletion; }
+            set { _keyOfGlobalIntToChangeUponPushableGridCompletion = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The value that the global int is set to upon completion.")]
+        public int valueOfGlobalIntToChangeUponPushableGridCompletion
+        {
+            get { return _valueOfGlobalIntToChangeUponPushableGridCompletion; }
+            set { _valueOfGlobalIntToChangeUponPushableGridCompletion = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("When true, the objects on the grid cannot be moved any more after full completion of the grid.")]
+        public bool lockGridOnCompletion
+        {
+            get { return _lockGridOnCompletion; }
+            set { _lockGridOnCompletion = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("When true, all objects on the grid are removed upon failure. This requires allPushableGridTargetPositionsAreShared to be set to false - failure is moving an object onto the target location of another object of the grid.")]
+        public bool removeGridOnFailure
+        {
+            get { return _removeGridOnFailure; }
+            set { _removeGridOnFailure = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The text shown as floaty and in log  upon failure. When set to none, no text is shown.")]
+        public string messageOnFailure
+        {
+            get { return _messageOnFailure; }
+            set { _messageOnFailure = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("When true, all objects on the grid are removed upon completion. Completion is moving all objects onto the viable target location(s). Again, allPushableGridTargetPositionsAreShared determines whether each object has to end on its very own target location.")]
+        public bool removeGridOnCompletion
+        {
+            get { return _removeGridOnCompletion; }
+            set { _removeGridOnCompletion = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The text shown as floaty and in log  upon completion. When set to none, no text is shown.")]
+        public string messageOnCompletion
+        {
+            get { return _messageOnCompletion; }
+            set { _messageOnCompletion = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The key of the global int to change upon failure of the grid.")]
+        public string keyOfGlobalIntToChangeUponPushableGridFailure
+        {
+            get { return _keyOfGlobalIntToChangeUponPushableGridFailure; }
+            set { _keyOfGlobalIntToChangeUponPushableGridFailure = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The value that the global int is set to upon failure.")]
+        public int valueOfGlobalIntToChangeUponPushableGridFailure
+        {
+            get { return _valueOfGlobalIntToChangeUponPushableGridFailure; }
+            set { _valueOfGlobalIntToChangeUponPushableGridFailure = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("When true, the objects on the grid cannot be moved any more after afilure of the grid.")]
+        public bool lockGridOnFailure
+        {
+            get { return _lockGridOnFailure; }
+            set { _lockGridOnFailure = value; }
+        }
+        /*
+        //2.pushable object properties (04f - STEP: Pushable object)
+        private bool _isPushable = false;
+        private string _pushableGridTriggerTag = "none";
+        private int _pushableStartPositionX = 0;
+        private int _pushableStartPositionY = 0;
+        private int _pushableTargetPositionX = 0;
+        private int _pushableTargetPositionY = 0;
+        private string _pushableTraitTag = "strongman";
+        private int _pushableDC = 10;
+        */
+
+        [CategoryAttribute("04f - STEP: pushable object"), DescriptionAttribute("When true, this object can be pushed around within the limits of its grid, which is defined by an otherwise empty trigger and its squares (see pushableGridTriggerTag).")]
+        public bool isPushable
+        {
+            get { return _isPushable; }
+            set { _isPushable = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable object"), DescriptionAttribute("The tag of the trigger that defines the grid on which this pushable object can be moved.")]
+        public string pushableGridTriggerTag
+        {
+            get { return _pushableGridTriggerTag; }
+            set { _pushableGridTriggerTag = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable object"), DescriptionAttribute("The X-component of the position that this prop is set back to upon reset of the grid (eg via G hotkey).")]
+        public int pushableStartPositionX
+        {
+            get { return _pushableStartPositionX; }
+            set { _pushableStartPositionX = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable object"), DescriptionAttribute("The Y-component of the position that this prop is set back to upon reset of the grid (eg via G hotkey).")]
+        public int pushableStartPositionY
+        {
+            get { return _pushableStartPositionY; }
+            set { _pushableStartPositionY = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable object"), DescriptionAttribute("The X-component of the target position that this prop must end on for grid completion. Note that with shared target psoitions each prop can also end on the target positions of the other props.")]
+        public int pushableTargetPositionX
+        {
+            get { return _pushableTargetPositionX; }
+            set { _pushableTargetPositionX = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable object"), DescriptionAttribute("The Y-component of the target position that this prop must end on for grid completion. Note that with shared target psoitions each prop can also end on the target positions of the other props.")]
+        public int pushableTargetPositionY
+        {
+            get { return _pushableTargetPositionY; }
+            set { _pushableTargetPositionY = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable object"), DescriptionAttribute("The tag of the trait used for pushing this prop.")]
+        public string pushableTraitTag
+        {
+            get { return _pushableTraitTag; }
+            set { _pushableTraitTag = value; }
+        }
+
+        [CategoryAttribute("04f - STEP: pushable object"), DescriptionAttribute("The DC for pushing this prop (use 10 more than the skill level you aim at as this is a take-ten static check)")]
+        public int pushableDC
+        {
+            get { return _pushableDC; }
+            set { _pushableDC = value; }
+        }
+
+        [CategoryAttribute("04e - STEP: climbable prop"), DescriptionAttribute("Cimbable props can be approached from two sides: the neighbbouring square as wella s from their own square. In both cases, the player has to walk the party over the climbale side of the prop. Example: A prop with climb direction north can be used by moving upwards from its own square or downwards from the square north of it.")]
+        public bool isClimbable
+        {
+            get { return _isClimbable; }
+            set { _isClimbable = value; }
+        }
+        //A prop with climb direction north can be used by moving upwards from its own square or downwards from the square north of it.
+        [CategoryAttribute("04e - STEP: climbable prop"), DescriptionAttribute("Can be: north, east, south or west. A prop with climb direction north can be used by moving upwards from its own square or downwards from the square north of it.")]
+        public string climbDirection
+        {
+            get { return _climbDirection; }
+            set { _climbDirection = value; }
+        }
+
+        [CategoryAttribute("04e - STEP: climbable prop"), DescriptionAttribute("The DC for the skill check (set it 10 higher than the skill level you aim for as a take-ten-check is applied).")]
+        public int climbDC
+        {
+            get { return _climbDC; }
+            set { _climbDC = value; }
+        }
+
+        [CategoryAttribute("04e - STEP: climbable prop"), DescriptionAttribute("The tag of the trait used for climbing.")]
+        public string climbTrait
+        {
+            get { return _climbTrait; }
+            set { _climbTrait = value; }
         }
 
         [Browsable(true), TypeConverter(typeof(ConversationTypeConverter))]
