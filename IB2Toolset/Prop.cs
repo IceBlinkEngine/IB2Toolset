@@ -19,6 +19,36 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        private bool _isLever = false;
+        private bool _isOn = false;
+        private string _nameOfBitmapON = "none";
+        private string _nameOfBitmapOFF = "none";
+        private string _keyOFGlobalIntToChange = "none";
+        private int _valueOfGlobalIntOFF = 0;
+        private int _valueOfGlobalIntON = 0;
+
+        private string _keyOfFirstGlobalIntThatControllsDoor = "none";
+        private int _valueOfFirstGlobalIntThatOpensDoor = 1;
+        private string _keyOfFifthGlobalIntThatControllsDoor = "none";
+        private int _valueOfFifthGlobalIntThatOpensDoor = 1;
+        private string _keyOfSecondGlobalIntThatControllsDoor = "none";
+        private int _valueOfSecondGlobalIntThatOpensDoor = 1;
+        private string _keyOfThirdGlobalIntThatControllsDoor = "none";
+        private int _valueOfThirdGlobalIntThatOpensDoor = 1;
+        private string _keyOfFourthGlobalIntThatControllsDoor = "none";
+        private int _valueOfFourthGlobalIntThatOpensDoor = 1;
+
+        private string _keyOfFirstGlobalIntThatControllsChest = "none";
+        private int _valueOfFirstGlobalIntThatOpensChest = 1;
+        private string _keyOfFifthGlobalIntThatControllsChest = "none";
+        private int _valueOfFifthGlobalIntThatOpensChest = 1;
+        private string _keyOfSecondGlobalIntThatControllsChest = "none";
+        private int _valueOfSecondGlobalIntThatOpensChest = 1;
+        private string _keyOfThirdGlobalIntThatControllsChest = "none";
+        private int _valueOfThirdGlobalIntThatOpensChest = 1;
+        private string _keyOfFourthGlobalIntThatControllsChest = "none";
+        private int _valueOfFourthGlobalIntThatOpensChest = 1;
+
         //04e - STEP: Climb
         private bool _isClimbable = false;
         private string _climbDirection = "north"; //north, east, south, west 
@@ -26,11 +56,13 @@ namespace IB2Toolset
         private string _climbTrait = "athlete";
 
         //1.pushable grid properties (04f - STEP: Pushable grid)
-        private bool _isGridForPushableObject = false;
+        //private bool _isGridForPushableObject = false;
+        private bool _completionStateCanBeLostAgain = false;
         private bool _pushableGridCanBeResetViaHotkey = true;
         private bool _pushableGridCanBeResetEvenAfterCompletion = false;
         private int _partyDefaultPushableGridPositionX = 0;
         private int _partyDefaultPushableGridPositionY = 0;
+        private string _partyDefaultDrawDirection = "down";
         private bool _allPushableGridTargetPositionsAreShared = true;
 
         private string _keyOfGlobalIntToChangeUponPushableGridCompletion = "none";
@@ -754,7 +786,7 @@ namespace IB2Toolset
         //rockspider
         //01 - Main 
         //02 - Sprite
-        
+
         //03a - SEARCH: secret door (space)
         //03b - SEARCH: hidden info (space)
         //03c - SEARCH: disarm trap (space)
@@ -768,11 +800,82 @@ namespace IB2Toolset
 
         //06  - IBScript hooks
 
-            //from 4 onwards +3?
+        //from 4 onwards +3?
+
+
+       
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The key of the first global int that will open this door automatically once its defined value is hit. Leave at none for the door to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfFirstGlobalIntThatControllsDoor
+        {
+            get { return _keyOfFirstGlobalIntThatControllsDoor; }
+            set { _keyOfFirstGlobalIntThatControllsDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The value of the first global int that must be matched to open this door.")]
+        public int valueOfFirstGlobalIntThatOpensDoor
+        {
+            get { return _valueOfFirstGlobalIntThatOpensDoor; }
+            set { _valueOfFirstGlobalIntThatOpensDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The key of the Second global int that will open this door automatically once its defined value is hit. Leave at none for the door to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfSecondGlobalIntThatControllsDoor
+        {
+            get { return _keyOfSecondGlobalIntThatControllsDoor; }
+            set { _keyOfSecondGlobalIntThatControllsDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The value of the Second global int that must be matched to open this door.")]
+        public int valueOfSecondGlobalIntThatOpensDoor
+        {
+            get { return _valueOfSecondGlobalIntThatOpensDoor; }
+            set { _valueOfSecondGlobalIntThatOpensDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The key of the Third global int that will open this door automatically once its defined value is hit. Leave at none for the door to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfThirdGlobalIntThatControllsDoor
+        {
+            get { return _keyOfThirdGlobalIntThatControllsDoor; }
+            set { _keyOfThirdGlobalIntThatControllsDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The value of the Third global int that must be matched to open this door.")]
+        public int valueOfThirdGlobalIntThatOpensDoor
+        {
+            get { return _valueOfThirdGlobalIntThatOpensDoor; }
+            set { _valueOfThirdGlobalIntThatOpensDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The key of the Fourth global int that will open this door automatically once its defined value is hit. Leave at none for the door to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfFourthGlobalIntThatControllsDoor
+        {
+            get { return _keyOfFourthGlobalIntThatControllsDoor; }
+            set { _keyOfFourthGlobalIntThatControllsDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The value of the Fourth global int that must be matched to open this door.")]
+        public int valueOfFourthGlobalIntThatOpensDoor
+        {
+            get { return _valueOfFourthGlobalIntThatOpensDoor; }
+            set { _valueOfFourthGlobalIntThatOpensDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The key of the Fifth global int that will open this door automatically once its defined value is hit. Leave at none for the door to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfFifthGlobalIntThatControllsDoor
+        {
+            get { return _keyOfFifthGlobalIntThatControllsDoor; }
+            set { _keyOfFifthGlobalIntThatControllsDoor = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("The value of the Fifth global int that must be matched to open this door.")]
+        public int valueOfFifthGlobalIntThatOpensDoor
+        {
+            get { return _valueOfFifthGlobalIntThatOpensDoor; }
+            set { _valueOfFifthGlobalIntThatOpensDoor = value; }
+        }
 
 
 
-        
         [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("If true, this acts as door. Dont forget to setup the gaOpenObject script in the STEP: script section to define (1) the tag of the key needed, (2) whether key is consumed, (3) tag of trait to check for lock picking and (4) DC of lock picking attempt.")]
         public bool isDoor
         {
@@ -786,6 +889,77 @@ namespace IB2Toolset
             get { return _differentSpriteWhenOpen; }
             set { _differentSpriteWhenOpen = value; }
         }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The key of the first global int that will open this container automatically once its defined value is hit. Leave at none for the container to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfFirstGlobalIntThatControllsChest
+        {
+            get { return _keyOfFirstGlobalIntThatControllsChest; }
+            set { _keyOfFirstGlobalIntThatControllsChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The value of the first global int that must be matched to open this container.")]
+        public int valueOfFirstGlobalIntThatOpensChest
+        {
+            get { return _valueOfFirstGlobalIntThatOpensChest; }
+            set { _valueOfFirstGlobalIntThatOpensChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The key of the Second global int that will open this container automatically once its defined value is hit. Leave at none for the container to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfSecondGlobalIntThatControllsChest
+        {
+            get { return _keyOfSecondGlobalIntThatControllsChest; }
+            set { _keyOfSecondGlobalIntThatControllsChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The value of the Second global int that must be matched to open this container.")]
+        public int valueOfSecondGlobalIntThatOpensChest
+        {
+            get { return _valueOfSecondGlobalIntThatOpensChest; }
+            set { _valueOfSecondGlobalIntThatOpensChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The key of the Third global int that will open this container automatically once its defined value is hit. Leave at none for the container to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfThirdGlobalIntThatControllsChest
+        {
+            get { return _keyOfThirdGlobalIntThatControllsChest; }
+            set { _keyOfThirdGlobalIntThatControllsChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The value of the Third global int that must be matched to open this container.")]
+        public int valueOfThirdGlobalIntThatOpensChest
+        {
+            get { return _valueOfThirdGlobalIntThatOpensChest; }
+            set { _valueOfThirdGlobalIntThatOpensChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The key of the Fourth global int that will open this container automatically once its defined value is hit. Leave at none for the container to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfFourthGlobalIntThatControllsChest
+        {
+            get { return _keyOfFourthGlobalIntThatControllsChest; }
+            set { _keyOfFourthGlobalIntThatControllsChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The value of the Fourth global int that must be matched to open this container.")]
+        public int valueOfFourthGlobalIntThatOpensChest
+        {
+            get { return _valueOfFourthGlobalIntThatOpensChest; }
+            set { _valueOfFourthGlobalIntThatOpensChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The key of the Fifth global int that will open this container automatically once its defined value is hit. Leave at none for the container to not rely upon a global int, ia from a push grid mechanism.")]
+        public string keyOfFifthGlobalIntThatControllsChest
+        {
+            get { return _keyOfFifthGlobalIntThatControllsChest; }
+            set { _keyOfFifthGlobalIntThatControllsChest = value; }
+        }
+
+        [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("The value of the Fifth global int that must be matched to open this container.")]
+        public int valueOfFifthGlobalIntThatOpensChest
+        {
+            get { return _valueOfFifthGlobalIntThatOpensChest; }
+            set { _valueOfFifthGlobalIntThatOpensChest = value; }
+        }
+
 
         [CategoryAttribute("04b - STEP: container "), DescriptionAttribute("If true, this acts as a container. Dont forget to setup the gaOpenObject script in the STEP: script section to define (1) the tag of the key needed, (2) whether key is consumed, (3) tag of trait to check for lock picking and (4) DC of lock picking attempt.")]
         public bool isContainer
@@ -950,7 +1124,73 @@ namespace IB2Toolset
         private string _pushableTraitTag = "strongman";
         private int _pushableDC = 10;
         */
-        
+
+        /*
+    private bool _isLever = false;
+    private bool _isOn = false;
+    private string _nameOfBitmapON = "none";
+    private string _nameOfBitmapOFF = "none";
+    private string _keyOFGlobalIntToChange = "none";
+    private int _valueOfGlobalIntOFF = 0;
+    private int _valueOfGlobalIntON = 0;
+    */
+        [CategoryAttribute("04g - STEP: lever"), DescriptionAttribute("This prop is a lever which is operated by bumping into it. On each bump it will change its state between OFF and ON, which affects a defined global int and its value as well as the props graphics. Great for controlling doors and chests.")]
+        public bool isLever
+        {
+            get { return _isLever; }
+            set { _isLever = value; }
+        }
+
+        [CategoryAttribute("04g - STEP: lever"), DescriptionAttribute("Usually levers start OFF, ie isOn is set to false. But this can be freely defined here.")]
+        public bool isOn
+        {
+            get { return _isOn; }
+            set { _isOn = value; }
+        }
+
+        [CategoryAttribute("04g - STEP: lever"), DescriptionAttribute("Name of the bitmap to use for ON state. Use it without file name extension, like prp_erawen.")]
+        public string nameOfBitmapON
+        {
+            get { return _nameOfBitmapON; }
+            set { _nameOfBitmapON = value; }
+        }
+
+        [CategoryAttribute("04g - STEP: lever"), DescriptionAttribute("Name of the bitmap to use for OFF state. Use it without file name extension, like prp_erawen.")]
+        public string nameOfBitmapOFF
+        {
+            get { return _nameOfBitmapOFF; }
+            set { _nameOfBitmapOFF = value; }
+        }
+
+        [CategoryAttribute("04g - STEP: lever"), DescriptionAttribute("The key of the global int that is affected upon state change of the lever.")]
+        public string keyOFGlobalIntToChange
+        {
+            get { return _keyOFGlobalIntToChange; }
+            set { _keyOFGlobalIntToChange = value; }
+        }
+
+        [CategoryAttribute("04g - STEP: lever"), DescriptionAttribute("Value to assign to the affected global int when lever is in OFF state.")]
+        public int valueOfGlobalIntOFF
+        {
+            get { return _valueOfGlobalIntOFF; }
+            set { _valueOfGlobalIntOFF = value; }
+        }
+
+        [CategoryAttribute("04g - STEP: lever"), DescriptionAttribute("Value to assign to the affected global int when lever is in ON state.")]
+        public int valueOfGlobalIntON
+        {
+            get { return _valueOfGlobalIntON; }
+            set { _valueOfGlobalIntON = value; }
+        }
+
+        //_pushableGridCanBeResetEvenAfterCompletion
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("Even after completion, this pushable grid can be reset via G hotkey while standing on it. Make sure to set pushableGridCanBeResetViaHotkey to true, too.")]
+        public bool pushableGridCanBeResetEvenAfterCompletion
+        {
+            get { return _pushableGridCanBeResetEvenAfterCompletion; }
+            set { _pushableGridCanBeResetEvenAfterCompletion = value; }
+        }
+
         [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("This pushable grid can be reset via G hotkey while standing on it.")]
         public bool pushableGridCanBeResetViaHotkey
         {
@@ -958,11 +1198,28 @@ namespace IB2Toolset
             set { _pushableGridCanBeResetViaHotkey = value; }
         }
 
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("This pushable grid counts as not completed (again) when you remove a pushable prop from its correct end position after completion. Doing so will reset the gloabl int that's normally affected on completion in this grid back to 0 again.")]
+        public bool completionStateCanBeLostAgain
+        {
+            get { return _completionStateCanBeLostAgain; }
+            set { _completionStateCanBeLostAgain = value; }
+        }
+
+        /*
         [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("Even after auccessfully completing it, this pushable grid can be reset via G hotkey while standing on it (reset has no effect on the global int chnaged upon completion.)")]
         public bool pushableGridCanBeResetEvenAfterCompletion
         {
             get { return _pushableGridCanBeResetViaHotkey; }
             set { _pushableGridCanBeResetViaHotkey = value; }
+        }
+        */
+
+        //_partyDefaultDrawDirection
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The orientation of the party tail after grid reset (up, left, down, right).")]
+        public string partyDefaultDrawDirection
+        {
+            get { return _partyDefaultDrawDirection; }
+            set { _partyDefaultDrawDirection = value; }
         }
 
         [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("The X-component of the default position that the party is teleported to on reset of the grid via G hotkey.")]
