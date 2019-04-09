@@ -19,6 +19,20 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+        private bool _isPureBreakableProp = false;
+        private string _requiredItemInInventory = "none"; //like eg pick axes of varying qualities
+        private string _breakableTraitTag = "none";
+        private int _breakableDC = 10;
+        private int _numberOfStages = 0;
+        public int counterStages = 0;
+        private string _debrisGraphic = "none";
+        private string _stageGraphic1 = "none";
+        private string _stageGraphic2 = "none";
+        private string _stageGraphic3 = "none";
+        private string _resRefOfItemGained = "none";
+        private string _nameOfSoundFileBump = "none";
+        private string _nameOfSoundFileBreak = "none";
+
         private bool _isLever = false;
         private bool _isOn = false;
         private string _nameOfBitmapON = "none";
@@ -57,6 +71,8 @@ namespace IB2Toolset
 
         //1.pushable grid properties (04f - STEP: Pushable grid)
         //private bool _isGridForPushableObject = false;
+        private int _turnsBeforeGridResets = 0;
+        public int timerTurnsBeforeGridResets = 0;
         private bool _completionStateCanBeLostAgain = false;
         private bool _pushableGridCanBeResetViaHotkey = true;
         private bool _pushableGridCanBeResetEvenAfterCompletion = false;
@@ -1134,6 +1150,108 @@ namespace IB2Toolset
     private int _valueOfGlobalIntOFF = 0;
     private int _valueOfGlobalIntON = 0;
     */
+
+        /*
+            private bool _isPureBreakableProp = false;
+            private string _requiredItemInInventory = "none"; //like eg pick axes of varying qualities
+            private string _breakableTraitTag = "none";
+            private int _breakableDC = 10;
+            private int _numberOfStages = 0;
+            private string _debrisGraphic = "none";
+            private string _stageGraphic1 = "none";
+            private string _stageGraphic2 = "none";
+            private string _stageGraphic3 = "none";
+            private string _resRefOfItemGained = "none";
+            private string _nameOfSoundFileBump = "none";
+            private string _nameOfSoundFileBreak = "none";
+            */
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("If false (default), this prop acts as an indictaor for a diggable tile, think mining (remember to set script call to gaBreakObject for  all diggable indicators as well as pure breakable obejcts). Whe a digable indicator is successfully mined, layer2+ graphcis are set to blnak, revealign layer1. Also tile height of target square is adjusted to current party height. If set to true, this is a pure breakable objects (like a statue or crate).")]
+        public bool isPureBreakableProp
+        {
+            get { return _isPureBreakableProp; }
+            set { _isPureBreakableProp = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The dc required when this prop requires a trait roll (as this is take ten roll, make it 10 higher than the skill level you aim for).")]
+        public int breakableDC
+        {
+            get { return _breakableDC; }
+            set { _breakableDC = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The number of additional bumps it takes before the prop is considered broken/mined. Default is zero, so it takes only one bump. Can be set up to the value of three. Make sure to set up graphics for each existing stage. The lowest stage number is broken first (eg 1,broken or 1,2,broken).")]
+        public int numberOfStages
+        {
+            get { return _numberOfStages; }
+            set { _numberOfStages = value;
+                this.counterStages = value;
+            }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The resref of an item that has to be in party inventory, like eg a pick axe, in order to break/mine this object. Set to none if no item is required. This property is cumulative to trait required.")]
+        public string requiredItemInInventory
+        {
+            get { return _requiredItemInInventory; }
+            set { _requiredItemInInventory = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The tag of the trait rolled when trying to break/mine this object. Set to none if no trait is required. This property is cumulative to item required.")]
+        public string breakableTraitTag
+        {
+            get { return _breakableTraitTag; }
+            set { _breakableTraitTag = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The graphic, just the filename without extension, to use for debris of the object once broken. Set to none if the object shall simply vanish wihtout trace.")]
+        public string debrisGraphic
+        {
+            get { return _debrisGraphic; }
+            set { _debrisGraphic = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The graphic, just the filename without extension, to use for this damage stage of the object. Set to none if this stage does not exist.")]
+        public string stageGraphic1
+        {
+            get { return _stageGraphic1; }
+            set { _stageGraphic1 = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The graphic, just the filename without extension, to use for this damage stage of the object. Set to none if this stage does not exist.")]
+        public string stageGraphic2
+        {
+            get { return _stageGraphic2; }
+            set { _stageGraphic2 = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The graphic, just the filename without extension, to use for this damage stage of the object. Set to none if this stage does not exist.")]
+        public string stageGraphic3
+        {
+            get { return _stageGraphic3; }
+            set { _stageGraphic3 = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The resref of the item that is added to party inventory once the prop is destroyed/mined. Set to none if no item shall be found.")]
+        public string resRefOfItemGained
+        {
+            get { return _resRefOfItemGained; }
+            set { _resRefOfItemGained = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The name of the sound file to play when bumping into this prop.")]
+        public string nameOfSoundFileBump
+        {
+            get { return _nameOfSoundFileBump; }
+            set { _nameOfSoundFileBump = value; }
+        }
+
+        [CategoryAttribute("04h - STEP: diggable tiles and breakable objects"), DescriptionAttribute("The name of the sound file to play when bumping into this prop.")]
+        public string nameOfSoundFileBreak
+        {
+            get { return _nameOfSoundFileBreak; }
+            set { _nameOfSoundFileBreak = value; }
+        }
+
         [CategoryAttribute("04g - STEP: lever"), DescriptionAttribute("This prop is a lever which is operated by bumping into it. On each bump it will change its state between OFF and ON, which affects a defined global int and its value as well as the props graphics. Great for controlling doors and chests.")]
         public bool isLever
         {
@@ -1204,7 +1322,15 @@ namespace IB2Toolset
             get { return _completionStateCanBeLostAgain; }
             set { _completionStateCanBeLostAgain = value; }
         }
-
+        //private int _turnsBeforeGridResets = 0;
+        [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("If setting this larger than 0, then this grid will reset x turns after the party stepped on it. This settign can be used to make even more challenging grid puzzles, requiring the player to plan his moves in advance.")]
+        public int turnsBeforeGridResets
+        {
+            get { return _turnsBeforeGridResets; }
+            set { _turnsBeforeGridResets = value;
+                this.timerTurnsBeforeGridResets = value;
+                }
+        }
         /*
         [CategoryAttribute("04f - STEP: pushable grid"), DescriptionAttribute("Even after auccessfully completing it, this pushable grid can be reset via G hotkey while standing on it (reset has no effect on the global int chnaged upon completion.)")]
         public bool pushableGridCanBeResetEvenAfterCompletion
