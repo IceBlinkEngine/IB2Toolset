@@ -15,6 +15,10 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private bool _useScrollingSystem = true;
+        private float _scrollingSpeed = 4f;//default 4f, lower is faster
+
+        private float _nightTimeDarknessOpacity = 0.6f;
         private bool _useHybridRollPointDistribution = false;
         private bool _useManualPointDistribution = true;
         private int _attributeBaseValue = 10;
@@ -222,12 +226,28 @@ namespace IB2Toolset
             set { _moduleName = value; }
         }
 
-        //public float nightTimeDarkness = 0.65f;
-        [CategoryAttribute("01 - Main"), DescriptionAttribute("The darkness of the night time. 1.00f is the old default. Changed to 0.65f.")]
-        public float nightTimeDarkness
+        //private bool _useScrollingSystem = true;
+        //private float _scrollingSpeed = 4f;//default 4f, lower is faster
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("If true, each move of the party on main map is happening fluidly, scrolling the map a tiny bit.")]
+        public bool useScrollingSystem
         {
-            get { return _nightTimeDarkness; }
-            set { _nightTimeDarkness = value; }
+            get { return _useScrollingSystem; }
+            set { _useScrollingSystem = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("Thr scrolling speed on main map; defaults to 4.0; lower is faster")]
+        public float scrollingSpeed
+        {
+            get { return _scrollingSpeed; }
+            set { _scrollingSpeed = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("The darkness of the night time (usually between 0.1 and 1, free to try more extreme, lower means a more transparent, ie lighter, night graphic). 0.6 is what I am currently using, try 1.0 for night time tint used before beta 1.38")]
+        public float nightTimeDarknessOpacity
+        {
+            get { return _nightTimeDarknessOpacity; }
+            set { _nightTimeDarknessOpacity = value; }
         }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("If true, the party makes a little walk sound on each step.")]
