@@ -21,6 +21,9 @@ namespace IB2Toolset
     public class Trigger
     {
         #region Fields
+
+        private string bumpTriggerDirection = "none"; //fromSouth, fromNorth, fromEast, fromWest, none
+
         private bool connectedDiscovery = false;
         private bool requiresActiveSearch = false;
         private string triggerTag = "newTrigger"; //must be unique
@@ -115,6 +118,13 @@ namespace IB2Toolset
         {
             get { return requiresActiveSearch; }
             set { requiresActiveSearch = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("If true, all squares in this trigger's square liste become visible if one of them is discovered.")]
+        public string BumpTriggerDirection
+        {
+            get { return bumpTriggerDirection; }
+            set { bumpTriggerDirection = value; }
         }
 
         [CategoryAttribute("0 - Main"), DescriptionAttribute("If true, all squares in this trigger's square liste become visible if one of them is discovered.")]

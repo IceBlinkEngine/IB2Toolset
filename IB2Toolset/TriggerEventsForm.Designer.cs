@@ -33,6 +33,7 @@
             this.chkTrigActiveSearch = new System.Windows.Forms.CheckBox();
             this.chkTrigConnectedDiscovery = new System.Windows.Forms.CheckBox();
             this.txtTrigTag = new System.Windows.Forms.TextBox();
+            this.txtTrigBumpTrigDir = new System.Windows.Forms.TextBox();
             this.gbTrigger = new System.Windows.Forms.GroupBox();
             this.gbCombatOnly = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@
             this.chkEncounterTriggerOnEveryStep = new System.Windows.Forms.CheckBox();
             this.chkTriggeredByPc = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label1a = new System.Windows.Forms.Label();
             this.gbE1 = new System.Windows.Forms.GroupBox();
             this.gbE1transition = new System.Windows.Forms.GroupBox();
             this.numE1y = new System.Windows.Forms.NumericUpDown();
@@ -136,7 +138,7 @@
             // chkTrigEnabled
             // 
             this.chkTrigEnabled.AutoSize = true;
-            this.chkTrigEnabled.Location = new System.Drawing.Point(6, 19);
+            this.chkTrigEnabled.Location = new System.Drawing.Point(6, 1);
             this.chkTrigEnabled.Name = "chkTrigEnabled";
             this.chkTrigEnabled.Size = new System.Drawing.Size(60, 17);
             this.chkTrigEnabled.TabIndex = 0;
@@ -147,7 +149,7 @@
             // chkTrigOnce
             // 
             this.chkTrigOnce.AutoSize = true;
-            this.chkTrigOnce.Location = new System.Drawing.Point(69, 19);
+            this.chkTrigOnce.Location = new System.Drawing.Point(69, 1);
             this.chkTrigOnce.Name = "chkTrigOnce";
             this.chkTrigOnce.Size = new System.Drawing.Size(50, 17);
             this.chkTrigOnce.TabIndex = 1;
@@ -158,7 +160,7 @@
             // chkTrigOnce
             // 
             this.chkTrigActiveSearch.AutoSize = true;
-            this.chkTrigActiveSearch.Location = new System.Drawing.Point(121, 19);
+            this.chkTrigActiveSearch.Location = new System.Drawing.Point(121, 1);
             this.chkTrigActiveSearch.Name = "chkTrigActiveSearch";
             this.chkTrigActiveSearch.Size = new System.Drawing.Size(55, 17);
             this.chkTrigActiveSearch.TabIndex = 2;
@@ -169,7 +171,7 @@
             // chkTrigOnce
             // 
             this.chkTrigConnectedDiscovery.AutoSize = true;
-            this.chkTrigConnectedDiscovery.Location = new System.Drawing.Point(182, 19);
+            this.chkTrigConnectedDiscovery.Location = new System.Drawing.Point(182, 1);
             this.chkTrigConnectedDiscovery.Name = "chkTrigConnectedDiscovery";
             this.chkTrigConnectedDiscovery.Size = new System.Drawing.Size(50, 17);
             this.chkTrigConnectedDiscovery.TabIndex = 2;
@@ -181,17 +183,30 @@
             // 
             this.txtTrigTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTrigTag.Location = new System.Drawing.Point(71, 41);
+            this.txtTrigTag.Location = new System.Drawing.Point(71, 19);
             this.txtTrigTag.Name = "txtTrigTag";
             this.txtTrigTag.Size = new System.Drawing.Size(174, 20);
             this.txtTrigTag.TabIndex = 3;
             this.txtTrigTag.TextChanged += new System.EventHandler(this.txtTrigTag_TextChanged);
+            //
+            //
+            // txtTrigTag
             // 
+            this.txtTrigBumpTrigDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigBumpTrigDir.Location = new System.Drawing.Point(71, 40);
+            this.txtTrigBumpTrigDir.Name = "txtTrigBumpTrigDir";
+            this.txtTrigBumpTrigDir.Size = new System.Drawing.Size(174, 20);
+            this.txtTrigBumpTrigDir.TabIndex = 3;
+            this.txtTrigBumpTrigDir.TextChanged += new System.EventHandler(this.txtTrigBumpTrigDir_TextChanged);
+
             // gbTrigger
             // 
             this.gbTrigger.Controls.Add(this.gbCombatOnly);
             this.gbTrigger.Controls.Add(this.label1);
+            this.gbTrigger.Controls.Add(this.label1a);
             this.gbTrigger.Controls.Add(this.txtTrigTag);
+            this.gbTrigger.Controls.Add(this.txtTrigBumpTrigDir);
             this.gbTrigger.Controls.Add(this.chkTrigOnce);
             this.gbTrigger.Controls.Add(this.chkTrigActiveSearch);
             this.gbTrigger.Controls.Add(this.chkTrigConnectedDiscovery);
@@ -293,12 +308,20 @@
                        // label1
                        // 
                        this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 44);
+            this.label1.Location = new System.Drawing.Point(4, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 11;
             this.label1.Text = "Trigger Tag:";
             // 
+            // label2
+            // 
+            this.label1a.AutoSize = true;
+            this.label1a.Location = new System.Drawing.Point(4, 43);
+            this.label1a.Name = "label1a";
+            this.label1a.Size = new System.Drawing.Size(65, 13);
+            this.label1a.TabIndex = 11;
+            this.label1a.Text = "Bump from:";
             // gbE1
             // 
             this.gbE1.Controls.Add(this.gbE1transition);
@@ -1159,8 +1182,10 @@
         private System.Windows.Forms.CheckBox chkTrigActiveSearch;
         private System.Windows.Forms.CheckBox chkTrigConnectedDiscovery;
         private System.Windows.Forms.TextBox txtTrigTag;
+        private System.Windows.Forms.TextBox txtTrigBumpTrigDir;
         private System.Windows.Forms.GroupBox gbTrigger;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label1a;
         private System.Windows.Forms.GroupBox gbE1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkE1once;

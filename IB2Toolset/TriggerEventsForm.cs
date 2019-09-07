@@ -63,11 +63,21 @@ namespace IB2Toolset
             }
         }
 
+        //bumpTriggerDirection
+
         private void txtTrigTag_TextChanged(object sender, EventArgs e)
         {
             if (prntForm.currentSelectedTrigger != null)
             {
                 prntForm.currentSelectedTrigger.TriggerTag = txtTrigTag.Text;
+            }
+        }
+
+        private void txtTrigBumpTrigDir_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.BumpTriggerDirection = txtTrigBumpTrigDir.Text;
             }
         }
 
@@ -504,6 +514,7 @@ namespace IB2Toolset
                 chkTrigActiveSearch.Checked = trg.RequiresActiveSearch;
                 chkTrigConnectedDiscovery.Checked = trg.ConnectedDiscovery;
                 txtTrigTag.Text = trg.TriggerTag;
+                txtTrigBumpTrigDir.Text = trg.BumpTriggerDirection;
                 chkTriggeredByPc.Checked = trg.canBeTriggeredByPc;
                 chkTriggeredByCreatures.Checked = trg.canBeTriggeredByCreature;
                 numTriggerCallsAllowed.Value = trg.numberOfScriptCallsRemaining;

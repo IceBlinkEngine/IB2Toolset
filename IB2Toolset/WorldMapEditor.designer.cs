@@ -55,6 +55,7 @@
             this.btnSynchArea = new System.Windows.Forms.Button();
             this.rbtnLoS = new System.Windows.Forms.RadioButton();
             this.rbtnInfo = new System.Windows.Forms.RadioButton();
+            this.rbtnWP = new System.Windows.Forms.RadioButton();
             this.rbtnWalkable = new System.Windows.Forms.RadioButton();
             this.rbtnToMaster = new System.Windows.Forms.RadioButton();
             //rbtnToMaster
@@ -403,7 +404,7 @@
             this.rbtnInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnInfo.Location = new System.Drawing.Point(9, 17);
             this.rbtnInfo.Name = "rbtnInfo";
-            this.rbtnInfo.Size = new System.Drawing.Size(103, 30);
+            this.rbtnInfo.Size = new System.Drawing.Size(50, 30);
             this.rbtnInfo.TabIndex = 4;
             this.rbtnInfo.TabStop = true;
             this.rbtnInfo.Text = "INFO";
@@ -411,6 +412,20 @@
             this.rbtnInfo.UseVisualStyleBackColor = true;
             this.rbtnInfo.CheckedChanged += new System.EventHandler(this.rbtnInfo_CheckedChanged);
             // 
+            //
+            // rbtnWP
+            // 
+            this.rbtnWP.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnWP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbtnWP.Location = new System.Drawing.Point (62, 17);
+            this.rbtnWP.Name = "rbtnWP";
+            this.rbtnWP.Size = new System.Drawing.Size(50, 30);
+            this.rbtnWP.TabIndex = 4;
+            this.rbtnWP.TabStop = true;
+            this.rbtnWP.Text = "WP";
+            this.rbtnWP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnWP.UseVisualStyleBackColor = true;
+            this.rbtnWP.CheckedChanged += new System.EventHandler(this.rbtnWP_CheckedChanged);
             // rbtnWalkable
             // 
             this.rbtnWalkable.Appearance = System.Windows.Forms.Appearance.Button;
@@ -515,6 +530,7 @@
             //this.groupBox2.Controls.Add(this.rbtnDownToW);
 
             this.groupBox2.Controls.Add(this.rbtnInfo);
+            this.groupBox2.Controls.Add(this.rbtnWP);
             this.groupBox2.Controls.Add(this.rbtnLoS);
             this.groupBox2.Controls.Add(this.rbtnEditTrigger);
             this.groupBox2.Controls.Add(this.rbtnWalkable);
@@ -1072,7 +1088,11 @@
             this.panelView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseClick);
             this.panelView.MouseEnter += new System.EventHandler(this.panelView_MouseEnter);
             this.panelView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseMove);
+
+            this.panelView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseUp);
+
             this.panelView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panelView_PreviewKeyDown);
+            //todo: mosueup event
             //   
 
 
@@ -1141,6 +1161,7 @@
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.RadioButton rbtnLoS;
         private System.Windows.Forms.RadioButton rbtnInfo;
+        private System.Windows.Forms.RadioButton rbtnWP;
         private System.Windows.Forms.RadioButton rbtnWalkable;
         private System.Windows.Forms.RadioButton rbtnToMaster;
         private System.Windows.Forms.RadioButton rbtnChangeLinkState;

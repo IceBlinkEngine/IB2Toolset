@@ -15,6 +15,7 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private int _overrideVisibilityRange = 2;
         private bool _useScrollingSystem = true;
         private float _scrollingSpeed = 4f;//default 4f, lower is faster
 
@@ -228,6 +229,14 @@ namespace IB2Toolset
 
         //private bool _useScrollingSystem = true;
         //private float _scrollingSpeed = 4f;//default 4f, lower is faster
+
+        //private int overrideVisibilityRange = 2;
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This overrides the visibilty settings of the individual areas, unless you set it to -1. 2 is a good value for campaigns with smaller maps, 3 for larger maps.")]
+        public int overrideVisibilityRange
+        {
+            get { return _overrideVisibilityRange; }
+            set { _overrideVisibilityRange = value; }
+        }
 
         [CategoryAttribute("01 - Main"), DescriptionAttribute("If true, each move of the party on main map is happening fluidly, scrolling the map a tiny bit.")]
         public bool useScrollingSystem

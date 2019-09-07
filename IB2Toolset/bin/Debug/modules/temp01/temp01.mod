@@ -67,6 +67,7 @@
   "attackFromBehindToHitModifier": 2,
   "attackFromBehindDamageModifier": 0,
   "moduleName": "temp01",
+  "overrideVisibilityRange": 2,
   "useScrollingSystem": true,
   "scrollingSpeed": 4.0,
   "nightTimeDarknessOpacity": 0.6,
