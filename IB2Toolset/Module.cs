@@ -15,6 +15,11 @@ namespace IB2Toolset
     {
         #region Fields
 
+        [JsonIgnore]
+        public Prop wp_selectedProp = new Prop();
+
+        public int currentlySelectedWayPointIndex = 0;
+
         private int _overrideVisibilityRange = 2;
         private bool _useScrollingSystem = true;
         private float _scrollingSpeed = 4f;//default 4f, lower is faster

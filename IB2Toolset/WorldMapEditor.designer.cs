@@ -516,6 +516,16 @@
             this.txtSelectedIconInfo.Name = "txtSelectedIconInfo";
             this.txtSelectedIconInfo.Size = new System.Drawing.Size(106, 54);
             this.txtSelectedIconInfo.TabIndex = 0;
+            //foundpadma
+            if (mod != null)
+            {
+                if (mod.wp_selectedProp != null)
+                {
+                    this.txtSelectedIconInfo.Text = "name: " + mod.wp_selectedProp.PropName + ", tag: " + mod.wp_selectedProp.PropTag;
+                    this.rbtnWP.Checked = true;
+                }
+            }
+
             // 
             // groupBox2
             // 
@@ -1161,7 +1171,7 @@
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.RadioButton rbtnLoS;
         private System.Windows.Forms.RadioButton rbtnInfo;
-        private System.Windows.Forms.RadioButton rbtnWP;
+        public System.Windows.Forms.RadioButton rbtnWP;
         private System.Windows.Forms.RadioButton rbtnWalkable;
         private System.Windows.Forms.RadioButton rbtnToMaster;
         private System.Windows.Forms.RadioButton rbtnChangeLinkState;

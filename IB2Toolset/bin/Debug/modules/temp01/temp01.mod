@@ -1,4 +1,5 @@
 {
+  "currentlySelectedWayPointIndex": 0,
   "formerDirection": "none",
   "masterAreasList": [],
   "saveName": "empty",

@@ -38,7 +38,10 @@ namespace IB2Toolset
         public List<string> itemsParentNodeList = new List<string>();
         public List<string> creaturesParentNodeList = new List<string>();
         public List<string> propsParentNodeList = new List<string>();
+        [JsonIgnore]
         public List<Area> openAreasList = new List<Area>();
+        [JsonIgnore]
+        public List<WorldMapEditor> openWMEList = new List<WorldMapEditor>();
         public List<Convo> openConvosList = new List<Convo>();
         public List<string> scriptList = new List<string>();
         public List<Condition> copiedConditionalsList = new List<Condition>();
@@ -4675,6 +4678,9 @@ public void loadSpriteDropdownList()
 
             return toReturn;
         }
+        //bintang
+       
+
         public Prop getPropByTag(string tag)
         {
             foreach (Prop it in propsList)

@@ -83,6 +83,7 @@ namespace IB2Toolset
         public string lastSelectedObjectTag;
         public string lastSelectedObjectResRef;
         public Prop le_selectedProp = new Prop();
+        //public Prop wp_selectedProp = new Prop();
         //GDI public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
         //GDI public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
 
@@ -899,8 +900,13 @@ namespace IB2Toolset
             }
 
             //refreshCmbBoxes();
+            //dekadenz
             prntForm.openAreasList.Add(area);
-            rbtnInfo.Checked = true;
+            prntForm.openWMEList.Add(this);
+            if (!rbtnWP.Checked)
+            {
+                rbtnInfo.Checked = true;
+            }
             rbtnZoom1x.Checked = true;
             //refreshMap(true);
             numBGLocX.Value = area.backgroundImageStartLocX;
@@ -1727,8 +1733,12 @@ namespace IB2Toolset
             //august
             gridX = e.X / sqr;
             gridY = e.Y / sqr;
+            //eisäule
+            panelView.ContextMenuStrip.Items.Clear();
+            contextMenuStrip1.Items.Clear();
+            //panelView.conte.Items.Clear();
 
-           
+
 
             if (gridX == lastGridX && gridY == lastGridY)
             {
@@ -1938,6 +1948,12 @@ namespace IB2Toolset
                     {
                         selectedBitmap = le_selectedProp.propBitmap;
                         selectedBitmapFilename = le_selectedProp.ImageFileName;
+                    }
+                    else
+                    {
+                       selectedBitmap = null;
+                       selectedBitmapFilename = "none";
+
                     }
                 }
             }
@@ -3297,20 +3313,7 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
-                    //REMOVE THESE
-                    //to do
-                    /*
-                    else if (rbtnBridgeNS.Checked)
-                    {
-                        selectedTile.index = gridY * area.MapSizeX + gridX;
-                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        area.Tiles[selectedTile.index].isNSBridge = false;
-                        area.Tiles[selectedTile.index].isEWBridge = false;
-                        calculateHeightShadows();
-                        //GDI refreshMap(false);
-                    }
-                    */
+                    
                     else if (rbtnDownToN.Checked)
                     {
                         selectedTile.index = gridY * area.MapSizeX + gridX;
@@ -3324,51 +3327,8 @@ namespace IB2Toolset
                         calculateHeightShadows();
                         //GDI refreshMap(false);
                     }
-                    /*
-                    else if (rbtnDownToE.Checked)
-                    {
-                        selectedTile.index = gridY * area.MapSizeX + gridX;
-                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        area.Tiles[selectedTile.index].isRamp = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowE = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowS = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowW = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowN = false;
-                        calculateHeightShadows();
-                        //GDI refreshMap(false);
-                    }
-                    */
-                    /*
-                    else if (rbtnDownToS.Checked)
-                    {
-                        selectedTile.index = gridY * area.MapSizeX + gridX;
-                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        area.Tiles[selectedTile.index].isRamp = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowE = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowS = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowW = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowN = false;
-                        calculateHeightShadows();
-                        //GDI refreshMap(false);
-                    }
-                    */
-                    /*
-                    else if (rbtnDownToW.Checked)
-                    {
-                        selectedTile.index = gridY * area.MapSizeX + gridX;
-                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
-                        prntForm.logText(Environment.NewLine);
-                        area.Tiles[selectedTile.index].isRamp = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowE = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowS = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowW = false;
-                        area.Tiles[selectedTile.index].hasDownStairShadowN = false;
-                        calculateHeightShadows();
-                        //GDI refreshMap(false);
-                    }
-                    */
+                    
+                    
                     #endregion
                     #region LoS mesh Toggle Selected (Make LoS Visible)
                     else if (rbtnLoS.Checked)
@@ -3391,9 +3351,20 @@ namespace IB2Toolset
                         //lombok4
                         //if the list is less than 2, do nothing
                         //august
+
+                        //GDI refreshMap(true);
+                        //GDI UpdatePB();
+                        if (!rbtnWP.Checked)
+                        {
+                            rbtnInfo.Checked = true;
+                        }
+                        resetTileToBePlacedSettings();
+
+
                         gridX = e.X / sqr;
                         gridY = e.Y / sqr;
                         prntForm.selectedLevelMapCreatureTag = "";
+                        //liegen
                         prntForm.selectedLevelMapPropTag = "";
                         prntForm.CreatureSelected = false;
                         prntForm.PropSelected = false;
@@ -3413,6 +3384,8 @@ namespace IB2Toolset
                         txtSelectedIconInfo.Text = "";
                         //lombok
                         nothingFound = true;
+                        //schnarker 1 line (removed again)
+                        //mod.wp_selectedProp = null;
                         foreach (Prop prp in area.Props)
                         {
                             if ((prp.LocationX == newPoint.X) && (prp.LocationY == newPoint.Y))
@@ -3426,7 +3399,26 @@ namespace IB2Toolset
                                 //lombok
                                 prntForm.selectedLevelMapPropTag = prp.PropTag;
                                 panelView.ContextMenuStrip.Items.Add(prp.PropTag, null, handler); //string, image, handler
-                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prp;
+                                //schnarker 1 line
+                                //prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prp;
+                                //schnarker 1 line
+                                //mod.wp_selectedProp = prp;
+                            }
+                        }
+
+                        //schnarker whole block
+                        if (rbtnWP.Checked && mod.wp_selectedProp != null)
+                        {
+                            for (int i = 0; i < mod.wp_selectedProp.WayPointList.Count; i++)
+                            {
+                                if (mod.wp_selectedProp.WayPointList[i].X == newPoint.X && mod.wp_selectedProp.WayPointList[i].Y == newPoint.Y)
+                                {
+                                    if (area.Filename == mod.wp_selectedProp.WayPointList[i].areaName)
+                                    {
+                                        nothingFound = false;
+                                        panelView.ContextMenuStrip.Items.Add((i + 1).ToString(), null, handler); //string, image, handler
+                                    }
+                                }
                             }
                         }
                         foreach (Trigger t in area.Triggers)
@@ -3468,7 +3460,10 @@ namespace IB2Toolset
                         //prntForm.PropSelected = false;
                         //prntForm.currentSelectedTrigger = null;
 
-                        rbtnInfo.Checked = true;
+                        if (!rbtnWP.Checked)
+                        {
+                            rbtnInfo.Checked = true;
+                        }
                         resetTileToBePlacedSettings();
                     }
                     break;
@@ -4929,6 +4924,18 @@ namespace IB2Toolset
             }
         }
 
+        public Prop getPlacedPropByTag(string tag)
+        {
+            foreach (Area a in mod.moduleAreasObjects)
+            {
+                foreach (Prop it in a.Props)
+                {
+                    if (it.PropTag == tag) return it;
+                }
+            }
+            return null;
+        }
+
         private void rotateBridge()
         {
             if (bridgeRotationCounter == 1)
@@ -5398,7 +5405,26 @@ namespace IB2Toolset
         {
             try
             {
-                RenderTarget2D.BeginDraw();
+                //prntForm
+                //foreach (Area a in openAreasList)
+                //{
+
+                //}
+                //foreach (WorldMapEditor we in prntForm.openWMEList)
+                //{
+                    //we.rbtnWP.Checked = this.rbtnWP.Checked;
+                //}
+                    if (rbtnWP.Checked)
+                {
+                    if (mod.wp_selectedProp != null)
+                    {
+                        if (mod.wp_selectedProp.PropTag != "" && mod.wp_selectedProp.PropTag != "none")
+                        {
+                            txtSelectedIconInfo.Text = "name: " + mod.wp_selectedProp.PropName + Environment.NewLine + "tag: " + mod.wp_selectedProp.PropTag;
+                        }
+                    }
+                }
+                    RenderTarget2D.BeginDraw();
                 RenderTarget2D.Clear(SharpDX.Color.Black);
                 redrawMain();
                 drawLinkedShade();
@@ -6460,6 +6486,8 @@ namespace IB2Toolset
                     //Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
                     SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("walk_pass").PixelSize.Width, GetFromBitmapList("walk_pass").PixelSize.Height);
                     SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+                   
+
                     if (chkGrid.Checked) //if show grid is turned on, draw grid squares
                     {
                         if (tile.LoSBlocked)
@@ -6484,8 +6512,10 @@ namespace IB2Toolset
                         if (sqr == 50) { scaler = 15.0f; }
                         else if (sqr == 25) { scaler = 7.5f; }
                         else if (sqr == 10) { scaler = 3.0f; }
-                        DrawText(tile.heightLevel.ToString(), dst.X, dst.Y, scaler, SharpDX.Color.Yellow);
-
+                        if (!rbtnWP.Checked)
+                        {
+                            DrawText(tile.heightLevel.ToString(), dst.X, dst.Y, scaler, SharpDX.Color.Yellow);
+                        }
                         if(tile.isRamp)
                         {
                             DrawText("R", dst.X + (sqr/4), dst.Y + (sqr/4), scaler * 1.1f, SharpDX.Color.Yellow);
@@ -6543,8 +6573,9 @@ namespace IB2Toolset
                 }
             }
             #endregion
-            #region Draw Selection Box
-            if (selectionBoxLocation.X != -1)
+         
+                    #region Draw Selection Box
+                    if (selectionBoxLocation.X != -1)
             {
                 int dx = selectionBoxLocation.X * sqr;
                 int dy = selectionBoxLocation.Y * sqr;
@@ -7363,7 +7394,308 @@ namespace IB2Toolset
             }
 
 
-                        #endregion
+            #endregion
+
+            #region Draw Waypoints
+            //liegen
+            //if (prntForm.selectedLevelMapPropTag != "" && prntForm.selectedLevelMapPropTag != "none")
+            //{
+            //bintang
+            //string selectedProp = prntForm.selectedLevelMapPropTag;
+            //wp_selectedProp = getPlacedPropByTag(selectedProp);
+            //if (getPlacedPropByTag(selectedProp) != null)
+            if (mod.wp_selectedProp != null && rbtnWP.Checked)
+            {
+
+                foreach (Prop p in area.Props)
+                {
+                    if (p == mod.wp_selectedProp)
+                    {
+                        int dx = mod.wp_selectedProp.LocationX * sqr;
+                        int dy = mod.wp_selectedProp.LocationY * sqr;
+                        SharpDX.RectangleF rect = new SharpDX.RectangleF(dx + 1, dy + 1, sqr - 2, sqr - 2);
+                        if (mod.wp_selectedProp.isChaser)
+                        {
+                            DrawRectangle(rect, SharpDX.Color.OrangeRed, 2);
+                        }
+                        else
+                        {
+                            DrawRectangle(rect, SharpDX.Color.BurlyWood, 2);
+                        }
+                    }
+                }
+
+                //foreach (WayPoint wp in getPlacedPropByTag(selectedProp).WayPointList)
+                //foreach (WayPoint wp in mod.wp_selectedProp.WayPointList)
+                for (int i = 0; i < mod.wp_selectedProp.WayPointList.Count; i++)
+                {
+                    if (area.Filename == mod.wp_selectedProp.WayPointList[i].areaName)
+                    {
+                        int dx = mod.wp_selectedProp.WayPointList[i].X * sqr;
+                        int dy = mod.wp_selectedProp.WayPointList[i].Y * sqr;
+                        SharpDX.RectangleF rect = new SharpDX.RectangleF(dx + 1, dy + 1, sqr - 2, sqr - 2);
+                        if (mod.wp_selectedProp.isChaser)
+                        {
+                            DrawRectangle(rect, SharpDX.Color.OrangeRed, 2);
+                        }
+                        else
+                        {
+                            DrawRectangle(rect, SharpDX.Color.BurlyWood, 2);
+                        }
+
+                        //Tile tile = area.Tiles[mod.wp_selectedProp.WayPointList[i].Y * area.MapSizeX + mod.wp_selectedProp.WayPointList[i].X];
+                        int rowsDownDueToMulti = 0;
+                        for (int j = 0; j < mod.wp_selectedProp.WayPointList.Count; j++)
+                        {
+                            if (mod.wp_selectedProp.WayPointList[i].areaName == mod.wp_selectedProp.WayPointList[j].areaName)
+                            {
+                                if (mod.wp_selectedProp.WayPointList[i].X == mod.wp_selectedProp.WayPointList[j].X && mod.wp_selectedProp.WayPointList[i].Y == mod.wp_selectedProp.WayPointList[j].Y)
+                                {
+                                    if (j < i)
+                                    {
+                                        rowsDownDueToMulti++;
+                                    }
+                                }
+                            }
+                        }
+                        SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("walk_pass").PixelSize.Width, GetFromBitmapList("walk_pass").PixelSize.Height);
+                        SharpDX.RectangleF dst = new SharpDX.RectangleF(mod.wp_selectedProp.WayPointList[i].X * sqr, mod.wp_selectedProp.WayPointList[i].Y * sqr, sqr, sqr);
+
+                        float scaler = 1.0f;
+                        if (sqr == 50) { scaler = 15.0f; }
+                        else if (sqr == 25) { scaler = 7.5f; }
+                        else if (sqr == 10) { scaler = 3.0f; }
+                       
+
+                        //text border
+                        //qunci
+                        
+                        if (i == mod.wp_selectedProp.WayPointList.Count - 1 || i == 0)
+                        {
+                            for (int x = -1; x < 2; x++)
+                            {
+                                for (int y = -1; y < 2; y++)
+                                {
+                                    if (y != 0 || x != 0)
+                                    {
+                                        if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                                        {
+                                            if (mod.wp_selectedProp.MoverType == "daily")
+                                            {
+                                                DrawText((i+1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "weekly")
+                                            {
+                                                DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", W" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "monthly")
+                                            {
+                                                DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", M" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "yearly")
+                                            {
+                                                DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", Y" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                            }
+                                        }
+                                        else if (mod.wp_selectedProp.MoverType == "patrol")
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", " + mod.wp_selectedProp.WayPointList[i].WaitDuration + " turns", dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                        }
+                                        else if (mod.wp_selectedProp.MoverType == "random")
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", random", dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                        }
+                                        else if (mod.wp_selectedProp.MoverType == "post")
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", post", dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                        }
+                                    }
+                                }
+                            }
+                        }//ende
+                        else
+                        {
+                            for (int x = -1; x < 2; x++)
+                            {
+                                for (int y = -1; y < 2; y++)
+                                {
+                                    if (y != 0 || x != 0)
+                                    {
+                                        if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                                        {
+                                            if (mod.wp_selectedProp.MoverType == "daily")
+                                            {
+                                                DrawText((i+1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "weekly")
+                                            {
+                                                DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", W" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "monthly")
+                                            {
+                                                DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", M" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "yearly")
+                                            {
+                                                DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", Y" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                            }
+                                        }
+                                        else if (mod.wp_selectedProp.MoverType == "patrol")
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", " + mod.wp_selectedProp.WayPointList[i].WaitDuration + " turns", dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                        }
+                                        else if (mod.wp_selectedProp.MoverType == "random")
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", random", dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                        }
+                                        else if (mod.wp_selectedProp.MoverType == "post")
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", post", dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        //inner, colored
+                        if (i != mod.currentlySelectedWayPointIndex)
+                        {
+                            if (i == mod.wp_selectedProp.WayPointList.Count - 1 || i == 0)
+                            {
+                                if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                                {
+                                    if (mod.wp_selectedProp.MoverType == "daily")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "weekly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", W" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "monthly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", M" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "yearly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", Y" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                    }
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "patrol")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", " + mod.wp_selectedProp.WayPointList[i].WaitDuration + " turns", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "random")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", random", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "post")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", post", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                }
+
+                            }
+                            else
+                            {
+                                if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                                {
+                                    if (mod.wp_selectedProp.MoverType == "daily")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "weekly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", W" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "monthly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", M" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "yearly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", Y" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                    }
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "patrol")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", " + mod.wp_selectedProp.WayPointList[i].WaitDuration + " turns", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "random")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", random", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "post")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", post", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                }
+                            }
+                        }
+                        else if (i == mod.currentlySelectedWayPointIndex)
+                        {
+                                if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                                {
+                                    if (mod.wp_selectedProp.MoverType == "daily")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "weekly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", W" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "monthly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", M" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
+                                    }
+                                    if (mod.wp_selectedProp.MoverType == "yearly")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", Y" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
+                                    }
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "patrol")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", " + mod.wp_selectedProp.WayPointList[i].WaitDuration + " turns", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "random")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", random", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
+                                }
+                                else if (mod.wp_selectedProp.MoverType == "post")
+                                {
+                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", post", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
+                                }  
+                        }
+                    }
+                }
+            }
+            /*
+        #region Draw Grid
+        for (int y = 0; y < area.MapSizeY; y++)
+        {
+            for (int x = 0; x < area.MapSizeX; x++)
+            {
+                Tile tile = area.Tiles[y * area.MapSizeX + x];
+                //draw square walkmesh and LoS stuff
+                //SharpDX.Direct2D1.Bitmap bm = GetFromBitmapList("walk_pass");
+                //Rectangle src = new Rectangle(0, 0, g_walkPass.Width, g_walkPass.Height);
+                //Rectangle target = new Rectangle(x * sqr, y * sqr, sqr, sqr);
+                SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList("walk_pass").PixelSize.Width, GetFromBitmapList("walk_pass").PixelSize.Height);
+                SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, sqr, sqr);
+                if (rbtnWP.Checked)
+                {
+                    float scaler = 1.0f;
+                    if (sqr == 50) { scaler = 15.0f; }
+                    else if (sqr == 25) { scaler = 7.5f; }
+                    else if (sqr == 10) { scaler = 3.0f; }
+                    DrawText(tile.heightLevel.ToString(), dst.X, dst.Y, scaler, SharpDX.Color.Yellow);
+                }
+                */
+
+            //}
+            //foreach (Trigger t in area.Triggers)
+            //{
+
+            //}
+            #endregion
             /*
             #region Draw Linked state
             for (int y = 0; y < area.MapSizeY; y++)
@@ -7396,750 +7728,750 @@ namespace IB2Toolset
             }
             #endregion
             */
-                        /*
-                        #region Draw Height Shadows
+            /*
+            #region Draw Height Shadows
 
-                        int indexOfNorthernNeighbour = -1;
-                        int indexOfSouthernNeighbour = -1;
-                        int indexOfEasternNeighbour = -1;
-                        int indexOfWesternNeighbour = -1;
-                        int indexOfNorthEasternNeighbour = -1;
-                        int indexOfNorthWesternNeighbour = -1;
-                        int indexOfSouthEasternNeighbour = -1;
-                        int indexOfSouthWesternNeighbour = -1;
+            int indexOfNorthernNeighbour = -1;
+            int indexOfSouthernNeighbour = -1;
+            int indexOfEasternNeighbour = -1;
+            int indexOfWesternNeighbour = -1;
+            int indexOfNorthEasternNeighbour = -1;
+            int indexOfNorthWesternNeighbour = -1;
+            int indexOfSouthEasternNeighbour = -1;
+            int indexOfSouthWesternNeighbour = -1;
 
-                        #region neighbours
-                        if ((area.northernNeighbourArea != ""))
-                        {
-                            for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                            {
-                                if (mod.moduleAreasObjects[i].Filename == area.northernNeighbourArea)
-                                {
-                                   indexOfNorthernNeighbour = i;
-                                }
-                            }
-
-                            if (mod.moduleAreasObjects[indexOfNorthernNeighbour].easternNeighbourArea != "")
-                            {
-                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                                {
-                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfNorthernNeighbour].easternNeighbourArea)
-                                    {
-                                        indexOfNorthEasternNeighbour = i;
-                                    }
-                                }
-                            }
-
-                            if (mod.moduleAreasObjects[indexOfNorthernNeighbour].westernNeighbourArea != "")
-                            {
-                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                                {
-                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfNorthernNeighbour].westernNeighbourArea)
-                                    {
-                                        indexOfNorthWesternNeighbour = i;
-                                    }
-                                }
-                            }
-                        }
-
-                        if ((area.southernNeighbourArea != ""))
-                        {
-                            for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                            {
-                                if (mod.moduleAreasObjects[i].Filename == area.southernNeighbourArea)
-                                {
-                                    indexOfSouthernNeighbour = i;
-                                }
-                            }
-
-                            if (mod.moduleAreasObjects[indexOfSouthernNeighbour].easternNeighbourArea != "")
-                            {
-                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                                {
-                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfSouthernNeighbour].easternNeighbourArea)
-                                    {
-                                        indexOfSouthEasternNeighbour = i;
-                                    }
-                                }
-                            }
-
-                            if (mod.moduleAreasObjects[indexOfSouthernNeighbour].westernNeighbourArea != "")
-                            {
-
-                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                                {
-                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfSouthernNeighbour].westernNeighbourArea)
-                                    {
-                                        indexOfSouthWesternNeighbour = i;
-                                    }
-                                }
-                            }
-                        }
-
-                        if ((area.westernNeighbourArea != ""))
-                        {              
-                            for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                            {
-                                if (mod.moduleAreasObjects[i].Filename == area.westernNeighbourArea)
-                                {
-                                    indexOfWesternNeighbour = i;
-                                }
-                            }
-
-                            if (mod.moduleAreasObjects[indexOfWesternNeighbour].northernNeighbourArea != "")
-                            {
-                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                                {
-                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfWesternNeighbour].northernNeighbourArea)
-                                    {
-                                        indexOfNorthWesternNeighbour = i;
-                                    }
-                                }
-                            }
-
-                            if (mod.moduleAreasObjects[indexOfWesternNeighbour].southernNeighbourArea != "")
-                            {
-
-                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                                {
-                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfWesternNeighbour].southernNeighbourArea)
-                                    {
-                                        indexOfSouthWesternNeighbour = i;
-                                    }
-                                }
-                            }
-                        }
-
-                        if ((area.easternNeighbourArea != ""))
-                        {
-                            for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                            {
-                                if (mod.moduleAreasObjects[i].Filename == area.easternNeighbourArea)
-                                {
-                                    indexOfEasternNeighbour = i;
-                                }
-                            }
-
-                            if (mod.moduleAreasObjects[indexOfEasternNeighbour].northernNeighbourArea != "")
-                            {
-                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                                {
-                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfEasternNeighbour].northernNeighbourArea)
-                                    {
-                                        indexOfNorthEasternNeighbour = i;
-                                    }
-                                }
-                            }
-
-                            if (mod.moduleAreasObjects[indexOfEasternNeighbour].southernNeighbourArea != "")
-                            {
-                                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
-                                {
-                                    if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfEasternNeighbour].southernNeighbourArea)
-                                    {
-                                        indexOfSouthEasternNeighbour = i;
-                                    }
-                                }
-                            }
-                        }
-                        #endregion
-
-                        for (int y = 0; y < area.MapSizeY; y++)
-                        {
-                            for (int x = 0; x < area.MapSizeX; x++)
-                            {
-                                Tile tile = area.Tiles[y * area.MapSizeX + x];
-
-                                for (int yS = -1; yS < 2; yS++)
-                                {
-                                    for (int xS = -1; xS < 2; xS++)
-                                    {
-                                        //**********************************************************************************
-                                        //int index = -1;
-                                        Tile tileCaster = new Tile();
-
-                                        //nine situations where a caster tile can be:
-                                        //caster tile on north-western map (diagonal situation)
-                                        if ((x + xS < 0) && (y + yS < 0))
-                                        {
-                                            if (indexOfNorthWesternNeighbour != -1)
-                                            {
-                                                int transformedX = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + x + xS;
-                                                int transformedY = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeY + y + yS;
-                                                tileCaster = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        tile.isInLongShadeNW = true;
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        tile.isInShortShadeNW = true;
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.isInShortShadeNW = false;
-                                                        tile.isInLongShadeNW = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    tile.isInShortShadeNW = false;
-                                                    tile.isInLongShadeNW = false;
-                                                }
-                                            }
-                                        }
-
-                                        //caster tile on south-western map (diagonal situation)
-                                        if ((x + xS < 0) && (y + yS > area.MapSizeY - 1))
-                                        {
-                                            if (indexOfSouthWesternNeighbour != -1)
-                                            {
-                                                int transformedX = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + x + xS;
-                                                int transformedY = y + yS - area.MapSizeY;
-                                                tileCaster = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        tile.isInLongShadeSW = true;
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        tile.isInShortShadeSW = true;
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.isInShortShadeSW = false;
-                                                        tile.isInLongShadeSW = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    tile.isInShortShadeSW = false;
-                                                    tile.isInLongShadeSW = false;
-                                                }
-
-
-                                            }
-
-                                        }
-
-
-                                        //***********************
-                                        //caster tile on south-eastern map (diagonal situation)
-                                        if ((x + xS > area.MapSizeX - 1) && (y + yS > area.MapSizeY - 1))
-                                        {
-                                            if (indexOfSouthEasternNeighbour != -1)
-                                            {
-                                                int transformedX = x + xS - area.MapSizeX;
-                                                int transformedY = y + yS - area.MapSizeY;
-                                                tileCaster = mod.moduleAreasObjects[indexOfSouthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthEasternNeighbour].MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        tile.isInLongShadeSE = true;
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        tile.isInShortShadeSE = true;
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.isInShortShadeSE = false;
-                                                        tile.isInLongShadeSE = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    tile.isInShortShadeSE = false;
-                                                    tile.isInLongShadeSE = false;
-                                                }
-                                            }
-                                        }
-
-                                        //caster tile on north-eastern map (diagonal situation)
-                                        if ((x + xS > area.MapSizeX - 1) && (y + yS < 0))
-                                        {
-                                            if (indexOfNorthEasternNeighbour != -1)
-                                            {
-                                                int transformedX = x + xS - area.MapSizeX;
-                                                int transformedY = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeY + y + yS; ;
-                                                tileCaster = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        tile.isInLongShadeNE = true;
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        tile.isInShortShadeNE = true;
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.isInShortShadeNE = false;
-                                                        tile.isInLongShadeNE = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    tile.isInShortShadeNE = false;
-                                                    tile.isInLongShadeNE = false;
-                                                }
-                                            }
-                                        }
-
-                                        //caster tile on western map (non-diagonal)
-                                        if ((x + xS < 0) && (y + yS >= 0) && (y + yS < area.MapSizeY))
-                                        {
-                                            if (indexOfWesternNeighbour != -1)
-                                            {
-                                                int transformedX = mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + x + xS;
-                                                int transformedY = y + yS;
-                                                tileCaster = mod.moduleAreasObjects[indexOfWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        if (yS == -1)
-                                                        {
-                                                            tile.isInLongShadeNW = true;
-                                                        }
-                                                        if (yS == 0)
-                                                        {
-                                                            tile.isInLongShadeW = true;
-                                                        }
-                                                        if (yS == 1)
-                                                        {
-                                                            tile.isInLongShadeSW = true;
-                                                        }
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        if (yS == -1)
-                                                        {
-                                                            tile.isInShortShadeNW = true;
-                                                        }
-                                                        if (yS == 0)
-                                                        {
-                                                            tile.isInShortShadeW = true;
-                                                        }
-                                                        if (yS == 1)
-                                                        {
-                                                            tile.isInShortShadeSW = true;
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.isInShortShadeNW = false;
-                                                        tile.isInLongShadeNW = false;
-                                                        tile.isInShortShadeW = false;
-                                                        tile.isInLongShadeW = false;
-                                                        tile.isInShortShadeSW = false;
-                                                        tile.isInLongShadeSW = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    tile.isInShortShadeNW = false;
-                                                    tile.isInLongShadeNW = false;
-                                                    tile.isInShortShadeW = false;
-                                                    tile.isInLongShadeW = false;
-                                                    tile.isInShortShadeSW = false;
-                                                    tile.isInLongShadeSW = false;
-                                                }
-                                            }
-                                        }
-
-                                        //caster tile on eastern map (non-diagonal)
-                                        if ((x + xS >= area.MapSizeX) && (y + yS >= 0) && (y + yS < area.MapSizeY))
-                                        {
-                                            if (indexOfEasternNeighbour != -1)
-                                            {
-                                                int transformedX = x + xS - area.MapSizeX;
-                                                int transformedY = y + yS;
-                                                tileCaster = mod.moduleAreasObjects[indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfEasternNeighbour].MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        if (yS == -1)
-                                                        {
-                                                            tile.isInLongShadeNE = true;
-                                                        }
-                                                        if (yS == 0)
-                                                        {
-                                                            tile.isInLongShadeE = true;
-                                                        }
-                                                        if (yS == 1)
-                                                        {
-                                                            tile.isInLongShadeSE = true;
-                                                        }
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        if (yS == -1)
-                                                        {
-                                                            tile.isInShortShadeNE = true;
-                                                        }
-                                                        if (yS == 0)
-                                                        {
-                                                            tile.isInShortShadeE = true;
-                                                        }
-                                                        if (yS == 1)
-                                                        {
-                                                            tile.isInShortShadeSE = true;
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.isInShortShadeNE = false;
-                                                        tile.isInLongShadeNE = false;
-                                                        tile.isInShortShadeE = false;
-                                                        tile.isInLongShadeE = false;
-                                                        tile.isInShortShadeSE = false;
-                                                        tile.isInLongShadeSE = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    tile.isInShortShadeNE = false;
-                                                    tile.isInLongShadeNE = false;
-                                                    tile.isInShortShadeE = false;
-                                                    tile.isInLongShadeE = false;
-                                                    tile.isInShortShadeSE = false;
-                                                    tile.isInLongShadeSE = false;
-                                                }
-                                            }
-                                        }
-
-
-                                        //caster tile on southern map (non-diagonal)
-                                        if ((y + yS >= area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
-                                        {
-                                            if (indexOfSouthernNeighbour != -1)
-                                            {
-                                                int transformedX = x + xS;
-                                                int transformedY = y + yS - area.MapSizeY;
-                                                tileCaster = mod.moduleAreasObjects[indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthernNeighbour].MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        if (xS == -1)
-                                                        {
-                                                            tile.isInLongShadeSW = true;
-                                                        }
-                                                        if (xS == 0)
-                                                        {
-                                                            tile.isInLongShadeS = true;
-                                                        }
-                                                        if (xS == 1)
-                                                        {
-                                                            tile.isInLongShadeSE = true;
-                                                        }
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        if (xS == -1)
-                                                        {
-                                                            tile.isInShortShadeSW = true;
-                                                        }
-                                                        if (xS == 0)
-                                                        {
-                                                            tile.isInShortShadeS = true;
-                                                        }
-                                                        if (xS == 1)
-                                                        {
-                                                            tile.isInShortShadeSE = true;
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.isInShortShadeSE = false;
-                                                        tile.isInLongShadeSE = false;
-                                                        tile.isInShortShadeS = false;
-                                                        tile.isInLongShadeS = false;
-                                                        tile.isInShortShadeSW = false;
-                                                        tile.isInLongShadeSW = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    tile.isInShortShadeSE = false;
-                                                    tile.isInLongShadeSE = false;
-                                                    tile.isInShortShadeS = false;
-                                                    tile.isInLongShadeS = false;
-                                                    tile.isInShortShadeSW = false;
-                                                    tile.isInLongShadeSW = false;
-                                                }
-                                            }
-                                        }
-
-                                        //caster tile on northern map (non-diagonal)
-                                        if ((y + yS < 0) && (x + xS >= 0) && (x + xS < area.MapSizeX))
-                                        {
-                                            if (indexOfNorthernNeighbour != -1)
-                                            {
-                                                int transformedX = x + xS;
-                                                int transformedY = mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeY + y + yS; ;
-                                                tileCaster = mod.moduleAreasObjects[indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        if (xS == -1)
-                                                        {
-                                                            tile.isInLongShadeNW = true;
-                                                            tile.isInShortShadeNW = false;
-                                                        }
-                                                        if (xS == 0)
-                                                        {
-                                                            tile.isInLongShadeN = true;
-                                                            tile.isInShortShadeN = false;
-                                                        }
-                                                        if (xS == 1)
-                                                        {
-                                                            tile.isInLongShadeNE = true;
-                                                            tile.isInShortShadeNE = false;
-                                                        }
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        if (xS == -1)
-                                                        {
-                                                            tile.isInShortShadeNW = true;
-                                                            tile.isInLongShadeNW = false;
-                                                        }
-                                                        if (xS == 0)
-                                                        {
-                                                            tile.isInShortShadeN = true;
-                                                            tile.isInLongShadeN = false;
-                                                        }
-                                                        if (xS == 1)
-                                                        {
-                                                            tile.isInShortShadeNE = true;
-                                                            tile.isInLongShadeNE = false;
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        if (xS == -1)
-                                                        {
-                                                            tile.isInLongShadeNW = false;
-                                                            tile.isInShortShadeNW = false;
-                                                        }
-                                                        if (xS == 0)
-                                                        {
-                                                            tile.isInLongShadeN = false;
-                                                            tile.isInShortShadeN = false;
-                                                        }
-                                                        if (xS == 1)
-                                                        {
-                                                            tile.isInLongShadeNE = false;
-                                                            tile.isInShortShadeNE = false;
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    if (xS == -1)
-                                                    {
-                                                        tile.isInLongShadeNW = false;
-                                                        tile.isInShortShadeNW = false;
-                                                    }
-                                                    if (xS == 0)
-                                                    {
-                                                        tile.isInLongShadeN = false;
-                                                        tile.isInShortShadeN = false;
-                                                    }
-                                                    if (xS == 1)
-                                                    {
-                                                        tile.isInLongShadeNE = false;
-                                                        tile.isInShortShadeNE = false;
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        //caster tile is on this map
-                                        if ((y + yS >= 0) && (y + yS < area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
-                                        {
-                                                int transformedX = x + xS;
-                                                int transformedY = y + yS; ;
-                                                tileCaster = area.Tiles[transformedY * area.MapSizeX + transformedX];
-
-                                                //casts shadow and is no ramp
-                                                if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
-                                                {
-                                                    //check for long shadows
-                                                    if (tileCaster.heightLevel == tile.heightLevel + 2)
-                                                    {
-                                                        if ((xS == -1) &&  (yS == -1))
-                                                        {
-                                                            tile.isInLongShadeNW = true;
-                                                        }
-
-                                                    }
-
-                                                    //check for short shadows
-                                                    else if (tileCaster.heightLevel == tile.heightLevel + 1)
-                                                    {
-                                                        if (xS == -1)
-                                                        {
-                                                            tile.isInShortShadeNW = true;
-                                                        }
-                                                        if (xS == 0)
-                                                        {
-                                                            tile.isInShortShadeN = true;
-                                                        }
-                                                        if (xS == 1)
-                                                        {
-                                                            tile.isInShortShadeNE = true;
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        tile.isInShortShadeNE = false;
-                                                        tile.isInLongShadeNE = false;
-                                                        tile.isInShortShadeN = false;
-                                                        tile.isInLongShadeN = false;
-                                                        tile.isInShortShadeNW = false;
-                                                        tile.isInLongShadeNW = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    tile.isInShortShadeNE = false;
-                                                    tile.isInLongShadeNE = false;
-                                                    tile.isInShortShadeN = false;
-                                                    tile.isInLongShadeN = false;
-                                                    tile.isInShortShadeNW = false;
-                                                    tile.isInLongShadeNW = false;
-                                                }
-                                        }
-
-                                        //**********************
-
-
-
-                                        //tile on southern map
-                                        if ((y > (gv.mod.currentArea.MapSizeY - 1)) && (!situationFound))
-                                        {
-                                            situationFound = true;
-                                            if (gv.mod.indexOfSouthernNeighbour != -1)
-                                            {
-                                                int transformedX = x;
-                                                int transformedY = y - gv.mod.currentArea.MapSizeY;
-                                                tile = mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].MapSizeX + transformedX];
-                                                index = gv.mod.indexOfSouthernNeighbour;
-                                            }
-                                            else
-                                            {
-                                                drawTile = false;
-                                            }
-                                        }
-                                        //tile on eastern map
-                                        if ((x > (gv.mod.currentArea.MapSizeX - 1)) && (!situationFound))
-                                        {
-                                            situationFound = true;
-                                            if (gv.mod.indexOfEasternNeighbour != -1)
-                                            {
-                                                int transformedX = x - gv.mod.currentArea.MapSizeX;
-                                                int transformedY = y;
-                                                tile = mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].MapSizeX + transformedX];
-                                                index = gv.mod.indexOfEasternNeighbour;
-                                            }
-                                            else
-                                            {
-                                                drawTile = false;
-                                            }
-                                        }
-                                        //tile on northern map
-                                        if ((y < 0) && (!situationFound))
-                                        {
-                                            situationFound = true;
-                                            if (gv.mod.indexOfNorthernNeighbour != -1)
-                                            {
-                                                int transformedX = x;
-                                                int transformedY = mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].MapSizeY + y;
-                                                tile = mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].MapSizeX + transformedX];
-                                                index = gv.mod.indexOfNorthernNeighbour;
-                                            }
-                                            else
-                                            {
-                                                drawTile = false;
-                                            }
-                                        }
-                                        //tile is on current map
-                                        if (!situationFound)
-                                        {
-                                            tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
-                                        }
-
-
-
-
-                                        //****************************************************************************************
-
-                                    }//close inner y loop
-                                }//close inner x loop
-
-
-                                float scalerX = GetFromBitmapList(tile.Layer1Filename).PixelSize.Width / 100;
-                                float scalerY = GetFromBitmapList(tile.Layer1Filename).PixelSize.Height / 100;
-                                SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer1Filename).PixelSize.Width, GetFromBitmapList(tile.Layer1Filename).PixelSize.Height);
-                                SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
-                                DrawD2DBitmap(GetFromBitmapList(tile.Layer1Filename), src, dst, tile.Layer1Rotate, tile.Layer1Mirror, tile.Layer1Xshift, tile.Layer1Yshift, tile.Layer1Xscale, tile.Layer1Yscale);
-                                }//closer outer y loop 
-                            }//close outer x loop
-
-                        #endregion
-                        */
+            #region neighbours
+            if ((area.northernNeighbourArea != ""))
+            {
+                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                {
+                    if (mod.moduleAreasObjects[i].Filename == area.northernNeighbourArea)
+                    {
+                       indexOfNorthernNeighbour = i;
                     }
+                }
+
+                if (mod.moduleAreasObjects[indexOfNorthernNeighbour].easternNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfNorthernNeighbour].easternNeighbourArea)
+                        {
+                            indexOfNorthEasternNeighbour = i;
+                        }
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfNorthernNeighbour].westernNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfNorthernNeighbour].westernNeighbourArea)
+                        {
+                            indexOfNorthWesternNeighbour = i;
+                        }
+                    }
+                }
+            }
+
+            if ((area.southernNeighbourArea != ""))
+            {
+                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                {
+                    if (mod.moduleAreasObjects[i].Filename == area.southernNeighbourArea)
+                    {
+                        indexOfSouthernNeighbour = i;
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfSouthernNeighbour].easternNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfSouthernNeighbour].easternNeighbourArea)
+                        {
+                            indexOfSouthEasternNeighbour = i;
+                        }
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfSouthernNeighbour].westernNeighbourArea != "")
+                {
+
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfSouthernNeighbour].westernNeighbourArea)
+                        {
+                            indexOfSouthWesternNeighbour = i;
+                        }
+                    }
+                }
+            }
+
+            if ((area.westernNeighbourArea != ""))
+            {              
+                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                {
+                    if (mod.moduleAreasObjects[i].Filename == area.westernNeighbourArea)
+                    {
+                        indexOfWesternNeighbour = i;
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfWesternNeighbour].northernNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfWesternNeighbour].northernNeighbourArea)
+                        {
+                            indexOfNorthWesternNeighbour = i;
+                        }
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfWesternNeighbour].southernNeighbourArea != "")
+                {
+
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfWesternNeighbour].southernNeighbourArea)
+                        {
+                            indexOfSouthWesternNeighbour = i;
+                        }
+                    }
+                }
+            }
+
+            if ((area.easternNeighbourArea != ""))
+            {
+                for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                {
+                    if (mod.moduleAreasObjects[i].Filename == area.easternNeighbourArea)
+                    {
+                        indexOfEasternNeighbour = i;
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfEasternNeighbour].northernNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfEasternNeighbour].northernNeighbourArea)
+                        {
+                            indexOfNorthEasternNeighbour = i;
+                        }
+                    }
+                }
+
+                if (mod.moduleAreasObjects[indexOfEasternNeighbour].southernNeighbourArea != "")
+                {
+                    for (int i = 0; i < mod.moduleAreasObjects.Count; i++)
+                    {
+                        if (mod.moduleAreasObjects[i].Filename == mod.moduleAreasObjects[indexOfEasternNeighbour].southernNeighbourArea)
+                        {
+                            indexOfSouthEasternNeighbour = i;
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            for (int y = 0; y < area.MapSizeY; y++)
+            {
+                for (int x = 0; x < area.MapSizeX; x++)
+                {
+                    Tile tile = area.Tiles[y * area.MapSizeX + x];
+
+                    for (int yS = -1; yS < 2; yS++)
+                    {
+                        for (int xS = -1; xS < 2; xS++)
+                        {
+                            //**********************************************************************************
+                            //int index = -1;
+                            Tile tileCaster = new Tile();
+
+                            //nine situations where a caster tile can be:
+                            //caster tile on north-western map (diagonal situation)
+                            if ((x + xS < 0) && (y + yS < 0))
+                            {
+                                if (indexOfNorthWesternNeighbour != -1)
+                                {
+                                    int transformedX = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + x + xS;
+                                    int transformedY = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeY + y + yS;
+                                    tileCaster = mod.moduleAreasObjects[indexOfNorthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthWesternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInLongShadeNW = true;
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeNW = true;
+                                        }
+                                        else
+                                        {
+                                            tile.isInShortShadeNW = false;
+                                            tile.isInLongShadeNW = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        tile.isInShortShadeNW = false;
+                                        tile.isInLongShadeNW = false;
+                                    }
+                                }
+                            }
+
+                            //caster tile on south-western map (diagonal situation)
+                            if ((x + xS < 0) && (y + yS > area.MapSizeY - 1))
+                            {
+                                if (indexOfSouthWesternNeighbour != -1)
+                                {
+                                    int transformedX = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + x + xS;
+                                    int transformedY = y + yS - area.MapSizeY;
+                                    tileCaster = mod.moduleAreasObjects[indexOfSouthWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthWesternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInLongShadeSW = true;
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeSW = true;
+                                        }
+                                        else
+                                        {
+                                            tile.isInShortShadeSW = false;
+                                            tile.isInLongShadeSW = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        tile.isInShortShadeSW = false;
+                                        tile.isInLongShadeSW = false;
+                                    }
+
+
+                                }
+
+                            }
+
+
+                            //***********************
+                            //caster tile on south-eastern map (diagonal situation)
+                            if ((x + xS > area.MapSizeX - 1) && (y + yS > area.MapSizeY - 1))
+                            {
+                                if (indexOfSouthEasternNeighbour != -1)
+                                {
+                                    int transformedX = x + xS - area.MapSizeX;
+                                    int transformedY = y + yS - area.MapSizeY;
+                                    tileCaster = mod.moduleAreasObjects[indexOfSouthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthEasternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInLongShadeSE = true;
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeSE = true;
+                                        }
+                                        else
+                                        {
+                                            tile.isInShortShadeSE = false;
+                                            tile.isInLongShadeSE = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        tile.isInShortShadeSE = false;
+                                        tile.isInLongShadeSE = false;
+                                    }
+                                }
+                            }
+
+                            //caster tile on north-eastern map (diagonal situation)
+                            if ((x + xS > area.MapSizeX - 1) && (y + yS < 0))
+                            {
+                                if (indexOfNorthEasternNeighbour != -1)
+                                {
+                                    int transformedX = x + xS - area.MapSizeX;
+                                    int transformedY = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeY + y + yS; ;
+                                    tileCaster = mod.moduleAreasObjects[indexOfNorthEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthEasternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            tile.isInLongShadeNE = true;
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            tile.isInShortShadeNE = true;
+                                        }
+                                        else
+                                        {
+                                            tile.isInShortShadeNE = false;
+                                            tile.isInLongShadeNE = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        tile.isInShortShadeNE = false;
+                                        tile.isInLongShadeNE = false;
+                                    }
+                                }
+                            }
+
+                            //caster tile on western map (non-diagonal)
+                            if ((x + xS < 0) && (y + yS >= 0) && (y + yS < area.MapSizeY))
+                            {
+                                if (indexOfWesternNeighbour != -1)
+                                {
+                                    int transformedX = mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + x + xS;
+                                    int transformedY = y + yS;
+                                    tileCaster = mod.moduleAreasObjects[indexOfWesternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfWesternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInLongShadeNW = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInLongShadeW = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInLongShadeSW = true;
+                                            }
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInShortShadeW = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInShortShadeSW = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            tile.isInShortShadeNW = false;
+                                            tile.isInLongShadeNW = false;
+                                            tile.isInShortShadeW = false;
+                                            tile.isInLongShadeW = false;
+                                            tile.isInShortShadeSW = false;
+                                            tile.isInLongShadeSW = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        tile.isInShortShadeNW = false;
+                                        tile.isInLongShadeNW = false;
+                                        tile.isInShortShadeW = false;
+                                        tile.isInLongShadeW = false;
+                                        tile.isInShortShadeSW = false;
+                                        tile.isInLongShadeSW = false;
+                                    }
+                                }
+                            }
+
+                            //caster tile on eastern map (non-diagonal)
+                            if ((x + xS >= area.MapSizeX) && (y + yS >= 0) && (y + yS < area.MapSizeY))
+                            {
+                                if (indexOfEasternNeighbour != -1)
+                                {
+                                    int transformedX = x + xS - area.MapSizeX;
+                                    int transformedY = y + yS;
+                                    tileCaster = mod.moduleAreasObjects[indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfEasternNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInLongShadeNE = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInLongShadeE = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInLongShadeSE = true;
+                                            }
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (yS == -1)
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                            }
+                                            if (yS == 0)
+                                            {
+                                                tile.isInShortShadeE = true;
+                                            }
+                                            if (yS == 1)
+                                            {
+                                                tile.isInShortShadeSE = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            tile.isInShortShadeNE = false;
+                                            tile.isInLongShadeNE = false;
+                                            tile.isInShortShadeE = false;
+                                            tile.isInLongShadeE = false;
+                                            tile.isInShortShadeSE = false;
+                                            tile.isInLongShadeSE = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        tile.isInShortShadeNE = false;
+                                        tile.isInLongShadeNE = false;
+                                        tile.isInShortShadeE = false;
+                                        tile.isInLongShadeE = false;
+                                        tile.isInShortShadeSE = false;
+                                        tile.isInLongShadeSE = false;
+                                    }
+                                }
+                            }
+
+
+                            //caster tile on southern map (non-diagonal)
+                            if ((y + yS >= area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                            {
+                                if (indexOfSouthernNeighbour != -1)
+                                {
+                                    int transformedX = x + xS;
+                                    int transformedY = y + yS - area.MapSizeY;
+                                    tileCaster = mod.moduleAreasObjects[indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfSouthernNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInLongShadeSW = true;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInLongShadeS = true;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInLongShadeSE = true;
+                                            }
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInShortShadeSW = true;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInShortShadeS = true;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInShortShadeSE = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            tile.isInShortShadeSE = false;
+                                            tile.isInLongShadeSE = false;
+                                            tile.isInShortShadeS = false;
+                                            tile.isInLongShadeS = false;
+                                            tile.isInShortShadeSW = false;
+                                            tile.isInLongShadeSW = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        tile.isInShortShadeSE = false;
+                                        tile.isInLongShadeSE = false;
+                                        tile.isInShortShadeS = false;
+                                        tile.isInLongShadeS = false;
+                                        tile.isInShortShadeSW = false;
+                                        tile.isInLongShadeSW = false;
+                                    }
+                                }
+                            }
+
+                            //caster tile on northern map (non-diagonal)
+                            if ((y + yS < 0) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                            {
+                                if (indexOfNorthernNeighbour != -1)
+                                {
+                                    int transformedX = x + xS;
+                                    int transformedY = mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeY + y + yS; ;
+                                    tileCaster = mod.moduleAreasObjects[indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[indexOfNorthernNeighbour].MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInLongShadeNW = true;
+                                                tile.isInShortShadeNW = false;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInLongShadeN = true;
+                                                tile.isInShortShadeN = false;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInLongShadeNE = true;
+                                                tile.isInShortShadeNE = false;
+                                            }
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                                tile.isInLongShadeNW = false;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInShortShadeN = true;
+                                                tile.isInLongShadeN = false;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                                tile.isInLongShadeNE = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInLongShadeNW = false;
+                                                tile.isInShortShadeNW = false;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInLongShadeN = false;
+                                                tile.isInShortShadeN = false;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInLongShadeNE = false;
+                                                tile.isInShortShadeNE = false;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (xS == -1)
+                                        {
+                                            tile.isInLongShadeNW = false;
+                                            tile.isInShortShadeNW = false;
+                                        }
+                                        if (xS == 0)
+                                        {
+                                            tile.isInLongShadeN = false;
+                                            tile.isInShortShadeN = false;
+                                        }
+                                        if (xS == 1)
+                                        {
+                                            tile.isInLongShadeNE = false;
+                                            tile.isInShortShadeNE = false;
+                                        }
+                                    }
+                                }
+                            }
+
+                            //caster tile is on this map
+                            if ((y + yS >= 0) && (y + yS < area.MapSizeY) && (x + xS >= 0) && (x + xS < area.MapSizeX))
+                            {
+                                    int transformedX = x + xS;
+                                    int transformedY = y + yS; ;
+                                    tileCaster = area.Tiles[transformedY * area.MapSizeX + transformedX];
+
+                                    //casts shadow and is no ramp
+                                    if ((tileCaster.isShadowCaster) && (!tileCaster.isRamp))
+                                    {
+                                        //check for long shadows
+                                        if (tileCaster.heightLevel == tile.heightLevel + 2)
+                                        {
+                                            if ((xS == -1) &&  (yS == -1))
+                                            {
+                                                tile.isInLongShadeNW = true;
+                                            }
+
+                                        }
+
+                                        //check for short shadows
+                                        else if (tileCaster.heightLevel == tile.heightLevel + 1)
+                                        {
+                                            if (xS == -1)
+                                            {
+                                                tile.isInShortShadeNW = true;
+                                            }
+                                            if (xS == 0)
+                                            {
+                                                tile.isInShortShadeN = true;
+                                            }
+                                            if (xS == 1)
+                                            {
+                                                tile.isInShortShadeNE = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            tile.isInShortShadeNE = false;
+                                            tile.isInLongShadeNE = false;
+                                            tile.isInShortShadeN = false;
+                                            tile.isInLongShadeN = false;
+                                            tile.isInShortShadeNW = false;
+                                            tile.isInLongShadeNW = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        tile.isInShortShadeNE = false;
+                                        tile.isInLongShadeNE = false;
+                                        tile.isInShortShadeN = false;
+                                        tile.isInLongShadeN = false;
+                                        tile.isInShortShadeNW = false;
+                                        tile.isInLongShadeNW = false;
+                                    }
+                            }
+
+                            //**********************
+
+
+
+                            //tile on southern map
+                            if ((y > (gv.mod.currentArea.MapSizeY - 1)) && (!situationFound))
+                            {
+                                situationFound = true;
+                                if (gv.mod.indexOfSouthernNeighbour != -1)
+                                {
+                                    int transformedX = x;
+                                    int transformedY = y - gv.mod.currentArea.MapSizeY;
+                                    tile = mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfSouthernNeighbour].MapSizeX + transformedX];
+                                    index = gv.mod.indexOfSouthernNeighbour;
+                                }
+                                else
+                                {
+                                    drawTile = false;
+                                }
+                            }
+                            //tile on eastern map
+                            if ((x > (gv.mod.currentArea.MapSizeX - 1)) && (!situationFound))
+                            {
+                                situationFound = true;
+                                if (gv.mod.indexOfEasternNeighbour != -1)
+                                {
+                                    int transformedX = x - gv.mod.currentArea.MapSizeX;
+                                    int transformedY = y;
+                                    tile = mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfEasternNeighbour].MapSizeX + transformedX];
+                                    index = gv.mod.indexOfEasternNeighbour;
+                                }
+                                else
+                                {
+                                    drawTile = false;
+                                }
+                            }
+                            //tile on northern map
+                            if ((y < 0) && (!situationFound))
+                            {
+                                situationFound = true;
+                                if (gv.mod.indexOfNorthernNeighbour != -1)
+                                {
+                                    int transformedX = x;
+                                    int transformedY = mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].MapSizeY + y;
+                                    tile = mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].Tiles[transformedY * mod.moduleAreasObjects[gv.mod.indexOfNorthernNeighbour].MapSizeX + transformedX];
+                                    index = gv.mod.indexOfNorthernNeighbour;
+                                }
+                                else
+                                {
+                                    drawTile = false;
+                                }
+                            }
+                            //tile is on current map
+                            if (!situationFound)
+                            {
+                                tile = mod.currentArea.Tiles[y * mod.currentArea.MapSizeX + x];
+                            }
+
+
+
+
+                            //****************************************************************************************
+
+                        }//close inner y loop
+                    }//close inner x loop
+
+
+                    float scalerX = GetFromBitmapList(tile.Layer1Filename).PixelSize.Width / 100;
+                    float scalerY = GetFromBitmapList(tile.Layer1Filename).PixelSize.Height / 100;
+                    SharpDX.RectangleF src = new SharpDX.RectangleF(0, 0, GetFromBitmapList(tile.Layer1Filename).PixelSize.Width, GetFromBitmapList(tile.Layer1Filename).PixelSize.Height);
+                    SharpDX.RectangleF dst = new SharpDX.RectangleF(x * sqr, y * sqr, (int)(sqr * scalerX), (int)(sqr * scalerY));
+                    DrawD2DBitmap(GetFromBitmapList(tile.Layer1Filename), src, dst, tile.Layer1Rotate, tile.Layer1Mirror, tile.Layer1Xshift, tile.Layer1Yshift, tile.Layer1Xscale, tile.Layer1Yscale);
+                    }//closer outer y loop 
+                }//close outer x loop
+
+            #endregion
+            */
+        }
         #endregion
 
         #region Methods
@@ -12157,6 +12489,14 @@ namespace IB2Toolset
                     MessageBox.Show("returned a null area");
                 }
 
+                if (mod.wp_selectedProp != null)
+                {
+                    if (mod.wp_selectedProp.ImageFileName != "blank")
+
+                    {
+                        rbtnWP.Checked = true;
+                    }
+                }
                 //get shadows right while opening already
                 //calculateHeightShadows();
 
@@ -13142,6 +13482,7 @@ namespace IB2Toolset
         }
         private void WorldMapEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
+            prntForm.openWMEList.Remove(this);
             if (useDirect2D)
             {
                 DisposeAllD2D();
@@ -13169,6 +13510,10 @@ namespace IB2Toolset
         }
         private void rbtnInfo_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnInfo.Checked = this.rbtnInfo.Checked;
+            }
             if (rbtnInfo.Checked)
             {
                 prntForm.logText("info on selecting map objects");
@@ -13183,6 +13528,10 @@ namespace IB2Toolset
         }
         private void rbtnPaintTile_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnPaintTile.Checked = this.rbtnPaintTile.Checked;
+            }
             if (rbtnPaintTile.Checked)
             {
                 prntForm.logText("painting tiles" + Environment.NewLine);
@@ -13196,6 +13545,10 @@ namespace IB2Toolset
         }
         private void rbtnChangeLinkState_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnChangeLinkState.Checked = this.rbtnChangeLinkState.Checked;
+            }
             if (rbtnChangeLinkState.Checked)
             {
                 prntForm.logText("editing link to master state");
@@ -13216,6 +13569,13 @@ namespace IB2Toolset
             //todo
             if (rbtnWP.Checked)
             {
+                if (mod.wp_selectedProp != null)
+                {
+                    if (mod.wp_selectedProp.PropTag != "" && mod.wp_selectedProp.PropTag != "none")
+                    {
+                        txtSelectedIconInfo.Text = "name: " + mod.wp_selectedProp.PropName + Environment.NewLine + "tag: " + mod.wp_selectedProp.PropTag;
+                    }
+                }
                 prntForm.logText("editing waypoints of " + prntForm.selectedLevelMapPropTag);
                 prntForm.logText(Environment.NewLine);
                 prntForm.selectedLevelMapCreatureTag = "";
@@ -13226,10 +13586,23 @@ namespace IB2Toolset
                 //refreshMap(true);
                 //UpdatePB();
             }
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnWP.Checked = this.rbtnWP.Checked;
+                if (we != this && this.rbtnWP.Checked)
+                {
+                    we.rbtnWP.Focus();
+                }
+
+            }
         }
 
         private void rbtnWalkable_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnWalkable.Checked = this.rbtnWalkable.Checked;
+            }
             if (rbtnWalkable.Checked)
             {
                 prntForm.logText("editing walkmesh");
@@ -13246,6 +13619,10 @@ namespace IB2Toolset
 
         private void rbtnToMaster_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnToMaster.Checked = this.rbtnToMaster.Checked;
+            }
             //patrick
             if (rbtnToMaster.Checked)
             {
@@ -13311,6 +13688,10 @@ namespace IB2Toolset
 
         private void rbtnHeightLevel_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnHeightLevel.Checked = this.rbtnHeightLevel.Checked;
+            }
             if (rbtnHeightLevel.Checked)
             {
                 prntForm.logText("editing height level");
@@ -13336,6 +13717,10 @@ namespace IB2Toolset
 
         private void rbtnBridgeEW_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnBridgeEW.Checked = this.rbtnBridgeEW.Checked;
+            }
             if (rbtnBridgeEW.Checked)
             {
                 prntForm.logText("setting East-West bridge");
@@ -13369,6 +13754,10 @@ namespace IB2Toolset
 
         private void rbtnDownToN_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnDownToN.Checked = this.rbtnDownToN.Checked;
+            }
             if (rbtnDownToN.Checked)
             {
                 prntForm.logText("setting downstairs to N");
@@ -13443,6 +13832,10 @@ namespace IB2Toolset
         */
         private void rbtnLoS_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnLoS.Checked = this.rbtnLoS.Checked;
+            }
             if (rbtnLoS.Checked)
             {
                 prntForm.logText("editing line-of-sight mesh");
@@ -13484,6 +13877,10 @@ namespace IB2Toolset
         }
         private void rbtnPaintTrigger_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnPaintTrigger.Checked = this.rbtnPaintTrigger.Checked;
+            }
             if (rbtnPaintTrigger.Checked)
             {
                 //create a new trigger object
@@ -13506,6 +13903,10 @@ namespace IB2Toolset
         }
         private void rbtnEditTrigger_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnEditTrigger.Checked = this.rbtnEditTrigger.Checked;
+            }
             if (rbtnEditTrigger.Checked)
             {
                 prntForm.logText("edit trigger: ");
@@ -13525,8 +13926,27 @@ namespace IB2Toolset
         }
         public void HandleContextMenuClick(object sender, EventArgs e)
         {
+           
             //else, handler returns the selected tag
             ToolStripMenuItem menuItm = (ToolStripMenuItem)sender;
+
+            //schnarker
+            if (rbtnWP.Checked && mod.wp_selectedProp != null)
+            {
+                for (int i = 0; i < mod.wp_selectedProp.WayPointList.Count; i++)
+                {
+                    if (menuItm.Text == (i+1).ToString())
+                    {
+                        mod.currentlySelectedWayPointIndex = i;
+                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[i];
+                        panelView.ContextMenuStrip.Items.Clear();
+                        contextMenuStrip1.Items.Clear();
+                        return;
+                    }
+                }
+                //alos bule highlight in mod
+            }
+
             foreach (Prop prp in area.Props)
             {
                 if (prp.PropTag == menuItm.Text)
@@ -13536,6 +13956,10 @@ namespace IB2Toolset
                     lastSelectedObjectTag = prp.PropTag;
                     //prntForm.selectedLevelMapPropTag = prp.PropTag;
                     prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prp;
+                    //foundpadma
+                    mod.wp_selectedProp = prp;
+                    panelView.ContextMenuStrip.Items.Clear();
+                    contextMenuStrip1.Items.Clear();
                     return;
                 }
             }
@@ -13546,6 +13970,8 @@ namespace IB2Toolset
                     txtSelectedIconInfo.Text = "Trigger Tag: " + Environment.NewLine + t.TriggerTag;
                     lastSelectedObjectTag = t.TriggerTag;
                     prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                    panelView.ContextMenuStrip.Items.Clear();
+                    contextMenuStrip1.Items.Clear();
                     return;
                 }
             }
@@ -13560,6 +13986,8 @@ namespace IB2Toolset
                     txtSelectedIconInfo.Text = "Tile (x" + locationX.ToString() + " / y" + locationY.ToString() + ")" + Environment.NewLine;
                     lastSelectedObjectTag = tileCounter.ToString();
                     prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = t;
+                    panelView.ContextMenuStrip.Items.Clear();
+                    contextMenuStrip1.Items.Clear();
                     return;
                 }
                 tileCounter++;
@@ -13567,18 +13995,30 @@ namespace IB2Toolset
             }
         private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnZoom1x.Checked = this.rbtnZoom1x.Checked;
+            }
             sqr = 50;
             resetPanelAndDeviceSize();
             //GDI refreshMap(true);
         }
         private void rbtnZoom2x_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnZoom2x.Checked = this.rbtnZoom2x.Checked;
+            }
             sqr = 25;
             resetPanelAndDeviceSize();
             //GDI refreshMap(true);
         }
         private void rbtnZoom5x_CheckedChanged(object sender, EventArgs e)
         {
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                we.rbtnZoom5x.Checked = this.rbtnZoom5x.Checked;
+            }
             sqr = 10;
             resetPanelAndDeviceSize();
             //GDI refreshMap(true);
@@ -13717,6 +14157,7 @@ namespace IB2Toolset
         }
         private void btnProperties_Click(object sender, EventArgs e)
         {
+            //kopfhörer
             prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = area;
         }
         private void panelView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
