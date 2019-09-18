@@ -2306,6 +2306,29 @@ namespace IB2Toolset
                         //GDI refreshMap(false);
                     }
                     #endregion
+                    #region In waypoint mode
+                    else if (rbtnWP.Checked)
+                    {
+                        //neuerraum
+                        WayPoint wp = new WayPoint();
+                        if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                        {
+                            if (mod.wp_selectedProp.isMover)
+                            {
+                                wp.X = gridX;
+                                wp.Y = gridY;
+                                wp.areaName = area.Filename;
+                                //if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                                //{
+
+                                //}
+                                mod.wp_selectedProp.WayPointList.Insert(mod.currentlySelectedWayPointIndex + 1, wp);
+                                mod.currentlySelectedWayPointIndex++;
+                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                            }
+                        }
+                    }
+                    #endregion
                     #region Prop Selected
                     else if (prntForm.PropSelected)
                     {
@@ -14164,18 +14187,40 @@ namespace IB2Toolset
         {            
             if (e.KeyCode == Keys.Escape)
             {
-                // exit by right click or ESC
-                prntForm.logText("pressed escape");
-                prntForm.logText(Environment.NewLine);
-                //prntForm.selectedEncounterCreatureTag = "";
-                prntForm.selectedLevelMapCreatureTag = "";
-                prntForm.selectedLevelMapPropTag = "";
-                prntForm.CreatureSelected = false;
-                prntForm.PropSelected = false;
-                //GDI refreshMap(true);
-                //GDI UpdatePB();
-                rbtnInfo.Checked = true;
-                resetTileToBePlacedSettings();
+
+                if (rbtnWP.Checked)
+                {
+                    
+                        //neuerraum
+                        //WayPoint wp = new WayPoint();
+                        if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                        {
+                            
+                            mod.wp_selectedProp.WayPointList.RemoveAt(mod.currentlySelectedWayPointIndex);
+                            if (mod.currentlySelectedWayPointIndex > 0)
+                            {
+                                mod.currentlySelectedWayPointIndex--;
+                            }
+                            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+
+                    }
+
+                }
+                else
+                {
+                    // exit by right click or ESC
+                    prntForm.logText("pressed escape");
+                    prntForm.logText(Environment.NewLine);
+                    //prntForm.selectedEncounterCreatureTag = "";
+                    prntForm.selectedLevelMapCreatureTag = "";
+                    prntForm.selectedLevelMapPropTag = "";
+                    prntForm.CreatureSelected = false;
+                    prntForm.PropSelected = false;
+                    //GDI refreshMap(true);
+                    //GDI UpdatePB();
+                    rbtnInfo.Checked = true;
+                    resetTileToBePlacedSettings();
+                }
             }
             else if (e.KeyCode == Keys.R)
             {
