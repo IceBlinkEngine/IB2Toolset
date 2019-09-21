@@ -113,9 +113,73 @@ namespace IB2Toolset
         public int transitionToMasterRotationCounter = 1; //1=N, 2=E, 3= S, 4 = W
         #endregion
 
+
         public WorldMapEditor(Module m, ParentForm p)
         {
             InitializeComponent(p);
+
+            mod = m;
+            prntForm = p;
+            resetTileToBePlacedSettings();
+            //createTileImageButtons();
+            createTileImageButtons("t_");
+
+            //prntForm._mainDirectory = Directory.GetCurrentDirectory();
+            if (useDirect2D)
+            {
+                //TODO add D2D stuff                
+            }
+            else
+            {
+                /*//GDI surface = new Bitmap(mSizeW, mSizeH);
+                panelView.BackgroundImage = surface;
+                device = Graphics.FromImage(surface);
+
+                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png"))
+                {
+                    g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_pass.png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_pass.png"))
+                {
+                    g_walkPass = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_pass.png");
+                }
+                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_block.png"))
+                {
+                    g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\walk_block.png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_block.png"))
+                {
+                    g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\walk_block.png");
+                }
+                if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\los_block.png"))
+                {
+                    g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\graphics\\los_block.png");
+                }
+                else if (File.Exists(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\los_block.png"))
+                {
+                    g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\ui\\los_block.png");
+                }
+                if ((g_walkBlock == null) || (g_walkPass == null) || (g_LoSBlock == null))
+                {
+                    try
+                    {
+                        g_walkPass = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\walk_pass.png");
+                        g_walkBlock = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\walk_block.png");
+                        g_LoSBlock = new Bitmap(prntForm._mainDirectory + "\\default\\NewModule\\ui\\los_block.png");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("failed to load walk_pass, los_block, and walk_block bitmaps: " + ex.ToString());
+                        //le_game.errorLog("failed to load walkPass and walkBlock bitmaps: " + ex.ToString());
+                    }
+                }//GDI */
+            }
+        }
+
+
+        public WorldMapEditor(Module m, ParentForm p, string areaFilename)
+        {
+            InitializeComponent(p, areaFilename);
             
             mod = m;
             prntForm = p;
@@ -181,6 +245,53 @@ namespace IB2Toolset
             synchLevel();
         }
 
+        public void EditAreaWP(string areaFilename)
+        {
+            //if (prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex].StartsWith("wm_"))
+            //{
+            //brandung
+            bool alreadyOpen = false;
+            foreach (WorldMapEditor wme in prntForm.openWMEList)
+            {
+                if (wme.area.Filename == areaFilename)
+                {
+                    alreadyOpen = true;
+                    wme.Show(prntForm.dockPanel1);
+                    break;
+                }
+            }
+
+            if (!alreadyOpen)
+            {
+
+
+                WorldMapEditor newChild = new WorldMapEditor(prntForm.mod, prntForm, areaFilename); //add new child
+                                                                                                    //newChild.Text = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+                newChild.Text = areaFilename;
+                newChild.Show(prntForm.dockPanel1); //as new form created so that corresponding tab and child form is active
+                                                    //refreshListBoxAreas();
+                newChild.g_directory = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
+                newChild.g_filename = areaFilename;
+                if (prntForm.openWMEList.Count > 0)
+                {
+                    newChild.rbtnWP.Checked = prntForm.openWMEList[0].rbtnWP.Checked;
+                }
+                //foreach (WorldMapEditor we in prntForm.openWMEList)
+                //{
+                //we.rbtnWP.Checked = this.rbtnWP.Checked;
+                //}
+                /*}
+                else
+                {
+                    LevelEditor newChild = new LevelEditor(prntForm.mod, prntForm); //add new child
+                    newChild.Text = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+                    newChild.Show(prntForm.dockPanel1); //as new form created so that corresponding tab and child form is active
+                    refreshListBoxAreas();
+                    newChild.g_directory = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
+                    newChild.g_filename = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+                }*/
+            }
+        }
 
         private void btnTileFilter_Click(object sender, EventArgs e)
         {  
@@ -832,8 +943,88 @@ namespace IB2Toolset
 
             prntForm.frmAreas.refreshListBoxAreas();
             //refreshLeftPanelInfo();
-        }        
+        }
 
+        public void WorldMapEditor_LoadWP(object sender, EventArgs e)
+        {
+            //LoadEncounters();
+            string g_filename = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName;
+            radioButton1.Checked = true;
+            checkBox1.Checked = true;
+            checkBox2.Checked = true;
+            checkBox3.Checked = true;
+            checkBox4.Checked = true;
+            checkBox5.Checked = true;
+            //createTileImageButtons(); 
+
+            area = new Area();
+            area.MapSizeX = 16;
+            area.MapSizeY = 16;
+
+            // try and load the file selected if it exists
+            //string g_filename = mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+            string g_directory = prntForm._mainDirectory + "\\modules\\" + mod.moduleName + "\\areas";
+            string filenameNoExtension = Path.GetFileNameWithoutExtension(g_filename);
+            if (File.Exists(g_directory + "\\" + g_filename + ".lvl"))
+            {
+                openLevel(g_directory, g_filename, filenameNoExtension);
+                if (area == null)
+                {
+                    createNewArea(area.MapSizeX, area.MapSizeY);
+                    area.Filename = g_filename;
+                }
+            }
+            else
+            {
+                createNewArea(area.MapSizeX, area.MapSizeY);
+                area.Filename = g_filename;
+                if (useDirect2D)
+                {
+                    //TODO add D2D stuff
+                    InitDirect2DAndDirectWrite();
+                }
+            }
+            lblMapSizeX.Text = area.MapSizeX.ToString();
+            lblMapSizeY.Text = area.MapSizeY.ToString();
+            //set up level drawing surface
+
+            if (useDirect2D)
+            {
+                //TODO add D2D stuff
+                /*try
+                {
+                    InitDirect2DAndDirectWrite();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to use DirectX, DirectX option will not be available. Error: " + ex.ToString());
+                    prntForm.errorLog(ex.ToString());
+                }*/
+            }
+            else
+            {
+                //GDI panelView.Width = area.MapSizeX * sqr;
+                //GDI panelView.Height = area.MapSizeY * sqr;
+                //GDI surface = new Bitmap(panelView.Size.Width, panelView.Size.Height);
+                //GDI device = Graphics.FromImage(surface);
+                //GDI panelView.BackgroundImage = (Image)surface;
+            }
+
+            //refreshCmbBoxes();
+            //dekadenz
+            prntForm.openAreasList.Add(area);
+            prntForm.openWMEList.Add(this);
+            if (!rbtnWP.Checked)
+            {
+                rbtnInfo.Checked = true;
+            }
+            rbtnZoom1x.Checked = true;
+            //refreshMap(true);
+            numBGLocX.Value = area.backgroundImageStartLocX;
+            numBGLocY.Value = area.backgroundImageStartLocY;
+            //Set this map to be a WORLD MAP
+            //area.IsWorldMap = true;
+        }
 
         private void WorldMapEditor_Load(object sender, EventArgs e)
         {
@@ -1987,6 +2178,27 @@ namespace IB2Toolset
             {
                 return;
             }
+            //this.ScrollControlIntoView(MousePosition);
+            /*
+            Point p2 = new Point();
+            if (sqr == 50)
+            {
+                p2.X = e.X - (int)(5.5f * sqr);
+                p2.Y = e.Y - 6 * sqr;
+            }
+            if (sqr == 25)
+            {
+                p2.X = e.X - 2 * (int)(5.5f * sqr);
+                p2.Y = e.Y -  2* 6 * sqr;
+            }
+            if (sqr == 10)
+            {
+                p2.X = e.X - 5 * (int)(5.5f * sqr);
+                p2.Y = e.Y - 5 * 6 * sqr;
+            }
+
+            this.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+            */
             switch (e.Button)
             {
                 #region Left Button
@@ -2309,22 +2521,46 @@ namespace IB2Toolset
                     #region In waypoint mode
                     else if (rbtnWP.Checked)
                     {
-                        //neuerraum
-                        WayPoint wp = new WayPoint();
-                        if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
-                        {
-                            if (mod.wp_selectedProp.isMover)
-                            {
-                                wp.X = gridX;
-                                wp.Y = gridY;
-                                wp.areaName = area.Filename;
-                                //if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
-                                //{
 
-                                //}
-                                mod.wp_selectedProp.WayPointList.Insert(mod.currentlySelectedWayPointIndex + 1, wp);
-                                mod.currentlySelectedWayPointIndex++;
-                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                        if (!mod.copiedWPInsertModeOn)
+                        {
+                            //neuerraum
+                            WayPoint wp = new WayPoint();
+                            if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                            {
+                                if (mod.wp_selectedProp.isMover)
+                                {
+                                    wp.X = gridX;
+                                    wp.Y = gridY;
+                                    wp.areaName = area.Filename;
+                                    //if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                                    //{
+
+                                    //}
+                                    mod.wp_selectedProp.WayPointList.Insert(mod.currentlySelectedWayPointIndex + 1, wp);
+                                    mod.currentlySelectedWayPointIndex++;
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                            {
+                                if (mod.wp_selectedProp.isMover)
+                                {
+                                    mod.copiedWPInsertModeOn = false;
+                                    WayPoint wp = new WayPoint();
+                                    wp = mod.copiedWayPoint.DeepCopy();
+                                    wp.X = gridX;
+                                    wp.Y = gridY;
+                                    wp.areaName = area.Filename;
+                                    wp.departureTime = null;
+                                    wp.WaitDuration = 0;
+                                    mod.wp_selectedProp.WayPointList.Insert(mod.currentlySelectedWayPointIndex + 1, wp);
+                                    mod.currentlySelectedWayPointIndex++;
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                                }
                             }
                         }
                     }
@@ -7505,7 +7741,15 @@ namespace IB2Toolset
                                         {
                                             if (mod.wp_selectedProp.MoverType == "daily")
                                             {
-                                                DrawText((i+1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                                if (mod.wp_selectedProp.WayPointList[i].departureTime == null || mod.wp_selectedProp.WayPointList[i].departureTime =="" || mod.wp_selectedProp.WayPointList[i].departureTime == "None" || mod.wp_selectedProp.WayPointList[i].departureTime == "none")
+                                                {
+                                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + " Enter Time", dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+
+                                                }
+                                                else
+                                                {
+                                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                                }
                                             }
                                             if (mod.wp_selectedProp.MoverType == "weekly")
                                             {
@@ -7548,7 +7792,15 @@ namespace IB2Toolset
                                         {
                                             if (mod.wp_selectedProp.MoverType == "daily")
                                             {
-                                                DrawText((i+1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                                if (mod.wp_selectedProp.WayPointList[i].departureTime == null || mod.wp_selectedProp.WayPointList[i].departureTime == "" || mod.wp_selectedProp.WayPointList[i].departureTime == "None" || mod.wp_selectedProp.WayPointList[i].departureTime == "none")
+                                                {
+                                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + " Enter Time", dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+
+                                                }
+                                                else
+                                                {
+                                                    DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3 + x, dst.Y + rowsDownDueToMulti * FontHeight + y, scaler, SharpDX.Color.Black);
+                                                }
                                             }
                                             if (mod.wp_selectedProp.MoverType == "weekly")
                                             {
@@ -7589,7 +7841,15 @@ namespace IB2Toolset
                                 {
                                     if (mod.wp_selectedProp.MoverType == "daily")
                                     {
-                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                        if (mod.wp_selectedProp.WayPointList[i].departureTime == null || mod.wp_selectedProp.WayPointList[i].departureTime == "" || mod.wp_selectedProp.WayPointList[i].departureTime == "None" || mod.wp_selectedProp.WayPointList[i].departureTime == "none")
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + " Enter Time", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Red);
+
+                                        }
+                                        else
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                        }
                                     }
                                     if (mod.wp_selectedProp.MoverType == "weekly")
                                     {
@@ -7624,7 +7884,15 @@ namespace IB2Toolset
                                 {
                                     if (mod.wp_selectedProp.MoverType == "daily")
                                     {
-                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                        if (mod.wp_selectedProp.WayPointList[i].departureTime == null || mod.wp_selectedProp.WayPointList[i].departureTime == "" || mod.wp_selectedProp.WayPointList[i].departureTime == "None" || mod.wp_selectedProp.WayPointList[i].departureTime == "none")
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + " Enter Time", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Red);
+
+                                        }
+                                        else
+                                        {
+                                            DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.Yellow);
+                                        }
                                     }
                                     if (mod.wp_selectedProp.MoverType == "weekly")
                                     {
@@ -7659,8 +7927,16 @@ namespace IB2Toolset
                                 {
                                     if (mod.wp_selectedProp.MoverType == "daily")
                                     {
+                                    if (mod.wp_selectedProp.WayPointList[i].departureTime == null || mod.wp_selectedProp.WayPointList[i].departureTime == "" || mod.wp_selectedProp.WayPointList[i].departureTime == "None" || mod.wp_selectedProp.WayPointList[i].departureTime == "none")
+                                    {
+                                        DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + " Enter Time", dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
+
+                                    }
+                                    else
+                                    {
                                         DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", D" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
                                     }
+                                }
                                     if (mod.wp_selectedProp.MoverType == "weekly")
                                     {
                                         DrawText((i + 1).ToString() + "/" + mod.wp_selectedProp.WayPointList.Count.ToString() + ", W" + mod.wp_selectedProp.WayPointList[i].departureTime, dst.X + 3, dst.Y + rowsDownDueToMulti * FontHeight, scaler, SharpDX.Color.CornflowerBlue);
@@ -13979,6 +14255,7 @@ namespace IB2Toolset
                     lastSelectedObjectTag = prp.PropTag;
                     //prntForm.selectedLevelMapPropTag = prp.PropTag;
                     prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prp;
+                    mod.currentlySelectedWayPointIndex = 0;
                     //foundpadma
                     mod.wp_selectedProp = prp;
                     panelView.ContextMenuStrip.Items.Clear();
@@ -14184,24 +14461,24 @@ namespace IB2Toolset
             prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = area;
         }
         private void panelView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {            
+        {
             if (e.KeyCode == Keys.Escape)
             {
 
                 if (rbtnWP.Checked)
                 {
-                    
-                        //neuerraum
-                        //WayPoint wp = new WayPoint();
-                        if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+
+                    //neuerraum
+                    //WayPoint wp = new WayPoint();
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                    {
+
+                        mod.wp_selectedProp.WayPointList.RemoveAt(mod.currentlySelectedWayPointIndex);
+                        if (mod.currentlySelectedWayPointIndex > 0)
                         {
-                            
-                            mod.wp_selectedProp.WayPointList.RemoveAt(mod.currentlySelectedWayPointIndex);
-                            if (mod.currentlySelectedWayPointIndex > 0)
-                            {
-                                mod.currentlySelectedWayPointIndex--;
-                            }
-                            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                            mod.currentlySelectedWayPointIndex--;
+                        }
+                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
 
                     }
 
@@ -14221,6 +14498,10 @@ namespace IB2Toolset
                     rbtnInfo.Checked = true;
                     resetTileToBePlacedSettings();
                 }
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                //nothing, is for menu points
             }
             else if (e.KeyCode == Keys.R)
             {
@@ -14284,6 +14565,74 @@ namespace IB2Toolset
             }
             else if (e.KeyCode == Keys.W)
             {
+                if (rbtnWP.Checked)
+                {
+
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                    {
+                        if (mod.currentlySelectedWayPointIndex < mod.wp_selectedProp.WayPointList.Count - 1)
+                        {
+                            mod.currentlySelectedWayPointIndex++;
+                        }
+                        else
+                        {
+                            mod.currentlySelectedWayPointIndex = 0;
+                        }
+                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                        if (area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                        else
+                        {
+                            //openfile
+                            EditAreaWP(mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName);
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                    }
+                    Point p2 = new Point();
+                    if (sqr == 50)
+                    {
+                        p2.X = gridX * sqr - (int)(5f * sqr);
+                        p2.Y = gridY * sqr - (int)(5.5f * sqr);
+                    }
+                    if (sqr == 25)
+                    {
+                        p2.X = gridX * sqr - 2 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 2 * 5 * sqr;
+                    }
+                    if (sqr == 10)
+                    {
+                        p2.X = gridX * sqr - 5 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 5 * 5 * sqr;
+                    }
+                    /*
+                    if (p2.X < 0)
+                    {
+                        p2.X = 0;
+                    }
+                    if (p2.Y < 0)
+                    {
+                        p2.Y = 0;
+                    }
+                    */
+                    //bool alreadyOpen = false;
+                    foreach (WorldMapEditor wme in prntForm.openWMEList)
+                    {
+                        if (wme.area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            wme.Show(prntForm.dockPanel1);
+                            wme.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+                            wme.Show(prntForm.dockPanel1);
+                            break;
+                        }
+                    }
+                    //this.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+
+                }
+
                 if (rbtnPaintTile.Checked)
                 {
                     tileToBePlaced.yshift--;
@@ -14291,20 +14640,332 @@ namespace IB2Toolset
             }
             else if (e.KeyCode == Keys.S)
             {
+                if (rbtnWP.Checked)
+                {
+
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                    {
+                        if (mod.currentlySelectedWayPointIndex > 0)
+                        {
+                            mod.currentlySelectedWayPointIndex--;
+                        }
+                        else
+                        {
+                            mod.currentlySelectedWayPointIndex = mod.wp_selectedProp.WayPointList.Count - 1;
+                        }
+                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                        if (area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                        else
+                        {
+                            //openfile
+                            EditAreaWP(mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName);
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                    }
+                    Point p2 = new Point();
+                    if (sqr == 50)
+                    {
+                        p2.X = gridX * sqr - (int)(5f * sqr);
+                        p2.Y = gridY * sqr - (int)(5.5f * sqr);
+                    }
+                    if (sqr == 25)
+                    {
+                        p2.X = gridX * sqr - 2 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 2 * 5 * sqr;
+                    }
+                    if (sqr == 10)
+                    {
+                        p2.X = gridX * sqr - 5 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 5 * 5 * sqr;
+                    }
+                    /*
+                    if (p2.X < 0)
+                    {
+                        p2.X = 0;
+                    }
+                    if (p2.Y < 0)
+                    {
+                        p2.Y = 0;
+                    }
+                    */
+                    //bool alreadyOpen = false;
+                    foreach (WorldMapEditor wme in prntForm.openWMEList)
+                    {
+                        if (wme.area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            wme.Show(prntForm.dockPanel1);
+                            wme.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+                            wme.Show(prntForm.dockPanel1);
+                            break;
+                        }
+                    }
+                    //this.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+
+                }
                 if (rbtnPaintTile.Checked)
                 {
                     tileToBePlaced.yshift++;
                 }
             }
+            else if (e.KeyCode == Keys.C)
+            {
+                if (rbtnWP.Checked)
+                {
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                    {
+                        if (mod.wp_selectedProp.WayPointList.Count > 0)
+                        {
+                            mod.copiedWayPoint = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].DeepCopy();
+                        }
+                    }
+                }
+            }
             else if (e.KeyCode == Keys.A)
             {
+                if (rbtnWP.Checked)
+                {
+
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                    {
+                        if (mod.currentlySelectedWayPointIndex > 0)
+                        {
+                            mod.currentlySelectedWayPointIndex--;
+                        }
+                        else
+                        {
+                            mod.currentlySelectedWayPointIndex = mod.wp_selectedProp.WayPointList.Count - 1;
+                        }
+                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                        if (area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                        else
+                        {
+                            //openfile
+                            EditAreaWP(mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName);
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                    }
+                    Point p2 = new Point();
+                    if (sqr == 50)
+                    {
+                        p2.X = gridX * sqr - (int)(5f * sqr);
+                        p2.Y = gridY * sqr - (int)(5.5f * sqr);
+                    }
+                    if (sqr == 25)
+                    {
+                        p2.X = gridX * sqr - 2 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 2 * 5 * sqr;
+                    }
+                    if (sqr == 10)
+                    {
+                        p2.X = gridX * sqr - 5 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 5 * 5 * sqr;
+                    }
+                    /*
+                    if (p2.X < 0)
+                    {
+                        p2.X = 0;
+                    }
+                    if (p2.Y < 0)
+                    {
+                        p2.Y = 0;
+                    }
+                    */
+                    //bool alreadyOpen = false;
+                    foreach (WorldMapEditor wme in prntForm.openWMEList)
+                    {
+                        if (wme.area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            wme.Show(prntForm.dockPanel1);
+                            wme.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+                            wme.Show(prntForm.dockPanel1);
+                            break;
+                        }
+                    }
+                    //this.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+
+                }
                 if (rbtnPaintTile.Checked)
                 {
                     tileToBePlaced.xshift--;
                 }
             }
+            else if (e.KeyCode == Keys.V)
+            {
+                if (rbtnWP.Checked)
+                {
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                    {
+                        if (!mod.copiedWPInsertModeOn)
+                        {
+                            mod.copiedWPInsertModeOn = true;
+                        }
+                        else
+                        {
+                            mod.copiedWPInsertModeOn = false;
+                        }
+                    }
+                }
+            }
             else if (e.KeyCode == Keys.D)
             {
+                if (rbtnWP.Checked)
+                {
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                    {
+                        if (mod.currentlySelectedWayPointIndex < mod.wp_selectedProp.WayPointList.Count - 1)
+                        {
+                            mod.currentlySelectedWayPointIndex++;
+                        }
+                        else
+                        {
+                            mod.currentlySelectedWayPointIndex = 0;
+                        }
+                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                        if (area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                        else
+                        {
+                            //openfile
+                            EditAreaWP(mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName);
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                    }
+                    Point p2 = new Point();
+                    if (sqr == 50)
+                    {
+                        p2.X = gridX * sqr - (int)(5f * sqr);
+                        p2.Y = gridY * sqr - (int)(5.5f * sqr);
+                    }
+                    if (sqr == 25)
+                    {
+                        p2.X = gridX * sqr - 2 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 2 * 5 * sqr;
+                    }
+                    if (sqr == 10)
+                    {
+                        p2.X = gridX * sqr - 5 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 5 * 5 * sqr;
+                    }
+                    /*
+                    if (p2.X < 0)
+                    {
+                        p2.X = 0;
+                    }
+                    if (p2.Y < 0)
+                    {
+                        p2.Y = 0;
+                    }
+                    */
+                    //bool alreadyOpen = false;
+                    foreach (WorldMapEditor wme in prntForm.openWMEList)
+                    {
+                        if (wme.area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            wme.Show(prntForm.dockPanel1);
+                            wme.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+                            wme.Show(prntForm.dockPanel1);
+                            break;
+                        }
+                    }
+                    /*
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
+                    {
+                        if (mod.wp_selectedProp.WayPointList.Count > 1)
+                        {
+                            //if (mod.wp_selectedProp.MoverType == "patrol")
+                            {
+                                WayPoint wpOrgCopy = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].DeepCopy();
+                                WayPoint wpTrgCopy = new WayPoint();
+                                int targetIndex = 0;
+                                int orgIndex = mod.currentlySelectedWayPointIndex;
+
+                                if (mod.currentlySelectedWayPointIndex < mod.wp_selectedProp.WayPointList.Count - 1)
+                                {
+                                    wpTrgCopy = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex + 1].DeepCopy();
+                                    targetIndex = mod.currentlySelectedWayPointIndex + 1;
+                                    mod.wp_selectedProp.WayPointList.RemoveAt(targetIndex);
+                                    mod.wp_selectedProp.WayPointList.RemoveAt(orgIndex);
+                                    mod.wp_selectedProp.WayPointList.Insert(orgIndex, wpTrgCopy);
+                                    mod.wp_selectedProp.WayPointList.Insert(targetIndex, wpOrgCopy);
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                                }
+                                else
+                                {
+                                    wpTrgCopy = mod.wp_selectedProp.WayPointList[0].DeepCopy();
+                                    targetIndex = 0;
+                                    mod.wp_selectedProp.WayPointList.RemoveAt(targetIndex);
+                                    mod.wp_selectedProp.WayPointList.RemoveAt(orgIndex);
+                                    mod.wp_selectedProp.WayPointList.Insert(orgIndex, wpTrgCopy);
+                                    mod.wp_selectedProp.WayPointList.Insert(targetIndex, wpOrgCopy);
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+
+                                }
+
+
+                            }
+
+                        }
+
+                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                        if (area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                        else
+                        {
+                            //openfile
+                            EditAreaWP(mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName);
+                            gridX = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].X;
+                            gridY = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].Y;
+                        }
+                    }
+                    Point p2 = new Point();
+                    if (sqr == 50)
+                    {
+                        p2.X = gridX * sqr - (int)(5f * sqr);
+                        p2.Y = gridY * sqr - (int)(5.5f * sqr);
+                    }
+                    if (sqr == 25)
+                    {
+                        p2.X = gridX * sqr - 2 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 2 * 5 * sqr;
+                    }
+                    if (sqr == 10)
+                    {
+                        p2.X = gridX * sqr - 5 * (int)(4.5f * sqr);
+                        p2.Y = gridY * sqr - 5 * 5 * sqr;
+                    }
+
+                    foreach (WorldMapEditor wme in prntForm.openWMEList)
+                    {
+                        if (wme.area.Filename == mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex].areaName)
+                        {
+                            wme.Show(prntForm.dockPanel1);
+                            wme.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+                            wme.Show(prntForm.dockPanel1);
+                            break;
+                        }
+                    }
+                    //this.panelNoScrollOnFocus1.AutoScrollPosition = p2;
+                */
+                }
+
+
                 if (rbtnPaintTile.Checked)
                 {
                     tileToBePlaced.xshift++;

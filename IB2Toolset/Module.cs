@@ -16,6 +16,13 @@ namespace IB2Toolset
         #region Fields
 
         [JsonIgnore]
+        public bool copiedWPInsertModeOn = false;
+
+        [JsonIgnore]
+        public WayPoint copiedWayPoint = new WayPoint();
+
+        public string areaFilename = "none";
+        [JsonIgnore]
         public Prop wp_selectedProp = new Prop();
 
         public int currentlySelectedWayPointIndex = 0;

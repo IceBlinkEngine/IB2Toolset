@@ -983,6 +983,7 @@ namespace IB2Toolset
             if (!mouseInMapArea(gridX, gridY)) { return; }
             lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
             panelView.Focus();
+            //panelView.
             if (prntForm.PropSelected)
             {
 

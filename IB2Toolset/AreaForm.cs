@@ -346,6 +346,38 @@ namespace IB2Toolset
             }*/
         }
 
+        public void EditAreaWP(string areaFilename)
+        {
+            //if (prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex].StartsWith("wm_"))
+            //{
+            //brandung
+            WorldMapEditor newChild = new WorldMapEditor(prntForm.mod, prntForm, areaFilename); //add new child
+            //newChild.Text = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+            newChild.Text = areaFilename;
+            newChild.Show(prntForm.dockPanel1); //as new form created so that corresponding tab and child form is active
+            refreshListBoxAreas();
+            newChild.g_directory = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
+            newChild.g_filename = areaFilename;
+            if (prntForm.openWMEList.Count > 0)
+            {
+                newChild.rbtnWP.Checked = prntForm.openWMEList[0].rbtnWP.Checked;
+            }
+            //foreach (WorldMapEditor we in prntForm.openWMEList)
+            //{
+            //we.rbtnWP.Checked = this.rbtnWP.Checked;
+            //}
+            /*}
+            else
+            {
+                LevelEditor newChild = new LevelEditor(prntForm.mod, prntForm); //add new child
+                newChild.Text = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+                newChild.Show(prntForm.dockPanel1); //as new form created so that corresponding tab and child form is active
+                refreshListBoxAreas();
+                newChild.g_directory = prntForm._mainDirectory + "\\modules\\" + prntForm.mod.moduleName + "\\areas";
+                newChild.g_filename = prntForm.mod.moduleAreasList[prntForm._selectedLbxAreaIndex];
+            }*/
+        }
+
         private void btnLoadAllArea_Click(object sender, EventArgs e)
         {
             string jobDir = "";
