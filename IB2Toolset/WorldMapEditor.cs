@@ -1953,6 +1953,122 @@ namespace IB2Toolset
             if (!mouseInMapArea(gridX, gridY)) { return; }
             lblMouseInfo.Text = "gridX = " + gridX.ToString() + " : gridY = " + gridY.ToString();
             panelView.Focus();
+            if (rbtnWP.Checked)
+            {
+                if (prntForm.mod.wp_selectedProp.WayPointList.Count > prntForm.mod.currentlySelectedWayPointIndex)
+                {
+                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prntForm.mod.wp_selectedProp.WayPointList[prntForm.mod.currentlySelectedWayPointIndex];
+                }
+            }
+                    
+
+            //*****************************************************************
+            /*
+            if (rbtnWP.Checked)
+            {
+                if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "none")
+                {
+                    if (mod.wp_selectedProp.WayPointList.Count > 1)
+                    {
+                        if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                        {
+                            List<WayPoint> newList = new List<WayPoint>();
+                            for (int i = mod.wp_selectedProp.WayPointList.Count - 1; i >= 0; i--)
+                            {
+                                List<string> timeUnitsList = new List<string>();
+                                int currentTimeInInterval = 0;
+
+                                //convert the string from the toolset for departure time into separate ints, filtering out ":" and blanks
+                                //format in toolset is number:number:number
+                                //with these ranges [0 to 336]:[0 to 23]:[0 to 59]
+                                //actually it's 1 to 336 for intuitive feeling, but below code treats zero and 1 the same way
+                                //think: 1 equals monday, 2 equals tuesday and so forth
+                                timeUnitsList = mod.wp_selectedProp.WayPointList[i].departureTime.Split(':').Select(x => x.Trim()).ToList();
+
+                                int dayCounter = Convert.ToInt32(timeUnitsList[0]);
+                                int hourCounter = Convert.ToInt32(timeUnitsList[1]);
+                                int minuteCounter = Convert.ToInt32(timeUnitsList[2]);
+
+                                //catch entries of zero
+                                //counter is reduced by one to make below calculation work the same for day/minutes/hours
+                                if ((dayCounter == 0) || (dayCounter == 1))
+                                {
+                                    dayCounter = 0;
+                                }
+                                else
+                                {
+                                    dayCounter = (dayCounter - 1);
+                                }
+
+                                //turn the the three counters into one number for departure time (in minutes)
+                                int convertedDepartureTime = dayCounter * 1440 + hourCounter * 60 + minuteCounter;
+
+                                bool wasInserted = false;
+                                //foreach (WayPoint wp2 in newList)
+                                for (int j = newList.Count - 1; j >= 0; j--)
+                                {
+                                    //departure time determine
+                                    List<string> timeUnitsList2 = new List<string>();
+                                    int currentTimeInInterval2 = 0;
+
+                                    //convert the string from the toolset for departure time into separate ints, filtering out ":" and blanks
+                                    //format in toolset is number:number:number
+                                    //with these ranges [0 to 336]:[0 to 23]:[0 to 59]
+                                    //actually it's 1 to 336 for intuitive feeling, but below code treats zero and 1 the same way
+                                    //think: 1 equals monday, 2 equals tuesday and so forth
+                                    timeUnitsList2 = newList[j].departureTime.Split(':').Select(x => x.Trim()).ToList();
+
+                                    int dayCounter2 = Convert.ToInt32(timeUnitsList2[0]);
+                                    int hourCounter2 = Convert.ToInt32(timeUnitsList2[1]);
+                                    int minuteCounter2 = Convert.ToInt32(timeUnitsList2[2]);
+
+                                    //catch entries of zero
+                                    //counter is reduced by one to make below calculation work the same for day/minutes/hours
+                                    if ((dayCounter2 == 0) || (dayCounter2 == 1))
+                                    {
+                                        dayCounter2 = 0;
+                                    }
+                                    else
+                                    {
+                                        dayCounter2 = (dayCounter2 - 1);
+                                    }
+
+                                    //turn the the three counters into one number for departure time (in minutes)
+                                    int convertedDepartureTime2 = dayCounter2 * 1440 + hourCounter2 * 60 + minuteCounter2;
+
+                                    //if waypoint org earlier/smaller, nothing
+                                    //if waypoint org later/higher, insert at+1
+                                    if (convertedDepartureTime > convertedDepartureTime2)
+                                    {
+                                        newList.Insert(j + 1, mod.wp_selectedProp.WayPointList[i].DeepCopy());
+                                        wasInserted = true;
+                                    }
+                                    //when through whole lsot and never larger, place at zero
+                                }
+
+                                if (!wasInserted)
+                                {
+                                    newList.Insert(0, mod.wp_selectedProp.WayPointList[i].DeepCopy());
+                                }
+
+                            }
+
+                            mod.wp_selectedProp.WayPointList.Clear();
+                            foreach (WayPoint wp in newList)
+                            {
+                                mod.wp_selectedProp.WayPointList.Add(wp.DeepCopy());
+                            }
+
+
+                        }
+
+                    }
+                }
+
+            }
+            */
+            //*****************************************************************
+
             if (prntForm.PropSelected)
             {
                 // TODO re-implement continuous drawing of props once converted to use Direct2D
@@ -2238,6 +2354,12 @@ namespace IB2Toolset
 
                     refreshLeftPanelInfo();
                     prntForm.currentSelectedTrigger = null;
+                   
+                    if (le_selectedProp != null)
+                    {
+                        rbtnWP.Checked = false;
+                    }
+
                     #region Tile Selected
                     if (rbtnPaintTile.Checked)
                     {
@@ -2520,16 +2642,60 @@ namespace IB2Toolset
                     #endregion
                     #region In waypoint mode
                     else if (rbtnWP.Checked)
-                    {
+                    {//1
+
+                        if (mod.wp_selectedProp.MoverType == "random" || mod.wp_selectedProp.MoverType == "patrol" || mod.wp_selectedProp.MoverType == "post")
+                        {
+                            string homeAreaOfProp = "none";
+                            foreach (Area a in prntForm.openAreasList)
+                            {
+                                foreach (Prop p in a.Props)
+                                {
+                                    if (p == mod.wp_selectedProp)
+                                    {
+                                        homeAreaOfProp = a.Filename;
+                                        break;
+                                    }
+                                }
+                                if (homeAreaOfProp != "none")
+                                {
+                                    break;
+                                }
+                            }
+                            if (area.Filename != homeAreaOfProp)
+                            {
+                                return;
+                            }
+                        }
 
                         if (!mod.copiedWPInsertModeOn)
-                        {
+                        {//2
                             //neuerraum
                             WayPoint wp = new WayPoint();
                             if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
-                            {
+                            {//3
                                 if (mod.wp_selectedProp.isMover)
-                                {
+                                {//4
+                                    //if (mod.wp_selectedProp.MoverType == "random")
+                                    //{
+                                        //return;
+                                    //}
+
+                                    if (mod.wp_selectedProp.MoverType == "post" || mod.wp_selectedProp.MoverType == "random")
+                                    {
+                                        //if (mod.wp_selectedProp.WayPointList.Count >= 1)
+                                        //{
+                                        mod.wp_selectedProp.WayPointList.Clear();
+                                        wp.X = gridX;
+                                        wp.Y = gridY;
+                                        wp.areaName = area.Filename;
+                                        mod.wp_selectedProp.WayPointList.Add(wp);
+                                        mod.currentlySelectedWayPointIndex = 0;
+                                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                                        return;
+                                        //}
+                                    }
+
                                     wp.X = gridX;
                                     wp.Y = gridY;
                                     wp.areaName = area.Filename;
@@ -2537,12 +2703,75 @@ namespace IB2Toolset
                                     //{
 
                                     //}
-                                    mod.wp_selectedProp.WayPointList.Insert(mod.currentlySelectedWayPointIndex + 1, wp);
-                                    mod.currentlySelectedWayPointIndex++;
-                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
-                                }
-                            }
-                        }
+                                    if (mod.currentlySelectedWayPointIndex < 0 || mod.currentlySelectedWayPointIndex > mod.wp_selectedProp.WayPointList.Count())
+                                    {
+                                        mod.currentlySelectedWayPointIndex = 0;
+                                    }
+
+                                    if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                                    {//5
+                                        if (mod.wp_selectedProp.WayPointList.Count == 0)
+                                        {//6
+                                            wp.departureTime = "1:0:1";
+                                            mod.wp_selectedProp.WayPointList.Add(wp.DeepCopy());
+                                            if (mod.wp_selectedProp.MoverType == "daily")
+                                            {
+                                                wp.departureTime = "1:23:59";
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "weekly")
+                                            {
+                                                wp.departureTime = "7:23:59";
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "monthly")
+                                            {
+                                                wp.departureTime = "28:23:59";
+                                            }
+                                            if (mod.wp_selectedProp.MoverType == "yearly")
+                                            {
+                                                wp.departureTime = "336:23:59";
+                                            }
+                                            mod.wp_selectedProp.WayPointList.Add(wp.DeepCopy());
+                                            mod.currentlySelectedWayPointIndex = 0;
+                                            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+
+                                        }//6
+                                        //two or more wp exist already
+                                        else
+                                        {
+                                            mod.wp_selectedProp.WayPointList.Insert(mod.currentlySelectedWayPointIndex + 1, wp);
+                                            mod.currentlySelectedWayPointIndex++;
+                                            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                                        }
+                                    }//5
+                                    //not time driven
+                                    else
+                                    {
+                                        if (mod.wp_selectedProp.WayPointList.Count == 0)
+                                        {
+                                            mod.wp_selectedProp.WayPointList.Add(wp);
+                                            mod.currentlySelectedWayPointIndex = 0;
+                                            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                                        }
+                                        else if (mod.currentlySelectedWayPointIndex == mod.wp_selectedProp.WayPointList.Count-1)
+                                        {
+                                            mod.wp_selectedProp.WayPointList.Add(wp);
+                                            mod.currentlySelectedWayPointIndex++;
+                                            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+
+                                        }
+                                        else
+                                        {
+                                            mod.wp_selectedProp.WayPointList.Insert(mod.currentlySelectedWayPointIndex + 1, wp);
+                                            mod.currentlySelectedWayPointIndex++;
+                                            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                                        }
+                                    }
+                               }//4
+                                        
+                           }//3
+                                    
+                                                            
+                        }//2
                         else
                         {
                             if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
@@ -2587,6 +2816,10 @@ namespace IB2Toolset
                             newProp.PropTag = le_selectedProp.PropTag + "_" + prntForm.mod.nextIdNumber;
                             newProp.LocationX = gridX;
                             newProp.LocationY = gridY;
+                            if (newProp.isMover)
+                            {
+                                mod.wp_selectedProp = newProp;
+                            }
                             area.Props.Add(newProp);
                         }
 
@@ -5664,17 +5897,120 @@ namespace IB2Toolset
         {
             try
             {
-                //prntForm
-                //foreach (Area a in openAreasList)
-                //{
-
-                //}
-                //foreach (WorldMapEditor we in prntForm.openWMEList)
-                //{
-                    //we.rbtnWP.Checked = this.rbtnWP.Checked;
-                //}
-                    if (rbtnWP.Checked)
+                /*
+                if (rbtnWP.Checked)
                 {
+                    if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "none")
+                    {
+                        if (mod.wp_selectedProp.WayPointList.Count > 1)
+                        {
+                            if (mod.wp_selectedProp.MoverType == "daily" || mod.wp_selectedProp.MoverType == "weekly" || mod.wp_selectedProp.MoverType == "monthly" || mod.wp_selectedProp.MoverType == "yearly")
+                            {
+                                    List<WayPoint> newList = new List<WayPoint>();
+                                    for (int i = mod.wp_selectedProp.WayPointList.Count - 1; i >= 0; i--)
+                                    {
+                                        List<string> timeUnitsList = new List<string>();
+                                        int currentTimeInInterval = 0;
+
+                                        //convert the string from the toolset for departure time into separate ints, filtering out ":" and blanks
+                                        //format in toolset is number:number:number
+                                        //with these ranges [0 to 336]:[0 to 23]:[0 to 59]
+                                        //actually it's 1 to 336 for intuitive feeling, but below code treats zero and 1 the same way
+                                        //think: 1 equals monday, 2 equals tuesday and so forth
+                                        timeUnitsList = mod.wp_selectedProp.WayPointList[i].departureTime.Split(':').Select(x => x.Trim()).ToList();
+
+                                        int dayCounter = Convert.ToInt32(timeUnitsList[0]);
+                                        int hourCounter = Convert.ToInt32(timeUnitsList[1]);
+                                        int minuteCounter = Convert.ToInt32(timeUnitsList[2]);
+
+                                        //catch entries of zero
+                                        //counter is reduced by one to make below calculation work the same for day/minutes/hours
+                                        if ((dayCounter == 0) || (dayCounter == 1))
+                                        {
+                                            dayCounter = 0;
+                                        }
+                                        else
+                                        {
+                                            dayCounter = (dayCounter - 1);
+                                        }
+
+                                        //turn the the three counters into one number for departure time (in minutes)
+                                        int convertedDepartureTime = dayCounter * 1440 + hourCounter * 60 + minuteCounter;
+
+                                        bool wasInserted = false;
+                                        //foreach (WayPoint wp2 in newList)
+                                        for (int j = newList.Count-1; j >= 0; j--)
+                                        {
+                                        //departure time determine
+                                        List<string> timeUnitsList2 = new List<string>();
+                                        int currentTimeInInterval2 = 0;
+
+                                        //convert the string from the toolset for departure time into separate ints, filtering out ":" and blanks
+                                        //format in toolset is number:number:number
+                                        //with these ranges [0 to 336]:[0 to 23]:[0 to 59]
+                                        //actually it's 1 to 336 for intuitive feeling, but below code treats zero and 1 the same way
+                                        //think: 1 equals monday, 2 equals tuesday and so forth
+                                        timeUnitsList2 = newList[j].departureTime.Split(':').Select(x => x.Trim()).ToList();
+
+                                        int dayCounter2 = Convert.ToInt32(timeUnitsList2[0]);
+                                        int hourCounter2 = Convert.ToInt32(timeUnitsList2[1]);
+                                        int minuteCounter2 = Convert.ToInt32(timeUnitsList2[2]);
+
+                                        //catch entries of zero
+                                        //counter is reduced by one to make below calculation work the same for day/minutes/hours
+                                        if ((dayCounter2 == 0) || (dayCounter2 == 1))
+                                        {
+                                            dayCounter2 = 0;
+                                        }
+                                        else
+                                        {
+                                            dayCounter2 = (dayCounter2 - 1);
+                                        }
+
+                                        //turn the the three counters into one number for departure time (in minutes)
+                                        int convertedDepartureTime2 = dayCounter2 * 1440 + hourCounter2 * 60 + minuteCounter2;
+
+                                        //if waypoint org earlier/smaller, nothing
+                                        //if waypoint org later/higher, insert at+1
+                                        if (convertedDepartureTime > convertedDepartureTime2)
+                                        {
+                                            newList.Insert(j+1, mod.wp_selectedProp.WayPointList[i].DeepCopy());
+                                            wasInserted = true;
+                                        }
+                                        //when through whole lsot and never larger, place at zero
+                                    }
+
+                                    if (!wasInserted)
+                                    {
+                                        newList.Insert(0, mod.wp_selectedProp.WayPointList[i].DeepCopy());
+                                    }
+
+                                    }
+
+                                mod.wp_selectedProp.WayPointList.Clear();
+                                foreach (WayPoint wp in newList)
+                                {
+                                    mod.wp_selectedProp.WayPointList.Add(wp.DeepCopy());
+                                }
+
+
+                                }
+                            
+                        }
+                    }
+
+                }
+                */
+                if (rbtnWP.Checked)
+                {
+
+                    /*
+                    if (prntForm.mod.wp_selectedProp.WayPointList.Count > prntForm.mod.currentlySelectedWayPointIndex)
+                    {
+                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prntForm.mod.wp_selectedProp.WayPointList[prntForm.mod.currentlySelectedWayPointIndex];
+                    }
+                    */
+
                     if (mod.wp_selectedProp != null)
                     {
                         if (mod.wp_selectedProp.PropTag != "" && mod.wp_selectedProp.PropTag != "none")
@@ -13866,6 +14202,7 @@ namespace IB2Toolset
         {
             //lombok
             //todo
+            panelView.Focus();
             if (rbtnWP.Checked)
             {
                 if (mod.wp_selectedProp != null)
@@ -14473,15 +14810,43 @@ namespace IB2Toolset
                     if (mod.wp_selectedProp != null && mod.wp_selectedProp.ImageFileName != "blank")
                     {
 
-                        mod.wp_selectedProp.WayPointList.RemoveAt(mod.currentlySelectedWayPointIndex);
-                        if (mod.currentlySelectedWayPointIndex > 0)
+                        bool notDeletableYet = false;
+                        if (prntForm.mod.wp_selectedProp.MoverType == "daily" || prntForm.mod.wp_selectedProp.MoverType == "weekly" || prntForm.mod.wp_selectedProp.MoverType == "monthly" || prntForm.mod.wp_selectedProp.MoverType == "yearly")
                         {
-                            mod.currentlySelectedWayPointIndex--;
+                            if (mod.wp_selectedProp.WayPointList.Count > 2)
+                            {
+                                if (mod.currentlySelectedWayPointIndex == 0 || mod.currentlySelectedWayPointIndex == prntForm.mod.wp_selectedProp.WayPointList.Count-1)
+                                {
+                                    notDeletableYet = true;
+                                }
+                            }
                         }
-                        prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+
+                        if (!notDeletableYet && mod.wp_selectedProp.WayPointList.Count > 0 && mod.currentlySelectedWayPointIndex < mod.wp_selectedProp.WayPointList.Count)
+                        {
+                            mod.wp_selectedProp.WayPointList.RemoveAt(mod.currentlySelectedWayPointIndex);
+                            if (mod.currentlySelectedWayPointIndex > 0)
+                            {
+                                mod.currentlySelectedWayPointIndex--;
+                            }
+
+                            if (mod.currentlySelectedWayPointIndex < mod.wp_selectedProp.WayPointList.Count)
+                            {
+                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
+                            }
+
+                            if (prntForm.mod.wp_selectedProp.MoverType == "daily" || prntForm.mod.wp_selectedProp.MoverType == "weekly" || prntForm.mod.wp_selectedProp.MoverType == "monthly" || prntForm.mod.wp_selectedProp.MoverType == "yearly")
+                            {
+                                if (mod.wp_selectedProp.WayPointList.Count <= 1)
+                                {
+                                    mod.wp_selectedProp.WayPointList.Clear();
+                                    prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prntForm.mod.wp_selectedProp;
+                                }
+
+                            }
+                        }
 
                     }
-
                 }
                 else
                 {
@@ -14565,6 +14930,10 @@ namespace IB2Toolset
             }
             else if (e.KeyCode == Keys.W)
             {
+                //panelNoScrollOnFocus1
+                //panelView.Focus();
+                //panelNoScrollOnFocus1.Focus();
+
                 if (rbtnWP.Checked)
                 {
 
@@ -14640,6 +15009,7 @@ namespace IB2Toolset
             }
             else if (e.KeyCode == Keys.S)
             {
+                //panelNoScrollOnFocus1.Focus();
                 if (rbtnWP.Checked)
                 {
 
