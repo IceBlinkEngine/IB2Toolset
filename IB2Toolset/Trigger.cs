@@ -398,5 +398,74 @@ namespace IB2Toolset
             else if (value == 5) { return "container"; }
             return returnString;
         }
+
+        public Trigger DeepCopy()
+        {
+            Trigger other = new Trigger();
+        
+        other.bumpTriggerDirection = bumpTriggerDirection; //fromSouth, fromNorth, fromEast, fromWest, none
+
+            other.connectedDiscovery = connectedDiscovery;
+            other.requiresActiveSearch = requiresActiveSearch;
+            other.triggerTag = triggerTag; //must be unique
+            other.enabled = enabled;
+            other.doOnceOnly = doOnceOnly;
+            //private List<Coordinate> triggerSquaresList = new List<Coordinate>();
+
+        other.enabledEvent1 = enabledEvent1;
+            other.doOnceOnlyEvent1 = doOnceOnlyEvent1;
+            other.event2RequiresTrueReturnCheck = event2RequiresTrueReturnCheck;
+            other.event1Type = event1Type;
+            //private TriggerType event1TypeEnum = TriggerType.None;
+            //private EventObjEditorReturnObject parameters1 = new EventObjEditorReturnObject();
+            other.event1FilenameOrTag = event1FilenameOrTag;
+            other.event1TransPointX = event1TransPointX;
+            other.event1TransPointY = event1TransPointY;
+            other.event1Parm1 = event1Parm1;
+            other.event1Parm2 = event1Parm2;
+            other.event1Parm3 = event1Parm3;
+            other.event1Parm4 = event1Parm4;
+
+            other.enabledEvent2 = enabledEvent2;
+            other.doOnceOnlyEvent2 = doOnceOnlyEvent2;
+            other.event3RequiresFalseReturnCheck = event3RequiresFalseReturnCheck;
+            other.event2Type = event2Type;
+            //private TriggerType event2TypeEnum = TriggerType.None;
+            //private EventObjEditorReturnObject parameters2 = new EventObjEditorReturnObject();
+            other.event2FilenameOrTag = event2FilenameOrTag;
+            other.event2TransPointX = event2TransPointX;
+            other.event2TransPointY = event2TransPointY;
+            other.event2Parm1 = event2Parm1;
+            other.event2Parm2 = event2Parm2;
+            other.event2Parm3 = event2Parm3;
+            other.event2Parm4 = event2Parm4;
+
+            other.enabledEvent3 = enabledEvent3;
+            other.doOnceOnlyEvent3 = doOnceOnlyEvent3;
+            other.event3Type = event3Type;
+            //private TriggerType event3TypeEnum = TriggerType.None;
+            other.event3FilenameOrTag = event3FilenameOrTag;
+            other.event3TransPointX = event3TransPointX;
+            other.event3TransPointY = event3TransPointY;
+            other.event3Parm1 = event3Parm1;
+            other.event3Parm2 = event3Parm2;
+            other.event3Parm3 = event3Parm3;
+            other.event3Parm4 = event3Parm4;
+
+            other.ConversationCannotBeAvoided = ConversationCannotBeAvoided;
+
+            other.numberOfScriptCallsRemaining = numberOfScriptCallsRemaining;
+            other.canBeTriggeredByPc = canBeTriggeredByPc;
+            other.canBeTriggeredByCreature = canBeTriggeredByCreature;
+
+            other.isLinkToMaster = isLinkToMaster;
+            other.tagOfLinkedMaster = tagOfLinkedMaster;
+            other.tagOfLink = tagOfLink;
+            other.transitionToMasterRotationCounter = transitionToMasterRotationCounter;
+
+            other.encounterTriggerOnEveryStep = encounterTriggerOnEveryStep;
+        
+            return other;
+        }
     }
 }

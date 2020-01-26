@@ -122,6 +122,7 @@ namespace IB2Toolset
         public bool drawEntranceLights = true;
         public bool alwaysNormalShadow = false;
         public bool drawDownStairShadows = true;
+        public int stealthModifier = 0;
 
         public bool isSecretPassage = false;
 
@@ -271,6 +272,13 @@ namespace IB2Toolset
         {
             get { return drawDownStairShadows; }
             set { drawDownStairShadows = value; }
+        }
+
+        [CategoryAttribute("02 - Movement, Cover and Hazards"), DescriptionAttribute("This modifies the stealth value of the party on this square. Higher makes stealthing easier for the party.")]
+        public int StealthModifier
+        {
+            get { return stealthModifier; }
+            set { stealthModifier = value; }
         }
 
         public Tile ShallowCopy()

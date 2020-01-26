@@ -33,6 +33,8 @@ namespace IB2Toolset
         private string _nameOfSoundFileBump = "none";
         private string _nameOfSoundFileBreak = "none";
 
+        private int _stealthModifier = 0; 
+
         private bool _isLever = false;
         private bool _isOn = false;
         private string _nameOfBitmapON = "none";
@@ -890,7 +892,12 @@ namespace IB2Toolset
             set { _valueOfFifthGlobalIntThatOpensDoor = value; }
         }
 
-
+        [CategoryAttribute("04i - STEP: Movement, Cover and Hazards"), DescriptionAttribute("This overrides the stealth modifier of a tile. Higher values make stealting easier for the party.")]
+        public int stealthModifier
+        {
+            get { return _stealthModifier; }
+            set { _stealthModifier = value; }
+        }
 
         [CategoryAttribute("04b - STEP: door "), DescriptionAttribute("If true, this acts as door. Dont forget to setup the gaOpenObject script in the STEP: script section to define (1) the tag of the key needed, (2) whether key is consumed, (3) tag of trait to check for lock picking and (4) DC of lock picking attempt.")]
         public bool isDoor

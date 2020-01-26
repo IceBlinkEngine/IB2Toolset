@@ -2360,6 +2360,41 @@ namespace IB2Toolset
                         rbtnWP.Checked = false;
                     }
 
+                    if (mod.copiedPropInsertModeOn)
+                    {
+                        if (mod.nonWp_selectedProp != null && mod.nonWp_selectedProp.ImageFileName != "blank")
+                        {
+                                mod.copiedPropInsertModeOn = false;
+                                Prop newProp = mod.nonWp_selectedProp.DeepCopy();
+                                newProp.LocationX = gridX;
+                                newProp.LocationY = gridY;
+                                newProp.PropTag = "PropCopy" + "_" + prntForm.mod.nextIdNumber;
+                                //anatomy
+                                //tag
+                                area.Props.Add(newProp);
+                                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = newProp;
+                        }
+                    }
+
+                    if (mod.copiedTriggerInsertModeOn)
+                    {
+                        if (mod.selectedTriggerCopy != null)
+                        {
+                            mod.copiedTriggerInsertModeOn = false;
+                            Trigger newTrigger = mod.selectedTriggerCopy.DeepCopy();
+                            Coordinate targetPoint = new Coordinate();
+                            targetPoint.X = gridX;
+                            targetPoint.Y = gridY;
+                            newTrigger.TriggerSquaresList.Clear();
+                            newTrigger.TriggerSquaresList.Add(targetPoint);
+                            newTrigger.TriggerTag = "TriggerCopy" + "_" + prntForm.mod.nextIdNumber;
+                            //anatomy
+                            //tag
+                            area.Triggers.Add(newTrigger);
+                            prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = newTrigger;
+                        }
+                    }
+
                     #region Tile Selected
                     if (rbtnPaintTile.Checked)
                     {
@@ -2797,6 +2832,7 @@ namespace IB2Toolset
                     #region Prop Selected
                     else if (prntForm.PropSelected)
                     {
+                        //rbtnWP.Checked = false;
                         string selectedProp = prntForm.selectedLevelMapPropTag;
                         prntForm.logText(selectedProp);
                         prntForm.logText(Environment.NewLine);
@@ -14145,10 +14181,26 @@ namespace IB2Toolset
         }
         private void rbtnInfo_CheckedChanged(object sender, EventArgs e)
         {
+
+            /*
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
-                we.rbtnInfo.Checked = this.rbtnInfo.Checked;
+                //if (we != this)
+                //{
+                we.rbtnWP.Checked = false;
+                //}
             }
+            */
+
+            foreach (WorldMapEditor we in prntForm.openWMEList)
+            {
+                //if (we != this)
+                //{
+                    we.rbtnInfo.Checked = this.rbtnInfo.Checked;
+                //}
+            }
+            
+
             if (rbtnInfo.Checked)
             {
                 prntForm.logText("info on selecting map objects");
@@ -14163,10 +14215,13 @@ namespace IB2Toolset
         }
         private void rbtnPaintTile_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnPaintTile.Checked = this.rbtnPaintTile.Checked;
             }
+            
+
             if (rbtnPaintTile.Checked)
             {
                 prntForm.logText("painting tiles" + Environment.NewLine);
@@ -14180,10 +14235,13 @@ namespace IB2Toolset
         }
         private void rbtnChangeLinkState_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnChangeLinkState.Checked = this.rbtnChangeLinkState.Checked;
             }
+            
+
             if (rbtnChangeLinkState.Checked)
             {
                 prntForm.logText("editing link to master state");
@@ -14205,6 +14263,12 @@ namespace IB2Toolset
             panelView.Focus();
             if (rbtnWP.Checked)
             {
+                //reddead
+                foreach (WorldMapEditor we in prntForm.openWMEList)
+                {
+                    we.rbtnWP.Checked = this.rbtnWP.Checked;
+                }
+                //activate on all open wE instances
                 if (mod.wp_selectedProp != null)
                 {
                     if (mod.wp_selectedProp.PropTag != "" && mod.wp_selectedProp.PropTag != "none")
@@ -14222,8 +14286,11 @@ namespace IB2Toolset
                 //refreshMap(true);
                 //UpdatePB();
             }
+
+            /*
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
+                //foundculprit
                 we.rbtnWP.Checked = this.rbtnWP.Checked;
                 if (we != this && this.rbtnWP.Checked)
                 {
@@ -14231,14 +14298,18 @@ namespace IB2Toolset
                 }
 
             }
+            */
+
         }
 
         private void rbtnWalkable_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnWalkable.Checked = this.rbtnWalkable.Checked;
             }
+            
             if (rbtnWalkable.Checked)
             {
                 prntForm.logText("editing walkmesh");
@@ -14255,10 +14326,12 @@ namespace IB2Toolset
 
         private void rbtnToMaster_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnToMaster.Checked = this.rbtnToMaster.Checked;
             }
+            
             //patrick
             if (rbtnToMaster.Checked)
             {
@@ -14324,10 +14397,13 @@ namespace IB2Toolset
 
         private void rbtnHeightLevel_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnHeightLevel.Checked = this.rbtnHeightLevel.Checked;
             }
+            
+
             if (rbtnHeightLevel.Checked)
             {
                 prntForm.logText("editing height level");
@@ -14353,10 +14429,13 @@ namespace IB2Toolset
 
         private void rbtnBridgeEW_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnBridgeEW.Checked = this.rbtnBridgeEW.Checked;
             }
+            
+
             if (rbtnBridgeEW.Checked)
             {
                 prntForm.logText("setting East-West bridge");
@@ -14390,10 +14469,12 @@ namespace IB2Toolset
 
         private void rbtnDownToN_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnDownToN.Checked = this.rbtnDownToN.Checked;
             }
+            
             if (rbtnDownToN.Checked)
             {
                 prntForm.logText("setting downstairs to N");
@@ -14468,10 +14549,12 @@ namespace IB2Toolset
         */
         private void rbtnLoS_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnLoS.Checked = this.rbtnLoS.Checked;
             }
+            
             if (rbtnLoS.Checked)
             {
                 prntForm.logText("editing line-of-sight mesh");
@@ -14513,10 +14596,12 @@ namespace IB2Toolset
         }
         private void rbtnPaintTrigger_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnPaintTrigger.Checked = this.rbtnPaintTrigger.Checked;
             }
+            
             if (rbtnPaintTrigger.Checked)
             {
                 //create a new trigger object
@@ -14539,10 +14624,12 @@ namespace IB2Toolset
         }
         private void rbtnEditTrigger_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnEditTrigger.Checked = this.rbtnEditTrigger.Checked;
             }
+            
             if (rbtnEditTrigger.Checked)
             {
                 prntForm.logText("edit trigger: ");
@@ -14632,30 +14719,36 @@ namespace IB2Toolset
             }
         private void rbtnZoom1x_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnZoom1x.Checked = this.rbtnZoom1x.Checked;
             }
+            
             sqr = 50;
             resetPanelAndDeviceSize();
             //GDI refreshMap(true);
         }
         private void rbtnZoom2x_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnZoom2x.Checked = this.rbtnZoom2x.Checked;
             }
+            
             sqr = 25;
             resetPanelAndDeviceSize();
             //GDI refreshMap(true);
         }
         private void rbtnZoom5x_CheckedChanged(object sender, EventArgs e)
         {
+            
             foreach (WorldMapEditor we in prntForm.openWMEList)
             {
                 we.rbtnZoom5x.Checked = this.rbtnZoom5x.Checked;
             }
+            
             sqr = 10;
             resetPanelAndDeviceSize();
             //GDI refreshMap(true);
@@ -15094,6 +15187,38 @@ namespace IB2Toolset
                         }
                     }
                 }
+                else
+                {
+                    foreach (Area a in prntForm.openAreasList)
+                    {
+                        foreach (Prop p in a.Props)
+                        {
+                            if (p.PropTag == lastSelectedObjectTag)
+                            {
+                                mod.nonWp_selectedProp = p.DeepCopy();
+                                mod.selectedTriggerCopy = null;
+                                break;
+                            }
+                        }
+
+                        foreach (Trigger t in a.Triggers)
+                        {
+                            if (t.TriggerTag == lastSelectedObjectTag)
+                            {
+                                //todo
+                                //tannenbusch
+                                mod.selectedTriggerCopy = t.DeepCopy();
+                                mod.nonWp_selectedProp = null;
+                                break;
+                            }
+                        }
+
+                    }
+                    //lastSelectedObjectTag = prp.PropTag;
+
+                    // not used prntForm.selectedLevelMapPropTag = prp.PropTag;
+                    //prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = prp;
+                }
             }
             else if (e.KeyCode == Keys.A)
             {
@@ -15184,6 +15309,34 @@ namespace IB2Toolset
                             mod.copiedWPInsertModeOn = false;
                         }
                     }
+                }
+                else
+                {
+                    if (mod.nonWp_selectedProp != null && mod.nonWp_selectedProp.ImageFileName != "blank")
+                    {
+                        if (!mod.copiedPropInsertModeOn)
+                        {
+                            mod.copiedPropInsertModeOn = true;
+                        }
+                        else
+                        {
+                            mod.copiedPropInsertModeOn = false;
+                        }
+                    }
+
+                    if (mod.selectedTriggerCopy != null)
+                    {
+                        if (!mod.copiedTriggerInsertModeOn)
+                        {
+                            mod.copiedTriggerInsertModeOn = true;
+                        }
+                        else
+                        {
+                            mod.copiedTriggerInsertModeOn = false;
+                        }
+                    }
+
+
                 }
             }
             else if (e.KeyCode == Keys.D)

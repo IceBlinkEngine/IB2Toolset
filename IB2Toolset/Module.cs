@@ -19,11 +19,22 @@ namespace IB2Toolset
         public bool copiedWPInsertModeOn = false;
 
         [JsonIgnore]
+        public bool copiedPropInsertModeOn = false;
+
+        [JsonIgnore]
+        public bool copiedTriggerInsertModeOn = false;
+
+        [JsonIgnore]
         public WayPoint copiedWayPoint = new WayPoint();
 
         public string areaFilename = "none";
         [JsonIgnore]
         public Prop wp_selectedProp = new Prop();
+        [JsonIgnore]
+        public Prop nonWp_selectedProp = new Prop();
+
+        [JsonIgnore]
+        public Trigger selectedTriggerCopy = new Trigger();
 
         public int currentlySelectedWayPointIndex = 0;
 

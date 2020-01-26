@@ -59,7 +59,8 @@
     "cr_damageDie": 4,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -121,7 +122,8 @@
     "cr_damageDie": 3,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -183,7 +185,8 @@
     "cr_damageDie": 3,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -247,7 +250,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -309,7 +313,8 @@
     "cr_damageDie": 8,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -371,7 +376,8 @@
     "cr_damageDie": 4,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -433,7 +439,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -495,7 +502,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -557,7 +565,8 @@
     "cr_damageDie": 4,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -619,7 +628,8 @@
     "cr_damageDie": 4,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -681,7 +691,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -743,7 +754,8 @@
     "cr_damageDie": 4,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -805,7 +817,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -867,7 +880,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -929,7 +943,8 @@
     "cr_damageDie": 8,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -991,7 +1006,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1053,7 +1069,8 @@
     "cr_damageDie": 4,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1118,7 +1135,8 @@
     "cr_damageDie": 3,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1180,7 +1198,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1246,7 +1265,8 @@
     "cr_damageDie": 4,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1308,7 +1328,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1370,7 +1391,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1432,7 +1454,8 @@
     "cr_damageDie": 6,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1494,7 +1517,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1556,7 +1580,8 @@
     "cr_damageDie": 6,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1618,7 +1643,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1680,7 +1706,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1744,7 +1771,8 @@
     "cr_damageDie": 8,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1810,7 +1838,8 @@
     "cr_damageDie": 4,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1872,7 +1901,8 @@
     "cr_damageDie": 6,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -1934,7 +1964,8 @@
     "cr_damageDie": 8,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2002,7 +2033,8 @@
     "cr_damageDie": 3,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2064,7 +2096,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2126,7 +2159,8 @@
     "cr_damageDie": 8,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2188,7 +2222,8 @@
     "cr_damageDie": 6,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2254,7 +2289,8 @@
     "cr_damageDie": 4,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2316,7 +2352,8 @@
     "cr_damageDie": 4,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2382,7 +2419,8 @@
     "cr_damageDie": 4,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2450,7 +2488,8 @@
     "cr_damageDie": 3,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2516,7 +2555,8 @@
     "cr_damageDie": 8,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2578,7 +2618,8 @@
     "cr_damageDie": 8,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2640,7 +2681,8 @@
     "cr_damageDie": 6,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2702,7 +2744,8 @@
     "cr_damageDie": 6,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2764,7 +2807,8 @@
     "cr_damageDie": 6,
     "cr_category": "Melee",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   },
   {
     "combatFacingLeft": true,
@@ -2830,6 +2874,7 @@
     "cr_damageDie": 4,
     "cr_category": "Ranged",
     "CreatureLocalInts": [],
-    "CreatureLocalStrings": []
+    "CreatureLocalStrings": [],
+    "RequiredWeaponTypesToHarmCreature": []
   }
 ]

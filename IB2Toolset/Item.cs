@@ -182,7 +182,7 @@ namespace IB2Toolset
             }
         }
         //[Browsable(true), TypeConverter(typeof(EffectTagTypeConverter))]
-        [CategoryAttribute("02 - Essentials and Perks"), DescriptionAttribute("List of tags added to pc's pcTags list upon equipping this item; when unequiping this item, the entry is removed again from pc's pcTags list.")]
+        [CategoryAttribute("02 - Essentials and Perks"), DescriptionAttribute("List of tags added to pc's pcTags list upon equipping this item; when unequiping this item, the entry is removed again from pc's pcTags list. For mainhand weapon, ammo and offhand weapon/shield the entries are checked against a creature's harmed by list. When using incremental systems, like magic+1, magic+2, etc. make sure to have the the single digit number at the end and to have the first entry of such type start with +1 at the end.")]
         public List<LocalImmunityString> entriesForPcTags
         {
             get { return _entriesForPcTags; }

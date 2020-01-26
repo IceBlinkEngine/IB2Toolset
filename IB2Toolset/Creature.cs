@@ -94,6 +94,19 @@ namespace IB2Toolset
         public List<Effect> cr_effectsList = new List<Effect>();
         private List<LocalInt> creatureLocalInts = new List<LocalInt>();
         private List<LocalString> creatureLocalStrings = new List<LocalString>();
+        private List<LocalString> requiredWeaponTypesToHarmCreature = new List<LocalString>();
+
+        /*
+        copy.requiredWeaponTypesToHarmCreature = new List<LocalString>();
+            foreach (LocalString l in this.requiredWeaponTypesToHarmCreature)
+            {
+                LocalString Lstr = new LocalString();
+        Lstr.Key = l.Key;
+                Lstr.Value = l.Value;
+                copy.requiredWeaponTypesToHarmCreature.Add(Lstr);
+            }
+            */
+
         private int _percentChanceToCastSpell = 100;
         private int _percentRequirementOfTargetInjuryForHealSpells = 50;
         private int _percentRequirementOfTargetSPLossForRestoreSPSpells = 50;
@@ -522,12 +535,22 @@ namespace IB2Toolset
             get { return creatureLocalInts; }
             set { creatureLocalInts = value; }
         }
-        [CategoryAttribute("05 - Locals"), DescriptionAttribute("Can be used for creating new properties or making individual creatures act unique.")]
+
+        [CategoryAttribute("05 - Locals"), DescriptionAttribute("Used to define type of cretaure, like undead, demon, animal... referred to by the affectOnly and adfectNever lists of effects; enter the creature type into the value field")]
         public List<LocalString> CreatureLocalStrings
         {
             get { return creatureLocalStrings; }
             set { creatureLocalStrings = value; }
         }
+
+        [CategoryAttribute("05 - Locals"), DescriptionAttribute("Used to define needed weapon perks to harm creature, like magic+1, magic+2, holy... referred to by ; enter the creature type into the value field")]
+        public List<LocalString> RequiredWeaponTypesToHarmCreature
+        {
+            get { return requiredWeaponTypesToHarmCreature; }
+            set { requiredWeaponTypesToHarmCreature = value; }
+        }
+
+        //requiredWeaponTypesToHarmCreature
         #endregion
 
         public Creature()
@@ -585,6 +608,14 @@ namespace IB2Toolset
                 Lstr.Key = l.Key;
                 Lstr.Value = l.Value;
                 other.CreatureLocalStrings.Add(Lstr);
+            }
+            other.RequiredWeaponTypesToHarmCreature = new List<LocalString>();
+            foreach (LocalString l in this.RequiredWeaponTypesToHarmCreature)
+            {
+                LocalString Lstr = new LocalString();
+                Lstr.Key = l.Key;
+                Lstr.Value = l.Value;
+                other.RequiredWeaponTypesToHarmCreature.Add(Lstr);
             }
             //other.EffectsList = new Effects();            
             //other.onScoringHit = this.onScoringHit.DeepCopy();            

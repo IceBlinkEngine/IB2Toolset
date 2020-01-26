@@ -654,14 +654,14 @@ namespace IB2Toolset
             set { areaLocalStrings = value; }
         }
         //add converter and cmb functionality later
-        [CategoryAttribute("00 - Main"), DescriptionAttribute("tag of weather object for this area"), Browsable(false)]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("tag of weather object for this area: can be spring, summer, autumn, winter, desert, swamp or iceland"), Browsable(false)]
         public string areaWeatherTag
         {
             get { return _areaWeatherTag; }
             set { _areaWeatherTag = value; }
         }
 
-        [CategoryAttribute("00 - Main"), DescriptionAttribute("name of weather object for this area")]
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("name of weather object for this area: can be spring, summer, autumn, winter, desert, swamp or iceland")]
         public string areaWeatherName
         {
             get { return _areaWeatherName; }
