@@ -83,6 +83,7 @@ namespace IB2Toolset
         public string lastSelectedObjectTag;
         public string lastSelectedObjectResRef;
         public Prop le_selectedProp = new Prop();
+        public Trigger le_selectedTrigger = new Trigger();
         //public Prop wp_selectedProp = new Prop();
         //GDI public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
         //GDI public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
@@ -2247,6 +2248,10 @@ namespace IB2Toolset
                 {
                     prntForm.PropSelected = true;
                 }
+                if (prntForm.selectedLevelMapTriggerTag != "")
+                {
+                    prntForm.TriggerSelected = true;
+                }
                 if (prntForm.PropSelected)
                 {
                     string selectedProp = prntForm.selectedLevelMapPropTag;
@@ -2260,6 +2265,23 @@ namespace IB2Toolset
                     {
                        selectedBitmap = null;
                        selectedBitmapFilename = "none";
+
+                    }
+                }
+
+                if (prntForm.TriggerSelected)
+                {
+                    string selectedTrigger = prntForm.selectedLevelMapTriggerTag;
+                    le_selectedTrigger = prntForm.getTriggerByTag(selectedTrigger);
+                    if (le_selectedTrigger != null)
+                    {
+                        //selectedBitmap = le_selectedProp.propBitmap;
+                        //selectedBitmapFilename = le_selectedProp.ImageFileName;
+                    }
+                    else
+                    {
+                        selectedBitmap = null;
+                        selectedBitmapFilename = "none";
 
                     }
                 }
@@ -2353,6 +2375,9 @@ namespace IB2Toolset
                     panelView.ContextMenuStrip.Items.Clear();
 
                     refreshLeftPanelInfo();
+
+                    //mieterverein
+                    //removed line below
                     prntForm.currentSelectedTrigger = null;
                    
                     if (le_selectedProp != null)
@@ -2711,10 +2736,10 @@ namespace IB2Toolset
                             {//3
                                 if (mod.wp_selectedProp.isMover)
                                 {//4
-                                    //if (mod.wp_selectedProp.MoverType == "random")
-                                    //{
-                                        //return;
-                                    //}
+                                 //if (mod.wp_selectedProp.MoverType == "random")
+                                 //{
+                                 //return;
+                                 //}
 
                                     if (mod.wp_selectedProp.MoverType == "post" || mod.wp_selectedProp.MoverType == "random")
                                     {
@@ -2787,7 +2812,7 @@ namespace IB2Toolset
                                             mod.currentlySelectedWayPointIndex = 0;
                                             prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
                                         }
-                                        else if (mod.currentlySelectedWayPointIndex == mod.wp_selectedProp.WayPointList.Count-1)
+                                        else if (mod.currentlySelectedWayPointIndex == mod.wp_selectedProp.WayPointList.Count - 1)
                                         {
                                             mod.wp_selectedProp.WayPointList.Add(wp);
                                             mod.currentlySelectedWayPointIndex++;
@@ -2801,11 +2826,11 @@ namespace IB2Toolset
                                             prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = mod.wp_selectedProp.WayPointList[mod.currentlySelectedWayPointIndex];
                                         }
                                     }
-                               }//4
-                                        
-                           }//3
-                                    
-                                                            
+                                }//4
+
+                            }//3
+
+
                         }//2
                         else
                         {
@@ -2861,6 +2886,84 @@ namespace IB2Toolset
 
                     }
                     #endregion
+                    else if (prntForm.TriggerSelected && le_selectedTrigger != null)
+                    {
+                        //rbtnWP.Checked = false;
+                        string selectedTrigger = prntForm.selectedLevelMapTriggerTag;
+                        prntForm.logText(selectedTrigger);
+                        prntForm.logText(Environment.NewLine);
+
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+                        // verify that there is no creature, blocked, or PC already on this location
+                        // add to a List<> a new item with the x,y coordinates
+                        if (le_selectedTrigger != null)
+                        {
+                            //if (le_selectedProp.ImageFileName == "blank")
+                            //{
+                                //return;
+                            //}
+                            Trigger newTrigger = new Trigger();
+                            newTrigger = le_selectedTrigger.DeepCopy();
+                            newTrigger.TriggerTag = le_selectedTrigger.TriggerTag + "_" + prntForm.mod.nextIdNumber;
+
+                            /*
+                            newProp.LocationX = gridX;
+                            newProp.LocationY = gridY;
+                            if (newProp.isMover)
+                            {
+                                mod.wp_selectedProp = newProp;
+                            }
+                            area.Props.Add(newProp);
+                            */
+
+                            Coordinate dst = new Coordinate();
+                            dst.X = gridX;
+                            dst.Y = gridY;
+                            newTrigger.TriggerSquaresList.Add(dst);
+                            area.Triggers.Add(newTrigger);
+
+                        }
+                    }
+                    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+                    /*
+                     #region Trigger (blueprint) Selected
+                    else if (prntForm.TriggerSelected && le_selectedTrigger != null)
+                    {
+                        string selectedTrigger = prntForm.selectedLevelMapTriggerTag;
+                        prntForm.logText(selectedTrigger);
+                        prntForm.logText(Environment.NewLine);
+
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+
+
+                        // verify that there is no creature, blocked, or PC already on this location
+                        // add to a List<> a new item with the x,y coordinates
+                        //if (le_selectedProp.ImageFileName == "blank")
+                        //{
+                        //return;
+                        //}
+                        Trigger newTrigger = new Trigger();
+                        //if (le_selectedTrigger != null)
+                        //{
+                            newTrigger = le_selectedTrigger.DeepCopy();
+                        //}
+                        //else
+                        //{
+                            //newTrigger
+                        //}
+                        newTrigger.TriggerTag = le_selectedTrigger.TriggerTag + "_" + prntForm.mod.nextIdNumber;
+                        Coordinate dst = new Coordinate();
+                        dst.X = gridX;
+                        dst.Y = gridY;
+                        newTrigger.TriggerSquaresList.Add(dst);
+                        thisEnc.Triggers.Add(newTrigger);
+                    }
+                    #endregion 
+                     
+                    */
+                    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                     #region Paint New Trigger Selected
                     else if (rbtnPaintTrigger.Checked)
                     {
@@ -3894,8 +3997,10 @@ namespace IB2Toolset
                         prntForm.selectedLevelMapCreatureTag = "";
                         //liegen
                         prntForm.selectedLevelMapPropTag = "";
+                        prntForm.selectedLevelMapTriggerTag = "";
                         prntForm.CreatureSelected = false;
                         prntForm.PropSelected = false;
+                        prntForm.TriggerSelected = false;
                         contextMenuStrip1.Items.Clear();
                         panelView.ContextMenuStrip.Items.Clear();
                         //when left click, get location
@@ -14176,8 +14281,10 @@ namespace IB2Toolset
             rbtnPaintTile.Checked = true;
             prntForm.selectedLevelMapCreatureTag = "";
             prntForm.selectedLevelMapPropTag = "";
+            prntForm.selectedLevelMapTriggerTag = "";
             prntForm.CreatureSelected = false;
             prntForm.PropSelected = false;
+            prntForm.TriggerSelected = false;
         }
         private void rbtnInfo_CheckedChanged(object sender, EventArgs e)
         {
@@ -14207,8 +14314,10 @@ namespace IB2Toolset
                 prntForm.logText(Environment.NewLine);
                 prntForm.selectedLevelMapCreatureTag = "";
                 prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
                 //refreshMap(true);
                 //UpdatePB();
             }
@@ -14227,8 +14336,10 @@ namespace IB2Toolset
                 prntForm.logText("painting tiles" + Environment.NewLine);
                 prntForm.selectedLevelMapCreatureTag = "";
                 prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
                 //pipetto
                 currentTileFilename = "";
             }
@@ -14251,6 +14362,7 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
                 //refreshMap(true);
                 //UpdatePB();
             }
@@ -14282,6 +14394,8 @@ namespace IB2Toolset
                 //prntForm.selectedLevelMapPropTag = "";
                 prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
+                prntForm.TriggerSelected = false;
+
                 //prntForm.PropSelected = false;
                 //refreshMap(true);
                 //UpdatePB();
@@ -14319,6 +14433,7 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
                 //refreshMap(true);
                 //UpdatePB();
             }
@@ -14413,6 +14528,7 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
                 //refreshMap(true);
                 //UpdatePB();
             }
@@ -14445,6 +14561,7 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
                 //refreshMap(true);
                 //UpdatePB();
             }
@@ -14484,6 +14601,7 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
                 stairRotationCounter = 1;
                 //refreshMap(true);
                 //UpdatePB();
@@ -14564,6 +14682,7 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
                 //refreshMap(true);
                 //UpdatePB();
             }
@@ -14949,8 +15068,10 @@ namespace IB2Toolset
                     //prntForm.selectedEncounterCreatureTag = "";
                     prntForm.selectedLevelMapCreatureTag = "";
                     prntForm.selectedLevelMapPropTag = "";
+                    prntForm.selectedLevelMapTriggerTag = "";
                     prntForm.CreatureSelected = false;
                     prntForm.PropSelected = false;
+                    prntForm.TriggerSelected = false;
                     //GDI refreshMap(true);
                     //GDI UpdatePB();
                     rbtnInfo.Checked = true;

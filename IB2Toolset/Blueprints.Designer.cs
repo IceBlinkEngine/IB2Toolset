@@ -36,15 +36,23 @@
             this.btnRemoveCreature = new System.Windows.Forms.Button();
             this.btnAddCreature = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tvItems = new System.Windows.Forms.TreeView();
             this.btnDuplicateItem = new System.Windows.Forms.Button();
             this.btnRemoveItem = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tvProps = new System.Windows.Forms.TreeView();
+            this.tvTriggers = new System.Windows.Forms.TreeView();
             this.btnDuplicateProp = new System.Windows.Forms.Button();
             this.btnRemoveProp = new System.Windows.Forms.Button();
             this.btnAddProp = new System.Windows.Forms.Button();
+
+            this.btnDuplicateTrigger = new System.Windows.Forms.Button();
+            this.btnRemoveTrigger = new System.Windows.Forms.Button();
+            this.btnAddTrigger = new System.Windows.Forms.Button();
+            this.btnSortTriggers = new System.Windows.Forms.Button();
+
             this.btnSortCreatures = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip1.AutoPopDelay = 20000;
@@ -53,6 +61,7 @@
             this.tabCreatureItem.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.tabPage8.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +71,7 @@
             this.tabCreatureItem.Controls.Add(this.tabPage6);
             this.tabCreatureItem.Controls.Add(this.tabPage7);
             this.tabCreatureItem.Controls.Add(this.tabPage1);
+            this.tabCreatureItem.Controls.Add(this.tabPage8);
             this.tabCreatureItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabCreatureItem.Location = new System.Drawing.Point(0, 0);
             this.tabCreatureItem.Name = "tabCreatureItem";
@@ -140,6 +150,22 @@
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "Items";
             this.tabPage7.UseVisualStyleBackColor = true;
+            //
+            //
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.btnSortTriggers);
+            this.tabPage8.Controls.Add(this.tvTriggers);
+            this.tabPage8.Controls.Add(this.btnDuplicateTrigger);
+            this.tabPage8.Controls.Add(this.btnRemoveTrigger);
+            this.tabPage8.Controls.Add(this.btnAddTrigger);
+            this.tabPage8.Location = new System.Drawing.Point(4, 25);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(260, 294);
+            this.tabPage8.TabIndex = 1;
+            this.tabPage8.Text = "Triggers";
+            this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // tvItems
             // 
@@ -209,6 +235,19 @@
             this.tvProps.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvProps_AfterSelect_1);
             this.tvProps.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tvProps_MouseClick_1);
             // 
+            // tvTriggers
+            // 
+            this.tvTriggers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvTriggers.Location = new System.Drawing.Point(3, 29);
+            this.tvTriggers.Name = "tvTriggers";
+            this.tvTriggers.Size = new System.Drawing.Size(254, 262);
+            this.tvTriggers.TabIndex = 50;
+            this.tvTriggers.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTriggers_AfterSelect_1);
+            this.tvTriggers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tvTriggers_MouseClick_1);
+            // 
+
             // btnDuplicateProp
             // 
             this.btnDuplicateProp.Location = new System.Drawing.Point(117, 3);
@@ -272,6 +311,49 @@
             this.btnSortProps.UseVisualStyleBackColor = true;
             this.btnSortProps.Click += new System.EventHandler(this.btnSortProps_Click);
             // 
+            //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+            // btnDuplicateTrigger
+            // 
+            this.btnDuplicateTrigger.Location = new System.Drawing.Point(117, 3);
+            this.btnDuplicateTrigger.Name = "btnDuplicateTrigger";
+            this.btnDuplicateTrigger.Size = new System.Drawing.Size(60, 23);
+            this.btnDuplicateTrigger.TabIndex = 49;
+            this.btnDuplicateTrigger.Text = "Duplicate";
+            this.btnDuplicateTrigger.UseVisualStyleBackColor = true;
+            this.btnDuplicateTrigger.Click += new System.EventHandler(this.btnDuplicateTrigger_Click_1);
+            // 
+            // btnRemoveTrigger
+            // 
+            this.btnRemoveTrigger.Location = new System.Drawing.Point(54, 3);
+            this.btnRemoveTrigger.Name = "btnRemoveTrigger";
+            this.btnRemoveTrigger.Size = new System.Drawing.Size(55, 23);
+            this.btnRemoveTrigger.TabIndex = 48;
+            this.btnRemoveTrigger.Text = "Remove";
+            this.btnRemoveTrigger.UseVisualStyleBackColor = true;
+            this.btnRemoveTrigger.Click += new System.EventHandler(this.btnRemoveTrigger_Click_1);
+            // 
+            // btnAddTrigger
+            // 
+            this.btnAddTrigger.Location = new System.Drawing.Point(9, 3);
+            this.btnAddTrigger.Name = "btnAddTrigger";
+            this.btnAddTrigger.Size = new System.Drawing.Size(37, 23);
+            this.btnAddTrigger.TabIndex = 47;
+            this.btnAddTrigger.Text = "Add";
+            this.btnAddTrigger.UseVisualStyleBackColor = true;
+            this.btnAddTrigger.Click += new System.EventHandler(this.btnAddTrigger_Click_1);
+            // 
+            // btnSortTriggers
+            // 
+            this.btnSortTriggers.Location = new System.Drawing.Point(182, 3);
+            this.btnSortTriggers.Name = "btnSortTriggers";
+            this.btnSortTriggers.Size = new System.Drawing.Size(41, 23);
+            this.btnSortTriggers.TabIndex = 51;
+            this.btnSortTriggers.Text = "Sort";
+            this.toolTip1.SetToolTip(this.btnSortTriggers, "Sort:\r\nWill sort all Triggers within\r\neach category by\r\nalphabetical order.");
+            this.btnSortTriggers.UseVisualStyleBackColor = true;
+            this.btnSortTriggers.Click += new System.EventHandler(this.btnSortTriggers_Click);
+
+            //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
             // Blueprints
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6f, 14f);
@@ -286,6 +368,7 @@
             this.tabPage6.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -294,6 +377,7 @@
 
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.TabPage tabPage1;
         public System.Windows.Forms.TabControl tabCreatureItem;
         public System.Windows.Forms.TreeView tvCreatures;
@@ -305,6 +389,7 @@
         public System.Windows.Forms.Button btnRemoveItem;
         public System.Windows.Forms.Button btnAddItem;
         public System.Windows.Forms.TreeView tvProps;
+        public System.Windows.Forms.TreeView tvTriggers;
         public System.Windows.Forms.Button btnDuplicateProp;
         public System.Windows.Forms.Button btnRemoveProp;
         public System.Windows.Forms.Button btnAddProp;
@@ -312,5 +397,9 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnSortItems;
         private System.Windows.Forms.Button btnSortProps;
+        private System.Windows.Forms.Button btnSortTriggers;
+        private System.Windows.Forms.Button btnAddTrigger;
+        private System.Windows.Forms.Button btnDuplicateTrigger;
+        private System.Windows.Forms.Button btnRemoveTrigger;
     }
 }

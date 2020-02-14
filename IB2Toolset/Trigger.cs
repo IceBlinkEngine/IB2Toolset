@@ -22,11 +22,30 @@ namespace IB2Toolset
     {
         #region Fields
 
+
+     
         private string bumpTriggerDirection = "none"; //fromSouth, fromNorth, fromEast, fromWest, none
+        private string mouseOverText = "none";
+
+        public bool chkTrigHidden = false;
+        public string txtTrigFindingTraitTag;
+        public string txtTrigFindingDC;
+        public string txtTrigSpawningTraitTag;
+        public string txtTrigSpawningDC;
+        public string txtTrigDespawningTraitTag;
+        public string txtTrigDespawningDC;
+        public string txtTrigDisablingTraitTag;
+        public string txtTrigDisablingDC;
+        public string txtTrigEnablingTraitTag;
+        public string txtTrigEnablingDC;
+        public bool chkTrigEnableOnFinding = false;
+    
 
         private bool connectedDiscovery = false;
         private bool requiresActiveSearch = false;
         private string triggerTag = "newTrigger"; //must be unique
+        private string triggerName = "newName";
+        private string triggerCategory = "newCategory";
         private bool enabled = true;
         private bool doOnceOnly = false;
         private List<Coordinate> triggerSquaresList = new List<Coordinate>();
@@ -73,7 +92,12 @@ namespace IB2Toolset
 
         private bool ConversationCannotBeAvoided = true;
 
-        public int numberOfScriptCallsRemaining = 999;  
+        public int numberOfScriptCallsRemaining = 999;
+        //public string traitTagForSpawning = "none";
+        //public int DCForSpawning = 0;
+        //public string traitTagForFinding = "none";
+        //public int DCForFinding = 0;
+        //public bool onlyFunctionalWhenFound = false;
         public bool canBeTriggeredByPc = true;  
         public bool canBeTriggeredByCreature = true;
 
@@ -92,6 +116,18 @@ namespace IB2Toolset
         {
             get { return triggerTag; }
             set { triggerTag = value; }
+        }
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("Name of the Trigger")]
+        public string TriggerName
+        {
+            get { return triggerName; }
+            set { triggerName = value; }
+        }
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("Category of the Trigger")]
+        public string TriggerCategory
+        {
+            get { return triggerCategory; }
+            set { triggerCategory = value; }
         }
         [CategoryAttribute("0 - Main"), DescriptionAttribute("Used to Enable or Disable the trigger")]
         public bool Enabled
@@ -120,11 +156,18 @@ namespace IB2Toolset
             set { requiresActiveSearch = value; }
         }
 
-        [CategoryAttribute("0 - Main"), DescriptionAttribute("If true, all squares in this trigger's square liste become visible if one of them is discovered.")]
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
         public string BumpTriggerDirection
         {
             get { return bumpTriggerDirection; }
             set { bumpTriggerDirection = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("mouse over text")]
+        public string MouseOverText
+        {
+            get { return mouseOverText; }
+            set { mouseOverText = value; }
         }
 
         [CategoryAttribute("0 - Main"), DescriptionAttribute("If true, all squares in this trigger's square liste become visible if one of them is discovered.")]
@@ -404,10 +447,12 @@ namespace IB2Toolset
             Trigger other = new Trigger();
         
         other.bumpTriggerDirection = bumpTriggerDirection; //fromSouth, fromNorth, fromEast, fromWest, none
-
+            other.mouseOverText = mouseOverText;
             other.connectedDiscovery = connectedDiscovery;
             other.requiresActiveSearch = requiresActiveSearch;
             other.triggerTag = triggerTag; //must be unique
+            other.triggerName = triggerName;
+            other.triggerCategory = triggerCategory;
             other.enabled = enabled;
             other.doOnceOnly = doOnceOnly;
             //private List<Coordinate> triggerSquaresList = new List<Coordinate>();
@@ -454,7 +499,22 @@ namespace IB2Toolset
 
             other.ConversationCannotBeAvoided = ConversationCannotBeAvoided;
 
-            other.numberOfScriptCallsRemaining = numberOfScriptCallsRemaining;
+
+
+        other.chkTrigHidden = chkTrigHidden;
+        other.txtTrigFindingTraitTag = txtTrigFindingTraitTag;
+        other.txtTrigFindingDC = txtTrigFindingDC;
+        other.txtTrigSpawningTraitTag = txtTrigSpawningTraitTag;
+        other.txtTrigSpawningDC = txtTrigSpawningDC;
+        other.txtTrigDespawningTraitTag = txtTrigDespawningTraitTag;
+        other.txtTrigDespawningDC = txtTrigDespawningDC;
+        other.txtTrigDisablingTraitTag = txtTrigDisablingTraitTag;
+        other.txtTrigDisablingDC  = txtTrigDisablingDC;
+        other.txtTrigEnablingTraitTag = txtTrigEnablingTraitTag;
+        other.txtTrigEnablingDC = txtTrigEnablingDC;
+        other.chkTrigEnableOnFinding = chkTrigEnableOnFinding;
+
+        other.numberOfScriptCallsRemaining = numberOfScriptCallsRemaining;
             other.canBeTriggeredByPc = canBeTriggeredByPc;
             other.canBeTriggeredByCreature = canBeTriggeredByCreature;
 

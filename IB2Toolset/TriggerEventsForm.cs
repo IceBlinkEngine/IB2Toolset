@@ -70,6 +70,34 @@ namespace IB2Toolset
             if (prntForm.currentSelectedTrigger != null)
             {
                 prntForm.currentSelectedTrigger.TriggerTag = txtTrigTag.Text;
+                prntForm.frmBlueprints.UpdateTreeViewCreatures();
+                prntForm.frmBlueprints.UpdateTreeViewItems();
+                prntForm.frmBlueprints.UpdateTreeViewProps();
+                prntForm.frmBlueprints.UpdateTreeViewTriggers();
+            }
+        }
+
+        private void txtTrigName_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.TriggerName = txtTrigName.Text;
+                prntForm.frmBlueprints.UpdateTreeViewCreatures();
+                prntForm.frmBlueprints.UpdateTreeViewItems();
+                prntForm.frmBlueprints.UpdateTreeViewProps();
+                prntForm.frmBlueprints.UpdateTreeViewTriggers();
+            }
+        }
+
+        private void txtTrigCategory_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.TriggerCategory = txtTrigCategory.Text;
+                prntForm.frmBlueprints.UpdateTreeViewCreatures();
+                prntForm.frmBlueprints.UpdateTreeViewItems();
+                prntForm.frmBlueprints.UpdateTreeViewProps();
+                prntForm.frmBlueprints.UpdateTreeViewTriggers();
             }
         }
 
@@ -81,6 +109,123 @@ namespace IB2Toolset
             }
         }
 
+        private void txtTrigMouseOverText_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.MouseOverText = txtTrigMouseOverText.Text;
+            }
+        }
+
+        private void chkTrigHidden_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.chkTrigHidden = chkTrigHidden.Checked;
+            }
+        }
+
+        private void chkTrigEnableOnFinding_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.chkTrigEnableOnFinding = chkTrigEnableOnFinding.Checked;
+            }
+        }
+
+        private void txtTrigFindingTraitTag_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigFindingTraitTag  = txtTrigFindingTraitTag.Text;
+            }
+        }
+
+        private void txtTrigFindingDC_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigFindingDC = txtTrigFindingDC.Text;
+            }
+        }
+
+        private void txtTrigSpawningDC_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigSpawningDC = txtTrigSpawningDC.Text;
+            }
+        }
+
+        private void txtTrigDespawningDC_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigDespawningDC = txtTrigDespawningDC.Text;
+            }
+        }
+
+        private void txtTrigEnablingDC_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigEnablingDC = txtTrigEnablingDC.Text;
+            }
+        }
+
+        private void txtTrigDisablingDC_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigDisablingDC = txtTrigDisablingDC.Text;
+            }
+        }
+
+        private void txtTrigSpawningTraitTag_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigSpawningTraitTag = txtTrigSpawningTraitTag.Text;
+            }
+        }
+
+        private void txtTrigDespawningTraitTag_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigDespawningTraitTag = txtTrigDespawningTraitTag.Text;
+            }
+        }
+
+        private void txtTrigDisablingTraitTag_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigDisablingTraitTag = txtTrigDisablingTraitTag.Text;
+            }
+        }
+
+        private void txtTrigEnablingTraitTag_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.txtTrigEnablingTraitTag = txtTrigEnablingTraitTag.Text;
+            }
+        }
+        /*
+        private System.Windows.Forms.CheckBox chkTrigHidden;
+        private System.Windows.Forms.TextBox txtTrigFindingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigFindingDC;
+        private System.Windows.Forms.TextBox txtTrigSpawningTraitTag;
+        private System.Windows.Forms.TextBox txtTrigSpawningDC;
+        private System.Windows.Forms.TextBox txtTrigDespawningTraitTag;
+        private System.Windows.Forms.TextBox txtTrigDespawningDC;
+        private System.Windows.Forms.TextBox txtTrigDisablingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigDisbalingDC;
+        private System.Windows.Forms.TextBox txtTrigEnablingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigEnablingDC;
+        private System.Windows.Forms.CheckBox chkTrigEnableOnFinding;
+        */
         private void chkTriggeredByPc_CheckedChanged(object sender, EventArgs e)
         {  
              if (prntForm.currentSelectedTrigger != null)  
@@ -108,7 +253,13 @@ namespace IB2Toolset
              {  
                  prntForm.currentSelectedTrigger.numberOfScriptCallsRemaining = (int)numTriggerCallsAllowed.Value;  
              }  
-         }  
+         }
+
+        //public string traitTagForSpawning = "none";
+        //public int DCForSpawning = 0;
+        //public string traitTagForFinding = "none";
+        //public int DCForFinding = 0;
+        //public bool onlyFunctionalWhenFound = false;
 
         #region EVENT 1
         private void chkE1enabled_CheckedChanged(object sender, EventArgs e)
@@ -509,12 +660,31 @@ namespace IB2Toolset
             if (prntForm.currentSelectedTrigger != null)
             {
                 Trigger trg = prntForm.currentSelectedTrigger;
+
+                chkTrigHidden.Checked = trg.chkTrigHidden;
+                chkTrigEnableOnFinding.Checked = trg.chkTrigEnableOnFinding;
+                txtTrigFindingDC.Text = trg.txtTrigFindingDC;
+                txtTrigFindingTraitTag.Text = trg.txtTrigFindingTraitTag;
+                txtTrigFindingDC.Text = trg.txtTrigFindingDC;
+                txtTrigEnablingTraitTag.Text = trg.txtTrigEnablingTraitTag;
+                txtTrigEnablingDC.Text = trg.txtTrigEnablingDC;
+                txtTrigDisablingTraitTag.Text = trg.txtTrigDisablingTraitTag;
+                txtTrigDisablingDC.Text = trg.txtTrigDisablingDC;
+                txtTrigSpawningTraitTag.Text = trg.txtTrigSpawningTraitTag;
+                txtTrigSpawningDC.Text = trg.txtTrigSpawningDC;
+                txtTrigDespawningTraitTag.Text = trg.txtTrigDespawningTraitTag;
+                txtTrigDespawningDC.Text = trg.txtTrigDespawningDC;
+                //todo for the others...
+
                 chkTrigEnabled.Checked = trg.Enabled;
                 chkTrigOnce.Checked = trg.DoOnceOnly;
                 chkTrigActiveSearch.Checked = trg.RequiresActiveSearch;
                 chkTrigConnectedDiscovery.Checked = trg.ConnectedDiscovery;
                 txtTrigTag.Text = trg.TriggerTag;
+                txtTrigName.Text = trg.TriggerName;
+                txtTrigCategory.Text = trg.TriggerCategory;
                 txtTrigBumpTrigDir.Text = trg.BumpTriggerDirection;
+                txtTrigMouseOverText.Text = trg.MouseOverText;
                 chkTriggeredByPc.Checked = trg.canBeTriggeredByPc;
                 chkTriggeredByCreatures.Checked = trg.canBeTriggeredByCreature;
                 numTriggerCallsAllowed.Value = trg.numberOfScriptCallsRemaining;

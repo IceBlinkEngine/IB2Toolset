@@ -33,7 +33,10 @@
             this.chkTrigActiveSearch = new System.Windows.Forms.CheckBox();
             this.chkTrigConnectedDiscovery = new System.Windows.Forms.CheckBox();
             this.txtTrigTag = new System.Windows.Forms.TextBox();
+            this.txtTrigName = new System.Windows.Forms.TextBox();
+            this.txtTrigCategory = new System.Windows.Forms.TextBox();
             this.txtTrigBumpTrigDir = new System.Windows.Forms.TextBox();
+            this.txtTrigMouseOverText = new System.Windows.Forms.TextBox();
             this.gbTrigger = new System.Windows.Forms.GroupBox();
             this.gbCombatOnly = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -42,8 +45,39 @@
             this.chkTriggeredByCreatures = new System.Windows.Forms.CheckBox();
             this.chkEncounterTriggerOnEveryStep = new System.Windows.Forms.CheckBox();
             this.chkTriggeredByPc = new System.Windows.Forms.CheckBox();
+
+            this.chkTrigEnableOnFinding = new System.Windows.Forms.CheckBox();
+            this.chkTrigHidden = new System.Windows.Forms.CheckBox();
+            this.txtTrigFindingTraitTag = new System.Windows.Forms.TextBox();
+            this.txtTrigFindingDC = new System.Windows.Forms.TextBox();
+            this.txtTrigSpawningTraitTag = new System.Windows.Forms.TextBox();
+            this.txtTrigSpawningDC = new System.Windows.Forms.TextBox();
+            this.txtTrigDespawningTraitTag = new System.Windows.Forms.TextBox();
+            this.txtTrigDespawningDC = new System.Windows.Forms.TextBox();
+            this.txtTrigEnablingTraitTag = new System.Windows.Forms.TextBox();
+            this.txtTrigEnablingDC = new System.Windows.Forms.TextBox();
+            this.txtTrigDisablingTraitTag = new System.Windows.Forms.TextBox();
+            this.txtTrigDisablingDC = new System.Windows.Forms.TextBox();
+
+        
+            //gehäuse
+
+            this.labelTrigSystem1 = new System.Windows.Forms.Label();
+            this.labelTrigSystem2 = new System.Windows.Forms.Label();
+            this.labelTrigSystem3 = new System.Windows.Forms.Label();
+            this.labelTrigSystem4 = new System.Windows.Forms.Label();
+            this.labelTrigSystem5 = new System.Windows.Forms.Label();
+            this.labelTrigSystem6 = new System.Windows.Forms.Label();
+            this.labelTrigSystem7 = new System.Windows.Forms.Label();
+            this.labelTrigSystem8 = new System.Windows.Forms.Label();
+            this.labelTrigSystem9 = new System.Windows.Forms.Label();
+            this.labelTrigSystem10 = new System.Windows.Forms.Label();
+
             this.label1 = new System.Windows.Forms.Label();
+            this.label1Name = new System.Windows.Forms.Label();
+            this.label1Category = new System.Windows.Forms.Label();
             this.label1a = new System.Windows.Forms.Label();
+            this.label1b = new System.Windows.Forms.Label();
             this.gbE1 = new System.Windows.Forms.GroupBox();
             this.gbE1transition = new System.Windows.Forms.GroupBox();
             this.numE1y = new System.Windows.Forms.NumericUpDown();
@@ -183,37 +217,309 @@
             // 
             this.txtTrigTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTrigTag.Location = new System.Drawing.Point(71, 19);
+            this.txtTrigTag.Location = new System.Drawing.Point(71, 61);
             this.txtTrigTag.Name = "txtTrigTag";
             this.txtTrigTag.Size = new System.Drawing.Size(174, 20);
             this.txtTrigTag.TabIndex = 3;
             this.txtTrigTag.TextChanged += new System.EventHandler(this.txtTrigTag_TextChanged);
             //
+            // txtTrigName
+            // 
+            this.txtTrigName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigName.Location = new System.Drawing.Point(71, 19);
+            this.txtTrigName.Name = "txtTrigName";
+            this.txtTrigName.Size = new System.Drawing.Size(174, 20);
+            this.txtTrigName.TabIndex = 3;
+            this.txtTrigName.TextChanged += new System.EventHandler(this.txtTrigName_TextChanged);
             //
-            // txtTrigTag
+            // txtTrigCategory
+            // 
+            this.txtTrigCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigCategory.Location = new System.Drawing.Point(71, 40);
+            this.txtTrigCategory.Name = "txtTrigCategory";
+            this.txtTrigCategory.Size = new System.Drawing.Size(174, 20);
+            this.txtTrigCategory.TabIndex = 3;
+            this.txtTrigCategory.TextChanged += new System.EventHandler(this.txtTrigCategory_TextChanged);
+            //
+            //
+            // txtTrigBump
             // 
             this.txtTrigBumpTrigDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTrigBumpTrigDir.Location = new System.Drawing.Point(71, 40);
+            this.txtTrigBumpTrigDir.Location = new System.Drawing.Point(71, 82);
             this.txtTrigBumpTrigDir.Name = "txtTrigBumpTrigDir";
             this.txtTrigBumpTrigDir.Size = new System.Drawing.Size(174, 20);
-            this.txtTrigBumpTrigDir.TabIndex = 3;
+             this.txtTrigBumpTrigDir.TabIndex = 3;
             this.txtTrigBumpTrigDir.TextChanged += new System.EventHandler(this.txtTrigBumpTrigDir_TextChanged);
-
+            //
+            //
+            // txtTrigMouseOverText
+            //
+            //
+            this.txtTrigMouseOverText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigMouseOverText.Location = new System.Drawing.Point(71, 103);
+            this.txtTrigMouseOverText.Name = "txtTrigMouseOverText";
+            this.txtTrigMouseOverText.Size = new System.Drawing.Size(174, 20);
+            this.txtTrigMouseOverText.TabIndex = 3;
+            this.txtTrigMouseOverText.TextChanged += new System.EventHandler(this.txtTrigMouseOverText_TextChanged);
+            //
+            //
+            // txtTrigFindingTraitTag
+            //
+            this.labelTrigSystem1.AutoSize = true;
+            this.labelTrigSystem1.Location = new System.Drawing.Point(4, 99);
+            this.labelTrigSystem1.Name = "labelTrigSystem1";
+            this.labelTrigSystem1.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem1.TabIndex = 12;
+            this.labelTrigSystem1.Text = "Find Trait:";
+            //
+            this.txtTrigFindingTraitTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigFindingTraitTag.Location = new System.Drawing.Point(91, 97);
+            this.txtTrigFindingTraitTag.Name = "txtTrigFindingTraitTag";
+            this.txtTrigFindingTraitTag.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigFindingTraitTag.TabIndex = 3;
+            this.txtTrigFindingTraitTag.TextChanged += new System.EventHandler(this.txtTrigFindingTraitTag_TextChanged);
+            //
+            //
+            //txtTrigFindingDC
+            //
+            this.labelTrigSystem2.AutoSize = true;
+            this.labelTrigSystem2.Location = new System.Drawing.Point(4, 125);
+            this.labelTrigSystem2.Name = "labelTrigSystem2";
+            this.labelTrigSystem2.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem2.TabIndex = 12;
+            this.labelTrigSystem2.Text = "Find DC:";
+            //
+            this.txtTrigFindingDC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigFindingDC.Location = new System.Drawing.Point(91, 123);
+            this.txtTrigFindingDC.Name = "txtTrigFindingDC";
+            this.txtTrigFindingDC.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigFindingDC.TabIndex = 3;
+            this.txtTrigFindingDC.TextChanged += new System.EventHandler(this.txtTrigFindingDC_TextChanged);
+            //
+            //
+            //txtTrigSpawningTraitTag
+            //
+            this.labelTrigSystem3.AutoSize = true;
+            this.labelTrigSystem3.Location = new System.Drawing.Point(4, 151);
+            this.labelTrigSystem3.Name = "labelTrigSystem3";
+            this.labelTrigSystem3.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem3.TabIndex = 12;
+            this.labelTrigSystem3.Text = "Spawn Trait:";
+            //
+            this.txtTrigSpawningTraitTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigSpawningTraitTag.Location = new System.Drawing.Point(91, 149);
+            this.txtTrigSpawningTraitTag.Name = "txtTrigSpawningTraitTag";
+            this.txtTrigSpawningTraitTag.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigSpawningTraitTag.TabIndex = 3;
+            this.txtTrigSpawningTraitTag.TextChanged += new System.EventHandler(this.txtTrigSpawningTraitTag_TextChanged);
+            //
+            //
+            //txtTrigSpawningDC
+            //
+            this.labelTrigSystem4.AutoSize = true;
+            this.labelTrigSystem4.Location = new System.Drawing.Point(4, 177);
+            this.labelTrigSystem4.Name = "labelTrigSystem4";
+            this.labelTrigSystem4.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem4.TabIndex = 12;
+            this.labelTrigSystem4.Text = "Spawn DC:";
+            //
+            this.txtTrigSpawningDC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigSpawningDC.Location = new System.Drawing.Point(91, 175);
+            this.txtTrigSpawningDC.Name = "txtTrigSpawningDC";
+            this.txtTrigSpawningDC.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigSpawningDC.TabIndex = 3;
+            this.txtTrigSpawningDC.TextChanged += new System.EventHandler(this.txtTrigSpawningDC_TextChanged);
+            //
+            //
+            //txtTrigDespawningDC
+            //
+            this.labelTrigSystem5.AutoSize = true;
+            this.labelTrigSystem5.Location = new System.Drawing.Point(4, 229);//229
+            this.labelTrigSystem5.Name = "labelTrigSystem5";
+            this.labelTrigSystem5.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem5.TabIndex = 12;
+            this.labelTrigSystem5.Text = "Despawn DC:";
+            //
+            this.txtTrigDespawningDC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigDespawningDC.Location = new System.Drawing.Point(91, 227);//227
+            this.txtTrigDespawningDC.Name = "txtTrigDespawningDC";
+            this.txtTrigDespawningDC.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigDespawningDC.TabIndex = 3;
+            this.txtTrigDespawningDC.TextChanged += new System.EventHandler(this.txtTrigDespawningDC_TextChanged);
+            //
+            //
+            //txtTrigDespawningTraitTag
+            //
+            this.labelTrigSystem6.AutoSize = true;
+            this.labelTrigSystem6.Location = new System.Drawing.Point(4, 203);//203
+            this.labelTrigSystem6.Name = "labelTrigSystem6";
+            this.labelTrigSystem6.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem6.TabIndex = 12;
+            this.labelTrigSystem6.Text = "Despawn Trait:";
+            //
+            this.txtTrigDespawningTraitTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigDespawningTraitTag.Location = new System.Drawing.Point(91, 201);//201
+            this.txtTrigDespawningTraitTag.Name = "txtTrigDespawningTraitTag";
+            this.txtTrigDespawningTraitTag.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigDespawningTraitTag.TabIndex = 3;
+            this.txtTrigDespawningTraitTag.TextChanged += new System.EventHandler(this.txtTrigDespawningTraitTag_TextChanged);
+            //
+            //
+            //txtTraigDisbalingTraitTag
+            //
+            this.labelTrigSystem7.AutoSize = true;
+            this.labelTrigSystem7.Location = new System.Drawing.Point(4, 255);
+            this.labelTrigSystem7.Name = "labelTrigSystem7";
+            this.labelTrigSystem7.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem7.TabIndex = 12;
+            this.labelTrigSystem7.Text = "Disable Trait:";
+            //
+            this.txtTrigDisablingTraitTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigDisablingTraitTag.Location = new System.Drawing.Point(91, 253);
+            this.txtTrigDisablingTraitTag.Name = "txtTrigDisablingTraitTag";
+            this.txtTrigDisablingTraitTag.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigDisablingTraitTag.TabIndex = 3;
+            this.txtTrigDisablingTraitTag.TextChanged += new System.EventHandler(this.txtTrigDisablingTraitTag_TextChanged);
+            //
+            //
+            //txtTrigDisablingDC
+            //
+            this.labelTrigSystem8.AutoSize = true;
+            this.labelTrigSystem8.Location = new System.Drawing.Point(4, 281);
+            this.labelTrigSystem8.Name = "labelTrigSystem8";
+            this.labelTrigSystem8.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem8.TabIndex = 12;
+            this.labelTrigSystem8.Text = "Disable DC:";
+            //
+            this.txtTrigDisablingDC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigDisablingDC.Location = new System.Drawing.Point(91, 279);
+            this.txtTrigDisablingDC.Name = "txtTrigDisablingDC";
+            this.txtTrigDisablingDC.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigDisablingDC.TabIndex = 3;
+            this.txtTrigDisablingDC.TextChanged += new System.EventHandler(this.txtTrigDisablingDC_TextChanged);
+            //
+            //
+            //txtTrigEnablingTraitTag
+            //
+            //
+            this.labelTrigSystem9.AutoSize = true;
+            this.labelTrigSystem9.Location = new System.Drawing.Point(4, 307);
+            this.labelTrigSystem9.Name = "labelTrigSystem9";
+            this.labelTrigSystem9.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem9.TabIndex = 12;
+            this.labelTrigSystem9.Text = "Enable Trait:";
+            //
+            //
+            this.txtTrigEnablingTraitTag.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTrigEnablingTraitTag.Location = new System.Drawing.Point(91, 305);
+            this.txtTrigEnablingTraitTag.Name = "txtTrigEnablingTraitTag";
+            this.txtTrigEnablingTraitTag.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigEnablingTraitTag.TabIndex = 3;
+            this.txtTrigEnablingTraitTag.TextChanged += new System.EventHandler(this.txtTrigEnablingTraitTag_TextChanged);
+            //
+            //
+            //txtTrigEnablingDC
+            //
+            //
+            this.labelTrigSystem10.AutoSize = true;
+            this.labelTrigSystem10.Location = new System.Drawing.Point(4, 333);
+            this.labelTrigSystem10.Name = "labelTrigSystem10";
+            this.labelTrigSystem10.Size = new System.Drawing.Size(65, 13);
+            this.labelTrigSystem10.TabIndex = 12;
+            this.labelTrigSystem10.Text = "Enable DC:";
+            //
+            //
+            this.txtTrigEnablingDC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+          | System.Windows.Forms.AnchorStyles.Right)));
+            //x71
+            this.txtTrigEnablingDC.Location = new System.Drawing.Point(91, 331);
+            this.txtTrigEnablingDC.Name = "txtTrigEnablingDC";
+            //174
+            this.txtTrigEnablingDC.Size = new System.Drawing.Size(154, 20);
+            this.txtTrigEnablingDC.TabIndex = 3;
+            this.txtTrigEnablingDC.TextChanged += new System.EventHandler(this.txtTrigEnablingDC_TextChanged);
+            //
+            //
+            //chkTrigHidden
+            //
+            //
+            //   
+            this.chkTrigHidden.AutoSize = true;
+            this.chkTrigHidden.Location = new System.Drawing.Point(6, 77);
+            this.chkTrigHidden.Name = "chkTrigHidden";
+            this.chkTrigHidden.Size = new System.Drawing.Size(172, 17);
+            this.chkTrigHidden.TabIndex = 7;
+            this.chkTrigHidden.Text = "Hidden";
+            this.chkTrigHidden.UseVisualStyleBackColor = true;
+            this.chkTrigHidden.CheckedChanged += new System.EventHandler(this.chkTrigHidden_CheckedChanged);
+            //
+            //
+            //chkTrigEnableOnFinding
+            //
+            //
+            //   
+            this.chkTrigEnableOnFinding.AutoSize = true;
+            this.chkTrigEnableOnFinding.Location = new System.Drawing.Point(71, 77);
+            this.chkTrigEnableOnFinding.Name = "chkTrigEnableOnFinding";
+            this.chkTrigEnableOnFinding.Size = new System.Drawing.Size(172, 17);
+            this.chkTrigEnableOnFinding.TabIndex = 7;
+            this.chkTrigEnableOnFinding.Text = "Enable on find ";
+            this.chkTrigEnableOnFinding.UseVisualStyleBackColor = true;
+            this.chkTrigEnableOnFinding.CheckedChanged += new System.EventHandler(this.chkTrigEnableOnFinding_CheckedChanged);
+            //
+            //
+            /*
+               private System.Windows.Forms.CheckBox chkTrigHidden;
+        private System.Windows.Forms.TextBox txtTrigFindingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigFindingDC;
+        private System.Windows.Forms.TextBox txtTrigSpawningTraitTag;
+        private System.Windows.Forms.TextBox txtTrigSpawningDC;
+        private System.Windows.Forms.TextBox txtTrigDespawningTraitTag;
+        private System.Windows.Forms.TextBox txtTrigDespawningDC;
+        private System.Windows.Forms.TextBox txtTrigDisablingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigDisbalingDC;
+        private System.Windows.Forms.TextBox txtTrigEnablingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigEnablingDC;
+        private System.Windows.Forms.CheckBox chkTrigEnableOnFinding;
+        */
+            //
+            //
             // gbTrigger
             // 
+            //gehäuse must be larger
+            //
             this.gbTrigger.Controls.Add(this.gbCombatOnly);
             this.gbTrigger.Controls.Add(this.label1);
+            this.gbTrigger.Controls.Add(this.label1Name);
+            this.gbTrigger.Controls.Add(this.label1Category);
             this.gbTrigger.Controls.Add(this.label1a);
+            this.gbTrigger.Controls.Add(this.label1b);
             this.gbTrigger.Controls.Add(this.txtTrigTag);
+            this.gbTrigger.Controls.Add(this.txtTrigName);
+            this.gbTrigger.Controls.Add(this.txtTrigCategory);
             this.gbTrigger.Controls.Add(this.txtTrigBumpTrigDir);
+            this.gbTrigger.Controls.Add(this.txtTrigMouseOverText);
             this.gbTrigger.Controls.Add(this.chkTrigOnce);
             this.gbTrigger.Controls.Add(this.chkTrigActiveSearch);
             this.gbTrigger.Controls.Add(this.chkTrigConnectedDiscovery);
             this.gbTrigger.Controls.Add(this.chkTrigEnabled);
             this.gbTrigger.Location = new System.Drawing.Point(3, 3);
             this.gbTrigger.Name = "gbTrigger";
-            this.gbTrigger.Size = new System.Drawing.Size(257, 145);
+            //this.gbTrigger.Size = new System.Drawing.Size(257, 158);
+            this.gbTrigger.Size = new System.Drawing.Size(257, 500);
             this.gbTrigger.TabIndex = 4;
             this.gbTrigger.TabStop = false;
             this.gbTrigger.Text = "TRIGGER PROPERTIES";
@@ -227,9 +533,56 @@
             this.gbCombatOnly.Controls.Add(this.chkTriggeredByCreatures);
             this.gbCombatOnly.Controls.Add(this.chkEncounterTriggerOnEveryStep);
             this.gbCombatOnly.Controls.Add(this.chkTriggeredByPc);
-            this.gbCombatOnly.Location = new System.Drawing.Point(6, 65);
+            //
+            //
+            //add all the new stuff here
+            //gehäuse
+
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem1);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem2);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem3);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem4);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem5);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem6);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem7);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem8);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem9);
+            this.gbCombatOnly.Controls.Add(this.labelTrigSystem10);
+
+            this.gbCombatOnly.Controls.Add(this.chkTrigHidden);
+            this.gbCombatOnly.Controls.Add(this.txtTrigFindingTraitTag);
+            this.gbCombatOnly.Controls.Add(this.txtTrigFindingDC);
+            this.gbCombatOnly.Controls.Add(this.txtTrigSpawningTraitTag);
+            this.gbCombatOnly.Controls.Add(this.txtTrigSpawningDC);
+            this.gbCombatOnly.Controls.Add(this.txtTrigDespawningTraitTag);
+            this.gbCombatOnly.Controls.Add(this.txtTrigDespawningDC);
+            this.gbCombatOnly.Controls.Add(this.txtTrigDisablingTraitTag);
+            this.gbCombatOnly.Controls.Add(this.txtTrigDisablingDC);
+            this.gbCombatOnly.Controls.Add(this.txtTrigEnablingTraitTag);
+            this.gbCombatOnly.Controls.Add(this.txtTrigEnablingDC);
+            this.gbCombatOnly.Controls.Add(this.chkTrigEnableOnFinding);
+            //
+            //
+
+            /*
+            private System.Windows.Forms.CheckBox chkTrigHidden;
+        private System.Windows.Forms.TextBox txtTrigFindingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigFindingDC;
+        private System.Windows.Forms.TextBox txtTrigSpawningTraitTag;
+        private System.Windows.Forms.TextBox txtTrigSpawningDC;
+        private System.Windows.Forms.TextBox txtTrigDespawningTraitTag;
+        private System.Windows.Forms.TextBox txtTrigDespawningDC;
+        private System.Windows.Forms.TextBox txtTrigDisablingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigDisbalingDC;
+        private System.Windows.Forms.TextBox txtTrigEnablingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigEnablingDC;
+        private System.Windows.Forms.CheckBox chkTrigEnableOnFinding;
+              */
+            //
+            //
+            this.gbCombatOnly.Location = new System.Drawing.Point(6, 132);
             this.gbCombatOnly.Name = "gbCombatOnly";
-            this.gbCombatOnly.Size = new System.Drawing.Size(245, 76);
+            this.gbCombatOnly.Size = new System.Drawing.Size(245, 358);
             this.gbCombatOnly.TabIndex = 5;
             this.gbCombatOnly.TabStop = false;
             this.gbCombatOnly.Text = "Combat Only Settings";
@@ -304,11 +657,25 @@
             this.chkTriggeredByPc.Text = "By PCs";
             this.chkTriggeredByPc.UseVisualStyleBackColor = true;
             this.chkTriggeredByPc.CheckedChanged += new System.EventHandler(this.chkTriggeredByPc_CheckedChanged);
-                       // 
-                       // label1
-                       // 
-                       this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 22);
+            //
+            //
+            this.label1Name.Location = new System.Drawing.Point(4, 22);
+            this.label1Name.Name = "label1name";
+            this.label1Name.Size = new System.Drawing.Size(65, 13);
+            this.label1Name.TabIndex = 11;
+            this.label1Name.Text = "Name:";
+            // label1
+            // 
+            this.label1Category.Location = new System.Drawing.Point(4, 43);
+            this.label1Category.Name = "label1category";
+            this.label1Category.Size = new System.Drawing.Size(65, 13);
+            this.label1Category.TabIndex = 11;
+            this.label1Category.Text = "Category:";
+            //this.label1Category.ValueChanged += new System.EventHandler(this.numE1y_ValueChanged);
+            //
+            //
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 11;
@@ -317,13 +684,24 @@
             // label2
             // 
             this.label1a.AutoSize = true;
-            this.label1a.Location = new System.Drawing.Point(4, 43);
+            this.label1a.Location = new System.Drawing.Point(4, 85);
             this.label1a.Name = "label1a";
             this.label1a.Size = new System.Drawing.Size(65, 13);
             this.label1a.TabIndex = 11;
             this.label1a.Text = "Bump from:";
-            // gbE1
+            // label3
             // 
+            this.label1b.AutoSize = true;
+            this.label1b.Location = new System.Drawing.Point(4, 106);
+            this.label1b.Name = "label1b";
+            this.label1b.Size = new System.Drawing.Size(65, 13);
+            this.label1b.TabIndex = 12;
+            this.label1b.Text = "Text:";
+            // gbE1
+            //gehäuse 
+            //must start deeper
+            //
+            //
             this.gbE1.Controls.Add(this.gbE1transition);
             this.gbE1.Controls.Add(this.gbE1parms);
             this.gbE1.Controls.Add(this.btnE1reset);
@@ -333,7 +711,8 @@
             this.gbE1.Controls.Add(this.label2);
             this.gbE1.Controls.Add(this.chkE1once);
             this.gbE1.Controls.Add(this.chkE1enabled);
-            this.gbE1.Location = new System.Drawing.Point(3, 154);
+            //this.gbE1.Location = new System.Drawing.Point(3, 164);
+            this.gbE1.Location = new System.Drawing.Point(3, 506);
             this.gbE1.Name = "gbE1";
             this.gbE1.Size = new System.Drawing.Size(257, 208);
             this.gbE1.TabIndex = 4;
@@ -585,7 +964,7 @@
             this.gbE2.Controls.Add(this.chkE2once);
             this.gbE2.Controls.Add(this.e2GcTrue);
             this.gbE2.Controls.Add(this.chkE2enabled);
-            this.gbE2.Location = new System.Drawing.Point(3, 364);
+            this.gbE2.Location = new System.Drawing.Point(3, 706);
             this.gbE2.Name = "gbE2";
             this.gbE2.Size = new System.Drawing.Size(257, 208);
             this.gbE2.TabIndex = 5;
@@ -847,10 +1226,10 @@
             this.pnlTrig.Controls.Add(this.gbTrigger);
             this.pnlTrig.Controls.Add(this.gbE2);
             this.pnlTrig.Controls.Add(this.gbE1);
-            this.pnlTrig.Location = new System.Drawing.Point(12, 6);
+            this.pnlTrig.Location = new System.Drawing.Point(0, 6);
             this.pnlTrig.Name = "pnlTrig";
             //this.pnlTrig.Size = new System.Drawing.Size(282, 729);
-            this.pnlTrig.Size = new System.Drawing.Size(240, 812);
+            this.pnlTrig.Size = new System.Drawing.Size(242, 712);
             this.pnlTrig.TabIndex = 6;
             // 
             // rtxtScript
@@ -859,7 +1238,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtxtScript.BackColor = System.Drawing.Color.White;
-            this.rtxtScript.Location = new System.Drawing.Point(3, 787);
+            this.rtxtScript.Location = new System.Drawing.Point(3, 1129);
             this.rtxtScript.Name = "rtxtScript";
             this.rtxtScript.ReadOnly = true;
             this.rtxtScript.Size = new System.Drawing.Size(257, 22);
@@ -879,7 +1258,7 @@
             this.gbE3.Controls.Add(this.chkE3once);
             this.gbE3.Controls.Add(this.e3GcTrue);
             this.gbE3.Controls.Add(this.chkE3enabled);
-            this.gbE3.Location = new System.Drawing.Point(3, 575);
+            this.gbE3.Location = new System.Drawing.Point(3, 917);
             this.gbE3.Name = "gbE3";
             this.gbE3.Size = new System.Drawing.Size(257, 208);
             this.gbE3.TabIndex = 6;
@@ -1182,10 +1561,43 @@
         private System.Windows.Forms.CheckBox chkTrigActiveSearch;
         private System.Windows.Forms.CheckBox chkTrigConnectedDiscovery;
         private System.Windows.Forms.TextBox txtTrigTag;
+        private System.Windows.Forms.TextBox txtTrigName;
+        private System.Windows.Forms.TextBox txtTrigCategory;
         private System.Windows.Forms.TextBox txtTrigBumpTrigDir;
+        private System.Windows.Forms.TextBox txtTrigMouseOverText;
+
+        private System.Windows.Forms.CheckBox chkTrigHidden;
+        private System.Windows.Forms.TextBox txtTrigFindingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigFindingDC;
+        private System.Windows.Forms.TextBox txtTrigSpawningTraitTag;
+        private System.Windows.Forms.TextBox txtTrigSpawningDC;
+        private System.Windows.Forms.TextBox txtTrigDespawningTraitTag;
+        private System.Windows.Forms.TextBox txtTrigDespawningDC;
+        private System.Windows.Forms.TextBox txtTrigDisablingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigDisablingDC;
+        private System.Windows.Forms.TextBox txtTrigEnablingTraitTag;
+        private System.Windows.Forms.TextBox txtTrigEnablingDC;
+        private System.Windows.Forms.CheckBox chkTrigEnableOnFinding;
+
+
+        private System.Windows.Forms.Label labelTrigSystem1;
+        private System.Windows.Forms.Label labelTrigSystem2;
+        private System.Windows.Forms.Label labelTrigSystem3;
+        private System.Windows.Forms.Label labelTrigSystem4;
+        private System.Windows.Forms.Label labelTrigSystem5;
+        private System.Windows.Forms.Label labelTrigSystem6;
+        private System.Windows.Forms.Label labelTrigSystem7;
+        private System.Windows.Forms.Label labelTrigSystem8;
+        private System.Windows.Forms.Label labelTrigSystem9;
+        private System.Windows.Forms.Label labelTrigSystem10;
+
+
         private System.Windows.Forms.GroupBox gbTrigger;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label1Name;
+        private System.Windows.Forms.Label label1Category;
         private System.Windows.Forms.Label label1a;
+        private System.Windows.Forms.Label label1b;
         private System.Windows.Forms.GroupBox gbE1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkE1once;

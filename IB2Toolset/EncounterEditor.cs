@@ -49,6 +49,7 @@ namespace IB2Toolset
         public bool tileSelected = true;
         public bool PcSelected = false;
         public bool CrtSelected = false;
+        public bool TrgSelected = false;
         //GDI Font drawFont = new Font("Arial", 6);
         //GDI Font drawFontNum = new Font("Arial", 24);
         //GDI SolidBrush drawBrush = new SolidBrush(Color.Yellow);
@@ -61,6 +62,7 @@ namespace IB2Toolset
         public string lastSelectedObjectResRef;
         public Creature le_selectedCreature = new Creature();
         public Prop le_selectedProp = new Prop();
+        public Trigger le_selectedTrigger = new Trigger();
         //public List<Bitmap> crtBitmapList = new List<Bitmap>(); //index will match AreaCreatureList index
         //GDI public List<Bitmap> propBitmapList = new List<Bitmap>(); //index will match AreaPropList index
         public Encounter thisEnc = new Encounter();
@@ -1102,16 +1104,33 @@ namespace IB2Toolset
                 if (prntForm.selectedLevelMapCreatureTag != "")
                 {
                     prntForm.CreatureSelected = true;
+                    prntForm.PropSelected = false;
+                    prntForm.TriggerSelected = false;
                     tileSelected = false;
                     PcSelected = false;
                     CrtSelected = true;
+                    TrgSelected = false;
                 }
                 if (prntForm.selectedLevelMapPropTag != "")
                 {
+                    prntForm.CreatureSelected = false;
                     prntForm.PropSelected = true;
+                    prntForm.TriggerSelected = false;
                     tileSelected = false;
                     PcSelected = false;
                     CrtSelected = false;
+                    TrgSelected = false;   
+                }
+
+                if (prntForm.selectedLevelMapTriggerTag != "")
+                {
+                    prntForm.CreatureSelected = false;
+                    prntForm.PropSelected = false;
+                    //prntForm.TriggerSelected = true;
+                    tileSelected = false;
+                    PcSelected = false;
+                    CrtSelected = false;
+                    TrgSelected = true;
                 }
                 if (prntForm.CreatureSelected)
                 {
@@ -1133,6 +1152,28 @@ namespace IB2Toolset
                         //selectedBitmapSize = le_selectedProp.propBitmap.Width / (tileSize * 2);
                     }
                 }
+                else if (prntForm.TriggerSelected)
+                {
+                    string selectedTrigger = prntForm.selectedLevelMapTriggerTag;
+                    le_selectedTrigger = prntForm.getTriggerByTag(selectedTrigger);
+                    if (le_selectedTrigger != null)
+                    {
+                        //selectedBitmap = le_selectedProp.propBitmap;
+                        //selectedBitmapSize = le_selectedProp.propBitmap.Width / (tileSize * 2);
+                    }
+                }
+                /*
+                else if (prntForm.TriggerSelected)
+                {
+                    string selectedTrigger = prntForm.selectedLevelMapPropTag;
+                    le_selectedProp = prntForm.getPropByTag(selectedProp);
+                    if (le_selectedProp != null)
+                    {
+                        selectedBitmap = le_selectedProp.propBitmap;
+                        //selectedBitmapSize = le_selectedProp.propBitmap.Width / (tileSize * 2);
+                    }
+                }
+                */
             }
             catch (Exception ex)
             {
@@ -1387,6 +1428,40 @@ namespace IB2Toolset
                         thisEnc.propsList.Add(newProp);
                     }
                     #endregion
+                    #region Trigger (blueprint) Selected
+                    else if (prntForm.TriggerSelected && le_selectedTrigger != null)
+                    {
+                        string selectedTrigger = prntForm.selectedLevelMapTriggerTag;
+                        prntForm.logText(selectedTrigger);
+                        prntForm.logText(Environment.NewLine);
+
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+
+
+                        // verify that there is no creature, blocked, or PC already on this location
+                        // add to a List<> a new item with the x,y coordinates
+                        //if (le_selectedProp.ImageFileName == "blank")
+                        //{
+                        //return;
+                        //}
+                        Trigger newTrigger = new Trigger();
+                        //if (le_selectedTrigger != null)
+                        //{
+                            newTrigger = le_selectedTrigger.DeepCopy();
+                        //}
+                        //else
+                        //{
+                            //newTrigger
+                        //}
+                        newTrigger.TriggerTag = le_selectedTrigger.TriggerTag + "_" + prntForm.mod.nextIdNumber;
+                        Coordinate dst = new Coordinate();
+                        dst.X = gridX;
+                        dst.Y = gridY;
+                        newTrigger.TriggerSquaresList.Add(dst);
+                        thisEnc.Triggers.Add(newTrigger);
+                    }
+                    #endregion
                     #region Paint New Trigger Selected
                     else if (rbtnPaintTrigger.Checked)
                     {
@@ -1637,8 +1712,10 @@ namespace IB2Toolset
                         prntForm.logText(Environment.NewLine);
                         prntForm.selectedLevelMapCreatureTag = "";
                         prntForm.selectedLevelMapPropTag = "";
+                        prntForm.selectedLevelMapTriggerTag = "";
                         prntForm.CreatureSelected = false;
                         prntForm.PropSelected = false;
+                        prntForm.TriggerSelected = false;
                         prntForm.currentSelectedTrigger = null;
                         //GDI refreshMap(true);
                         //GDI UpdatePB();
@@ -2435,12 +2512,31 @@ namespace IB2Toolset
         {
             prntForm.selectedLevelMapCreatureTag = "";
             prntForm.selectedLevelMapPropTag = "";
+            prntForm.selectedLevelMapTriggerTag = "";
             prntForm.CreatureSelected = false;
             prntForm.PropSelected = false;
+            prntForm.TriggerSelected = false;
             tileSelected = false;
             PcSelected = false;
             CrtSelected = false;
+            TrgSelected = false;
+            le_selectedTrigger = null;
         }
+
+        public void ResetAllToFalseButNotTriggers()
+        {
+            prntForm.selectedLevelMapCreatureTag = "";
+            prntForm.selectedLevelMapPropTag = "";
+            //prntForm.selectedLevelMapTriggerTag = "";
+            prntForm.CreatureSelected = false;
+            prntForm.PropSelected = false;
+            prntForm.TriggerSelected = false;
+            tileSelected = false;
+            PcSelected = false;
+            CrtSelected = false;
+            TrgSelected = false;
+        }
+
         #endregion
 
         #region Event Handlers  
@@ -2616,7 +2712,7 @@ namespace IB2Toolset
                 prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = newTrigger;
                 prntForm.logText("painting a new trigger");
                 prntForm.logText(Environment.NewLine);
-                ResetAllToFalse();
+                ResetAllToFalseButNotTriggers();
                 //prntForm.selectedLevelMapCreatureTag = "";
                 //prntForm.selectedLevelMapPropTag = "";
                 //prntForm.CreatureSelected = false;
@@ -2635,7 +2731,7 @@ namespace IB2Toolset
                 //prntForm.selectedLevelMapPropTag = "";
                 //prntForm.CreatureSelected = false;
                 //prntForm.PropSelected = false;
-                ResetAllToFalse();
+                ResetAllToFalseButNotTriggers();
                 prntForm.selectedLevelMapTriggerTag = lastSelectedObjectTag;
                 //refreshMap(true);
                 //UpdatePB();
@@ -2885,8 +2981,11 @@ namespace IB2Toolset
                 //prntForm.selectedEncounterCreatureTag = "";
                 prntForm.selectedLevelMapCreatureTag = "";
                 prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
                 prntForm.CreatureSelected = false;
                 prntForm.PropSelected = false;
+                prntForm.TriggerSelected = false;
+                prntForm.currentSelectedTrigger = null;
                 //refreshMap(true);
                 UpdatePB();
                 rbtnInfo.Checked = true;

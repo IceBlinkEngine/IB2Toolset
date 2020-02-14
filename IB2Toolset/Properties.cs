@@ -26,6 +26,7 @@ namespace IB2Toolset
             prntForm.frmBlueprints.UpdateTreeViewCreatures();
             prntForm.frmBlueprints.UpdateTreeViewItems();
             prntForm.frmBlueprints.UpdateTreeViewProps();
+            prntForm.frmBlueprints.UpdateTreeViewTriggers();
             //e.ChangedItem.PropertyDescriptor.Name
             //brightburn
            

@@ -27,6 +27,7 @@ namespace IB2Toolset
         public List<Encounter> encountersList = new List<Encounter>();
         public List<Item> itemsList = new List<Item>();
         public List<Prop> propsList = new List<Prop>();
+        public List<Trigger> triggersList = new List<Trigger>();
         public List<PlayerClass> playerClassesList = new List<PlayerClass>();
         public List<Race> racesList = new List<Race>();
         public List<Spell> spellsList = new List<Spell>();
@@ -38,6 +39,7 @@ namespace IB2Toolset
         public List<string> itemsParentNodeList = new List<string>();
         public List<string> creaturesParentNodeList = new List<string>();
         public List<string> propsParentNodeList = new List<string>();
+        public List<string> triggersParentNodeList = new List<string>();
         [JsonIgnore]
         public List<Area> openAreasList = new List<Area>();
         [JsonIgnore]
@@ -55,6 +57,7 @@ namespace IB2Toolset
         public string selectedLevelMapTriggerTag = "";
         public bool CreatureSelected = false;
         public bool PropSelected = false;
+        public bool TriggerSelected = false;
         public int nodeCount = 1;
         public int createdTab = 0;
         public int _selectedLbxAreaIndex;
@@ -66,6 +69,7 @@ namespace IB2Toolset
         public string lastSelectedCreatureNodeName = "";
         public string lastSelectedItemNodeName = "";
         public string lastSelectedPropNodeName = "";
+        public string lastSelectedTriggerNodeName = "";
         public Trigger currentSelectedTrigger = null;
         public Bitmap iconBitmap;
         public string lastModuleFullPath;
@@ -129,6 +133,7 @@ namespace IB2Toolset
             openCreatures(_mainDirectory + "\\default\\NewModule\\data\\creatures.json");
             openItems(_mainDirectory + "\\default\\NewModule\\data\\items.json");
             openProps(_mainDirectory + "\\default\\NewModule\\data\\props.json");
+            openTriggers(_mainDirectory + "\\default\\NewModule\\data\\triggers.json");
             openJournal(_mainDirectory + "\\default\\NewModule\\data\\journal.json");
             openPlayerClasses(_mainDirectory + "\\default\\NewModule\\data\\playerClasses.json");
             openRaces(_mainDirectory + "\\default\\NewModule\\data\\races.json");
@@ -459,6 +464,20 @@ namespace IB2Toolset
             }
             frmBlueprints.UpdateTreeViewProps();
             loadPropSprites();
+        }
+        private void openTriggers(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                triggersList.Clear();
+                triggersList = loadTriggersFile(filename);
+            }
+            else
+            {
+                MessageBox.Show("Couldn't find triggers.json file. Will create a new one upon saving module.");
+            }
+            frmBlueprints.UpdateTreeViewTriggers();
+            //loadPropSprites();
         }
         private void loadPropSprites()
         {
@@ -795,6 +814,7 @@ namespace IB2Toolset
                 openShops(directory + "\\data\\shops.json");
                 openEncounters(directory + "\\data\\encounters.json");
                 openProps(directory + "\\data\\props.json");
+                openTriggers(directory + "\\data\\triggers.json");
                 openJournal(directory + "\\data\\journal.json");
                 openPlayerClasses(directory + "\\data\\playerClasses.json");
                 openRaces(directory + "\\data\\races.json");
@@ -3415,6 +3435,7 @@ public void loadSpriteDropdownList()
                 saveShopsFile(fullPathDirectory + "\\data\\shops.json");
                 saveEncountersFile(fullPathDirectory + "\\data\\encounters.json");
                 savePropsFile(fullPathDirectory + "\\data\\props.json");
+                saveTriggersFile(fullPathDirectory + "\\data\\triggers.json");
                 saveJournalFile(fullPathDirectory + "\\data\\journal.json");
                 savePlayerClassesFile(fullPathDirectory + "\\data\\playerClasses.json");
                 saveRacesFile(fullPathDirectory + "\\data\\races.json");
@@ -4627,6 +4648,78 @@ public void loadSpriteDropdownList()
             }
             return null;
         }
+
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+        public void saveTriggersFile(string filename)
+        {
+            string json = JsonConvert.SerializeObject(triggersList, Newtonsoft.Json.Formatting.Indented);
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.Write(json.ToString());
+            }
+        }
+        public List<Trigger> loadTriggersFile(string filename)
+        {
+            List<Trigger> toReturn = null;
+
+            // deserialize JSON directly from a file
+            using (StreamReader file = File.OpenText(filename))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                toReturn = (List<Trigger>)serializer.Deserialize(file, typeof(List<Trigger>));
+            }
+
+            //glockensocken
+            //try to also add all props from NewModule, but only if their tags are not already existing
+            //openProps(_mainDirectory + "\\default\\NewModule\\data\\props.json");
+
+            List<Trigger> fromNewModule = null;
+            // deserialize JSON directly from a file
+            //problembär
+            try
+            {
+                using (StreamReader file = File.OpenText(_mainDirectory + "\\default\\NewModule\\data\\triggers.json"))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    fromNewModule = (List<Trigger>)serializer.Deserialize(file, typeof(List<Trigger>));
+                }
+
+                foreach (Trigger pFNM in fromNewModule)
+                {
+                    bool doAdd = true;
+                    foreach (Trigger pCurrent in toReturn)
+                    {
+                        if (pFNM.TriggerTag == pCurrent.TriggerTag)
+                        {
+                            doAdd = false;
+                            break;
+                        }
+                    }
+                    if (doAdd)
+                    {
+                        toReturn.Add(pFNM);
+                    }
+                }
+            }
+            catch
+            { }
+
+            return toReturn;
+        }
+        //bintang
+
+            //not used so far
+        public Trigger getTriggerByTag(string tag)
+        {
+            foreach (Trigger it in triggersList)
+            {
+                if (it.TriggerTag == tag) return it;
+            }
+            return null;
+        }
+
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 
         public void savePropsFile(string filename)
         {

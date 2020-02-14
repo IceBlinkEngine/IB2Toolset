@@ -126,6 +126,10 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapCreatureTag = tvCreatures.SelectedNode.Name;
                 prntForm.selectedEncounterPropTag = "";
                 prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedEncounterTriggerTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
+                prntForm.CreatureSelected = true;
+                prntForm.TriggerSelected = false;
                 prntForm.PropSelected = false;
                 prntForm.lastSelectedCreatureNodeName = tvCreatures.SelectedNode.Name;
                 prntForm.logText(prntForm.selectedEncounterCreatureTag);
@@ -146,6 +150,10 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapCreatureTag = tvCreatures.SelectedNode.Name;
                 prntForm.selectedEncounterPropTag = "";
                 prntForm.selectedLevelMapPropTag = "";
+                prntForm.selectedEncounterTriggerTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
+                prntForm.CreatureSelected = true;
+                prntForm.TriggerSelected = false;
                 prntForm.PropSelected = false;
                 prntForm.lastSelectedCreatureNodeName = tvCreatures.SelectedNode.Name;
                 prntForm.logText(prntForm.selectedEncounterCreatureTag);
@@ -440,6 +448,10 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapPropTag = tvProps.SelectedNode.Name;
                 prntForm.selectedEncounterCreatureTag = "";
                 prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedEncounterTriggerTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
+                prntForm.PropSelected = true;
+                prntForm.TriggerSelected = false;
                 prntForm.CreatureSelected = false;
                 prntForm.frmIconSprite.gbKnownSpells.Enabled = false;
                 prntForm.lastSelectedPropNodeName = tvProps.SelectedNode.Name;
@@ -458,6 +470,10 @@ namespace IB2Toolset
                 prntForm.selectedLevelMapPropTag = tvProps.SelectedNode.Name;
                 prntForm.selectedEncounterCreatureTag = "";
                 prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedEncounterTriggerTag = "";
+                prntForm.selectedLevelMapTriggerTag = "";
+                prntForm.PropSelected = true;
+                prntForm.TriggerSelected = false;
                 prntForm.CreatureSelected = false;
                 prntForm.frmIconSprite.gbKnownSpells.Enabled = false;
                 prntForm.lastSelectedPropNodeName = tvProps.SelectedNode.Name;
@@ -519,6 +535,209 @@ namespace IB2Toolset
             prntForm.propsList = prntForm.propsList.OrderBy(o => o.PropCategoryName).ThenBy(o => o.PropName).ToList();
             UpdateTreeViewProps();
         }
+        #endregion
+
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+        #region Triggers Stuff
+        #region UpdateTreeViewItems
+        public void UpdateTreeViewTriggers()
+        {
+            Dictionary<string, bool> nodeStates = SaveTreeState(tvTriggers);
+            tvTriggers.Nodes.Clear();
+            prntForm.triggersParentNodeList.Clear();
+            foreach (Trigger trg in prntForm.triggersList)
+            {
+                if (!CheckExistsTriggerCategory(trg.TriggerCategory))
+                    prntForm.triggersParentNodeList.Add(trg.TriggerCategory);
+            }
+            foreach (string trg in prntForm.triggersParentNodeList)
+            {
+                TreeNode parentNode;
+                parentNode = tvTriggers.Nodes.Add(trg);
+                PopulateTreeViewTriggers(trg, parentNode);
+            }
+            RestoreTreeState(tvTriggers, nodeStates);
+            //tvProps.ExpandAll();
+            refreshPropertiesTriggers();
+        }
+        private bool CheckExistsTriggerCategory(string parentNodeName)
+        {
+            foreach (string par in prntForm.triggersParentNodeList)
+            {
+                if (parentNodeName == par)
+                    return true;
+            }
+            return false;
+        }
+        private void PopulateTreeViewTriggers(string parentName, TreeNode parentNode)
+        {
+            var filteredTriggers = prntForm.triggersList.Where(trg => trg.TriggerCategory == parentName);
+
+            TreeNode childNode;
+            foreach (var pr in filteredTriggers.ToList())
+            {
+                childNode = parentNode.Nodes.Add(pr.TriggerName);
+                childNode.Name = pr.TriggerTag;
+            }
+        }
+        private void refreshPropertiesTriggers()
+        {
+            if (tvTriggers.SelectedNode != null)
+            {
+                string _nodeTag = tvTriggers.SelectedNode.Name;
+                prntForm.frmIceBlinkProperties.propertyGrid1.SelectedObject = GetTrigger(_nodeTag);
+                prntForm.currentSelectedTrigger = GetTrigger(_nodeTag);
+            }
+        }
+        public Trigger GetTrigger(string _nodeTag)
+        {
+            foreach (Trigger trg in prntForm.triggersList)
+            {
+                if (trg.TriggerTag == _nodeTag)
+                    return trg;
+            }
+            return null;
+        }
+        public int GetTriggerIndex(string _nodeTag)
+        {
+            int cnt = 0;
+            foreach (Trigger trg in prntForm.triggersList)
+            {
+                if (trg.TriggerTag == _nodeTag)
+                    return cnt;
+                cnt++;
+            }
+            return -1;
+        }
+        #endregion
+        private void tvTriggers_AfterSelect_1(object sender, TreeViewEventArgs e)
+        {
+            //prntForm.logText("afterselectProp");
+            if (tvTriggers.SelectedNode != null && tvTriggers.Nodes.Count > 0)
+            {
+                prntForm.selectedEncounterTriggerTag = tvTriggers.SelectedNode.Name;
+                prntForm.selectedLevelMapTriggerTag = tvTriggers.SelectedNode.Name;
+                prntForm.selectedEncounterCreatureTag = "";
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.selectedEncounterPropTag = "";
+                prntForm.selectedLevelMapPropTag = "";
+                prntForm.TriggerSelected = true;
+                prntForm.PropSelected = false;
+                prntForm.CreatureSelected = false;
+                prntForm.frmIconSprite.gbKnownSpells.Enabled = false;
+                prntForm.lastSelectedTriggerNodeName = tvTriggers.SelectedNode.Name;
+                prntForm.logText(prntForm.selectedEncounterTriggerTag);
+                prntForm.logText(Environment.NewLine);
+
+                Trigger t = new Trigger();
+                t = GetTrigger((string)tvTriggers.SelectedNode.Tag);
+                //lastSelectedObjectTag = t.TriggerTag;
+                prntForm.currentSelectedTrigger = t;
+                //prntForm.le_selectedTrigger = t;
+            }
+            refreshPropertiesTriggers();
+            prntForm.frmTriggerEvents.refreshTriggers();
+            //not needed?
+            //prntForm.refreshIconTriggers();
+        }
+        private void tvTriggers_MouseClick_1(object sender, MouseEventArgs e)
+        {
+            //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+            /*
+            txtSelectedIconInfo.Text = "Trigger Tag: " + Environment.NewLine + t.TriggerTag;
+            lastSelectedObjectTag = t.TriggerTag;
+            prntForm.currentSelectedTrigger = t;
+            prntForm.frmTriggerEvents.refreshTriggers();
+            panelView.ContextMenuStrip.Items.Add(t.TriggerTag, null, handler);
+            */
+            //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            //prntForm.logText("mouseclickProp");
+            if (tvTriggers.SelectedNode != null && tvTriggers.Nodes.Count > 0)
+            {
+
+                //Trigger t = new Trigger();
+                //t = GetTrigger((string)tvTriggers.SelectedNode.Tag);
+                //lastSelectedObjectTag = t.TriggerTag;
+                //prntForm.currentSelectedTrigger = t;
+                //prntForm.frmTriggerEvents.refreshTriggers();
+
+                prntForm.selectedEncounterTriggerTag = tvTriggers.SelectedNode.Name;
+                prntForm.selectedLevelMapTriggerTag = tvTriggers.SelectedNode.Name;
+                prntForm.selectedEncounterCreatureTag = "";
+                prntForm.selectedLevelMapCreatureTag = "";
+                prntForm.TriggerSelected = true;
+                prntForm.CreatureSelected = false;
+                prntForm.PropSelected = false;
+                prntForm.frmIconSprite.gbKnownSpells.Enabled = false;
+                prntForm.lastSelectedTriggerNodeName = tvTriggers.SelectedNode.Name;
+                prntForm.logText(prntForm.selectedEncounterTriggerTag);
+                prntForm.logText(Environment.NewLine);
+            }
+            refreshPropertiesTriggers();
+            prntForm.frmTriggerEvents.refreshTriggers();
+            //not needed?
+            //prntForm.refreshIconProps();
+        }
+        private void btnAddTrigger_Click_1(object sender, EventArgs e)
+        {
+            Trigger newTrigger = new Trigger();
+            newTrigger.TriggerName = "newTrigger";
+            newTrigger.TriggerCategory = "New Category";
+            newTrigger.TriggerTag = "newTriggerTag_" + prntForm.mod.nextIdNumber;
+            prntForm.nodeCount++;
+            prntForm.triggersList.Add(newTrigger);
+            UpdateTreeViewTriggers();
+        }
+        private void btnRemoveTrigger_Click_1(object sender, EventArgs e)
+        {
+            if (tvTriggers.SelectedNode != null && tvTriggers.Nodes.Count > 0)
+            {
+                try
+                {
+                    string _nodeTag = tvTriggers.SelectedNode.Name;
+                    prntForm.triggersList.RemoveAt(GetTriggerIndex(_nodeTag));
+                    tvTriggers.Nodes.RemoveAt(tvTriggers.SelectedNode.Index);
+                    UpdateTreeViewTriggers();
+                }
+                catch
+                {
+                    prntForm.logText("Failed to remove trigger");
+                    prntForm.logText(Environment.NewLine);
+                }
+            }
+        }
+        private void btnDuplicateTrigger_Click_1(object sender, EventArgs e)
+        {
+            if (tvTriggers.SelectedNode != null && tvTriggers.Nodes.Count > 0)
+            {
+                try
+                {
+                    string _nodeTag = tvTriggers.SelectedNode.Name;
+                    Trigger newTrigger = prntForm.triggersList[GetTriggerIndex(_nodeTag)].DeepCopy();
+                    newTrigger.TriggerTag = "newTriggerTag_" + prntForm.mod.nextIdNumber;
+                    prntForm.triggersList.Add(newTrigger);
+                    UpdateTreeViewTriggers();
+                }
+                catch
+                {
+                    prntForm.logText("Failed to duplicate trigger");
+                    prntForm.logText(Environment.NewLine);
+                }
+            }
+        }
+        private void btnSortTriggers_Click(object sender, EventArgs e)
+        {
+            prntForm.triggersList = prntForm.triggersList.OrderBy(o => o.TriggerCategory).ThenBy(o => o.TriggerName).ToList();
+            UpdateTreeViewTriggers();
+        }
         #endregion            
+
+
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
     }
 }
