@@ -121,7 +121,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.chkTrigHidden = chkTrigHidden.Checked;
+                prntForm.currentSelectedTrigger.ChkTrigHidden = chkTrigHidden.Checked;
             }
         }
 
@@ -129,7 +129,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.chkTrigEnableOnFinding = chkTrigEnableOnFinding.Checked;
+                prntForm.currentSelectedTrigger.ChkTrigEnableOnFinding = chkTrigEnableOnFinding.Checked;
             }
         }
 
@@ -137,7 +137,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigFindingTraitTag  = txtTrigFindingTraitTag.Text;
+                prntForm.currentSelectedTrigger.TxtTrigFindingTraitTag  = txtTrigFindingTraitTag.Text;
             }
         }
 
@@ -145,7 +145,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigFindingDC = txtTrigFindingDC.Text;
+                prntForm.currentSelectedTrigger.TxtTrigFindingDC = txtTrigFindingDC.Text;
             }
         }
 
@@ -153,7 +153,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigSpawningDC = txtTrigSpawningDC.Text;
+                prntForm.currentSelectedTrigger.TxtTrigSpawningDC = txtTrigSpawningDC.Text;
             }
         }
 
@@ -161,7 +161,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigDespawningDC = txtTrigDespawningDC.Text;
+                prntForm.currentSelectedTrigger.TxtTrigDespawningDC = txtTrigDespawningDC.Text;
             }
         }
 
@@ -169,7 +169,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigEnablingDC = txtTrigEnablingDC.Text;
+                prntForm.currentSelectedTrigger.TxtTrigEnablingDC = txtTrigEnablingDC.Text;
             }
         }
 
@@ -177,7 +177,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigDisablingDC = txtTrigDisablingDC.Text;
+                prntForm.currentSelectedTrigger.TxtTrigDisablingDC = txtTrigDisablingDC.Text;
             }
         }
 
@@ -185,7 +185,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigSpawningTraitTag = txtTrigSpawningTraitTag.Text;
+                prntForm.currentSelectedTrigger.TxtTrigSpawningTraitTag = txtTrigSpawningTraitTag.Text;
             }
         }
 
@@ -193,7 +193,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigDespawningTraitTag = txtTrigDespawningTraitTag.Text;
+                prntForm.currentSelectedTrigger.TxtTrigDespawningTraitTag = txtTrigDespawningTraitTag.Text;
             }
         }
 
@@ -201,7 +201,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigDisablingTraitTag = txtTrigDisablingTraitTag.Text;
+                prntForm.currentSelectedTrigger.TxtTrigDisablingTraitTag = txtTrigDisablingTraitTag.Text;
             }
         }
 
@@ -209,7 +209,7 @@ namespace IB2Toolset
         {
             if (prntForm.currentSelectedTrigger != null)
             {
-                prntForm.currentSelectedTrigger.txtTrigEnablingTraitTag = txtTrigEnablingTraitTag.Text;
+                prntForm.currentSelectedTrigger.TxtTrigEnablingTraitTag = txtTrigEnablingTraitTag.Text;
             }
         }
         /*
@@ -661,19 +661,19 @@ namespace IB2Toolset
             {
                 Trigger trg = prntForm.currentSelectedTrigger;
 
-                chkTrigHidden.Checked = trg.chkTrigHidden;
-                chkTrigEnableOnFinding.Checked = trg.chkTrigEnableOnFinding;
-                txtTrigFindingDC.Text = trg.txtTrigFindingDC;
-                txtTrigFindingTraitTag.Text = trg.txtTrigFindingTraitTag;
-                txtTrigFindingDC.Text = trg.txtTrigFindingDC;
-                txtTrigEnablingTraitTag.Text = trg.txtTrigEnablingTraitTag;
-                txtTrigEnablingDC.Text = trg.txtTrigEnablingDC;
-                txtTrigDisablingTraitTag.Text = trg.txtTrigDisablingTraitTag;
-                txtTrigDisablingDC.Text = trg.txtTrigDisablingDC;
-                txtTrigSpawningTraitTag.Text = trg.txtTrigSpawningTraitTag;
-                txtTrigSpawningDC.Text = trg.txtTrigSpawningDC;
-                txtTrigDespawningTraitTag.Text = trg.txtTrigDespawningTraitTag;
-                txtTrigDespawningDC.Text = trg.txtTrigDespawningDC;
+                chkTrigHidden.Checked = trg.ChkTrigHidden;
+                chkTrigEnableOnFinding.Checked = trg.ChkTrigEnableOnFinding;
+                txtTrigFindingDC.Text = trg.TxtTrigFindingDC;
+                txtTrigFindingTraitTag.Text = trg.TxtTrigFindingTraitTag;
+                txtTrigFindingDC.Text = trg.TxtTrigFindingDC;
+                txtTrigEnablingTraitTag.Text = trg.TxtTrigEnablingTraitTag;
+                txtTrigEnablingDC.Text = trg.TxtTrigEnablingDC;
+                txtTrigDisablingTraitTag.Text = trg.TxtTrigDisablingTraitTag;
+                txtTrigDisablingDC.Text = trg.TxtTrigDisablingDC;
+                txtTrigSpawningTraitTag.Text = trg.TxtTrigSpawningTraitTag;
+                txtTrigSpawningDC.Text = trg.TxtTrigSpawningDC;
+                txtTrigDespawningTraitTag.Text = trg.TxtTrigDespawningTraitTag;
+                txtTrigDespawningDC.Text = trg.TxtTrigDespawningDC;
                 //todo for the others...
 
                 chkTrigEnabled.Checked = trg.Enabled;

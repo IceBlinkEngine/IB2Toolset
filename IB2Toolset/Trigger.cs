@@ -27,18 +27,18 @@ namespace IB2Toolset
         private string bumpTriggerDirection = "none"; //fromSouth, fromNorth, fromEast, fromWest, none
         private string mouseOverText = "none";
 
-        public bool chkTrigHidden = false;
-        public string txtTrigFindingTraitTag;
-        public string txtTrigFindingDC;
-        public string txtTrigSpawningTraitTag;
-        public string txtTrigSpawningDC;
-        public string txtTrigDespawningTraitTag;
-        public string txtTrigDespawningDC;
-        public string txtTrigDisablingTraitTag;
-        public string txtTrigDisablingDC;
-        public string txtTrigEnablingTraitTag;
-        public string txtTrigEnablingDC;
-        public bool chkTrigEnableOnFinding = false;
+        private bool chkTrigHidden = false;
+        private string txtTrigFindingTraitTag;
+        private string txtTrigFindingDC;
+        private string txtTrigSpawningTraitTag;
+        private string txtTrigSpawningDC;
+        private string txtTrigDespawningTraitTag;
+        private string txtTrigDespawningDC;
+        private string txtTrigDisablingTraitTag;
+        private string txtTrigDisablingDC;
+        private string txtTrigEnablingTraitTag;
+        private string txtTrigEnablingDC;
+        private bool chkTrigEnableOnFinding = false;
     
 
         private bool connectedDiscovery = false;
@@ -162,6 +162,105 @@ namespace IB2Toolset
             get { return bumpTriggerDirection; }
             set { bumpTriggerDirection = value; }
         }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public bool ChkTrigHidden
+        {
+            get { return chkTrigHidden; }
+            set { chkTrigHidden = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public bool ChkTrigEnableOnFinding
+        {
+            get { return chkTrigEnableOnFinding; }
+            set { chkTrigEnableOnFinding = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigFindingTraitTag
+        {
+            get { return txtTrigFindingTraitTag; }
+            set { txtTrigFindingTraitTag = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigFindingDC
+        {
+            get { return txtTrigFindingDC; }
+            set { txtTrigFindingDC = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigSpawningTraitTag
+        {
+            get { return txtTrigSpawningTraitTag; }
+            set { txtTrigSpawningTraitTag = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigSpawningDC
+        {
+            get { return txtTrigSpawningDC; }
+            set { txtTrigSpawningDC = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigDespawningTraitTag
+        {
+            get { return txtTrigDespawningTraitTag; }
+            set { txtTrigDespawningTraitTag = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigDespawningDC
+        {
+            get { return txtTrigDespawningDC; }
+            set { txtTrigDespawningDC = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigEnablingTraitTag
+        {
+            get { return txtTrigEnablingTraitTag; }
+            set { txtTrigEnablingTraitTag = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigEnablingDC
+        {
+            get { return txtTrigEnablingDC; }
+            set { txtTrigEnablingDC = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigDisablingTraitTag
+        {
+            get { return txtTrigDisablingTraitTag; }
+            set { txtTrigDisablingTraitTag = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TxtTrigDisablingDC
+        {
+            get { return txtTrigDisablingDC; }
+            set { txtTrigDisablingDC = value; }
+        }
+
+        /*
+        private bool chkTrigHidden = false;
+        private string txtTrigFindingTraitTag;
+        private string txtTrigFindingDC;
+        private string txtTrigSpawningTraitTag;
+        private string txtTrigSpawningDC;
+        private string txtTrigDespawningTraitTag;
+        private string txtTrigDespawningDC;
+        private string txtTrigDisablingTraitTag;
+        private string txtTrigDisablingDC;
+        private string txtTrigEnablingTraitTag;
+        private string txtTrigEnablingDC;
+        private bool chkTrigEnableOnFinding = false;
+        */
 
         [CategoryAttribute("0 - Main"), DescriptionAttribute("mouse over text")]
         public string MouseOverText
