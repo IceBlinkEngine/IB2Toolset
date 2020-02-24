@@ -41,7 +41,11 @@ namespace IB2Toolset
         public int combatLocY = 0;
         private int _moveDistance = 5;
         private int _initiativeBonus = 0;
-        private string _name = "newCreature";
+
+         private string _unveilStatInfoTraitTag = "none";
+        private int _unveilStatInfoTraitDC = 0;
+
+        private string _name = "newName";
         private string _tag = "newTag";
         private string _resref = "newResRef";
         private string _desc = ""; //detailed description
@@ -134,6 +138,24 @@ namespace IB2Toolset
             get { return _name; }
             set { _name = value; }
         }
+
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("Tag of trait that is checked when deciding whether detailed mouse over info for a creature is shown in combat")]
+        public string unveilStatInfoTraitTag
+        {
+            get { return _unveilStatInfoTraitTag; }
+            set { _unveilStatInfoTraitTag = value; }
+        }
+
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("DC used for deciding whether detailed creature info is shown in combat (static check, so add 10)")]
+        public int unveilStatInfoTraitDC
+        {
+            get { return _unveilStatInfoTraitDC; }
+            set { _unveilStatInfoTraitDC = value; }
+        }
+
+        //private string _unveilStatInfoTraitTag = "none";
+        //private int _unveilStatInfoTraitDC = 0;
+
         [CategoryAttribute("00 - Main"), DescriptionAttribute("Tag of the creature (Must be unique)")]
         public string cr_tag
         {

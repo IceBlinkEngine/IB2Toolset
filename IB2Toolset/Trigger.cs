@@ -23,7 +23,14 @@ namespace IB2Toolset
         #region Fields
 
 
-     
+        private string vanishInXTurns = "";
+        private string vanishCounter = "";
+        private string appearInXTurns = "";
+        private string appearCounter = "";
+        private bool changeWalkableStateOnEnabledStateChange = false;
+        //below is likely only needed in toolset
+        private string tagOfPRopToPlaceOnTop = "none";
+
         private string bumpTriggerDirection = "none"; //fromSouth, fromNorth, fromEast, fromWest, none
         private string mouseOverText = "none";
 
@@ -177,6 +184,49 @@ namespace IB2Toolset
             set { chkTrigEnableOnFinding = value; }
         }
 
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string VanishInXTurns
+        {
+            get { return vanishInXTurns; }
+            set { vanishInXTurns = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string VanishCounter
+        {
+            get { return vanishCounter; }
+            set { vanishCounter = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string AppearInXTurns
+        {
+            get { return appearInXTurns; }
+            set { appearInXTurns = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string AppearCounter
+        {
+            get { return appearCounter; }
+            set { appearCounter = value; }
+        }
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public bool ChangeWalkableStateOnEnabledStateChange
+        {
+            get { return changeWalkableStateOnEnabledStateChange; }
+            set { changeWalkableStateOnEnabledStateChange = value; }
+        }
+
+
+        [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
+        public string TagOfPRopToPlaceOnTop
+        {
+            get { return tagOfPRopToPlaceOnTop; }
+            set { tagOfPRopToPlaceOnTop = value; }
+        }
+      
         [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
         public string TxtTrigFindingTraitTag
         {
@@ -544,7 +594,16 @@ namespace IB2Toolset
         public Trigger DeepCopy()
         {
             Trigger other = new Trigger();
-        
+
+
+              other.vanishInXTurns = vanishInXTurns;
+            other.vanishCounter = vanishCounter;
+            other.appearInXTurns = appearInXTurns;
+            other.appearCounter = appearCounter;
+            other.changeWalkableStateOnEnabledStateChange = changeWalkableStateOnEnabledStateChange;
+            //below is likely only needed in toolset
+            other.tagOfPRopToPlaceOnTop = tagOfPRopToPlaceOnTop;
+
         other.bumpTriggerDirection = bumpTriggerDirection; //fromSouth, fromNorth, fromEast, fromWest, none
             other.mouseOverText = mouseOverText;
             other.connectedDiscovery = connectedDiscovery;

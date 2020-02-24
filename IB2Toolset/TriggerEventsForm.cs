@@ -141,6 +141,63 @@ namespace IB2Toolset
             }
         }
 
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+        private void vanishInXTurns_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.VanishInXTurns = vanishInXTurns.Text;
+            }
+        }
+
+        /*
+        private void vanishCounter_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.VanishCounter = vanishCounter.Text;
+            }
+        }
+        */
+
+        private void appearInXTurns_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.AppearInXTurns = appearInXTurns.Text;
+            }
+        }
+
+        /*
+        private void appearCounter_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.AppearCounter = appearCounter.Text;
+            }
+        }
+        */
+
+        private void tagOfPRopToPlaceOnTop_TextChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.TagOfPRopToPlaceOnTop = tagOfPRopToPlaceOnTop.Text;
+            }
+        }
+
+        private void changeWalkableStateOnEnabledStateChange_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prntForm.currentSelectedTrigger != null)
+            {
+                prntForm.currentSelectedTrigger.ChangeWalkableStateOnEnabledStateChange = changeWalkableStateOnEnabledStateChange.Checked;
+            }
+        }
+        //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+
+
         private void txtTrigFindingDC_TextChanged(object sender, EventArgs e)
         {
             if (prntForm.currentSelectedTrigger != null)
@@ -660,6 +717,23 @@ namespace IB2Toolset
             if (prntForm.currentSelectedTrigger != null)
             {
                 Trigger trg = prntForm.currentSelectedTrigger;
+
+                /*
+                     private int vanishInXTurns = 0;
+        private int vanishCounter = 0;
+        private int appearInXTurns = 0;
+        private int appearCounter = 0;
+        private bool changeWalkableStateOnEnabledStateChange = false;
+        //below is likely only needed in toolset
+        private string tagOfPRopToPlaceOnTop = "none";
+        */
+        //wallace
+                vanishInXTurns.Text = trg.VanishInXTurns;
+                //vanishCounter.Text = trg.VanishCounter;
+                appearInXTurns.Text = trg.AppearInXTurns;
+                //appearCounter.Text = trg.AppearCounter;
+                tagOfPRopToPlaceOnTop.Text = trg.TagOfPRopToPlaceOnTop;
+                changeWalkableStateOnEnabledStateChange.Checked = trg.ChangeWalkableStateOnEnabledStateChange;
 
                 chkTrigHidden.Checked = trg.ChkTrigHidden;
                 chkTrigEnableOnFinding.Checked = trg.ChkTrigEnableOnFinding;

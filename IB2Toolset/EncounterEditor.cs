@@ -1460,6 +1460,47 @@ namespace IB2Toolset
                         dst.Y = gridY;
                         newTrigger.TriggerSquaresList.Add(dst);
                         thisEnc.Triggers.Add(newTrigger);
+
+                        //add ptop if tag of prop for trigger defined
+                        //entkrallt
+                        if (newTrigger.TagOfPRopToPlaceOnTop != null && newTrigger.TagOfPRopToPlaceOnTop != "" && newTrigger.TagOfPRopToPlaceOnTop != "None" && newTrigger.TagOfPRopToPlaceOnTop != "none")
+                        {
+                            string selectedProp = newTrigger.TagOfPRopToPlaceOnTop;
+                            le_selectedProp = prntForm.getPropByTag(selectedProp);
+                            if (le_selectedProp.ImageFileName == "blank")
+                            {
+                                return;
+                            }
+                            Prop newProp = new Prop();
+                            newProp = le_selectedProp.DeepCopy();
+                            newProp.PropTag = le_selectedProp.PropTag + "_" + prntForm.mod.nextIdNumber;
+                            newProp.LocationX = gridX;
+                            newProp.LocationY = gridY;
+                            thisEnc.propsList.Add(newProp);
+                            /*
+                             string selectedProp = prntForm.selectedLevelMapPropTag;
+                        prntForm.logText(selectedProp);
+                        prntForm.logText(Environment.NewLine);
+
+                        prntForm.logText("gridx = " + gridX.ToString() + "gridy = " + gridY.ToString());
+                        prntForm.logText(Environment.NewLine);
+
+
+                        // verify that there is no creature, blocked, or PC already on this location
+                        // add to a List<> a new item with the x,y coordinates
+                        if (le_selectedProp.ImageFileName == "blank")
+                        {
+                            return;
+                        }
+                        Prop newProp = new Prop();
+                        newProp = le_selectedProp.DeepCopy();
+                        newProp.PropTag = le_selectedProp.PropTag + "_" + prntForm.mod.nextIdNumber;
+                        newProp.LocationX = gridX;
+                        newProp.LocationY = gridY;
+                        thisEnc.propsList.Add(newProp);
+                        */
+
+                        }
                     }
                     #endregion
                     #region Paint New Trigger Selected
@@ -2212,7 +2253,7 @@ namespace IB2Toolset
                 1465 + SharpDX.RectangleF dst = new SharpDX.RectangleF(cspx, cspy, (int)(sqr * scalerX), (int)(sqr * scalerY));
                 */
 
-                DrawD2DBitmap(GetFromBitmapList(crt.cr_tokenFilename), src, dst, 0, false, 0, 0);
+                            DrawD2DBitmap(GetFromBitmapList(crt.cr_tokenFilename), src, dst, 0, false, 0, 0);
                 //GDI device.DrawImage(crt.creatureIconBitmap, dst, src, GraphicsUnit.Pixel);
                 float scaler = 1.0f;
                 if (sqr == 50) { scaler = 10.0f; }

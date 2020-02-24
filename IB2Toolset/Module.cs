@@ -94,6 +94,14 @@ namespace IB2Toolset
         private int _numberOfPlayerMadePcsAllowed = 1;
         private int _numberOfPlayerMadePcsRequired = 1;
         private int maxPartySize = 6;
+
+        private bool _showType = true;
+        private bool _showHitBy = true;
+        private bool _showRegen = true;
+        private bool _showDeathScript = true;
+        private bool _showAI = true;
+        private bool _showSpells = true;
+
         private string _moduleDescription = "";
         private string _moduleCredits = "<big><b>Lanterna - The Exile</b></big><BR><BR>"
                         + "-Story, coding and some art by <b>slowdive_fan</b><BR><BR>"
@@ -1037,6 +1045,56 @@ namespace IB2Toolset
             get { return _useMinimalisticUI; }
             set { _useMinimalisticUI = value; }
         }
+        /*
+        public bool showType = true;
+        public bool showHitBy = true;
+        public bool showRegen = true;
+        public bool showDeathScript = true;
+        public bool showAI = true;
+        public bool showSpells = true;
+        */
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("Show type of creature on mouse over during encounters")]
+        public bool showType
+        {
+            get { return _showType; }
+            set { _showType = value; }
+        }
+
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("Show hit by info for creature on mouse over during encounters")]
+        public bool showHitBy
+        {
+            get { return _showHitBy; }
+            set { _showHitBy = value; }
+        }
+
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("Show regeneration info for creature on mouse over during encounters")]
+        public bool showRegen
+        {
+            get { return _showRegen; }
+            set { _showRegen = value; }
+        }
+
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("Show death script for creature on mouse over during encounters")]
+        public bool showDeathScript
+        {
+            get { return _showDeathScript; }
+            set { _showDeathScript = value; }
+        }
+
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("Show AI type of creature on mouse over during encounters")]
+        public bool showAI
+        {
+            get { return _showAI; }
+            set { _showAI = value; }
+        }
+
+        [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("Show spells known by creature on mouse over during encounters")]
+        public bool showSpells
+        {
+            get { return _showSpells; }
+            set { _showSpells = value; }
+        }
+
 
         [CategoryAttribute("04 - Fonts and UI"), DescriptionAttribute("This grants manual control over combat camera, even during cretaure moves. Once a pc is damaged or attacked though, the camera focuses on the pc")]
         public bool useManualCombatCam

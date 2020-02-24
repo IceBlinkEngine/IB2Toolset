@@ -59,7 +59,13 @@
             this.txtTrigDisablingTraitTag = new System.Windows.Forms.TextBox();
             this.txtTrigDisablingDC = new System.Windows.Forms.TextBox();
 
-        
+            this.vanishInXTurns = new System.Windows.Forms.TextBox();
+            //this.vanishCounter = new System.Windows.Forms.TextBox();
+            this.appearInXTurns = new System.Windows.Forms.TextBox();
+            //this.appearCounter = new System.Windows.Forms.TextBox();
+            this.tagOfPRopToPlaceOnTop = new System.Windows.Forms.TextBox();
+            this.changeWalkableStateOnEnabledStateChange = new System.Windows.Forms.CheckBox();
+
             //gehäuse
 
             this.labelTrigSystem1 = new System.Windows.Forms.Label();
@@ -72,12 +78,15 @@
             this.labelTrigSystem8 = new System.Windows.Forms.Label();
             this.labelTrigSystem9 = new System.Windows.Forms.Label();
             this.labelTrigSystem10 = new System.Windows.Forms.Label();
+            this.labelVanish = new System.Windows.Forms.Label();
+            this.labelAppear = new System.Windows.Forms.Label();
 
             this.label1 = new System.Windows.Forms.Label();
             this.label1Name = new System.Windows.Forms.Label();
             this.label1Category = new System.Windows.Forms.Label();
             this.label1a = new System.Windows.Forms.Label();
             this.label1b = new System.Windows.Forms.Label();
+            this.labelPropTag = new System.Windows.Forms.Label();
             this.gbE1 = new System.Windows.Forms.GroupBox();
             this.gbE1transition = new System.Windows.Forms.GroupBox();
             this.numE1y = new System.Windows.Forms.NumericUpDown();
@@ -303,6 +312,63 @@
             this.txtTrigFindingDC.TextChanged += new System.EventHandler(this.txtTrigFindingDC_TextChanged);
             //
             //
+            this.vanishInXTurns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+         | System.Windows.Forms.AnchorStyles.Right)));
+            this.vanishInXTurns.Location = new System.Drawing.Point(91, 357);
+            this.vanishInXTurns.Name = "vanishInXTurns";
+            this.vanishInXTurns.Size = new System.Drawing.Size(154, 20);
+            this.vanishInXTurns.TabIndex = 3;
+            this.vanishInXTurns.TextChanged += new System.EventHandler(this.vanishInXTurns_TextChanged);
+            //
+            
+            this.appearInXTurns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+       | System.Windows.Forms.AnchorStyles.Right)));
+            this.appearInXTurns.Location = new System.Drawing.Point(91, 383);
+            this.appearInXTurns.Name = "appearInXTurns";
+            this.appearInXTurns.Size = new System.Drawing.Size(154, 20);
+            this.appearInXTurns.TabIndex = 3;
+            this.appearInXTurns.TextChanged += new System.EventHandler(this.appearInXTurns_TextChanged);
+            
+            //
+            /*
+            this.vanishCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+        | System.Windows.Forms.AnchorStyles.Right)));
+            this.vanishCounter.Location = new System.Drawing.Point(91, 123);
+            this.vanishCounter.Name = "vanishCounter";
+            this.vanishCounter.Size = new System.Drawing.Size(154, 20);
+            this.vanishCounter.TabIndex = 3;
+            this.vanishCounter.TextChanged += new System.EventHandler(this.vanishCounter_TextChanged);
+            */
+            //
+            /*
+            this.appearCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+       | System.Windows.Forms.AnchorStyles.Right)));
+            this.appearCounter.Location = new System.Drawing.Point(91, 123);
+            this.appearCounter.Name = "appearCounter";
+            this.appearCounter.Size = new System.Drawing.Size(154, 20);
+            this.appearCounter.TabIndex = 3;
+            this.appearCounter.TextChanged += new System.EventHandler(this.appearCounter_TextChanged);
+            */
+            //
+            this.tagOfPRopToPlaceOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+              | System.Windows.Forms.AnchorStyles.Right)));
+            this.tagOfPRopToPlaceOnTop.Location = new System.Drawing.Point(71, 125);
+            this.tagOfPRopToPlaceOnTop.Name = "PropTag";
+            this.tagOfPRopToPlaceOnTop.Size = new System.Drawing.Size(174, 20);
+            this.tagOfPRopToPlaceOnTop.TabIndex = 3;
+            this.tagOfPRopToPlaceOnTop.TextChanged += new System.EventHandler(this.tagOfPRopToPlaceOnTop_TextChanged);
+            //
+            this.changeWalkableStateOnEnabledStateChange.AutoSize = true;
+            this.changeWalkableStateOnEnabledStateChange.Location = new System.Drawing.Point(95, 34);
+            this.changeWalkableStateOnEnabledStateChange.Name = "changeWalkableStateOnEnabledStateChange";
+            this.changeWalkableStateOnEnabledStateChange.Size = new System.Drawing.Size(172, 17);
+            this.changeWalkableStateOnEnabledStateChange.TabIndex = 7;
+            this.changeWalkableStateOnEnabledStateChange.Text = "WalkableToggler";
+            this.changeWalkableStateOnEnabledStateChange.UseVisualStyleBackColor = true;
+            this.changeWalkableStateOnEnabledStateChange.CheckedChanged += new System.EventHandler(this.changeWalkableStateOnEnabledStateChange_CheckedChanged);
+
+
+
             //txtTrigSpawningTraitTag
             //
             this.labelTrigSystem3.AutoSize = true;
@@ -441,6 +507,19 @@
             this.labelTrigSystem10.TabIndex = 12;
             this.labelTrigSystem10.Text = "Enable DC:";
             //
+            this.labelVanish.AutoSize = true;
+            this.labelVanish.Location = new System.Drawing.Point(4, 359);
+            this.labelVanish.Name = "labelVanish";
+            this.labelVanish.Size = new System.Drawing.Size(65, 13);
+            this.labelVanish.TabIndex = 12;
+            this.labelVanish.Text = "Vanish in x turns";
+            //
+            this.labelAppear.AutoSize = true;
+            this.labelAppear.Location = new System.Drawing.Point(4, 385);
+            this.labelAppear.Name = "labelAppear";
+            this.labelAppear.Size = new System.Drawing.Size(65, 13);
+            this.labelAppear.TabIndex = 12;
+            this.labelAppear.Text = "Appear in x turns";
             //
             this.txtTrigEnablingDC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
           | System.Windows.Forms.AnchorStyles.Right)));
@@ -507,11 +586,13 @@
             this.gbTrigger.Controls.Add(this.label1Category);
             this.gbTrigger.Controls.Add(this.label1a);
             this.gbTrigger.Controls.Add(this.label1b);
+            this.gbTrigger.Controls.Add(this.labelPropTag);
             this.gbTrigger.Controls.Add(this.txtTrigTag);
             this.gbTrigger.Controls.Add(this.txtTrigName);
             this.gbTrigger.Controls.Add(this.txtTrigCategory);
             this.gbTrigger.Controls.Add(this.txtTrigBumpTrigDir);
             this.gbTrigger.Controls.Add(this.txtTrigMouseOverText);
+            this.gbTrigger.Controls.Add(this.tagOfPRopToPlaceOnTop);
             this.gbTrigger.Controls.Add(this.chkTrigOnce);
             this.gbTrigger.Controls.Add(this.chkTrigActiveSearch);
             this.gbTrigger.Controls.Add(this.chkTrigConnectedDiscovery);
@@ -519,7 +600,7 @@
             this.gbTrigger.Location = new System.Drawing.Point(3, 3);
             this.gbTrigger.Name = "gbTrigger";
             //this.gbTrigger.Size = new System.Drawing.Size(257, 158);
-            this.gbTrigger.Size = new System.Drawing.Size(257, 500);
+            this.gbTrigger.Size = new System.Drawing.Size(257, 574);
             this.gbTrigger.TabIndex = 4;
             this.gbTrigger.TabStop = false;
             this.gbTrigger.Text = "TRIGGER PROPERTIES";
@@ -548,6 +629,8 @@
             this.gbCombatOnly.Controls.Add(this.labelTrigSystem8);
             this.gbCombatOnly.Controls.Add(this.labelTrigSystem9);
             this.gbCombatOnly.Controls.Add(this.labelTrigSystem10);
+            this.gbCombatOnly.Controls.Add(this.labelVanish);
+            this.gbCombatOnly.Controls.Add(this.labelAppear);
 
             this.gbCombatOnly.Controls.Add(this.chkTrigHidden);
             this.gbCombatOnly.Controls.Add(this.txtTrigFindingTraitTag);
@@ -561,6 +644,13 @@
             this.gbCombatOnly.Controls.Add(this.txtTrigEnablingTraitTag);
             this.gbCombatOnly.Controls.Add(this.txtTrigEnablingDC);
             this.gbCombatOnly.Controls.Add(this.chkTrigEnableOnFinding);
+
+            this.gbCombatOnly.Controls.Add(this.vanishInXTurns);
+            //this.gbCombatOnly.Controls.Add(this.vanishCounter);
+            this.gbCombatOnly.Controls.Add(this.appearInXTurns);
+            //this.gbCombatOnly.Controls.Add(this.appearCounter);
+            this.gbCombatOnly.Controls.Add(this.changeWalkableStateOnEnabledStateChange);
+
             //
             //
 
@@ -580,9 +670,9 @@
               */
             //
             //
-            this.gbCombatOnly.Location = new System.Drawing.Point(6, 132);
+            this.gbCombatOnly.Location = new System.Drawing.Point(6, 154);
             this.gbCombatOnly.Name = "gbCombatOnly";
-            this.gbCombatOnly.Size = new System.Drawing.Size(245, 358);
+            this.gbCombatOnly.Size = new System.Drawing.Size(245, 432);
             this.gbCombatOnly.TabIndex = 5;
             this.gbCombatOnly.TabStop = false;
             this.gbCombatOnly.Text = "Combat Only Settings";
@@ -591,7 +681,7 @@
             // label27  
             //   
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(52, 58);
+            this.label27.Location = new System.Drawing.Point(52, 64);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(159, 13);
             this.label27.TabIndex = 10;
@@ -600,7 +690,7 @@
             // label26  
             //   
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(50, 44);
+            this.label26.Location = new System.Drawing.Point(50, 50);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(182, 13);
             this.label26.TabIndex = 9;
@@ -609,7 +699,7 @@
             // numTriggerCallsAllowed  
             //   
             this.numTriggerCallsAllowed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numTriggerCallsAllowed.Location = new System.Drawing.Point(6, 46);
+            this.numTriggerCallsAllowed.Location = new System.Drawing.Point(6, 50);
             this.numTriggerCallsAllowed.Maximum = new decimal(new int[] {
              1000,
              0,
@@ -628,7 +718,7 @@
                         // chkTriggeredByCreatures  
                         //   
             this.chkTriggeredByCreatures.AutoSize = true;
-            this.chkTriggeredByCreatures.Location = new System.Drawing.Point(6, 29);
+            this.chkTriggeredByCreatures.Location = new System.Drawing.Point(6, 34);
             this.chkTriggeredByCreatures.Name = "chkTriggeredByCreatures";
             this.chkTriggeredByCreatures.Size = new System.Drawing.Size(172, 17);
             this.chkTriggeredByCreatures.TabIndex = 7;
@@ -639,7 +729,7 @@
             //chkEncounterTriggerOnEveryStep
             //   
             this.chkEncounterTriggerOnEveryStep.AutoSize = true;
-            this.chkEncounterTriggerOnEveryStep.Location = new System.Drawing.Point(70, 13);
+            this.chkEncounterTriggerOnEveryStep.Location = new System.Drawing.Point(70, 16);
             this.chkEncounterTriggerOnEveryStep.Name = "chkEncounterTriggerOnEveryStep";
             this.chkEncounterTriggerOnEveryStep.Size = new System.Drawing.Size(172, 17);
             this.chkEncounterTriggerOnEveryStep.TabIndex = 7;
@@ -650,7 +740,7 @@
             // chkTriggeredByPc  
             //   
             this.chkTriggeredByPc.AutoSize = true;
-            this.chkTriggeredByPc.Location = new System.Drawing.Point(6, 13);
+            this.chkTriggeredByPc.Location = new System.Drawing.Point(6, 16);
             this.chkTriggeredByPc.Name = "chkTriggeredByPc";
             this.chkTriggeredByPc.Size = new System.Drawing.Size(146, 17);
             this.chkTriggeredByPc.TabIndex = 6;
@@ -697,6 +787,14 @@
             this.label1b.Size = new System.Drawing.Size(65, 13);
             this.label1b.TabIndex = 12;
             this.label1b.Text = "Text:";
+            //
+            this.labelPropTag.AutoSize = true;
+            this.labelPropTag.Location = new System.Drawing.Point(4, 128);
+            this.labelPropTag.Name = "labelPropTag";
+            this.labelPropTag.Size = new System.Drawing.Size(65, 13);
+            this.labelPropTag.TabIndex = 12;
+            this.labelPropTag.Text = "Prop tag:";
+
             // gbE1
             //gehäuse 
             //must start deeper
@@ -712,7 +810,7 @@
             this.gbE1.Controls.Add(this.chkE1once);
             this.gbE1.Controls.Add(this.chkE1enabled);
             //this.gbE1.Location = new System.Drawing.Point(3, 164);
-            this.gbE1.Location = new System.Drawing.Point(3, 506);
+            this.gbE1.Location = new System.Drawing.Point(3, 580);
             this.gbE1.Name = "gbE1";
             this.gbE1.Size = new System.Drawing.Size(257, 208);
             this.gbE1.TabIndex = 4;
@@ -964,7 +1062,7 @@
             this.gbE2.Controls.Add(this.chkE2once);
             this.gbE2.Controls.Add(this.e2GcTrue);
             this.gbE2.Controls.Add(this.chkE2enabled);
-            this.gbE2.Location = new System.Drawing.Point(3, 706);
+            this.gbE2.Location = new System.Drawing.Point(3, 780);
             this.gbE2.Name = "gbE2";
             this.gbE2.Size = new System.Drawing.Size(257, 208);
             this.gbE2.TabIndex = 5;
@@ -1238,7 +1336,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtxtScript.BackColor = System.Drawing.Color.White;
-            this.rtxtScript.Location = new System.Drawing.Point(3, 1129);
+            this.rtxtScript.Location = new System.Drawing.Point(3, 1203);
             this.rtxtScript.Name = "rtxtScript";
             this.rtxtScript.ReadOnly = true;
             this.rtxtScript.Size = new System.Drawing.Size(257, 22);
@@ -1258,7 +1356,7 @@
             this.gbE3.Controls.Add(this.chkE3once);
             this.gbE3.Controls.Add(this.e3GcTrue);
             this.gbE3.Controls.Add(this.chkE3enabled);
-            this.gbE3.Location = new System.Drawing.Point(3, 917);
+            this.gbE3.Location = new System.Drawing.Point(3, 991);
             this.gbE3.Name = "gbE3";
             this.gbE3.Size = new System.Drawing.Size(257, 208);
             this.gbE3.TabIndex = 6;
@@ -1566,6 +1664,22 @@
         private System.Windows.Forms.TextBox txtTrigBumpTrigDir;
         private System.Windows.Forms.TextBox txtTrigMouseOverText;
 
+        /*
+               private int vanishInXTurns = 0;
+  private int vanishCounter = 0;
+  private int appearInXTurns = 0;
+  private int appearCounter = 0;
+  private bool changeWalkableStateOnEnabledStateChange = false;
+  //below is likely only needed in toolset
+  private string tagOfPRopToPlaceOnTop = "none";
+  */
+        private System.Windows.Forms.TextBox vanishInXTurns;
+        //private System.Windows.Forms.TextBox vanishCounter;
+        private System.Windows.Forms.TextBox appearInXTurns;
+        //private System.Windows.Forms.TextBox appearCounter;
+        private System.Windows.Forms.TextBox tagOfPRopToPlaceOnTop;
+        private System.Windows.Forms.CheckBox changeWalkableStateOnEnabledStateChange;
+
         private System.Windows.Forms.CheckBox chkTrigHidden;
         private System.Windows.Forms.TextBox txtTrigFindingTraitTag;
         private System.Windows.Forms.TextBox txtTrigFindingDC;
@@ -1590,6 +1704,8 @@
         private System.Windows.Forms.Label labelTrigSystem8;
         private System.Windows.Forms.Label labelTrigSystem9;
         private System.Windows.Forms.Label labelTrigSystem10;
+        private System.Windows.Forms.Label labelVanish;
+        private System.Windows.Forms.Label labelAppear;
 
 
         private System.Windows.Forms.GroupBox gbTrigger;
@@ -1598,6 +1714,7 @@
         private System.Windows.Forms.Label label1Category;
         private System.Windows.Forms.Label label1a;
         private System.Windows.Forms.Label label1b;
+        private System.Windows.Forms.Label labelPropTag;
         private System.Windows.Forms.GroupBox gbE1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkE1once;
