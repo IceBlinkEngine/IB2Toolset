@@ -24,9 +24,9 @@ namespace IB2Toolset
 
 
         private string vanishInXTurns = "";
-        private string vanishCounter = "";
+        private int vanishCounter = 0;
         private string appearInXTurns = "";
-        private string appearCounter = "";
+        private int appearCounter = 0;
         private bool changeWalkableStateOnEnabledStateChange = false;
         //below is likely only needed in toolset
         private string tagOfPRopToPlaceOnTop = "none";
@@ -191,12 +191,14 @@ namespace IB2Toolset
             set { vanishInXTurns = value; }
         }
 
+        /*
         [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
         public string VanishCounter
         {
             get { return vanishCounter; }
             set { vanishCounter = value; }
         }
+        */
 
         [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
         public string AppearInXTurns
@@ -205,12 +207,14 @@ namespace IB2Toolset
             set { appearInXTurns = value; }
         }
 
+        /*
         [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
         public string AppearCounter
         {
             get { return appearCounter; }
             set { appearCounter = value; }
         }
+        */
 
         [CategoryAttribute("0 - Main"), DescriptionAttribute("none, fromEast, fromSouth, fromWest, fromNorth")]
         public bool ChangeWalkableStateOnEnabledStateChange
