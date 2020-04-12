@@ -55,6 +55,10 @@ namespace IB2Toolset
         private int _numberOfMentalAtttributesBelowBaseAllowed = 2;
         private int _numberOfPhysicalAtttributesBelowBaseAllowed = 2;
 
+        private bool _heightBlocksSight = true;
+        private bool _allEffectsUseFullSizeIcons = false;
+        //_thisEffectUsesFullSizeIcon
+
         private bool _playFootstepSound = true;
         private float _nightTimeDarkness = 0.65f;
         private string _tagOfStealthMainTrait = "shadow";
@@ -297,6 +301,19 @@ namespace IB2Toolset
             set { _playFootstepSound = value; }
         }
 
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("If true, all tiles block sight that are higher than the tile the party is currnetly on. Note: this overrides all manual LoS settings, these get lost when you turn this setting to true. Best set to false for already existing modules that were build without this setting in mind.")]
+        public bool heightBlocksSight
+        {
+            get { return _heightBlocksSight; }
+            set { _heightBlocksSight = value; }
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("If true, all effect icons are drawn at full suare size on top of actors.")]
+        public bool allEffectsUseFullSizeIcons
+        {
+            get { return _allEffectsUseFullSizeIcons; }
+            set { _allEffectsUseFullSizeIcons = value; }
+        }
         [CategoryAttribute("01 - Main"), DescriptionAttribute("When set to true, the engine allows for chance that the party or the enemy in an encounter starts flat-footed in the first round of combat, skipping that round. The chances are based on stealth and spotEnemy trait tag rolls using the corresponding DC values of props (or encounters themselves if a an encounter is not carried by a prop with own values).")]
         public bool useFlatFootedSystem
         {

@@ -74,6 +74,8 @@
   "scrollingSpeed": 4.0,
   "nightTimeDarknessOpacity": 0.6,
   "playFootstepSound": true,
+  "heightBlocksSight": true,
+  "allEffectsUseFullSizeIcons": false,
   "useFlatFootedSystem": true,
   "tagOfStealthMainTrait": "shadow",
   "tagOfMovementSpeedTrait": "traveller",

@@ -16,6 +16,9 @@ namespace IB2Toolset
     {
         #region Fields
 
+
+        private bool _thisEffectUsesFullSizeIcon = false;
+
         private string _squareIndicatorFilename = "fx_webbed";
         private int _durationOnSquareInUnits = 0;
         private string _name = "newEffect";
@@ -138,6 +141,20 @@ namespace IB2Toolset
             set
             {
                 _name = value;
+            }
+        }
+
+        //private bool _thisEffectUsesFullSizeIcon = false;
+        [CategoryAttribute("00 - Main"), DescriptionAttribute("This effect's icon is always ddrawn full size on top of an actor.")]
+        public bool thisEffectUsesFullSizeIcon
+        {
+            get
+            {
+                return _thisEffectUsesFullSizeIcon;
+            }
+            set
+            {
+                _thisEffectUsesFullSizeIcon = value;
             }
         }
 
