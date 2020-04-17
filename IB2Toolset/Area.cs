@@ -15,6 +15,10 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private string _fillLayer4WithThisTile = "none";
+        private string _traitTagForClearingOvergrowth = "none";
+        private int _overgrowthStrength = 0;
+
         private bool _isOverViewMap = false;
 
         private bool _overviewOwnZoneMapExists = false;
@@ -471,6 +475,33 @@ namespace IB2Toolset
         {
             get { return _noFlicker; }
             set { _noFlicker = value; }
+        }
+
+        /*
+        private string _fillLayer4WithThisTile = "none";
+        private string _traitTagForClearingOvergrowth = "none";
+        private int _overgrowthStrength = 0;
+        */
+
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Fielname of the tile to fill the layer 4 of a whole area with; not vivisble in toolset, but cretaed runtime during gameplay; a quicker alternatvie to manually placing layer 4 tiles, this overrides all entries for level 4 tiles on this area.")]
+        public string fillLayer4WithThisTile
+        {
+            get { return _fillLayer4WithThisTile; }
+            set { _fillLayer4WithThisTile = value; }
+        }
+
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Tag of the trait responsible for making the overgrowth tiles in layer 4 more transparent; always uses party leader.")]
+        public string traitTagForClearingOvergrowth
+        {
+            get { return _traitTagForClearingOvergrowth; }
+            set { _traitTagForClearingOvergrowth = value; }
+        }
+
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("The higher this value, the more opaque the overgrowth in layer 4 stays; it's a static comparison between the leader's trait with the tag for clearing and this value.")]
+        public int overgrowthStrength
+        {
+            get { return _overgrowthStrength; }
+            set { _overgrowthStrength = value; }
         }
 
         [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Light related - true: Lights on this map do not dance, ie the shadows and lit areas only move when the party moves or a prop that is also a light source moves.")]

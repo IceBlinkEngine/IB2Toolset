@@ -205,7 +205,7 @@
             this.radioButton5.Size = new System.Drawing.Size(60, 17);
             this.radioButton5.TabIndex = 8;
             this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Layer 5";
+            this.radioButton5.Text = "OnTop";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // radioButton4
@@ -216,7 +216,7 @@
             this.radioButton4.Size = new System.Drawing.Size(60, 17);
             this.radioButton4.TabIndex = 7;
             this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Layer 4";
+            this.radioButton4.Text = "Overgrowth";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton3
@@ -274,7 +274,7 @@
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(61, 17);
             this.checkBox5.TabIndex = 6;
-            this.checkBox5.Text = "Layer 5";
+            this.checkBox5.Text = "OnTop";
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
@@ -285,7 +285,7 @@
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(61, 17);
             this.checkBox4.TabIndex = 5;
-            this.checkBox4.Text = "Layer 4";
+            this.checkBox4.Text = "Overgrowth";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
@@ -1335,7 +1335,7 @@
             this.radioButton5.Size = new System.Drawing.Size(60, 17);
             this.radioButton5.TabIndex = 8;
             this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Layer 5";
+            this.radioButton5.Text = "OnTop";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // radioButton4
@@ -1346,7 +1346,7 @@
             this.radioButton4.Size = new System.Drawing.Size(60, 17);
             this.radioButton4.TabIndex = 7;
             this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Layer 4";
+            this.radioButton4.Text = "Overgrowth";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton3
@@ -1404,7 +1404,7 @@
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(61, 17);
             this.checkBox5.TabIndex = 6;
-            this.checkBox5.Text = "Layer 5";
+            this.checkBox5.Text = "OnTop";
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
@@ -1415,7 +1415,7 @@
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(61, 17);
             this.checkBox4.TabIndex = 5;
-            this.checkBox4.Text = "Layer 4";
+            this.checkBox4.Text = "Overgrowth";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
