@@ -15,6 +15,7 @@ namespace IB2Toolset
     {
         #region Fields
 
+        private bool _useSimpleDarkness = false;
         private string _fillLayer4WithThisTile = "none";
         private string _traitTagForClearingOvergrowth = "none";
         private int _overgrowthStrength = 0;
@@ -483,7 +484,15 @@ namespace IB2Toolset
         private int _overgrowthStrength = 0;
         */
 
-        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Fielname of the tile to fill the layer 4 of a whole area with; not vivisble in toolset, but cretaed runtime during gameplay; a quicker alternatvie to manually placing layer 4 tiles, this overrides all entries for level 4 tiles on this area.")]
+        //_useSimpleDarkness
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("If set to true, this is a pitch black area, using the simple light model. This fills layer 4 with a black tile, overriding anything else set for it. No day and night cycle here.")]
+        public bool useSimpleDarkness
+        {
+            get { return _useSimpleDarkness; }
+            set { _useSimpleDarkness = value; }
+        }
+
+        [CategoryAttribute("04 - Light and visibility"), DescriptionAttribute("Filename of the tile to fill the layer 4 of a whole area with; not visible in toolset, but cretaed runtime during gameplay; a quicker alternatvie to manually placing layer 4 tiles, this overrides all entries for level 4 tiles on this area.")]
         public string fillLayer4WithThisTile
         {
             get { return _fillLayer4WithThisTile; }

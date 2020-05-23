@@ -38,6 +38,9 @@ namespace IB2Toolset
 
         public int currentlySelectedWayPointIndex = 0;
 
+        //todo
+        private bool _useLayers4And5AsNormalLayers = false;
+
         private int _overrideVisibilityRange = 2;
         private bool _useScrollingSystem = true;
         private float _scrollingSpeed = 4f;//default 4f, lower is faster
@@ -266,6 +269,15 @@ namespace IB2Toolset
         //private float _scrollingSpeed = 4f;//default 4f, lower is faster
 
         //private int overrideVisibilityRange = 2;
+        //private bool _useLayers4And5AsNormalLayers = false;
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("If set to true, the layers for overgrowth(4) and the dynamic layer for objects above party(5) just act as normal layers, like layer 1 to 3, ie always drawn underneath the party.")]
+        public bool useLayers4And5AsNormalLayers
+        {
+            get { return _useLayers4And5AsNormalLayers; }
+            set { _useLayers4And5AsNormalLayers = value; }
+        }
+
+
         [CategoryAttribute("01 - Main"), DescriptionAttribute("This overrides the visibilty settings of the individual areas, unless you set it to -1. 2 is a good value for campaigns with smaller maps, 3 for larger maps.")]
         public int overrideVisibilityRange
         {

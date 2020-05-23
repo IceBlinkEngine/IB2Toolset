@@ -69,6 +69,7 @@
   "attackFromBehindToHitModifier": 2,
   "attackFromBehindDamageModifier": 0,
   "moduleName": "temp01",
+  "useLayers4And5AsNormalLayers": false,
   "overrideVisibilityRange": 2,
   "useScrollingSystem": true,
   "scrollingSpeed": 4.0,
