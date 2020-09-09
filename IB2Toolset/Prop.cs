@@ -19,6 +19,9 @@ namespace IB2Toolset
         [JsonIgnore]
         public Bitmap propBitmap;
 
+
+        private int _lightRadius = 4;
+        public string _lightColor = "yellow";
         private bool _isPureBreakableProp = false;
         private string _requiredItemInInventory = "none"; //like eg pick axes of varying qualities
         private string _breakableTraitTag = "none";
@@ -1758,12 +1761,31 @@ namespace IB2Toolset
         }
         */
 
-        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("Light related - true = is 2 square radius light of yellowish color, flickering and position shifting, ie think torch like")]
+        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("Light related - true = is light of lightRadius and lightColor in this section, also works for movers; for a halo chosse the appropriate light image as prop graphic")]
         public bool isLight
         {
             get { return _isLight; }
             set { _isLight = value; }
         }
+
+        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("Light related - any value between 1 and 4, light radius in squares around center")]
+        public int lightRadius
+        {
+            get { return _lightRadius; }
+            set { _lightRadius = value; }
+        }
+
+        [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("Light related - subtle color of the light on all sqaures within its radius (and in line of sight of light): yellow, orange, red, blue, green, purple")]
+        public string lightColor
+        {
+            get { return _lightColor; }
+            set { _lightColor = value; }
+        }
+
+        //private int _lightRadius = 4;
+        //public string _lightColor = "yellow";
+
+
         [CategoryAttribute("08 - Project Living World"), DescriptionAttribute("Light related - true = draws the color of the light and its intense glow, False = colorless light with no glow, ideal for extending light range of other light sources, just place two squares away from them and light up large areas")]
         public bool hasHalo
         {
