@@ -152,7 +152,7 @@ namespace IB2Toolset
             createTilePrefixFilterList();
 
             //fill all lists
-            DropdownStringLists.aiTypeStringList = new List<string> { "BasicAttacker", "GeneralCaster","bloodHunter","mindHunter","softTargetHunter"};
+            DropdownStringLists.aiTypeStringList = new List<string> { "BasicAttacker", "GeneralCaster","bloodHunter","mindHunter","softTargetHunter","ScriptedAttacker"};
             DropdownStringLists.damageTypeStringList = new List<string> { "Normal", "Acid", "Cold", "Electricity", "Fire", "Magic", "Poison" };
             DropdownStringLists.itemTypeStringList = new List<string> { "Head", "Neck", "Armor", "Ranged", "Melee", "General", "Ring", "Shield", "Feet", "Ammo", "Gloves" };
             DropdownStringLists.useableWhenStringList = new List<string> { "InCombat", "OutOfCombat", "Always", "Passive" };
