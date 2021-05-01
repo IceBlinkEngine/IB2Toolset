@@ -51,6 +51,7 @@ namespace IB2Toolset
         private int _charges = 0; //useful for items like wands
         private string _ammoType = "none";
         private bool _twoHanded = false; //requires the use of two hands
+        private bool _isLightWeapon = false; //true if it is a light weapon
         private bool _canNotBeUnequipped = false; //set to true for cursed items or summon creature items
         private bool _onlyUseableWhenEquipped = false;
         private bool _endTurnAfterEquipping = true;
@@ -469,7 +470,20 @@ namespace IB2Toolset
                 _twoHanded = value;
             }
         }
-        
+
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("MELEE: True if item is a light weapon. Used for two-weapon fighting modifiers.")]
+        public bool isLightWeapon
+        {
+            get
+            {
+                return _isLightWeapon;
+            }
+            set
+            {
+                _isLightWeapon = value;
+            }
+        }
+
         [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("When true, equipping such item in combat immediately ends the current player character's turn.")]
         public bool endTurnAfterEquipping
         {
