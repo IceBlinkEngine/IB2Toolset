@@ -53,6 +53,7 @@ namespace IB2Toolset
         private bool _twoHanded = false; //requires the use of two hands
         private int _threatRange = 20;
         private int _criticalMultiplier = 2;
+        private bool _isLightWeapon = false; //true if it is a light weapon
         private bool _canNotBeUnequipped = false; //set to true for cursed items or summon creature items
         private bool _onlyUseableWhenEquipped = false;
         private bool _endTurnAfterEquipping = true;
@@ -494,6 +495,18 @@ namespace IB2Toolset
             set
             {
                 _criticalMultiplier = value;
+            }
+        {
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("MELEE: True if item is a light weapon. Used for two-weapon fighting modifiers.")]
+        public bool isLightWeapon
+        {
+            get
+            {
+                return _isLightWeapon;
+            }
+            set
+            {
+                _isLightWeapon = value;
             }
         }
 
