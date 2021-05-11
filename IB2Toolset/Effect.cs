@@ -122,6 +122,8 @@ namespace IB2Toolset
         private bool _useEvasion = false; //if true, do half damage on failed DC check and no damage with successful DC check against spells/traits   
         private int _modifyShopBuyBackPrice = 0;  
         private int _modifyShopSellPrice = 0;
+        private int _twoWeaponFightingMainHandModifier = 0;
+        private int _twoWeaponFightingOffHandModifier = 0;
 
         private bool _allowCastingWithoutTriggeringAoO = false;
         private bool _allowCastingWithoutRiskOfInterruption = false;
@@ -341,6 +343,18 @@ namespace IB2Toolset
         {
             get { return _babModifierForMeleeAttack; }
             set { _babModifierForMeleeAttack = value; }
+        }
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("grants a bonus to the main hand when using two weapon fighting. Example: set to 2 for two-weapon fighting L1 and 4 for two-weapon fighting L2")]
+        public int twoWeaponFightingMainHandModifier
+        {
+            get { return _twoWeaponFightingMainHandModifier; }
+            set { _twoWeaponFightingMainHandModifier = value; }
+        }
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("grants a bonus to the off-hand when using two weapon fighting. Example: set to 6 for two-weapon fighting L1 and 8 for two-weapon fighting L2")]
+        public int twoWeaponFightingOffHandModifier
+        {
+            get { return _twoWeaponFightingOffHandModifier; }
+            set { _twoWeaponFightingOffHandModifier = value; }
         }
         [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from damage for melee attacks")]  
         public int damageModifierForMeleeAttack
