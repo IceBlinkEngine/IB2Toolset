@@ -68,6 +68,8 @@ namespace IB2Toolset
         private string _spriteEndingFilename = "none"; //sprite to use for end effect of projectiles
         private string _attackSound = "none";
         private int _numberOfAttacks = 1;
+        private int _threatRange = 20;
+        private int _criticalMultiplier = 2;
         private string _ai = "BasicAttacker";
         //private AiBasicTactic cr_ai = AiBasicTactic.BasicAttacker;
         private int _fortitude = 0;
@@ -342,6 +344,20 @@ namespace IB2Toolset
         {
             get { return this._numberOfAttacks; }
             set { this._numberOfAttacks = value; }
+        }
+        
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Enter the threat range for a critical hit roll. 18 means a roll of 18+ is a critical hit.")]
+        public int threatRange
+        {
+            get { return this._threatRange; }
+            set { this._threatRange = value; }
+        }
+
+        [CategoryAttribute("02 - Attack/Defend"), DescriptionAttribute("Enter the critical damage multiplier when a critical hit is made. 2 means that the damage is double and 3 is three times the damage, etc.")]
+        public int criticalMultiplier
+        {
+            get { return this._criticalMultiplier; }
+            set { this._criticalMultiplier = value; }
         }
         //[CategoryAttribute("07 - Scripts"), DescriptionAttribute("fires when the creature makes a successful hit on a target")]
         //[Editor(typeof(ScriptSelectEditor), typeof(System.Drawing.Design.UITypeEditor))]
