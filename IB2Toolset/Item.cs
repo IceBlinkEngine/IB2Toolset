@@ -51,6 +51,8 @@ namespace IB2Toolset
         private int _charges = 0; //useful for items like wands
         private string _ammoType = "none";
         private bool _twoHanded = false; //requires the use of two hands
+        private int _threatRange = 20;
+        private int _criticalMultiplier = 2;
         private bool _isLightWeapon = false; //true if it is a light weapon
         private bool _canNotBeUnequipped = false; //set to true for cursed items or summon creature items
         private bool _onlyUseableWhenEquipped = false;
@@ -471,6 +473,30 @@ namespace IB2Toolset
             }
         }
 
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("Enter the threat range for a critical hit roll. 18 means a roll of 18+ is successful.")]
+        public int threatRange
+        {
+            get
+            {
+                return _threatRange;
+            }
+            set
+            {
+                _threatRange = value;
+            }
+        }
+        [CategoryAttribute("08 - Attack and Damage"), DescriptionAttribute("Enter the critical damage multiplier for a successful critical hit. 2 means that the damage is double and 3 is three times the damage, etc.")]
+        public int criticalMultiplier
+        {
+            get
+            {
+                return _criticalMultiplier;
+            }
+            set
+            {
+                _criticalMultiplier = value;
+            }
+        {
         [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("MELEE: True if item is a light weapon. Used for two-weapon fighting modifiers.")]
         public bool isLightWeapon
         {
