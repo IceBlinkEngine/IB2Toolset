@@ -496,7 +496,7 @@ namespace IB2Toolset
             {
                 _criticalMultiplier = value;
             }
-        {
+        }
         [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("MELEE: True if item is a light weapon. Used for two-weapon fighting modifiers.")]
         public bool isLightWeapon
         {
