@@ -109,6 +109,12 @@ namespace IB2Toolset
                 numHealActionD.Value = ef.healActionsEveryNLevels;
                 numHealActionE.Value = ef.healActionsAfterLevelN;
                 numHealActionF.Value = ef.healActionsUpToNLevelsTotal;
+                numTranActionA.Value = ef.transferNumOfDice;
+                numTranActionB.Value = ef.transferDie;
+                numTranActionC.Value = ef.transferAdder;
+                numTranActionD.Value = ef.transferActionsEveryNLevels;
+                numTranActionE.Value = ef.transferActionsAfterLevelN;
+                numTranActionF.Value = ef.transferActionsUpToNLevelsTotal;
             }
         }
 
@@ -226,6 +232,55 @@ namespace IB2Toolset
             {
                 prntForm.effectsList[lbxEffects.SelectedIndex].healActionsUpToNLevelsTotal = (int)numHealActionF.Value;
             }
+        }
+
+        //Transfer Action
+        private void numTranActionA_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].transferNumOfDice = (int)numTranActionA.Value;
+            }
+        }
+        private void numTranActionB_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].transferDie = (int)numTranActionB.Value;
+            }
+        }
+        private void numTranActionC_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].transferAdder = (int)numTranActionC.Value;
+            }
+        }
+        private void numTranActionD_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].transferActionsEveryNLevels = (int)numTranActionD.Value;
+            }
+        }
+        private void numTranActionE_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].transferActionsAfterLevelN = (int)numTranActionE.Value;
+            }
+        }
+        private void numTranActionF_ValueChanged(object sender, EventArgs e)
+        {
+            if ((lbxEffects.SelectedIndex >= 0) && (prntForm.effectsList != null))
+            {
+                prntForm.effectsList[lbxEffects.SelectedIndex].transferActionsUpToNLevelsTotal = (int)numTranActionF.Value;
+            }
+        }
+
+        private void EffectEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            prntForm.refreshDropDownLists();
         }
     }
 }

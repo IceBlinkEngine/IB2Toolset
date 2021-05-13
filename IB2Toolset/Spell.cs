@@ -85,6 +85,8 @@ namespace IB2Toolset
         private string _spellEndSound = "none";
         private int _costSP = 0;
         private int _costHP = 0;
+        private bool _requiresHit = false;
+
         private string _spellTargetType = "Enemy";
         //private TargetType spellTargetType = TargetType.Enemy;
         private string _spellEffectType = "Damage";
@@ -299,6 +301,18 @@ namespace IB2Toolset
             set
             {
                 _costHP = value;
+            }
+        }
+        [CategoryAttribute("02 - Target"), DescriptionAttribute("Does this spell require a successful hit roll? The to hit roll is always based on dexterity just like ranged attacks.")]
+        public bool requiresHit
+        {
+            get
+            {
+                return _requiresHit;
+            }
+            set
+            {
+                _requiresHit = value;
             }
         }
         /*
