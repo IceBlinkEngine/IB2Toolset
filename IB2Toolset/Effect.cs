@@ -80,6 +80,17 @@ namespace IB2Toolset
         private int _healActionsAfterLevelN = 0; //(E)
         private int _healActionsUpToNLevelsTotal = 0; //(F)
 
+        //TRANSFER (hp/sp)
+        private bool _doTransfer = false;
+        private bool _transferHP = true; //if true, heals HP. If false, heals SP
+        //(for reference) HealActions: AdB+C for every D levels after level E up to F levels total
+        private int _transferNumOfDice = 0; //(A)how many dice to roll
+        private int _transferDie = 0; //(B)type of die to roll such as 4 sided or 10 sided, etc.
+        private int _transferAdder = 0; //(C)integer adder to total damage such as the "1" in 2d4+1
+        private int _transferActionsEveryNLevels = 0; //(D)
+        private int _transferActionsAfterLevelN = 0; //(E)
+        private int _transferActionsUpToNLevelsTotal = 0; //(F)
+
         //BUFF and DEBUFF
         private bool _doBuff = false;
         private bool _doDeBuff = false;
@@ -618,6 +629,58 @@ namespace IB2Toolset
             get { return _healActionsUpToNLevelsTotal; }
             set { _healActionsUpToNLevelsTotal = value; }
         }
+
+        [CategoryAttribute("02 - Transfer"), DescriptionAttribute("set to true if this Effect uses a Transfer type Effect")]
+        public bool doTransfer
+        {
+            get { return _doTransfer; }
+            set { _doTransfer = value; }
+        }
+        [CategoryAttribute("02 - Transfer"), DescriptionAttribute("set to true if this Effect will transfer HPs, set to fasle to 'transfer' SP instead (think rejuvenation type spells to recoupe SP).")]
+        public bool transferHP
+        {
+            get { return _transferHP; }
+            set { _transferHP = value; }
+        }
+        [CategoryAttribute("02 - Transfer"), DescriptionAttribute("(A) [transferActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        public int transferNumOfDice
+        {
+            get { return _transferNumOfDice; }
+            set { _transferNumOfDice = value; }
+        }
+        [CategoryAttribute("02 - Transfer"), DescriptionAttribute("(B) [transferActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        public int transferDie
+        {
+            get { return _transferDie; }
+            set { _transferDie = value; }
+        }
+        [CategoryAttribute("02 - Transfer"), DescriptionAttribute("(C) [transferActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        public int transferAdder
+        {
+            get { return _transferAdder; }
+            set { _transferAdder = value; }
+        }
+        [CategoryAttribute("02 - Transfer"), DescriptionAttribute("(D) [transferActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        public int transferActionsEveryNLevels
+        {
+            get { return _transferActionsEveryNLevels; }
+            set { _transferActionsEveryNLevels = value; }
+        }
+        [CategoryAttribute("02 - Transfer"), DescriptionAttribute("(E) [transferActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        public int transferActionsAfterLevelN
+        {
+            get { return _transferActionsAfterLevelN; }
+            set { _transferActionsAfterLevelN = value; }
+        }
+        [CategoryAttribute("02 - Transfer"), DescriptionAttribute("(F) [transferActions: AdB+C for every D levels after level E up to F levels total]"), ReadOnly(true), Browsable(false)]
+        public int transferActionsUpToNLevelsTotal
+        {
+            get { return _transferActionsUpToNLevelsTotal; }
+            set { _transferActionsUpToNLevelsTotal = value; }
+        }
+
+
+
         [CategoryAttribute("00 - Main"), DescriptionAttribute("set to true if this Effect uses a Buff (excluding heal) type Effect. Note: with duration 0 a buff lasts til start of next turn of the recipient")]
         public bool doBuff
         {

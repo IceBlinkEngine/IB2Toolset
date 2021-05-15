@@ -54,6 +54,7 @@ namespace IB2Toolset
         private int _threatRange = 20;
         private int _criticalMultiplier = 2;
         private bool _isLightWeapon = false; //true if it is a light weapon
+        private bool _isFinesseWeapon = false; //if true, use dex modifier for attack roll, else use strength modifier
         private bool _canNotBeUnequipped = false; //set to true for cursed items or summon creature items
         private bool _onlyUseableWhenEquipped = false;
         private bool _endTurnAfterEquipping = true;
@@ -509,7 +510,18 @@ namespace IB2Toolset
                 _isLightWeapon = value;
             }
         }
-
+        [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("MELEE: True if item is a finesse weapon. Uses Dexterity modifier for attack rolls.")]
+        public bool isFinesseWeapon
+        {
+            get
+            {
+                return _isFinesseWeapon;
+            }
+            set
+            {
+                _isFinesseWeapon = value;
+            }
+        }
         [CategoryAttribute("07 - Handling and Moves"), DescriptionAttribute("When true, equipping such item in combat immediately ends the current player character's turn.")]
         public bool endTurnAfterEquipping
         {

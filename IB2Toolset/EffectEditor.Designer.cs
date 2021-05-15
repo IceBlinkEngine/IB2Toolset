@@ -29,6 +29,21 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.numTranActionF = new System.Windows.Forms.NumericUpDown();
+            this.numTranActionE = new System.Windows.Forms.NumericUpDown();
+            this.numTranActionD = new System.Windows.Forms.NumericUpDown();
+            this.numTranActionC = new System.Windows.Forms.NumericUpDown();
+            this.numTranActionB = new System.Windows.Forms.NumericUpDown();
+            this.numTranActionA = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -81,6 +96,13 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionE)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionA)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHealActionF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHealActionE)).BeginInit();
@@ -111,6 +133,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox5);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
@@ -119,9 +142,160 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
-            this.splitContainer1.Size = new System.Drawing.Size(818, 449);
+            this.splitContainer1.Size = new System.Drawing.Size(818, 702);
             this.splitContainer1.SplitterDistance = 539;
             this.splitContainer1.TabIndex = 4;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label23);
+            this.groupBox5.Controls.Add(this.label24);
+            this.groupBox5.Controls.Add(this.label25);
+            this.groupBox5.Controls.Add(this.label26);
+            this.groupBox5.Controls.Add(this.label27);
+            this.groupBox5.Controls.Add(this.label28);
+            this.groupBox5.Controls.Add(this.label29);
+            this.groupBox5.Controls.Add(this.label30);
+            this.groupBox5.Controls.Add(this.numTranActionF);
+            this.groupBox5.Controls.Add(this.numTranActionE);
+            this.groupBox5.Controls.Add(this.numTranActionD);
+            this.groupBox5.Controls.Add(this.numTranActionC);
+            this.groupBox5.Controls.Add(this.numTranActionB);
+            this.groupBox5.Controls.Add(this.numTranActionA);
+            this.groupBox5.Location = new System.Drawing.Point(199, 444);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(329, 141);
+            this.groupBox5.TabIndex = 6;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Transfer Action (\"transfers\" HP or SP, see \"transferHP\" setting)";
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(6, 79);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(317, 57);
+            this.label23.TabIndex = 15;
+            this.label23.Text = "Example Minor Drain: 1d4+1 for every 0 level(s) after level 0 up to 0 levels tota" +
+    "l.\r\nExample Vampiric Touch: 1d6+1 for every 2 level(s) after level 3 up to 11 le" +
+    "vels total.\r\n";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(220, 54);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(83, 20);
+            this.label24.TabIndex = 14;
+            this.label24.Text = "levels total";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(131, 54);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(45, 20);
+            this.label25.TabIndex = 13;
+            this.label25.Text = "up to";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(10, 54);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(77, 20);
+            this.label26.TabIndex = 12;
+            this.label26.Text = "after level";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(247, 22);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(48, 20);
+            this.label27.TabIndex = 11;
+            this.label27.Text = "levels";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(146, 22);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(69, 20);
+            this.label28.TabIndex = 10;
+            this.label28.Text = "for every";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(96, 22);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(18, 20);
+            this.label29.TabIndex = 9;
+            this.label29.Text = "+";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Location = new System.Drawing.Point(46, 22);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(18, 20);
+            this.label30.TabIndex = 8;
+            this.label30.Text = "d";
+            // 
+            // numTranActionF
+            // 
+            this.numTranActionF.Location = new System.Drawing.Point(182, 54);
+            this.numTranActionF.Name = "numTranActionF";
+            this.numTranActionF.Size = new System.Drawing.Size(32, 20);
+            this.numTranActionF.TabIndex = 7;
+            this.numTranActionF.ValueChanged += new System.EventHandler(this.numTranActionF_ValueChanged);
+            // 
+            // numTranActionE
+            // 
+            this.numTranActionE.Location = new System.Drawing.Point(93, 54);
+            this.numTranActionE.Name = "numTranActionE";
+            this.numTranActionE.Size = new System.Drawing.Size(32, 20);
+            this.numTranActionE.TabIndex = 6;
+            this.numTranActionE.ValueChanged += new System.EventHandler(this.numTranActionE_ValueChanged);
+            // 
+            // numTranActionD
+            // 
+            this.numTranActionD.Location = new System.Drawing.Point(215, 22);
+            this.numTranActionD.Name = "numTranActionD";
+            this.numTranActionD.Size = new System.Drawing.Size(32, 20);
+            this.numTranActionD.TabIndex = 5;
+            this.numTranActionD.ValueChanged += new System.EventHandler(this.numTranActionD_ValueChanged);
+            // 
+            // numTranActionC
+            // 
+            this.numTranActionC.Location = new System.Drawing.Point(114, 22);
+            this.numTranActionC.Name = "numTranActionC";
+            this.numTranActionC.Size = new System.Drawing.Size(32, 20);
+            this.numTranActionC.TabIndex = 4;
+            this.numTranActionC.ValueChanged += new System.EventHandler(this.numTranActionC_ValueChanged);
+            // 
+            // numTranActionB
+            // 
+            this.numTranActionB.Location = new System.Drawing.Point(64, 22);
+            this.numTranActionB.Name = "numTranActionB";
+            this.numTranActionB.Size = new System.Drawing.Size(32, 20);
+            this.numTranActionB.TabIndex = 3;
+            this.numTranActionB.ValueChanged += new System.EventHandler(this.numTranActionB_ValueChanged);
+            // 
+            // numTranActionA
+            // 
+            this.numTranActionA.Location = new System.Drawing.Point(14, 22);
+            this.numTranActionA.Name = "numTranActionA";
+            this.numTranActionA.Size = new System.Drawing.Size(32, 20);
+            this.numTranActionA.TabIndex = 2;
+            this.numTranActionA.ValueChanged += new System.EventHandler(this.numTranActionA_ValueChanged);
             // 
             // groupBox4
             // 
@@ -548,7 +722,7 @@
             this.groupBox1.Controls.Add(this.lbxEffects);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(177, 426);
+            this.groupBox1.Size = new System.Drawing.Size(177, 679);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "List of Effects";
@@ -600,7 +774,7 @@
             this.lbxEffects.FormattingEnabled = true;
             this.lbxEffects.Location = new System.Drawing.Point(10, 61);
             this.lbxEffects.Name = "lbxEffects";
-            this.lbxEffects.Size = new System.Drawing.Size(157, 355);
+            this.lbxEffects.Size = new System.Drawing.Size(157, 602);
             this.lbxEffects.TabIndex = 82;
             this.lbxEffects.SelectedIndexChanged += new System.EventHandler(this.lbxEffects_SelectedIndexChanged);
             // 
@@ -609,7 +783,7 @@
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(275, 449);
+            this.propertyGrid1.Size = new System.Drawing.Size(275, 702);
             this.propertyGrid1.TabIndex = 0;
             this.propertyGrid1.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid1_PropertyValueChanged);
             // 
@@ -617,14 +791,23 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6f, 14f);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(818, 449);
+            this.ClientSize = new System.Drawing.Size(818, 702);
             this.Controls.Add(this.splitContainer1);
             this.Name = "EffectEditor";
             this.Text = "Effect Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EffectEditor_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionE)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTranActionA)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHealActionF)).EndInit();
@@ -703,5 +886,20 @@
         private System.Windows.Forms.NumericUpDown numDamActionC;
         private System.Windows.Forms.NumericUpDown numDamActionB;
         private System.Windows.Forms.NumericUpDown numDamActionA;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.NumericUpDown numTranActionF;
+        private System.Windows.Forms.NumericUpDown numTranActionE;
+        private System.Windows.Forms.NumericUpDown numTranActionD;
+        private System.Windows.Forms.NumericUpDown numTranActionC;
+        private System.Windows.Forms.NumericUpDown numTranActionB;
+        private System.Windows.Forms.NumericUpDown numTranActionA;
     }
 }
