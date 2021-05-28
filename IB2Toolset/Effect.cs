@@ -135,6 +135,9 @@ namespace IB2Toolset
         private int _modifyShopSellPrice = 0;
         private int _twoWeaponFightingMainHandModifier = 0;
         private int _twoWeaponFightingOffHandModifier = 0;
+        private int _numberOfMirrorImagesLeft = 0;
+        private int _numberOfHitPointDamageAbsorptionLeft = 0;
+
 
         private bool _allowCastingWithoutTriggeringAoO = false;
         private bool _allowCastingWithoutRiskOfInterruption = false;
@@ -366,6 +369,18 @@ namespace IB2Toolset
         {
             get { return _twoWeaponFightingOffHandModifier; }
             set { _twoWeaponFightingOffHandModifier = value; }
+        }
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("number of mirror images left. Set to greater than zero if this is a mirror image type effect.")]
+        public int numberOfMirrorImagesLeft
+        {
+            get { return _numberOfMirrorImagesLeft; }
+            set { _numberOfMirrorImagesLeft = value; }
+        }
+        [CategoryAttribute("05 - Modifiers (pc only)"), DescriptionAttribute("number of hit point damage that will be absorbed by this effect.")]
+        public int numberOfHitPointDamageAbsorptionLeft
+        {
+            get { return _numberOfHitPointDamageAbsorptionLeft; }
+            set { _numberOfHitPointDamageAbsorptionLeft = value; }
         }
         [CategoryAttribute("04 - Modifiers (pc and creature)"), DescriptionAttribute("adds or subtracts from damage for melee attacks")]  
         public int damageModifierForMeleeAttack

@@ -111,6 +111,8 @@ namespace IB2Toolset
         private List<LocalImmunityString> _traitWorksNeverWhen = new List<LocalImmunityString>();
 
         private string _traitToReplaceByTag = "none";
+        private bool _useNumberOfUsesPerDaySystem = false;
+        private int[] _numberOfUsesPerDay = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
         #endregion
 
@@ -315,7 +317,25 @@ namespace IB2Toolset
             set { _useableInSituation = value; }
         }
 
+        [CategoryAttribute("04 - Uses Per Day System"), DescriptionAttribute("if true, this trait uses the number of uses per day system.")]
+        public bool useNumberOfUsesPerDaySystem
+        {
+            get { return _useNumberOfUsesPerDaySystem; }
+            set { _useNumberOfUsesPerDaySystem = value; }
+        }
 
+        [CategoryAttribute("04 - Uses Per Day System"), DescriptionAttribute("Set the number of uses per day at each level. The first entry is at level 1.")]
+        public int[] numberOfUsesPerDay
+        {
+            get
+            {
+                return _numberOfUsesPerDay;
+            }
+            set
+            {
+                _numberOfUsesPerDay = value;
+            }
+        }
         //[Browsable(true), TypeConverter(typeof(SpriteConverter))]
         /*
         [CategoryAttribute("01 - Main"), DescriptionAttribute("Sprite to use for the effect (Sprite Filename with extension)")]
@@ -479,6 +499,9 @@ namespace IB2Toolset
         public Trait DeepCopy()
         {
             Trait other = (Trait)this.MemberwiseClone();
+
+            other.numberOfUsesPerDay = (int[])this.numberOfUsesPerDay.Clone();
+
             other.traitEffectTagList = new List<EffectTagForDropDownList>();
             foreach (EffectTagForDropDownList s in this.traitEffectTagList)
             {
