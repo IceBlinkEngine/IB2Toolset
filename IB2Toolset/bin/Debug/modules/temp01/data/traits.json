@@ -21,7 +21,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "int",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -45,7 +57,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "int",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -69,7 +93,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -93,7 +129,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -117,7 +165,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "cha",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -141,7 +201,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "cha",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -165,7 +237,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -189,7 +273,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -213,7 +309,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -237,7 +345,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -261,7 +381,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -285,7 +417,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -309,7 +453,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -333,7 +489,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -357,7 +525,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -381,7 +561,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -405,7 +597,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -429,7 +633,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -453,7 +669,19 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "dex",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "methodOfChecking": "leader",
@@ -477,6 +705,18 @@
     "requiredCharisma": 0,
     "skillModifierAttribute": "str",
     "traitToReplaceByTag": "none",
-    "useableInSituation": "Always"
+    "useableInSituation": "Always",
+    "useNumberOfUsesPerDaySystem": false,
+    "numberOfUsesPerDay": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   }
 ]

@@ -599,6 +599,17 @@
           "Width": 50,
           "Height": 50,
           "show": true
+        },
+		{
+          "tag": "tglD20",
+          "ImgOnFilename": "tgl_d20_on",
+          "ImgOffFilename": "tgl_d20_off",
+          "toggleOn": false,
+          "X": 685,
+          "Y": 25,
+          "Width": 50,
+          "Height": 50,
+          "show": true
         }
       ],
       "portraitList": [],

@@ -17,6 +17,7 @@ namespace IB2Toolset
 {
     public partial class ParentForm : Form
     {
+        public string version = "1.0.204";
         //added comment here to push a change
         public string _mainDirectory;
         public Module mod = new Module();
@@ -148,7 +149,7 @@ namespace IB2Toolset
             saveAsTemp();
 
             //hope this fits for IB2, too
-            Text = "IceBlink 2 Toolset - " + mod.moduleLabelName;
+            Text = "IceBlink Toolset v" + version + " - " + mod.moduleLabelName;
             createTilePrefixFilterList();
 
             //fill all lists
@@ -825,7 +826,7 @@ namespace IB2Toolset
                 openWeathers(directory + "\\data\\weathers.json");
                 openEffects(directory + "\\data\\effects.json");
                 refreshDropDownLists();
-                this.Text = "IceBlink 2 Toolset - " + mod.moduleLabelName;
+                Text = "IceBlink Toolset v" + version + " - " + mod.moduleLabelName;
                 createTilePrefixFilterList();
             }
         }
@@ -1254,7 +1255,7 @@ public void loadSpriteDropdownList()
                 }
                 MessageBox.Show("Moduled saved");
                 refreshDropDownLists();
-                this.Text = "IceBlinkRPG Toolset - " + mod.moduleLabelName;
+                Text = "IceBlink Toolset v" + version + " - " + mod.moduleLabelName;
             }
             catch (Exception e)
             {

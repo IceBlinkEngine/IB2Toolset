@@ -111,6 +111,8 @@
   "useSmoothMovement": true,
   "usePredefinedTileCategories": true,
   "useAllTileSystem": true,
+  "useAdjacentAcBonusSystem": false,
+  "useAdvancedCasterAI": false,
   "activeSearchSPCostPaidByByLeaderOnly": true,
   "activeSearchSPCost": 1,
   "fogOfWarOpacity": 0.9525,

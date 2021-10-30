@@ -207,6 +207,8 @@ namespace IB2Toolset
         private string _raceLabel = "Race";
         private int _borderAreaSize = 0;
         private bool _useAllTileSystem = true;
+        private bool _useAdjacentAcBonusSystem = false;
+        private bool _useAdvancedCasterAI = false;
         private bool _useMinimalisticUI = true;
         private bool _useManualCombatCam = true;
         private bool _useCombatSmoothMovement = true;
@@ -583,6 +585,22 @@ namespace IB2Toolset
         {
             get { return _useAllTileSystem; }
             set { _useAllTileSystem = value; }
+
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag determines if the builder is using the adjacent allies system. This system gives a PC or Creature +1 to AC for each adjacent ally.")]
+        public bool useAdjacentAcBonusSystem
+        {
+            get { return _useAdjacentAcBonusSystem; }
+            set { _useAdjacentAcBonusSystem = value; }
+
+        }
+
+        [CategoryAttribute("01 - Main"), DescriptionAttribute("This flag determines if the builder is using the new Advanced Cster AI (beta) or the old established Caster AI.")]
+        public bool useAdvancedCasterAI
+        {
+            get { return _useAdvancedCasterAI; }
+            set { _useAdvancedCasterAI = value; }
 
         }
 
